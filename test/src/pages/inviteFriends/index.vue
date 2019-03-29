@@ -1,16 +1,19 @@
 <template>
-    <div id="verified-name">
+    <div id="invite-friends">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>实名认证</span>
+            <span>邀请好友</span>
             <span><van-icon name="ellipsis"/></span>
         </header>
         <div class="container">
-            334893479
+           <router-link to="/share/inviteFriends/inviteShare" tag="div" class="invite">
+              立即邀请好友加入
+           </router-link>
         </div>
     </div>
 
 </template>
+
 
 
 <script>
@@ -20,20 +23,16 @@ export default {
 
         }
     },
-    created(){
-        console.log(11);
-        
-    },
     methods:{
         goBack() {
-            this.$router.push({path:'/home/verified'})
+            this.$router.push('/share')
         }
     }
 }
 </script>
 
 <style lang="less">
-   #verified-name {
+   #invite-friends {
        >header {
            background: #000;
            width:100%;
@@ -56,6 +55,19 @@ export default {
        >.container {
            padding-top:56px;
            padding-bottom: 50px;
+           >.invite {
+               width:70%;
+               margin-left:15%;
+               text-align: center;
+               padding:30px 0;
+               background-color: #AA6808;
+               color:#fff;
+               border:1px solid #fff;
+               border-radius: 10px;
+               position: fixed;
+               left:0px;
+               bottom:100px;
+           }
        }
    }
 </style>

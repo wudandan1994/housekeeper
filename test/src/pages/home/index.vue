@@ -11,7 +11,7 @@
                 <span>上海</span>
             </div>  
             <span>首页</span>
-            <span class="news"><van-icon name="volume" />&nbsp;消息</span>        
+            <span @click="news" class="news"><van-icon name="volume" />&nbsp;消息</span>        
         </header>
         <div class="container">
             <!-- 轮播图模块 -->
@@ -75,14 +75,14 @@
                             <span>GU>></span>
                         </div>
                     </li>
-                    <li>
+                    <router-link to="/home/creditHousekeeper" tag="li">
                         <span class="handle"><van-icon name="description" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
                             <p>落地商户空卡周转</p>
                             <span>智能还款</span>
                         </div>
-                    </li>
+                    </router-link>
                 </ul>
             </div>
             <!-- 详情模块 -->
@@ -223,10 +223,13 @@ export default {
                     message: '确定要退出？',
                     confirmButtonText:'是',
                 }).then(() => {
-                        this.$router.push('/login')
+                    this.$router.push('/login')
                 }).catch(() => {
                     // on cancel
                 });
+        },
+        news(){
+             this.$router.push('/home/news')
         }
     }
     
@@ -252,6 +255,7 @@ export default {
             >.menu {
                 margin-left:5px;
                 position: relative;
+                cursor: pointer;
            }
         }
         .location {
@@ -259,6 +263,7 @@ export default {
         }
         >.news {
             margin-right: 5px;
+            cursor: pointer;
         }
        }
        >.container {

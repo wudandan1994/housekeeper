@@ -2,7 +2,7 @@
     <div id="share-component">
         <header>
             <span class="left-arrow">
-                <van-icon name="arrow-left" />
+               
             </span>
             <span>分享</span>
             <span class="right-arrow">
@@ -67,11 +67,11 @@
                         <p>推广海报图</p>
                         <p>分享二维码.快速增粉</p>
                     </li>
-                    <li>
+                    <router-link to="/share/inviteFriends" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>邀请好友</p>
                         <p>邀请新人注册,有红包奖励</p>
-                    </li>
+                    </router-link>
                     <li>
                         <p><van-icon name="notes-o" /></p>
                         <p>名片玩家视频</p>
@@ -157,7 +157,7 @@ export default {
               >.top {
                   display: flex;
                   justify-content: space-between;
-                  padding-top:30px;
+                  padding-top:50px;
                   padding-bottom: 10px;
                   >li {
                       text-align: center;
@@ -177,6 +177,7 @@ export default {
                   color:#eee;
                   display: flex;
                   justify-content: space-between;
+                  padding-top:30px;
                   >li {
                       width:33.33%;
                       text-align: center;
@@ -217,6 +218,7 @@ export default {
               }
           }
           >.business {
+              padding-bottom: 20px;
               >ul{
                   display: flex;
                   flex-wrap: wrap;

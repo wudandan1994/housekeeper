@@ -37,7 +37,7 @@
                     <span><van-icon name="like"/></span>
                     <span>微信登录</span>
                 </p>
-                <p>注册</p>
+                <p @click="register">注册</p>
             </div>
         </div>
     </div>
@@ -58,6 +58,9 @@ export default {
         },
         forgetPassword() {
             this.$router.push('/forgetPassword')
+        },
+        register() {
+             this.$router.push('/register')
         }
     }
 }

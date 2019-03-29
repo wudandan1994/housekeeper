@@ -46,7 +46,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home/accountManagement')
+            this.$router.push('/login')
         }
     }
 }

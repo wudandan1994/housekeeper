@@ -23,7 +23,7 @@
                      您可在"我的"，"名片"页面或"我的"->&nbsp;"详情"->"实名认证"查看您的实名认证进度及结果
                  </p>
              </div>
-             <router-link to="/home/verified/verifiedName" tag="a" class="at-once">
+             <router-link to="/home/verified/verifiedName" tag="span" class="at-once">
                      立即实名
              </router-link>
         </div>

@@ -12,9 +12,13 @@ import aboutUsComponent from '@/pages/aboutUs'
 import accountManagementComponent from '@/pages/accountManagement'
 import modifyPhoneComponent from '@/pages/modifyPhone'
 import loginComponent from '@/pages/login'
+import newsComponent from '@/pages/news'
+import inviteFriendsComponent from '@/pages/inviteFriends'
+import creditHousekeeperComponent from '@/pages/creditHousekeeper'
+import aisleHousekeeperComponent from '@/pages/aisleHousekeeper'
+import registerComponent from '@/pages/register'
 import forgetPasswordComponent from '@/pages/forgetPassword'
 import modifyLoginPasswordComponent from '@/pages/modifyLoginPassword'
-
 import consultationComponent from '@/pages/consultation'
 import noviceGuideComponent from '@/pages/noviceGuide'
 import liftingAmountComponent from '@/pages/liftingAmount'
@@ -41,6 +45,8 @@ import shareComponent from '@/pages/share'
 import financialCircleComponent from '@/pages/financialCircle'
 import realNameComponent from '@/pages/realName'
 import creditEnquiryComponent from '@/pages/creditEnquiry'
+import inviteShareComponent from '@/pages/inviteShare'
+
 
 
 
@@ -55,15 +61,21 @@ export default new Router({
     {path:"/vip",component:vipComponent},
     {path:"/home",component:homeComponent},
     {path:"/login",component:loginComponent},
+    {path:"/register",component:registerComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
+    {path:"/home/news",component:newsComponent},
+    {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
+    {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
+    {path:"/share/inviteFriends",component:inviteFriendsComponent},
+    {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
+
+
+
     {path:"/home/clearCache",component:clearCacheComponent},
     {path:"/home/accountManagement", component:accountManagementComponent,},
     {path:"/home/accountManagement/modifyLoginPassword", component:modifyLoginPasswordComponent,},
     {path:"/home/accountManagement/modifyPhone", component:modifyPhoneComponent,},
-
-
-
     {path:"/home/punch/totalPunch",component:totalPunchComponent},
     {path:"/home/violationInquiry",component:violationInquiryComponent},
     {path:"/home/violationInquiry/addCar",component:addCarComponent},
@@ -72,13 +84,10 @@ export default new Router({
     {path:"/home/creditEnquiry",component:creditEnquiryComponent,},
     {path:"/home/systemNews",component:systemNewsComponent,},
     {path:"/home/verified",component:verifiedComponent,},
-    {path:"/home/verifiedName",component:verifiedNameComponent,},
+    {path:"/home/verified/verifiedName",component:verifiedNameComponent,},
     {path:"/home/bindingPhone",component:bindingPhoneComponent,},
     {path:"/home/customerService",component:customerServiceComponent,},
     {path:"/home/aboutUs",component:aboutUsComponent,},
-
-
-
     {path:"/home/creditEnquiry/myOrder",component:myOrderComponent,},
     {path:"/home/creditEnquiry/creditDataQuery",component:creditDataQueryComponent,},
     {path:"/home/creditEnquiry/reporyExample",component:reportExampleComponent,},

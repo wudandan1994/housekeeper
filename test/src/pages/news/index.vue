@@ -1,12 +1,21 @@
 <template>
-    <div id="verified-name">
+    <div id="progress-query">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>实名认证</span>
-            <span><van-icon name="ellipsis"/></span>
         </header>
         <div class="container">
-            334893479
+            <van-tabs
+                padding-top="10px"
+                title-active-color="#F3C480"
+                background="#020202"
+                color="#F3C480"
+                title-inactive-color="#fff"
+                swipeable="true"
+               >
+                    <van-tab v-for="index in 8" :title="'标签 ' + index" :key="index">
+                        内容 {{ index }}
+                    </van-tab>
+                </van-tabs>
         </div>
     </div>
 
@@ -20,20 +29,16 @@ export default {
 
         }
     },
-    created(){
-        console.log(11);
-        
-    },
     methods:{
         goBack() {
-            this.$router.push({path:'/home/verified'})
+            this.$router.push('/home')
         }
     }
 }
 </script>
 
 <style lang="less">
-   #verified-name {
+   #progress-query {
        >header {
            background: #000;
            width:100%;
