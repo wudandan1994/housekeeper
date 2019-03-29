@@ -42,7 +42,9 @@ import financialCircleComponent from '@/pages/financialCircle'
 import realNameComponent from '@/pages/realName'
 import creditEnquiryComponent from '@/pages/creditEnquiry'
 
-
+import loan from '@/pages/loan'
+import loandetail from '@/pages/loan/detail'
+import form from '@/pages/loan/form'
 
 
 
@@ -96,6 +98,10 @@ export default new Router({
     {path:"/share",component:shareComponent},
     {path:"/financialCircle",component:financialCircleComponent},
     {path:"/vip/realName",component:realNameComponent},
+
+    {path: '/home/loan', component: loan},
+    {path: '/loan/detail',component: loandetail},
+    {path: '/loan/form',component: form}
 
   ]
 })

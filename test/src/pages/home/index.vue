@@ -67,14 +67,14 @@
                             <span>落地商户</span>
                         </div>
                     </router-link>
-                    <li>
+                    <router-link tag="li" to="/home/loan">
                         <span class="handle"><van-icon name="description" /></span>
                         <div class="channel">
                             <h3>我要贷款</h3>
                             <p>实时审批&nbsp;授信额度</p>
                             <span>GU>></span>
                         </div>
-                    </li>
+                    </router-link>
                     <li>
                         <span class="handle"><van-icon name="description" /></span>
                         <div class="channel">
@@ -399,8 +399,11 @@ export default {
             }
         }
             >.aside-left {
+                width: 100%;
+                height: 100%;
                 background-color: rgba(0, 0, 0, .4);
-                position: fixed;
+                position: absolute;
+                overflow: visible;
                 top:0px;
                 right:0px;
                 bottom: 0px;
@@ -410,6 +413,8 @@ export default {
                 text-align: center;
                 >.info {
                     width:60%;
+                    height: 100%;
+                    overflow-y: scroll;
                     background-color: #222222;
                     position: fixed;
                     top:0px;
