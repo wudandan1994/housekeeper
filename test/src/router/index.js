@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
-import homeComponent from '@/pages/home'
+// import homeComponent from '@/pages/home'
 import cardCenterComponent from '@/pages/cardCenter'
 import clearCacheComponent from '@/pages/clearCache'
 import businessCooperationComponent from '@/pages/businessCooperation'
@@ -48,7 +48,9 @@ import creditEnquiryComponent from '@/pages/creditEnquiry'
 import inviteShareComponent from '@/pages/inviteShare'
 
 
-
+import loan from '@/pages/loan'
+import loandetail from '@/pages/loan/detail'
+import form from '@/pages/loan/form'
 
 
 
@@ -59,7 +61,7 @@ export default new Router({
   routes: [
     { path: '/',redirect:'/home'},
     {path:"/vip",component:vipComponent},
-    {path:"/home",component:homeComponent},
+    // {path:"/home",component:homeComponent},
     {path:"/login",component:loginComponent},
     {path:"/register",component:registerComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
@@ -105,6 +107,10 @@ export default new Router({
     {path:"/share",component:shareComponent},
     {path:"/financialCircle",component:financialCircleComponent},
     {path:"/vip/realName",component:realNameComponent},
+
+    {path: '/home/loan', component: loan},
+    {path: '/loan/detail',component: loandetail},
+    {path: '/loan/form',component: form}
 
   ]
 })

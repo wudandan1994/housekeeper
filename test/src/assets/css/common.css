@@ -107,3 +107,10 @@ table {
 	    justify-content: center;
 	    align-items: flex-end;
 	}
+	.loan .van-nav-bar{
+		background: black !important;
+	}
+	.loan .van-nav-bar__text,.van-nav-bar__title,.van-nav-bar .van-icon{
+		color: white !important;
+
+	}

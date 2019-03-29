@@ -1,3 +1,5 @@
+
+    
 <template>
     <div id="home-component">
         <header>
@@ -11,7 +13,7 @@
                 <span>上海</span>
             </div>  
             <span>首页</span>
-            <span @click="news" class="news"><van-icon name="volume" />&nbsp;消息</span>        
+            <span class="news"><van-icon name="volume" />&nbsp;消息</span>        
         </header>
         <div class="container">
             <!-- 轮播图模块 -->
@@ -67,22 +69,22 @@
                             <span>落地商户</span>
                         </div>
                     </router-link>
-                    <li>
+                    <router-link tag="li" to="/home/loan">
                         <span class="handle"><van-icon name="description" /></span>
                         <div class="channel">
                             <h3>我要贷款</h3>
                             <p>实时审批&nbsp;授信额度</p>
                             <span>GU>></span>
                         </div>
-                    </li>
-                    <router-link to="/home/creditHousekeeper" tag="li">
+                    </router-link>
+                    <li>
                         <span class="handle"><van-icon name="description" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
                             <p>落地商户空卡周转</p>
                             <span>智能还款</span>
                         </div>
-                    </router-link>
+                    </li>
                 </ul>
             </div>
             <!-- 详情模块 -->
@@ -219,17 +221,14 @@ export default {
         },
         signOut(){
             this.$dialog.confirm({
-                    title: '提示',
-                    message: '确定要退出？',
+                    title: '提示',
+                    message: '确定要退出？',
                     confirmButtonText:'是',
-                }).then(() => {
-                    this.$router.push('/login')
-                }).catch(() => {
-                    // on cancel
-                });
-        },
-        news(){
-             this.$router.push('/home/news')
+                }).then(() => {
+                        this.$router.push('/login')
+                }).catch(() => {
+                    // on cancel
+                });
         }
     }
     
@@ -255,7 +254,6 @@ export default {
             >.menu {
                 margin-left:5px;
                 position: relative;
-                cursor: pointer;
            }
         }
         .location {
@@ -263,7 +261,6 @@ export default {
         }
         >.news {
             margin-right: 5px;
-            cursor: pointer;
         }
        }
        >.container {
@@ -360,7 +357,6 @@ export default {
                             margin-bottom: 10px;
                         }
                     }
-
                 }
             }
         }
@@ -404,8 +400,11 @@ export default {
             }
         }
             >.aside-left {
+                width: 100%;
+                height: 100%;
                 background-color: rgba(0, 0, 0, .4);
-                position: fixed;
+                position: absolute;
+                overflow: visible;
                 top:0px;
                 right:0px;
                 bottom: 0px;
@@ -415,6 +414,8 @@ export default {
                 text-align: center;
                 >.info {
                     width:60%;
+                    height: 100%;
+                    overflow-y: scroll;
                     background-color: #222222;
                     position: fixed;
                     top:0px;
@@ -463,5 +464,5 @@ export default {
          }
     }
    }
-
 </style>
+
