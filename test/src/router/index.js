@@ -51,6 +51,8 @@ import inviteShareComponent from '@/pages/inviteShare'
 import loan from '@/pages/loan'
 import loandetail from '@/pages/loan/detail'
 import form from '@/pages/loan/form'
+// 账户管理
+import userAccountManage from '@/pages/userAccountManage'
 
 
 import posterComponent from '@/pages/poster'
@@ -119,7 +121,8 @@ export default new Router({
 
     {path: '/home/loan', component: loan},
     {path: '/loan/detail',component: loandetail},
-    {path: '/loan/form',component: form}
+    {path: '/loan/form',component: form},
+    {path: '/ponserCenter/userAccountManage',component: userAccountManage}
 
   ]
 })
