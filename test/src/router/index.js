@@ -53,6 +53,11 @@ import loandetail from '@/pages/loan/detail'
 import form from '@/pages/loan/form'
 
 
+import posterComponent from '@/pages/poster'
+import principleComponent from '@/pages/principle'
+import dataComponent from '@/pages/data'
+import businessCardComponent from '@/pages/businessCard'
+import creditCardLinkComponent from '@/pages/creditCardLink'
 
 
 
@@ -71,7 +76,11 @@ export default new Router({
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
-
+    {path:"/share/poster",component:posterComponent},
+    {path:"/share/principle",component:principleComponent},
+    {path:"/share/data",component:dataComponent},
+    {path:"/share/businessCard",component:businessCardComponent},
+    {path:"/share/creditCardLink",component:creditCardLinkComponent},
 
 
     {path:"/home/clearCache",component:clearCacheComponent},
