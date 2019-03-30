@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
-// import homeComponent from '@/pages/home'
+import homeComponent from '@/pages/home'
 import cardCenterComponent from '@/pages/cardCenter'
 import clearCacheComponent from '@/pages/clearCache'
 import businessCooperationComponent from '@/pages/businessCooperation'
@@ -68,7 +68,7 @@ export default new Router({
   routes: [
     { path: '/',redirect:'/home'},
     {path:"/vip",component:vipComponent},
-    // {path:"/home",component:homeComponent},
+    {path:"/home",component:homeComponent},
     {path:"/login",component:loginComponent},
     {path:"/register",component:registerComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},

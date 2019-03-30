@@ -76,14 +76,14 @@
                             <span>GU>></span>
                         </div>
                     </router-link>
-                    <li>
+                    <router-link to="/home/creditHousekeeper" tag="li">
                         <span class="handle"><van-icon name="description" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
                             <p>落地商户空卡周转</p>
                             <span>智能还款</span>
                         </div>
-                    </li>
+                    </router-link>
                 </ul>
             </div>
             <!-- 详情模块 -->
