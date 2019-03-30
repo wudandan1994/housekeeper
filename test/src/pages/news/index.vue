@@ -1,5 +1,5 @@
 <template>
-    <div id="progress-query">
+    <div id="news">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
         </header>
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="less">
-   #progress-query {
+   #news {
        >header {
            background: #000;
            width:100%;

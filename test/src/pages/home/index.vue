@@ -1,5 +1,4 @@
 
-    
 <template>
     <div id="home-component">
         <header>
