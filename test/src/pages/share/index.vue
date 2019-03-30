@@ -12,24 +12,24 @@
         <div class="contain">
             <div class="poster">
                 <ul class="top">
-                    <li>
+                    <router-link to="/share/poster" tag="li">
                         <span class="logo">
                             <van-icon name="friends" />
                         </span>
                         <p>特色海报</p>
-                    </li>
-                    <li>
+                    </router-link>
+                    <router-link to="/share/principle" tag="li">
                         <span class="logo">
                             <van-icon name="friends" />
                         </span>
                         <p>推广原则</p>
-                    </li>
-                    <li>
+                    </router-link>
+                    <router-link to="/share/data" tag="li">
                         <span class="logo">
                             <van-icon name="friends" />
                         </span>
                         <p>团队数据</p>
-                    </li>
+                    </router-link>
                 </ul>
                 <ul class="bottom">
                     <li>
@@ -62,11 +62,11 @@
                         <p>新闻资讯</p>
                         <p>文章可植入广告.锁粉</p>
                     </li>
-                    <li>
+                    <router-link to="/share/poster" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>推广海报图</p>
                         <p>分享二维码.快速增粉</p>
-                    </li>
+                    </router-link>
                     <router-link to="/share/inviteFriends" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>邀请好友</p>
@@ -77,11 +77,11 @@
                         <p>名片玩家视频</p>
                         <p>钱夹报视频.一键分享</p>
                     </li>
-                    <li>
+                    <router-link to="/share/businessCard" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>名片推广</p>
                         <p>分享名片.快速增粉</p>
-                    </li>
+                    </router-link>
                     <li>
                         <p><van-icon name="notes-o" /></p>
                         <p>生成短链接</p>
@@ -92,11 +92,11 @@
                         <p>链接转化二维码</p>
                         <p>快速转粉.一键分享</p>
                     </li>
-                    <li>
+                    <router-link to="/share/creditCardLink" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>信用卡链接</p>
                         <p>分享带锁粉功能哦!</p>
-                    </li>
+                    </router-link>
                     <li>
                         <p><van-icon name="notes-o" /></p>
                         <p>分享链接</p>
@@ -136,11 +136,11 @@ export default {
           height: 46px;
           line-height: 46px;
           background-color: #000;
+          padding-top:10px;
           color:white;
           width:100%;
            position: fixed;
            display: flex;
-           box-sizing: border-box;
            justify-content: space-between;
            >.left-arrow {
                margin-left:20px;
