@@ -1,134 +1,113 @@
 <template>
     <div id="personal-center-component">
-        <header>个人中心</header>
-        <div class="container">
+        <header class="header">
+            
             <div class="top">
-                <div class="background"></div>
-                <div class="yellow"></div>
-                <div class="person">
-                   <div class="detail">
-                       <p class="arrow">详情&nbsp;&nbsp;<van-icon name="arrow" /></p>
-                       <div class="user">
-                           <div class="watch">
-                                <h3>
-                                    <span>王多鱼</span>&nbsp;&nbsp;
-                                    <span>
-                                        <van-icon name="gem" />
-                                    </span>
-                                </h3>
-                                <p>您是链名片的第100位用户</p>
-                                <p>
-                                    <router-link to="/vip" tag="span">升VIP</router-link>
-                                    <router-link to="/vip/realName" tag="span">去实名</router-link>
-                                </p>
-                           </div>
-                           <div class="forward">
-                                <p>
-                                    <van-icon name="manager" />
-                                </p>
-                           </div>
-                       </div>
-                       <div class="send">
-                           <p>
-                               <span>300</span>&nbsp;&nbsp;&nbsp; 看过我的人
-                           </p>
-                           <p>
-                               <span>55</span>&nbsp;&nbsp;&nbsp;转发我的人
-                           </p>
-                       </div>
-                   </div>
-                   <div class="more">
-                       <p>专享更多会员权益</p>
-                       <p>
-                           <span>会员升级</span>
-                       </p>
-                   </div>
+                <div class="title center">个人中心</div>
+                <div class="authentication">实名认证</div>
+                <router-link to="/home/verified"> <div class="authentication">实名认证</div></router-link>
+            </div>
+
+            <div class="middle row">
+                <div class="avator center"><img src="http://img2.imgtn.bdimg.com/it/u=1122649470,955539824&fm=26&gp=0.jpg" alt=""></div>
+                <div class="name-details">
+                    <div class="name-vip row">
+                        <div class="name center">纪康</div>
+                        <div class="vip center">
+                            <van-icon name="gem" size="20px" color="#ccc"/>
+                        </div>
+                        <div class="operator end-center">
+                            <van-icon name="medel" size="20px" color="#dab17b"/>
+                            <span>运营商</span>
+                        </div>
+                    </div>
+                    <div class="set row">
+                        <div class="unset center">未设置</div>
+                        <div class="code center">推荐码: 46578356</div>
+                    </div>
                 </div>
             </div>
-            <div class="goods">
-                <ul>
-                    <li>
-                        <span>
-                            <van-icon name="comment" />
-                        </span>
-                        <a href="#">
-                            我的名片
-                            <van-icon name="arrow" />
-                        </a>
-                    </li>
-                    <li>
-                        <span>
-                            <van-icon name="comment" />
-                        </span>
-                        <a href="#">
-                            名片夹
-                            <van-icon name="arrow" />
-                        </a>
-                    </li>
-                    <li>
-                        <span>
-                            <van-icon name="comment" />
-                        </span>
-                        <a href="#">
-                            商品中心
-                            <van-icon name="arrow" />
-                        </a>
-                    </li>
-                    <li>
-                        <span>
-                            <van-icon name="comment" />
-                        </span>
-                        <a href="#">
-                            我的账户
-                            <van-icon name="arrow" />
-                        </a>
-                    </li>
-                    <li>
-                        <span>
-                            <van-icon name="comment" />
-                        </span>
-                        <a href="#">
-                            我的卡券
-                            <van-icon name="arrow" />
-                        </a>
-                    </li>
-                    <li>
-                        <span>
-                            <van-icon name="comment" />
-                        </span>
-                        <a href="#">
-                            已购买
-                            <van-icon name="arrow" />
-                        </a>
-                    </li>
-                    <li>
-                        <span>
-                            <van-icon name="comment" />
-                        </span>
-                        <a href="#">
-                            推荐给好友
-                            <van-icon name="arrow" />
-                        </a>
-                    </li>
-                    <li>
-                        <span>
-                            <van-icon name="comment" />
-                        </span>
-                        <a href="#">
-                            关于我们
-                            <van-icon name="arrow" />
-                        </a>
-                    </li>
-                    <li>
-                        <span>
-                            <van-icon name="comment" />
-                        </span>
-                        <a href="#">
-                            帮助中心
-                            <van-icon name="arrow" />
-                        </a>
-                    </li>
-                </ul>
+
+            <div class="bottom row">
+                <div class="per-menu">
+                    <div class="per-icon center"><van-icon name="star" size="20px" color="#dab17b"/></div>
+                    <div class="per-title center">积分</div>
+                </div>
+                 <div class="per-menu">
+                    <div class="per-icon center"><van-icon name="bill" size="20px" color="#dab17b"/></div>
+                    <div class="per-title center">可结算</div>
+                </div>
+                 <div class="per-menu">
+                    <div class="per-icon center"><van-icon name="gift-card" size="20px" color="#dab17b"/></div>
+                    <div class="per-title center">总收益</div>
+                </div>
+            </div>
+        </header>
+        <div class="menu-title start-center">特约服务</div>
+        <div class="per-list row">
+            <router-link tag="div" class="per-menu-list line" to="/ponserCenter/userAccountManage">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
+            </router-link>
+
+            <div class="per-menu-list line">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
+            </div>
+
+            <div class="per-menu-list">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
+            </div>
+
+        </div>
+        <div class="per-list row">
+            <div class="per-menu-list line">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
+            </div>
+
+            <div class="per-menu-list line">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
+            </div>
+
+            <div class="per-menu-list">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
+            </div>
+        </div>
+        <div class="menu-title m-top start-center">实时工具</div>
+        <div class="per-list row">
+            <div class="per-menu-list line">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
+            </div>
+
+            <div class="per-menu-list line">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
+            </div>
+
+            <div class="per-menu-list">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
+            </div>
+        </div>
+        <div class="per-list row">
+            <div class="per-menu-list line">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
+            </div>
+
+            <div class="per-menu-list line">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
+            </div>
+
+            <div class="per-menu-list">
+                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">账户管理</div>
             </div>
         </div>
     </div>
@@ -147,162 +126,158 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   #personal-center-component {
-      >header {
-          height: 46px;
-          width:100%;
-          background-color: #0A0E15;
-          color: #fff;
-          line-height: 46px;
-          text-align: center;
-          position: fixed;
-      }
-      >.container {
-          width:100%;
-          padding-top:45px;
-          padding-bottom: 50px;
-          box-sizing: border-box;
-          >.top{
-              position: relative;
-              >.background {
-                  width:100%;
-                  height: 400px;
-                  background-color:#222222; 
-              }
-              >.yellow {
-                  width:100%;
-                  height:100px;
-                  background-color:#F8BA6D; 
-              }
-              >.person {
-                  position: absolute;
-                  width:96%;
-                  margin:20px 20px;
-                  box-sizing: border-box;
-                  position: absolute;
-                  top:0px;
-                  left:0px;
-                  box-shadow: 1px 1px 1px 2px #ccc;
-                  border-radius:2px;
-                  >.detail {
-                      background-color:#343434; 
-                      color:#ddd;
-                      padding-top:20px;
-                      padding-bottom: 20px;
-                      padding-left:30px;
-                      padding-right: 20px;
-                      >.arrow {
-                          text-align: right;
-                      }
-                      >.user {
-                          display: flex;
-                          justify-content: space-between;
-                          >.watch {
-                              >h3 {
-                                  font-size: 40px;
-                                  >span {
-                                      &:nth-of-type(1){
-                                          color:#DAC795;
-                                          font-weight: bolder;
-                                      }
-                                  }
-                                  >span {
-                                      &:nth-of-type(2){
-                                          padding-top:5px;
-                                      }
-                                  }
-                              }
-                              > P{
-                                 &:nth-of-type(1){
-                                     margin-top:20px;
-                                     margin-bottom: 30px;
-                                     color:#ddd;
-                                 } 
-                              }
-                              >p {
-                                  &:nth-of-type(2) { 
-                                      padding-top:15px;
-                                      padding-bottom:15px;
-                                      >span {
-                                          background-color: #fff;
-                                          color:#000;
-                                          padding:3px 20px;
-                                          border:1px solid #D0C19A;
-                                          margin:4px;
-                                          font-size: 30px;
-                                          font-weight: bolder;
-                                      }
-                                  }
-                              }
-                          }
-                          >.forward {
-                              >p {
-                                  font-size:130px;
-                                  margin-top:30px;
-                              }
-                          }
-                      }
-                      >.send {
-                          display: flex;
-                          justify-content: space-between;
-                          margin-top:30px;
-                          margin-bottom: 20px;
-                          >p {
-                               font-size: 36px;
-                              >span {
-                                  color:#D9CFA7;
-                              }
-                              
-                          }
-                      }
-                  }
-                  >.more {
-                      background-color: #fff;
-                      display: flex;
-                      justify-content: space-between;
-                      padding:30px;
-                      font-size:40px;
-                      color:#000;
-                      border-radius:10px;
-                      >p{
-                          &:nth-of-type(2){
-                              >span {
-                                  background-color:#F8BA71;
-                                  padding:10px 20px; 
-                                  border-radius:30px;
-                              }
-                          }
-                      }
-                  }
-              }
+      width: 100%;
+      height: auto;
+      padding-bottom: 5vh;
+      background: #F2F2F2;
+      .header{
+          width: 99vw;
+          height: auto;
+          margin-left: auto;
+          margin-right: auto;
+          background-color: rgb(0, 0, 0);
+          border: 1px solid rgb(102, 102, 102);
+          .top{
+            position: relative;
+            .title{
+                width: 100%;
+                height: auto;
+                line-height: 80px;
+                font-size: 18px;
+                font-weight: 400;
+                color: rgb(212, 214, 221);
+            }
+            .authentication{
+                width: auto;
+                height: 20px;
+                position: absolute;
+                top: 25px;
+                right: 10px;
+                z-index: 1;
+                font-size: 12px;
+                font-weight: 400;
+                color: rgb(212, 214, 221);
+            }
           }
-          >.goods {
-              >ul{
-                  padding-left:20px;
-                  >li {
-                      height: 60px;
-                      line-height:40px;
-                      display: flex;
-                      font-size: 30px;
-                      justify-content: space-between;
-                    //   padding:20px 0px 20px 5px;
-                    margin:20px 0px;
-                      >span {
-                          color:#F8BA6D;
-                      }
-                      >a {
-                          display: flex;
-                          flex:1;
-                          margin-left:20px;
-                          justify-content: space-between;
-                          color:#000;
-                          border-bottom: 1px solid #ccc;
-                          padding-bottom: 20px;
-                      }
-                  }
-              }
-          }
+          .middle{
+                width: 100%;
+                height: 120px;
+                margin-top: 50px;
+                color: white;
+                .avator{
+                    width: 20vw;
+                    height: auto;
+                    >img{
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                    }
+                }
+                .name-details{
+                    width: 80vw;
+                    height: auto;
+                }
+                .name-vip{
+                    width: 100%;
+                    height: 50%;
+                    .name{
+                        width: 10%;
+                        height: 100%;
+                        font-size: 25px;
+                        font-weight: 700;
+                        color: rgb(218, 177, 123);
+                        overflow: hidden;
+                    }
+                    .vip{
+                        width: 12%;
+                        height: 100%;
+                    }
+                    .operator{
+                        width: 76%;
+                        height: 100%;
+                        font-size: 9px;
+                        font-weight: 400;
+                        color: rgb(255, 255, 255);
+                    }
+                }
+                .set{
+                    width: 100%;
+                    height: 50%;
+                    .unset{
+                        width: 100px;
+                        height: 50%;
+                        border: solid 0.02rem rgb(102, 102, 102);
+                        margin-top: 15px;
+                        color: #ccc;
+                        font-size: 15px;
+                        border-radius: 20px;
+                    }
+                    .code{
+                        width: 200px;
+                        height: 50%;
+                        border: solid 0.02rem rgb(102, 102, 102);
+                        margin-top: 15px;
+                        margin-left: 30px;
+                        padding-left: 15px;
+                        padding-right: 15px;
+                        color: #ccc;
+                        backface-visibility: white;
+                        font-size: 0.2em;
+                        border-radius: 20px;
+                    }
+                }
+           }
+           .bottom{
+               width: 100%;
+               height: 150px;
+               margin-top: 50px;
+               .per-menu{
+                   color: white;
+                   width: 30%;
+                   height: 100%;
+                   margin-left: 2.5%;
+                   .per-icon{
+                       width: 100%;
+                       height: 60%;
+                   }
+                   .per-title{
+                       width: 100%;
+                       height: 40%;
+                   }
+               }
+           }
       }
-  }
+       .menu-title{
+            width: 99%;
+            padding-left: 1%;
+            height: 80px;
+            border-bottom: solid 1px #ccc;
+            background: white;
+        }
+        .m-top{
+            margin-top: 15px;
+        }
+        .per-list{
+            background: white;
+            border-bottom: solid 1px #ccc;
+            .per-menu-list{
+                width: 33%;
+                height: 180px;
+                .menu-icon{
+                    width: 100%;
+                    height: 60%;
+                }
+                .per-menu-title{
+                    width: 100%;
+                    height: 40%;
+                }
+            }
+            .line{
+                    border-right: solid 1px #ccc;
+            }
+        }
+        
+}
 </style>
