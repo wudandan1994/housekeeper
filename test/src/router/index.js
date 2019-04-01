@@ -11,7 +11,7 @@ import aboutUsComponent from '@/pages/aboutUs'
 import accountManagementComponent from '@/pages/accountManagement'
 import modifyPhoneComponent from '@/pages/modifyPhone'
 import loginComponent from '@/pages/login'
-import newsComponent from '@/pages/news'
+// import newsComponent from '@/pages/news'
 import inviteFriendsComponent from '@/pages/inviteFriends'
 import creditHousekeeperComponent from '@/pages/creditHousekeeper'
 import aisleHousekeeperComponent from '@/pages/aisleHousekeeper'
@@ -56,27 +56,20 @@ import income from '@/pages/userAccountManage/Income'
 import incomedetail from "@/pages/userAccountManage/incomedetail"
 // 下级收入明细
 import personalIncomeDetail from '@/pages/userAccountManage/personalIncomeDetail'
+// 积分明细
+import integralDetail from '@/pages/userAccountManage/integralDetail'
+import integralCash from '@/pages/userAccountManage/integralCash'
+import addcard from '@/pages/userAccountManage/addcard'
 
 import posterComponent from '@/pages/poster'
 import principleComponent from '@/pages/principle'
 import dataComponent from '@/pages/data'
 import businessCardComponent from '@/pages/businessCard'
 import creditCardLinkComponent from '@/pages/creditCardLink'
-<<<<<<< HEAD
-// 积分明细
-import integralDetail from '@/pages/userAccountManage/integralDetail'
-// 积分提现
-import integralCash from "@/pages/userAccountManage/integralCash"
-// 银行卡管理
-import addcard from '@/pages/userAccountManage/addcard'
-
-
-=======
 import shareLinkComponent from '@/pages/shareLink'
 import promotionMaterialComponent from '@/pages/promotionMaterial'
 import corporateVideoComponent from '@/pages/corporateVideo'
 import adsNewsComponent from '@/pages/adsNews'
->>>>>>> 385cfe7c4437aefc1223a10cf5d5a9963e8169e3
 
 
 export default new Router({
@@ -88,7 +81,7 @@ export default new Router({
     {path:"/register",component:registerComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
-    {path:"/home/news",component:newsComponent},
+    // {path:"/home/news",component:newsComponent},
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
