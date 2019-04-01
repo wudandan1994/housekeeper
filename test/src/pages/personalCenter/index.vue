@@ -215,7 +215,7 @@ export default {
                         border-radius: 20px;
                     }
                     .code{
-                        width: 200px;
+                        width: auto;
                         height: 50%;
                         border: solid 0.02rem rgb(102, 102, 102);
                         margin-top: 15px;

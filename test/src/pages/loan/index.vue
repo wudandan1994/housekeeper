@@ -285,12 +285,13 @@ export default {
                  width: 100%;
                  height: 30%;
                  .bonus{
-                     width: 50%;
+                     width: auto;
                      height: 100%;
                      padding-left: 4%;
                      padding-right: 4%;
                      font-size: 15px;
                      font-weight: 400;
+                     overflow: hidden;
                      >span{
                          color: red;
                      }

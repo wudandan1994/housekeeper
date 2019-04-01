@@ -53,7 +53,12 @@ import loandetail from '@/pages/loan/detail'
 import form from '@/pages/loan/form'
 // 账户管理
 import userAccountManage from '@/pages/userAccountManage'
-
+// 收益明细
+import income from '@/pages/userAccountManage/Income'
+// 收入明细表
+import incomedetail from "@/pages/userAccountManage/incomedetail"
+// 下级收入明细
+import personalIncomeDetail from '@/pages/userAccountManage/personalIncomeDetail'
 
 import posterComponent from '@/pages/poster'
 import principleComponent from '@/pages/principle'
@@ -122,7 +127,10 @@ export default new Router({
     {path: '/home/loan', component: loan},
     {path: '/loan/detail',component: loandetail},
     {path: '/loan/form',component: form},
-    {path: '/ponserCenter/userAccountManage',component: userAccountManage}
+    {path: '/ponserCenter/userAccountManage',component: userAccountManage},
+    {path: '/personalCenter/income',component: income},
+    {path: '/personalCenter/incomedetail',component: incomedetail},
+    {path: '/personalCenter/incomedetail/personalIncomeDetail',component: personalIncomeDetail}
 
   ]
 })
