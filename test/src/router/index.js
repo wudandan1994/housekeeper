@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
-
 import homeComponent from '@/pages/home'
 import cardCenterComponent from '@/pages/cardCenter'
 import clearCacheComponent from '@/pages/clearCache'
@@ -46,8 +45,6 @@ import financialCircleComponent from '@/pages/financialCircle'
 import realNameComponent from '@/pages/realName'
 import creditEnquiryComponent from '@/pages/creditEnquiry'
 import inviteShareComponent from '@/pages/inviteShare'
-
-
 import loan from '@/pages/loan'
 import loandetail from '@/pages/loan/detail'
 import form from '@/pages/loan/form'
@@ -65,6 +62,12 @@ import principleComponent from '@/pages/principle'
 import dataComponent from '@/pages/data'
 import businessCardComponent from '@/pages/businessCard'
 import creditCardLinkComponent from '@/pages/creditCardLink'
+// 积分明细
+import integralDetail from '@/pages/userAccountManage/integralDetail'
+// 积分提现
+import integralCash from "@/pages/userAccountManage/integralCash"
+// 银行卡管理
+import addcard from '@/pages/userAccountManage/addcard'
 
 
 
@@ -88,8 +91,6 @@ export default new Router({
     {path:"/share/data",component:dataComponent},
     {path:"/share/businessCard",component:businessCardComponent},
     {path:"/share/creditCardLink",component:creditCardLinkComponent},
-
-
     {path:"/home/clearCache",component:clearCacheComponent},
     {path:"/home/accountManagement", component:accountManagementComponent,},
     {path:"/home/accountManagement/modifyLoginPassword", component:modifyLoginPasswordComponent,},
@@ -123,14 +124,15 @@ export default new Router({
     {path:"/share",component:shareComponent},
     {path:"/financialCircle",component:financialCircleComponent},
     {path:"/vip/realName",component:realNameComponent},
-
     {path: '/home/loan', component: loan},
     {path: '/loan/detail',component: loandetail},
     {path: '/loan/form',component: form},
     {path: '/ponserCenter/userAccountManage',component: userAccountManage},
     {path: '/personalCenter/income',component: income},
     {path: '/personalCenter/incomedetail',component: incomedetail},
-    {path: '/personalCenter/incomedetail/personalIncomeDetail',component: personalIncomeDetail}
-
+    {path: '/personalCenter/incomedetail/personalIncomeDetail',component: personalIncomeDetail},
+    {path: '/personalCenter/incomedetail/integralDetail',component: integralDetail},
+    {path: '/personalCenter/incomedetail/integralCash',component: integralCash},
+    {path: '/personalCenter/incomedetail/addcard',component: addcard},
   ]
 })
