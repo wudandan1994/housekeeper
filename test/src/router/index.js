@@ -138,6 +138,5 @@ export default new Router({
     {path: '/personalCenter/income',component: income},
     {path: '/personalCenter/incomedetail',component: incomedetail},
     {path: '/personalCenter/incomedetail/personalIncomeDetail',component: personalIncomeDetail}
-
   ]
 })
