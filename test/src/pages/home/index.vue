@@ -102,8 +102,8 @@
                             <van-icon name="friends" />
                         </span>
                         <div class="detail-item">
-                            <h3>授权分润</h3>
-                            <p>给实习会员设置分润</p>
+                            <h3>汽车保险</h3>
+                            <p>没有中间商差价</p>
                         </div>
                     </li>
                     <li>
@@ -111,8 +111,8 @@
                             <van-icon name="friends" />
                         </span>
                         <div class="detail-item">
-                            <h3>授权分润</h3>
-                            <p>给实习会员设置分润</p>
+                            <h3>发圈素材</h3>
+                            <p>发朋友圈获得奖金</p>
                         </div>
                     </li>
                     <li>
@@ -120,8 +120,8 @@
                             <van-icon name="friends" />
                         </span>
                         <div class="detail-item">
-                            <h3>授权分润</h3>
-                            <p>给实习会员设置分润</p>
+                            <h3>排行榜</h3>
+                            <p>钱夹宝业务排名</p>
                         </div>
                     </li>
                     <li>
@@ -129,8 +129,8 @@
                             <van-icon name="friends" />
                         </span>
                         <div class="detail-item">
-                            <h3>授权分润</h3>
-                            <p>给实习会员设置分润</p>
+                            <h3>意外险</h3>
+                            <p>出行安全有保障</p>
                         </div>
                     </li>
                     <li>
@@ -138,8 +138,8 @@
                             <van-icon name="friends" />
                         </span>
                         <div class="detail-item">
-                            <h3>授权分润</h3>
-                            <p>给实习会员设置分润</p>
+                            <h3>提额秘籍</h3>
+                            <p>快速提额</p>
                         </div>
                     </li>
                     <li>
@@ -147,8 +147,8 @@
                             <van-icon name="friends" />
                         </span>
                         <div class="detail-item">
-                            <h3>授权分润</h3>
-                            <p>给实习会员设置分润</p>
+                            <h3>共享奖金池</h3>
+                            <p>参与奖金池奖励分配</p>
                         </div>
                     </li>
                     <li>
@@ -156,8 +156,35 @@
                             <van-icon name="friends" />
                         </span>
                         <div class="detail-item">
-                            <h3>授权分润</h3>
-                            <p>给实习会员设置分润</p>
+                            <h3>给团队绑卡</h3>
+                            <p>TA绑卡开通注册</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span>
+                            <van-icon name="friends" />
+                        </span>
+                        <div class="detail-item">
+                            <h3>积分兑换</h3>
+                            <p>积分不失/换乐无穷</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span>
+                            <van-icon name="friends" />
+                        </span>
+                        <div class="detail-item">
+                            <h3>商城</h3>
+                            <p>商城</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span>
+                            <van-icon name="friends" />
+                        </span>
+                        <div class="detail-item">
+                            <h3>违章查询</h3>
+                            <p>违章查询</p>
                         </div>
                     </li>
                 </ul>

@@ -51,8 +51,10 @@ import principleComponent from '@/pages/principle'
 import dataComponent from '@/pages/data'
 import businessCardComponent from '@/pages/businessCard'
 import creditCardLinkComponent from '@/pages/creditCardLink'
-
-
+import shareLinkComponent from '@/pages/shareLink'
+import promotionMaterialComponent from '@/pages/promotionMaterial'
+import corporateVideoComponent from '@/pages/corporateVideo'
+import adsNewsComponent from '@/pages/adsNews'
 
 
 export default new Router({
@@ -70,11 +72,16 @@ export default new Router({
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},
+    {path:"/share/promotionMaterial",component:promotionMaterialComponent},
     {path:"/share/principle",component:principleComponent},
     {path:"/share/data",component:dataComponent},
+    {path:"/share/adsNews",component:adsNewsComponent},
     {path:"/share/businessCard",component:businessCardComponent},
     {path:"/share/creditCardLink",component:creditCardLinkComponent},
+    {path:"/share/shareLink",component:shareLinkComponent},
+    {path:"/share/corporateVideo",component:corporateVideoComponent},
 
+  
 
     {path:"/home/clearCache",component:clearCacheComponent},
     {path:"/home/accountManagement", component:accountManagementComponent,},
