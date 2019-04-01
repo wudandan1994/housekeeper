@@ -12,7 +12,8 @@
            <div class="ranking">
                <van-tabs
                 padding-top="10px"
-                title-active-color="orange"
+                title-active-color="#807957"
+                color="#777237"
                >
                     <van-tab v-for="index in 8" :title="'标签 ' + index" :key="index">
                         内容 {{ index }}

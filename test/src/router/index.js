@@ -62,6 +62,7 @@ import principleComponent from '@/pages/principle'
 import dataComponent from '@/pages/data'
 import businessCardComponent from '@/pages/businessCard'
 import creditCardLinkComponent from '@/pages/creditCardLink'
+<<<<<<< HEAD
 // 积分明细
 import integralDetail from '@/pages/userAccountManage/integralDetail'
 // 积分提现
@@ -70,6 +71,12 @@ import integralCash from "@/pages/userAccountManage/integralCash"
 import addcard from '@/pages/userAccountManage/addcard'
 
 
+=======
+import shareLinkComponent from '@/pages/shareLink'
+import promotionMaterialComponent from '@/pages/promotionMaterial'
+import corporateVideoComponent from '@/pages/corporateVideo'
+import adsNewsComponent from '@/pages/adsNews'
+>>>>>>> 385cfe7c4437aefc1223a10cf5d5a9963e8169e3
 
 
 export default new Router({
@@ -87,8 +94,10 @@ export default new Router({
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},
+    {path:"/share/promotionMaterial",component:promotionMaterialComponent},
     {path:"/share/principle",component:principleComponent},
     {path:"/share/data",component:dataComponent},
+    {path:"/share/adsNews",component:adsNewsComponent},
     {path:"/share/businessCard",component:businessCardComponent},
     {path:"/share/creditCardLink",component:creditCardLinkComponent},
     {path:"/home/clearCache",component:clearCacheComponent},

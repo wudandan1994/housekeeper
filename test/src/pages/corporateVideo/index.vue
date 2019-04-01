@@ -1,21 +1,19 @@
 <template>
-    <div id="news">
+    <div id="progress-query">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
+            <span>钱夹宝企业视频</span>
+            <span><van-icon name="ellipsis"/></span>
         </header>
         <div class="container">
-            <van-tabs
-                padding-top="10px"
-                title-active-color="#F3C480"
-                background="#020202"
-                color="#F3C480"
-                title-inactive-color="#fff"
-                swipeable="true"
-               >
-                    <van-tab v-for="index in 8" :title="'标签 ' + index" :key="index">
-                        内容 {{ index }}
-                    </van-tab>
-                </van-tabs>
+           <div class="time">
+              <ul>
+                  <li>
+                       <video src=""></video>
+                       <p>小程序+时代&nbsp;&nbsp;五大趋势不容错过</p>
+                  </li>
+              </ul>
+           </div>
         </div>
     </div>
 
@@ -31,14 +29,14 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home')
+            this.$router.push('/share')
         }
     }
 }
 </script>
 
 <style lang="less">
-   #news {
+   #progress-query {
        >header {
            background: #000;
            width:100%;
@@ -61,6 +59,18 @@ export default {
        >.container {
            padding-top:56px;
            padding-bottom: 50px;
+           >.time {
+               text-align: center;
+               margin-top:30px;
+               >ul{
+                   >li{
+                       background-color: red;
+                       >p {
+                           margin-top:10px;
+                       }
+                   }
+               }
+           }
        }
    }
 </style>

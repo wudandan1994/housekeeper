@@ -57,11 +57,11 @@
             </div>
             <div class="business">
                 <ul>
-                    <li>
+                    <router-link to="/share/adsNews" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>新闻资讯</p>
                         <p>文章可植入广告.锁粉</p>
-                    </li>
+                    </router-link>
                     <router-link to="/share/poster" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>推广海报图</p>
@@ -72,11 +72,11 @@
                         <p>邀请好友</p>
                         <p>邀请新人注册,有红包奖励</p>
                     </router-link>
-                    <li>
+                    <router-link to="/share/corporateVideo" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>名片玩家视频</p>
                         <p>钱夹报视频.一键分享</p>
-                    </li>
+                    </router-link>
                     <router-link to="/share/businessCard" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>名片推广</p>
@@ -97,27 +97,34 @@
                         <p>信用卡链接</p>
                         <p>分享带锁粉功能哦!</p>
                     </router-link>
-                    <li>
+                    <router-link to="/share/shareLink" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>分享链接</p>
                         <p>分享钱夹宝链接</p>
-                    </li>
-                    <li>
+                    </router-link>
+                    <router-link to="/share/promotionMaterial" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>推广素材图</p>
                         <p>各种视频+图片</p>
-                    </li>
-                    <li>
+                    </router-link>
+                    <router-link to="/share/poster" tag="li">
                         <p><van-icon name="notes-o" /></p>
                         <p>信用卡推广图</p>
                         <p>信用卡推广图.一键锁粉</p>
-                    </li>
-                    <li>
+                    </router-link>
+                    <li @click="flagDown">
                         <p><van-icon name="notes-o" /></p>
                         <p>物料下载</p>
                         <p>海量宣传资料</p>
                     </li>
-                    
+                    <div class="tips" v-show="showFlag">
+                        <h3>温馨提示</h3>
+                        <p>如您想下载百度网盘的物料，请先下载百度网盘客户端或者APP，并且先注册百度账号，如您有账号可直接下载物料！</p>
+                        <p>
+                            <span>下载说明</span>
+                            <span>去下载</span>
+                        </p>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -126,6 +133,16 @@
 
 <script>
 export default {
+    data(){
+        return{
+            showFlag:false,
+        }
+    },
+    methods:{
+        flagDown(){
+            this.showFlag=!this.showFlag
+        }
+    }
     
 }
 </script>
@@ -222,6 +239,7 @@ export default {
               >ul{
                   display: flex;
                   flex-wrap: wrap;
+                  position: relative;
                   >li {
                       width:33%;
                       margin-top:5px;
@@ -287,6 +305,46 @@ export default {
                         background-color: #878787;
                     }
                   }
+                 >.tips {
+                    width:80%;
+                    height: 500px;
+                    margin-left:10%;
+                    position: absolute;
+                    bottom:6%;
+                    left:0px;
+                    >h3 {
+                        text-align: center;
+                        padding:20px 0;
+                        background-color: #E8E8E8;
+                        border-bottom: 1px solid #ccc;
+                        color:#3B3B3D;
+                        font-weight: bold;
+                    }
+                    >p {
+                        &:nth-of-type(1){
+                            line-height: 40px;
+                            background-color: #fff;
+                            padding:20px;
+                        }
+                        &:nth-of-type(2){
+                            padding-bottom: 20px;
+                            line-height: 40px;
+                            background-color: #fff;
+                            display: flex;
+                            justify-content: space-around;
+                            >span {
+                                border:2px solid #ccc;
+                                padding:10px 30px;
+                                border-radius:20px;
+                                &:nth-of-type(2){
+                                    background-color: #BD9B5B;
+                                    color:#fff;
+                                }
+                            }
+                        }
+                    }
+                 }
+
               }
           }
       }
