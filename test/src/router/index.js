@@ -60,6 +60,9 @@ import personalIncomeDetail from '@/pages/userAccountManage/personalIncomeDetail
 import integralDetail from '@/pages/userAccountManage/integralDetail'
 import integralCash from '@/pages/userAccountManage/integralCash'
 import addcard from '@/pages/userAccountManage/addcard'
+// 添加支付宝账户
+import alipay from '@/pages/userAccountManage/alipay'
+// 2019年4月2日10:41:43
 
 import posterComponent from '@/pages/poster'
 import principleComponent from '@/pages/principle'
@@ -136,5 +139,6 @@ export default new Router({
     {path: '/personalCenter/incomedetail/integralDetail',component: integralDetail},
     {path: '/personalCenter/incomedetail/integralCash',component: integralCash},
     {path: '/personalCenter/incomedetail/addcard',component: addcard},
+    {path: '/personalCenter/addcard/alipay',component: alipay},
   ]
 })
