@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="set row">
-                        <div class="unset center">未设置</div>
+                        <router-link tag="div" class="unset center" to="/register">未设置</router-link>
                         <div class="code center">推荐码: 46578356</div>
                     </div>
                 </div>
