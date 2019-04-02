@@ -205,20 +205,13 @@
                         <router-link to="/home/aboutUs" tag="li">关于我们</router-link>
                         <li class="switch">声音开关
                             <p>
-                                <van-switch
-                         size="20px" 
-                         inactive-color="#DDDDDD"
-                         active-color="#CDB168" 
-                         v-model="checked" 
-                         />
+                                
                             </p>
                         </li>
                         <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
                         <router-link to="/home/clearCache" tag="li">清除缓存</router-link>
                     </ul>
-                    <!-- <router-link to="/login" tag="div" class="sign-out">
-                        <span>退出登录</span>
-                    </router-link> -->
+                   
                       <div  @click="signOut" class="sign-out">
                         <span>退出登录</span>
                     </div> 
@@ -468,10 +461,8 @@ export default {
                             border-top:3px dashed #535353;
                             padding:50px 10px;
                              &.switch {
-                             display: flex ;
                              >p {
                                  margin-top:-5px;
-                                 margin-left:5px;
                              }
                           }
                         }
