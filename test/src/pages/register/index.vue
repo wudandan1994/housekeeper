@@ -10,7 +10,7 @@
                <div class="area">
                    <ul>
                        <li>
-                           <p><span><van-icon name="star"/></span> 头像</p>
+                           <p><span><van-icon name="manager"/></span> 头像</p>
                            <div class="uploadimg">
                                <input type="file" name="file" multiple>
                                <img src="" alt="">
@@ -19,7 +19,7 @@
                            </div>
                        </li>
                        <li>
-                           <p><span><van-icon name="star"/></span> 昵称</p>
+                           <p><span><van-icon name="map-marked"/></span> 昵称</p>
                           <input type="text" class="nickname" placeholder="可乐-5-2">
                           <span><van-icon name="arrow" /></span>
                        </li>
@@ -42,13 +42,13 @@
                            </p>
                        </li>
                         <li>
-                          <p><span><van-icon name="lock"/></span> 所在地</p>
+                          <p><span><van-icon name="location"/></span> 所在地</p>
                            <p>
                                <input type="text" placeholder="请选择"> <span><van-icon name="arrow" /></span>
                            </p>
                        </li>
                        <li>
-                          <p><span><van-icon name="lock"/></span> 身份情况</p>
+                          <p><span><van-icon name="card"/></span> 身份情况</p>
                            <p>
                                <input type="text" placeholder="请选择"> <span><van-icon name="arrow" /></span>
                            </p>
@@ -95,7 +95,7 @@
                    </ul>
                </div>
                <div class="card-id">
-                    <p><span><van-icon name="lock"/></span> 实名认证</p>
+                    <p><span><van-icon name="friends"/></span> 实名认证</p>
                     <p @click="modify">
                         <span>未认证</span> <span><van-icon name="arrow" /></span>
                     </p>

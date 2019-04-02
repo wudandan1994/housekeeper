@@ -9,21 +9,21 @@
            <div class="phone">
                <ul>
                    <li>
-                       <span><van-icon name="like" />手机号</span>
+                       <span><van-icon name="phone" />&nbsp;&nbsp;&nbsp;手机号</span>
                        <input type="number" placeholder="请输入11位手机号码">
                        
                    </li>
                     <li>
-                        <span><van-icon name="like" />验证码:</span>
+                        <span><van-icon name="checked" />&nbsp;&nbsp;&nbsp;验证码</span>
                        <input type="number" placeholder="注意查收短信">
                        <span>获取验证码</span>
                    </li>
                     <li>
-                        <span><van-icon name="like" />新密码:</span>
+                        <span><van-icon name="lock" />&nbsp;&nbsp;&nbsp;新密码</span>
                        <input type="text" placeholder="6-16位数字或字母">
                    </li>
                     <li>
-                        <span><van-icon name="like" />确认密码:</span>
+                        <span><van-icon name="lock" />&nbsp;&nbsp;&nbsp;确认密码</span>
                        <input type="text" placeholder="再次输入密码">
                    </li>
                </ul>
@@ -96,7 +96,7 @@ export default {
                        }
                        >span {
                            &:nth-of-type(1) {
-                               margin-right:5px;
+                               margin-right:10px;
                            }
                            &:nth-of-type(2){
                                color:white;

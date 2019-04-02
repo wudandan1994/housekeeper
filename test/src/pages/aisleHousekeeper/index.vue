@@ -19,8 +19,6 @@
                    <span>&nbsp;</span>
                    <span>还款计划</span>
                </p>
-               <p><span>更多计划</span><span><van-icon name="arrow"/></span></p>
-               <img src="" alt="">
            </div>
         </div>
     </div>
@@ -73,8 +71,16 @@ export default {
            }
            >.plan {
                margin:20px;
-               display:flex;
-               justify-content: space-around;
+               >p {
+                   >span {
+                   &:nth-of-type(1){
+                        display:line-block;
+                        width:5px;
+                        background-color:#A89749; 
+                   }
+                 }
+               }
+               
            }
        }
    }

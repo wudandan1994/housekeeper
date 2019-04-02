@@ -11,38 +11,38 @@
            <div class="light">
                <ul>
                    <li>
-                       <p><van-icon name="star"/></p>
+                       <p ><van-icon name="vip-card"/></p>
                        <div>
                            <p>凡是钻石会员等级，即可帮助他人进行绑卡操作！</p>
                            <p>打破部分人群绑卡操作困难痛点，自己后台替他人操作。一帮到底，真正做到一站式扶持，加速团队裂变！</p>
                        </div>
                    </li>
                    <li>
-                       <p><van-icon name="star"/></p>
+                       <p><van-icon name="like"/></p>
                        <div>
-                           <p>凡是钻石会员等级，即可帮助他人进行绑卡操作！</p>
-                           <p>打破部分人群绑卡操作困难痛点，自己后台替他人操作。一帮到底，真正做到一站式扶持，加速团队裂变！</p>
+                           <p>精养卡智能规划，千城布局，省时省心</p>
+                           <p>卡内预留2%以上即可，大额也支持，笔笔落地商户，健康消费，智能完美账单</p>
                        </div>
                    </li>
                    <li>
-                       <p><van-icon name="star"/></p>
+                       <p><van-icon name="hot"/></p>
                        <div>
-                           <p>凡是钻石会员等级，即可帮助他人进行绑卡操作！</p>
-                           <p>打破部分人群绑卡操作困难痛点，自己后台替他人操作。一帮到底，真正做到一站式扶持，加速团队裂变！</p>
+                           <p>空卡周转，解决急需，维护信用</p>
+                           <p>全程只需手续费，我给额度你来还，避免逾期，保你信用无忧</p>
                        </div>
                    </li>
                    <li>
-                       <p><van-icon name="star"/></p>
+                       <p><van-icon name="bookmark"/></p>
                        <div>
-                           <p>凡是钻石会员等级，即可帮助他人进行绑卡操作！</p>
-                           <p>打破部分人群绑卡操作困难痛点，自己后台替他人操作。一帮到底，真正做到一站式扶持，加速团队裂变！</p>
+                           <p>极速还款，全新模式</p>
+                           <p>距还款日只剩1-3天又想账单尽量完美，极速模式，照样可以还</p>
                        </div>
                    </li>
                    <li>
-                       <p><van-icon name="star"/></p>
+                       <p><van-icon name="diamond"/></p>
                        <div>
-                           <p>凡是钻石会员等级，即可帮助他人进行绑卡操作！</p>
-                           <p>打破部分人群绑卡操作困难痛点，自己后台替他人操作。一帮到底，真正做到一站式扶持，加速团队裂变！</p>
+                           <p>最高利润，自用省钱，分享赚钱</p>
+                           <p>挑战还款分润最高极限，团队裂变，管道收益！被人刷卡，团队躺赚收益</p>
                        </div>
                    </li>
                </ul>
@@ -119,9 +119,34 @@ export default {
                        padding-right:10px;
                        padding-bottom:30px;
                        padding-top:10px;
+                       &:nth-of-type(1){
+                           >p {
+                               color:#61F293;
+                           }
+                       }
+                       &:nth-of-type(2){
+                           >p {
+                               color:#FF8B07;
+                           }
+                       }
+                       &:nth-of-type(3){
+                           >p {
+                               color:#E849BD;
+                           }
+                       }
+                        &:nth-of-type(4){
+                           >p {
+                               color:#07B8EC;
+                           }
+                       }
+                       &:nth-of-type(5){
+                           >p {
+                               color:#417F79;
+                           }
+                       }
+
                        >p {
                            font-size: 100px;
-                        //    margin-top:15px;
                            margin-right: 10px;
                        }
                        >div {
@@ -136,6 +161,8 @@ export default {
                                }
                                &:nth-of-type(2){
                                    line-height: 36px;
+                                   color:#B0B0B0;
+                                   padding-top:10px;
                                }
                            }
                        }

@@ -12,6 +12,7 @@ import accountManagementComponent from '@/pages/accountManagement'
 import modifyPhoneComponent from '@/pages/modifyPhone'
 import loginComponent from '@/pages/login'
 import newsComponent from '@/pages/news'
+import logOutComponent from '@/pages/logOut'
 import inviteFriendsComponent from '@/pages/inviteFriends'
 import creditHousekeeperComponent from '@/pages/creditHousekeeper'
 import aisleHousekeeperComponent from '@/pages/aisleHousekeeper'
@@ -80,6 +81,7 @@ export default new Router({
     {path:"/vip",component:vipComponent},
     {path:"/home",component:homeComponent},
     {path:"/login",component:loginComponent},
+    {path:"/logOut",component:logOutComponent},  
     {path:"/register",component:registerComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},

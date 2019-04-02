@@ -15,10 +15,10 @@
                     <span>手机号</span>
                     <router-link to="/home/accountManagement/modifyPhone" tag="span"><van-icon name="arrow"/></router-link>
                 </p>
-                <p>
+                <!-- <p>
                     <span>修改手势密码</span>
                     <span  @click="changeGesture"><van-icon name="arrow"/></span>
-                </p>
+                </p> -->
             </div>
         </div>
     </div>
