@@ -31,15 +31,15 @@
                         <span>征信查询</span>
                     </router-link>
                     <li>
-                        <van-icon name="more" class="zx-search" />
+                        <van-icon name="gem" class="zx-search" />
                         <span>升级代理</span>
                     </li>
                     <router-link to="/home/incomeBreakdown" tag="li">
-                        <van-icon name="more" class="zx-search" />
+                        <van-icon name="column" class="zx-search" />
                         <span>收益明细</span>
                     </router-link>
                     <router-link tag="li" to="/home/punch">
-                        <van-icon name="more" class="zx-search" />
+                        <van-icon name="youzan-shield" class="zx-search" />
                         <span>签到打卡</span>
                     </router-link>
                 </ul>
@@ -53,7 +53,7 @@
             <div class="credit">
                 <ul>
                     <router-link  tag="li" to="/home/cardCenter">
-                        <span class="handle"><van-icon name="description" /></span>
+                        <span class="handle"><van-icon name="card" /></span>
                         <div class="channel">
                             <h3>信用卡办理</h3>
                             <p>佣金当天结算</p>
@@ -61,7 +61,7 @@
                         </div>
                     </router-link>
                     <router-link tag="li" to="/home/receivables">
-                        <span class="handle"><van-icon name="description" /></span>
+                        <span class="handle"><van-icon name="gold-coin" /></span>
                         <div class="channel">
                             <h3>商户收款</h3>
                             <p>快捷支付</p>
@@ -74,10 +74,10 @@
                             <h3>我要贷款</h3>
                             <p>实时审批&nbsp;授信额度</p>
                             <span>GU>></span>
-                        </div>
+                        </div>  
                     </router-link>
                     <router-link to="/home/creditHousekeeper" tag="li">
-                        <span class="handle"><van-icon name="description" /></span>
+                        <span class="handle"><van-icon name="setting" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
                             <p>落地商户空卡周转</p>
@@ -100,7 +100,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="friends" />
+                            <van-icon name="lock" />
                         </span>
                         <div class="detail-item">
                             <h3>汽车保险</h3>
@@ -109,7 +109,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="friends" />
+                            <van-icon name="cluster" />
                         </span>
                         <div class="detail-item">
                             <h3>发圈素材</h3>
@@ -118,7 +118,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="friends" />
+                            <van-icon name="ascending" />
                         </span>
                         <div class="detail-item">
                             <h3>排行榜</h3>
@@ -127,7 +127,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="friends" />
+                            <van-icon name="bag" />
                         </span>
                         <div class="detail-item">
                             <h3>意外险</h3>
@@ -136,7 +136,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="friends" />
+                            <van-icon name="invition" />
                         </span>
                         <div class="detail-item">
                             <h3>提额秘籍</h3>
@@ -145,7 +145,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="friends" />
+                            <van-icon name="gold-coin" />
                         </span>
                         <div class="detail-item">
                             <h3>共享奖金池</h3>
@@ -154,7 +154,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="friends" />
+                            <van-icon name="vip-card" />
                         </span>
                         <div class="detail-item">
                             <h3>给团队绑卡</h3>
@@ -163,7 +163,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="friends" />
+                            <van-icon name="star" />
                         </span>
                         <div class="detail-item">
                             <h3>积分兑换</h3>
@@ -172,7 +172,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="friends" />
+                            <van-icon name="expand" />
                         </span>
                         <div class="detail-item">
                             <h3>商城</h3>
@@ -181,7 +181,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="friends" />
+                            <van-icon name="medel" />
                         </span>
                         <div class="detail-item">
                             <h3>违章查询</h3>
@@ -348,7 +348,7 @@ export default {
                     background-color:#FAFAFA;
                     >.handle {
                         color:#CF9C5D;
-                        font-size: 40px;
+                        font-size: 60px;
                         margin-left: 10px;
                         margin-top:30px;
                     }
