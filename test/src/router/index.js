@@ -11,7 +11,7 @@ import aboutUsComponent from '@/pages/aboutUs'
 import accountManagementComponent from '@/pages/accountManagement'
 import modifyPhoneComponent from '@/pages/modifyPhone'
 import loginComponent from '@/pages/login'
-// import newsComponent from '@/pages/news'
+import newsComponent from '@/pages/news'
 import inviteFriendsComponent from '@/pages/inviteFriends'
 import creditHousekeeperComponent from '@/pages/creditHousekeeper'
 import aisleHousekeeperComponent from '@/pages/aisleHousekeeper'
@@ -81,7 +81,7 @@ export default new Router({
     {path:"/register",component:registerComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
-    // {path:"/home/news",component:newsComponent},
+    {path:"/home/news",component:newsComponent},
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
