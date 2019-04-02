@@ -25,11 +25,11 @@
                 <div class="can-number center">123</div>
             </div>
         </div>
-        <div class="per-menu toTop row">
+        <router-link tag="div" class="per-menu toTop row" to="/personalCenter/incomedetail/integralCash">
             <div class="icon start-center"><i class="iconfont icon-jine"></i></div>
             <div class="menu-name start-center">积分提现</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
-        </div>
+        </router-link>
          <div class="per-menu row">
             <div class="icon start-center"><i class="iconfont icon-xianjin"></i></div>
             <div class="menu-name start-center">现金提现</div>
@@ -45,11 +45,11 @@
             <div class="menu-name start-center">收益明细</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
         </router-link>
-         <div class="per-menu row">
+         <router-link tag="div" class="per-menu row" to="/personalCenter/incomedetail/integralDetail">
             <div class="icon start-center"><i class="iconfont icon-xianjin"></i></div>
             <div class="menu-name start-center">积分明细</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
-        </div>
+        </router-link>
         <div class="agree row">
             <div class="checkbox"><van-checkbox v-model="checked" shape="square" checked-color="rgb(133, 107, 48)"></van-checkbox></div>
             <div class="check-title">我已认真阅读<span>《钱夹宝平台推广规范》</span>,认同平台的经营模式,并且自愿接受协议中的条款</div>

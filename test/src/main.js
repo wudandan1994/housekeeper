@@ -11,6 +11,7 @@ import 'babel-polyfill'
 import './assets/css/common.css'
 // 引入图标库
 import '@/assets/icon/iconfont.css'
+import '@/assets/icon/iconfont.js'
 
 import axios from 'axios'
 Vue.prototype.$http = axios

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
-
 import homeComponent from '@/pages/home'
 import cardCenterComponent from '@/pages/cardCenter'
 import clearCacheComponent from '@/pages/clearCache'
@@ -12,7 +11,7 @@ import aboutUsComponent from '@/pages/aboutUs'
 import accountManagementComponent from '@/pages/accountManagement'
 import modifyPhoneComponent from '@/pages/modifyPhone'
 import loginComponent from '@/pages/login'
-import newsComponent from '@/pages/news'
+// import newsComponent from '@/pages/news'
 import inviteFriendsComponent from '@/pages/inviteFriends'
 import creditHousekeeperComponent from '@/pages/creditHousekeeper'
 import aisleHousekeeperComponent from '@/pages/aisleHousekeeper'
@@ -46,8 +45,6 @@ import financialCircleComponent from '@/pages/financialCircle'
 import realNameComponent from '@/pages/realName'
 import creditEnquiryComponent from '@/pages/creditEnquiry'
 import inviteShareComponent from '@/pages/inviteShare'
-
-
 import loan from '@/pages/loan'
 import loandetail from '@/pages/loan/detail'
 import form from '@/pages/loan/form'
@@ -59,6 +56,10 @@ import income from '@/pages/userAccountManage/Income'
 import incomedetail from "@/pages/userAccountManage/incomedetail"
 // 下级收入明细
 import personalIncomeDetail from '@/pages/userAccountManage/personalIncomeDetail'
+// 积分明细
+import integralDetail from '@/pages/userAccountManage/integralDetail'
+import integralCash from '@/pages/userAccountManage/integralCash'
+import addcard from '@/pages/userAccountManage/addcard'
 
 import posterComponent from '@/pages/poster'
 import principleComponent from '@/pages/principle'
@@ -80,7 +81,7 @@ export default new Router({
     {path:"/register",component:registerComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
-    {path:"/home/news",component:newsComponent},
+    // {path:"/home/news",component:newsComponent},
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
@@ -92,11 +93,6 @@ export default new Router({
     {path:"/share/adsNews",component:adsNewsComponent},
     {path:"/share/businessCard",component:businessCardComponent},
     {path:"/share/creditCardLink",component:creditCardLinkComponent},
-    {path:"/share/shareLink",component:shareLinkComponent},
-    {path:"/share/corporateVideo",component:corporateVideoComponent},
-
-  
-
     {path:"/home/clearCache",component:clearCacheComponent},
     {path:"/home/accountManagement", component:accountManagementComponent,},
     {path:"/home/accountManagement/modifyLoginPassword", component:modifyLoginPasswordComponent,},
@@ -130,13 +126,15 @@ export default new Router({
     {path:"/share",component:shareComponent},
     {path:"/financialCircle",component:financialCircleComponent},
     {path:"/vip/realName",component:realNameComponent},
-
     {path: '/home/loan', component: loan},
     {path: '/loan/detail',component: loandetail},
     {path: '/loan/form',component: form},
     {path: '/ponserCenter/userAccountManage',component: userAccountManage},
     {path: '/personalCenter/income',component: income},
     {path: '/personalCenter/incomedetail',component: incomedetail},
-    {path: '/personalCenter/incomedetail/personalIncomeDetail',component: personalIncomeDetail}
+    {path: '/personalCenter/incomedetail/personalIncomeDetail',component: personalIncomeDetail},
+    {path: '/personalCenter/incomedetail/integralDetail',component: integralDetail},
+    {path: '/personalCenter/incomedetail/integralCash',component: integralCash},
+    {path: '/personalCenter/incomedetail/addcard',component: addcard},
   ]
 })

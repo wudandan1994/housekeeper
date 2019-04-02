@@ -46,7 +46,7 @@ export default {
          // 返回首页
         handleReturnHome(){
             this.$router.push({
-                path:'/personalCenter/userAccountManage'
+                path:'/ponserCenter/userAccountManage'
             })
         },
         // 更多
