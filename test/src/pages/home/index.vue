@@ -33,9 +33,9 @@
                         <van-icon name="more" class="zx-search" />
                         <span>升级代理</span>
                     </li>
-                    <router-link to="/home/violationInquiry" tag="li">
+                    <router-link to="/home/incomeBreakdown" tag="li">
                         <van-icon name="more" class="zx-search" />
-                        <span>违规查询</span>
+                        <span>收益明细</span>
                     </router-link>
                     <router-link tag="li" to="/home/punch">
                         <van-icon name="more" class="zx-search" />

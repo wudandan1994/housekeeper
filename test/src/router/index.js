@@ -55,6 +55,8 @@ import shareLinkComponent from '@/pages/shareLink'
 import promotionMaterialComponent from '@/pages/promotionMaterial'
 import corporateVideoComponent from '@/pages/corporateVideo'
 import adsNewsComponent from '@/pages/adsNews'
+import incomeBreakdownComponent from '@/pages/incomeBreakdown'
+
 
 
 export default new Router({
@@ -80,6 +82,7 @@ export default new Router({
     {path:"/share/creditCardLink",component:creditCardLinkComponent},
     {path:"/share/shareLink",component:shareLinkComponent},
     {path:"/share/corporateVideo",component:corporateVideoComponent},
+    {path:"/home/incomeBreakdown",component:incomeBreakdownComponent},
 
   
 
