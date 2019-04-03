@@ -12,6 +12,7 @@ import accountManagementComponent from '@/pages/accountManagement'
 import modifyPhoneComponent from '@/pages/modifyPhone'
 import loginComponent from '@/pages/login'
 import newsComponent from '@/pages/news'
+import logOutComponent from '@/pages/logOut'
 import inviteFriendsComponent from '@/pages/inviteFriends'
 import creditHousekeeperComponent from '@/pages/creditHousekeeper'
 import aisleHousekeeperComponent from '@/pages/aisleHousekeeper'
@@ -75,6 +76,8 @@ import shareLinkComponent from '@/pages/shareLink'
 import promotionMaterialComponent from '@/pages/promotionMaterial'
 import corporateVideoComponent from '@/pages/corporateVideo'
 import adsNewsComponent from '@/pages/adsNews'
+import incomeBreakdownComponent from '@/pages/incomeBreakdown'
+
 
 
 export default new Router({
@@ -83,6 +86,7 @@ export default new Router({
     {path:"/vip",component:vipComponent},
     {path:"/home",component:homeComponent},
     {path:"/login",component:loginComponent},
+    {path:"/logOut",component:logOutComponent},  
     {path:"/register",component:registerComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
@@ -98,6 +102,9 @@ export default new Router({
     {path:"/share/adsNews",component:adsNewsComponent},
     {path:"/share/businessCard",component:businessCardComponent},
     {path:"/share/creditCardLink",component:creditCardLinkComponent},
+    {path:"/share/shareLink",component:shareLinkComponent},
+    {path:"/share/corporateVideo",component:corporateVideoComponent},
+    {path:"/home/incomeBreakdown",component:incomeBreakdownComponent},
     {path:"/home/clearCache",component:clearCacheComponent},
     {path:"/home/accountManagement", component:accountManagementComponent,},
     {path:"/home/accountManagement/modifyLoginPassword", component:modifyLoginPasswordComponent,},

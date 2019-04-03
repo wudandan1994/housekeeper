@@ -20,11 +20,12 @@ axios.defaults.withCredentials = true
 // 引入适配
 import 'lib-flexible/flexible'
 
-import { Button,Switch,Dialog,RadioGroup, Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area} from 'vant'
+import { Button,Switch,Dialog,RadioGroup, Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area} from 'vant'
 Vue.use(Button)
 Vue.use(Tabbar).use(TabbarItem)
 Vue.use(Icon)
 Vue.use(NavBar)
+Vue.use(Collapse).use(CollapseItem)
 Vue.use(Field)
 Vue.use(Swipe).use(SwipeItem)
 Vue.use(NoticeBar)

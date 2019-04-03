@@ -21,7 +21,7 @@
                         <span class="new-price">￥998.00</span>
                         <span class="old-price">1680</span>
                         <span class="buy">立即购买</span>
-                        <span class="buy-he">帮他购买</span>
+                        <!-- <span class="buy-he">帮他购买</span> -->
                      </div>
                 </li>
                 <li>
@@ -42,7 +42,7 @@
                         <span class="new-price">￥998.00</span>
                         <span class="old-price">1680</span>
                         <span class="buy">立即购买</span>
-                        <span class="buy-he">帮他购买</span>
+                        <!-- <span class="buy-he">帮他购买</span> -->
                      </div>
                 </li>
                 <li>
@@ -63,7 +63,7 @@
                         <span class="new-price">￥998.00</span>
                         <span class="old-price">1680</span>
                         <span class="buy">立即购买</span>
-                        <span class="buy-he">帮他购买</span>
+                        <!-- <span class="buy-he">帮他购买</span> -->
                      </div>
                 </li>
             </ul>
@@ -163,6 +163,7 @@ export default {
                          margin-top:10px;
                          color:#000;
                          font-weight: bolder;
+                         margin-left:-20%;
                      }
                      >.buy {
                          color:white;

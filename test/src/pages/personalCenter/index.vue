@@ -1,7 +1,6 @@
 <template>
     <div id="personal-center-component">
         <header class="header">
-            
             <div class="top">
                 <div class="title center">个人中心</div>
                 <div class="authentication">实名认证</div>
@@ -127,20 +126,20 @@ export default {
         }
     },
     methods:{
-        handleTest(){ 
-            var url = '/wxApi/connect/oauth2/authorize?appid=wx5a886a2daf539632&redirect_uri=http%3a%2f%2fbc.91dianji.com.cn%2fapi%2fcustomer%2fwx&response_type=code&scope=snsapi_userinfo&state=123';
-            axiosGet(url).then(res =>{
-                console.log('请求成功',res);
-            }).catch(res =>{
-                console.log('请求失败',res)
-            })
-        },
+        // handleTest(){ 
+        //     var url = '/wxApi/connect/oauth2/authorize?appid=wx5a886a2daf539632&redirect_uri=http%3a%2f%2fbc.91dianji.com.cn%2fapi%2fcustomer%2fwx&response_type=code&scope=snsapi_userinfo&state=123';
+        //     axiosGet(url).then(res =>{
+        //         console.log('请求成功',res);
+        //     }).catch(res =>{
+        //         console.log('请求失败',res)
+        //     })
+        // },
         changeActive(obj){
             console.log('obj', obj);
         }
     },
     created(){
-        this.handleTest();
+        // this.handleTest();
     }
 }
 </script>

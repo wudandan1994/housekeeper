@@ -12,24 +12,24 @@
         <div class="contain">
             <div class="poster">
                 <ul class="top">
-                    <router-link to="/share/poster" tag="li">
+                    <li>
                         <span class="logo">
-                            <van-icon name="friends" />
+                            <van-icon name="photo" />
                         </span>
                         <p>特色海报</p>
-                    </router-link>
-                    <router-link to="/share/principle" tag="li">
+                    </li>
+                    <li>
                         <span class="logo">
-                            <van-icon name="friends" />
+                            <van-icon name="expand" />
                         </span>
                         <p>推广原则</p>
-                    </router-link>
-                    <router-link to="/share/data" tag="li">
+                    </li>
+                    <li>
                         <span class="logo">
                             <van-icon name="friends" />
                         </span>
                         <p>团队数据</p>
-                    </router-link>
+                    </li>
                 </ul>
                 <ul class="bottom">
                     <li>
@@ -57,33 +57,33 @@
             </div>
             <div class="business">
                 <ul>
-                    <router-link to="/share/adsNews" tag="li">
-                        <p><van-icon name="notes-o" /></p>
+                    <li>
+                        <p><van-icon name="new" /></p>
                         <p>新闻资讯</p>
-                        <p>文章可植入广告.锁粉</p>
-                    </router-link>
-                    <router-link to="/share/poster" tag="li">
-                        <p><van-icon name="notes-o" /></p>
+                        <p>文章可植入广告、锁粉</p>
+                    </li>
+                    <li>
+                        <p><van-icon name="gift-card" /></p>
                         <p>推广海报图</p>
-                        <p>分享二维码.快速增粉</p>
-                    </router-link>
-                    <router-link to="/share/inviteFriends" tag="li">
-                        <p><van-icon name="notes-o" /></p>
+                        <p>分享二维码、快速增粉</p>
+                    </li>
+                    <li>
+                        <p><van-icon name="add" /></p>
                         <p>邀请好友</p>
                         <p>邀请新人注册,有红包奖励</p>
-                    </router-link>
-                    <router-link to="/share/corporateVideo" tag="li">
-                        <p><van-icon name="notes-o" /></p>
+                    </li>
+                    <li>
+                        <p><van-icon name="video" /></p>
                         <p>名片玩家视频</p>
                         <p>钱夹报视频.一键分享</p>
-                    </router-link>
-                    <router-link to="/share/businessCard" tag="li">
-                        <p><van-icon name="notes-o" /></p>
+                    </li>
+                    <li>
+                        <p><van-icon name="todo-list" /></p>
                         <p>名片推广</p>
                         <p>分享名片.快速增粉</p>
-                    </router-link>
+                    </li>
                     <li>
-                        <p><van-icon name="notes-o" /></p>
+                        <p><van-icon name="cluster" /></p>
                         <p>生成短链接</p>
                         <p>快速分享短链接</p>
                     </li>
@@ -92,28 +92,28 @@
                         <p>链接转化二维码</p>
                         <p>快速转粉.一键分享</p>
                     </li>
-                    <router-link to="/share/creditCardLink" tag="li">
-                        <p><van-icon name="notes-o" /></p>
+                    <li>
+                        <p><van-icon name="vip-card" /></p>
                         <p>信用卡链接</p>
                         <p>分享带锁粉功能哦!</p>
-                    </router-link>
+                    </li>
                     <router-link to="/share/shareLink" tag="li">
-                        <p><van-icon name="notes-o" /></p>
+                        <p><van-icon name="weapp-nav" /></p>
                         <p>分享链接</p>
                         <p>分享钱夹宝链接</p>
                     </router-link>
-                    <router-link to="/share/promotionMaterial" tag="li">
-                        <p><van-icon name="notes-o" /></p>
+                    <li>
+                        <p><van-icon name="graphic" /></p>
                         <p>推广素材图</p>
                         <p>各种视频+图片</p>
-                    </router-link>
-                    <router-link to="/share/poster" tag="li">
-                        <p><van-icon name="notes-o" /></p>
+                    </li>
+                    <li>
+                        <p><van-icon name="photo" /></p>
                         <p>信用卡推广图</p>
                         <p>信用卡推广图.一键锁粉</p>
-                    </router-link>
+                    </li>
                     <li @click="flagDown">
-                        <p><van-icon name="notes-o" /></p>
+                        <p><van-icon name="descending" /></p>
                         <p>物料下载</p>
                         <p>海量宣传资料</p>
                     </li>

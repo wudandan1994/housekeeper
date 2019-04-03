@@ -21,10 +21,11 @@
            </div>
            <div class="password">
                <p>
-                   <van-radio-group v-model="radio" >
+                   <!-- <van-radio-group   @click="password"  v-model="radio" >
                              <van-radio checked-color="#A5854B" name="1"></van-radio>
-                    </van-radio-group>
-                    <span>&nbsp;记住密码</span>
+                    </van-radio-group> -->
+                    <van-checkbox v-model="checked" checked-color="#C8B27D">记住密码</van-checkbox>
+                    <span>&nbsp;</span>
                </p>
                <p @click="forgetPassword">忘记密码？</p>
            </div>
@@ -50,9 +51,14 @@ export default {
     data() {
         return {
             radio:"1",
+            checked:false,
         }
     },
     methods:{
+        password(){
+            console.log(111);
+            
+        },
         goBack() {
             this.$router.push('/home')
         },
@@ -60,7 +66,7 @@ export default {
             this.$router.push('/forgetPassword')
         },
         register() {
-             this.$router.push('/register')
+             this.$router.push('/logOut')
         }
     }
 }
@@ -116,6 +122,7 @@ export default {
                        border:none;
                        flex: 1;
                        color:#000;
+                       background-color: #535353;
                    }
                }
            }
@@ -130,6 +137,11 @@ export default {
                    font-size: 30px;
                     &:nth-of-type(1) {
                         display: flex;
+                        font-size:18px;
+                        color:#fff;
+                    }
+                    .van-checkbox__label {
+                        color:#fff;
                     }
                }
            }
