@@ -45,6 +45,7 @@ export default {
            color:#fff;
            display: flex;
            position: fixed;
+           z-index:999;
            justify-content: space-between;
            >span {
                &:nth-of-type(1) {

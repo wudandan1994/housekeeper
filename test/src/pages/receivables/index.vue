@@ -147,6 +147,7 @@ export default {
            display: flex;
            justify-content: space-between;
            color:#fff;
+           z-index:999;
        }
        >.container {
            background-color:#ECF0F3; 
@@ -336,6 +337,7 @@ export default {
            >.statistics {
                margin-top:20px;
                background-color: #fff;
+               margin-bottom: 100px;
                >ul{
                    >li {
                        display: flex;

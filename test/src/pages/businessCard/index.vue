@@ -133,6 +133,7 @@ export default {
            padding-top:10px;
            color:#fff;
            display: flex;
+           z-index:999;
            position: fixed;
            justify-content: space-between;
            >span {

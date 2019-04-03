@@ -46,6 +46,7 @@ export default {
            width:100%;
            height: 46px;
            line-height: 46px;
+           z-index:999;
            padding-top:10px;
            color:#fff;
            display: flex;

@@ -154,6 +154,7 @@ export default {
           width: 99vw;
           height: auto;
           margin-left: auto;
+          z-index:999;
           margin-right: auto;
           background-color: rgb(0, 0, 0);
           border: 1px solid rgb(102, 102, 102);

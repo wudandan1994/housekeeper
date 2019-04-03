@@ -80,6 +80,7 @@ border: solid 1px white;
 >.header{
 width: 100vw;
 height: auto;
+z-index:999;
 background-color: black;
 }
 .checked{

@@ -101,6 +101,7 @@ export default {
          color:white;
          text-align: center;
          position: fixed;
+         z-index:999;
      }
      >.containt {
          padding-top:46px;

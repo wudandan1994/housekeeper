@@ -164,6 +164,7 @@ export default {
           background-color: #000;
           padding-top:10px;
           color:white;
+          z-index:999;
           width:100%;
            position: fixed;
            display: flex;

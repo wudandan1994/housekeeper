@@ -26,6 +26,7 @@ export default {
             width:100%;
             color:#fff;
             padding-left:20px;
+            z-index:999;
             font-size: 30px;
             >p{
                 >span {

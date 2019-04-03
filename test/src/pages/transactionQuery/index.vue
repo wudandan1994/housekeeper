@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="less">
-   #transaction_query {
+   #transaction-query{
        >header {
            background: #000;
            width:100%;
@@ -39,6 +39,7 @@ export default {
            color:#fff;
            display: flex;
            position: fixed;
+           z-index:999;
            justify-content: space-between;
            >span {
                &:nth-of-type(1) {
