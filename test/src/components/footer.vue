@@ -41,7 +41,7 @@ export default {
         }
          .van-tabbar-item__icon{
             font-size: 44px  !important;
-            margin-bottom: 10px !important;
+            margin-bottom: 14px !important;
         }
         
     }
