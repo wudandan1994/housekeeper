@@ -66,42 +66,7 @@
                        </li>
                    </ul>
                </div>
-               <div class="card-id">
-                   <ul>
-                       <li>
-                           <p>上传身份证正面</p>
-                           <div class="uploadimg">
-                               <input type="file" name="file" multiple>
-                               <img src="" alt="">
-                               <span><van-icon name="arrow" /></span>
-                           </div>
-                       </li>
-                       <li>
-                           <p>上传身份证反面</p>
-                           <div class="uploadimg">
-                               <input type="file" name="file" multiple>
-                               <img src="" alt="">
-                               <span><van-icon name="arrow" /></span>
-                           </div>
-                       </li>
-                       <li>
-                           <p>上传手持银行卡+身份证</p>
-                           <div class="uploadimg">
-                               <input type="file" name="file" multiple>
-                               <img src="" alt="">
-                               <span><van-icon name="arrow" /></span>
-                           </div>
-                       </li>
-                       <li>
-                           <p>上传银行正面</p>
-                           <div class="uploadimg">
-                               <input type="file" name="file" multiple>
-                               <img src="" alt="">
-                               <span><van-icon name="arrow" /></span>
-                           </div>
-                       </li>
-                   </ul>
-               </div>
+             
             </div>
             <div class="safe">
                 <div>
@@ -151,6 +116,7 @@ export default {
            line-height: 46px;
            padding-top:10px;
            color:#fff;
+           z-index:999;
            display: flex;
            justify-content: space-between;
            >span {
@@ -248,35 +214,7 @@ export default {
                        }
                    }
                }
-               >.card-id {
-                   margin-top: 20px;
-                   background-color: #fff;
-                   padding-left: 15px;
-                   >ul {
-                       >li {
-                           display: flex;
-                           justify-content: space-between;
-                           padding-top: 30px;
-                           padding-bottom: 30px;
-                           border-bottom: 1px solid #ccc;
-                           &:nth-of-type(4) {
-                               border:none;
-                           }
-                           >.uploadimg {
-                               cursor: pointer;
-                               
-                               position: relative;
-                               >input {
-                                   position: absolute;
-                                   right:0px;
-                                   top:0px;
-                                   opacity: 0;
-                                    cursor: pointer;
-                               }
-                           }
-                       }
-                   }
-               }
+              
            }
            >.safe {
               display: flex;
@@ -289,7 +227,7 @@ export default {
                   }
                   >h3 {
                       margin-left:15px;
-                      color:#CBCCCE;
+                      color:#999;
                       >p {
                           margin-bottom: 20px;
                       }

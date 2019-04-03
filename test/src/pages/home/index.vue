@@ -302,6 +302,7 @@ export default {
         padding-top:10px;
         position: fixed;
         width:100%;
+        z-index:999;
         align-items: center;
         >div {
             display: flex;
@@ -396,7 +397,7 @@ export default {
                             font-weight: bolder;
                         }
                         >p {
-                            font-size:12px;
+                            font-size:30px;
                             margin-top:10px;
                             margin-bottom:10px;
                             color:#bbb;
@@ -418,7 +419,7 @@ export default {
             margin-top:10px;
             border-top:1px solid #ccc;
             background-color: #fff;
-            padding-bottom: 50px;
+            padding-bottom:100px;
             >ul{
                 display: flex;
                 flex-wrap: wrap;
@@ -445,7 +446,7 @@ export default {
                             margin-bottom: 20px;
                         }
                         >p {
-                            font-size:14px;
+                            font-size:30px;
                             margin-bottom: 20px;
                             color:#bbb;
                         }

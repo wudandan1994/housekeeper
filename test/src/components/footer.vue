@@ -33,6 +33,8 @@ export default {
 </script>
 <style lang="less" scoped>
     #footer-com{
-        
+        .van-tabbar-item{
+            font-size:40px;
+        }
     }
 </style>

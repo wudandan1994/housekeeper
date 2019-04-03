@@ -249,6 +249,7 @@ export default {
             color:#fff;
             padding-top:10px;
             position:fixed;
+            z-index:999;
         }
         >.container {
             background-color: #ECF0F3;

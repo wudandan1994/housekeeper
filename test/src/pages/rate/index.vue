@@ -49,6 +49,7 @@ export default {
           padding-top:10px;
           background-color:#2F2B28;
           color:#fff;
+          z-index:999;
           display: flex;
           justify-content: space-between;
           padding-left:10px;

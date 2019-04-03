@@ -90,6 +90,7 @@ export default {
            height: 46px;
            line-height: 46px;
            padding-top:10px;
+           z-index:999;
            color:#fff;
            display: flex;
            position: fixed;

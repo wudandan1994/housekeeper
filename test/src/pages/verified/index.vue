@@ -55,6 +55,7 @@ export default {
            line-height: 46px;
            padding-top:10px;
            color:#fff;
+           z-index:999;
            display: flex;
            position: fixed;
            justify-content: space-between;

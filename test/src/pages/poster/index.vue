@@ -86,6 +86,7 @@ export default {
            padding-top:10px;
            line-height:46px;
            color:#fff;
+           z-index:999;
            display: flex;
            position: fixed;
            justify-content: space-between;
