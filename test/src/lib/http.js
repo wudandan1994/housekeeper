@@ -25,7 +25,7 @@ export const axiosPost = (url, params = {}) =>{
 }
 // 封装GET请求
 export const axiosGet = (url,params = {}) =>{
-    const _url = url;
+    const _url = hostUrl + url;
     const _axios = axios.create({
         timeout: 10000, //设置请求超时时间
     })
