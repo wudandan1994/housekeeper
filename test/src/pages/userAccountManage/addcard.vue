@@ -16,18 +16,18 @@
             </div>
             <div class="status center">(未绑定)</div>
         </div>
-        <div class="UnionPay row">
+        <router-link tag="div" to="/personalCenter/addcard/UnionPay" class="UnionPay row">
             <div class="pay-icon end-center"> <svg class="icon" aria-hidden="true"><use xlink:href="#icon-pay-unionpay"></use></svg></div>
             <div class="add-icon center"><van-icon name="plus"/></div>
             <div class="add-title start-center">添加银行卡</div>
             <div class="more-icon center"><van-icon name="arrow"/></div>
-        </div>
-        <div class="UnionPay row">
+        </router-link>
+        <router-link tag="div" to="/personalCenter/addcard/alipay" class="UnionPay row">
             <div class="pay-icon end-center"><van-icon name="alipay" color="#0398E2"/></div>
             <div class="add-icon center"><van-icon name="plus"/></div>
             <div class="add-title start-center">添加支付宝</div>
             <div class="more-icon center"><van-icon name="arrow"/></div>
-        </div>
+        </router-link>
     </div>
 </template>
 <script>

@@ -35,11 +35,11 @@
             <div class="menu-name start-center">现金提现</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
         </div>
-         <div class="per-menu toTop row">
+        <router-link tag="div" to="/personalCenter/incomedetail/addcard" class="per-menu toTop row">
             <div class="icon start-center"><i class="iconfont icon-yinhangqia"></i></div>
             <div class="menu-name start-center">银行卡</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
-        </div>
+        </router-link>
         <router-link tag="div" class="per-menu toTop row" to="/personalCenter/income">
             <div class="icon start-center"><i class="iconfont icon-jine"></i></div>
             <div class="menu-name start-center">收益明细</div>
@@ -74,6 +74,38 @@ export default {
         handleMore(){
             this.$toast('尽请期待');
         },
+        showError(error){ 
+            switch(error.code) { 
+                case error.PERMISSION_DENIED: 
+                alert("定位失败,用户拒绝请求地理定位"); 
+                break; 
+                case error.POSITION_UNAVAILABLE: 
+                alert("定位失败,位置信息是不可用"); 
+                break; 
+                case error.TIMEOUT: 
+                alert("定位失败,请求获取用户位置超时"); 
+                break; 
+                case error.UNKNOWN_ERROR: 
+                alert("定位失败,定位系统失效"); 
+                break; 
+            } 
+        },
+        showPosition(position){ 
+            var lat = position.coords.latitude; //纬度 
+            var lag = position.coords.longitude; //经度 
+            alert('纬度:'+lat+',经度:'+lag); 
+        }, 
+
+        getLocation(){ 
+            if (navigator.geolocation){ 
+                navigator.geolocation.getCurrentPosition(this.showPosition,this.showError); 
+            }else{ 
+                alert("浏览器不支持地理定位。"); 
+            } 
+        } 
+    },
+    created(){
+        this.getLocation();
     }
 }
 </script>

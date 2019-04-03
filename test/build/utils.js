@@ -29,12 +29,12 @@ exports.cssLoaders = function (options) {
     }
   }
 
-  const px2remLoader = {
-    loader: 'px2rem-loader',
-    options: {
-      remUnit: 75
-    }
-  }
+  // const px2remLoader = {
+  //   loader: 'px2rem-loader',
+  //   options: {
+  //     remUnit: 75
+  //   }
+  // }
 
 
   // generate loader string to be used with extract text plugin

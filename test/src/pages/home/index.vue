@@ -198,18 +198,24 @@
                 </div>
             </div>
         </div>
+        <footerMenu :active="active" @getChange="changeActive"></footerMenu>
     </div>
 </template>
 
 <script>
+import footerMenu from '@/components/footer'
 export default {
+  components:{
+      footerMenu
+  },
      data() {
-    return {
-        // 轮播图图片
-      images: [] ,
-      showAaside:false, 
-      checked:true,
-    }
+        return {
+            // 轮播图图片
+        images: [] ,
+        showAaside:false, 
+        checked:true,
+        active: 0
+        }
   },
    methods:{
         isShow() {
@@ -228,6 +234,9 @@ export default {
                 }).catch(() => {
                     // on cancel
                 });
+        },
+        changeActive(obj){
+            console.log('obj', obj);
         }
     }
     

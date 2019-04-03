@@ -1,7 +1,7 @@
 <template>
     <div id="page-alipay">
         <header class="manage loan">
-            <van-nav-bar title="添加支付宝" left-text="返回" left-arrow @click-left="handleReturnHome" @click-right="handleMore">
+            <van-nav-bar title="添加银行卡" left-text="返回" left-arrow @click-left="handleReturnHome" @click-right="handleMore">
                 <van-icon name="weapp-nav" slot="right" />
             </van-nav-bar>
         </header>
@@ -10,12 +10,21 @@
             <div class="input start-center"><input type="text" placeholder="请填写支付宝姓名"></div>
         </div>
         <div class="user-input row">
-            <div class="title start-center">支付宝账号</div>
-            <div class="input start-center"><input type="text" placeholder="请填写支付宝账号"></div>
+            <div class="title start-center">银行卡号</div>
+            <div class="input start-center"><input type="text" placeholder="请填写所持银行卡号"></div>
         </div>
         <div class="user-input top row">
+            <div class="title start-center">发卡行</div>
+            <div class="input start-center"><input type="number" placeholder="请填写发卡行"></div>
+        </div>
+        <div class="user-input top row">
+            <div class="title start-center">支行地址</div>
+            <div class="input start-center" @click="handleArea">{{area}}</div>
+        </div>
+        <van-area v-if="show" class="position" :area-list="areaList" @confirm="handleAreas" />
+        <div class="user-input top row">
             <div class="title start-center">手机号</div>
-            <div class="input start-center"><input type="number" placeholder="请填写支付宝绑定的手机号"></div>
+            <div class="input start-center"><input type="number" placeholder="请填写银行卡预留手机号"></div>
         </div>
         <div class="user-input row">
             <div class="title start-center">验证码</div>
@@ -26,11 +35,18 @@
     </div>
 </template>
 <script>
+import area from '@/config/area.js'
 export default {
     data(){
         return{
-            title: '获取验证码'
+            area: '请选择支行地址',
+            show: false,
+            title: '获取验证码',
+            areaList:{}
         }
+    },
+    created(){
+        this.areaList = area;
     },
     methods:{
         handleReturnHome(){
@@ -61,6 +77,15 @@ export default {
             }else{
                 this.$toast('验证码已发送，请勿重复操作');
             }
+        },
+        // 打开获取地区
+        handleArea(val){
+            this.show = true;
+        },
+        // 获取地区
+        handleAreas(val){
+            this.show = false;
+            this.area = val[0].name+'/'+val[1].name+'/'+val[2].name
         }
     }    
 }
@@ -125,6 +150,13 @@ export default {
             color: white;
             margin-top: 50px;
             border-radius: 20px;
+        }
+        .position{
+            width: 100vw;
+            z-index: 2;
+            position: fixed;
+            left: 0;
+            bottom: 0;
         }
     }
 </style>

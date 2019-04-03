@@ -128,19 +128,28 @@
                 </ul>
             </div>
         </div>
+        <footerMenu :active="active" @getChange="changeActive"></footerMenu>
     </div>
 </template>
 
 <script>
+import footerMenu from '@/components/footer'
 export default {
+     components:{
+      footerMenu
+  },
     data(){
         return{
             showFlag:false,
+            active: 3
         }
     },
     methods:{
         flagDown(){
             this.showFlag=!this.showFlag
+        },
+        changeActive(obj){
+            console.log('obj', obj);
         }
     }
     

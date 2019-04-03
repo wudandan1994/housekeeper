@@ -68,12 +68,26 @@
                 </li>
             </ul>
         </div>
+        <footerMenu :active="active" @getChange="changeActive"></footerMenu>
     </div>
 </template>
 
 <script>
+import footerMenu from '@/components/footer'
 export default {
-    
+    components: {
+        footerMenu
+    },
+    data(){
+        return{
+            active: 1
+        }
+    },
+    methods:{
+        changeActive(obj){
+            console.log('obj', obj);
+        }
+    }
 }
 </script>
 

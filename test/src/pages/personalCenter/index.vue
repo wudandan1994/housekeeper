@@ -110,18 +110,37 @@
                 <div class="per-menu-title center">账户管理</div>
             </div>
         </div>
+        <footerMenu :active="active" @getChange="changeActive"></footerMenu>
     </div>
 </template>
 
 <script>
+import footerMenu from '@/components/footer'
+import {axiosPost,axiosGet} from '../../lib/http.js'
 export default {
+    components:{
+      footerMenu
+    },
     data(){
         return {
-
+            active:2
         }
     },
     methods:{
-
+        handleTest(){ 
+            var url = '/wxApi/connect/oauth2/authorize?appid=wx5a886a2daf539632&redirect_uri=http%3a%2f%2fbc.91dianji.com.cn%2fapi%2fcustomer%2fwx&response_type=code&scope=snsapi_userinfo&state=123';
+            axiosGet(url).then(res =>{
+                console.log('请求成功',res);
+            }).catch(res =>{
+                console.log('请求失败',res)
+            })
+        },
+        changeActive(obj){
+            console.log('obj', obj);
+        }
+    },
+    created(){
+        this.handleTest();
     }
 }
 </script>
