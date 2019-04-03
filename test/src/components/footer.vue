@@ -31,10 +31,17 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
     #footer-com{
-        .van-tabbar-item{
-            font-size:40px;
+        .van-tabbar {
+            height: 100px;
         }
+        .van-tabbar-item{
+            font-size: 26px;
+        }
+         .van-tabbar-item__icon{
+                font-size: 40px  !important;
+                margin-bottom: 10px !important;
+            }
     }
 </style>
