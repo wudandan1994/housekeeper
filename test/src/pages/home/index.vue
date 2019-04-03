@@ -261,12 +261,7 @@ export default {
         },
         // 微信授权
         handleOauth(){
-            let url = '/wxApi/connect/oauth2/authorize?appid=wx5a886a2daf539632&redirect_uri=http%3a%2f%2fbc.91dianji.com.cn%2fapi%2fcustomer%2fwx&response_type=code&scope=snsapi_userinfo';
-            axiosGet(url).then(res =>{
-                console.log('我的请求失败',res);
-            }).catch(res =>{
-                console.log('我的请求成功',res);
-            })
+            location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5a886a2daf539632&redirect_uri=http%3a%2f%2fbc.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo"
         },
         // 登录
         handleLogin(){
@@ -279,11 +274,36 @@ export default {
             }).catch(res =>{
                 console.log('登录失败',res);
             })
-        }
+        },
+        // 获取url参数
+        GetUrlParam(paraName) {
+    　　　　var url = document.location.toString();
+    　　　　var arrObj = url.split("?");
+
+    　　　　if (arrObj.length > 1) {
+    　　　　　　var arrPara = arrObj[1].split("&");
+    　　　　　　var arr;
+
+    　　　　　　for (var i = 0; i < arrPara.length; i++) {
+    　　　　　　　　arr = arrPara[i].split("=");
+
+    　　　　　　　　if (arr != null && arr[0] == paraName) {
+    　　　　　　　　　　return arr[1];
+    　　　　　　　　}
+    　　　　　　}
+    　　　　　　return "";
+    　　　　}
+    　　　　else {
+    　　　　　　return "";
+    　　　　}
+    　　}
     },
     created(){
         this.handleLogin();
         this.handleOauth();
+        if(this.GetUrlParam('code') != ''){
+            // 继续请求
+        }
     }
     
 }
