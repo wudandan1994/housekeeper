@@ -365,7 +365,7 @@ export default {
                     >.channel {
                         text-align: left;
                         flex:1;
-                        margin-left:30px;
+                        margin-left:20px;
                         >h3 {
                             font-size:30px;
                             font-weight: bolder;
@@ -406,12 +406,12 @@ export default {
                     border-right: 1px solid #ccc;
                     box-sizing: border-box;
                     >span {
-                        margin-left: 50px;
+                        margin-left: 40px;
                         font-size: 40px;
                         color:#CF9C5D;
                     }
                     >.detail-item {
-                        margin-left:20px;
+                        margin-left:10px;
                         flex:1;
                         >h3 {
                             font-weight: bolder;

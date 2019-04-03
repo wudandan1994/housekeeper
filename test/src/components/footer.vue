@@ -34,7 +34,10 @@ export default {
 <style lang="less" scoped>
     #footer-com{
         .van-tabbar-item{
-            font-size:40px;
+            font-size:30px;
         }
+        .van-tabbar {
+        height: 100px;
+      }
     }
 </style>
