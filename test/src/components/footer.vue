@@ -40,8 +40,9 @@ export default {
             font-size: 26px;
         }
          .van-tabbar-item__icon{
-                font-size: 40px  !important;
-                margin-bottom: 10px !important;
-            }
+            font-size: 40px  !important;
+            margin-bottom: 10px !important;
+        }
+        
     }
 </style>
