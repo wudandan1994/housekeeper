@@ -37,10 +37,10 @@ export default {
             height: 100px;
         }
         .van-tabbar-item{
-            font-size: 26px;
+            font-size: 22px;
         }
          .van-tabbar-item__icon{
-            font-size: 40px  !important;
+            font-size: 44px  !important;
             margin-bottom: 10px !important;
         }
         
