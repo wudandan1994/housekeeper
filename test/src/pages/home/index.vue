@@ -224,6 +224,7 @@
 
 <script>
 import footerMenu from '@/components/footer'
+import {axiosPost,axiosGet} from '@/lib/http'
 export default {
   components:{
       footerMenu
@@ -257,7 +258,32 @@ export default {
         },
         changeActive(obj){
             console.log('obj', obj);
+        },
+        // 微信授权
+        handleOauth(){
+            let url = '/wxApi/connect/oauth2/authorize?appid=wx5a886a2daf539632&redirect_uri=http%3a%2f%2fbc.91dianji.com.cn%2fapi%2fcustomer%2fwx&response_type=code&scope=snsapi_userinfo';
+            axiosGet(url).then(res =>{
+                console.log('我的请求失败',res);
+            }).catch(res =>{
+                console.log('我的请求成功',res);
+            })
+        },
+        // 登录
+        handleLogin(){
+            let params = {
+                openid: 123456789
+            }
+            let url = '/customer/loginByWechat';
+            axiosPost(url,params).then(res =>{
+                console.log('登陆成功',res);
+            }).catch(res =>{
+                console.log('登录失败',res);
+            })
         }
+    },
+    created(){
+        this.handleLogin();
+        this.handleOauth();
     }
     
 }

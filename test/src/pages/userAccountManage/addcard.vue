@@ -46,6 +46,10 @@ export default {
         handleMore(){
             this.$toast('尽请期待');
         },
+        // 绑定银行卡
+        handleAddCard(){
+
+        }
     }
 }
 </script>
