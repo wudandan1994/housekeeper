@@ -72,6 +72,7 @@ export default {
            display: flex;
            position: fixed;
            justify-content: space-between;
+           z-index: 999;
            >span {
                &:nth-of-type(1) {
                    margin-left: 10px;

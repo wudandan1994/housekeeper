@@ -38,7 +38,7 @@
                         <van-icon name="column" class="zx-search" />
                         <span>收益明细</span>
                     </router-link>
-                    <router-link tag="li" to="/home/punch">
+                    <router-link tag="li" to="/home/totalPunch">
                         <van-icon name="youzan-shield" class="zx-search" />
                         <span>签到打卡</span>
                     </router-link>
