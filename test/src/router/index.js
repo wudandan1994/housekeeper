@@ -109,7 +109,7 @@ export default new Router({
     {path:"/home/accountManagement", component:accountManagementComponent,},
     {path:"/home/accountManagement/modifyLoginPassword", component:modifyLoginPasswordComponent,},
     {path:"/home/accountManagement/modifyPhone", component:modifyPhoneComponent,},
-    {path:"/home/punch/totalPunch",component:totalPunchComponent},
+    {path:"/home/totalPunch",component:totalPunchComponent},
     {path:"/home/violationInquiry",component:violationInquiryComponent},
     {path:"/home/violationInquiry/addCar",component:addCarComponent},
     {path:"/home/violationInquiry/addCar/addSave",component:addSaveComponent},
