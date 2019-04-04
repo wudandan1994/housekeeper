@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from '@/vuex/index'
 
 Vue.config.productionTip = false
 // 引入插件兼容Ie
@@ -47,6 +48,7 @@ Vue.use(Area)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
