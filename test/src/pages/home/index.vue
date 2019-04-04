@@ -234,10 +234,17 @@ export default {
      data() {
         return {
             // 轮播图图片
-        images: [] ,
-        showAaside:false, 
-        checked:true,
-        active: 0
+            images: [] ,
+            showAaside:false, 
+            checked:true,
+            active: 0,
+            code: '',
+            openid: '',
+            access_token: '',
+            refresh_token: '',
+            // newaccess_token: '',
+            nickname: '',
+            photo: '',
         }
   },
    methods:{
@@ -261,51 +268,17 @@ export default {
         changeActive(obj){
             console.log('obj', obj);
         },
-        // 微信授权
-        handleOauth(){
-            location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5a886a2daf539632&redirect_uri=http%3a%2f%2fbc.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo"
-        },
-        // 登录
-        handleLogin(){
-            let params = {
-                openid: 123456789
-            }
-            let url = '/customer/loginByWechat';
-            axiosPost(url,params).then(res =>{
-                console.log('登陆成功',res);
-            }).catch(res =>{
-                console.log('登录失败',res);
-            })
-        },
-        // 获取url参数
-        GetUrlParam(paraName) {
-    　　　　var url = document.location.toString();
-    　　　　var arrObj = url.split("?");
-
-    　　　　if (arrObj.length > 1) {
-    　　　　　　var arrPara = arrObj[1].split("&");
-    　　　　　　var arr;
-
-    　　　　　　for (var i = 0; i < arrPara.length; i++) {
-    　　　　　　　　arr = arrPara[i].split("=");
-
-    　　　　　　　　if (arr != null && arr[0] == paraName) {
-    　　　　　　　　　　return arr[1];
-    　　　　　　　　}
-    　　　　　　}
-    　　　　　　return "";
-    　　　　}
-    　　　　else {
-    　　　　　　return "";
-    　　　　}
-    　　}
     },
     created(){
+<<<<<<< HEAD
         // this.handleLogin();
         // this.handleOauth();
         if(this.GetUrlParam('code') != ''){
             // 继续请求
         }
+=======
+       
+>>>>>>> a977bd91fd06a83b0570f61d924560b5e22e06e0
     }
     
 }

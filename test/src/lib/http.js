@@ -25,15 +25,13 @@ export const axiosPost = (url, params = {}) =>{
 }
 // 封装GET请求
 export const axiosGet = (url,params = {}) =>{
-    const _url = hostUrl + url;
+    const _url = url;
     const _axios = axios.create({
-        timeout: 10000, //设置请求超时时间
+        timeout: 20000, //设置请求超时时间
     })
     return _axios.get(_url,qs.stringify(params)).then(res=>{
-        console.log('GET请求成功',res);
         return res;
     }).catch(res=>{
-        console.log('GET请求失败',res);
         return res;
     })
 }

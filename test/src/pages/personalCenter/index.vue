@@ -8,10 +8,10 @@
             </div>
 
             <div class="middle row">
-                <div class="avator center"><img src="http://img2.imgtn.bdimg.com/it/u=1122649470,955539824&fm=26&gp=0.jpg" alt=""></div>
+                <div class="avator center"><img :src="headimg" alt=""></div>
                 <div class="name-details">
                     <div class="name-vip row">
-                        <div class="name center">纪康</div>
+                        <div class="name center">{{nickname}}</div>
                         <div class="vip center">
                             <van-icon name="gem" size="20px" color="#ccc"/>
                         </div>
@@ -116,13 +116,16 @@
 <script>
 import footerMenu from '@/components/footer'
 import {axiosPost,axiosGet} from '../../lib/http.js'
+import storage from '@/lib/storage'
 export default {
     components:{
       footerMenu
     },
     data(){
         return {
-            active:2
+            active:2,
+            nickname: '',
+            headimg: ''
         }
     },
     methods:{
@@ -139,7 +142,8 @@ export default {
         }
     },
     created(){
-        // this.handleTest();
+        this.nickname = storage.get('nickname');
+        this.headimg  = storage.get('headimg'); 
     }
 }
 </script>
@@ -204,7 +208,7 @@ export default {
                     width: 100%;
                     height: 50%;
                     .name{
-                        width: 10%;
+                        width: auto;
                         height: 100%;
                         font-size: 25px;
                         font-weight: 700;
