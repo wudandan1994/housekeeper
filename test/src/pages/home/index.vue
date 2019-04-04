@@ -27,19 +27,19 @@
             <div class="search">
                 <ul>
                     <router-link to="/home/creditEnquiry" tag="li">
-                        <van-icon name="more" class="zx-search" />
+                        <p> <van-icon name="http://bc.91dianji.com.cn/icon_23.png"  class="zx-search"  /></p>
                         <span>征信查询</span>
                     </router-link>
                     <li>
-                        <van-icon name="gem" class="zx-search" />
+                         <p> <van-icon name="http://bc.91dianji.com.cn/icon_24.png"  class="zx-search"  /></p>
                         <span>升级代理</span>
                     </li>
                     <router-link to="/home/incomeBreakdown" tag="li">
-                        <van-icon name="column" class="zx-search" />
+                         <p> <van-icon name="http://bc.91dianji.com.cn/icon_25.png"  class="zx-search"  /></p>
                         <span>收益明细</span>
                     </router-link>
                     <router-link tag="li" to="/home/totalPunch">
-                        <van-icon name="youzan-shield" class="zx-search" />
+                        <p> <van-icon name="http://bc.91dianji.com.cn/icon_26.png"  class="zx-search"  /></p>
                         <span>签到打卡</span>
                     </router-link>
                 </ul>
@@ -53,7 +53,9 @@
             <div class="credit">
                 <ul>
                     <router-link  tag="li" to="/home/cardCenter">
-                        <span class="handle"><van-icon name="card" /></span>
+                        <span class="handle">
+                            <van-icon name="http://bc.91dianji.com.cn/icon_34.png" />
+                        </span>
                         <div class="channel">
                             <h3>信用卡办理</h3>
                             <p>佣金当天结算</p>
@@ -61,7 +63,7 @@
                         </div>
                     </router-link>
                     <router-link tag="li" to="/home/receivables">
-                        <span class="handle"><van-icon name="gold-coin" /></span>
+                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/icon_35.png" /></span>
                         <div class="channel">
                             <h3>商户收款</h3>
                             <p>快捷支付</p>
@@ -69,7 +71,7 @@
                         </div>
                     </router-link>
                     <router-link tag="li" to="/home/loan">
-                        <span class="handle"><van-icon name="description" /></span>
+                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/icon_36.png" /></span>
                         <div class="channel">
                             <h3>我要贷款</h3>
                             <p>实时审批&nbsp;授信额度</p>
@@ -77,7 +79,7 @@
                         </div>  
                     </router-link>
                     <router-link to="/home/creditHousekeeper" tag="li">
-                        <span class="handle"><van-icon name="setting" /></span>
+                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/icon_37.png" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
                             <p>落地商户空卡周转</p>
@@ -91,7 +93,7 @@
                 <ul>
                     <li>
                         <span>
-                            <van-icon name="friends" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_49.png" />
                         </span>
                         <div class="detail-item">
                             <h3>授权分润</h3>
@@ -100,7 +102,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="lock" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_50.png" />
                         </span>
                         <div class="detail-item">
                             <h3>汽车保险</h3>
@@ -109,7 +111,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="cluster" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_51.png" />
                         </span>
                         <div class="detail-item">
                             <h3>发圈素材</h3>
@@ -118,7 +120,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="ascending" />
+                            <van-icon name="http://bc.91dianji.com.cn/icon_52.png" />
                         </span>
                         <div class="detail-item">
                             <h3>排行榜</h3>
@@ -127,7 +129,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="bag" />
+                            <van-icon name="http://bc.91dianji.com.cn/icon_53.png" />
                         </span>
                         <div class="detail-item">
                             <h3>意外险</h3>
@@ -136,7 +138,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="invition" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_60.png" />
                         </span>
                         <div class="detail-item">
                             <h3>提额秘籍</h3>
@@ -145,7 +147,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="gold-coin" />
+                            <van-icon name="http://bc.91dianji.com.cn/icon_61.png" />
                         </span>
                         <div class="detail-item">
                             <h3>共享奖金池</h3>
@@ -154,7 +156,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="vip-card" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_62.png" />
                         </span>
                         <div class="detail-item">
                             <h3>给团队绑卡</h3>
@@ -163,7 +165,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="star" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_63.png" />
                         </span>
                         <div class="detail-item">
                             <h3>积分兑换</h3>
@@ -172,7 +174,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="expand" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_64.png" />
                         </span>
                         <div class="detail-item">
                             <h3>商城</h3>
@@ -181,7 +183,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="medel" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_65.png" />
                         </span>
                         <div class="detail-item">
                             <h3>违章查询</h3>
@@ -299,8 +301,8 @@ export default {
     　　}
     },
     created(){
-        this.handleLogin();
-        this.handleOauth();
+        // this.handleLogin();
+        // this.handleOauth();
         if(this.GetUrlParam('code') != ''){
             // 继续请求
         }
@@ -313,11 +315,12 @@ export default {
    #home-component {
        background-color: #eee;
        >header {
-        height:46px;
+        height:86px;
+        font-size:28px;
+        line-height: 86px;
         background-color: #000; 
         color:white;
         display:flex;
-        line-height: 46px;
         justify-content: space-between;
         padding-top:10px;
         position: fixed;
@@ -325,6 +328,7 @@ export default {
         z-index:999;
         align-items: center;
         >div {
+            margin-left:15px;
             display: flex;
             >.menu {
                 margin-left:5px;
@@ -335,7 +339,7 @@ export default {
             margin-left:15px;
         }
         >.news {
-            margin-right: 5px;
+            margin-right:15px;
         }
        }
        >.container {
@@ -348,21 +352,33 @@ export default {
        }
         >.search {
             margin-top:15px;
-            background-color: #fff;
             height: 110px;
             >ul{
                 list-style: none;
                 display: flex;
-                align-items: center;
                 height: 100%;
-                border-bottom: 1px solid #ccc;
+                background-color: #fff;
+                border-bottom:2px solid #ccc;
+                padding-bottom:20px;
+                padding-top:10px;
                 >li {
                     width:25%;
                     text-align: center;
-                    >.zx-search {
+                     margin-bottom:20px;
+                     >span {
+                         font-size: 24px;
+                     }
+                     >p {
+                          text-align: center;
+                          margin-bottom:10px;
+                          transform: translateX(25%);
+                         >.zx-search {
                         display:block;
-                        font-size:60px;
+                        font-size:80px;
+                        text-align: center;
                     }
+                }
+                    
                 }
             }
         }
@@ -370,6 +386,7 @@ export default {
             display: flex;
             flex-wrap: nowrap;
             height: 100px;
+            margin-top:50px;
             background-color: white;
             >.information {
                 font-weight: bolder;
@@ -417,7 +434,7 @@ export default {
                             font-weight: bolder;
                         }
                         >p {
-                            font-size:30px;
+                            font-size:28px;
                             margin-top:10px;
                             margin-bottom:10px;
                             color:#bbb;
@@ -440,6 +457,7 @@ export default {
             border-top:1px solid #ccc;
             background-color: #fff;
             padding-bottom:100px;
+            margin-bottom: 100px;
             >ul{
                 display: flex;
                 flex-wrap: wrap;

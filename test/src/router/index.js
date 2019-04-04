@@ -81,6 +81,7 @@ import incomeBreakdownComponent from '@/pages/incomeBreakdown'
 
 
 export default new Router({
+  // mode:"hash",
   routes: [
     { path: '/',redirect:'/home'},
     {path:"/vip",component:vipComponent},

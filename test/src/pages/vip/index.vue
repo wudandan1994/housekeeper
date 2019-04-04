@@ -8,8 +8,20 @@
                      <div class="diamonds">
                          <div class="card">钱夹宝钻石卡</div>
                          <div class="instructions">
-                             <span>权益说明</span>
-                             <span>退换规则</span>
+                             <span @click="isShow">权益说明</span>
+                             <van-popup v-model="show">
+                                <div class="cover">
+                                    <p>钱夹宝钻石卡</p>
+                                    <p>权益说明</p>
+                                </div>
+                            </van-popup>
+                             <span @click="isShowRule">退换规则</span>
+                              <van-popup v-model="showRule">
+                                <div class="rule">
+                                    <p>平台保证金退还说明</p>
+                                    <p>权益说明</p>
+                                </div>
+                            </van-popup>
                          </div>
                      </div>
                      <div class="qualifications">
@@ -29,8 +41,20 @@
                      <div class="diamonds">
                          <div class="card">钱夹宝钻石卡</div>
                          <div class="instructions">
-                             <span>权益说明</span>
-                             <span>退换规则</span>
+                             <span @click="isShow">权益说明</span>
+                             <van-popup v-model="show">
+                                <div class="cover">
+                                    <p>钱夹宝钻石卡</p>
+                                    <p>权益说明</p>
+                                </div>
+                            </van-popup>
+                             <span @click="isShowRule">退换规则</span>
+                              <van-popup v-model="showRule">
+                                <div class="rule">
+                                    <p>平台保证金退还说明</p>
+                                    <p>权益说明</p>
+                                </div>
+                            </van-popup>
                          </div>
                      </div>
                      <div class="qualifications">
@@ -49,9 +73,21 @@
                     <img src="../../../static/images/flower.jpg.jpg" alt="">
                      <div class="diamonds">
                          <div class="card">钱夹宝钻石卡</div>
-                         <div class="instructions">
-                             <span>权益说明</span>
-                             <span>退换规则</span>
+                          <div class="instructions">
+                             <span @click="isShow">权益说明</span>
+                             <van-popup v-model="show">
+                                <div class="cover">
+                                    <p>钱夹宝钻石卡</p>
+                                    <p>权益说明</p>
+                                </div>
+                            </van-popup>
+                             <span @click="isShowRule">退换规则</span>
+                              <van-popup v-model="showRule">
+                                <div class="rule">
+                                    <p>平台保证金退还说明</p>
+                                    <p>权益说明</p>
+                                </div>
+                            </van-popup>
                          </div>
                      </div>
                      <div class="qualifications">
@@ -80,12 +116,20 @@ export default {
     },
     data(){
         return{
-            active: 1
+            active: 1,
+            show:false,
+            showRule:false,
         }
     },
     methods:{
         changeActive(obj){
             console.log('obj', obj);
+        },
+        isShow(){
+             this.show=true
+        },
+        isShowRule(){
+            this.showRule=true
         }
     }
 }
@@ -95,19 +139,21 @@ export default {
  #vip {
      >header {
          width:100%;
-         height: 46px;
          background-color: #000;
-         line-height: 46px;
          color:white;
          text-align: center;
          position: fixed;
          z-index:999;
+         height:86px;
+        font-size:28px;
+        line-height: 86px;
      }
      >.containt {
-         padding-top:46px;
+         padding-top:80px;
          padding-bottom: 46px;
          >ul {
              padding:20px 30px;
+             margin-bottom: 100px;
              >li {
                  >img {
                      display: block;
@@ -134,6 +180,38 @@ export default {
                              border-radius:8px;
                              margin-left:20px;
                          }
+                         .cover {
+                             width:500px;
+                             padding-top:30px;
+                            height: 700px;
+                            border-radius: 10px;
+                            padding:30px;
+                            background-color: #fff;
+                            >p{
+                                &:nth-of-type(1){
+                                    color:#DAB17B;
+                                    text-align: center;
+                                    font-size: bold;
+                                    margin-bottom: 20px;
+                                }
+                            }
+                         }
+                         .rule {
+                             width:500px;
+                             padding-top:30px;
+                            height: 700px;
+                            border-radius: 10px;
+                            padding:30px;
+                            background-color: #fff;
+                            >p{
+                                &:nth-of-type(1){
+                                    color:#DAB17B;
+                                    text-align: center;
+                                    font-size: bold;
+                                    margin-bottom: 20px;
+                                }
+                            }
+                         }
                      }
                  }
                  >.qualifications {
@@ -145,7 +223,7 @@ export default {
                          color:#000;
                           background-color: #D9B786;
                           padding:10px 3px;
-                          font-size: 16px;
+                          font-size: 22px;
                           border-radius:13px;
                      }
                  }
@@ -171,7 +249,7 @@ export default {
                          background-color: #C7363F;
                          border-radius: 10px;
                          padding:10px 20px;
-                         font-size: 14px;
+                         font-size: 22px;
                      }
                      >.buy-he {
                          color:white;
