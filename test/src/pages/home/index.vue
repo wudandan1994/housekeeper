@@ -270,15 +270,8 @@ export default {
         },
     },
     created(){
-<<<<<<< HEAD
-        // this.handleLogin();
-        // this.handleOauth();
-        if(this.GetUrlParam('code') != ''){
-            // 继续请求
-        }
-=======
-       
->>>>>>> a977bd91fd06a83b0570f61d924560b5e22e06e0
+        console.log(this.$store.state.wechat.nickname)
+        console.log(this.$store.state.wechat.headimg)
     }
     
 }

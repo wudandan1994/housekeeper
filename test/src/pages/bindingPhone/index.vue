@@ -2,7 +2,7 @@
     <div id="verified-name">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>实名认证</span>
+            <span>绑定手机号</span>
             <span></span>
         </header>
         <div class="container">

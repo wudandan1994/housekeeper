@@ -13,7 +13,7 @@
                     <div class="name-vip row">
                         <div class="name center">{{nickname}}</div>
                         <div class="vip center">
-                            <van-icon name="gem" size="20px" color="#ccc"/>
+                            <van-icon name="http://bc.91dianji.com.cn/301-1.png" size="26px" color="#ccc"/>
                         </div>
                         <div class="operator end-center">
                             <van-icon name="medel" size="20px" color="#dab17b"/>
@@ -29,15 +29,15 @@
 
             <div class="bottom row">
                 <div class="per-menu">
-                    <div class="per-icon center"><van-icon name="star" size="20px" color="#dab17b"/></div>
+                    <div class="per-icon center"><van-icon name="http://bc.91dianji.com.cn/303.png" size="30px" color="#dab17b"/></div>
                     <div class="per-title center">积分</div>
                 </div>
                  <div class="per-menu">
-                    <div class="per-icon center"><van-icon name="bill" size="20px" color="#dab17b"/></div>
+                    <div class="per-icon center"><van-icon name="http://bc.91dianji.com.cn/304.png" size="30px" color="#dab17b"/></div>
                     <div class="per-title center">可结算</div>
                 </div>
                  <div class="per-menu">
-                    <div class="per-icon center"><van-icon name="gift-card" size="20px" color="#dab17b"/></div>
+                    <div class="per-icon center"><van-icon name="http://bc.91dianji.com.cn/305.png" size="30px" color="#dab17b"/></div>
                     <div class="per-title center">总收益</div>
                 </div>
             </div>
@@ -45,68 +45,68 @@
         <div class="menu-title start-center">特约服务</div>
         <div class="per-list row">
             <router-link tag="div" class="per-menu-list line" to="/ponserCenter/userAccountManage">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/306.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">账户管理</div>
             </router-link>
 
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">账户管理</div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/307.png" size="52px" color="#dab17b"/></div>
+                <div class="per-menu-title center">上级推荐人</div>
             </div>
 
             <div class="per-menu-list">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">账户管理</div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/308.png" size="52px" color="#dab17b"/></div>
+                <div class="per-menu-title center">微名片</div>
             </div>
 
         </div>
         <div class="per-list row">
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">账户管理</div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/309.png" size="52px" color="#dab17b"/></div>
+                <div class="per-menu-title center">商务合作</div>
             </div>
 
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">账户管理</div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/310.png" size="52px" color="#dab17b"/></div>
+                <div class="per-menu-title center">共享佣金池</div>
             </div>
 
             <div class="per-menu-list">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">账户管理</div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/311.png" size="52px" color="#dab17b"/></div>
+                <div class="per-menu-title center">营销课堂</div>
             </div>
         </div>
         <div class="menu-title m-top start-center">实时工具</div>
         <div class="per-list row">
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">账户管理</div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/313.png" size="52px" color="#dab17b"/></div>
+                <div class="per-menu-title center">VIP视频</div>
             </div>
 
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">账户管理</div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/314.png" size="52px" color="#dab17b"/></div>
+                <div class="per-menu-title center">流程说明</div>
             </div>
 
             <div class="per-menu-list">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">账户管理</div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/315.png" size="52px" color="#dab17b"/></div>
+                <div class="per-menu-title center">平台手册</div>
             </div>
         </div>
         <div class="per-list row">
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">账户管理</div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/316.png" size="52px" color="#dab17b"/></div>
+                <div class="per-menu-title center">百问百答</div>
             </div>
 
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">账户管理</div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/317.png" size="52px" color="#dab17b"/></div>
+                <div class="per-menu-title center">退换说明</div>
             </div>
 
             <div class="per-menu-list">
-                <div class="menu-icon center"><van-icon name="gift-card" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">账户管理</div>
+                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/318.png" size="52px" color="#dab17b"/></div>
+                <div class="per-menu-title center">名片夹</div>
             </div>
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
@@ -124,8 +124,8 @@ export default {
     data(){
         return {
             active:2,
-            nickname: '',
-            headimg: ''
+            nickname: 'Giovanni',
+            headimg: 'http://bc.91dianji.com.cn/301-1.png'
         }
     },
     methods:{
@@ -142,8 +142,8 @@ export default {
         }
     },
     created(){
-        this.nickname = storage.get('nickname');
-        this.headimg  = storage.get('headimg'); 
+        // this.nickname = this.$store.state.wechat.nickname;
+        // this.headimg  = this.$store.state.wechat.headimg; 
     }
 }
 </script>
@@ -151,17 +151,17 @@ export default {
 <style lang="less" scoped>
   #personal-center-component {
       width: 100%;
-      height: auto;
+      height: 90vh;
+      overflow: scroll;
       padding-bottom: 5vh;
       background: #F2F2F2;
       .header{
-          width: 99vw;
+          width: 100vw;
           height: auto;
           margin-left: auto;
           z-index:999;
           margin-right: auto;
-          background-color: rgb(0, 0, 0);
-          border: 1px solid rgb(102, 102, 102);
+          background: linear-gradient(#4B66AF,#6883C1);
           .top{
             position: relative;
             height: 86px;
@@ -173,15 +173,16 @@ export default {
                 height: auto;
                 font-weight: 400;
                 color: rgb(212, 214, 221);
+                font-size: 32px;
             }
             .authentication{
                 width: auto;
                 height: 20px;
                 position: absolute;
-                top: 25px;
+                top: 5px;
                 right: 10px;
                 z-index: 1;
-                font-size: 12px;
+                font-size: 28px;
                 font-weight: 400;
                 color: rgb(212, 214, 221);
             }
@@ -207,10 +208,11 @@ export default {
                 .name-vip{
                     width: 100%;
                     height: 50%;
+                    position: relative;
                     .name{
                         width: auto;
                         height: 100%;
-                        font-size: 25px;
+                        font-size: 44px;
                         font-weight: 700;
                         color: rgb(218, 177, 123);
                         overflow: hidden;
@@ -220,11 +222,19 @@ export default {
                         height: 100%;
                     }
                     .operator{
-                        width: 76%;
+                        width: auto;
                         height: 100%;
-                        font-size: 9px;
+                        font-size: 26px;
+                        padding-left: 5px;
+                        padding-right: 5px;
                         font-weight: 400;
-                        color: rgb(255, 255, 255);
+                        color: #4B66AF;
+                        position: absolute;
+                        top: 0px;
+                        right: 0px;
+                        background: #E8ECF7;
+                        border-top-left-radius: 30px;
+                        border-bottom-left-radius: 30px;
                     }
                 }
                 .set{
@@ -233,24 +243,24 @@ export default {
                     .unset{
                         width: 100px;
                         height: 50%;
-                        border: solid 0.02rem rgb(102, 102, 102);
+                        border: solid 0.02rem #B6C5E4;
                         margin-top: 15px;
                         color: #ccc;
-                        font-size: 15px;
+                        font-size: 28px;
                         border-radius: 20px;
+                        padding: 8px;
                     }
                     .code{
                         width: auto;
                         height: 50%;
-                        border: solid 0.02rem rgb(102, 102, 102);
+                        border: solid 0.02rem #B6C5E4;
                         margin-top: 15px;
                         margin-left: 30px;
-                        padding-left: 15px;
-                        padding-right: 15px;
                         color: #ccc;
                         backface-visibility: white;
-                        font-size: 0.2em;
+                        font-size: 28px;
                         border-radius: 20px;
+                        padding: 8px;
                     }
                 }
            }
@@ -275,11 +285,13 @@ export default {
            }
       }
        .menu-title{
-            width: 99%;
-            padding-left: 1%;
+            width: 98%;
+            padding-left: 2%;
             height: 80px;
             border-bottom: solid 1px #ccc;
             background: white;
+            font-size: 30px;
+            color: #000;
         }
         .m-top{
             margin-top: 15px;
@@ -295,8 +307,10 @@ export default {
                     height: 60%;
                 }
                 .per-menu-title{
+                    font-size: 28px;
                     width: 100%;
                     height: 40%;
+                    color: #666;
                 }
             }
             .line{
