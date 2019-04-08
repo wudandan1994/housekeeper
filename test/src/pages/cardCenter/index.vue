@@ -240,8 +240,8 @@ export default {
 <style lang="less" >
     #card-center {
         >header {
-            height: 46px;
-            line-height: 46px;
+            height: 86px;
+            line-height: 86px;
             width:100%;
             background-color: #000;
             display: flex;
@@ -250,10 +250,11 @@ export default {
             padding-top:10px;
             position:fixed;
             z-index:999;
+            font-size:28px;
         }
         >.container {
             background-color: #ECF0F3;
-            padding-top:56px;
+            padding-top:96px;
             padding-bottom: 50px;
             >.housekeeper {
                 display: flex;

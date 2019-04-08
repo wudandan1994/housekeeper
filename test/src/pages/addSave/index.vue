@@ -60,6 +60,7 @@ export default {
            display: flex;
            position: fixed;
            z-index:999;
+           font-size:28px;
            justify-content: space-between;
            >span {
                &:nth-of-type(1) {
@@ -71,7 +72,7 @@ export default {
            }
        }
        >.container {
-           padding-top:56px;
+           padding-top:96px;
            padding-bottom: 50px;
            >.car-deatil {
                >p {

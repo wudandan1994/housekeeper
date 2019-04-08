@@ -71,8 +71,9 @@ export default {
        >header {
            background: #000;
            width:100%;
-           height: 46px;
-           line-height: 46px;
+           height:86px;
+           line-height:86px;
+           font-size:28px;
            padding-top:10px;
            z-index:999;
            color:#fff;
@@ -89,7 +90,7 @@ export default {
            }
        }
        >.container {
-           padding-top:56px;
+           padding-top:96px;
            padding-bottom: 50px;
            >.time {
                border:2px solid #ccc;

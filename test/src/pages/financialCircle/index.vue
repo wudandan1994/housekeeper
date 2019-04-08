@@ -70,7 +70,7 @@ export default {
             width: 50%;
             height: 100px;
             margin: auto;
-            font-size: 14px;
+            font-size: 28px;
             font-weight: 400;
         >div{
             width: 50%;

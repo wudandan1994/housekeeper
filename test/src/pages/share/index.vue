@@ -178,7 +178,7 @@ export default {
            }
       }
       >.contain {
-          padding-top:46px;
+          padding-top:96px;
           padding-bottom: 50px;
           >.poster {
               background-color: #24292F;

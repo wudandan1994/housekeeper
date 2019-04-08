@@ -112,9 +112,10 @@ export default {
        >header {
            background: #000;
            width:100%;
-           height: 46px;
-           line-height: 46px;
+           height: 86px;
+           line-height: 86px;
            padding-top:10px;
+           font-size:28px;
            color:#fff;
            z-index:999;
            display: flex;
@@ -133,7 +134,7 @@ export default {
            >.message {
                background-color: #fff;
                padding-top:20px;
-               padding-bottom: 10xp;
+               padding-bottom: 10px;
                display: flex;
                border-bottom: 1px solid #ccc;
                padding-bottom: 10px;

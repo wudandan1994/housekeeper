@@ -313,9 +313,10 @@ export default {
         }
        }
        >.container {
-           padding-bottom:56px;
-           padding-top:56px;
-           height: 1000px;
+           padding-bottom:96px;
+           padding-top:96px;
+        //    width: 100%;
+           overflow-x: hidden;
             >.swipe {
            height: 300px;
            background-color: orange;
