@@ -24,9 +24,11 @@
                <div class="positive">
                    <p>1.身份证正面</p>
                     <div class="uploadimg">
-                         <van-uploader :after-read="onRead" accept="image/*" multiple name="zhengm">                           
+                         <!-- <van-uploader :after-read="onRead" accept="image/*" multiple name="zhengm">                           
                               <img src="" ref="zhengm" >
-                        </van-uploader>
+                        </van-uploader> -->
+                        <input type="file" id="zhengm" @change="changeImg($event)">
+                        <img src="" alt="">
                     </div>
                </div>
                <div class="negative fanm">
@@ -46,22 +48,63 @@
 
 
 <script>
+import {axiosPost,axiosGet} from '@/lib/http'
 export default {
     data() {
         return {
-            imgBase64:[],
             name:"",
             idcardnumber:"",
+            picshowList: [],
         }
     },
     methods:{
-         onRead(filez) {
-        console.log(filez);
-        
-           this.$refs.zhengm.src=filez.content
+    //      onRead(filez) {
+    //     console.log( typeof filez.file.name);
+    //     axiosPost("/upload/uploadImg",filez.file.name)
+    //     .then(res=>{
+    //         console.log(res)
+    //         console.log("222");
+            
+    //     })
+    //     .catch(err=>{
+    //         console.log(err);
+    //         console.log(555);
+            
+    //     })
+    //        this.$refs.zhengm.src=filez.content
            
-        //    localStorage.setItem('zhengm',filez.content)
-      },
+    //     //    localStorage.setItem('zhengm',filez.content)
+    //   },
+            changeImg(e){
+                // console.log(filef);
+                // let file =this.files[0]
+                // console.log(this.files);
+                console.log(this);
+                let vm=this;
+                let _this = e.currentTarget;
+                console.log(_this);
+                
+                console.log('this.upnum: ',vm.upnum)
+                console.log('vm.picshowList.length: ',vm.picshowList.length);
+      
+
+                let files=document.getElementById("zhengm").files[0];
+
+
+                 axiosPost("/upload/uploadImg",files)
+                    .then(res=>{
+                        // console.log('上传成功',res)
+                        
+                    })
+                    .catch(err=>{
+                        // console.log(err);
+                        // console.log(555);
+                        
+                    })
+                            
+                
+                
+            },
       onReadFanm(filef){
            this.$refs.fanm.src=filef.content
             localStorage.setItem('fanm',filef.content)

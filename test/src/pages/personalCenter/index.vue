@@ -184,11 +184,7 @@ export default {
                 top: 5px;
                 right: 10px;
                 z-index: 1;
-<<<<<<< HEAD
-                font-size: 28px;
-=======
                 font-size: 30px;
->>>>>>> d1b4330df6dd4890c6d598b3c3292c2a7c78b70a
                 font-weight: 400;
                 color: rgb(212, 214, 221);
             }
@@ -218,11 +214,7 @@ export default {
                     .name{
                         width: auto;
                         height: 100%;
-<<<<<<< HEAD
-                        font-size: 44px;
-=======
                         font-size: 36px;
->>>>>>> d1b4330df6dd4890c6d598b3c3292c2a7c78b70a
                         font-weight: 700;
                         color: rgb(218, 177, 123);
                         overflow: hidden;
