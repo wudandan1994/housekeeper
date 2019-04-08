@@ -142,10 +142,11 @@ export default {
 <style lang="less">
    #receivables {
        >header {
-           height: 46px;
-           line-height: 46px;
+           height: 86px;
+           line-height: 86px;
            width:100%;
            padding-top:10px;
+           font-size:28px;
            background-color: #000;
            display: flex;
            justify-content: space-between;

@@ -51,11 +51,12 @@ export default {
        >header {
            background: #000;
            width:100%;
-           height: 46px;
-           line-height: 46px;
+           height: 86px;
+           line-height: 86px;
            padding-top:10px;
            color:#fff;
            z-index:999;
+           font-size:28px;
            display: flex;
            position: fixed;
            justify-content: space-between;
@@ -69,7 +70,7 @@ export default {
            }
        }
        >.container {
-           padding:66px 20px 50px 20px;
+           padding:96px 20px 50px 20px;
             font-size: 30px;
             line-height:40px;
             color:#8D8D8D;

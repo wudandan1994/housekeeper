@@ -21,8 +21,9 @@ export default {
     #real-name {
         >header {
             background-color: #000;
-            height: 46px;
-            line-height:46px;
+            height: 86px;
+            line-height:86px;
+            font-size:28px;
             width:100%;
             color:#fff;
             padding-left:20px;

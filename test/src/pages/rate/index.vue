@@ -44,8 +44,9 @@ export default {
 <style lang="less">
   #rate {
       >header {
-          height: 46px;
-          line-height: 46px;
+          height: 86px;
+          line-height: 86px;
+          font-size:28px;
           padding-top:10px;
           background-color:#2F2B28;
           color:#fff;

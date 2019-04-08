@@ -149,7 +149,7 @@ export default {
         line-height: 86px;
      }
      >.containt {
-         padding-top:80px;
+         padding-top:96px;
          padding-bottom: 46px;
          >ul {
              padding:20px 30px;

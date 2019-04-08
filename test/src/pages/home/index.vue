@@ -270,8 +270,17 @@ export default {
         },
     },
     created(){
+<<<<<<< HEAD
         console.log(this.$store.state.wechat.nickname)
         console.log(this.$store.state.wechat.headimg)
+=======
+        // this.handleLogin();
+        // this.handleOauth();
+        if(this.GetUrlParam('code') != ''){
+            // 继续请求
+        }
+       
+>>>>>>> d1b4330df6dd4890c6d598b3c3292c2a7c78b70a
     }
     
 }
@@ -309,9 +318,10 @@ export default {
         }
        }
        >.container {
-           padding-bottom:56px;
-           padding-top:56px;
-           height: 1000px;
+           padding-bottom:96px;
+           padding-top:96px;
+        //    width: 100%;
+           overflow-x: hidden;
             >.swipe {
            height: 300px;
            background-color: orange;

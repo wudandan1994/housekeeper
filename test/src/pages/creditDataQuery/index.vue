@@ -33,13 +33,14 @@ export default {
        >header {
            background: #000;
            width:100%;
-           height: 46px;
-           line-height: 46px;
+           height: 86px;
+           line-height: 86px;
            padding-top:10px;
            color:#fff;
            display: flex;
            z-index:999;
            position: fixed;
+           font-size:28px;
            justify-content: space-between;
            >span {
                &:nth-of-type(1) {
@@ -51,7 +52,7 @@ export default {
            }
        }
        >.container {
-           padding-top:56px;
+           padding-top:96px;
            padding-bottom: 50px;
        }
    }

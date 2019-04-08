@@ -133,9 +133,10 @@ export default {
        >header {
            background: #000;
            width:100%;
-           height: 46px;
-           line-height: 46px;
+           height: 86px;
+           line-height: 86px;
            padding-top:10px;
+           font-size:28px;
            color:#fff;
            display: flex;
            z-index:999;
@@ -151,7 +152,7 @@ export default {
            }
        }
        >.container {
-           padding-top:56px;
+           padding-top:96px;
            padding-bottom: 50px;
            background-color:#E2E3E5; 
            >.info {

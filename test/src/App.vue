@@ -111,9 +111,6 @@ export default {
     if(this.GetUrlParam('code') != ''){
       // 已授权
       this.handleAccessToken();
-      // this.handleRegister();
-      // this.handleLogin();
-      
     }else{
       // 未授权
       this.handleOauth();
@@ -128,7 +125,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+<<<<<<< HEAD
   // margin-top:60px;
+=======
+//   padding-top:60px;
+>>>>>>> d1b4330df6dd4890c6d598b3c3292c2a7c78b70a
   
 }
 
