@@ -56,7 +56,6 @@ export default {
     },
     methods:{
         password(){
-            console.log(111);
             
         },
         goBack() {
