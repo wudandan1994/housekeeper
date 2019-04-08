@@ -62,6 +62,9 @@ export default {
        >.container {
            padding-top:56px;
            padding-bottom: 50px;
+           .van-tab{
+               font-size: 30px;
+           }
        }
    }
 </style>

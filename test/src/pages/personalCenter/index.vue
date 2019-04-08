@@ -2,9 +2,9 @@
     <div id="personal-center-component">
         <header class="header">
             <div class="top">
+                <span></span>
                 <div class="title center">个人中心</div>
-                <div class="authentication">实名认证</div>
-                <router-link to="/home/verified"> <div class="authentication">实名认证</div></router-link>
+                <router-link to="/home/verified" tag="div"> <div class="authentication">实名认证</div></router-link>
             </div>
 
             <div class="middle row">
@@ -164,6 +164,10 @@ export default {
           border: 1px solid rgb(102, 102, 102);
           .top{
             position: relative;
+            height: 86px;
+            line-height: 86px;
+            display: flex;
+             font-size:28px;
             .title{
                 width: 100%;
                 height: auto;

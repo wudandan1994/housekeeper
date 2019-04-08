@@ -159,8 +159,9 @@ export default {
 <style lang="less" >
   #share-component {
       >header {
-          height: 46px;
-          line-height: 46px;
+          height: 86px;
+          line-height: 86px;
+          font-size: 28px;
           background-color: #000;
           padding-top:10px;
           color:white;

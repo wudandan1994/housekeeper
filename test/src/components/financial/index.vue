@@ -5,15 +5,17 @@
            <div class="detail column">
                <div class="name-top row">
                    <div class="name start-center">任我行</div>
+       
+       
                    <div class="top center"><div class="toTop center">已置顶</div></div>
                </div>
                <div class="company">传帮带(上海)网络科技有限公司</div>
-               <div class="bank"><div>所属银行:招商银行</div></div>
+               <div class="bank"><span>所属银行:招商银行</span></div>
            </div>
            <div class="add-friends column">
                <div class="add center"><div>加好友</div></div>
                <div class="address center">
-                   <van-icon name="map-marked"/>信阳市
+                   <van-icon name="location"/>信阳市
                 </div>
            </div>
        </div>
@@ -25,12 +27,12 @@
                    <div class="top center"><div class="toTop center">已置顶</div></div>
                </div>
                <div class="company">传帮带(上海)网络科技有限公司</div>
-               <div class="bank"><div>所属银行:招商银行</div></div>
+               <div class="bank"><span>所属银行:招商银行</span></div>
            </div>
            <div class="add-friends column">
                <div class="add center"><div>加好友</div></div>
                <div class="address center">
-                   <van-icon name="map-marked"/>信阳市
+                   <van-icon name="location"/>信阳市
                 </div>
            </div>
        </div>
@@ -42,12 +44,12 @@
                    <div class="top center"><div class="toTop center">已置顶</div></div>
                </div>
                <div class="company">传帮带(上海)网络科技有限公司</div>
-               <div class="bank"><div>所属银行:招商银行</div></div>
+               <div class="bank"><span>所属银行:招商银行</span></div>
            </div>
            <div class="add-friends column">
                <div class="add center"><div>加好友</div></div>
                <div class="address center">
-                   <van-icon name="map-marked"/>信阳市
+                   <van-icon name="location"/>信阳市
                 </div>
            </div>
        </div>
@@ -74,6 +76,7 @@ export default {
    .per-message{
        width: 100vw;
        height: 120px;
+       padding:20px 0px;
        border-bottom: solid 1px rgb(204, 204, 204);
    }
    .avator{
@@ -124,21 +127,21 @@ export default {
         font-size: 12px;
         font-weight: 400;
         color: rgb(102, 102, 102);
+        margin-bottom:15px;
+        margin-top:15px;
    }
    .bank{
        width: 100%;
        height: 35%;
+       margin-bottom: 10px;
    }
-   .bank div{
-       width: auto;
-       height: auto;
-       padding: 5px;
-       font-size: 11px;
-       font-weight: 400;
+   .bank span{
+       padding: 5px 10px;
+       font-size: 24px;
        color: rgb(185, 117, 12);
-       border-radius: 4px;
+       border-radius:10px;
        background-color: rgb(242, 242, 242);
-       border: 1px solid rgb(204, 204, 204);
+       border: 2px solid #888;
    }
    .add-friends{
        width: 20%;

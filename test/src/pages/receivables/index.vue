@@ -27,7 +27,7 @@
                         <span>￥</span>
                         <input type="number" placeholder="请输入金额最低500元">
                     </p>
-                     <p>
+                     <p @click="showPay">
                          <span>立即支付</span>
                      </p>
                 </div>
@@ -131,6 +131,9 @@ export default {
         cancle(){
              this.showTips=false
         },
+        showPay(){
+             this.showTips=true
+        }
 
     }
 }
@@ -291,7 +294,7 @@ export default {
                    width:96%;
                    margin-left:20px;
                     position: absolute;
-                    top:260px;
+                    top:0px;
                     left:0px;
                     z-index:99;
                     border:1px solid #ccc;
