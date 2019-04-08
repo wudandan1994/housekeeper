@@ -110,11 +110,11 @@ export default {
   created(){
     // 先判断该 用户openid是否被注册，已注册无需授权，未注册需授权
     console.log(storage.get("openid"));
-    if(storage.get("openid") == null){
-      // 授权
-      this.handleOauth();
-      this.handleAccessToken();
-    }
+    // if(storage.get("openid") == null){
+    //   // 授权
+    //   this.handleOauth();
+    //   this.handleAccessToken();
+    // }
   },
 }
 </script>
