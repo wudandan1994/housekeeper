@@ -17,44 +17,51 @@
         <div class="container">
             <!-- 轮播图模块 -->
             <div class="swipe">
-                <!-- <van-swipe :autoplay="3000">
+                <van-swipe :autoplay="3000">
                     <van-swipe-item v-for="(image, index) in images" :key="index">
-                        <img v-lazy="image" />
+                        <img v-lazy="image" class="per-img" />
                     </van-swipe-item>
-                </van-swipe> -->
+                </van-swipe>
             </div>
             <!-- 查询模块 -->
             <div class="search">
                 <ul>
                     <router-link to="/home/creditEnquiry" tag="li">
-                        <p> <van-icon name="http://bc.91dianji.com.cn/icon_23.png"  class="zx-search"  /></p>
+                        <p> <van-icon name="http://bc.91dianji.com.cn/101.png"  class="zx-search"  /></p>
                         <span>征信查询</span>
                     </router-link>
                     <li>
-                         <p> <van-icon name="http://bc.91dianji.com.cn/icon_24.png"  class="zx-search"  /></p>
+                         <p> <van-icon name="http://bc.91dianji.com.cn/102.png"  class="zx-search"  /></p>
                         <span>升级代理</span>
                     </li>
                     <router-link to="/home/incomeBreakdown" tag="li">
-                         <p> <van-icon name="http://bc.91dianji.com.cn/icon_25.png"  class="zx-search"  /></p>
+                         <p> <van-icon name="http://bc.91dianji.com.cn/103.png"  class="zx-search"  /></p>
                         <span>收益明细</span>
                     </router-link>
                     <router-link tag="li" to="/home/totalPunch">
-                        <p> <van-icon name="http://bc.91dianji.com.cn/icon_26.png"  class="zx-search"  /></p>
+                        <p> <van-icon name="http://bc.91dianji.com.cn/104.png"  class="zx-search"  /></p>
                         <span>签到打卡</span>
                     </router-link>
                 </ul>
             </div>
             <!-- 名片咨询模块 -->
-            <div class="business-card">
+            <!-- <div class="business-card">
                 <span class="information">名片资讯</span>
                 <span class="Investment">《投资者说》“老中青”三位嘉宾为小散解套出...</span>
+            </div> -->
+            <div class="pannel-news row">
+                <div class="pannel-title center">钱夹<br/>资讯</div>
+                <div class="pannel-detail center">
+                    <p>《投资者说》“老中青”三位嘉宾为小散解套出...</p>
+                </div>
             </div>
+
             <!-- 信用卡模块 -->
             <div class="credit">
                 <ul>
                     <router-link  tag="li" to="/home/cardCenter">
                         <span class="handle">
-                            <van-icon name="http://bc.91dianji.com.cn/icon_34.png" />
+                            <van-icon name="http://bc.91dianji.com.cn/105.png" size="40px" />
                         </span>
                         <div class="channel">
                             <h3>信用卡办理</h3>
@@ -63,7 +70,7 @@
                         </div>
                     </router-link>
                     <router-link tag="li" to="/home/receivables">
-                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/icon_35.png" /></span>
+                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/106.png" size="40px" /></span>
                         <div class="channel">
                             <h3>商户收款</h3>
                             <p>快捷支付</p>
@@ -71,15 +78,15 @@
                         </div>
                     </router-link>
                     <router-link tag="li" to="/home/loan">
-                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/icon_36.png" /></span>
+                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/107.png" size="40px" /></span>
                         <div class="channel">
                             <h3>我要贷款</h3>
                             <p>实时审批&nbsp;授信额度</p>
-                            <span>GU>></span>
+                            <span>GO>></span>
                         </div>  
                     </router-link>
                     <router-link to="/home/creditHousekeeper" tag="li">
-                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/icon_37.png" /></span>
+                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/108.png" size="40px" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
                             <p>落地商户空卡周转</p>
@@ -93,7 +100,7 @@
                 <ul>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_49.png" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_49.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>授权分润</h3>
@@ -102,7 +109,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_50.png" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_50.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>汽车保险</h3>
@@ -111,7 +118,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_51.png" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_51.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>发圈素材</h3>
@@ -120,7 +127,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="http://bc.91dianji.com.cn/icon_52.png" />
+                            <van-icon name="http://bc.91dianji.com.cn/icon_52.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>排行榜</h3>
@@ -129,7 +136,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="http://bc.91dianji.com.cn/icon_53.png" />
+                            <van-icon name="http://bc.91dianji.com.cn/icon_53.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>意外险</h3>
@@ -138,7 +145,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_60.png" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_60.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>提额秘籍</h3>
@@ -147,7 +154,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="http://bc.91dianji.com.cn/icon_61.png" />
+                            <van-icon name="http://bc.91dianji.com.cn/icon_61.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>共享奖金池</h3>
@@ -156,7 +163,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_62.png" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_62.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>给团队绑卡</h3>
@@ -165,7 +172,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_63.png" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_63.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>积分兑换</h3>
@@ -174,7 +181,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_64.png" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_64.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>商城</h3>
@@ -183,7 +190,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_65.png" />
+                           <van-icon name="http://bc.91dianji.com.cn/icon_65.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>违章查询</h3>
@@ -234,7 +241,13 @@ export default {
      data() {
         return {
             // 轮播图图片
-            images: [] ,
+            images: [
+                'http://bc.91dianji.com.cn/01.png',
+                'http://bc.91dianji.com.cn/02.jpg',
+                'http://bc.91dianji.com.cn/04.png',
+                'http://bc.91dianji.com.cn/06.jpg',
+                'http://bc.91dianji.com.cn/08.jpg'
+            ],
             showAaside:false, 
             checked:true,
             active: 0,
@@ -270,12 +283,8 @@ export default {
         },
     },
     created(){
-        // this.handleLogin();
-        // this.handleOauth();
-        if(this.GetUrlParam('code') != ''){
-            // 继续请求
-        }
-       
+        console.log(this.$store.state.wechat.nickname)
+        console.log(this.$store.state.wechat.headimg)
     }
     
 }
@@ -318,8 +327,11 @@ export default {
         //    width: 100%;
            overflow-x: hidden;
             >.swipe {
-           height: 300px;
-           background-color: orange;
+           height: 390px;
+           .per-img{
+               width: 100vw;
+               height: 390px;
+           }
        }
         >.search {
             margin-top:15px;
@@ -371,6 +383,41 @@ export default {
                 margin-left:20px;
             }
         }
+        >.pannel-news{
+            width: 98vw;
+            height: 150px;
+            margin-top:50px;
+            margin-left: auto;
+            margin-right: auto;
+            background-image: -webkit-linear-gradient(0deg, #4965AE, #8C9ACD);
+            .pannel-title{
+                width: 20%;
+                height: 100%;
+                color: white;
+                font-weight: bold;
+                font-size: 38px;
+                letter-spacing: 5px;
+                line-height: 48px;
+            }
+            .pannel-detail{
+                width: 80%;
+                height: 100%;
+                color: white;
+                font-size: 28px;
+                animation: pannleRoll 1s ease-in-out;
+
+            }
+            @keyframes pannelRoll {
+               0% {
+                transform: translateX(200px);
+                    -webkit-transform: translateX(200px);
+                }
+                100% {
+                    transform: translateX(-100%);
+                    -webkit-transform: translateX(-100%);
+                }
+            }
+        }
         >.credit {
             margin-top:20px;
             background-color: #fff;
@@ -384,7 +431,7 @@ export default {
                     display: flex;
                     justify-content: space-around;
                     width:47%;
-                    border:3px solid #ccc;
+                    border: 2px solid #ccc;
                     border-radius:10px;
                     padding-bottom:30px;
                     padding-top:15px;
@@ -411,9 +458,8 @@ export default {
                             color:#bbb;
                         }
                         >span {
-                            border:2px solid #000;
-                            color:white;
-                            background-color:#CF9C5D;
+                            color:#4B66AF;
+                            background-color:#E8ECF7;
                             border-radius:15px;
                             padding:1px 20px 5px 20px;
                             font-size: 14px;

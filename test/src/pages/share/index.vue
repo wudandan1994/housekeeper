@@ -162,7 +162,7 @@ export default {
           height: 86px;
           line-height: 86px;
           font-size: 28px;
-          background-color: #000;
+          background-color: #4B66AF;
           padding-top:10px;
           color:white;
           z-index:999;
@@ -181,7 +181,7 @@ export default {
           padding-top:96px;
           padding-bottom: 50px;
           >.poster {
-              background-color: #24292F;
+              background: linear-gradient(#4B66AF,#6883C1);
               >.top {
                   display: flex;
                   justify-content: space-between;
