@@ -9,13 +9,13 @@
             <div class="phone-numer">
                 <div>
                     <span>手机号：</span>
-                    <input type="number" placeholder="请输入手机号">
+                    <input type="number" v-model="mobile"  placeholder="请输入手机号">
                 </div>
                 <div>
                     <span>输入验证码：</span>
                     <p>
-                        <input type="number" placeholder="请输入验证码">
-                        <span>获取验证码</span>
+                        <input type="number" v-model="authcode" placeholder="请输入验证码">
+                        <span @click="getCode"><span v-show="showCount">{{count}}秒后再次</span>获取验证码</span>
                     </p>
                 </div>
             </div>
@@ -32,17 +32,56 @@
 
 
 <script>
+import {axiosPost,axiosGet} from '@/lib/http'
 export default {
     data() {
         return {
             show:false,
+            mobile:"",
+            authcode:"",
+            count:60,
+            showCount:false
         }
     },
     created(){
-        console.log(11);
         
     },
     methods:{
+        // 获取验证码
+        getCode(){
+            console.log(this);
+            let that=this
+            if(that.mobile.trim().length===0){
+                that.$toast({
+                    message:"请填写手机号码"
+                })
+            } else {
+                let data={
+                    mobile:this.mobile,
+                    type:"1"
+                }
+                axiosPost("/customer/sendSms",data)
+                .then(function(res){
+                    console.log(that);
+                    
+                    console.log(res);
+                    if(res.data.success) {
+                        console.log(252525);
+                        that.showCount=true;
+                         if(that.showCount){
+                        that.count--
+                      }
+                    }
+                    
+                })
+                .catch(err=>{
+                    console.log(err);
+                    
+                })
+               
+            }
+            
+        },
         goBack() {
             this.$router.push('/home')
         },
@@ -88,6 +127,13 @@ export default {
                    flex-wrap: nowrap;
                    border-bottom: 1px solid #ccc;
                    padding-bottom:40px;
+                   &:nth-of-type(2){
+                       >p {
+                           >input {
+                               padding-bottom: 15px;
+                           }
+                       }
+                   }
                    >input {
                        border:none;
                    }
