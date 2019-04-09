@@ -129,14 +129,6 @@ export default {
         }
     },
     methods:{
-        // handleTest(){ 
-        //     var url = '/wxApi/connect/oauth2/authorize?appid=wx5a886a2daf539632&redirect_uri=http%3a%2f%2fbc.91dianji.com.cn%2fapi%2fcustomer%2fwx&response_type=code&scope=snsapi_userinfo&state=123';
-        //     axiosGet(url).then(res =>{
-        //         console.log('请求成功',res);
-        //     }).catch(res =>{
-        //         console.log('请求失败',res)
-        //     })
-        // },
         changeActive(obj){
             console.log('obj', obj);
         }
@@ -184,11 +176,7 @@ export default {
                 top: 5px;
                 right: 10px;
                 z-index: 1;
-<<<<<<< HEAD
                 font-size: 28px;
-=======
-                font-size: 30px;
->>>>>>> d1b4330df6dd4890c6d598b3c3292c2a7c78b70a
                 font-weight: 400;
                 color: rgb(212, 214, 221);
             }
@@ -218,13 +206,9 @@ export default {
                     .name{
                         width: auto;
                         height: 100%;
-<<<<<<< HEAD
                         font-size: 44px;
-=======
-                        font-size: 36px;
->>>>>>> d1b4330df6dd4890c6d598b3c3292c2a7c78b70a
                         font-weight: 700;
-                        color: rgb(218, 177, 123);
+                        color: white;
                         overflow: hidden;
                     }
                     .vip{
@@ -236,13 +220,15 @@ export default {
                         height: 100%;
                         font-size: 26px;
                         font-weight: 400;
-                        color: #4B66AF;
+                        color: #ccc;
                         position: absolute;
                         top: 0px;
                         right: 0px;
-                        background: #E8ECF7;
+                        background: #798bc5;
                         border-top-left-radius: 30px;
                         border-bottom-left-radius: 30px;
+                        padding-left: 10px;
+                        padding-right: 10px;
                     }
                 }
                 .set{
@@ -254,6 +240,7 @@ export default {
                         border: solid 0.02rem #B6C5E4;
                         margin-top: 15px;
                         color: #ccc;
+                        background: #798bc5;
                         font-size: 28px;
                         border-radius: 20px;
                         padding: 8px;
@@ -265,6 +252,7 @@ export default {
                         margin-top: 15px;
                         margin-left: 30px;
                         color: #ccc;
+                        background: #798bc5;
                         backface-visibility: white;
                         font-size: 28px;
                         border-radius: 20px;

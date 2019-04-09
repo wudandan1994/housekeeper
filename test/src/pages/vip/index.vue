@@ -4,9 +4,9 @@
         <div class="containt">
             <ul>
                 <li>
-                    <img src="../../../static/images/flower.jpg.jpg" alt="">
+                    <img src="http://bc.91dianji.com.cn/vip_jins.png" alt="">
                      <div class="diamonds">
-                         <div class="card">钱夹宝钻石卡</div>
+                         <div class="card">钱夹宝金卡</div>
                          <div class="instructions">
                              <span @click="isShow">权益说明</span>
                              <van-popup v-model="show">
@@ -37,43 +37,10 @@
                      </div>
                 </li>
                 <li>
-                    <img src="../../../static/images/flower.jpg.jpg" alt="">
+                    <img src="http://bc.91dianji.com.cn/vip_yin.png" alt="">
                      <div class="diamonds">
                          <div class="card">钱夹宝钻石卡</div>
                          <div class="instructions">
-                             <span @click="isShow">权益说明</span>
-                             <van-popup v-model="show">
-                                <div class="cover">
-                                    <p>钱夹宝钻石卡</p>
-                                    <p>权益说明</p>
-                                </div>
-                            </van-popup>
-                             <span @click="isShowRule">退换规则</span>
-                              <van-popup v-model="showRule">
-                                <div class="rule">
-                                    <p>平台保证金退还说明</p>
-                                    <p>权益说明</p>
-                                </div>
-                            </van-popup>
-                         </div>
-                     </div>
-                     <div class="qualifications">
-                         <span>授权还款额度</span>
-                         <span>授权实习会员资格</span>
-                         <span>只能还款分润万38-60</span>
-                    </div>  
-                     <div class="price">
-                        <span class="new-price">￥998.00</span>
-                        <span class="old-price">1680</span>
-                        <span class="buy">立即购买</span>
-                        <!-- <span class="buy-he">帮他购买</span> -->
-                     </div>
-                </li>
-                <li>
-                    <img src="../../../static/images/flower.jpg.jpg" alt="">
-                     <div class="diamonds">
-                         <div class="card">钱夹宝钻石卡</div>
-                          <div class="instructions">
                              <span @click="isShow">权益说明</span>
                              <van-popup v-model="show">
                                 <div class="cover">
@@ -174,8 +141,8 @@ export default {
                          display: flex;
                          >span {
                              width:50%;
-                             border:2px solid #D5AC7D;
-                             color:#D5AC7D;
+                             border:2px solid #4B66AF;
+                             color:#4B66AF;
                              padding:7px 10px 4px 10px;
                              border-radius:8px;
                              margin-left:20px;
@@ -219,9 +186,8 @@ export default {
                      display: flex;
                      justify-content: space-between;
                      >span {
-                         border:1px solid #D5AC7D;
-                         color:#000;
-                          background-color: #D9B786;
+                          color: #4B66AF;
+                          background-color: #E8ECF7;
                           padding:10px 3px;
                           font-size: 22px;
                           border-radius:13px;
@@ -233,20 +199,20 @@ export default {
                      justify-content: space-between;
                      margin-bottom: 15px;
                      >.new-price {
-                         color:#C7363F;
+                         color:#E84529;
                          font-weight: bolder;
                          font-size: 36px;
                      }
                      >.old-price {
                          text-decoration: line-through;
                          margin-top:10px;
-                         color:#000;
+                         color:#666;
                          font-weight: bolder;
-                         margin-left:-20%;
+                         margin-left:-40%;
                      }
                      >.buy {
                          color:white;
-                         background-color: #C7363F;
+                         background-color: #E84529;
                          border-radius: 10px;
                          padding:10px 20px;
                          font-size: 22px;

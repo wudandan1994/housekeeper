@@ -9,7 +9,7 @@
                     <van-tabbar-item icon="http://bc.91dianji.com.cn/icon_75.png" to="/financialCircle">金融圈</van-tabbar-item>
             </van-tabbar> -->
 
-            <van-tabbar v-model="nowactive" active-color="#DAB17C" >
+            <van-tabbar v-model="nowactive" active-color="#4B66AF" >
                     <van-tabbar-item  to="/home" >
                         <span>首页</span>
                         <img
@@ -65,16 +65,16 @@ export default {
         return{
             nowactive: this.active ,
              icon: {
-                normal: 'http://bc.91dianji.com.cn/icon_71.png',
-                active: 'http://bc.91dianji.com.cn/icon_82.png',
-                vipActive:'http://bc.91dianji.com.cn/icon_83.png',
-                vipNomal:'http://bc.91dianji.com.cn/icon_72.png',
-                personActive:'http://bc.91dianji.com.cn/icon_84.png',
-                personNomal:'http://bc.91dianji.com.cn/icon_73.png',
-                 shareActive:'http://bc.91dianji.com.cn/icon_85.png',
-                shareNomal:'http://bc.91dianji.com.cn/icon_74.png',
-                circleActive:'http://bc.91dianji.com.cn/icon_86.png',
-                circleNomal:'http://bc.91dianji.com.cn/icon_75.png',
+                normal: 'http://bc.91dianji.com.cn/footer_01.png',
+                active: 'http://bc.91dianji.com.cn/footer_01-1.png',
+                vipActive:'http://bc.91dianji.com.cn/footer_02-1.png',
+                vipNomal:'http://bc.91dianji.com.cn/footer_02.png',
+                personActive:'http://bc.91dianji.com.cn/footer_03-1.png',
+                personNomal:'http://bc.91dianji.com.cn/footer_03.png',
+                 shareActive:'http://bc.91dianji.com.cn/footer_04-1.png',
+                shareNomal:'http://bc.91dianji.com.cn/footer_04.png',
+                circleActive:'http://bc.91dianji.com.cn/footer_05-1.png',
+                circleNomal:'http://bc.91dianji.com.cn/footer_05.png',
             }
         }
     },
