@@ -67,6 +67,10 @@ import alipay from '@/pages/userAccountManage/alipay'
 import UnionPay from "@/pages/userAccountManage/UnionPay"
 // 2019年4月2日14:52:41
 
+//提现
+import cashComponent from '@/pages/userAccountManage/cash'
+
+
 import posterComponent from '@/pages/poster'
 import principleComponent from '@/pages/principle'
 import dataComponent from '@/pages/data'
@@ -109,7 +113,7 @@ export default new Router({
     {path:"/home/clearCache",component:clearCacheComponent},
     {path:"/home/accountManagement", component:accountManagementComponent,},
     {path:"/home/accountManagement/modifyLoginPassword", component:modifyLoginPasswordComponent,},
-    {path:"/home/accountManagement/modifyPhone", component:modifyPhoneComponent,},
+    {path:"/home/bindingPhone", component:bindingPhoneComponent,},
     {path:"/home/totalPunch",component:totalPunchComponent},
     {path:"/home/violationInquiry",component:violationInquiryComponent},
     {path:"/home/violationInquiry/addCar",component:addCarComponent},
@@ -151,5 +155,7 @@ export default new Router({
     {path: '/personalCenter/incomedetail/addcard',component: addcard},
     {path: '/personalCenter/addcard/alipay',component: alipay},
     {path: '/personalCenter/addcard/UnionPay',component: UnionPay},
+    {path: '/personalCenter/incomedetail/cash',component: cashComponent},
+
   ]
 })

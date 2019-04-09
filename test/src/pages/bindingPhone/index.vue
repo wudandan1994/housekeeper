@@ -1,5 +1,5 @@
-<template>
-    <div id="verified-name">
+ <template>
+    <div id="binding-phone">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>绑定手机号</span>
@@ -15,13 +15,17 @@
                     <span>输入验证码：</span>
                     <p>
                         <input type="number" v-model="authcode" placeholder="请输入验证码">
-                        <span @click="getCode"><span v-show="showCount">{{count}}秒后再次</span>获取验证码</span>
+                         <span>
+                                <span v-show="showCount">{{count}}秒后获取</span>
+                                <span v-show="showCode" @click="getCode">获取验证码</span>
+                         </span>
+                        
                     </p>
                 </div>
             </div>
-            <div class="at-once" @click="isShow">立即绑定</div>
+            <div class="at-once" @click="bindingPhone">立即绑定</div>
            
-                <van-popup v-model="show">
+                <van-popup >
                     <div class="cover">绑定成功</div>
                 </van-popup>
           
@@ -29,7 +33,6 @@
     </div>
 
 </template>
-
 
 <script>
 import {axiosPost,axiosGet} from '@/lib/http'
@@ -40,7 +43,9 @@ export default {
             mobile:"",
             authcode:"",
             count:60,
-            showCount:false
+            showCount:false,
+            showCode:true,
+            timerId:null,
         }
     },
     created(){
@@ -49,52 +54,109 @@ export default {
     methods:{
         // 获取验证码
         getCode(){
-            console.log(this);
             let that=this
+            let partten=/^1\d{10}$/
             if(that.mobile.trim().length===0){
+              
+                
                 that.$toast({
-                    message:"请填写手机号码"
+                    message:"手机号码不能为空"
                 })
-            } else {
+                return
+
+            } else if(!partten.test(that.mobile)){
+                 that.$toast({
+                    message:"请填写11位手机号码"
+                })
+                 return
+            }
+            
+            else  {
                 let data={
                     mobile:this.mobile,
                     type:"1"
                 }
                 axiosPost("/customer/sendSms",data)
                 .then(function(res){
-                    console.log(that);
                     
-                    console.log(res);
                     if(res.data.success) {
-                        console.log(252525);
-                        that.showCount=true;
-                         
+                        that.showCount=true
+                         that.showCode=false
+                    }
+                    if(that.showCount){
+                        that.timerId=setInterval(function(){
+                            that.count--
+                            if(that.count<=0){
+                                that.showCount=false
+                                that.showCode=true
+                                that.count=60
+                                clearInterval(that.timerId)
+                            }
+                        },1000)
                     }
                     
                 })
-                .catch(err=>{
-                    console.log(err);
-                    
+                .catch(function (err) {
+                   that.$toast({
+                    message:"请勿重复发送短信"
+                  })
                 })
-                if(that.showCount){
-                       setTimeout()
-                      }
-               
             }
             
         },
         goBack() {
             this.$router.push('/home')
         },
-        isShow() {
-            this.show=true
+        bindingPhone() {
+            let that=this
+            let partten=/^1\d{10}$/
+            if(this.mobile.trim().length===0){
+                 that.$toast({
+                    message:"手机号码不能为空"
+                })
+                return
+            }
+            if(!partten.test(that.mobile)){
+                 that.$toast({
+                    message:"请填写11位手机号码"
+                })
+                 return
+            }
+            if(that.authcode.trim().length===0){
+                that.$toast({
+                    message:"验证码不能为空"
+                })
+                 return
+            }
+            let data={
+                mobile:that.mobile,
+                authcode:that.authcode
+            }
+             axiosPost("/customer/updateMobile",data)
+             .then(function(res){
+                 if(res.success){
+                      that.$toast({
+                    message:"操作成功"
+                })
+              }
+               this.show=true
+
+             })
+             .catch(function(err){
+                 if(!res.success){
+                      that.$toast({
+                    message:"操作有误"
+                 })
+                }
+             })
+           
         }
     }
 }
 </script>
 
 <style lang="less">
-   #verified-name {
+   #binding-phone {
        >header {
            background: #000;
            width:100%;

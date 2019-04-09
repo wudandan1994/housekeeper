@@ -58,6 +58,12 @@ export default {
         width: 100vw;
         height: 100vh;
         background: #EEEFF1;
+        .loan {
+            height: 86px;
+            line-height: 86px;
+            font-size: 36px;
+
+        }
         .personal{
             width: 100vw;
             height: 120px;

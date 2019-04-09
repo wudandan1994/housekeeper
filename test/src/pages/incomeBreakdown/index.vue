@@ -60,7 +60,7 @@ export default {
             this.$router.push('/home')
         },
         lookMine(){
-             this.$router.push('/personCenter/income')
+             this.$router.push('/personalCenter/income')
         }
     }
 }

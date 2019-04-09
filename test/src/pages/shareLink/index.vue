@@ -10,18 +10,18 @@
                <li>
                    <van-collapse v-model="activeNames">
                          <van-collapse-item name="1">
-                            <div slot="title"> <span><van-icon name="like" /></span>官网首页链接&nbsp;<span>（可锁粉）</span></div>
+                            <div slot="title"> <span><van-icon name="more" /></span>官网首页链接&nbsp;<span>（可锁粉）</span></div>
                              https://m.kakoim.cn/tool/videointroduce
                              <!-- （点击复制链接） -->
                         </van-collapse-item>
                     </van-collapse>
                </li>
-                <li>
+                <!-- <li>
                    <van-collapse v-model="activeNames">
                          <van-collapse-item name="2">
                             <div slot="title"> <span><van-icon name="like" /></span>官网升级链接&nbsp;<span>（可锁粉）</span></div>
                              https://m.kakoim.cn/tool/videointroduce
-                             <!-- （点击复制链接） -->
+                            （点击复制链接） 
                         </van-collapse-item>
                     </van-collapse>
                </li>
@@ -30,7 +30,7 @@
                          <van-collapse-item name="3">
                             <div slot="title"> <span><van-icon name="like" /></span>官网视频链接&nbsp;<span>（可锁粉）</span></div>
                              https://m.kakoim.cn/tool/videointroduce
-                             <!-- （点击复制链接） -->
+                            （点击复制链接） 
                         </van-collapse-item>
                     </van-collapse>
                </li>
@@ -39,7 +39,7 @@
                          <van-collapse-item name="4">
                             <div slot="title"> <span><van-icon name="like" /></span>官网邀请好友链接&nbsp;<span>（可锁粉）</span></div>
                              https://m.kakoim.cn/tool/videointroduce
-                             <!-- （点击复制链接） -->
+                              （点击复制链接）
                         </van-collapse-item>
                     </van-collapse>
                </li>
@@ -48,7 +48,7 @@
                          <van-collapse-item name="5">
                             <div slot="title"> <span><van-icon name="like" /></span>官网APP下载链接&nbsp;<span>（可锁粉）</span></div>
                              https://m.kakoim.cn/tool/videointroduce
-                             <!-- （点击复制链接） -->
+                             （点击复制链接）
                         </van-collapse-item>
                     </van-collapse>
                </li>
@@ -57,7 +57,7 @@
                          <van-collapse-item name="6">
                             <div slot="title"> <span><van-icon name="like" /></span>官网信用卡首页链接&nbsp;<span>（可锁粉）</span></div>
                              https://m.kakoim.cn/tool/videointroduce
-                             <!-- （点击复制链接） -->
+                              （点击复制链接） 
                         </van-collapse-item>
                     </van-collapse>
                </li>
@@ -66,10 +66,10 @@
                          <van-collapse-item name="7">
                             <div slot="title"> <span><van-icon name="like" /></span>官网我的微名片链接&nbsp;<span>（可锁粉）</span></div>
                              https://m.kakoim.cn/tool/videointroduce
-                             <!-- （点击复制链接） -->
+                             （点击复制链接） 
                         </van-collapse-item>
                     </van-collapse>
-               </li>
+               </li> -->
            </ul>
         </div>
     </div>

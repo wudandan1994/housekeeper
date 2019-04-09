@@ -12,39 +12,39 @@
                        <li>
                            <p><span><van-icon name="manager"/></span> 头像</p>
                            <div class="uploadimg">
-                               <input type="file" name="file" multiple>
-                               <img src="" alt="">
-                               <span><van-icon name="star" /></span>
+                               <input type="file" id="photo" name="file" multiple>
+                               <img :src="personInfo.photo" alt="">
+                               
                                <span><van-icon name="arrow" /></span>
                            </div>
                        </li>
                        <li>
                            <p><span><van-icon name="map-marked"/></span> 昵称</p>
-                          <input type="text" class="nickname" placeholder="可乐-5-2">
+                          <input type="text" class="nickname" :placeholder="personInfo.nickname">
                           <span><van-icon name="arrow" /></span>
                        </li>
                         <li>
                            <p><span><van-icon name="phone"/></span> 手机号</p>
                            <p>
-                               <input type="number" placeholder="请输入常用手机号码"> <span><van-icon name="arrow" /></span>
+                               <input type="number" :placeholder="personInfo.mobile"> <span><van-icon name="arrow" /></span>
                            </p>
                        </li>
                        <li>
                            <p><span><van-icon name="lock"/></span> 登录密码</p>
                            <p>
-                               <input type="text" placeholder="请设置登录密码"> <span><van-icon name="arrow" /></span>
+                               <input type="password" :placeholder="personInfo.password"> <span><van-icon name="arrow" /></span>
                            </p>
                        </li>
                        <li>
                           <p><span><van-icon name="lock"/></span> 确认密码</p>
                            <p>
-                               <input type="text" placeholder="请再次输入登录密码"> <span><van-icon name="arrow" /></span>
+                               <input type="password" :placeholder="personInfo.password"> <span><van-icon name="arrow" /></span>
                            </p>
                        </li>
                         <li>
-                          <p><span><van-icon name="location"/></span> 所在地</p>
+                          <p><span><van-icon name="location"/></span>所在地</p>
                            <p>
-                               <input type="text" placeholder="请选择"> <span><van-icon name="arrow" /></span>
+                               <input type="text" :placeholder="personInfo.city"> <span><van-icon name="arrow" /></span>
                            </p>
                        </li>
                        <li>
@@ -59,10 +59,26 @@
                    <ul>
                        <li>
                          <p><span><van-icon name="lock"/></span> 是否有信用卡</p>
-                         
+                          <!-- <van-switch v-model="checked"  size="20px" /> -->
+                           <van-switch
+                         size="20px" 
+                         inactive-color="#DDDDDD"
+                         active-color="#CDB168" 
+                         active-value="ON"
+                         inactive-value="OFF"
+                         v-model="checkedCard" 
+                         />
                        </li>
                        <li>
                           <p><span><van-icon name="lock"/></span> 是否有车</p>
+                          <van-switch
+                         size="20px" 
+                         inactive-color="#DDDDDD"
+                         active-color="#CDB168" 
+                         active-value="ON"
+                         inactive-value="OFF"
+                         v-model="checkedCar" 
+                         />
                        </li>
                         <li>
                           <p><span><van-icon name="lock"/></span> 微信号</p>
@@ -87,7 +103,7 @@
                          active-color="#CDB168" 
                          active-value="ON"
                          inactive-value="OFF"
-                         v-model="checked" 
+                         v-model="checkedVoice" 
                          />
                            </p>
                        </li>
@@ -111,20 +127,50 @@
 </template>
 
 <script>
+import {axiosPost,axiosGet} from '@/lib/http'
+import storage from '@/lib/storage'
 export default {
+    
     data() {
         return {
-            checked:true,
+           
+            personInfo:{},
+            checkedCard:true,
+            checkedCar:true,
+             checkedVoice:true,
         }
     },
     methods:{
         goBack() {
-            this.$router.push('/login')
+            this.$router.push('/personalCenter')
         },
         modify(){
             this.$router.push('/home/verified')
+        },
+        getSet(){
+            let data={
+                // openid:this.$store.state.wechat.openid,
+                openid:"ohwrlwlEuphjdvOimvqkhplpzEqo"
+
+            }
+            let that=this
+            axiosPost("/customer/getCustomer",data)
+            .then(function(res){
+                    if(res.status===200){
+                        that.personInfo=res.data.data
+                        localStorage.setItem("personInfo",JSON.stringify(that.personInfo))
+                    }
+                    
+            })
+            .catch(function(err){
+                console.log(err,"error");
+            })
+            
         }
-    }
+    },
+    created () {
+        this.getSet()
+    },
 }
 </script>
 
@@ -166,6 +212,21 @@ export default {
                            border-bottom: 1px solid #ccc;
                            padding-top:30px;
                            padding-bottom:30px;
+                           &:nth-of-type(1){
+                               display: flex;
+                               >div {
+                                   flex:1;
+                                   width:100px;
+                                   display: flex;
+                                   >#photo {
+                                       width:300px;
+                                       text-align: left;
+                                   }
+                                   >img {
+                                       width:100%;
+                                   }
+                               }
+                           }
                            >div{
                                cursor: pointer;
                                position: relative;
