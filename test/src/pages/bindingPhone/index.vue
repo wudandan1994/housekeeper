@@ -68,9 +68,7 @@ export default {
                     if(res.data.success) {
                         console.log(252525);
                         that.showCount=true;
-                         if(that.showCount){
-                        that.count--
-                      }
+                         
                     }
                     
                 })
@@ -78,6 +76,9 @@ export default {
                     console.log(err);
                     
                 })
+                if(that.showCount){
+                       setTimeout()
+                      }
                
             }
             
