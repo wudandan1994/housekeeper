@@ -11,7 +11,7 @@
                 <div class="avator center"><img :src="headimg" alt=""></div>
                 <div class="name-details">
                     <div class="name-vip row">
-                        <div class="name center">{{nickname}}</div>
+                        <div class="name center">{{personInfo.nickname}}</div>
                         <div class="vip center">
                             <van-icon name="http://bc.91dianji.com.cn/301-1.png" size="26px" color="#ccc"/>
                         </div>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="set row">
                         <router-link tag="div" class="unset center" to="/register">未设置</router-link>
-                        <div class="code center">推荐码: 46578356</div>
+                        <div class="code center">推荐码: {{personInfo.recommendedcode}}</div>
                     </div>
                 </div>
             </div>
@@ -125,17 +125,25 @@ export default {
         return {
             active:2,
             nickname: 'Giovanni',
-            headimg: 'http://bc.91dianji.com.cn/301-1.png'
+            headimg: 'http://bc.91dianji.com.cn/301-1.png',
+            personInfo:{},
         }
     },
     methods:{
         changeActive(obj){
             console.log('obj', obj);
-        }
+        },
+        getPersonInfo(){
+            
+            this.personInfo=JSON.parse(localStorage.getItem("personInfo"))
+            console.log(this.personInfo);
+            
+        },
     },
     created(){
         // this.nickname = this.$store.state.wechat.nickname;
         // this.headimg  = this.$store.state.wechat.headimg; 
+        this.getPersonInfo()
     }
 }
 </script>

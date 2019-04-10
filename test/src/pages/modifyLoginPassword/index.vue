@@ -11,24 +11,28 @@
                <ul>
                    <li>
                        <span>+86</span>
-                       <input type="number" placeholder="输入手机号码">
-                       <span>获取验证码</span>
+                       <input type="number" v-model="mobile" placeholder="输入11位手机号码">
+                       <span>
+                            <span v-show="showCount">{{count}}秒后再次获取</span>
+                            <span @click="getCode" v-show="showCode">获取验证码</span>
+                       </span>
+                      
                    </li>
                     <li>
                         <span>输入验证码:</span>
-                       <input type="number" placeholder="输入验证码">
+                       <input v-model="authcode" type="number" placeholder="输入验证码">
                    </li>
                     <li>
                         <span>新密码:</span>
-                       <input type="text" placeholder="输入新密码">
+                       <input v-model="newPassword" type="password" placeholder="输入新密码">
                    </li>
                     <li>
                         <span>再次输入新密码:</span>
-                       <input type="text" placeholder="输入新密码">
+                       <input v-model="suerPassword" type="password" placeholder="输入新密码">
                    </li>
                </ul>
            </div>
-           <div class="at-once">
+           <div @click="modify" class="at-once">
                    立即修改
                </div>
         </div>
@@ -38,15 +42,110 @@
 
 
 <script>
+import {axiosPost,axiosGet} from '@/lib/http'
+import storage from '@/lib/storage'
 export default {
     data() {
         return {
-
+            count:60,
+            showCount:false,
+            showCode:true,
+            mobile:"",
+            authcode:"",
+            newPassword:"",
+            suerPassword:""
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home/accountManagement')
+        },
+        getCode(){
+            let that=this
+            let partten=/^1\d{10}$/
+            if(!partten.test(that.mobile)){
+                 that.$toast({
+                    message:"请填写11位手机号码"
+                })
+                 return
+            } else  {
+                let data={
+                    mobile:this.mobile,
+                    type:"1"
+                }
+                axiosPost("/customer/sendSms",data)
+                .then(function(res){
+                    
+                    if(res.data.success) {
+                        that.showCount=true
+                         that.showCode=false
+                    }
+                    if(that.showCount){
+                        that.timerId=setInterval(function(){
+                            that.count--
+                            if(that.count<=0){
+                                that.showCount=false
+                                that.showCode=true
+                                that.count=60
+                                clearInterval(that.timerId)
+                            }
+                        },1000)
+                    }
+                    
+                })
+                .catch(function (err) {
+                   that.$toast({
+                    message:"请勿重复发送短信"
+                  })
+                })
+            }
+        },
+        modify(){
+             let that=this
+            let partten=/^1\d{10}$/
+            if(!partten.test(that.mobile)){
+                 that.$toast({
+                    message:"请填写11位手机号码"
+                })
+                 return
+            }
+            if(that.authcode.trim().length===0){
+                 that.$toast({
+                    message:"请输入验证码"
+                })
+                 return
+            }
+            if(that.newPassword.trim().length===0){
+                 that.$toast({
+                    message:"请输入新密码"
+                })
+                 return
+            }
+            if(that.newPassword.trim().length===0){
+                 that.$toast({
+                    message:"请再次输入新密码"
+                })
+                 return
+            }
+            if(that.newPassword !== that.suerPassword){
+                 that.$toast({
+                    message:"两次输入的密码不一致，请重新填写"
+                })
+                 return
+            }
+            let data={
+                password:that.suerPassword,
+                openid:that.$store.state.wechat.openid
+            }
+             axiosPost("/customer/updatePassword",data)
+             .then(function(res){
+                 console.log(res,"result");
+                 
+             })
+             .catch(function(err){
+                 console.log(err,"error");
+                 
+             })
         }
     }
 }

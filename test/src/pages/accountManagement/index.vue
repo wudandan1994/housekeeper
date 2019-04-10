@@ -13,7 +13,7 @@
                 </p>
                 <p>
                     <span>手机号</span>
-                    <router-link to="/home/accountManagement/modifyPhone" tag="span"><van-icon name="arrow"/></router-link>
+                    <router-link to="/home/bindingPhone" tag="span"><van-icon name="arrow"/></router-link>
                 </p>
                 <!-- <p>
                     <span>修改手势密码</span>

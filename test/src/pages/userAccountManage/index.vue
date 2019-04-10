@@ -30,11 +30,11 @@
             <div class="menu-name start-center">积分提现</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
         </router-link>
-         <div class="per-menu row">
+         <router-link to="/personalCenter/incomedetail/cash" tag="div" class="per-menu row">
             <div class="icon start-center"><i class="iconfont icon-xianjin"></i></div>
             <div class="menu-name start-center">现金提现</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
-        </div>
+         </router-link>
         <router-link tag="div" to="/personalCenter/incomedetail/addcard" class="per-menu toTop row">
             <div class="icon start-center"><i class="iconfont icon-yinhangqia"></i></div>
             <div class="menu-name start-center">银行卡</div>
@@ -112,6 +112,7 @@ export default {
 <style lang="less" scoped>
     #page-user-AccountManage{
         background: #F7F7F9;
+        
         .personalCenter{
             width: 100vw;
             height:200px;

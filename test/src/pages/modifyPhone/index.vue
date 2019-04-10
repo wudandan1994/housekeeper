@@ -1,5 +1,5 @@
 <template>
-    <div id="verified-name">
+    <div id="modify-phone">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>实名认证</span>
@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style lang="less">
-   #verified-name {
+   #modify-phone{
        >header {
            background: #000;
            width:100%;
