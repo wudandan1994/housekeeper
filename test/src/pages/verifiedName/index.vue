@@ -111,14 +111,22 @@ export default {
 
       },
       submit(){
-          let  idcardnumber=this.idcardnumber
-          let  idcardfront=localStorage.getItem('zhengm')
-          console.log(typeof idcardfront);
-          let  idcardback=localStorage.getItem("fanm")
-          let name=this.name
-        if(!this.name.trim()){
-
-        }
+         wx.chooseImage({
+            count: 1, // 默认9
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res) {
+                console.log('图片上传',res);
+                this.front = res.localIds[0];
+                wx.uploadImage({
+                    localId: res.localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                    success: function (res) {
+                        console.log('图片上传成功',res);
+                    }
+                });
+            }
+        });
           
       },
          goBack() {
