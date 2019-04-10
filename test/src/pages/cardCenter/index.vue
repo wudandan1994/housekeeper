@@ -19,9 +19,11 @@
         </header>
         <div class="container">
             <div class="housekeeper">
-                <router-link to='/home/cardCenter/consultation' tag="div" class="consultation" >
-                    <!-- <img src="../../../static/images/flower.jpg.jpg" alt=""> -->
-                </router-link>
+                <!-- <router-link to='/home/cardCenter/consultation' tag="div" class="consultation" >
+                     <img src="../../../static/images/flower.jpg.jpg" alt=""> 
+                </router-link> -->
+                <div class="consultation">咨询<br>
+                    管家</div>
                 <div class="ring">
                     <van-notice-bar
                         text="足协杯战线连续第2年上演广州德比战，上赛季半决赛上恒大以两回合5-3的总比分淘汰富力。"
@@ -31,156 +33,24 @@
             </div>
             <div class="center">
                 <ul>
-                    <li>
+                    <li v-for="(item, index) in cardList" :key="index" >
                         <div class="card">
-                            <img src="../../../static/images/flower.jpg.jpg" alt="">
+                            <img :src="item.merCardImg" > 
                             <p>
-                                <span>
-                                    <van-icon name="star" />
-                                </span>
-                                <span>上海小赢卡</span>
+                                <span>{{item.merCardName}}</span>
                             </p>
-                            <p>上海小赢卡核卡成功就有佣金</p>
+                            <p>{{item.labelTitle}}</p>
                         </div>
                         <div class="ads">
                             <div class="bottom">
-                                <p><span>奖金：100<van-icon name="arrow-down" /></span> </p>
-                                <p> <span><van-icon name="video" /></span><span>广告视频</span></p>
+                                <p><span>通过率：{{item.througRate}}</span> </p>
+                                <p> 
+                                    <span><van-icon name="gold-coin" />
+                                    </span><span>高额奖金</span>
+                                </p>
+                                
                             </div>
-                            <p><span class="handle">免费办卡</span></p>
-                        </div>
-                    </li>
-                     <li>
-                        <div class="card">
-                            <img src="../../../static/images/flower.jpg.jpg" alt="">
-                            <p>
-                                <span>
-                                    <van-icon name="star" />
-                                </span>
-                                <span>上海小赢卡</span>
-                            </p>
-                            <p>上海小赢卡核卡成功就有佣金</p>
-                        </div>
-                        <div class="ads">
-                            <div class="bottom">
-                                <p><span>奖金：100<van-icon name="arrow-down" /></span> </p>
-                                <p> <span><van-icon name="video" /></span><span>广告视频</span></p>
-                            </div>
-                            <p><span class="handle">免费办卡</span></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <img src="../../../static/images/flower.jpg.jpg" alt="">
-                            <p>
-                                <span>
-                                    <van-icon name="star" />
-                                </span>
-                                <span>上海小赢卡</span>
-                            </p>
-                            <p>上海小赢卡核卡成功就有佣金</p>
-                        </div>
-                        <div class="ads">
-                            <div class="bottom">
-                                <p><span>奖金：100<van-icon name="arrow-down" /></span> </p>
-                                <p> <span><van-icon name="video" /></span><span>广告视频</span></p>
-                            </div>
-                            <p><span class="handle">免费办卡</span></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <img src="../../../static/images/flower.jpg.jpg" alt="">
-                            <p>
-                                <span>
-                                    <van-icon name="star" />
-                                </span>
-                                <span>上海小赢卡</span>
-                            </p>
-                            <p>上海小赢卡核卡成功就有佣金</p>
-                        </div>
-                        <div class="ads">
-                            <div class="bottom">
-                                <p><span>奖金：100<van-icon name="arrow-down" /></span> </p>
-                                <p> <span><van-icon name="video" /></span><span>广告视频</span></p>
-                            </div>
-                            <p><span class="handle">免费办卡</span></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <img src="../../../static/images/flower.jpg.jpg" alt="">
-                            <p>
-                                <span>
-                                    <van-icon name="star" />
-                                </span>
-                                <span>上海小赢卡</span>
-                            </p>
-                            <p>上海小赢卡核卡成功就有佣金</p>
-                        </div>
-                        <div class="ads">
-                            <div class="bottom">
-                                <p><span>奖金：100<van-icon name="arrow-down" /></span> </p>
-                                <p> <span><van-icon name="video" /></span><span>广告视频</span></p>
-                            </div>
-                            <p><span class="handle">免费办卡</span></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <img src="../../../static/images/flower.jpg.jpg" alt="">
-                            <p>
-                                <span>
-                                    <van-icon name="star" />
-                                </span>
-                                <span>上海小赢卡</span>
-                            </p>
-                            <p>上海小赢卡核卡成功就有佣金</p>
-                        </div>
-                        <div class="ads">
-                            <div class="bottom">
-                                <p><span>奖金：100<van-icon name="arrow-down" /></span> </p>
-                                <p> <span><van-icon name="video" /></span><span>广告视频</span></p>
-                            </div>
-                            <p><span class="handle">免费办卡</span></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <img src="../../../static/images/flower.jpg.jpg" alt="">
-                            <p>
-                                <span>
-                                    <van-icon name="star" />
-                                </span>
-                                <span>上海小赢卡</span>
-                            </p>
-                            <p>上海小赢卡核卡成功就有佣金</p>
-                        </div>
-                        <div class="ads">
-                            <div class="bottom">
-                                <p><span>奖金：100<van-icon name="arrow-down" /></span> </p>
-                                <p> <span><van-icon name="video" /></span><span>广告视频</span></p>
-                            </div>
-                            <p><span class="handle">免费办卡</span></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="card">
-                            <img src="../../../static/images/flower.jpg.jpg" alt="">
-                            <p>
-                                <span>
-                                    <van-icon name="star" />
-                                </span>
-                                <span>上海小赢卡</span>
-                            </p>
-                            <p>上海小赢卡核卡成功就有佣金</p>
-                        </div>
-                        <div class="ads">
-                            <div class="bottom">
-                                <p><span>奖金：100<van-icon name="arrow-down" /></span> </p>
-                                <p> <span><van-icon name="video" /></span><span>广告视频</span></p>
-                            </div>
-                            <p><span class="handle">免费办卡</span></p>
+                            <p @click="getCard(item)"><span class="handle">免费办卡</span></p>
                         </div>
                     </li>
                     
@@ -223,17 +93,45 @@
 </template>
 
 <script>
+import {axiosPost,axiosGet} from '@/lib/http'
 export default {
     data(){
         return {
-
+            cardList:[]
         }
     },
     methods:{
         goBack(){
             this.$router.push('/home')
-        }
-    }
+        },
+        getCardList(){
+            let that= this
+            axiosPost("/creditCard/getBankList")
+            .then(function(res){
+                if(res.status===200){
+                    let data=res.data.data.data
+                    that.cardList.push(...data.notSingleCardList)
+                    that.cardList.push(...data.singleCardList)
+                }
+            })
+            .catch(function(err){
+                console.log(err,"error")
+            })
+        },
+        getCard(item){
+            this.$router.push({
+                path:"/home/cardCenter/applyCard",
+                query:{
+                    info:item
+                }
+            })
+
+            
+        },
+    },
+    created() {
+        this.getCardList()
+    },
 }
 </script>
 
@@ -264,7 +162,9 @@ export default {
                 border-bottom: 3px solid #ccc;
                 >.consultation {
                     width:100px;
-                    background-color: red;
+                    font-size: 36px;
+                   text-align: center;
+                   padding-top:20px;
                     >img {
                         width:100%;
                     }
@@ -283,7 +183,7 @@ export default {
                 >ul{
                     display: flex;
                     flex-wrap: wrap;
-                  justify-content: space-around;
+                  justify-content: space-between;
                     >li {
                         width:49%;
                         padding-bottom:25px;
@@ -300,12 +200,12 @@ export default {
                             >p {
                                 &:nth-of-type(1) {
                                     padding-top:10px;
-                                    padding-bottom: 10px;
+                                    margin-bottom:20px;
                                 }
-                            }
-                            >p {
+                            }>p {
                                 &:nth-of-type(2){
                                     padding-bottom: 10px;
+                                    font-weight: bold;
                                 }
                             }
                         }

@@ -1,5 +1,5 @@
 <template>
-    <div id="storage">
+    <div id="register">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>个人设置</span>
@@ -12,8 +12,11 @@
                        <li>
                            <p><span><van-icon name="manager"/></span> 头像</p>
                            <div class="uploadimg">
-                               <input type="file" id="photo" name="file" multiple>
-                               <img :src="personInfo.photo" alt="">
+                               <!-- <input type="file" id="photo" name="file" multiple> -->
+                               <input type="text">
+                                <div class="images">
+                                     <img :src="personInfo.photo" alt="">
+                                </div>
                                
                                <span><van-icon name="arrow" /></span>
                            </div>
@@ -50,9 +53,16 @@
                        <li>
                           <p><span><van-icon name="card"/></span> 身份情况</p>
                            <p>
-                               <input type="text" placeholder="请选择"> <span><van-icon name="arrow" /></span>
+                               <input type="text" @focus="showInfo"  :placeholder="identity"> <span><van-icon name="arrow" /></span>
+                               <van-actionsheet
+                                v-model="show"
+                                :actions="actions"
+                                cancel-text="取消"
+                                @select="onSelect"
+                                @cancel="onCancel"
+                                />
                            </p>
-                       </li>
+                       </li> 
                    </ul>
                </div>
                <div class="phone">
@@ -83,7 +93,7 @@
                         <li>
                           <p><span><van-icon name="lock"/></span> 微信号</p>
                            <p>
-                               <input type="text" placeholder="请输入微信号"> <span><van-icon name="arrow" /></span>
+                               <input type="text" :placeholder="personInfo.wechat"> <span><van-icon name="arrow" /></span>
                            </p>
                        </li>
                        <li>
@@ -135,19 +145,41 @@ export default {
         return {
            
             personInfo:{},
-            checkedCard:true,
-            checkedCar:true,
-             checkedVoice:true,
+            checkedCard:"",
+            checkedCar:"",
+            checkedVoice:"",
+            show:false,
+            actions:[
+                { name:"上班族"},
+                { name:"个体户"},
+                { name:"自由职业者"},
+                { name:"企业主"},
+            ],
+            identity:""
+            
         }
     },
     methods:{
         goBack() {
             this.$router.push('/personalCenter')
         },
+        onCancel(){
+
+        },
+        showInfo(){
+            this.show=true
+        },
+        onSelect(item){
+             this.show = false;
+        //    console.log(item.name);
+           this.identity=item.name;
+           
+        },
         modify(){
             this.$router.push('/home/verified')
         },
         getSet(){
+
             let data={
                 // openid:this.$store.state.wechat.openid,
                 openid:"ohwrlwlEuphjdvOimvqkhplpzEqo"
@@ -158,12 +190,20 @@ export default {
             .then(function(res){
                     if(res.status===200){
                         that.personInfo=res.data.data
+                        that.checkedCard=Number(that.personInfo.iscreditcard)
+                        that.checkedCar=Number(that.personInfo.iscar)
+                        that.checkedVoice=that.personInfo.voice
+
                         localStorage.setItem("personInfo",JSON.stringify(that.personInfo))
+                        // set(name,val){
+                        //         localStorage.setItem(name,val);
+                        //     }
                     }
+                    console.log(that.personInfo);
                     
             })
             .catch(function(err){
-                console.log(err,"error");
+                // console.log(err,"error");
             })
             
         }
@@ -175,7 +215,7 @@ export default {
 </script>
 
 <style lang="less">
-   #storage {
+   #register {
        >header {
            background: #000;
            width:100%;
@@ -213,15 +253,23 @@ export default {
                            padding-top:30px;
                            padding-bottom:30px;
                            &:nth-of-type(1){
-                               display: flex;
+                            //    display: flex;
                                >div {
                                    flex:1;
                                    width:100px;
                                    display: flex;
-                                   >#photo {
-                                       width:300px;
-                                       text-align: left;
-                                   }
+                                   justify-content: space-around;
+                                   padding-left:10px;
+                                  >.images {
+                                      width:200px;
+                                      >img {
+                                          width:100%;
+                                      }
+                                  }
+                                  >#photo {
+                                      width:300px;
+                                  }
+
                                    >img {
                                        width:100%;
                                    }
@@ -229,12 +277,12 @@ export default {
                            }
                            >div{
                                cursor: pointer;
-                               position: relative;
+                            //    position: relative;
                                >input {
-                                   position: absolute;
-                                   right:0px;
-                                   top:0px;
-                                   opacity: 0;
+                                //    position: absolute;
+                                //    left:0px;
+                                //    top:0px;
+                                //    opacity: 0;
                                     cursor: pointer;
                                }
                            }

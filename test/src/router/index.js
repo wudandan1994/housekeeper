@@ -70,6 +70,8 @@ import UnionPay from "@/pages/userAccountManage/UnionPay"
 //提现
 import cashComponent from '@/pages/userAccountManage/cash'
 
+// 提现记录
+import recordComponent from "@/pages/userAccountManage/record"
 
 import posterComponent from '@/pages/poster'
 import principleComponent from '@/pages/principle'
@@ -81,6 +83,7 @@ import promotionMaterialComponent from '@/pages/promotionMaterial'
 import corporateVideoComponent from '@/pages/corporateVideo'
 import adsNewsComponent from '@/pages/adsNews'
 import incomeBreakdownComponent from '@/pages/incomeBreakdown'
+import applyCardComponent from '@/pages/applyCard'
 
 
 
@@ -96,6 +99,8 @@ export default new Router({
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
     {path:"/home/news",component:newsComponent},
+    {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
+
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
@@ -156,6 +161,8 @@ export default new Router({
     {path: '/personalCenter/addcard/alipay',component: alipay},
     {path: '/personalCenter/addcard/UnionPay',component: UnionPay},
     {path: '/personalCenter/incomedetail/cash',component: cashComponent},
+    {path: '/personalCenter/incomedetail/record',component: recordComponent},
+
 
   ]
 })

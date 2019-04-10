@@ -136,7 +136,7 @@ export default {
         getPersonInfo(){
             
             this.personInfo=JSON.parse(localStorage.getItem("personInfo"))
-            console.log(this.personInfo);
+            // console.log(this.personInfo);
             
         },
     },
