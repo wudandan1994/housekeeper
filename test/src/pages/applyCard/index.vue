@@ -63,19 +63,19 @@ export default {
             let partern=/^1\d{10}$/
             if(that.merName.trim().length===0){
                 that.$toast({
-                    message:"用户名不能为空"
+                    message:"请填写姓名用户名"
                 })
                 return
             }
             if(that.merMobile.trim().length===0){
                 that.$toast({
-                    message:"手机号不能为空"
+                    message:"请填写姓名手机号"
                 })
                 return
             }
             if(that.merIdentityNo.trim().length===0){
                 that.$toast({
-                    message:"身份证号码不能为空"
+                    message:"请填写姓名身份证号码"
                 })
                 return
             }
