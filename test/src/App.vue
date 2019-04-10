@@ -106,16 +106,16 @@ export default {
         })
     },
   },
-  // created(){
-  //   this.code = this.GetUrlParam('code');
-  //   if(this.GetUrlParam('code') != ''){
-  //     // 已授权
-  //     this.handleAccessToken();
-  //   }else{
-  //     // 未授权
-  //     this.handleOauth();
-  //   }
-  // },
+  created(){
+    this.code = this.GetUrlParam('code');
+    if(this.GetUrlParam('code') != ''){
+      // 已授权
+      this.handleAccessToken();
+    }else{
+      // 未授权
+      this.handleOauth();
+    }
+  },
   mounted(){
     // js-sdk的access_token
     let url = 'http://bc.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
