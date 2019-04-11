@@ -143,7 +143,7 @@ export default {
     created(){
         // this.nickname = this.$store.state.wechat.nickname;
         // this.headimg  = this.$store.state.wechat.headimg; 
-        this.getPersonInfo()
+        // this.getPersonInfo()
     }
 }
 </script>

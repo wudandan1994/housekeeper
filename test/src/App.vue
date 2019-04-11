@@ -81,21 +81,23 @@ export default {
                     let url = '/customer/registered';
                     axiosPost(url,params).then(res =>{
                         console.log('注册成功',res.data);
-                        // 登录
-                        let params = {
-                            openid: this.$store.state.wechat.openid
-                        }
-                        let url = '/customer/loginByWechat';
-                        axiosPost(url,params).then(res =>{
-                            console.log('登陆成功',res);
-                            storage.set('cid',res.data.data.id);
-                        }).catch(res =>{
-                            console.log('登录失败',res);
-                        })
+                        
                     }).catch(res =>{
                         console.log('注册失败',res.data);
                     })
                   }
+                  // 登录
+                  let params = {
+                      openid: this.$store.state.wechat.openid
+                  }
+                  let url = '/customer/loginByWechat';
+                  axiosPost(url,params).then(res =>{
+                      console.log('登陆成功',res);
+                      this.$toast('登陆成功');
+                      storage.set('cid',res.data.data.id);
+                  }).catch(res =>{
+                      console.log('登录失败',res);
+                  })
                 }).catch(res =>{
                 })
             }).catch(res =>{
@@ -118,7 +120,8 @@ export default {
   },
   mounted(){
     // js-sdk的access_token
-    let url = 'http://bc.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
+    if(storage.get('cid') != ''){
+      let url = 'http://bc.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
     axiosGet(url).then(res =>{
       console.log('jsapi请求成功',res);
       let url = 'http://bc.91dianji.com.cn/wxApi/cgi-bin/ticket/getticket?access_token='+ res.data.access_token +'&type=jsapi';
@@ -182,6 +185,7 @@ export default {
     }).catch(res =>{
       console.log('jsapi请求失败',res);
     })
+    }
   }
 }
 </script>
@@ -193,5 +197,4 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
 </style>

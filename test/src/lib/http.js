@@ -13,11 +13,11 @@ export const axiosPost = (url, params = {}) =>{
             // ElementUI.Message.error('登录信息失效');
             window.location.href = '#/logIn'
         }
-        if(res.data.success){
+        // if(res.data.success){
             return res;
-        }else{
-            // ElementUI.Message.error(res.data.message);
-        }
+        // }else{
+        //     // ElementUI.Message.error(res.data.message);
+        // }
         
     }).catch(res =>{
         return res;

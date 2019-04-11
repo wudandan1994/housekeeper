@@ -81,6 +81,8 @@ import promotionMaterialComponent from '@/pages/promotionMaterial'
 import corporateVideoComponent from '@/pages/corporateVideo'
 import adsNewsComponent from '@/pages/adsNews'
 import incomeBreakdownComponent from '@/pages/incomeBreakdown'
+// 支付宝支付中间页
+import middleAlipay from "@/pages/vip/middle"
 
 
 
@@ -156,6 +158,7 @@ export default new Router({
     {path: '/personalCenter/addcard/alipay',component: alipay},
     {path: '/personalCenter/addcard/UnionPay',component: UnionPay},
     {path: '/personalCenter/incomedetail/cash',component: cashComponent},
+    {path: '/middle',component: middleAlipay},
 
   ]
 })
