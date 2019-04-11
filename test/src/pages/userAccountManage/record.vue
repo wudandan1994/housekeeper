@@ -6,7 +6,7 @@
             <span></span>
         </header>
         <div class="container">
-           <div class="total">
+           <div  v-show="showRecord" class="total">
                <ul>
                    <li v-for="(item, index) in recordList" :key="index">
                        <span>+{{item.withdraw_apply_total}}</span>
@@ -28,6 +28,7 @@ export default {
     data() {
         return {
             recordList:[],
+            showRecord:false
         }
     },
     methods:{
@@ -42,8 +43,13 @@ export default {
             }
              axiosPost("/customer/getWithdrawalById",data)
              .then(function(res){
-                 if(res.status===200){
-                    that.recordList=res.data.data
+                 if(res.data.data.length===0){
+                     that.$toast({
+                         message:"您还没有提现记录哦！"
+                     })
+                 } else {
+                     that.showRecord=true
+                      that.recordList=res.data.data
                  }
              })
              .catch(function(err){

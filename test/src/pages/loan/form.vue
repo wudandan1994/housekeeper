@@ -64,6 +64,7 @@
     </div>
 </template>
 <script>
+import {axiosPost,axiosGet} from '@/lib/http'
 export default {
     data(){
         return{
@@ -122,8 +123,8 @@ export default {
         },
         // 服务条款
         handleAgree(val){
-            console.log('同意协议',val);
-            console.log('同意协议',this.checked);
+            // console.log('同意协议',val);
+            // console.log('同意协议',this.checked);
         },
         // 表单提交
         handleSubmit(){
@@ -139,7 +140,20 @@ export default {
                this.$toast('请阅读并同意服务协议');
            }
            else{
-               this.$toast('表单填写成功,可以提交');
+               let data={
+                   realName:this.form.name,
+                   mobile:this.form.mobile,
+                   certcode:this.form.idcardnumber
+               }
+               axiosPost("/creditCard/getLoanUrl",data)
+               .then(function(res){
+                   console.log(res,"success");
+                    location.href=res.data.data.data
+               })
+               .catch(function(err){
+                   console.log(err,"error");
+                   
+               })
            }
         }
     },
