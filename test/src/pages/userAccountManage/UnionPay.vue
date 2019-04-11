@@ -92,7 +92,7 @@ export default {
                 return
             }
             let data={
-                // cid:that.$store.state.wechat.openid,
+                //    cid:storage.get("cid"),
                 cid:"5",
                 name:that.name,
                 phone:that.phone,

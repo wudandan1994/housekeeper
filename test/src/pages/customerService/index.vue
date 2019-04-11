@@ -1,12 +1,12 @@
 <template>
-    <div id="progress-query">
+    <div id="customerService">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>在线客服</span>
             <span><van-icon name="ellipsis"/></span>
         </header>
         <div class="container">
-           
+                 
         </div>
     </div>
 
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="less">
-   #progress-query {
+   #customerService {
        >header {
            background: #000;
            width:100%;
@@ -53,7 +53,7 @@ export default {
        }
        >.container {
            padding-top:96px;
-           padding-bottom: 50px;
+        //    padding-bottom: 50px;
        }
    }
 </style>

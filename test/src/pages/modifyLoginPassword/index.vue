@@ -37,7 +37,6 @@
                </div>
         </div>
     </div>
-
 </template>
 
 
@@ -110,12 +109,12 @@ export default {
                 })
                  return
             }
-            // if(!code.test(that.newPassword)){
-            //      that.$toast({
-            //         message:"输入6-18位字母加数字新密码"
-            //     })
-            //      return
-            // }
+            if(!code.test(that.newPassword)){
+                 that.$toast({
+                    message:"输入6-18位字母加数字新密码"
+                })
+                 return
+            }
             if(that.authcode.trim().length===0){
                  that.$toast({
                     message:"请输入验证码"

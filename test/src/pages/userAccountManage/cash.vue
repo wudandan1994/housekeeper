@@ -38,6 +38,8 @@
     </div>
 </template>
 <script>
+import storage from '@/lib/storage'
+import {axiosPost,axiosGet} from '@/lib/http'
 export default {
     data(){
         return{
@@ -54,6 +56,27 @@ export default {
         },
         // 提现
         getCash(){
+
+
+        //  查询是否有绑卡
+           let that=this
+        //    console.log(Number(this.cash));
+           let cach=Number(this.cash)
+
+           let data={
+            //    cid:storage.get("cid")
+            cid:"5"
+           }
+           axiosPost("/customer/getBankCardByOpenid",data)
+           .then(function(res){
+               console.log(res,"result");
+               
+           })
+           .catch(function(err){
+               console.log(err,"error");
+               
+           })
+
             
         }
     }
