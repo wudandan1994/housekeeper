@@ -66,13 +66,10 @@ import alipay from '@/pages/userAccountManage/alipay'
 // 添加银行卡
 import UnionPay from "@/pages/userAccountManage/UnionPay"
 // 2019年4月2日14:52:41
-
 //提现
 import cashComponent from '@/pages/userAccountManage/cash'
-
 // 提现记录
 import recordComponent from "@/pages/userAccountManage/record"
-
 import posterComponent from '@/pages/poster'
 import principleComponent from '@/pages/principle'
 import dataComponent from '@/pages/data'
@@ -84,6 +81,8 @@ import corporateVideoComponent from '@/pages/corporateVideo'
 import adsNewsComponent from '@/pages/adsNews'
 import incomeBreakdownComponent from '@/pages/incomeBreakdown'
 import applyCardComponent from '@/pages/applyCard'
+// 上级推荐人
+import previousComponent from '@/pages/previous'
 
 
 
@@ -100,7 +99,6 @@ export default new Router({
     {path:"/home/punch",component:punchComponent},
     {path:"/home/news",component:newsComponent},
     {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
-
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
@@ -162,7 +160,6 @@ export default new Router({
     {path: '/personalCenter/addcard/UnionPay',component: UnionPay},
     {path: '/personalCenter/incomedetail/cash',component: cashComponent},
     {path: '/personalCenter/incomedetail/record',component: recordComponent},
-
-
+    {path: '/personalCenter/previous',component:previousComponent},
   ]
 })

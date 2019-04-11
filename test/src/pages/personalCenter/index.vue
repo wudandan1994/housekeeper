@@ -49,10 +49,10 @@
                 <div class="per-menu-title center">账户管理</div>
             </router-link>
 
-            <div class="per-menu-list line">
+            <router-link to="/personalCenter/previous" tag="div" class="per-menu-list line">
                 <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/307.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">上级推荐人</div>
-            </div>
+            </router-link>
 
             <div class="per-menu-list">
                 <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/308.png" size="52px" color="#dab17b"/></div>
