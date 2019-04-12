@@ -9,7 +9,6 @@ import bindingPhoneComponent from '@/pages/bindingPhone'
 import customerServiceComponent from '@/pages/customerService'
 import aboutUsComponent from '@/pages/aboutUs'
 import accountManagementComponent from '@/pages/accountManagement'
-import modifyPhoneComponent from '@/pages/modifyPhone'
 import loginComponent from '@/pages/login'
 import newsComponent from '@/pages/news'
 import logOutComponent from '@/pages/logOut'
@@ -70,6 +69,8 @@ import UnionPay from "@/pages/userAccountManage/UnionPay"
 //提现
 import cashComponent from '@/pages/userAccountManage/cash'
 
+// 提现记录
+import recordComponent from "@/pages/userAccountManage/record"
 
 import posterComponent from '@/pages/poster'
 import principleComponent from '@/pages/principle'
@@ -83,6 +84,7 @@ import adsNewsComponent from '@/pages/adsNews'
 import incomeBreakdownComponent from '@/pages/incomeBreakdown'
 // 支付宝支付中间页
 import middleAlipay from "@/pages/vip/middle"
+import applyCardComponent from '@/pages/applyCard'
 
 
 
@@ -98,6 +100,8 @@ export default new Router({
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
     {path:"/home/news",component:newsComponent},
+    {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
+
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
@@ -159,6 +163,7 @@ export default new Router({
     {path: '/personalCenter/addcard/UnionPay',component: UnionPay},
     {path: '/personalCenter/incomedetail/cash',component: cashComponent},
     {path: '/middle',component: middleAlipay},
+    {path: '/personalCenter/incomedetail/record',component: recordComponent},
 
   ]
 })

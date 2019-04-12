@@ -35,7 +35,7 @@ export default {
     methods:{
         handleReturnHome(){
             this.$router.push({
-                path:'/personalCenter/incomedetail/integralCash'
+                path:'/personalCenter/incomedetail/addcard'
             })
         },
         // 更多

@@ -50,6 +50,11 @@
             <div class="menu-name start-center">积分明细</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
         </router-link>
+         <router-link tag="div" class="per-menu row" to="/personalCenter/incomedetail/record">
+            <div class="icon start-center"><i class="iconfont icon-xianjin"></i></div>
+            <div class="menu-name start-center">提现记录</div>
+            <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
+        </router-link>
         <div class="agree row">
             <div class="checkbox"><van-checkbox v-model="checked" shape="square" checked-color="rgb(133, 107, 48)"></van-checkbox></div>
             <div class="check-title">我已认真阅读<span>《钱夹宝平台推广规范》</span>,认同平台的经营模式,并且自愿接受协议中的条款</div>
@@ -73,39 +78,10 @@ export default {
         // 更多
         handleMore(){
             this.$toast('尽请期待');
-        },
-        showError(error){ 
-            switch(error.code) { 
-                case error.PERMISSION_DENIED: 
-                alert("定位失败,用户拒绝请求地理定位"); 
-                break; 
-                case error.POSITION_UNAVAILABLE: 
-                alert("定位失败,位置信息是不可用"); 
-                break; 
-                case error.TIMEOUT: 
-                alert("定位失败,请求获取用户位置超时"); 
-                break; 
-                case error.UNKNOWN_ERROR: 
-                alert("定位失败,定位系统失效"); 
-                break; 
-            } 
-        },
-        showPosition(position){ 
-            var lat = position.coords.latitude; //纬度 
-            var lag = position.coords.longitude; //经度 
-            alert('纬度:'+lat+',经度:'+lag); 
-        }, 
-
-        getLocation(){ 
-            if (navigator.geolocation){ 
-                navigator.geolocation.getCurrentPosition(this.showPosition,this.showError); 
-            }else{ 
-                alert("浏览器不支持地理定位。"); 
-            } 
-        } 
+        }  
     },
     created(){
-        this.getLocation();
+        
     }
 }
 </script>

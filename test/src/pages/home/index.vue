@@ -27,28 +27,24 @@
             <div class="search">
                 <ul>
                     <router-link to="/home/creditEnquiry" tag="li">
-                        <p> <van-icon name="http://bc.91dianji.com.cn/101.png"  class="zx-search"  /></p>
+                        <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
                         <span>征信查询</span>
                     </router-link>
                     <router-link to="/vip" tag="li">
-                         <p> <van-icon name="http://bc.91dianji.com.cn/102.png"  class="zx-search"  /></p>
+                         <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
                         <span>升级代理</span>
                     </router-link>
                     <router-link to="/home/incomeBreakdown" tag="li">
-                         <p> <van-icon name="http://bc.91dianji.com.cn/103.png"  class="zx-search"  /></p>
+                         <p> <van-icon name="http://pay.91dianji.com.cn/103.png"  class="zx-search"  /></p>
                         <span>收益明细</span>
                     </router-link>
                     <router-link tag="li" to="/home/totalPunch">
-                        <p> <van-icon name="http://bc.91dianji.com.cn/104.png"  class="zx-search"  /></p>
+                        <p> <van-icon name="http://pay.91dianji.com.cn/104.png"  class="zx-search"  /></p>
                         <span>签到打卡</span>
                     </router-link>
                 </ul>
             </div>
             <!-- 名片咨询模块 -->
-            <!-- <div class="business-card">
-                <span class="information">名片资讯</span>
-                <span class="Investment">《投资者说》“老中青”三位嘉宾为小散解套出...</span>
-            </div> -->
             <div class="pannel-news row">
                 <div class="pannel-title center">钱夹<br/>资讯</div>
                 <div class="pannel-detail center">
@@ -61,7 +57,7 @@
                 <ul>
                     <router-link  tag="li" to="/home/cardCenter">
                         <span class="handle">
-                            <van-icon name="http://bc.91dianji.com.cn/105.png" size="40px" />
+                            <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                         </span>
                         <div class="channel">
                             <h3>信用卡办理</h3>
@@ -70,7 +66,7 @@
                         </div>
                     </router-link>
                     <router-link tag="li" to="/home/receivables">
-                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/106.png" size="40px" /></span>
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /></span>
                         <div class="channel">
                             <h3>商户收款</h3>
                             <p>快捷支付</p>
@@ -78,7 +74,7 @@
                         </div>
                     </router-link>
                     <router-link tag="li" to="/home/loan">
-                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/107.png" size="40px" /></span>
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
                         <div class="channel">
                             <h3>我要贷款</h3>
                             <p>实时审批&nbsp;授信额度</p>
@@ -86,7 +82,7 @@
                         </div>  
                     </router-link>
                     <router-link to="/home/creditHousekeeper" tag="li">
-                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/108.png" size="40px" /></span>
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
                             <p>落地商户空卡周转</p>
@@ -100,7 +96,7 @@
                 <ul>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_49.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_49.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>授权分润</h3>
@@ -109,7 +105,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_50.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>汽车保险</h3>
@@ -118,7 +114,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_51.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_51.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>发圈素材</h3>
@@ -127,7 +123,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="http://bc.91dianji.com.cn/icon_52.png" size="30px" />
+                            <van-icon name="http://pay.91dianji.com.cn/icon_52.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>排行榜</h3>
@@ -136,7 +132,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="http://bc.91dianji.com.cn/icon_53.png" size="30px" />
+                            <van-icon name="http://pay.91dianji.com.cn/icon_53.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>意外险</h3>
@@ -145,7 +141,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_60.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_60.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>提额秘籍</h3>
@@ -154,7 +150,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="http://bc.91dianji.com.cn/icon_61.png" size="30px" />
+                            <van-icon name="http://pay.91dianji.com.cn/icon_61.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>共享奖金池</h3>
@@ -163,7 +159,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_62.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_62.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>给团队绑卡</h3>
@@ -172,7 +168,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_63.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_63.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>积分兑换</h3>
@@ -181,7 +177,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_64.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_64.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>商城</h3>
@@ -190,7 +186,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_65.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_65.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>违章查询</h3>
@@ -240,11 +236,11 @@ export default {
         return {
             // 轮播图图片
             images: [
-                'http://bc.91dianji.com.cn/01.png',
-                'http://bc.91dianji.com.cn/02.jpg',
-                'http://bc.91dianji.com.cn/04.png',
-                'http://bc.91dianji.com.cn/06.jpg',
-                'http://bc.91dianji.com.cn/08.jpg'
+                'http://pay.91dianji.com.cn/01.png',
+                'http://pay.91dianji.com.cn/02.jpg',
+                'http://pay.91dianji.com.cn/04.png',
+                'http://pay.91dianji.com.cn/06.jpg',
+                'http://pay.91dianji.com.cn/08.jpg'
             ],
             showAaside:false, 
             checked:true,

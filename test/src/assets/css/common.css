@@ -114,6 +114,9 @@ table {
 		color: white !important;
 
 	}
+	.van-nav-bar__title{
+		font-size: 20px;
+	}
 	.icon {
 		width: 1em; height: 1em;
 		vertical-align: -0.15em;
@@ -139,4 +142,9 @@ table {
 		  height: 100px;
 		  font-size: 36px;
 		  line-height: 80px;
+	  }
+	  .van-nav-bar{
+		  height: 86px;
+		  line-height: 86px;
+		  font-size: 30px;
 	  }

@@ -7,7 +7,7 @@
         </header>
         <div class="container">
            <div class="logo">
-               <img src="../../../static/images/flower.jpg.jpg" alt="">
+               <img src="http://pay.91dianji.com.cn/logo.png" alt="">
            </div>
            <div class="info">
                 <p>
@@ -24,7 +24,7 @@
                    <!-- <van-radio-group   @click="password"  v-model="radio" >
                              <van-radio checked-color="#A5854B" name="1"></van-radio>
                     </van-radio-group> -->
-                    <van-checkbox v-model="checked" checked-color="#C8B27D">记住密码</van-checkbox>
+                    <van-checkbox v-model="checked" checked-color="#000">记住密码</van-checkbox>
                     <span>&nbsp;</span>
                </p>
                <p @click="forgetPassword">忘记密码？</p>
@@ -37,7 +37,7 @@
                     <span><van-icon name="like"/></span>
                     <span>微信登录</span>
                 </p>
-                <p @click="register">注册</p>
+                <!-- <p @click="register">注册</p> -->
             </div>
         </div>
     </div>
@@ -54,9 +54,9 @@ export default {
         }
     },
     methods:{
-        password(){
+        // password(){
             
-        },
+        // },
         goBack() {
             this.$router.push('/home')
         },
@@ -67,7 +67,7 @@ export default {
              this.$router.push('/logOut')
         },
         logIn(){
-            location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fbc.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+            location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
         }
     }
 }
@@ -99,7 +99,7 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
-           background-color: #181818;
+           background-color: #fff;
            >.logo {
                padding-top:200px;
                width:40%;
@@ -111,21 +111,25 @@ export default {
                }
            }
            >.info {
+               padding-top:160px;
                width:60%;
                margin:0 auto;
                >p {
-                   background-color: #535353;
+                   background-color: #ccc;
                    color:#fff;
                    display: flex;
                    padding:20px 10px;
+                   >span {
+                       color:#A5854B;
+                   }
                    &:nth-of-type(1) {
-                       margin-bottom: 20px;
+                       margin-bottom: 60px;
                    }
                    >input {
                        border:none;
                        flex: 1;
                        color:#000;
-                       background-color: #535353;
+                       background-color: #ccc;
                    }
                }
            }
@@ -136,16 +140,12 @@ export default {
                justify-content: space-between;
                >p {
                    padding:20px 0px;
-                   color:#fff;
                    font-size: 30px;
                     &:nth-of-type(1) {
                         display: flex;
                         font-size:18px;
-                        color:#fff;
                     }
-                    .van-checkbox__label {
-                        color:#fff;
-                    }
+                    
                }
            }
            >.login {
@@ -164,12 +164,12 @@ export default {
                display: flex;
                justify-content: space-around;
                margin-top:50px;
+               
                >p {
                    font-size: 36px;
-                   &:nth-of-type(2) {
+                   &:nth-of-type(1) {
                        >span {
                            &:nth-of-type(2) {
-                               color:#fff;
                            }
                        }
                    }

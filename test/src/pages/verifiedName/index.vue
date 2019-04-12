@@ -1,6 +1,6 @@
 <template>
     <div id="verified-name">
-        <!-- <header>
+        <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>实名认证</span>
             <span><van-icon name="ellipsis"/></span>
@@ -42,7 +42,7 @@
             </div>
            <div class="submit center" @click="submit"><van-button class="van-button" type="default">提交</van-button></div>
            <div class="loading center" v-if="loading"><van-loading type="spinner" color="black" size="50px" /></div>
-        </div> -->
+        </div>
     </div>
 
 </template>
@@ -54,7 +54,7 @@ import {axiosPost,axiosGet} from '@/lib/http'
 export default {
     data() {
         return {
-            url: 'http://bc.91dianji.com.cn/',
+            url: 'http://pay.91dianji.com.cn/',
             name:"",
             idcardnumber:"",
             picshowList: [],
@@ -73,7 +73,7 @@ export default {
                 headers: {'Content-Type': 'multipart/form-data'}
             };
             // axios.post('http://localhost:8080/api/upload/uploadImg',formData,config).then(res =>{     //本地环境
-            axios.post('http://bc.91dianji.com.cn/api/upload/uploadImg',formData,config).then(res =>{ //线上环境
+            axios.post('http://pay.91dianji.com.cn/api/upload/uploadImg',formData,config).then(res =>{ //线上环境
                 console.log('请求成功',res);
                 this.front = res.data.data.imgUrl
                 this.cardfront = this.url + res.data.data.thumImgUrl
@@ -89,7 +89,7 @@ export default {
                 headers: {'Content-Type': 'multipart/form-data'}
             };
             // axios.post('http://localhost:8080/api/upload/uploadImg',formData,config).then(res =>{//本地环境
-            axios.post('http://bc.91dianji.com.cn/api/upload/uploadImg',formData,config).then(res =>{ //线上环境
+            axios.post('http://pay.91dianji.com.cn/api/upload/uploadImg',formData,config).then(res =>{ //线上环境
                 console.log('请求成功',res);
                 this.back = res.data.data.imgUrl
                 this.cardback = this.url + res.data.data.thumImgUrl

@@ -30,7 +30,7 @@
                          <span>只能还款分润万38-60</span>
                     </div>  
                      <div class="price">
-                        <span class="new-price">￥993.00</span>
+                        <span class="new-price">￥96.00</span>
                         <!-- <span class="old-price">1680</span> -->
                         <span class="buy" @click="handleVip('993')">立即购买</span>
                         <!-- <span class="buy-he">帮他购买</span> -->
@@ -63,7 +63,7 @@
                          <span>只能还款分润万38-60</span>
                     </div>  
                      <div class="price">
-                        <span class="new-price">￥393.00</span>
+                        <span class="new-price">￥93.00</span>
                         <!-- <span class="old-price">1680</span> -->
                         <span class="buy" @click="handleVip('393')">立即购买</span>
                         <!-- <span class="buy-he">帮他购买</span> -->
@@ -96,11 +96,11 @@
 
         <div class="buy-detail" v-if="pup2">
             <div class="recom row">
-                <div class="avator end-center"><img src="http://img.qqzhi.com/uploads/2019-02-15/144408874.jpg" alt=""></div>
+                <div class="avator end-center"><img :src="recomheadimg" alt=""></div>
                 <div class="recom-detail">
                     <div class="recom-title start-center">上级推荐人</div>
-                    <div class="recom-name start-center">Giovanni</div>
-                    <div class="recom-code start-center">推荐码:52648594</div>
+                    <div class="recom-name start-center">{{recomname}}</div>
+                    <div class="recom-code start-center">推荐码:{{recomcode}}</div>
                 </div>
                 <div class="recom-info center">
                     <div class="mini-info center">
@@ -108,10 +108,10 @@
                     </div>
                 </div>
             </div>
-            <div class="price center">¥998.00</div>
+            <div class="price center">¥{{price}}</div>
             <div class="per-title row">
                 <div class="goods-title start-center">商品名称</div>
-                <div class="goods-detail start-center">钱夹宝金卡</div>
+                <div class="goods-detail start-center">{{level}}</div>
             </div>
             <div class="per-title row">
                 <div class="goods-title start-center">付款类型</div>
@@ -136,11 +136,11 @@
             </div>
             <div class="per-title row">
                 <div class="goods-title start-center">推荐码</div>
-                <div class="goods-detail start-center">52648594</div>
+                <div class="goods-detail start-center">{{recomcode}}</div>
             </div>
             <div class="per-title row">
                 <div class="goods-title start-center">上级推荐人</div>
-                <div class="goods-detail start-center">Giovanni</div>
+                <div class="goods-detail start-center">{{recomname}}</div>
             </div>
             <div class="buybtn row">
                 <van-button type="info" class="cancel" @click="handleBuyCancel">取消支付</van-button>
@@ -168,6 +168,10 @@ export default {
             level: '',
             value: 5,
             paytype: 'wechat',
+            orderid: '',
+            recomname: '',
+            recomcode: '',
+            recomheadimg: '',
         }
     },
     methods:{
@@ -193,7 +197,7 @@ export default {
         // 会员充值
         handleVip(obj){
             this.price = obj;
-            obj == '993' ? this.level = '金卡会员' : this.level = '银卡会员';
+            obj == '993' ? this.level = '金卡会员' : this.level = '铜卡会员';
             this.pup1 = true;
             
         },
@@ -206,12 +210,37 @@ export default {
             this.pup1 = false;
             this.pup2 = true;
             console.log('商品价格',this.price);
+            let name = '';
+            if(this.price == '993'){
+                name = '钱夹宝金卡';
+            }else{
+                name = '钱夹宝银卡'
+            }
             let url = '/order/insertOrder';
             let params = {
-                amount: this.price
+                amount: this.price,
+                name: this.level
             };
             axiosPost(url,params).then(res =>{
                 console.log('下单成功',res);
+                if(res.data.success){
+                    this.orderid = res.data.data.orderid;
+                    // 请求上级推荐人
+                    let url = '/customer/getCustomerUP';
+                    let params = {
+                        recommendedcode: this.$store.state.wechat.recommendedcode
+                    };
+                    axiosPost(url,params).then(res =>{
+                        console.log('上级请求成功',res);
+                        if(res.data.success){
+                            this.recomname = res.data.data.nickname;
+                            this.recomcode = res.data.data.promotioncode;
+                            this.recomheadimg = res.data.data.photo;
+                        }
+                    }).catch(res =>{
+                        console.log('上级请求失败',res);
+                    })
+                }
             }).catch(res =>{
                 console.log('下单失败',res);
             })
@@ -227,34 +256,22 @@ export default {
         },
         // 立即购买
         handleBuyNow(){
-            var ua = navigator.userAgent.toLowerCase();
-            if(ua.match(/MicroMessenger/i)=="micromessenger") {
-                // 微信浏览器
-                console.log('微信');
-                let price = this.price;
-                let name = '';
-                if(price == '993'){
-                    name = '钱夹宝金卡';
-                }else{
-                    name = '钱夹宝银卡'
-                }
-                let params = {
-                    amount: this.price,
-                    name: name
-                };
-                let url = '/order/insertOrder';
-                axiosPost(url,params).then(res =>{
-                    console.log('下单成功',res);
-                    if(res.data.success){
-                        window.location.href="http://bc.91dianji.com.cn/pay.htm?orderid="+res.data.data.orderid + '&openid='+ this.$store.state.wechat.openid
-                    }
-                }).catch(res =>{
-                    console.log('下单失败',res);
-                })
-            } else {
-                // 非微信浏览器
-                console.log('非微信');
-            } 
+            // 首先判断选择哪一种支付方式
+            if(this.paytype == 'alipay'){
+                // 支付宝支付
+                var ua = navigator.userAgent.toLowerCase();
+                if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                    window.location.href="http://bc.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
+                         
+                } else {
+                    // 非微信浏览器
+                    console.log('非微信');
+                } 
+            }else{
+                console.log('发起微信支付');
+                this.$toast('微信支付对接中');
+            }
+            
         }
     },
     created(){
@@ -398,7 +415,7 @@ export default {
          background: rgba(0, 0, 0, 0.4);
          .pop-detail{
              width: 80%;
-             height: 60%;
+             height: 65%;
              background: white;
              .reminder{
                  width: 100%;
@@ -429,6 +446,7 @@ export default {
                          float: left;
                      }
                      >li{
+                         font-size: 28px;
                          width: 90%;
                          height: auto;
                          margin-top: 20px;
@@ -444,7 +462,8 @@ export default {
                      margin-left: auto;
                      margin-right: auto;
                      clear: both;
-                     margin-top: 100px;
+                     margin-top: 80px;
+                     font-size: 24px;
                  }
              }
              .button{
@@ -458,6 +477,7 @@ export default {
                      height: 100%;
                      background: #ccc;
                      color: #666;
+                     font-size: 28px;
                  }
                  .submit{
                      width: 40%;
@@ -465,6 +485,7 @@ export default {
                      margin-left: 20%;
                      background: linear-gradient(90deg,#4B66AF,#6883C1);
                      color: #fff;
+                     font-size: 28px;
                  }
              }
          }
@@ -542,12 +563,13 @@ export default {
                 width: 25%;
                 height: 100%;
                 margin-left: 5%;
-                font-size: 34px;
+                font-size: 32px;
                 color: #ccc;
             }
             .goods-detail{
                 width: auto;
                 height: 100%;
+                font-size: 28px;
                 .alipay{
                     border: solid 1.2px #0498E2;
                 }
@@ -591,6 +613,8 @@ export default {
                 width: 40%;
                 height: 100%;
                 background: #ddd;
+                border: none;
+                font-size: 30px;
             }
             .submit{
                 width: 40%;
@@ -600,6 +624,8 @@ export default {
                 font-size: 36px;
                 font-weight: bold;
                 margin-left: 20%;
+                border: none;
+                font-size: 30px;
             }
         }
      }

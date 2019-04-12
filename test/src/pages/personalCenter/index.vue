@@ -11,9 +11,9 @@
                 <div class="avator center"><img :src="headimg" alt=""></div>
                 <div class="name-details">
                     <div class="name-vip row">
-                        <div class="name center">{{personInfo.nickname}}</div>
+                        <div class="name center">{{nickname}}</div>
                         <div class="vip center">
-                            <van-icon name="http://bc.91dianji.com.cn/301-1.png" size="26px" color="#ccc"/>
+                            <van-icon name="http://pay.91dianji.com.cn/301-1.png" size="26px" color="#ccc"/>
                         </div>
                         <div class="operator end-center">
                             <van-icon name="medel" size="20px" color="#dab17b"/>
@@ -29,15 +29,15 @@
 
             <div class="bottom row">
                 <div class="per-menu">
-                    <div class="per-icon center"><van-icon name="http://bc.91dianji.com.cn/303.png" size="30px" color="#dab17b"/></div>
+                    <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/303.png" size="30px" color="#dab17b"/></div>
                     <div class="per-title center">积分</div>
                 </div>
                  <div class="per-menu">
-                    <div class="per-icon center"><van-icon name="http://bc.91dianji.com.cn/304.png" size="30px" color="#dab17b"/></div>
+                    <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/304.png" size="30px" color="#dab17b"/></div>
                     <div class="per-title center">可结算</div>
                 </div>
                  <div class="per-menu">
-                    <div class="per-icon center"><van-icon name="http://bc.91dianji.com.cn/305.png" size="30px" color="#dab17b"/></div>
+                    <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/305.png" size="30px" color="#dab17b"/></div>
                     <div class="per-title center">总收益</div>
                 </div>
             </div>
@@ -45,67 +45,67 @@
         <div class="menu-title start-center">特约服务</div>
         <div class="per-list row">
             <router-link tag="div" class="per-menu-list line" to="/ponserCenter/userAccountManage">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/306.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/306.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">账户管理</div>
             </router-link>
 
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/307.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/307.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">上级推荐人</div>
             </div>
 
             <div class="per-menu-list">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/308.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/308.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">微名片</div>
             </div>
 
         </div>
         <div class="per-list row">
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/309.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/309.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">商务合作</div>
             </div>
 
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/310.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/310.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">共享佣金池</div>
             </div>
 
             <div class="per-menu-list">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/311.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/311.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">营销课堂</div>
             </div>
         </div>
         <div class="menu-title m-top start-center">实时工具</div>
         <div class="per-list row">
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/313.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/313.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">VIP视频</div>
             </div>
 
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/314.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/314.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">流程说明</div>
             </div>
 
             <div class="per-menu-list">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/315.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/315.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">平台手册</div>
             </div>
         </div>
         <div class="per-list row">
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/316.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/316.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">百问百答</div>
             </div>
 
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/317.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/317.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">退换说明</div>
             </div>
 
             <div class="per-menu-list">
-                <div class="menu-icon center"><van-icon name="http://bc.91dianji.com.cn/318.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/318.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">名片夹</div>
             </div>
         </div>
@@ -124,26 +124,19 @@ export default {
     data(){
         return {
             active:2,
-            nickname: 'Giovanni',
-            headimg: 'http://bc.91dianji.com.cn/301-1.png',
+            nickname: '',
+            headimg: '',
             personInfo:{},
         }
     },
     methods:{
         changeActive(obj){
             console.log('obj', obj);
-        },
-        getPersonInfo(){
-            
-            this.personInfo=JSON.parse(localStorage.getItem("personInfo"))
-            console.log(this.personInfo);
-            
-        },
+        }
     },
     created(){
-        // this.nickname = this.$store.state.wechat.nickname;
-        // this.headimg  = this.$store.state.wechat.headimg; 
-        // this.getPersonInfo()
+        this.nickname = this.$store.state.wechat.nickname;
+        this.headimg  = this.$store.state.wechat.headimg; 
     }
 }
 </script>

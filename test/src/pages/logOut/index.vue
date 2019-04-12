@@ -1,9 +1,9 @@
 <template>
     <div id="log-out">
         <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
+            <!-- <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span></span>
-            <span></span>
+            <span></span> -->
         </header>
         <div class="container">
            <div class="register">

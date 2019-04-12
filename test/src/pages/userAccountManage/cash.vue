@@ -18,7 +18,7 @@
                         <div class="apply-card"></div>
                         <router-link tag="div" to="/personalCenter/incomedetail/addcard" class="more center"><i class="iconfont icon-more"></i></router-link>
                     </div>
-                    <div class="desc">注:钱夹宝提现秒到账，手续费5%+1元/笔，最低提现金额3元起提。<span>5%的提现手续费将全部作为城主的收益</span></div>
+                    <div class="desc">注:钱夹宝提现秒到账，手续费5%+1元/笔，最低提现金额100元起提。<span>5%的提现手续费将全部作为城主的收益</span></div>
                     <div class="user-input">
                         <div class="input-title"><span>提取金额</span></div>
                         <div class="money-input row">
@@ -29,8 +29,8 @@
                     <div class="desc-two">
                         <p>亲爱的钱家宝会员，提现为整百提现。您提交提现申请后将进入人工审核状态，工作时间内1-3天将完成审核！请合理安排提现</p>
                     </div>
-                    <div class="Immediate-withdrawals center">立即提现</div>
-                   
+                    <div @click="getCash" class="Immediate-withdrawals center">立即提现</div>
+                    
                 </van-tab>
                 <van-tab title="可提现">内容 2</van-tab>
             </van-tabs>
@@ -38,6 +38,8 @@
     </div>
 </template>
 <script>
+import storage from '@/lib/storage'
+import {axiosPost,axiosGet} from '@/lib/http'
 export default {
     data(){
         return{
@@ -51,6 +53,31 @@ export default {
             this.$router.push({
                 path:'/ponserCenter/userAccountManage'
             })
+        },
+        // 提现
+        getCash(){
+
+
+        //  查询是否有绑卡
+           let that=this
+        //    console.log(Number(this.cash));
+           let cach=Number(this.cash)
+
+           let data={
+            //    cid:storage.get("cid")
+            cid:"5"
+           }
+           axiosPost("/customer/getBankCardByOpenid",data)
+           .then(function(res){
+               console.log(res,"result");
+               
+           })
+           .catch(function(err){
+               console.log(err,"error");
+               
+           })
+
+            
         }
     }
 }
