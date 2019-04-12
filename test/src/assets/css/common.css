@@ -107,50 +107,43 @@ table {
 	    justify-content: center;
 	    align-items: flex-end;
 	}
-	.loan .van-nav-bar{
-		background: black !important;
+	
+	.van-toast--default{
+	width: 200px;
+	height: 200px;
 	}
-	.loan .van-nav-bar__text,.van-nav-bar__title,.van-nav-bar .van-icon{
-		color: white !important;
-
+	.van-toast--default .van-toast__icon{
+		font-size: 100px;
 	}
-	.van-nav-bar__title{
-		font-size: 20px;
+	.van-toast--default .van-toast__text{
+		font-size: 30px;
 	}
-	.icon {
-		width: 1em; height: 1em;
-		vertical-align: -0.15em;
-		fill: currentColor;
-		overflow: hidden;
-	 }
-	 .van-button--default{
-		background: #c63;
+	.van-toast--text{
+		width: auto;
+		height: 100px;
+		font-size: 30px;
+		line-height: 80px;
+	}
+	.header-top{
+		width: 100vw;
+		height: 86px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 100000;
+		background: #000000;
+	}
+	.left-icon{
+		width: 10%;
+		height: 100%;
+	}
+	.top-title{
+		width: 80%;
+		height: 100%;
 		color: white;
-	  }
-	  .van-toast--default{
-		width: 200px;
-		height: 200px;
-	  }
-	  .van-toast--default .van-toast__icon{
-		  font-size: 100px;
-	  }
-	  .van-toast--default .van-toast__text{
-		  font-size: 30px;
-	  }
-	  .van-toast--text{
-		  width: 200px;
-		  height: 100px;
-		  font-size: 36px;
-		  line-height: 80px;
-	  }
-	  .van-nav-bar{
-		  height: 86px;
-		  line-height: 86px;
-		  font-size: 36px;
-	  }
-	  .van-nav-bar__left, .van-nav-bar__right{
-		  font-size: 36px;
-	  }
-	  .van-nav-bar__arrow{
-		  font-size: 20px;
-	  }
+		font-size: 30px;
+	}
+	.right-icon{
+		width: 10%;
+		height: 100%;
+	}

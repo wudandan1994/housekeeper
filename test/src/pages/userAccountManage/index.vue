@@ -1,28 +1,30 @@
 <template>
     <div id="page-user-AccountManage">
-        <header class="manage loan">
-            <van-nav-bar title="账户管理"  left-arrow @click-left="handleReturnHome" @click-right="handleMore">
-                <van-icon name="weapp-nav" slot="right" />
-            </van-nav-bar>
+        <header class="header-top row">
+            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">账户管理</div>
+            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
-        <div class="personalCenter row">
-            <div class="avator center"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553937143739&di=6455bedd462d2fd8679cece7475fe8a0&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F22%2F20170622131955_h4eZS.thumb.700_0.jpeg" alt=""></div>
-            <div class="name-details">
-                <div class="name-level row">
-                    <div class="name start-center">Giovanni</div>
-                    <div class="level center"><div>实习</div></div>
+        <div class="header-bottom">
+            <div class="personalCenter row">
+                <div class="avator center"><img :src="headimg" alt=""></div>
+                <div class="name-details">
+                    <div class="name-level row">
+                        <div class="name start-center">{{nickname}}</div>
+                        <div class="level center"><div>实习</div></div>
+                    </div>
+                    <div class="code start-center"><div class="center">推荐码:{{recomcode}}</div></div>
                 </div>
-                <div class="code start-center"><div class="center">推荐码:65824538</div></div>
             </div>
-        </div>
-        <div class="integral-cash row">
-            <div class="integral">
-                <div class="can-title center">可提现积分</div>
-                <div class="can-number center">123</div>
-            </div>
-            <div class="integral">
-                <div class="can-title center">可提现金额</div>
-                <div class="can-number center">123</div>
+            <div class="integral-cash row">
+                <div class="integral">
+                    <div class="can-title center">可提现积分</div>
+                    <div class="can-number center">123</div>
+                </div>
+                <div class="integral">
+                    <div class="can-title center">可提现金额</div>
+                    <div class="can-number center">123</div>
+                </div>
             </div>
         </div>
         <router-link tag="div" class="per-menu toTop row" to="/personalCenter/incomedetail/integralCash">
@@ -55,17 +57,20 @@
             <div class="menu-name start-center">提现记录</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
         </router-link>
-        <div class="agree row">
+        <!-- <div class="agree row">
             <div class="checkbox"><van-checkbox v-model="checked" shape="square" checked-color="rgb(133, 107, 48)"></van-checkbox></div>
             <div class="check-title">我已认真阅读<span>《钱夹宝平台推广规范》</span>,认同平台的经营模式,并且自愿接受协议中的条款</div>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>
 export default {
     data(){
         return{
-            checked: false
+            checked: false,
+            nickname: '',
+            headimg: '',
+            recomcode: '',
         }
     },
     methods:{
@@ -81,69 +86,78 @@ export default {
         }  
     },
     created(){
-        
+        this.nickname = this.$store.state.wechat.nickname;
+        this.headimg  = this.$store.state.wechat.headimg;
+        this.recomcode  = this.$store.state.wechat.recommendedcode; 
     }
 }
 </script>
 <style lang="less" scoped>
     #page-user-AccountManage{
         background: #F7F7F9;
-        
-        .personalCenter{
-            width: 100vw;
-            height:200px;
-            background: #2C2D31;
-            color: white;
-            .avator{
-                width: 20vw;
-                height: 100%;
-                >img{
-                    width: 100px;
-                    height: 100px;
-                    border-radius: 50%;
-                }
-            }
-            .name-details{
-                width: 80vw;
-                height: 100px;
-                margin-top: 50px;
-                .name-level{
-                    width: 100%;
-                    height: 50%;
-                    .name{
-                        width: auto;
-                        height: 100%;
-                    }
-                    .level{
-                        width: auto;
-                        height: auto;
-                        margin-left: 5%;
-                    }
-                }
-                .code{
-                    width: 100%;
-                    height: 50%;
-                    >div{
-                        width: auto;
-                        height: 50%;
-                        border: solid 0.02rem #ccc;
-                        border-radius: 20px;
-                        padding: 5px;
-                    }
-                }
-            }
+        padding-top: 86px;
+        .header-top{
+          background: #4B66AF;
         }
-        .integral-cash{
-            width: 100vw;
-            height: 180px;
-            background: #2C2D31;
-            color: white;
-            .integral{
-                width: 50%;
-                height: 100%;
-                .can-title,.can-number{
-                    width: 100%;
-                    height: 50%;
+        .header-bottom{
+          background: linear-gradient(#4B66AF,#6883C1);
+            .personalCenter{
+                width: 100vw;
+                height:200px;
+                color: white;
+                .avator{
+                    width: 20vw;
+                    height: 100%;
+                    >img{
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                    }
+                }
+                .name-details{
+                    width: 80vw;
+                    height: 100px;
+                    margin-top: 50px;
+                    .name-level{
+                        width: 100%;
+                        height: 50%;
+                        .name{
+                            width: auto;
+                            height: 100%;
+                            font-size: 28px;
+                        }
+                        .level{
+                            width: auto;
+                            height: auto;
+                            margin-left: 5%;
+                            font-size: 28px;
+                        }
+                    }
+                    .code{
+                        width: 100%;
+                        height: 50%;
+                        >div{
+                            width: auto;
+                            height: 50%;
+                            border: solid 0.02rem #ccc;
+                            border-radius: 20px;
+                            padding: 10px;
+                        }
+                    }
+                }
+            }
+            .integral-cash{
+                width: 100vw;
+                height: 180px;
+                color: white;
+                .integral{
+                    width: 50%;
+                    height: 100%;
+                    .can-title,.can-number{
+                        width: 100%;
+                        height: 50%;
+                        font-size: 26px;
+                    }
                 }
             }
         }
@@ -167,6 +181,7 @@ export default {
             .menu-name{
                 width: 77vw;
                 height: 100%;
+                font-size: 26px;
                 border-bottom: solid 1px #EDEDED;
             }
             .insert-icon{
