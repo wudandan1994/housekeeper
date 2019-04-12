@@ -24,6 +24,24 @@
                       </div>
                   </div>
              </div>
+              <div class="phone">
+                  <ul>
+                      <li>
+                          <p><van-icon name="phone"/></p>
+                          <div> 
+                              <p class="gray">打电话</p>
+                              <p>和上级电话联系</p>
+                          </div>
+                      </li>
+                       <li>
+                          <p><van-icon name="manager"/></p>
+                          <div> 
+                              <p class="gray">我的上级</p>
+                              <p>直属上级信息</p>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
              <div class="tips">
                  <h3>1.温馨提示</h3>
                  <p>专属服务经理是平台对用户的第一责任人，在享用平台相关权益的同时，也肩负指导、培训和为用户排忧解难的责任和义务，投诉电话：400-801-5636</p>
@@ -43,9 +61,7 @@ export default {
     },
     methods:{
         goBack() {
-            // this.$router.push('/personalCenter')
-            console.log(222);
-            
+            this.$router.push('/personalCenter')
         }
     },
     created () {
@@ -80,10 +96,11 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
+           background-color: #EFEDEF;
            >.image {
                width:100%;
-               background-color:red;
                position: relative;
+                background-color: gray;
                >img {
                    width:100%;
                }
@@ -117,7 +134,6 @@ export default {
                                 width:100px;
                                 height: 100px;
                                 border-radius: 50%;
-                                background-color: orange;
                                 margin-right:20px;
                                 >img {
                                     width:100%;
@@ -125,6 +141,45 @@ export default {
                             }
                        }
                    }
+               }
+           }
+           >.phone{
+               margin-top: 20%;
+                >ul{
+                   display: flex;
+                   justify-content: space-between;
+                   background-color: #fff;
+                   >li {
+                       padding:30px;
+                       display: flex;
+                       align-items: center;
+                       border-top:1px solid #ccc;
+                       border-bottom:1px solid #ccc;
+                       width:50%;
+                       color:#ccc;
+                    
+                       >p {
+                           margin-right:10px;
+                           font-size: 40px;
+                       }
+                       &:nth-of-type(1){
+                           border-right: 1px solid #ccc;
+                       }
+                       .gray {
+                           padding-bottom: 10px;
+                       }
+                   }
+               }
+            }
+           >.tips {
+               margin-top:10%;
+               >h3 {
+                   color:#000;
+                   padding-bottom: 30px;
+               }
+               >p {
+                   line-height:40px;
+                   color:#999;
                }
            }
        }
