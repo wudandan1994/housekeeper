@@ -143,7 +143,6 @@ export default {
     
     data() {
         return {
-           
             personInfo:{},
             checkedCard:"",
             checkedCar:"",
@@ -156,7 +155,6 @@ export default {
                 { name:"企业主"},
             ],
             identity:""
-            
         }
     },
     methods:{
@@ -183,7 +181,6 @@ export default {
             let data={
                 // openid:this.$store.state.wechat.openid,
                 openid:"ohwrlwlEuphjdvOimvqkhplpzEqo"
-
             }
             let that=this
             axiosPost("/customer/getCustomer",data)
@@ -210,7 +207,7 @@ export default {
     },
     created () {
         // this.getSet()
-        
+
     },
 }
 </script>
