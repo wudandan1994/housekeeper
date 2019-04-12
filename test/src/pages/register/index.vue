@@ -209,7 +209,8 @@ export default {
         }
     },
     created () {
-        this.getSet()
+        // this.getSet()
+        
     },
 }
 </script>
