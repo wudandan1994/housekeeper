@@ -73,8 +73,13 @@
                             <span>落地商户</span>
                         </div>
                     </router-link>
+<<<<<<< HEAD
+                    <router-link tag="li" to="/loan/detail">
+                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/107.png" size="40px" /></span>
+=======
                     <router-link tag="li" to="/home/loan">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
+>>>>>>> 8e1325d0d69df2175c88d238fea8a9a7d6bc75be
                         <div class="channel">
                             <h3>我要贷款</h3>
                             <p>实时审批&nbsp;授信额度</p>
@@ -199,8 +204,8 @@
             <div class="aside-left" v-show="showAaside" @click.self="hideAside">
                 <div class="info">
                     <div class="avatar">
-                         <span><van-icon name="manager" /></span>
-                         <p>可乐-5-2</p>
+                         <span><van-icon :name="headimg" /></span>
+                         <p>{{nickname}}</p>
                     </div>
                     <ul>
                         <router-link tag="li" to="/home/systemNews">系统消息</router-link>
@@ -252,6 +257,7 @@ export default {
             // newaccess_token: '',
             nickname: '',
             photo: '',
+            headimg:''
         }
   },
    methods:{
@@ -273,12 +279,11 @@ export default {
                 });
         },
         changeActive(obj){
-            console.log('obj', obj);
         },
     },
     created(){
-        console.log(this.$store.state.wechat.nickname)
-        console.log(this.$store.state.wechat.headimg)
+        this.nickname=this.$store.state.wechat.nickname
+        this.headimg=this.$store.state.wechat.headimg
     }
     
 }
@@ -291,7 +296,7 @@ export default {
         height:86px;
         font-size:28px;
         line-height: 86px;
-        background-color: #000; 
+         background-color: #4B66AF;
         color:white;
         display:flex;
         justify-content: space-between;
@@ -383,7 +388,7 @@ export default {
             margin-top:50px;
             margin-left: auto;
             margin-right: auto;
-            background-image: -webkit-linear-gradient(0deg, #4965AE, #8C9ACD);
+            background-image: -webkit-linear-gradient(0deg, #4965AE, #7189C4);
             .pannel-title{
                 width: 20%;
                 height: 100%;
@@ -507,6 +512,7 @@ export default {
                 width: 100%;
                 height: 100%;
                 background-color: rgba(0, 0, 0, .4);
+               
                 position: absolute;
                 overflow: visible;
                 top:0px;
@@ -520,7 +526,7 @@ export default {
                     width:60%;
                     height: 100%;
                     overflow-y: scroll;
-                    background-color: #222222;
+                    background-color: #4965AE;
                     position: fixed;
                     top:0px;
                     right: 0px;
@@ -543,7 +549,7 @@ export default {
                         margin-left:100px;
                         margin-right:100px;
                         >li {
-                            border-top:3px dashed #535353;
+                            border-top:3px dashed #ccc;
                             padding:50px 10px;
                              &.switch {
                              >p {
@@ -557,7 +563,7 @@ export default {
                         margin-bottom: 30px;
                          >span{
                             border:2px solid #fff;
-                           background-color: #BEA664;
+                           background-color:#8E9CCE;
                            padding:30px 60px;
                            border-radius: 10px;
                          }
