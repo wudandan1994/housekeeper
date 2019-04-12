@@ -1,9 +1,9 @@
 <template>
     <div id="page-component-detail">
-        <header class="loan">
-            <van-nav-bar title="贷款详情" left-text="返回" :fixed="fixed" left-arrow @click-left="handleReturnHome" @click-right="handleMore">
-                <van-icon name="weapp-nav" slot="right" />
-            </van-nav-bar>
+        <header class="header-top row">
+            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">贷款详情</div>
+            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
         <div class="logo">
             <img src="http://img3.imgtn.bdimg.com/it/u=1986179278,1118313821&fm=26&gp=0.jpg" alt="">
@@ -195,6 +195,7 @@ export default {
                 text-align: left;
                 line-height: 80px;
                 font-weight: 600;
+                font-size: 24px;
             }
             .loan-money{
                 height: 100px;
@@ -212,13 +213,13 @@ export default {
             .explain-big-title{
                 width: 100%;
                 height: 50%;
-                font-size: 30px;
+                font-size: 32px;
                 font-weight: 700;
             }
             .explain-small-title{
                 width: 100%;
                 height: 50%;
-                font-size: 20px;
+                font-size: 26px;
                 font-weight: 400;
                 color: #ccc;
             }
