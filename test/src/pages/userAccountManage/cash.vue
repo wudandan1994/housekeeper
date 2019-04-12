@@ -61,7 +61,7 @@ export default {
            let cash=Number(that.cash)
            if(cash % 100 !== 0){
                that.$toast({
-                   message:"提现为整百金额"
+                   message:"请输入整百金额提现"
                })
                return
            }
