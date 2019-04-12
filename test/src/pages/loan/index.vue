@@ -1,9 +1,9 @@
 <template>
     <div id="page-component-loan">
-        <header class="loan">
-            <van-nav-bar title="信用贷款" left-text="返回" left-arrow @click-left="handleReturnHome" @click-right="handleMore">
-                <van-icon name="weapp-nav" slot="right" />
-            </van-nav-bar>
+        <header class="header-top row">
+            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">信用贷款</div>
+            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
         <div class="screen row">
             <div class="line"></div>
@@ -139,15 +139,17 @@ export default {
             width: 100vw;
             height: 100vh;
             background: #EBF1F1;
+            padding-top: 86px;
         .screen{
             width: 100vw;
-            height: 60px;
+            height: 80px;
             background: white;
             border-bottom: solid 1px #ccc;
             position: relative;
             >.per-screen{
                 width: 50%;
                 height: 100%;
+                font-size: 28px;
             }
             >.line{
                 height: 99%;
@@ -265,7 +267,7 @@ export default {
                  .loan-detail-title{
                      width: 100%;
                      height: 40%;
-                     font-size: 30px;
+                     font-size: 32px;
                      font-weight: 700;
                  }
                  .loan-detail-price{
@@ -278,7 +280,8 @@ export default {
                  .loan-detail-desc{
                      width: 100%;
                      height: 30%;
-                     color: #ccc;
+                     font-size: 26px;
+                     color: #999;
                  }
              }
              .bottom-con{
@@ -289,7 +292,7 @@ export default {
                      height: 100%;
                      padding-left: 4%;
                      padding-right: 4%;
-                     font-size: 15px;
+                     font-size: 24px;
                      font-weight: 400;
                      overflow: hidden;
                      >span{
