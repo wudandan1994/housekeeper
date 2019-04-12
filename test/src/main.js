@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 // 引入插件兼容Ie
 import 'babel-polyfill'
 // 引入公共css
-import './assets/css/common.css'
+// import './assets/css/common.css'
 // 引入图标库
 import '@/assets/icon/iconfont.css'
 import '@/assets/icon/iconfont.js'
