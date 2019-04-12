@@ -28,7 +28,7 @@ export default {
     handleOauth(){
         // 第一次授权过后无需再次授权
         // if(this.$store.state.wechat.openid)
-        location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fbc.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+        location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
         console.log('授权','123');
     },
     // 获取url参数
@@ -53,10 +53,10 @@ export default {
     // 获取access_token
     // handleAccessToken(){
     //   console.log('执行');
-    //     let url = 'http://bc.91dianji.com.cn//wxApi/sns/oauth2/access_token?appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0&code='+this.code+'&grant_type=authorization_code';
+    //     let url = 'http://pay.91dianji.com.cn//wxApi/sns/oauth2/access_token?appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0&code='+this.code+'&grant_type=authorization_code';
     //     axiosGet(url).then(res =>{
     //         // 继续请求昵称头像等信息
-    //         let url = 'http://bc.91dianji.com.cn//wxApi/sns/userinfo?access_token='+ res.data.access_token +'&openid='+ res.data.openid +'&lang=zh_CN';
+    //         let url = 'http://pay.91dianji.com.cn//wxApi/sns/userinfo?access_token='+ res.data.access_token +'&openid='+ res.data.openid +'&lang=zh_CN';
     //         axiosGet(url).then(res =>{
     //             console.log('获取用户头像信息成功',res);
     //             this.nickname = res.data.nickname;
@@ -118,10 +118,10 @@ export default {
   },
   // mounted(){
   //   // js-sdk的access_token
-  //   let url = 'http://bc.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
+  //   let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
   //   axiosGet(url).then(res =>{
   //     console.log('jsapi请求成功',res);
-  //     let url = 'http://bc.91dianji.com.cn/wxApi/cgi-bin/ticket/getticket?access_token='+ res.data.access_token +'&type=jsapi';
+  //     let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/ticket/getticket?access_token='+ res.data.access_token +'&type=jsapi';
   //     axiosGet(url).then(res =>{
   //       console.log('jsapi_ticket请求成功',res);
   //       storage.set('ticket',res.data.ticket);
@@ -160,7 +160,7 @@ export default {
   //               title: '钱夹宝', // 分享标题
   //               desc: '钱夹宝邀请您来参加', // 分享描述
   //               link: url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-  //               imgUrl: 'http://bc.91dianji.com.cn/101.png', // 分享图标
+  //               imgUrl: 'http://pay.91dianji.com.cn/101.png', // 分享图标
   //               type: '', // 分享类型,music、video或link，不填默认为link
   //               dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
   //               success: function (res) {

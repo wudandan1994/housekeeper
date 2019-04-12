@@ -4,7 +4,7 @@
         <div class="containt">
             <ul>
                 <li>
-                    <img src="http://bc.91dianji.com.cn/vip_jins.png" alt="">
+                    <img src="http://bc.91dianji.com.cn/jin.png" alt="">
                      <div class="diamonds">
                          <div class="card">钱夹宝金卡</div>
                          <div class="instructions">
@@ -30,16 +30,16 @@
                          <span>只能还款分润万38-60</span>
                     </div>  
                      <div class="price">
-                        <span class="new-price">￥998.00</span>
-                        <span class="old-price">1680</span>
+                        <span class="new-price">￥993.00</span>
+                        <!-- <span class="old-price">1680</span> -->
                         <span class="buy">立即购买</span>
                         <!-- <span class="buy-he">帮他购买</span> -->
                      </div>
                 </li>
                 <li>
-                    <img src="http://bc.91dianji.com.cn/vip_yin.png" alt="">
+                    <img src="http://bc.91dianji.com.cn/tong.png" alt="">
                      <div class="diamonds">
-                         <div class="card">钱夹宝钻石卡</div>
+                         <div class="card">钱夹宝铜卡</div>
                          <div class="instructions">
                              <span @click="isShow">权益说明</span>
                              <van-popup v-model="show">
@@ -63,8 +63,8 @@
                          <span>只能还款分润万38-60</span>
                     </div>  
                      <div class="price">
-                        <span class="new-price">￥998.00</span>
-                        <span class="old-price">1680</span>
+                        <span class="new-price">￥393.00</span>
+                        <!-- <span class="old-price">1680</span> -->
                         <span class="buy">立即购买</span>
                         <!-- <span class="buy-he">帮他购买</span> -->
                      </div>

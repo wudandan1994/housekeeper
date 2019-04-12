@@ -15,12 +15,12 @@
                             </div>
                             <div>
                                 <p class="recommend gray">推荐人</p>
-                                <p>Laomeng</p>
+                                <p>{{nickname}}</p>
                             </div>
                       </div>
                       <div>
                           <p class="recommend ">级别：<span class="gray">实习会员</span></p>
-                          <p>推荐码：<span class="gray">60472697</span></p>
+                          <p>推荐码：<span class="gray">{{recommendedcode}}</span></p>
                       </div>
                   </div>
              </div>
@@ -56,7 +56,8 @@
 export default {
     data() {
         return {
-
+            nickname:"",
+            recommendedcode:""
         }
     },
     methods:{
@@ -64,9 +65,11 @@ export default {
             this.$router.push('/personalCenter')
         }
     },
-    created () {
-        
-    },
+   created(){
+        this.nickname = this.$store.state.wechat.nickname;
+        this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
+       
+    }
 }
 </script>
 
