@@ -22,8 +22,8 @@
                 <!-- <router-link to='/home/cardCenter/consultation' tag="div" class="consultation" >
                      <img src="../../../static/images/flower.jpg.jpg" alt=""> 
                 </router-link> -->
-                <div class="consultation">咨询<br>
-                    管家</div>
+                <div class="consultation">钱夹<br>
+                    咨询</div>
                 <div class="ring">
                     <van-notice-bar
                         text="足协杯战线连续第2年上演广州德比战，上赛季半决赛上恒大以两回合5-3的总比分淘汰富力。"
@@ -141,7 +141,7 @@ export default {
             height: 86px;
             line-height: 86px;
             width:100%;
-            background-color: #000;
+            background-color: #4B66AF;
             display: flex;
             justify-content: space-between;
             color:#fff;
@@ -165,6 +165,9 @@ export default {
                     font-size: 36px;
                    text-align: center;
                    padding-top:20px;
+                   .van-notice-bar{
+                       color:red;
+                   }
                     >img {
                         width:100%;
                     }

@@ -101,7 +101,7 @@ export default {
         // 返回首页
         handleReturnHome(){
             this.$router.push({
-                path:'/home/loan'
+                path:'/home'
             })
         },
         // 更多

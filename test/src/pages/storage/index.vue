@@ -110,7 +110,7 @@ export default {
 <style lang="less">
    #storage {
        >header {
-           background: #000;
+           background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -206,7 +206,7 @@ export default {
                                text-align: right;
                            }
                            span {
-                               background-color:#88682B;
+                               background-color: #4B66AF;
                                color:#ddd; 
                                margin-left: 20px;
                                padding:15px 20px;
@@ -242,8 +242,8 @@ export default {
               padding-bottom: 30px;
               text-align: center;
               color:#fff;
-              background-color: #9F6711;
-              width:60%;
+              background-color: #4B66AF;
+              width:90%;
               margin:0 auto;
               border-radius: 15px;
 

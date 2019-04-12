@@ -114,7 +114,7 @@ export default {
                 var index = Math.floor(Math.random()*36);
                 this.realCode += ran[index];
             }
-            console.log('当前验证码',this.realCode);
+            
         },
         // 切换验证码
         changeCode(){
@@ -123,8 +123,6 @@ export default {
         },
         // 服务条款
         handleAgree(val){
-            // console.log('同意协议',val);
-            // console.log('同意协议',this.checked);
         },
         // 表单提交
         handleSubmit(){
@@ -146,12 +144,11 @@ export default {
                    certcode:this.form.idcardnumber
                }
                axiosPost("/creditCard/getLoanUrl",data)
+              
                .then(function(res){
-                   console.log(res,"success");
-                    location.href=res.data.data.data
+                    location.href=res.data.data
                })
                .catch(function(err){
-                   console.log(err,"error");
                    
                })
            }

@@ -8,10 +8,10 @@
         <div class="container">
             <div class="partner">
                 <div class="detail">
-                    <p><span><van-icon name="manager"/></span></p>
+                    <p><span><van-icon :name="headimg"/></span></p>
                     <div class="internship">
-                        <p>可乐-5-3 <img src="" alt=""></p>
-                        <p>推荐码：10472992</p>
+                        <p>{{nickname}}</p>
+                        <p>推荐码：{{recommendedcode}}</p>
                     </div>
                 </div>
             </div>
@@ -30,13 +30,20 @@
 export default {
     data() {
         return {
-
+            nickname:"",
+            recommendedcode:"",
+            headimg:""
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home/receivables')
         }
+    },
+     created(){
+        this.nickname=this.$store.state.wechat.nickname
+        this.headimg=this.$store.state.wechat.headimg
+         this.recommendedcode=this.$store.state.wechat.recommendedcode
     }
 }
 </script>
@@ -48,7 +55,7 @@ export default {
           line-height: 86px;
           font-size:28px;
           padding-top:10px;
-          background-color:#2F2B28;
+          background-color:#4B66AF;
           color:#fff;
           z-index:999;
           display: flex;
@@ -60,7 +67,7 @@ export default {
           >.partner {
               width:100%;
               height: 300px;
-              background-color: orange;
+              background-color: #4B66AF;
               position: relative;
               >.detail {
                   width:94%;
@@ -93,8 +100,7 @@ export default {
           >.rate-explain {
               padding-left:50px;
               >p {
-                  padding-top:200px;
-                  border-bottom: 4px solid #ccc;
+                  padding-top:200px; 
                   padding-bottom: 20px;
                   >span {
                       &:nth-of-type(1) {

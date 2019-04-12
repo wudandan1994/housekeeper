@@ -147,7 +147,7 @@ export default {
            width:100%;
            padding-top:10px;
            font-size:28px;
-           background-color: #000;
+            background-color: #4B66AF;
            display: flex;
            justify-content: space-between;
            color:#fff;
@@ -156,7 +156,7 @@ export default {
        >.container {
            background-color:#ECF0F3; 
            >.portrait {
-               background-color:#343338; 
+               background-color:#4B66AF; 
                color:#eee;
                display: flex;
                padding-left:40px;
@@ -201,18 +201,20 @@ export default {
                    left:0px;
                    margin:20px;
                    border-radius: 10px;
-                   padding-left:30px;
+                  
                    box-shadow: 0px 1px 2px 3px  #ccc;
                    >P{
                        &:nth-of-type(1){
                            margin-top:40px;
                            font-size:30px;
                            color:#000;
+                            padding-left:30px;
                        }
                        &:nth-of-type(2){
                            margin-top:50px;
                            margin-bottom:50px;
                            font-size: 30px;
+                            padding-left:30px;
                            >span {
                                font-weight: bold;
                            }
@@ -222,20 +224,21 @@ export default {
                            }
                        }
                        &:nth-of-type(3){
-                           background-color:#9E6A14; 
+                           background-color:#4B66AF; 
                            color:#fff;
                            text-align: center;
-                           padding-top:35px;
-                           padding-bottom: 35px;
+                           padding-top:30px;
+                           width:90%;
+                           margin:0 auto;
+                           padding-bottom: 30px;
                            border-radius: 10px;
                            margin-bottom: 40px;
                            font-size: 38px;
-                           margin-right:40px;
                        }
                    }
                }
                >p {
-                   line-height:50px;
+                   line-height:40px;
                    padding-bottom: 20px;
                    color:#C3C7CA;
                    padding-left: 20px;
@@ -275,13 +278,13 @@ export default {
                        >div {
                            > p {
                                &:nth-of-type(1) {
-                                   font-size:38px;
+                                   font-size:30px;
                                    color:#000;
-                                   margin-bottom:30px;
+                                   margin-bottom:20px;
                                }
                                &:nth-of-type(2) {
                                    color:#ccc;
-
+                                   font-size:28px;
                                }
                            }
                        }
@@ -346,7 +349,7 @@ export default {
                    >li {
                        display: flex;
                        justify-content: space-between;
-                       padding:20px 10px;
+                       padding:30px 10px;
                        border-bottom: 1px solid #ccc;
                        >p {
                            display: flex;
