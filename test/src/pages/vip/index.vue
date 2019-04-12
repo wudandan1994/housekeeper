@@ -30,26 +30,16 @@
                          <span>只能还款分润万38-60</span>
                     </div>  
                      <div class="price">
-<<<<<<< HEAD
-                        <span class="new-price">￥96.00</span>
-                        <!-- <span class="old-price">1680</span> -->
-                        <span class="buy" @click="handleVip('993')">立即购买</span>
-=======
                         <span class="new-price">￥993.00</span>
                         <!-- <span class="old-price">1680</span> -->
-                        <span class="buy">立即购买</span>
->>>>>>> 29b7b35a3af6b6bc405bbfe50ff13dca25782ec0
+                        <span class="buy" @click="handleVip('993')">立即购买</span>
                         <!-- <span class="buy-he">帮他购买</span> -->
                      </div>
                 </li>
                 <li>
                     <img src="http://bc.91dianji.com.cn/tong.png" alt="">
                      <div class="diamonds">
-<<<<<<< HEAD
                          <div class="card">钱夹宝铜牌会员</div>
-=======
-                         <div class="card">钱夹宝铜卡</div>
->>>>>>> 29b7b35a3af6b6bc405bbfe50ff13dca25782ec0
                          <div class="instructions">
                              <span @click="isShow">权益说明</span>
                              <van-popup v-model="show">
@@ -73,15 +63,9 @@
                          <span>只能还款分润万38-60</span>
                     </div>  
                      <div class="price">
-<<<<<<< HEAD
-                        <span class="new-price">￥93.00</span>
-                        <!-- <span class="old-price">1680</span> -->
-                        <span class="buy" @click="handleVip('393')">立即购买</span>
-=======
                         <span class="new-price">￥393.00</span>
                         <!-- <span class="old-price">1680</span> -->
-                        <span class="buy">立即购买</span>
->>>>>>> 29b7b35a3af6b6bc405bbfe50ff13dca25782ec0
+                        <span class="buy" @click="handleVip('393')">立即购买</span>
                         <!-- <span class="buy-he">帮他购买</span> -->
                      </div>
                 </li>
