@@ -43,14 +43,14 @@
                         :src="props.active ? icon.shareActive : icon.shareNomal"
                         >
                     </van-tabbar-item>
-                     <!-- <van-tabbar-item  to="/financialCircle">
+                     <van-tabbar-item  to="/financialCircle">
                         <span>金融圈</span>
                         <img
                         slot="icon"
                         slot-scope="props"
                         :src="props.active ? icon.circleActive : icon.circleNomal"
                         > 
-                    </van-tabbar-item>-->
+                    </van-tabbar-item>
             </van-tabbar>
 
 
