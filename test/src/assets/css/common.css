@@ -146,5 +146,11 @@ table {
 	  .van-nav-bar{
 		  height: 86px;
 		  line-height: 86px;
-		  font-size: 30px;
+		  font-size: 36px;
+	  }
+	  .van-nav-bar__left, .van-nav-bar__right{
+		  font-size: 36px;
+	  }
+	  .van-nav-bar__arrow{
+		  font-size: 20px;
 	  }

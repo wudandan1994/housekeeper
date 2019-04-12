@@ -93,6 +93,8 @@ export default {
                       this.$store.commit('mobile',res.data.data.mobile);
                       this.$store.commit('promotioncode',res.data.data.promotioncode);
                       this.$store.commit('recommendedcode',res.data.data.recommendedcode);
+                      this.$store.commit('vip',res.data.data.vip);
+                      this.$store.commit('level',res.data.data.level);
                       storage.set('cid',res.data.data.id);
                       console.log('VUEX',this);
                   }).catch(res =>{

@@ -147,8 +147,8 @@ export default {
                }
                axiosPost("/creditCard/getLoanUrl",data)
                .then(function(res){
-                   console.log(res,"success");
-                    location.href=res.data.data.data
+                   console.log("success",res);
+                    // location.href=res.data.data.data
                })
                .catch(function(err){
                    console.log(err,"error");

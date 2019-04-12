@@ -1,7 +1,7 @@
 <template>
     <div id="page-user-AccountManage">
         <header class="manage loan">
-            <van-nav-bar title="账户管理" left-text="返回" left-arrow @click-left="handleReturnHome" @click-right="handleMore">
+            <van-nav-bar title="账户管理"  left-arrow @click-left="handleReturnHome" @click-right="handleMore">
                 <van-icon name="weapp-nav" slot="right" />
             </van-nav-bar>
         </header>

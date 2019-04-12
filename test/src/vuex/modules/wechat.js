@@ -4,7 +4,9 @@ const state = {
     nickname: '',
     promotioncode: '',
     recommendedcode: '',
-    mobile: ''
+    mobile: '',
+    vip: '',
+    level: ''
 }
 const mutations = {
     openid(state,openid){
@@ -24,6 +26,12 @@ const mutations = {
     },
     mobile(state,mobile){
         state.mobile = mobile;
+    },
+    vip(state,vip){
+        state.vip = vip;
+    },
+    level(state,level){
+        state.level = level;
     }
 
 }
