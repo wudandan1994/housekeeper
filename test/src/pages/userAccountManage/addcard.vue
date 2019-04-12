@@ -1,9 +1,11 @@
 <template>
     <div id="add-card">
         <header class="manage loan">
-            <van-nav-bar title="银行卡管理" left-text="返回" left-arrow @click-left="handleReturnHome" @click-right="handleMore">
-                <van-icon name="weapp-nav" slot="right" />
-            </van-nav-bar>
+            <!-- <van-nav-bar
+            left-text="返回"
+            left-arrow
+            @click-left="handleReturnHome"
+            /> -->
         </header>
         <div class="personal row">
             <div class="avator center"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553937143739&di=6455bedd462d2fd8679cece7475fe8a0&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F22%2F20170622131955_h4eZS.thumb.700_0.jpeg" alt=""></div>
@@ -42,10 +44,6 @@ export default {
                 path:'/personalCenter/incomedetail/integralCash'
             })
         },
-        // 更多
-        handleMore(){
-            this.$toast('尽请期待');
-        },
         // 绑定银行卡
         handleAddCard(){
 
@@ -58,12 +56,12 @@ export default {
         width: 100vw;
         height: 100vh;
         background: #EEEFF1;
-        .loan {
-            height: 86px;
-            line-height: 86px;
-            font-size: 36px;
+        // .loan {
+        //     height: 86px;
+        //     line-height: 86px;
+        //     font-size: 36px;
 
-        }
+        // }
         .personal{
             width: 100vw;
             height: 120px;

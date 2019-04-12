@@ -13,9 +13,7 @@
                     <div class="name-vip row">
                         <div class="name center">{{nickname}}</div>
                         <div class="vip center">
-                            <!-- <van-icon name="http://bc.91dianji.com.cn/301-1.png" size="26px" color="#ccc"/> -->
-                            <van-icon :name="headimg" size="26px" color="#ccc"/> 
-
+                            <van-icon :name="vip" size="26px" color="#ccc"/>
                         </div>
                         <div class="operator end-center">
                             <van-icon name="medel" size="20px" color="#dab17b"/>
@@ -24,7 +22,7 @@
                     </div>
                     <div class="set row">
                         <router-link tag="div" class="unset center" to="/register">未设置</router-link>
-                        <div class="code center">推荐码: {{personInfo.recommendedcode}}</div>
+                        <div class="code center">推荐码: {{recommendedcode}}</div>
                     </div>
                 </div>
             </div>
@@ -51,7 +49,7 @@
                 <div class="per-menu-title center">账户管理</div>
             </router-link>
 
-            <router-link to="/personalCenter/previous" tag="div" class="per-menu-list line">
+            <router-link tag="div" class="per-menu-list line" to="/personalCenter/previous">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/304.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">上级推荐人</div>
             </router-link>
@@ -97,17 +95,17 @@
         </div>
         <div class="per-list row">
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/312.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/311.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">百问百答</div>
             </div>
 
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/313.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/312.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">退换说明</div>
             </div>
 
             <div class="per-menu-list">
-                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/314.png" size="52px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/313.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">名片夹</div>
             </div>
         </div>
@@ -128,24 +126,24 @@ export default {
             active:2,
             nickname: '',
             headimg: '',
-            personInfo:{},
+            recommendedcode: '',
+            vip: 'http://pay.91dianji.com.cn/301-1.png',
         }
     },
     methods:{
         changeActive(obj){
             console.log('obj', obj);
-        },
-        getPersonInfo(){
-            
-            this.personInfo=JSON.parse(localStorage.getItem("personInfo"))
-            // console.log(this.personInfo);
-            
-        },
+        }
     },
     created(){
         this.nickname = this.$store.state.wechat.nickname;
-        this.headimg  = this.$store.state.wechat.headimg; 
-        // this.getPersonInfo()
+        this.headimg  = this.$store.state.wechat.headimg;
+        this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
+        if(this.$store.state.wechat.vip == '1'){
+            this.vip ='http://pay.91dianji.com.cn/301.png';
+        }else{
+            this.vip = 'http://pay.91dianji.com.cn/301-1.png';
+        }
     }
 }
 </script>

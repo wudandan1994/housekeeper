@@ -10,15 +10,9 @@ export const axiosPost = (url, params = {}) =>{
     });
     return _axios.post(_url,qs.stringify(params)).then(res =>{
         if(res.data.code == -1){
-            // ElementUI.Message.error('登录信息失效');
-            // window.location.href = '#/logIn'
+            window.location.href = '#/logIn'
         }
-        // if(res.data.success){
-            return res;
-        // }else{
-            // ElementUI.Message.error(res.data.message);
-        // }
-        
+         return res; 
     }).catch(res =>{
         return res;
     })

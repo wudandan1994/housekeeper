@@ -9,7 +9,6 @@ import bindingPhoneComponent from '@/pages/bindingPhone'
 import customerServiceComponent from '@/pages/customerService'
 import aboutUsComponent from '@/pages/aboutUs'
 import accountManagementComponent from '@/pages/accountManagement'
-// import modifyPhoneComponent from '@/pages/modifyPhone'
 import loginComponent from '@/pages/login'
 import newsComponent from '@/pages/news'
 import logOutComponent from '@/pages/logOut'
@@ -80,6 +79,8 @@ import promotionMaterialComponent from '@/pages/promotionMaterial'
 import corporateVideoComponent from '@/pages/corporateVideo'
 import adsNewsComponent from '@/pages/adsNews'
 import incomeBreakdownComponent from '@/pages/incomeBreakdown'
+// 支付宝支付中间页
+import middleAlipay from "@/pages/vip/middle"
 import applyCardComponent from '@/pages/applyCard'
 // 上级推荐人
 import previousComponent from '@/pages/previous'
@@ -159,6 +160,7 @@ export default new Router({
     {path: '/personalCenter/addcard/alipay',component: alipay},
     {path: '/personalCenter/addcard/UnionPay',component: UnionPay},
     {path: '/personalCenter/incomedetail/cash',component: cashComponent},
+    {path: '/middle',component: middleAlipay},
     {path: '/personalCenter/incomedetail/record',component: recordComponent},
     {path: '/personalCenter/previous',component:previousComponent},
   ]

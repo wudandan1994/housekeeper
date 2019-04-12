@@ -7,7 +7,7 @@
         </header>
         <div class="container">
            <div class="logo">
-               <img src="../../../static/images/logo.png" alt="">
+               <img src="http://pay.91dianji.com.cn/logo.png" alt="">
            </div>
            <div class="info">
                 <p>
@@ -33,7 +33,6 @@
                登录
            </div>
             <div class="wx-login">
-                <!-- <p></p> -->
                 <p @click="logIn">
                     <span><van-icon name="like"/></span>
                     <span>微信登录</span>
@@ -68,9 +67,7 @@ export default {
              this.$router.push('/logOut')
         },
         logIn(){
-             location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fbc.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
-             console.log(5555);
-             
+            location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
         }
     }
 }

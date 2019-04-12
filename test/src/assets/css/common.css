@@ -114,9 +114,43 @@ table {
 		color: white !important;
 
 	}
+	.van-nav-bar__title{
+		font-size: 20px;
+	}
 	.icon {
 		width: 1em; height: 1em;
 		vertical-align: -0.15em;
 		fill: currentColor;
 		overflow: hidden;
 	 }
+	 .van-button--default{
+		background: #c63;
+		color: white;
+	  }
+	  .van-toast--default{
+		width: 200px;
+		height: 200px;
+	  }
+	  .van-toast--default .van-toast__icon{
+		  font-size: 100px;
+	  }
+	  .van-toast--default .van-toast__text{
+		  font-size: 30px;
+	  }
+	  .van-toast--text{
+		  width: 200px;
+		  height: 100px;
+		  font-size: 36px;
+		  line-height: 80px;
+	  }
+	  .van-nav-bar{
+		  height: 86px;
+		  line-height: 86px;
+		  font-size: 36px;
+	  }
+	  .van-nav-bar__left, .van-nav-bar__right{
+		  font-size: 36px;
+	  }
+	  .van-nav-bar__arrow{
+		  font-size: 20px;
+	  }
