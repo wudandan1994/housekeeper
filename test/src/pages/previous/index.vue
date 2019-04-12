@@ -1,0 +1,190 @@
+<template>
+    <div id="previous">
+        <header>
+            <span @click="goBack"><van-icon name="arrow-left"/></span>
+            <span>专属服务经理</span>
+            <span><van-icon name="ellipsis"/></span>
+        </header>
+        <div class="container">
+             <div class="image">
+                  <img src="../../../static/images/logo.png" alt="">
+                  <div class="info">
+                      <div>
+                            <div class="picture">
+                                <img src="../../../static/images/wx-logo.png" alt="">
+                            </div>
+                            <div>
+                                <p class="recommend gray">推荐人</p>
+                                <p>{{nickname}}</p>
+                            </div>
+                      </div>
+                      <div>
+                          <p class="recommend ">级别：<span class="gray">实习会员</span></p>
+                          <p>推荐码：<span class="gray">{{recommendedcode}}</span></p>
+                      </div>
+                  </div>
+             </div>
+              <div class="phone">
+                  <ul>
+                      <li>
+                          <p><van-icon name="phone"/></p>
+                          <div> 
+                              <p class="gray">打电话</p>
+                              <p>和上级电话联系</p>
+                          </div>
+                      </li>
+                       <li>
+                          <p><van-icon name="manager"/></p>
+                          <div> 
+                              <p class="gray">我的上级</p>
+                              <p>直属上级信息</p>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+             <div class="tips">
+                 <h3>1.温馨提示</h3>
+                 <p>专属服务经理是平台对用户的第一责任人，在享用平台相关权益的同时，也肩负指导、培训和为用户排忧解难的责任和义务，投诉电话：400-801-5636</p>
+             </div>
+        </div>
+    </div>
+
+</template>
+
+
+<script>
+export default {
+    data() {
+        return {
+            nickname:"",
+            recommendedcode:""
+        }
+    },
+    methods:{
+        goBack() {
+            this.$router.push('/personalCenter')
+        }
+    },
+   created(){
+        this.nickname = this.$store.state.wechat.nickname;
+        this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
+       
+    }
+}
+</script>
+
+<style lang="less">
+   #previous{
+       >header {
+           background: #000;
+           width:100%;
+           height: 86px;
+           line-height: 86px;
+           padding-top:10px;
+           font-size:28px;
+           color:#fff;
+           display: flex;
+           position: fixed;
+           z-index:999;
+           justify-content: space-between;
+           >span {
+               &:nth-of-type(1) {
+                   margin-left: 20px;
+               }
+               &:nth-of-type(3) {
+                   margin-right: 20px;
+               }
+           }
+       }
+       >.container {
+           padding-top:96px;
+           padding-bottom: 50px;
+           background-color: #EFEDEF;
+           >.image {
+               width:100%;
+               position: relative;
+                background-color: gray;
+               >img {
+                   width:100%;
+               }
+               >.info{
+                   position: absolute;
+                   bottom: 0px;
+                   left:0px;
+                   right:0px;
+                   margin-left:10px;
+                   margin-right:10px;
+                   transform: translateY(50%);
+                   background-color: #fff;
+                   border-radius: 10px;
+                   border:2px solid #ccc;
+                   display: flex;
+                   justify-content: space-between;
+                    align-items: center;
+                   padding:30px;
+                   .recommend {
+                       margin-bottom: 20px;
+                   }
+                   .gray{
+                       color:#ccc;
+                   }
+                   >div {
+                       &:nth-of-type(1){
+                           display: flex;
+                           justify-content: space-between;
+                           align-items: center;
+                            >.picture {
+                                width:100px;
+                                height: 100px;
+                                border-radius: 50%;
+                                margin-right:20px;
+                                >img {
+                                    width:100%;
+                                }
+                            }
+                       }
+                   }
+               }
+           }
+           >.phone{
+               margin-top: 20%;
+                >ul{
+                   display: flex;
+                   justify-content: space-between;
+                   background-color: #fff;
+                   >li {
+                       padding:30px;
+                       display: flex;
+                       align-items: center;
+                       border-top:1px solid #ccc;
+                       border-bottom:1px solid #ccc;
+                       width:50%;
+                       color:#ccc;
+                    
+                       >p {
+                           margin-right:10px;
+                           font-size: 40px;
+                       }
+                       &:nth-of-type(1){
+                           border-right: 1px solid #ccc;
+                       }
+                       .gray {
+                           padding-bottom: 10px;
+                       }
+                   }
+               }
+            }
+           >.tips {
+               margin-top:10%;
+               >h3 {
+                   color:#000;
+                   padding-bottom: 30px;
+               }
+               >p {
+                   line-height:40px;
+                   color:#999;
+               }
+           }
+       }
+   }
+</style>

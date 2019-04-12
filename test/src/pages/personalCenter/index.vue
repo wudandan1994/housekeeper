@@ -52,7 +52,7 @@
             <div class="per-menu-list line">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/307.png" size="52px" color="#dab17b"/></div>
                 <div class="per-menu-title center">上级推荐人</div>
-            </div>
+            </router-link>
 
             <div class="per-menu-list">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/308.png" size="52px" color="#dab17b"/></div>
@@ -271,6 +271,7 @@ export default {
                    height: 100%;
                    margin-left: 2.5%;
                    .per-icon{
+                       
                        width: 100%;
                        height: 60%;
                    }
@@ -299,9 +300,11 @@ export default {
             .per-menu-list{
                 width: 33%;
                 height: 180px;
+                padding-top:10px;
                 .menu-icon{
                     width: 100%;
                     height: 60%;
+                    font-size: 24px;
                 }
                 .per-menu-title{
                     font-size: 28px;

@@ -44,7 +44,8 @@ export default {
     data(){
         return{
             active: 0,
-            cash: ''
+            cash: '',
+            timerId:null
         }
     },
     methods:{
@@ -56,21 +57,43 @@ export default {
         },
         // 提现
         getCash(){
-
-
-        //  查询是否有绑卡
            let that=this
-        //    console.log(Number(this.cash));
-           let cach=Number(this.cash)
-
-           let data={
-            //    cid:storage.get("cid")
-            cid:"5"
+           let cash=Number(that.cash)
+           if(cash % 100 !== 0){
+               that.$toast({
+                   message:"请输入整百金额提现"
+               })
+               return
            }
+           //  查询是否有绑卡
            axiosPost("/customer/getBankCardByOpenid",data)
            .then(function(res){
                console.log(res,"result");
-               
+               if(res.data.data.length===0){
+                   that.$toast({
+                       message:"还没有绑定的银行卡，请先绑卡"
+                   })
+                   that.timerId=setTimeout(function(){
+                       that.$router.puth("/personalCenter/incomedetail/addcard")
+                   },4000)
+               } else {
+                    let data={
+                    //    cid:storage.get("cid")
+                      cid:"5",
+                      withdraw_apply_total:cash,
+                      withdraw_bank_id:res.data.data[0].bankcardno
+                  }
+                  axiosPost("/customer/getwithdrawalBank",data)
+                  .then(function(res){
+                      console.log(res,"提现成功");
+                      that.$toast({
+                          message:"提现成功"
+                      })
+                  })
+                  .catch(function(err){
+                      console.log(err,"操作错误");
+                  })
+               }
            })
            .catch(function(err){
                console.log(err,"error");
