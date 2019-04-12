@@ -116,6 +116,9 @@ export default {
         width: 100vw;
         height: 95vh;
         overflow: scroll;
+        .loan .van-nav-bar {
+            background-color: #4B66AF !important;
+        }
         .logo{
             width: 100%;
             height: auto;
@@ -227,7 +230,7 @@ export default {
         }
         .strategy{
             .way{
-                color: #886A31;
+                color: #4B66AF;
                 width: 100vw;
                 height: 80px;
                 font-size: 25px;
@@ -250,17 +253,18 @@ export default {
                 }
                 .im-title{
                     width: 100%;
-                    height: 40%;
+                    height: 30%;
                 }
             }
             .im-btn{
                 width: 54vw;
-                height: 130px;
+                padding-top:30px;
+                padding-bottom: 30px;
                 margin-left: 2vw;
-                background: #886A31;
+                background: #4B66AF;
                 color: white;
                 font-size: 35px;
-                margin-top: 10px;
+                margin-top: 30px;
                 border-radius: 12px;
             }
         }

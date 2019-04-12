@@ -3,7 +3,7 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>个人设置</span>
-            <span>保存&nbsp;<van-icon name="ellipsis"/></span>
+            <span>保存</span>
         </header>
         <div class="container">
             <div class="info">
@@ -73,7 +73,7 @@
                            <van-switch
                          size="20px" 
                          inactive-color="#DDDDDD"
-                         active-color="#CDB168" 
+                         active-color="#4B66AF" 
                          active-value="ON"
                          inactive-value="OFF"
                          v-model="checkedCard" 
@@ -84,7 +84,7 @@
                           <van-switch
                          size="20px" 
                          inactive-color="#DDDDDD"
-                         active-color="#CDB168" 
+                         active-color="#4B66AF" 
                          active-value="ON"
                          inactive-value="OFF"
                          v-model="checkedCar" 
@@ -100,7 +100,7 @@
                             <p><span><van-icon name="lock"/></span> 上传微信二维码</p>
                            <div class="uploadimg">
                                <input type="file" placeholder="请上传" name="file" multiple>
-                               <span><van-icon name="close"/>请上传</span>
+                               <span>请上传</span>
                                <span><van-icon name="arrow" /></span>
                            </div>
                        </li>
@@ -215,7 +215,7 @@ export default {
 <style lang="less">
    #register {
        >header {
-           background: #000;
+           background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -245,11 +245,16 @@ export default {
                    background-color: #fff;
                    >ul {
                        >li {
+                           padding-left:20px;
+                           padding-right: 20px;
                            display: flex;
                            justify-content: space-between;
                            border-bottom: 1px solid #ccc;
                            padding-top:30px;
                            padding-bottom:30px;
+                           >p {
+                               font-size: 30px;
+                           }
                            &:nth-of-type(1){
                             //    display: flex;
                                >div {
@@ -301,7 +306,8 @@ export default {
                            justify-content: space-between;
                            padding-top:30px;
                            padding-bottom:30px;
-                           padding-right: 10px;
+                           padding-right: 20px;
+                           padding-left:20px;
                             border-bottom: 1px solid #ccc;
                             >div {
                                   cursor: pointer;
@@ -315,6 +321,7 @@ export default {
                                }
                             }
                            >p {
+                               font-size: 30px;
                                &:nth-of-type(2) {
                                    >input {
                                        border:none;
@@ -328,10 +335,18 @@ export default {
                >.card-id {
                    margin-top: 20px;
                    background-color: #fff;
-                   padding-left: 15px;
                    display: flex;
                    justify-content: space-between;
-                   padding:15px 0px;
+                   padding:30px 0px;
+                   >p {
+                       font-size: 30px;
+                      &:nth-of-type(1){
+                          margin-left:20px;
+                      }
+                      &:nth-of-type(2){
+                          margin-right:20px;
+                      }
+                   }
                   
                }
            }
@@ -358,10 +373,10 @@ export default {
               padding-bottom: 30px;
               text-align: center;
               color:#fff;
-              background-color: #9F6711;
-              width:60%;
+              background-color: #4B66AF;
+              width:92%;
               margin-top:60px;
-              margin-left:20%;
+              margin-left:4%;
               margin-bottom: 100px;
               border-radius: 15px;
 

@@ -157,6 +157,9 @@ export default {
         background: #EEEFF1;
         width: 100vw;
         height: 100vh;
+        .loan .van-nav-bar {
+          background-color: #4B66AF!important;
+         }
         .top{
             margin-top: 20px;
         }
@@ -204,11 +207,12 @@ export default {
             }
         }
         .next-stop{
-            width: 60vw;
-            height: 100px;
+            width: 90vw;
+            padding-top:30px;
+            padding-bottom: 30px;
             margin-left: auto;
             margin-right: auto;
-            background: #8C6C2A;
+            background-color: #4B66AF;
             color: white;
             margin-top: 50px;
             border-radius: 20px;

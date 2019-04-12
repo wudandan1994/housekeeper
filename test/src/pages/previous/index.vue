@@ -76,7 +76,7 @@ export default {
 <style lang="less">
    #previous{
        >header {
-           background: #000;
+           background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -112,8 +112,8 @@ export default {
                    bottom: 0px;
                    left:0px;
                    right:0px;
-                   margin-left:10px;
-                   margin-right:10px;
+                   margin-left:30px;
+                   margin-right:30px;
                    transform: translateY(50%);
                    background-color: #fff;
                    border-radius: 10px;
@@ -121,12 +121,12 @@ export default {
                    display: flex;
                    justify-content: space-between;
                     align-items: center;
-                   padding:30px;
+                   padding:50px;
                    .recommend {
                        margin-bottom: 20px;
                    }
                    .gray{
-                       color:#ccc;
+                       color:#000;
                    }
                    >div {
                        &:nth-of-type(1){
@@ -153,14 +153,13 @@ export default {
                    justify-content: space-between;
                    background-color: #fff;
                    >li {
-                       padding:30px;
+                       padding:60px;
                        display: flex;
                        align-items: center;
                        border-top:1px solid #ccc;
                        border-bottom:1px solid #ccc;
                        width:50%;
-                       color:#ccc;
-                    
+                       color:#000;
                        >p {
                            margin-right:10px;
                            font-size: 40px;
@@ -169,13 +168,15 @@ export default {
                            border-right: 1px solid #ccc;
                        }
                        .gray {
-                           padding-bottom: 10px;
+                           padding-bottom: 20px;
                        }
                    }
                }
             }
            >.tips {
-               margin-top:10%;
+               margin-top:8%;
+               padding-left:20px;
+               padding-right:20px;
                >h3 {
                    color:#000;
                    padding-bottom: 30px;

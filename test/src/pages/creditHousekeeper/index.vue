@@ -74,7 +74,7 @@ export default {
 <style lang="less">
    #credit-housekeeper{
        >header {
-           background: #000;
+           background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -99,10 +99,11 @@ export default {
            padding-bottom: 50px;
            >h3 {
                text-align: center;
-               color:#C67E11;
+               color:#000;
                padding:30px 0;
                font-size: 50px;
                font-weight: bold;
+               margin-top:50px;
            }
            >.mode {
                margin-left:50px;
@@ -154,6 +155,7 @@ export default {
                        >div {
                            flex:1;
                             line-height: 36px;
+                            padding-right:30px;
                            >p {
                                &:nth-of-type(1){
                                    font-size: 30px;
@@ -163,7 +165,7 @@ export default {
                                }
                                &:nth-of-type(2){
                                    line-height: 36px;
-                                   color:#B0B0B0;
+                                   color:#999;
                                    padding-top:10px;
                                }
                            }
@@ -176,10 +178,10 @@ export default {
               padding-bottom: 30px;
               text-align: center;
               color:#fff;
-              background-color: #9F6711;
-              width:60%;
+              background-color: #4B66AF;
+              width:90%;
               margin-top:60px;
-              margin-left:20%;
+              margin-left:5%;
               margin-bottom: 100px;
               border-radius: 15px;
 

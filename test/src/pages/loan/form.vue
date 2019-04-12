@@ -146,12 +146,8 @@ export default {
                axiosPost("/creditCard/getLoanUrl",data)
               
                .then(function(res){
-<<<<<<< HEAD
-                    location.href=res.data.data
-=======
                    console.log("success",res);
-                    // location.href=res.data.data.data
->>>>>>> 8e1325d0d69df2175c88d238fea8a9a7d6bc75be
+                    location.href=res.data.data
                })
                .catch(function(err){
                    
@@ -166,6 +162,9 @@ export default {
 </script>
 <style lang="less" scoped>
     #page-component-form{
+        .loan .van-nav-bar {
+            background: #4B66AF !important;
+}
         .swipe{
             width: 100vw;
             height: 30vh;
@@ -188,11 +187,11 @@ export default {
             margin-right: auto;
             padding: 20px;
             line-height: 40px;
-            color: #D0A454;
+            color: #4B66AF;
             background: #F5F5F4;
-            -moz-box-shadow:0px 0px 15px #333 inset;               /* For Firefox3.6+ */
-            -webkit-box-shadow:0px 0px 15px #333 inset;            /* For Chrome5+, Safari5+ */
-            box-shadow:0px 0px 15px #333 inset;   
+            -moz-box-shadow:0px 0px 15px #999 inset;               /* For Firefox3.6+ */
+            -webkit-box-shadow:0px 0px 15px #999 inset;            /* For Chrome5+, Safari5+ */
+            box-shadow:0px 0px 15px #999 inset;   
         }
         .top{
             margin-top: 30px;
@@ -242,21 +241,21 @@ export default {
             }
         }
         .btns{
-            width: 65vw;
+            width: 85vw;
             height: 100px;
             margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
             .cancel{
-                width: 45%;
+                width: 70%;
                 height: 100%;
-                background: #87682F;
+                background-color: #4B66AF;
                 color: white;
                 font-size: 30px;
                 border-radius: 10px;
             }
             .sure{
-                width: 45%;
+                width: 70%;
                 height: 100%;
                 margin-left: 10%;
                 background: #CACACA;
