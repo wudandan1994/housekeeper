@@ -67,11 +67,13 @@ export default {
     },
     methods:{
         onRead(file) {
-            var formData = new FormData();
-            formData.append('file',file.file);
+            var formData = new FormData()
+            
+            formData.append('file',file.file)
+             console.log(formData)
             let config = {
                 headers: {'Content-Type': 'multipart/form-data'}
-            };
+            }
             // axios.post('http://localhost:8080/api/upload/uploadImg',formData,config).then(res =>{     //本地环境
             axios.post('http://pay.91dianji.com.cn/api/upload/uploadImg',formData,config).then(res =>{ //线上环境
                 console.log('请求成功',res);

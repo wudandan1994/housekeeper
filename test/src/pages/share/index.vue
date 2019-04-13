@@ -156,7 +156,7 @@ export default {
 }
 </script>
 
-<style lang="less" >
+<style lang="less" scoped >
   #share-component {
       >header {
           height: 86px;
@@ -267,9 +267,10 @@ export default {
                           &:nth-of-type(2){
                               margin-top:30px;
                               margin-bottom: 20px;
+                              font-size: 28px;
                           }
                           &:nth-of-type(3){
-                              font-size: 14px;
+                              font-size: 24px;
                               margin-bottom: 10px;
                           }
                       }
