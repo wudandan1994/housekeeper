@@ -37,7 +37,7 @@
             <div class="bottom row">
                 <div class="per-menu">
                     <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/303-check.png" size="30px" color="#dab17b"/></div>
-                    <div class="per-title center">积分</div>
+                    <router-link tag="div" class="per-title center" to="/personalCenter/incomedetail/integralCash">积分</router-link>
                 </div>
                  <div class="per-menu">
                     <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/304-check.png" size="30px" color="#dab17b"/></div>
