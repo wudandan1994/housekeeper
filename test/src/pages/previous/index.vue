@@ -11,7 +11,7 @@
                   <div class="info">
                       <div>
                             <div class="picture">
-                                <img src="../../../static/images/wx-logo.png" alt="">
+                                <img src="http://pay.91dianji.com.cn/Superior.jpg" alt="">
                             </div>
                             <div>
                                 <p class="recommend gray">推荐人</p>
@@ -19,7 +19,7 @@
                             </div>
                       </div>
                       <div>
-                          <p class="recommend ">级别：<span class="gray">实习会员</span></p>
+                          <p class="recommend ">级别：<span class="gray">{{level}}</span></p>
                           <p>推荐码：<span class="gray">{{recommendedcode}}</span></p>
                       </div>
                   </div>
@@ -57,7 +57,8 @@ export default {
     data() {
         return {
             nickname:"",
-            recommendedcode:""
+            recommendedcode:"",
+            level:""
         }
     },
     methods:{
@@ -66,9 +67,9 @@ export default {
         }
     },
    created(){
-        this.nickname = this.$store.state.wechat.nickname;
-        this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
-       
+        this.nickname = this.$store.state.wechat.nickname
+        this.recommendedcode  = this.$store.state.wechat.recommendedcode
+        this.level = this.$store.state.wechat.level
     }
 }
 </script>

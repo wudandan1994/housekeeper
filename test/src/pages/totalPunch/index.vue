@@ -12,15 +12,15 @@
                        <p>我的金币</p>
                        <p>
                            <span></span>
-                           <span>0</span>
+                           <span>{{gold}}</span>
                        </p>
                    </div>
-                   <div class="middle">
-                      <p>未签到</p>
+                   <div @click="sign" class="middle">
+                      <p>{{isPunch?"已签到":"未签到"}}</p>
                    </div>
                    <div class="right">
                        <p>当月累计签到</p>
-                           <span>2</span>
+                           <span>{{signcount}}</span>
                            天
                    </div>
                </div>
@@ -89,7 +89,7 @@
                 <!-- 日期 -->
             <ul class="days">
                 <!-- 核心 v-for循环 每一次循环用<li>标签创建一天 -->
-                <li v-for="dayobject in days" :key="dayobject.day" >
+                <li v-for="(dayobject,index) in days" :key="index" >
                     <!--本月-->
                     <!--如果不是本月  改变类名加灰色-->
 
@@ -113,6 +113,7 @@
 
 
 <script>
+import {axiosPost,axiosGet} from '@/lib/http'
 export default {
     data() {
         return {
@@ -121,14 +122,35 @@ export default {
             currentYear: 1970,
             currentWeek: 1,
             days: [],
+            isPunch:false,
+           
+             signcount:"",
+             gold:''
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home')
-            // console.log(new Date());
+        },
+        sign(){
+            console.log(55);
+            axiosPost("/customer/insertSign")
+            .then(function(res){
+                this.isPunch=true
+                this.$toast({
+                    message:"签到成功"
+                })
+            })
             
         },
+         searchPunch(){
+           axiosPost("/customer/getSignDetail")
+           .then(function(res){
+                // this.count=res.data.count
+                this.signcount=res.data.signcount
+                this.gold=res.data.gold
+           })
+         },
          initData: function (cur) {
                     let that = this;
                     let leftcount = 0; //存放剩余数量
@@ -196,10 +218,12 @@ export default {
                     if (d < 10) d = "0" + d;
                     return y + "-" + m + "-" + d
                 },
-       },
+         },
+      
     created () {
-         let that = this;
-         that.initData(null);
+         let that = this
+         that.initData(null)
+          this.searchPunch()
     }
 }
 </script>
@@ -207,7 +231,7 @@ export default {
 <style lang="less">
    #total-punch {
        >header {
-           background: #000;
+           background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height:86px;
@@ -231,7 +255,7 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
            >.task{
-               background-color: #9A0000;
+               background-color: #4B66AF;
                color:#FFF1F6;
                padding:20px 30px;
                >.punch {
@@ -240,9 +264,10 @@ export default {
                    >.middle {
                        width:200px;
                        height: 200px;
-                       background-color: #9A0000;
+                       background-color: #fff;
                        border:10px solid #fff;
                        border-radius: 50%;
+                       color:#000;
                        >p {
                            text-align: center;
                            line-height: 200px;
@@ -322,15 +347,15 @@ export default {
                
            }
            >.rule{
-               background-color: #8A0000;
+               background-color: #4B66AF;
                color:#fff;
                >ul{
                    display: flex;
                    padding:20px 0px;
                    >li {
-                       width:33%;
-                       border-right: 1px solid #fff;
-                       text-align: center;
+                            width:33%;
+                            border-right: 1px solid #fff;
+                            text-align: center;
                        &:nth-of-type(3){
                            border:none;
                        }
@@ -414,24 +439,12 @@ export default {
                         display: inline-block;
                         width: 12.9%;
                         text-align: center;
-                        padding-bottom: 3px;
-                        padding-top: 7px;
+                        padding-bottom:10px;
+                        padding-top: 15px;
                         font-size: 26px;
-                        color: rgb(14, 220, 235);
+                        // color: rgb(14, 220, 235);
+                        color:#000;
                         font-weight: 200;
-                        // & .class-30 {
-                        //      background: url(bg_30.png) no-repeat 0 0 /100% 100%;
-                        //  }
-        //                 &.class-60 {
-        //                   background: url(bg_60.png) no-repeat 0 0 /100% 100%;
-        //               }
-        //                 &.class-3060 {
-        //                    background: url(bg_3060.png) no-repeat 0 0 /100% 100%;
-        //               }
-        //                 &.other-month {
-        //                     padding: 5px;
-        //                     color: #84a8ae;
-        //                 }
                         >span {
                             >span {
                                 height: 29.5px;
@@ -445,17 +458,6 @@ export default {
                         }
                     }
                 }
-        //         // .arrow1 {
-        //         //     background: url(left.png) no-repeat 0 0 /100% 100%;
-        //         //     margin-left: 44px;
-        //         // }
-
-        //         // .arrow2 {
-        //         //     background: url(right.png) no-repeat 0 0 /100% 100%;
-        //         //     margin-right: 44px;
-                // }
-
-               
            }
        }
    }

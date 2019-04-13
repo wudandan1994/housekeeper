@@ -143,14 +143,14 @@ export default {
         }
     },
     created(){
-        // this.nickname = this.$store.state.wechat.nickname;
-        // this.headimg  = this.$store.state.wechat.headimg;
-        // this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
-        // if(this.$store.state.wechat.vip == '1'){
-        //     this.vip ='http://pay.91dianji.com.cn/301.png';
-        // }else{
-        //     this.vip = 'http://pay.91dianji.com.cn/301-1.png';
-        // }
+        this.nickname = this.$store.state.wechat.nickname;
+        this.headimg  = this.$store.state.wechat.headimg;
+        this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
+        if(this.$store.state.wechat.vip == '1'){
+            this.vip ='http://pay.91dianji.com.cn/301.png';
+        }else{
+            this.vip = 'http://pay.91dianji.com.cn/301-1.png';
+        }
     }
 }
 </script>
