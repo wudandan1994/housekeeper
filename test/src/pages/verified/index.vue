@@ -49,7 +49,7 @@ export default {
 <style lang="less">
    #verified {
        >header {
-           background: #000;
+            background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -102,7 +102,7 @@ export default {
            }
            >.at-once {
                color:white;
-               background-color: #967E42;
+                background-color: #4965AE;
                padding:30px 200px;
                border-radius: 10px;
                text-align: center;

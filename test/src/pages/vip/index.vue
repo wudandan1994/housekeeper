@@ -11,7 +11,7 @@
                              <span @click="isShow">权益说明</span>
                              <van-popup v-model="show">
                                 <div class="cover">
-                                    <p>钱夹宝钻石卡</p>
+                                    <p>钱夹宝金卡卡</p>
                                     <p>权益说明</p>
                                 </div>
                             </van-popup>
@@ -44,7 +44,7 @@
                              <span @click="isShow">权益说明</span>
                              <van-popup v-model="show">
                                 <div class="cover">
-                                    <p>钱夹宝钻石卡</p>
+                                    <p>钱夹宝铜卡</p>
                                     <p>权益说明</p>
                                 </div>
                             </van-popup>
@@ -214,7 +214,7 @@ export default {
             if(this.price == '993'){
                 name = '钱夹宝金卡';
             }else{
-                name = '钱夹宝银卡'
+                name = '钱夹宝铜卡'
             }
             let url = '/order/insertOrder';
             let params = {
@@ -283,7 +283,7 @@ export default {
  #vip {
      >header {
          width:100%;
-         background-color: #000;
+         background-color: #4B66AF;
          color:white;
          text-align: center;
          position: fixed;
@@ -333,7 +333,7 @@ export default {
                             background-color: #fff;
                             >p{
                                 &:nth-of-type(1){
-                                    color:#DAB17B;
+                                    color:#000;
                                     text-align: center;
                                     font-size: bold;
                                     margin-bottom: 20px;
@@ -349,7 +349,7 @@ export default {
                             background-color: #fff;
                             >p{
                                 &:nth-of-type(1){
-                                    color:#DAB17B;
+                                    color:#000;
                                     text-align: center;
                                     font-size: bold;
                                     margin-bottom: 20px;
@@ -365,7 +365,7 @@ export default {
                      >span {
                           color: #4B66AF;
                           background-color: #E8ECF7;
-                          padding:10px 3px;
+                          padding:10px 4px;
                           font-size: 22px;
                           border-radius:13px;
                      }
@@ -415,7 +415,7 @@ export default {
          background: rgba(0, 0, 0, 0.4);
          .pop-detail{
              width: 80%;
-             height: 65%;
+             height: 55%;
              background: white;
              .reminder{
                  width: 100%;

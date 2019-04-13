@@ -148,7 +148,7 @@ export default {
               
                .then(function(res){
                    console.log("success",res);
-                    // location.href=res.data.data.data
+                    location.href=res.data.data
                })
                .catch(function(err){
                    
@@ -163,6 +163,9 @@ export default {
 </script>
 <style lang="less" scoped>
     #page-component-form{
+        .loan .van-nav-bar {
+            background: #4B66AF !important;
+        }
         padding-top: 86px;
         .swipe{
             width: 100vw;
@@ -187,12 +190,12 @@ export default {
             margin-right: auto;
             padding: 20px;
             line-height: 40px;
-            color: #D0A454;
+            color: #4B66AF;
             font-size: 26px;
             background: #F5F5F4;
-            -moz-box-shadow:0px 0px 15px #333 inset;               /* For Firefox3.6+ */
-            -webkit-box-shadow:0px 0px 15px #333 inset;            /* For Chrome5+, Safari5+ */
-            box-shadow:0px 0px 15px #333 inset;   
+            -moz-box-shadow:0px 0px 15px #999 inset;               /* For Firefox3.6+ */
+            -webkit-box-shadow:0px 0px 15px #999 inset;            /* For Chrome5+, Safari5+ */
+            box-shadow:0px 0px 15px #999 inset;   
         }
         .top{
             margin-top: 30px;
@@ -253,13 +256,13 @@ export default {
             }
         }
         .btns{
-            width: 65vw;
+            width: 85vw;
             height: 100px;
             margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
             .cancel{
-                width: 45%;
+                width: 70%;
                 height: 100%;
                 background: #CACACA;
                 color: white;
@@ -268,7 +271,7 @@ export default {
                 border: none;
             }
             .sure{
-                width: 45%;
+                width: 70%;
                 height: 100%;
                 margin-left: 10%;
                 background: #87682F;

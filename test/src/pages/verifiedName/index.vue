@@ -152,7 +152,11 @@ export default {
 <style lang="less">
    #verified-name {
        >header {
+<<<<<<< HEAD
            background: #4b66af;
+=======
+           background-color: #4965AE;
+>>>>>>> 2e1dfd36a18158c673bdf75666fd62665a9ba3dc
            width:100%;
            height: 86px;
            line-height: 86px;

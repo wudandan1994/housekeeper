@@ -62,9 +62,10 @@ export default {
 #financial-circle-component{
         color: white;
         .more{
-            width: 98vw;
+            width: 100%;
             height: 86px;
             font-size: 28px;
+             background-color: #4B66AF;
         }
         .topTwo{
             width: 50%;

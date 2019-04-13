@@ -73,7 +73,7 @@
                             <span>落地商户</span>
                         </div>
                     </router-link>
-                    <router-link tag="li" to="/home/loan">
+                    <router-link tag="li" to="/loan/detail">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
                         <div class="channel">
                             <h3>我要贷款</h3>
@@ -328,7 +328,6 @@ export default {
        >.container {
            padding-bottom:96px;
            padding-top:96px;
-        //    width: 100%;
            overflow-x: hidden;
             >.swipe {
            height: 390px;
@@ -434,11 +433,12 @@ export default {
                 >li {
                     display: flex;
                     justify-content: space-around;
+                    align-items: center;
                     width:47%;
                     border: 2px solid #ccc;
                     border-radius:10px;
-                    padding-bottom:30px;
-                    padding-top:15px;
+                    padding-bottom:20px;
+                    padding-top:35px;
                     margin-top:10px;
                     background-color:#FAFAFA;
                     >.handle {
@@ -528,7 +528,7 @@ export default {
                 color:#fff;
                 text-align: center;
                 >.info {
-                    width:60%;
+                    width:50%;
                     height: 100%;
                     overflow-y: scroll;
                     background-color: #4965AE;
@@ -556,6 +556,7 @@ export default {
                         >li {
                             border-top:3px dashed #ccc;
                             padding:50px 10px;
+                            font-size: 28px;
                              &.switch {
                              >p {
                                  margin-top:-5px;
@@ -564,14 +565,19 @@ export default {
                         }
                     }
                     >.sign-out {
-                        margin-top:100px;
-                        margin-bottom: 30px;
+                        margin-top:20px;
+                        // margin-bottom:20px;
                          >span{
                             border:2px solid #fff;
                            background-color:#8E9CCE;
                            padding:30px 60px;
                            border-radius: 10px;
                          }
+                    }
+                    .van-dialog,
+                    .van-dialog__message,
+                    .van-button {
+                        font-size: 30px;
                     }
                 }
          }

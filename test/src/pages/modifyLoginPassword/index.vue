@@ -166,7 +166,7 @@ export default {
 <style lang="less">
    #modify-login-password {
        >header {
-           background: #000;
+           background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -215,7 +215,7 @@ export default {
                        >span {
                            &:nth-of-type(2){
                                color:white;
-                               background-color: #B39956;
+                               background-color: #4965AE;
                                padding:0 10px;
                                margin-right:20px;
                                line-height: 60px;
@@ -231,11 +231,11 @@ export default {
                }
            }
            >.at-once {
-               width:60%;
-               background-color: #B39956;
+               width:90%;
+               background-color: #4965AE;
                color:white;
                margin-top:200px;
-               margin-left:20%;
+               margin-left:5%;
                text-align: center;
                padding:30px;
                border-radius: 10px;

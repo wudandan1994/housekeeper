@@ -1,7 +1,7 @@
 <template>
     <div id="progress-query">
         <header>
-            <span @click="goBack"><van-icon name="close"/></span>
+            <span></span>
             <span>登录</span>
             <span></span>
         </header>
@@ -34,7 +34,7 @@
            </div>
             <div class="wx-login">
                 <p @click="logIn">
-                    <span><van-icon name="like"/></span>
+                    <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
                 </p>
                 <!-- <p @click="register">注册</p> -->
@@ -55,11 +55,7 @@ export default {
     },
     methods:{
         // password(){
-            
         // },
-        goBack() {
-            this.$router.push('/home')
-        },
         forgetPassword() {
             this.$router.push('/forgetPassword')
         },
@@ -76,7 +72,7 @@ export default {
 <style lang="less">
    #progress-query {
        >header {
-           background: #000;
+           background: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -112,69 +108,68 @@ export default {
            }
            >.info {
                padding-top:160px;
-               width:60%;
+               width:80%;
                margin:0 auto;
                >p {
-                   background-color: #ccc;
+                   background-color: #f2f2f2;
                    color:#fff;
                    display: flex;
                    padding:20px 10px;
                    >span {
-                       color:#A5854B;
+                      color: #4B66AF;
                    }
                    &:nth-of-type(1) {
-                       margin-bottom: 60px;
+                       margin-bottom: 40px;
                    }
                    >input {
                        border:none;
                        flex: 1;
                        color:#000;
-                       background-color: #ccc;
+                       background-color: #f2f2f2;
                    }
                }
            }
            >.password {
-               width:60%;
+               width:80%;
                margin:0 auto;
                display: flex;
                justify-content: space-between;
+               padding-bottom: 20px;
                >p {
                    padding:20px 0px;
-                   font-size: 30px;
+                    font-size:26px;
                     &:nth-of-type(1) {
                         display: flex;
-                        font-size:18px;
+                       padding-bottom: 20px;
                     }
                     
                }
            }
            >.login {
-               width:60%;
-               margin-left:20%;
-               margin-top:20px;
+               width:80%;
+               margin-left:10%;
+               margin-top:10px;
                border-radius: 10px;
-               background-color: #A5854B;
+               background-color: #4B66AF;
                padding:30px 0px;
                color:#fff;
                text-align: center;
            }
            >.wx-login {
-               width:60%;
-               margin-left: 20%;
+               width:80%;
+               margin-left: 10%;
                display: flex;
                justify-content: space-around;
                margin-top:50px;
-               
                >p {
                    font-size: 36px;
-                   &:nth-of-type(1) {
-                       >span {
-                           &:nth-of-type(2) {
-                           }
-                       }
+                   .wx-logo{
+                       font-size: 60px;
+                       display: inline-block;
+                    vertical-align: middle;
                    }
                    &:nth-of-type(3) {
-                       color:#A5854B;
+                       color:#4B66AF;
                    }
                }
            }

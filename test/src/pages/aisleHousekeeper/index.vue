@@ -60,7 +60,7 @@ export default {
 <style lang="less">
    #credit-housekeeper{
        >header {
-           background: #000;
+           background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;

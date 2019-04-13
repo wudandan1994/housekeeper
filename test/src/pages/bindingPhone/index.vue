@@ -158,7 +158,7 @@ export default {
 <style lang="less">
    #binding-phone {
        >header {
-           background: #000;
+           background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -208,7 +208,7 @@ export default {
                        }
                        >span {
                                color:#fff;
-                               background-color: #B39956;
+                               background-color: #4965AE;
                                padding:15px 10px;
                                border-radius: 10px;
                            }
@@ -217,11 +217,11 @@ export default {
            }
            >.at-once {
               color:#fff;
-              background-color: #B39A57;
+              background-color: #4965AE;
               margin-top:300px;
               text-align: center;
-              width:60%;
-              margin-left:20%;
+              width:90%;
+              margin-left:5%;
               padding:30px 0px;
               border-radius: 10px;
            }

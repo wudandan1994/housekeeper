@@ -31,7 +31,7 @@ export default {
 <style lang="less">
    #progress-query {
        >header {
-           background: #000;
+           background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;

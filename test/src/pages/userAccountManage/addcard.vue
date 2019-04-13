@@ -1,18 +1,27 @@
 <template>
     <div id="add-card">
+<<<<<<< HEAD
         <header class="header-top row">
             <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">银行卡管理</div>
             <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+=======
+        <header class="manage loan">
+            <van-nav-bar
+            left-text="返回"
+            left-arrow
+            @click-left="handleReturnHome"
+            />
+>>>>>>> 2e1dfd36a18158c673bdf75666fd62665a9ba3dc
         </header>
         <div class="personal row">
-            <div class="avator center"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553937143739&di=6455bedd462d2fd8679cece7475fe8a0&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F22%2F20170622131955_h4eZS.thumb.700_0.jpeg" alt=""></div>
+            <div class="avator center"><img :src="headimg"></div>
             <div class="name-code">
                 <div class="name row">
-                    <div class="start-center">Giovanni</div>
-                    <div class="center">实习</div>
+                    <div class="start-center">{{nickname}}</div>
+                    <div class="center">{{level}}</div>
                 </div>
-                <div class="code start-center">推荐码：25489658</div>
+                <div class="code start-center">推荐码：{{recommendedcode}}</div>
             </div>
             <div class="status center">(未绑定)</div>
         </div>
@@ -33,7 +42,12 @@
 <script>
 export default {
     data(){
-        return {}
+        return {
+            nickname:'',
+            headimg:'',
+            recommendedcode:'',
+            level:''
+        }
     },
     methods:{
          // 返回首页
@@ -46,6 +60,13 @@ export default {
         handleAddCard(){
 
         }
+    },
+    created () {
+         this.nickname = this.$store.state.wechat.nickname;
+        this.headimg  = this.$store.state.wechat.headimg;
+        this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
+        this.level  = this.$store.state.wechat.level; 
+
     }
 }
 </script>
@@ -54,7 +75,13 @@ export default {
         width: 100vw;
         height: 100vh;
         background: #EEEFF1;
+<<<<<<< HEAD
         padding-top: 86px;
+=======
+        .loan .van-nav-bar {
+            background-color: #4B66AF!important;
+      }
+>>>>>>> 2e1dfd36a18158c673bdf75666fd62665a9ba3dc
         // .loan {
         //     height: 86px;
         //     line-height: 86px;

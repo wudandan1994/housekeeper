@@ -67,6 +67,9 @@ export default {
         height: 100vh;
         padding-top: 86px;
         overflow: scroll;
+        .loan .van-nav-bar {
+           background: #4B66AF !important;
+       }
         .cash-top{
             width: 100vw;
             height: auto;
@@ -104,7 +107,7 @@ export default {
                         >div{
                             width: 60%;
                             height: 80%;
-                            background: #866E38;
+                            background: #4B66AF;
                             color: white;
                             border-radius: 15px;
                         }
@@ -187,11 +190,12 @@ export default {
             }
             .Immediate-withdrawals{
                 width: 90%;
-                height: 100px;
+                padding-top:30px;
+                padding-bottom: 30px;
                 margin-left: auto;
                 margin-right: auto;
                 margin-top: 50px;
-                background: #8A6B2B;
+                background: #4B66AF;
                 color: white;
                 border-radius: 15px;
                 letter-spacing: 10px;
