@@ -6,7 +6,7 @@ const state = {
     recommendedcode: '',
     mobile: '',
     vip: '',
-    level: ''
+    level: '实习'
 }
 const mutations = {
     openid(state,openid){

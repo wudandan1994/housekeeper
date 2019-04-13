@@ -1,11 +1,9 @@
 <template>
     <div id="add-card">
-        <header class="manage loan">
-            <!-- <van-nav-bar
-            left-text="返回"
-            left-arrow
-            @click-left="handleReturnHome"
-            /> -->
+        <header class="header-top row">
+            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">银行卡管理</div>
+            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
         <div class="personal row">
             <div class="avator center"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553937143739&di=6455bedd462d2fd8679cece7475fe8a0&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F22%2F20170622131955_h4eZS.thumb.700_0.jpeg" alt=""></div>
@@ -56,6 +54,7 @@ export default {
         width: 100vw;
         height: 100vh;
         background: #EEEFF1;
+        padding-top: 86px;
         // .loan {
         //     height: 86px;
         //     line-height: 86px;
@@ -66,6 +65,7 @@ export default {
             width: 100vw;
             height: 120px;
             background: white;
+            padding-top: 20px;
             .avator{
                 width: 120px;
                 height: 100%;
