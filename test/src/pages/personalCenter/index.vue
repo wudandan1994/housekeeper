@@ -37,15 +37,15 @@
             <div class="bottom row">
                 <div class="per-menu">
                     <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/303-check.png" size="30px" color="#dab17b"/></div>
-                    <div class="per-title center">积分</div>
+                    <router-link tag="div" class="per-title center" to="/personalCenter/incomedetail/integralCash">积分</router-link>
                 </div>
                  <div class="per-menu">
                     <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/304-check.png" size="30px" color="#dab17b"/></div>
-                    <div class="per-title center">可结算</div>
+                    <router-link tag="div" to="/personalCenter/incomedetail/cash" class="per-title center">可结算</router-link>
                 </div>
                  <div class="per-menu">
                     <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/305-check.png" size="30px" color="#dab17b"/></div>
-                    <div class="per-title center">总收益</div>
+                    <router-link tag="div" to="/ponserCenter/userAccountManage" class="per-title center">总收益</router-link>
                 </div>
             </div>
         </header>
