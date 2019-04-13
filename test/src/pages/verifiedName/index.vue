@@ -59,8 +59,8 @@ export default {
             idcardnumber:"",
             picshowList: [],
             front: '',
-            cardfront: '',
-            cardback: '',
+            cardfront: 'http://pay.91dianji.com.cn/idcardfront.jpg',
+            cardback: 'http://pay.91dianji.com.cn/idcardback.jpg',
             back: '',
             loading: false
         }
@@ -154,7 +154,11 @@ export default {
 <style lang="less">
    #verified-name {
        >header {
+<<<<<<< HEAD
+           background: #4b66af;
+=======
            background-color: #4965AE;
+>>>>>>> 2e1dfd36a18158c673bdf75666fd62665a9ba3dc
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -178,11 +182,12 @@ export default {
            padding-top:94px;
            padding-bottom: 50px;
            >.real {
-               background-color: #252930;
+               background-color: #4b66af;
                color:#fff;
                .name{
                    width: 100%;
-                   height: 80px;
+                   height: 120px;
+                   border-bottom: solid 1px #1221CA;
                    .name-icon{
                        width: 10%;
                        height: 100%;
@@ -202,6 +207,9 @@ export default {
                           background: transparent;
                           border: none; 
                        }
+                       input::placeholder{
+                          color: #ccc; 
+                       }
                    }
                }
            }
@@ -212,7 +220,7 @@ export default {
                    margin-top:200px;
                }
                >h3{
-                   font-size: 36px;
+                   font-size: 32px;
                    color:#000;
                    font-weight: bold;
                    padding-bottom: 20px;
@@ -233,6 +241,7 @@ export default {
                 .title{
                     width: 100%;
                     height: 50px;
+                    font-size: 30px;
                 }
                 .uploadimg{
                     width: 100%;

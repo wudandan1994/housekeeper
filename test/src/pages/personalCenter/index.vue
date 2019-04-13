@@ -1,32 +1,39 @@
 <template>
     <div id="personal-center-component">
         <header class="header">
-            <div class="top">
-                <span></span>
-                <div class="title center">个人中心</div>
-                <router-link to="/home/verified" tag="div"> <div class="authentication">实名认证</div></router-link>
-            </div>
-
-            <div class="middle row">
-                <div class="avator center"><img :src="headimg" alt=""></div>
-                <div class="name-details">
-                    <div class="name-vip row">
-                        <div class="name center">{{nickname}}</div>
-                        <div class="vip center">
-                            <van-icon :name="vip" size="26px" color="#ccc"/>
-                        </div>
-                        <div class="operator end-center">
-                            <van-icon name="medel" size="20px" color="#dab17b"/>
-                            <span>运营商</span>
-                        </div>
-                    </div>
-                    <div class="set row">
-                        <router-link tag="div" class="unset center" to="/register">未设置</router-link>
-                        <div class="code center">推荐码: {{recommendedcode}}</div>
+            <div class="top row">
+                <div class="avator"><img :src="headimg" alt=""></div>
+                <div class="name-code">
+                    <div class="name start-center">{{nickname}}</div>
+                    <div class="unset start-center">
+                        <router-link tag="div" class="center" to="/register">未设置</router-link>
                     </div>
                 </div>
             </div>
-
+            <div class="operator end-center">
+                <van-icon name="medel" size="20px" color="#dab17b"/>
+                <span>运营商</span>
+            </div>
+            <div class="position">
+                <div class="recomcode center">推荐码:98787654</div>
+                <router-link to="/home/verified" class="authentication center" tag="div">实名认证</router-link>
+                <div class="isvip end-center"><img :src="vip" alt=""></div>
+                <div class="position-detail row">
+                    <div class="per-position shou right">
+                        <div class="title start-center">收益</div>
+                        <div class="title bold start-center">3456</div>
+                    </div>
+                    <div class="per-position yu right">
+                        <div class="title start-center">余额</div>
+                        <div class="title bold start-center">3456</div>
+                    </div>
+                    <div class="per-position fen">
+                        <div class="title start-center">分佣</div>
+                        <div class="title bold start-center">3456</div>
+                    </div>
+                </div>
+            </div>
+        
             <div class="bottom row">
                 <div class="per-menu">
                     <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/303-check.png" size="30px" color="#dab17b"/></div>
@@ -124,8 +131,8 @@ export default {
     data(){
         return {
             active:2,
-            nickname: '',
-            headimg: '',
+            nickname: 'Giovanni',
+            headimg: 'http://img2.imgtn.bdimg.com/it/u=1000195578,2796948806&fm=11&gp=0.jpg',
             recommendedcode: '',
             vip: 'http://pay.91dianji.com.cn/301-1.png',
         }
@@ -136,14 +143,14 @@ export default {
         }
     },
     created(){
-        this.nickname = this.$store.state.wechat.nickname;
-        this.headimg  = this.$store.state.wechat.headimg;
-        this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
-        if(this.$store.state.wechat.vip == '1'){
-            this.vip ='http://pay.91dianji.com.cn/301.png';
-        }else{
-            this.vip = 'http://pay.91dianji.com.cn/301-1.png';
-        }
+        // this.nickname = this.$store.state.wechat.nickname;
+        // this.headimg  = this.$store.state.wechat.headimg;
+        // this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
+        // if(this.$store.state.wechat.vip == '1'){
+        //     this.vip ='http://pay.91dianji.com.cn/301.png';
+        // }else{
+        //     this.vip = 'http://pay.91dianji.com.cn/301-1.png';
+        // }
     }
 }
 </script>
@@ -157,137 +164,169 @@ export default {
       background: #F2F2F2;
       .header{
           width: 100vw;
-          height: auto;
-          margin-left: auto;
-          z-index:999;
-          margin-right: auto;
-          background: linear-gradient(#4B66AF,#6883C1);
+          height: 450px;
+          position: relative;
+          background: linear-gradient(#4B66AF,#6883C1);  
+          padding-top: 60px;  
           .top{
-            position: relative;
-            height: 86px;
-            line-height: 86px;
-            display: flex;
-             font-size:28px;
-            .title{
-                width: 100%;
-                height: auto;
-                line-height: 80px;
-                font-size: 36px;
-                font-weight: 400;
-                color: rgb(212, 214, 221);
-                font-size: 32px;
-            }
-            .authentication{
-                width: auto;
-                height: 20px;
-                position: absolute;
-                top: 5px;
-                right: 10px;
-                z-index: 1;
-                font-size: 28px;
-                font-weight: 400;
-                color: rgb(212, 214, 221);
-            }
+              width: 90%;
+              height: 120px;
+              margin-left: auto;
+              margin-right: auto;
+              .avator{
+                  width: 18%;
+                  height: 100%;
+                  >img{
+                      width: 120px;
+                      height: 120px;
+                      border-radius: 50%;
+                  }
+              }
+              .name-code{
+                  width: 72%;
+                  margin-left: 15px;
+                  height: 100%;
+                  .name{
+                      height: 50px;
+                      margin-top: 10px;
+                      font-size: 40px;
+                      font-weight: 700;
+                      color:#ffffff;
+                  }
+                  .unset{
+                      width: 100%;
+                      height: 50px;
+                      margin-top: 5px;
+                      font-size: 28px;
+                      color:#ffffff; 
+                      >div{
+                        width: auto;
+                        border: solid 0.02rem #ccc;
+                        border-radius: 20px; 
+                        padding: 5px 20px;
+                      }
+
+                  }
+              }
           }
-          .middle{
-                width: 100%;
-                height: 120px;
-                margin-top: 50px;
-                color: white;
-                .avator{
-                    width: 20vw;
-                    height: auto;
-                    >img{
-                        width: 100px;
-                        height: 100px;
-                        border-radius: 50%;
-                    }
-                }
-                .name-details{
-                    width: 80vw;
-                    height: auto;
-                }
-                .name-vip{
-                    width: 100%;
-                    height: 50%;
-                    position: relative;
-                    .name{
-                        width: auto;
-                        height: 100%;
-                        font-size: 44px;
-                        font-weight: 700;
-                        color: white;
-                        overflow: hidden;
-                    }
-                    .vip{
-                        width: 12%;
-                        height: 100%;
-                    }
-                    .operator{
-                        width: auto;
-                        height: 100%;
-                        font-size: 26px;
-                        font-weight: 400;
-                        color: #ccc;
-                        position: absolute;
-                        top: 0px;
-                        right: 0px;
-                        background: #798bc5;
-                        border-top-left-radius: 30px;
-                        border-bottom-left-radius: 30px;
-                        padding-left: 10px;
-                        padding-right: 10px;
-                    }
-                }
-                .set{
-                    width: 100%;
-                    height: 50%;
-                    .unset{
-                        width: 100px;
-                        height: 50%;
-                        border: solid 0.02rem #B6C5E4;
-                        margin-top: 15px;
-                        color: #ccc;
-                        background: #798bc5;
-                        font-size: 28px;
-                        border-radius: 20px;
-                        padding: 8px;
-                    }
-                    .code{
-                        width: auto;
-                        height: 50%;
-                        border: solid 0.02rem #B6C5E4;
-                        margin-top: 15px;
-                        margin-left: 30px;
-                        color: #ccc;
-                        background: #798bc5;
-                        backface-visibility: white;
-                        font-size: 28px;
-                        border-radius: 20px;
-                        padding: 8px;
-                    }
-                }
-           }
-           .bottom{
-               width: 100%;
-               height: 150px;
-               margin-top: 50px;
-               .per-menu{
-                   color: white;
-                   width: 30%;
-                   height: 100%;
-                   margin-left: 2.5%;
-                   .per-icon{
-                       
-                       width: 100%;
-                       height: 60%;
-                   }
-                   .per-title{
-                       width: 100%;
-                       height: 40%;
-                   }
-               }
-           }
+          .operator{
+              width: auto;
+              height: 100px;
+              position: absolute;
+              right: 0px;
+              top: 70px;
+              background: #798bc5;
+              padding-left: 20px;
+              padding-right: 20px;
+              color: #ccc;
+              border-top-left-radius: 60px;
+              border-bottom-left-radius: 60px;
+          }
+          .position{
+              width: 90%;
+              height: 350px;
+              position: relative;
+              margin-top: 100px;
+              margin-left: auto;
+              margin-right: auto;
+              background: #ffffff;
+              border-radius: 15px;
+              .recomcode{
+                  width: 220px;
+                  height: 50px;
+                  padding-left: 10px;
+                  padding-right: 10px;
+                  border: solid 0.02rem  rgb(101, 121, 254);
+                  color: rgb(101, 121, 254);
+                  position: absolute;
+                  left: 20px;
+                  top: 30px;
+                  font-size: 24px;
+                  border-radius: 60px;
+              }
+              .authentication{
+                  width: 120px;
+                  height: 55px;
+                  position: absolute;
+                  left: 300px;
+                  top: 30px;
+                  color: rgb(101, 121, 254);
+                  font-weight: 700;
+                  font-size: 28px;
+              }
+              .isvip{
+                  width: 120px;
+                  height: 60px;
+                  position: absolute;
+                  right: 20px;
+                  top: 20px;
+                  >img{
+                      width: 60px;
+                      height: 60px;
+                  }
+              }
+              .position-detail{
+                  width: 95%;
+                  height: 200px;
+                  position: absolute;
+                  left: 2.5%;
+                  bottom: 20px;
+                  
+                  .per-position{
+                      width: 33%;
+                      height: 100%;
+                      .title{
+                          width: 90%;
+                          height: 50px;
+                          padding-left: 10%;
+                          font-size: 30px;
+                      }
+                      .bold{
+                          font-weight: bold;
+                          font-size: 34px;
+                      }
+                      
+                  }
+                  .shou{
+                      background: url('http://pay.91dianji.com.cn/3-shou.jpg') no-repeat;
+                      background-size: 80% 60%;
+                      background-position: 15% 100%;
+                  }
+                  .yu{
+                      background: url('http://pay.91dianji.com.cn/3-yu.jpg') no-repeat;
+                      background-size: 80% 60%;
+                      background-position: 15% 100%;
+                  }
+                  .fen{
+                      background: url('http://pay.91dianji.com.cn/3-fen.jpg') no-repeat;
+                      background-size: 80% 60%;
+                      background-position: 15% 100%;
+                  }
+                  .right{
+                    border-right: solid 1px #f2f2f2;
+                  }
+              }
+          }
+          .bottom{
+              width: 100vw;
+              height: 180px;
+              background: white;
+              margin-top: 30px;
+              .per-menu{
+                  width: 33%;
+                  height: 160px;
+                  margin-top: 10px;
+                  .per-icon{
+                      width: 100%;
+                      height: 60%;
+                  }
+                  .per-title{
+                      width: 100%;
+                      height: 40%;
+                      font-size: 30px;
+                  }
+              }
+          }
       }
        .menu-title{
             width: 98%;
@@ -297,6 +336,7 @@ export default {
             background: white;
             font-size: 30px;
             color: #000;
+            margin-top: 360px;
         }
         .m-top{
             margin-top: 15px;

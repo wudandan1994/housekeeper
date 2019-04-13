@@ -1,11 +1,18 @@
 <template>
     <div id="add-card">
+<<<<<<< HEAD
+        <header class="header-top row">
+            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">银行卡管理</div>
+            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+=======
         <header class="manage loan">
             <van-nav-bar
             left-text="返回"
             left-arrow
             @click-left="handleReturnHome"
             />
+>>>>>>> 2e1dfd36a18158c673bdf75666fd62665a9ba3dc
         </header>
         <div class="personal row">
             <div class="avator center"><img :src="headimg"></div>
@@ -68,9 +75,13 @@ export default {
         width: 100vw;
         height: 100vh;
         background: #EEEFF1;
+<<<<<<< HEAD
+        padding-top: 86px;
+=======
         .loan .van-nav-bar {
             background-color: #4B66AF!important;
       }
+>>>>>>> 2e1dfd36a18158c673bdf75666fd62665a9ba3dc
         // .loan {
         //     height: 86px;
         //     line-height: 86px;
@@ -81,6 +92,7 @@ export default {
             width: 100vw;
             height: 120px;
             background: white;
+            padding-top: 20px;
             .avator{
                 width: 120px;
                 height: 100%;

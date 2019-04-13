@@ -147,3 +147,14 @@ table {
 		width: 10%;
 		height: 100%;
 	}
+	.van-tabs--line .van-tabs__wrap{
+		height: 80px;
+	}
+	.van-tab{
+		line-height: 80px;
+		font-size: 26px;
+	}
+	.van-button--default{
+		color: #ffffff;
+		background: #4b66af;
+	}
