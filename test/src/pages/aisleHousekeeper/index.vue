@@ -17,25 +17,17 @@
            <div class="plan">
                <p>
                    <span>&nbsp;</span>
-                   <span>还款计划</span>
+                   <span>绑定信用卡</span>
                </p>
            </div>
            <div class="example">
-               <img src="" alt="">
+               <img src="http://pay.91dianji.com.cn/Superior.jpg" alt="">
            </div>
            <div class="detail">
-               <ul>
-                   <li>
-                        <span><van-icon name="gold-coin"/></span>
-                        预算费用
-                        <span><van-icon name="arrow-down"/></span>
-                   </li>
-                   <li>
-                        <span><van-icon name="graphic"/></span>
-                        预算费用
-                        <span><van-icon name="arrow-down"/></span>
-                   </li>
-               </ul>
+               <p>您已绑定的信用卡</p>
+              <ul>
+                  <li></li>
+              </ul>
            </div>
         </div>
     </div>
@@ -43,16 +35,29 @@
 
 
 <script>
+import { axiosPost } from '../../lib/http'
 export default {
     data() {
         return {
-            images:[],
+            images:[],//轮播图信息
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home/creditHousekeeper')
+        },
+        getBankList(){
+            axiosPost("/creditCard/getBankCardbindList")
+            .then(function(res){
+                console.log(res,"success")
+            })
+            .catch(function(err){
+                console.log(err,"error")
+            })
         }
+    },
+    created () {
+        this.getBankList()
     }
 }
 </script>
@@ -102,45 +107,14 @@ export default {
                
            }
            >.example {
-               margin-left:20px;
-               margin-right:20px;
-               height: 300px;
-               background-color: orange;
+               margin:20px;
+               >img {
+                   width:100%;
+               }
            }
            >.detail {
-            
-             >ul{
-                  display: flex;
-                  justify-content: space-around;
-                  border-bottom: 1px solid #ccc;
-                 >li {
-                     text-align: center;
-                     width:49%;
-                     margin:20px 0px;
-                     padding:10px 0px;
-                     color:#2E2E2E;
-                     >span {
-                         &:nth-child(2){
-                             margin-left:20px;
-                         }
-                     }
-                     &:nth-of-type(1){
-                         border-right:1px solid #ccc;
-                         >span{
-                             &:nth-of-type(1){
-                                 color:#E9752C;
-                             }
-                         }
-                     }
-                     &:nth-of-type(2){
-                         >span {
-                              &:nth-of-type(1){
-                                 color:#619FDC;
-                             }
-                         }
-                     }
-                 }
-             }
+              
+           margin-top:20px;
            }
        }
    }

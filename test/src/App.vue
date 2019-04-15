@@ -199,6 +199,10 @@ export default {
        })
      }
    }
+<<<<<<< HEAD
+
+=======
+>>>>>>> a0c2ceec0a9cc3b81adab0b17a787783ed903bd2
 }
 </script>
 
