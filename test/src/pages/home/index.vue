@@ -279,6 +279,10 @@ export default {
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
+        console.log('ceshi');
+    },
+    mounted(){
+        console.log('测试函数');
     }
     
 }

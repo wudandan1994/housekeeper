@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    
     <router-view/>
-  
   </div>
 </template>
 
@@ -108,6 +106,7 @@ export default {
          }).catch(res =>{
              console.log('获取access_token失败',res.data)
          })
+     }
   },
    created(){
      console.log('纪康测试');
@@ -131,11 +130,10 @@ export default {
          path: '/login'
        })
      }
-
    },
    mounted(){
      // js-sdk的access_token
-    //  if(storage.get('cid') != ''){
+     if(storage.get('cid') != ''){
        let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
        axiosGet(url).then(res =>{
          console.log('jsapi请求成功',res);
@@ -199,9 +197,8 @@ export default {
        }).catch(res =>{
          console.log('jsapi请求失败',res);
        })
-    //  }
+     }
    }
-}
 }
 </script>
 
