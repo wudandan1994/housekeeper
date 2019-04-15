@@ -108,12 +108,13 @@ export default {
          }).catch(res =>{
              console.log('获取access_token失败',res.data)
          })
-
   },
    created(){
+     console.log('纪康测试');
     //  判断是否是微信浏览器
      var ua = navigator.userAgent.toLowerCase();
      if(ua.match(/MicroMessenger/i)=="micromessenger") {
+       console.log('微信');
        // 微信浏览器
        this.code = this.GetUrlParam('code');
        if(this.GetUrlParam('code') != ''){
@@ -124,6 +125,7 @@ export default {
          this.handleOauth();
        }
      }else{
+       console.log('非微信');
        // 非微信浏览器
        this.$router.push({
          path: '/login'
@@ -133,7 +135,7 @@ export default {
    },
    mounted(){
      // js-sdk的access_token
-     if(storage.get('cid') != ''){
+    //  if(storage.get('cid') != ''){
        let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
        axiosGet(url).then(res =>{
          console.log('jsapi请求成功',res);
@@ -197,7 +199,7 @@ export default {
        }).catch(res =>{
          console.log('jsapi请求失败',res);
        })
-     }
+    //  }
    }
 }
 }
