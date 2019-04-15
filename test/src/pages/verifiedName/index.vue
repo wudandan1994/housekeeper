@@ -1,9 +1,9 @@
 <template>
     <div id="verified-name">
         <header class="header-top row">
-            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
-            <div class="top-title center">账户管理</div>
-            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">实名认证</div>
+            <div class="right-icon varify center">{{status}}</div>
         </header>
         <div class="container">
            <div class="real">
@@ -40,7 +40,7 @@
                     </van-uploader>
                 </div>
             </div>
-           <div class="submit center" @click="submit"><van-button class="van-button" type="default">提交</van-button></div>
+           <div class="submit center" @click="submit" v-if="status == '未认证'"><van-button class="van-button" type="default">提交</van-button></div>
            <div class="loading center" v-if="loading"><van-loading type="spinner" color="black" size="50px" /></div>
         </div>
     </div>
@@ -62,10 +62,17 @@ export default {
             cardfront: 'http://pay.91dianji.com.cn/idcardfront.jpg',
             cardback: 'http://pay.91dianji.com.cn/idcardback.jpg',
             back: '',
-            loading: false
+            loading: false,
+            status: ''
         }
     },
     methods:{
+         // 返回首页
+        handleReturnHome(){
+            this.$router.push({
+                path:'/home/verified'
+            })
+        },
         onRead(file) {
             var formData = new FormData()
             
@@ -76,8 +83,9 @@ export default {
             // axios.post('http://localhost:8080/api/upload/uploadImg',formData,config).then(res =>{     //本地环境
             axios.post('http://pay.91dianji.com.cn/api/upload/uploadImg',formData,config).then(res =>{ //线上环境
                 console.log('身份证正面上传成功',res);
-                this.front = res.data.data.imgUrl
-                this.cardfront = this.url + res.data.data.thumImgUrl
+                this.front = res.data.data.imgUrl;
+                console.log('图片组合',this.url + res.data.data.thumImgUrl);
+                this.cardfront = this.url + res.data.data.thumImgUrl;
             }).catch(res =>{
                 console.log('身份证正面上传失败',res);
             })
@@ -120,11 +128,15 @@ export default {
                     idcardback: this.back
                 };
                 axiosPost(url,params).then(res =>{
-                    setTimeout(() =>{
+                    // setTimeout(() =>{
+                    //     this.loading = false;
+                    //     this.$toast.success('已提交');
+                    // },1000)
+                    console.log('实名认证成功',res);
+                    if(res.data.success){
                         this.loading = false;
                         this.$toast.success('已提交');
-                    },2000)
-                    console.log('实名认证成功',res);
+                    }
                 }).catch(res =>{
                     console.log('实名认证失败',res);
                 })
@@ -145,16 +157,30 @@ export default {
             let params = {};
             axiosPost(url,params).then(res =>{
                 console.log('获取实名认证状态成功',res);
+                if(res.data.data.status != '0'){
+                    this.name = res.data.data.name;
+                    this.idcardnumber = res.data.data.idcardnumber;
+                    this.cardback = this.url + res.data.data.idcardback;
+                    this.cardfront = this.url + res.data.data.idcardfront;
+                   if(res.data.data.status == '1'){
+                        this.status = '审核中'
+                    }else{
+                        this.status = '已认证'
+                    }
+                }else{
+                    this.status = '未认证'
+                }
             }).catch(res =>{
                 console.log('获取实名认证状态失败',res);
             })
         }
     },
     created(){
-        this.handleGetAOuth();
+        
         
     },
     mounted(){
+        this.handleGetAOuth();
     }
 }
 </script>
@@ -173,6 +199,9 @@ export default {
            position: fixed;
            justify-content: space-between;
            z-index: 999;
+           .varify{
+              font-size: 24px;
+           }
            >span {
                &:nth-of-type(1) {
                    margin-left: 10px;

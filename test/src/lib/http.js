@@ -5,12 +5,12 @@ import { hostUrl } from './config.js'
 export const axiosPost = (url, params = {}) =>{
     const _url = hostUrl + url;
     const _axios = axios.create({
-        timeout: 5000, //设置请求超时时间
+        // timeout: 5000, //设置请求超时时间
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
     });
     return _axios.post(_url,qs.stringify(params)).then(res =>{
         if(res.data.code == -1){
-            // window.location.href = '#/logIn'
+            window.location.href = '#/logIn'
         }
          return res; 
     }).catch(res =>{

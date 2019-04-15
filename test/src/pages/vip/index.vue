@@ -6,7 +6,7 @@
                 <li>
                     <img src="http://bc.91dianji.com.cn/jin.png" alt="">
                      <div class="diamonds">
-                         <div class="card">钱夹宝金牌会员</div>
+                         <div class="card">钱夹宝钻石会员</div>
                          <div class="instructions">
                              <span @click="isShow">权益说明</span>
                              <van-popup v-model="show">
@@ -39,12 +39,12 @@
                 <li>
                     <img src="http://bc.91dianji.com.cn/tong.png" alt="">
                      <div class="diamonds">
-                         <div class="card">钱夹宝铜牌会员</div>
+                         <div class="card">钱夹宝黄金会员</div>
                          <div class="instructions">
                              <span @click="isShow">权益说明</span>
                              <van-popup v-model="show">
                                 <div class="cover">
-                                    <p>钱夹宝铜卡</p>
+                                    <p>钱夹宝黄金会员</p>
                                     <p>权益说明</p>
                                 </div>
                             </van-popup>

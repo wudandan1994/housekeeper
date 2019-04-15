@@ -140,17 +140,18 @@ table {
 		background: #000000;
 	}
 	.left-icon{
-		width: 10%;
+		width: 14%;
 		height: 100%;
+		margin-left: 1%;
 	}
 	.top-title{
-		width: 80%;
+		width: 70%;
 		height: 100%;
 		color: white;
 		font-size: 30px;
 	}
 	.right-icon{
-		width: 10%;
+		width: 15%;
 		height: 100%;
 	}
 	.van-tabs--line .van-tabs__wrap{

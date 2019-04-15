@@ -95,6 +95,7 @@ export default {
             }
             axiosPost("/creditCard/insertCreditCard",data)
             .then(function(res){
+                console.log('申请办卡',res);
                     location.href=res.data.data.data
                     console.log(res);
                     
