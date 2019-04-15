@@ -129,7 +129,7 @@
             </div>
            
             <div class="next">
-                <span>注册</span>
+                <span>更新信息</span>
             </div>
         </div>
     </div>
@@ -171,13 +171,12 @@ export default {
              this.show = false;
         //    console.log(item.name);
            this.identity=item.name;
-           
         },
         modify(){
             this.$router.push('/home/verified')
         },
         getSet(){
-
+            // 查询个人设置
             let data={
                 // openid:this.$store.state.wechat.openid,
                 openid:"ohwrlwlEuphjdvOimvqkhplpzEqo"
@@ -190,23 +189,23 @@ export default {
                         that.checkedCard=Number(that.personInfo.iscreditcard)
                         that.checkedCar=Number(that.personInfo.iscar)
                         that.checkedVoice=that.personInfo.voice
-
-                        localStorage.setItem("personInfo",JSON.stringify(that.personInfo))
+                        // localStorage.setItem("personInfo",JSON.stringify(that.personInfo))
                         // set(name,val){
                         //         localStorage.setItem(name,val);
                         //     }
                     }
-                    console.log(that.personInfo);
-                    
             })
             .catch(function(err){
                 // console.log(err,"error");
             })
-            
+        },
+        // 更新个人设置
+        updateSet(){
+
         }
     },
     created () {
-        // this.getSet()
+        this.getSet()
 
     },
 }

@@ -108,7 +108,7 @@ export default {
          }).catch(res =>{
              console.log('获取access_token失败',res.data)
          })
-
+     }
   },
    created(){
     //  判断是否是微信浏览器
@@ -199,7 +199,7 @@ export default {
        })
      }
    }
-}
+
 }
 </script>
 

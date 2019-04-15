@@ -123,9 +123,8 @@ export default {
             currentWeek: 1,
             days: [],
             isPunch:false,
-           
-             signcount:"",
-             gold:''
+             signcount:0,
+             gold:0
         }
     },
     methods:{
@@ -133,7 +132,7 @@ export default {
             this.$router.push('/home')
         },
         sign(){
-            console.log(55);
+            
             axiosPost("/customer/insertSign")
             .then(function(res){
                 this.isPunch=true
@@ -147,8 +146,8 @@ export default {
            axiosPost("/customer/getSignDetail")
            .then(function(res){
                 // this.count=res.data.count
-                this.signcount=res.data.signcount
-                this.gold=res.data.gold
+                this.signcount=res.data.data.signcount
+                this.gold=res.data.data.gold
            })
          },
          initData: function (cur) {
