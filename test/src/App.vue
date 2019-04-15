@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    
     <router-view/>
-  
   </div>
 </template>
 
@@ -111,9 +109,11 @@ export default {
      }
   },
    created(){
+     console.log('纪康测试');
     //  判断是否是微信浏览器
      var ua = navigator.userAgent.toLowerCase();
      if(ua.match(/MicroMessenger/i)=="micromessenger") {
+       console.log('微信');
        // 微信浏览器
        this.code = this.GetUrlParam('code');
        if(this.GetUrlParam('code') != ''){
@@ -124,12 +124,12 @@ export default {
          this.handleOauth();
        }
      }else{
+       console.log('非微信');
        // 非微信浏览器
        this.$router.push({
          path: '/login'
        })
      }
-
    },
    mounted(){
      // js-sdk的access_token
@@ -199,7 +199,10 @@ export default {
        })
      }
    }
+<<<<<<< HEAD
 
+=======
+>>>>>>> a0c2ceec0a9cc3b81adab0b17a787783ed903bd2
 }
 </script>
 
