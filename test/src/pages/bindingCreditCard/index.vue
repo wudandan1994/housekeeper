@@ -39,7 +39,7 @@
         </div>
          <div class="user-input  row">
             <div class="title year start-center">信用卡安全码</div>
-            <div class="input start-center"><input type="number"  v-model="safeCode" placeholder="请填写信用卡安全码"></div>
+            <div class="input start-center"><input type="number"  v-model="safeCode" placeholder="请填写信用卡后三位安全码"></div>
         </div>
 
         <div class="user-input top row">
@@ -52,7 +52,10 @@
             <div class="get-code center" @click="handleSafeCode"><div>{{title}}</div></div>
         </div>
 
-        <div @click="bindingCard" class="next-stop center">确认绑定</div>
+        <!-- <div @click="bindingCard" class="next-stop center">确认绑定</div> -->
+        <div class="btn">
+            <van-button round size="large" type="info">确认绑定</van-button>
+        </div>
     </div>
 </template>
 <script>
@@ -88,7 +91,6 @@ export default {
          // 获取验证码
         handleSafeCode(){
             let that=this
-            console.log('title',this.title);
             if(this.title == '获取验证码'){
                 let num = 60;
                 let codetitle = '';
@@ -168,8 +170,6 @@ export default {
                     console.log(err,"error");
                     
                 })
-
-
                 setTimeout(() => {
                     clearInterval(timer);
                     this.title = '获取验证码';
@@ -178,6 +178,10 @@ export default {
                 this.$toast('验证码已发送，请勿重复操作');
             }
         },
+        // 绑卡
+        bindingCard(){
+
+        }
 
        
     }    
@@ -265,6 +269,17 @@ export default {
             color: white;
             margin-top: 50px;
             border-radius: 20px;
+        }
+        .btn {
+            margin-top:30px;
+            padding-left:20px;
+            padding-right: 20px;
+            >button {
+                height: 100px;
+                padding-top:20px;
+                padding-bottom: 20px;
+                background-color: #4B66AF;
+            }
         }
         .position{
             width: 100vw;
