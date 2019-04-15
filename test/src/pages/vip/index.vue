@@ -415,7 +415,7 @@ export default {
          background: rgba(0, 0, 0, 0.4);
          .pop-detail{
              width: 80%;
-             height: 55%;
+             height: 62%;
              background: white;
              .reminder{
                  width: 100%;
@@ -567,7 +567,7 @@ export default {
                 color: #ccc;
             }
             .goods-detail{
-                width: auto;
+                width: 75%;
                 height: 100%;
                 font-size: 28px;
                 .alipay{
@@ -577,7 +577,7 @@ export default {
                     border: solid 1.2px #09BB07;
                 }
                 .paytype{
-                    width: auto;
+                    width: 40%;
                     height: 70%;
                     padding-left: 15px;
                     padding-right: 15px;
@@ -589,9 +589,9 @@ export default {
                     }
                 }
                 .paytypes{
-                    width: auto;
+                    width: 40%;
                     height: 70%;
-                    margin-left: 30px;
+                    margin-left: 5%;
                     padding-left: 15px;
                     padding-right: 15px;
                     margin-top: 15px;

@@ -11,35 +11,35 @@
            <div class="light">
                <ul>
                    <li>
-                       <p ><van-icon name="vip-card"/></p>
+                       <p ><van-icon name="http://pay.91dianji.com.cn/110.png"/></p>
                        <div>
                            <p>凡是钻石会员等级，即可帮助他人进行绑卡操作！</p>
                            <p>打破部分人群绑卡操作困难痛点，自己后台替他人操作。一帮到底，真正做到一站式扶持，加速团队裂变！</p>
                        </div>
                    </li>
                    <li>
-                       <p><van-icon name="like"/></p>
+                       <p><van-icon name="http://pay.91dianji.com.cn/112.png"/></p>
                        <div>
                            <p>精养卡智能规划，千城布局，省时省心</p>
                            <p>卡内预留2%以上即可，大额也支持，笔笔落地商户，健康消费，智能完美账单</p>
                        </div>
                    </li>
                    <li>
-                       <p><van-icon name="hot"/></p>
+                       <p><van-icon name="http://pay.91dianji.com.cn/113.png"/></p>
                        <div>
                            <p>空卡周转，解决急需，维护信用</p>
                            <p>全程只需手续费，我给额度你来还，避免逾期，保你信用无忧</p>
                        </div>
                    </li>
                    <li>
-                       <p><van-icon name="bookmark"/></p>
+                       <p><van-icon name="http://pay.91dianji.com.cn/114.png"/></p>
                        <div>
                            <p>极速还款，全新模式</p>
                            <p>距还款日只剩1-3天又想账单尽量完美，极速模式，照样可以还</p>
                        </div>
                    </li>
                    <li>
-                       <p><van-icon name="diamond"/></p>
+                       <p><van-icon name="http://pay.91dianji.com.cn/115.png"/></p>
                        <div>
                            <p>最高利润，自用省钱，分享赚钱</p>
                            <p>挑战还款分润最高极限，团队裂变，管道收益！被人刷卡，团队躺赚收益</p>
@@ -111,7 +111,8 @@ export default {
                font-weight: bold;
                padding:10px;
                font-size: 36px;
-               margin-bottom:60px;
+               margin-bottom:50px;
+               margin-top: 25px;
            }
            >.light {
                margin-left:50px;

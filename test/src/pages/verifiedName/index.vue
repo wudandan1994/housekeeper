@@ -1,9 +1,9 @@
 <template>
     <div id="verified-name">
-        <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>实名认证</span>
-            <span><van-icon name="ellipsis"/></span>
+        <header class="header-top row">
+            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">账户管理</div>
+            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
         <div class="container">
            <div class="real">
@@ -70,17 +70,16 @@ export default {
             var formData = new FormData()
             
             formData.append('file',file.file)
-             console.log(formData)
             let config = {
                 headers: {'Content-Type': 'multipart/form-data'}
             }
             // axios.post('http://localhost:8080/api/upload/uploadImg',formData,config).then(res =>{     //本地环境
             axios.post('http://pay.91dianji.com.cn/api/upload/uploadImg',formData,config).then(res =>{ //线上环境
-                console.log('请求成功',res);
+                console.log('身份证正面上传成功',res);
                 this.front = res.data.data.imgUrl
                 this.cardfront = this.url + res.data.data.thumImgUrl
             }).catch(res =>{
-                console.log('请求失败',res);
+                console.log('身份证正面上传失败',res);
             })
         },
            
@@ -92,11 +91,11 @@ export default {
             };
             // axios.post('http://localhost:8080/api/upload/uploadImg',formData,config).then(res =>{//本地环境
             axios.post('http://pay.91dianji.com.cn/api/upload/uploadImg',formData,config).then(res =>{ //线上环境
-                console.log('请求成功',res);
+                console.log('身份证反面上传成功',res);
                 this.back = res.data.data.imgUrl
                 this.cardback = this.url + res.data.data.thumImgUrl
             }).catch(res =>{
-                console.log('请求失败',res);
+                console.log('身份证反面上传失败',res);
             })
 
         },
@@ -139,14 +138,23 @@ export default {
             var file = event.target.files[0];
              var reader = new FileReader();
                 console.log('测试',reader.readAsDataURL(file));
+        },
+        // 获取实名认证信息
+        handleGetAOuth(){
+            let url = '/customer/getIdentification';
+            let params = {};
+            axiosPost(url,params).then(res =>{
+                console.log('获取实名认证状态成功',res);
+            }).catch(res =>{
+                console.log('获取实名认证状态失败',res);
+            })
         }
     },
     created(){
-        // this.$toast.success('已提交');
+        this.handleGetAOuth();
         
     },
     mounted(){
-        // document.forms[0].submit();
     }
 }
 </script>
@@ -263,10 +271,10 @@ export default {
                color:#fff;
                text-align: center;
                border-radius: 5px;
-               font-size: 30px;
                .van-button{
                    width: 100%;
                    height: 100%;
+                   font-size: 30px;
                }
            }
            .loading{

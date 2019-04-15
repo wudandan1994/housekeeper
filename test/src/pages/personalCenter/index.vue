@@ -20,16 +20,16 @@
                 <div class="isvip end-center"><img :src="vip" alt=""></div>
                 <div class="position-detail row">
                     <div class="per-position shou right">
-                        <div class="title start-center">收益</div>
-                        <div class="title bold start-center">3456</div>
+                        <div class="title center">收益</div>
+                        <div class="title bold center">3456</div>
                     </div>
                     <div class="per-position yu right">
-                        <div class="title start-center">余额</div>
-                        <div class="title bold start-center">3456</div>
+                        <div class="title center">余额</div>
+                        <div class="title bold center">3456</div>
                     </div>
                     <div class="per-position fen">
-                        <div class="title start-center">分佣</div>
-                        <div class="title bold start-center">3456</div>
+                        <div class="title center">分佣</div>
+                        <div class="title bold center">3456</div>
                     </div>
                 </div>
             </div>
@@ -102,17 +102,17 @@
         </div>
         <div class="per-list row">
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/311.png" size="30px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/312.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">百问百答</div>
             </div>
 
             <div class="per-menu-list line">
-                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/312.png" size="30px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/313.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">退换说明</div>
             </div>
 
             <div class="per-menu-list">
-                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/313.png" size="30px" color="#dab17b"/></div>
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/314.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">名片夹</div>
             </div>
         </div>
