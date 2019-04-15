@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="common-title start-center">
-            <van-icon name="bookmark" color="#886A31" size="1.5em"/>
+            <van-icon name="bookmark" color="#4B66AF" size="1.5em"/>
             <span>申请条件</span>
         </div>
         <div class="condition">
@@ -35,7 +35,7 @@
         </div>
         <div class="kong"></div>
         <div class="common-title start-center">
-            <van-icon name="send-gift" color="#886A31" size="1.5em"/>
+            <van-icon name="send-gift" color="#4B66AF" size="1.5em"/>
             <span>所需材料</span>
         </div>
         <div class="condition">
@@ -45,7 +45,7 @@
         </div>
         <div class="kong"></div>
         <div class="common-title start-center">
-            <van-icon name="todo-list" color="#886A31" size="1.5em"/>
+            <van-icon name="todo-list" color="#4B66AF" size="1.5em"/>
             <span>费率说明</span>
         </div>
         <div class="condition">
@@ -67,7 +67,7 @@
         </div>
         <div class="kong"></div>
         <div class="common-title start-center">
-            <van-icon name="coupon" color="#886A31" size="1.5em"/>
+            <van-icon name="coupon" color="#4B66AF" size="1.5em"/>
             <span>申请攻略</span>
         </div>
         <div class="strategy">
@@ -77,11 +77,11 @@
         <div class="kong"></div>
         <div class="Immediate-apply row">
             <div class="icon-title">
-                <div class="im-icon center"><van-icon name="invition" size="2.5em" color="#886A31" /></div>
+                <div class="im-icon center"><van-icon name="invition" size="2.5em" color="#4B66AF" /></div>
                 <div class="im-title center">我要推广</div>
             </div>
             <div class="icon-title">
-                <div class="im-icon center"><van-icon name="volume" size="2.5em" color="#886A31" /></div>
+                <div class="im-icon center"><van-icon name="volume" size="2.5em" color="#4B66AF" /></div>
                 <div class="im-title center">申请指南</div>
             </div>
             <router-link tag="div" to="/loan/form">

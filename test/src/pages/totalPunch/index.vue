@@ -145,6 +145,7 @@ export default {
          searchPunch(){
            axiosPost("/customer/getSignDetail")
            .then(function(res){
+               console.log('签到',res);
                 // this.count=res.data.count
                 this.signcount=res.data.data.signcount
                 this.gold=res.data.data.gold

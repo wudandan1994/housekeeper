@@ -274,7 +274,7 @@ export default {
                 width: 70%;
                 height: 100%;
                 margin-left: 10%;
-                background: #87682F;
+                background: #4B66AF;
                 color: white;
                 font-size: 30px;
                 border-radius: 10px;
@@ -289,7 +289,7 @@ export default {
             padding-bottom: 50px;
             background: #F7F6FB;
             span{
-                color: #87682F;
+                color: #4B66AF;
             }
             .remarks{
                 width: 90vw;
@@ -312,7 +312,7 @@ export default {
                 .pop-title{
                     font-size: 35px;
                     font-weight: 700;
-                    color: #87682F;
+                    color: #4B66AF;
                 }
                 .pop-content{
                     padding: 5vw;
