@@ -10,7 +10,7 @@ export const axiosPost = (url, params = {}) =>{
     });
     return _axios.post(_url,qs.stringify(params)).then(res =>{
         if(res.data.code == -1){
-            // window.location.href = '#/logIn'
+            window.location.href = '#/logIn'
         }
          return res; 
     }).catch(res =>{
