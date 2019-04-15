@@ -96,6 +96,8 @@ export default {
             axiosPost("/creditCard/insertCreditCard",data)
             .then(function(res){
                     location.href=res.data.data.data
+                    console.log(res);
+                    
             })
             .catch(function(err){
                  that.$toast({

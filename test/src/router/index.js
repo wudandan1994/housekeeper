@@ -84,6 +84,9 @@ import middleAlipay from "@/pages/vip/middle"
 import applyCardComponent from '@/pages/applyCard'
 // 上级推荐人
 import previousComponent from '@/pages/previous'
+// 绑定信用卡
+import bindingCreditCardComponent from '@/pages/bindingCreditCard'
+
 
 
 
@@ -100,6 +103,8 @@ export default new Router({
     {path:"/home/punch",component:punchComponent},
     {path:"/home/news",component:newsComponent},
     {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
+    {path:"/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard",component:bindingCreditCardComponent,},
+
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
