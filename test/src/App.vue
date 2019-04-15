@@ -111,25 +111,25 @@ export default {
    created(){
      console.log('纪康测试');
     //  判断是否是微信浏览器
-     var ua = navigator.userAgent.toLowerCase();
-     if(ua.match(/MicroMessenger/i)=="micromessenger") {
-       console.log('微信');
-       // 微信浏览器
-       this.code = this.GetUrlParam('code');
-       if(this.GetUrlParam('code') != ''){
-         // 已授权
-         this.handleAccessToken();
-       }else{
-         // 未授权
-         this.handleOauth();
-       }
-     }else{
-       console.log('非微信');
-       // 非微信浏览器
-       this.$router.push({
-         path: '/login'
-       })
-     }
+    //  var ua = navigator.userAgent.toLowerCase();
+    //  if(ua.match(/MicroMessenger/i)=="micromessenger") {
+    //    console.log('微信');
+    //    // 微信浏览器
+    //    this.code = this.GetUrlParam('code');
+    //    if(this.GetUrlParam('code') != ''){
+    //      // 已授权
+    //      this.handleAccessToken();
+    //    }else{
+    //      // 未授权
+    //      this.handleOauth();
+    //    }
+    //  }else{
+    //    console.log('非微信');
+    //    // 非微信浏览器
+    //    this.$router.push({
+    //      path: '/login'
+    //    })
+    //  }
    },
    mounted(){
      // js-sdk的access_token
