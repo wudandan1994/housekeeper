@@ -13,21 +13,23 @@
                         <img v-lazy="image" />
                     </van-swipe-item>
                </van-swipe> -->
+               <img src="../../../static/images/zs.png.png" alt="">
            </div>
            <div class="plan">
                <p>
                    <span>&nbsp;</span>
-                   <span>绑定信用卡</span>
+                   <span>已绑定卡示例</span>
                </p>
            </div>
            <div class="example">
-               <img src="http://pay.91dianji.com.cn/Superior.jpg" alt="">
+               <img src="../../../static/images/ka.png.png" alt="">
            </div>
            <div class="detail">
-               <p>您已绑定的信用卡</p>
+              <p @click="getBankList">查看已绑定的信用卡 </p>
               <ul>
                   <li></li>
               </ul>
+              <router-link to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" tag="h3">去绑定信用卡</router-link>
            </div>
         </div>
     </div>
@@ -39,7 +41,8 @@ import { axiosPost } from '../../lib/http'
 export default {
     data() {
         return {
-            images:[],//轮播图信息
+           
+            timerId:null
         }
     },
     methods:{
@@ -47,9 +50,16 @@ export default {
             this.$router.push('/home/creditHousekeeper')
         },
         getBankList(){
+            let that=this
             axiosPost("/creditCard/getBankCardbindList")
             .then(function(res){
                 console.log(res,"success")
+                if(!res.data.success){
+                    that.$toast=({
+                        message:res.data.message
+                    })
+                    
+                }
             })
             .catch(function(err){
                 console.log(err,"error")
@@ -57,7 +67,7 @@ export default {
         }
     },
     created () {
-        this.getBankList()
+       
     }
 }
 </script>
@@ -92,6 +102,10 @@ export default {
                width:100%;
                height: 300px;
                background-color: red;
+               margin-bottom:60px;
+               >img {
+                   width:100%;
+               }
            }
            >.plan {
                margin:20px;
@@ -113,8 +127,14 @@ export default {
                }
            }
            >.detail {
-              
-           margin-top:20px;
+              margin:20px;
+              >p {
+                  
+              }
+              >h3{
+                  margin-top:20px;
+                  color:#4B66AF;
+              }
            }
        }
    }

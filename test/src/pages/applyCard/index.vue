@@ -97,6 +97,8 @@ export default {
             .then(function(res){
                 console.log('申请办卡',res);
                     location.href=res.data.data.data
+                    console.log(res);
+                    
             })
             .catch(function(err){
                  that.$toast({
