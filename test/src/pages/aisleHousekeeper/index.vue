@@ -13,7 +13,7 @@
                         <img v-lazy="image" />
                     </van-swipe-item>
                </van-swipe> -->
-               <img src="../../../static/images/zs.png.png" alt="">
+               <img src="http://bc.91dianji.com.cn/zhaoshang.png" alt="">
            </div>
            <div class="plan">
                <p>
@@ -22,7 +22,7 @@
                </p>
            </div>
            <div class="example">
-               <img src="../../../static/images/ka.png.png" alt="">
+               <img src="http://bc.91dianji.com.cn/ka.png" alt="">
            </div>
            <div class="detail">
               <p @click="getBankList">查看已绑定的信用卡 </p>
