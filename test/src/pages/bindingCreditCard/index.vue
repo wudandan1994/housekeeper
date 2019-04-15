@@ -39,7 +39,7 @@
         </div>
          <div class="user-input  row">
             <div class="title year start-center">信用卡安全码</div>
-            <div class="input start-center"><input type="number"  v-model="code" placeholder="请填写信用卡安全码"></div>
+            <div class="input start-center"><input type="number"  v-model="safeCode" placeholder="请填写信用卡安全码"></div>
         </div>
 
         <div class="user-input top row">
@@ -72,8 +72,8 @@ export default {
             idCard:"",
             year:"",
             month:"",
-            code:"",
-            safeCode:""
+            safeCode:"",
+            autoCode:""
         }
     },
     created(){
