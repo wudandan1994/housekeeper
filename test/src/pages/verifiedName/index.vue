@@ -27,7 +27,7 @@
                 <div class="title start-center">1.身份证正面</div>
                 <div class="uploadimg">
                     <van-uploader :after-read="onRead" class="upload-component" accept="image/*" multiple name="zhengm">                           
-                            <img :src="cardfront" />
+                            <img :src="url+cardfront" />
                     </van-uploader>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 <div class="title start-center">2.身份证反面</div>
                 <div  class="uploadimg">
                         <van-uploader :after-read="onReadFanm" class="upload-component" accept="image/*" multiple name="fanm">                           
-                            <img :src="cardback" />
+                            <img :src="url+cardback" />
                     </van-uploader>
                 </div>
             </div>
@@ -60,8 +60,8 @@ export default {
             idcardnumber:"",
             picshowList: [],
             front: '',
-            cardfront: 'http://pay.91dianji.com.cn/idcardfront.jpg',
-            cardback: 'http://pay.91dianji.com.cn/idcardback.jpg',
+            cardfront: 'idcardfront.jpg',
+            cardback: 'idcardback.jpg',
             back: '',
             loading: false,
             status: ''
@@ -80,7 +80,7 @@ export default {
             axios.post(url,form,config).then(res =>{
                 console.log('文件上传成功',res);
                 if(res.data.success){
-                    this.cardfront = this.url + res.data.data.imgUrl;
+                    this.cardfront = res.data.data.imgUrl;
                 }
             }).catch(res =>{
                 console.log('文件上传失败',res);
@@ -99,7 +99,7 @@ export default {
             axios.post(url,form,config).then(res =>{
                 console.log('文件上传成功',res);
                 if(res.data.success){
-                    this.cardback = this.url + res.data.data.imgUrl;
+                    this.cardback = res.data.data.imgUrl;
                 }
             }).catch(res =>{
                 console.log('文件上传失败',res);
@@ -112,8 +112,8 @@ export default {
                 openid: this.$store.state.wechat.openid,
                 idcardnumber: this.idcardnumber,
                 name: this.name,
-                cardfront: this.cardfront,
-                cardback: this.cardback,
+                idcardfront: this.cardfront,
+                idcardback: this.cardback,
                 cid: storage.get('cid')
             };
             axiosPost(url,params).then(res =>{
@@ -141,8 +141,8 @@ export default {
                 if(res.data.data.status != '0'){
                     this.name = res.data.data.name;
                     this.idcardnumber = res.data.data.idcardnumber;
-                    this.cardback = this.url + res.data.data.idcardback;
-                    this.cardfront = this.url + res.data.data.idcardfront;
+                    this.cardback = res.data.data.idcardback;
+                    this.cardfront = res.data.data.idcardfront;
                    if(res.data.data.status == '1'){
                         this.status = '审核中'
                     }else{
