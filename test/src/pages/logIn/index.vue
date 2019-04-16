@@ -37,7 +37,7 @@
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
                 </p>
-                <!-- <p @click="register">注册</p> -->
+                <p @click="register">注册</p>
             </div>
         </div>
     </div>
@@ -196,7 +196,7 @@ export default {
                    .wx-logo{
                        font-size: 60px;
                        display: inline-block;
-                    vertical-align: middle;
+                       vertical-align: middle;
                    }
                    &:nth-of-type(3) {
                        color:#4B66AF;

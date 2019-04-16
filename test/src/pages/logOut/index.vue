@@ -1,71 +1,193 @@
 <template>
-    <div id="log-out">
+    <div id="logOut">
         <header>
-            <!-- <span @click="goBack"><van-icon name="arrow-left"/></span>
+            <span @click="goBack"><van-icon name="arrow-left"/></span>
+            <span>注册</span>
             <span></span>
-            <span></span> -->
         </header>
         <div class="container">
-           <div class="register">
-               <p>注册</p>
+           <p>请获取短信验证，并设置新的登录密码</p>
+           <div class="phone">
+               <ul>
+                   <li>
+                       <span>+86</span>
+                       <input type="number" v-model="mobile" placeholder="输入11位手机号码">
+                       <span>
+                            <span v-show="showCount">{{count}}秒后再次获取</span>
+                            <span @click="getCode" v-show="showCode">获取验证码</span>
+                       </span>
+                   </li>
+                    <li>
+                        <span>输入验证码:</span>
+                       <input v-model="authcode" type="number" placeholder="输入验证码">
+                   </li>
+                    <li>
+                        <span>新密码:</span>
+                       <input v-model="newPassword" type="password" placeholder="输入6-18位字母加数字新密码">
+                   </li>
+                    <li>
+                        <span>再次输入新密码:</span>
+                       <input v-model="suerPassword" type="password" placeholder="输入新密码">
+                   </li>
+                    <li>
+                        <span>输入推荐码</span>
+                       <input v-model="code" type="number" placeholder="输入推荐码">
+                   </li>
+               </ul>
            </div>
-           <div class="info">
-               <div class="phone">
-                   <span>手机号</span>
-                   <input type="number" >
+           <div @click="modify" class="at-once">
+                   立即注册
                </div>
-                <div class="code">
-                     <span>验证码</span>
-                   <input type="number" >
-                   <span class="getcode">获取验证码</span>
-               </div>
-                <div class="password">
-                     <span>密码</span>
-                   <input type="text" >
-               </div>
-               <div class="sure-password">
-                    <span>确认密码</span>
-                   <input type="text" >
-               </div>
-                <p id="logOut">注册</p>
-                <p @click="goLogIn" class="check">已有账号？去登陆</p>
-           </div>
-           
         </div>
     </div>
-
 </template>
 
 
 <script>
+import {axiosPost,axiosGet} from '@/lib/http'
+import storage from '@/lib/storage'
 export default {
     data() {
         return {
-
+            count:60,
+            showCount:false,
+            showCode:true,
+            mobile:"",
+            authcode:"",
+            newPassword:"",
+            suerPassword:"",
+            code:"",
+            timerId:null
         }
     },
     methods:{
-        // goBack() {
-        //     this.$router.push('/logIn')
-        // },
-        goLogIn(){
+        goBack() {
             this.$router.push('/logIn')
+        },
+        getCode(){
+            let that=this
+            let partten=/^1\d{10}$/
+            if(!partten.test(that.mobile)){
+                 that.$toast({
+                    message:"请填写11位手机号码"
+                })
+                 return
+            } else  {
+                let data={
+                    mobile:this.mobile,
+                    type:"2"
+                }
+                axiosPost("/customer/sendSms",data)
+                .then(function(res){
+                    
+                    if(res.data.success) {
+                        that.showCount=true
+                         that.showCode=false
+                    }
+                    if(that.showCount){
+                        that.timerId=setInterval(function(){
+                            that.count--
+                            if(that.count<=0){
+                                that.showCount=false
+                                that.showCode=true
+                                that.count=60
+                                clearInterval(that.timerId)
+                            }
+                        },1000)
+                    }
+                    
+                })
+                .catch(function (err) {
+                   that.$toast({
+                    message:"请勿重复发送短信"
+                  })
+                })
+            }
+        },
+        modify(){
+             let that=this
+            let partten=/^1\d{10}$/  // 11位手机号的正则
+            //  let code=/[0-9A-Za-z] {6,18} /  //密码的正则
+            if(!partten.test(that.mobile)){
+                 that.$toast({
+                    message:"请填写11位手机号码"
+                })
+                 return
+            }
+            // if(!code.test(that.newPassword)){
+            //      that.$toast({
+            //         message:"输入6-18位字母加数字新密码"
+            //     })
+            //      return
+            // }
+            if(that.authcode.trim().length===0){
+                 that.$toast({
+                    message:"请输入验证码"
+                })
+                 return
+            }
+            if(that.newPassword.trim().length===0){
+                 that.$toast({
+                    message:"请输入新密码"
+                })
+                 return
+            }
+            
+            if(that.suerPassword.trim().length===0){
+                 that.$toast({
+                    message:"请确认密码"
+                })
+                 return
+            }
+            if(that.newPassword !== that.suerPassword){
+                 that.$toast({
+                    message:"两次输入的密码不一致，请重新填写"
+                })
+                 return
+            }
+            if(that.code.trim().length===0){
+                 that.$toast({
+                    message:"请输入推荐码"
+                })
+                 return
+            }
+            let data={
+                password:that.suerPassword,
+                mobile:this.mobile,
+                authcode:this.authcode,
+                recommendedcode:that.code
+            }
+             axiosPost("/customer/insertPhoneRegistered",data)
+             .then(function(res){
+                 console.log(res,"result");
+                 that.$toast({
+                     message:res.data.message
+                 })
+                 that.timerId=setTimeout(function(){
+                     that.$router.push('/logIn')
+                 },4000)
+                
+             })
+             .catch(function(err){
+                 console.log(err,"error");
+                 
+             })
         }
     }
 }
 </script>
 
 <style lang="less">
-   #log-out{
+   #logOut {
        >header {
-           background: #000;
+           background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
            padding-top:10px;
            color:#fff;
-           display: flex;
            font-size:28px;
+           display: flex;
            z-index:999;
            position: fixed;
            justify-content: space-between;
@@ -81,53 +203,57 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
-           >.register {
-               text-align: center;
-               margin:50px;
-               font-size: 60px;
+           background-color: #EEEFF1;
+           >p {
+               padding:30px;
+               font-size: 30px;
+               color:#767677;
+               font-weight: bold;
            }
-           >.info {
-               margin:100px;
-               >div {
-                    padding:20px 40px;
-                     background-color: #525252;
-                     color:#FFFFFF;
-                     margin-bottom: 40px;
-                     border-radius: 10px;
-                     display: flex;
-                     &.code {
-                         position: relative;
-                         >.getcode{
-                                position: absolute;
-                                top:5px;
-                                right:5px;
-                                padding:20px 10px;
-                                background-color: #DE890B;
-                                border-radius: 10px;
-                         }
-                     }
-                   >input {
-                       border:none;
-                      background-color: #525252;
-                      margin-left:15px;
-
+           >.phone {
+               >ul{
+                   padding-left:30px;
+                   background-color: #fff;
+                   >li{
+                       display: flex;
+                       flex-wrap: nowrap;
+                       border-bottom: 1px solid #ccc;
+                       padding-top:40px;
+                       padding-bottom: 40px;
+                       height: 60px;
+                       line-height: 60px;
+                       color:#000;
+                       &:last-child {
+                           border:none;
+                       }
+                       >span {
+                           &:nth-of-type(2){
+                               color:white;
+                               background-color: #4965AE;
+                               padding:0 10px;
+                               margin-right:20px;
+                               line-height: 60px;
+                               border-radius: 10px;
+                           }
+                       }
+                       >input {
+                           border:none;
+                           flex: 1;
+                           margin-left:10px;
+                       }
                    }
                }
-                >#logOut {
-               background-color: #A08653;
-               margin-top:100px;
-               padding:40px;
+           }
+           >.at-once {
+               width:90%;
+               background-color: #4965AE;
+               color:white;
+               margin-top:200px;
+               margin-left:5%;
                text-align: center;
-               color:#fff;
+               padding:30px;
                border-radius: 10px;
-               margin-bottom: 30px;
            }
-           >.check {
-               text-align: center;
-               margin-top:50px;
-           }
-        }
-          
        }
    }
 </style>
