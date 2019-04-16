@@ -9,7 +9,6 @@ import bindingPhoneComponent from '@/pages/bindingPhone'
 import customerServiceComponent from '@/pages/customerService'
 import aboutUsComponent from '@/pages/aboutUs'
 import accountManagementComponent from '@/pages/accountManagement'
-import modifyPhoneComponent from '@/pages/modifyPhone'
 import loginComponent from '@/pages/login'
 import newsComponent from '@/pages/news'
 import logOutComponent from '@/pages/logOut'
@@ -66,7 +65,10 @@ import alipay from '@/pages/userAccountManage/alipay'
 // 添加银行卡
 import UnionPay from "@/pages/userAccountManage/UnionPay"
 // 2019年4月2日14:52:41
-
+//提现
+import cashComponent from '@/pages/userAccountManage/cash'
+// 提现记录
+import recordComponent from "@/pages/userAccountManage/record"
 import posterComponent from '@/pages/poster'
 import principleComponent from '@/pages/principle'
 import dataComponent from '@/pages/data'
@@ -77,6 +79,14 @@ import promotionMaterialComponent from '@/pages/promotionMaterial'
 import corporateVideoComponent from '@/pages/corporateVideo'
 import adsNewsComponent from '@/pages/adsNews'
 import incomeBreakdownComponent from '@/pages/incomeBreakdown'
+// 支付宝支付中间页
+import middleAlipay from "@/pages/vip/middle"
+import applyCardComponent from '@/pages/applyCard'
+// 上级推荐人
+import previousComponent from '@/pages/previous'
+// 绑定信用卡
+import bindingCreditCardComponent from '@/pages/bindingCreditCard'
+
 
 
 
@@ -92,6 +102,9 @@ export default new Router({
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
     {path:"/home/news",component:newsComponent},
+    {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
+    {path:"/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard",component:bindingCreditCardComponent,},
+
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
@@ -109,7 +122,7 @@ export default new Router({
     {path:"/home/clearCache",component:clearCacheComponent},
     {path:"/home/accountManagement", component:accountManagementComponent,},
     {path:"/home/accountManagement/modifyLoginPassword", component:modifyLoginPasswordComponent,},
-    {path:"/home/accountManagement/modifyPhone", component:modifyPhoneComponent,},
+    {path:"/home/bindingPhone", component:bindingPhoneComponent,},
     {path:"/home/totalPunch",component:totalPunchComponent},
     {path:"/home/violationInquiry",component:violationInquiryComponent},
     {path:"/home/violationInquiry/addCar",component:addCarComponent},
@@ -151,5 +164,9 @@ export default new Router({
     {path: '/personalCenter/incomedetail/addcard',component: addcard},
     {path: '/personalCenter/addcard/alipay',component: alipay},
     {path: '/personalCenter/addcard/UnionPay',component: UnionPay},
+    {path: '/personalCenter/incomedetail/cash',component: cashComponent},
+    {path: '/middle',component: middleAlipay},
+    {path: '/personalCenter/incomedetail/record',component: recordComponent},
+    {path: '/personalCenter/previous',component:previousComponent},
   ]
 })

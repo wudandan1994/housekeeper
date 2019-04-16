@@ -1,15 +1,14 @@
 <template>
     <div id="page-component-form">
-         <header class="loan">
-            <van-nav-bar title="申请贷款" left-text="返回" :fixed="fixed" left-arrow @click-left="handleReturnHome" @click-right="handleMore">
-                <van-icon name="weapp-nav" slot="right" />
-            </van-nav-bar>
+         <header class="header-top row">
+            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">申请贷款</div>
+            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
         <!-- 轮播图 -->
         <div class="swipe">
           <van-swipe :autoplay="3000" indicator-color="white">
             <van-swipe-item v-for="(item,index) in images" :key="index"><img class="imgs" :src="item" alt=""></van-swipe-item>
-           
           </van-swipe>
         </div>
         <div class="title center">选择或添加申请人信息</div>
@@ -41,7 +40,7 @@
 
         <div class="btns row">
             <van-button type="default" class="cancel">取消</van-button>
-            <van-button type="primary" class="sure" @click="handleSubmit">添加信息</van-button>
+            <van-button type="primary" class="sure" @click="handleSubmit">确认</van-button>
         </div>
         <div class="clause">
             <div class="center"><van-checkbox v-model="checked" @change="handleAgree" shape="square" checked-color="#87682F">阅读并同意<span @click="handleShow">《钱夹宝服务协议》</span></van-checkbox></div>
@@ -64,14 +63,17 @@
     </div>
 </template>
 <script>
+import {axiosPost,axiosGet} from '@/lib/http'
 export default {
     data(){
         return{
             fixed: true,
             images:[
-                'http://hbimg.b0.upaiyun.com/796f6212f63d57366a51b943a3a2cda60579b7d622e8-3aYDiD_fw658',
-                'http://p1.ifengimg.com/fck/2018_01/4b3586c88209a81_w640_h429.jpg',
-                'http://img.mp.itc.cn/upload/20161021/4e325227c4024211bfb5e3f64daa9066_th.jpg'
+                'http://pay.91dianji.com.cn/01.png',
+                'http://pay.91dianji.com.cn/02.jpg',
+                'http://pay.91dianji.com.cn/04.png',
+                'http://pay.91dianji.com.cn/06.jpg',
+                'http://pay.91dianji.com.cn/08.jpg'
             ],
             form:{
                 name: '',
@@ -113,7 +115,7 @@ export default {
                 var index = Math.floor(Math.random()*36);
                 this.realCode += ran[index];
             }
-            console.log('当前验证码',this.realCode);
+            
         },
         // 切换验证码
         changeCode(){
@@ -122,8 +124,6 @@ export default {
         },
         // 服务条款
         handleAgree(val){
-            console.log('同意协议',val);
-            console.log('同意协议',this.checked);
         },
         // 表单提交
         handleSubmit(){
@@ -139,7 +139,20 @@ export default {
                this.$toast('请阅读并同意服务协议');
            }
            else{
-               this.$toast('表单填写成功,可以提交');
+               let data={
+                   realName:this.form.name,
+                   mobile:this.form.mobile,
+                   certcode:this.form.idcardnumber
+               }
+               axiosPost("/creditCard/getLoanUrl",data)
+              
+               .then(function(res){
+                   console.log("success",res);
+                    location.href=res.data.data
+               })
+               .catch(function(err){
+                   
+               })
            }
         }
     },
@@ -150,9 +163,13 @@ export default {
 </script>
 <style lang="less" scoped>
     #page-component-form{
+        .loan .van-nav-bar {
+            background: #4B66AF !important;
+        }
+        padding-top: 86px;
         .swipe{
             width: 100vw;
-            height: 30vh;
+            height: auto;
             // background: #c97;
             .imgs{
                 width: 100vw;
@@ -164,6 +181,7 @@ export default {
             height: 100px;
             font-size: 32px;
             font-weight: 600;
+            margin-top: 30px;
         }
         .detail{
             width: 90vw;
@@ -172,11 +190,12 @@ export default {
             margin-right: auto;
             padding: 20px;
             line-height: 40px;
-            color: #D0A454;
+            color: #4B66AF;
+            font-size: 26px;
             background: #F5F5F4;
-            -moz-box-shadow:0px 0px 15px #333 inset;               /* For Firefox3.6+ */
-            -webkit-box-shadow:0px 0px 15px #333 inset;            /* For Chrome5+, Safari5+ */
-            box-shadow:0px 0px 15px #333 inset;   
+            -moz-box-shadow:0px 0px 15px #999 inset;               /* For Firefox3.6+ */
+            -webkit-box-shadow:0px 0px 15px #999 inset;            /* For Chrome5+, Safari5+ */
+            box-shadow:0px 0px 15px #999 inset;   
         }
         .top{
             margin-top: 30px;
@@ -192,25 +211,36 @@ export default {
                 width: 10vw;
                 height: 100%;
                 font-weight: 600;
+                font-size: 26px;
                 margin-left: 2vw;
             }
             .user-input{
                 width: 75vw;
                 height: 100%;
+                >input::placeholder{
+                    font-size:22px;
+                    color: #666666;
+                }
                 >input{
                     width: 100%;
-                    height: 92%;
+                    height: 99%;
                     border: none;
                     text-align: right;
+                    font-size: 26px;
                 }
             }
             .user-code{
                 width: 50vw;
                 height: 100%;
+                >input::placeholder{
+                    font-size:22px;
+                    color: #666666;
+                }
                 >input{
                     width: 100%;
                     height: 92%;
                     border: none;
+                    font-size: 26px;
                     text-align: right;
                 }
             }
@@ -226,27 +256,29 @@ export default {
             }
         }
         .btns{
-            width: 65vw;
+            width: 85vw;
             height: 100px;
             margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
             .cancel{
-                width: 45%;
+                width: 70%;
                 height: 100%;
-                background: #87682F;
-                color: white;
-                font-size: 30px;
-                border-radius: 10px;
-            }
-            .sure{
-                width: 45%;
-                height: 100%;
-                margin-left: 10%;
                 background: #CACACA;
                 color: white;
                 font-size: 30px;
                 border-radius: 10px;
+                border: none;
+            }
+            .sure{
+                width: 70%;
+                height: 100%;
+                margin-left: 10%;
+                background: #4B66AF;
+                color: white;
+                font-size: 30px;
+                border-radius: 10px;
+                border: none;
             }
         }
         .clause{
@@ -257,7 +289,7 @@ export default {
             padding-bottom: 50px;
             background: #F7F6FB;
             span{
-                color: #87682F;
+                color: #4B66AF;
             }
             .remarks{
                 width: 90vw;
@@ -280,7 +312,7 @@ export default {
                 .pop-title{
                     font-size: 35px;
                     font-weight: 700;
-                    color: #87682F;
+                    color: #4B66AF;
                 }
                 .pop-content{
                     padding: 5vw;

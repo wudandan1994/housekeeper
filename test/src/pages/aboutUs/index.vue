@@ -1,5 +1,5 @@
 <template>
-    <div id="progress-query">
+    <div id="about-us">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>关于我们</span>
@@ -29,9 +29,9 @@ export default {
 </script>
 
 <style lang="less">
-   #progress-query {
+   #about-us{
        >header {
-           background: #000;
+            background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;

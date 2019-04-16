@@ -1,12 +1,24 @@
 <template>
-    <div id="progress-query">
+    <div id="customerService">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>在线客服</span>
             <span><van-icon name="ellipsis"/></span>
         </header>
         <div class="container">
-           
+            <div class="logo center"><van-icon name="http://pay.91dianji.com.cn/logo.png" size="250px"/></div>
+            <div class="per-detail row">
+                <van-icon name="phone" size="18px" color="rgb(75, 102, 175)"/>
+                <div class="detail start-center">4001059769</div>
+            </div>
+            <div class="per-detail row">
+                <van-icon name="card" size="18px" color="rgb(75, 102, 175)"/>
+                <div class="detail start-center">chuanbangdai@126.com</div>
+            </div>
+            <div class="per-detail row">
+                <van-icon name="location" size="18px" color="rgb(75, 102, 175)"/>
+                <div class="detail start-center">上海市宝山区泰和路2038号A座303室</div>
+            </div>
         </div>
     </div>
 
@@ -29,9 +41,9 @@ export default {
 </script>
 
 <style lang="less">
-   #progress-query {
+   #customerService {
        >header {
-           background: #000;
+           background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -53,7 +65,22 @@ export default {
        }
        >.container {
            padding-top:96px;
-           padding-bottom: 50px;
+           .logo{
+               width: 100%;
+               height: auto;
+               margin-top: 50px;
+            }
+            .per-detail{
+                width: 70%;
+                height: 60px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .detail{
+                line-height: 22px;
+                margin-left: 10px;
+                font-size: 28px;
+            }
        }
    }
 </style>

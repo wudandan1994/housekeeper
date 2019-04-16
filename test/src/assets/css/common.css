@@ -43,6 +43,12 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+.icon {
+	width: 1em; height: 1em;
+	vertical-align: -0.15em;
+	fill: currentColor;
+	overflow: hidden;
+ }
 .row{
 	    display: flex;
 	    display: -webkit-flex;
@@ -107,16 +113,55 @@ table {
 	    justify-content: center;
 	    align-items: flex-end;
 	}
-	.loan .van-nav-bar{
-		background: black !important;
+	
+	.van-toast--default{
+	width: 200px;
+	height: 200px;
 	}
-	.loan .van-nav-bar__text,.van-nav-bar__title,.van-nav-bar .van-icon{
-		color: white !important;
-
+	.van-toast--default .van-toast__icon{
+		font-size: 100px;
 	}
-	.icon {
-		width: 1em; height: 1em;
-		vertical-align: -0.15em;
-		fill: currentColor;
-		overflow: hidden;
-	 }
+	.van-toast--default .van-toast__text{
+		font-size: 30px;
+	}
+	.van-toast--text{
+		width: auto;
+		height: 100px;
+		font-size: 30px;
+		line-height: 80px;
+	}
+	.header-top{
+		width: 100vw;
+		height: 86px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 100000;
+		background: #000000;
+	}
+	.left-icon{
+		width: 14%;
+		height: 100%;
+		margin-left: 1%;
+	}
+	.top-title{
+		width: 70%;
+		height: 100%;
+		color: white;
+		font-size: 30px;
+	}
+	.right-icon{
+		width: 15%;
+		height: 100%;
+	}
+	.van-tabs--line .van-tabs__wrap{
+		height: 80px;
+	}
+	.van-tab{
+		line-height: 80px;
+		font-size: 26px;
+	}
+	.van-button--default{
+		color: #ffffff;
+		background: #4b66af;
+	}

@@ -13,7 +13,7 @@
                 </p>
                 <p>
                     <span>手机号</span>
-                    <router-link to="/home/accountManagement/modifyPhone" tag="span"><van-icon name="arrow"/></router-link>
+                    <router-link to="/home/bindingPhone" tag="span"><van-icon name="arrow"/></router-link>
                 </p>
                 <!-- <p>
                     <span>修改手势密码</span>
@@ -55,7 +55,7 @@ export default {
 <style lang="less">
    #account-management {
        >header {
-           background: #000;
+           background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;

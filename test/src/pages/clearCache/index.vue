@@ -22,6 +22,7 @@
 
 
 <script>
+import storage from '@/lib/storage'
 export default {
     data() {
         return {
@@ -33,6 +34,7 @@ export default {
             this.$router.push('/home')
         },
         isShow() {
+            storage.remove("personInfo")
             this.show=true
         }
     }
@@ -42,7 +44,7 @@ export default {
 <style lang="less">
    #clear-cache {
        >header {
-           background: #000;
+           background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;

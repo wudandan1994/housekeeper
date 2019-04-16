@@ -40,7 +40,7 @@ export default {
 <style lang="less">
    #news {
        >header {
-           background: #000;
+           background-color:#8E9CCE;
            width:100%;
            height: 86px;
            line-height: 86px;

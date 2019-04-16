@@ -13,29 +13,23 @@
                         <img v-lazy="image" />
                     </van-swipe-item>
                </van-swipe> -->
+               <img src="http://bc.91dianji.com.cn/zhaoshang.png" alt="">
            </div>
            <div class="plan">
                <p>
                    <span>&nbsp;</span>
-                   <span>还款计划</span>
+                   <span>已绑定卡示例</span>
                </p>
            </div>
            <div class="example">
-               <img src="" alt="">
+               <img src="http://bc.91dianji.com.cn/ka.png" alt="">
            </div>
            <div class="detail">
-               <ul>
-                   <li>
-                        <span><van-icon name="gold-coin"/></span>
-                        预算费用
-                        <span><van-icon name="arrow-down"/></span>
-                   </li>
-                   <li>
-                        <span><van-icon name="graphic"/></span>
-                        预算费用
-                        <span><van-icon name="arrow-down"/></span>
-                   </li>
-               </ul>
+              <p @click="getBankList">查看已绑定的信用卡 </p>
+              <ul>
+                  <li></li>
+              </ul>
+              <router-link to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" tag="h3">去绑定信用卡</router-link>
            </div>
         </div>
     </div>
@@ -43,16 +37,37 @@
 
 
 <script>
+import { axiosPost } from '../../lib/http'
 export default {
     data() {
         return {
-            images:[],
+           
+            timerId:null
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home/creditHousekeeper')
+        },
+        getBankList(){
+            let that=this
+            axiosPost("/creditCard/getBankCardbindList")
+            .then(function(res){
+                console.log(res,"success")
+                if(!res.data.success){
+                    that.$toast=({
+                        message:res.data.message
+                    })
+                    
+                }
+            })
+            .catch(function(err){
+                console.log(err,"error")
+            })
         }
+    },
+    created () {
+       
     }
 }
 </script>
@@ -60,7 +75,7 @@ export default {
 <style lang="less">
    #credit-housekeeper{
        >header {
-           background: #000;
+           background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -87,6 +102,10 @@ export default {
                width:100%;
                height: 300px;
                background-color: red;
+               margin-bottom:60px;
+               >img {
+                   width:100%;
+               }
            }
            >.plan {
                margin:20px;
@@ -102,45 +121,20 @@ export default {
                
            }
            >.example {
-               margin-left:20px;
-               margin-right:20px;
-               height: 300px;
-               background-color: orange;
+               margin:20px;
+               >img {
+                   width:100%;
+               }
            }
            >.detail {
-            
-             >ul{
-                  display: flex;
-                  justify-content: space-around;
-                  border-bottom: 1px solid #ccc;
-                 >li {
-                     text-align: center;
-                     width:49%;
-                     margin:20px 0px;
-                     padding:10px 0px;
-                     color:#2E2E2E;
-                     >span {
-                         &:nth-child(2){
-                             margin-left:20px;
-                         }
-                     }
-                     &:nth-of-type(1){
-                         border-right:1px solid #ccc;
-                         >span{
-                             &:nth-of-type(1){
-                                 color:#E9752C;
-                             }
-                         }
-                     }
-                     &:nth-of-type(2){
-                         >span {
-                              &:nth-of-type(1){
-                                 color:#619FDC;
-                             }
-                         }
-                     }
-                 }
-             }
+              margin:20px;
+              >p {
+                  
+              }
+              >h3{
+                  margin-top:20px;
+                  color:#4B66AF;
+              }
            }
        }
    }

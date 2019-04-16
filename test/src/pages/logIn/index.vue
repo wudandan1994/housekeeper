@@ -1,22 +1,22 @@
 <template>
     <div id="progress-query">
         <header>
-            <span @click="goBack"><van-icon name="close"/></span>
+            <span></span>
             <span>登录</span>
             <span></span>
         </header>
         <div class="container">
            <div class="logo">
-               <img src="../../../static/images/flower.jpg.jpg" alt="">
+               <img src="http://pay.91dianji.com.cn/logo.png" alt="">
            </div>
            <div class="info">
                 <p>
                     <span><van-icon name="phone"/></span>
-                    <input type="number" placeholder="请输入手机号码">
+                    <input type="number" v-model="phone" placeholder="请输入手机号码">
                 </p>
                 <p>
                     <span><van-icon name="lock"/></span>
-                    <input type="text" placeholder="请输入密码">
+                    <input type="text" v-model="password" placeholder="请输入密码">
                 </p>
            </div>
            <div class="password">
@@ -24,21 +24,20 @@
                    <!-- <van-radio-group   @click="password"  v-model="radio" >
                              <van-radio checked-color="#A5854B" name="1"></van-radio>
                     </van-radio-group> -->
-                    <van-checkbox v-model="checked" checked-color="#C8B27D">记住密码</van-checkbox>
+                    <van-checkbox v-model="checked" checked-color="#000">记住密码</van-checkbox>
                     <span>&nbsp;</span>
                </p>
                <p @click="forgetPassword">忘记密码？</p>
            </div>
-           <div class="login">
+           <div @click="logInPass" class="login">
                登录
            </div>
             <div class="wx-login">
-                <p></p>
-                <p>
-                    <span><van-icon name="like"/></span>
+                <p @click="logIn">
+                    <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
                 </p>
-                <p @click="register">注册</p>
+                <!-- <p @click="register">注册</p> -->
             </div>
         </div>
     </div>
@@ -47,25 +46,58 @@
 
 
 <script>
+import {axiosPost} from '@/lib/http'
 export default {
     data() {
         return {
             radio:"1",
             checked:false,
+            phone:"",
+            password:""
         }
     },
     methods:{
-        password(){
-            
-        },
-        goBack() {
-            this.$router.push('/home')
-        },
+        // password(){
+        // },
         forgetPassword() {
             this.$router.push('/forgetPassword')
         },
         register() {
              this.$router.push('/logOut')
+        },
+        logInPass(){
+            let that=this
+            if(that.phone.trim().length===0){
+                that.$toast({
+                    message:"请输入手机号码"
+                })
+                return
+            }
+            if(that.password.trim().length===0){
+                that.$toast({
+                    message:"请输入密码"
+                })
+                 return
+            }
+            let data={
+                mobile:that.phone,
+                password:that.password
+            }
+            axiosPost("/customer/login",data)
+            .then(function(res){
+                console.log(res,"result");
+                that.$router.push('/home')
+            })
+            .catch(function(err){
+                console.log(err,"error");
+                
+            })
+
+
+
+        },
+        logIn(){
+            location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
         }
     }
 }
@@ -74,7 +106,7 @@ export default {
 <style lang="less">
    #progress-query {
        >header {
-           background: #000;
+           background: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -97,7 +129,7 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
-           background-color: #181818;
+           background-color: #fff;
            >.logo {
                padding-top:200px;
                width:40%;
@@ -109,70 +141,69 @@ export default {
                }
            }
            >.info {
-               width:60%;
+               padding-top:160px;
+               width:80%;
                margin:0 auto;
                >p {
-                   background-color: #535353;
+                   background-color: #f2f2f2;
                    color:#fff;
                    display: flex;
                    padding:20px 10px;
+                   >span {
+                      color: #4B66AF;
+                   }
                    &:nth-of-type(1) {
-                       margin-bottom: 20px;
+                       margin-bottom: 40px;
                    }
                    >input {
                        border:none;
                        flex: 1;
                        color:#000;
-                       background-color: #535353;
+                       background-color: #f2f2f2;
                    }
                }
            }
            >.password {
-               width:60%;
+               width:80%;
                margin:0 auto;
                display: flex;
                justify-content: space-between;
+               padding-bottom: 20px;
                >p {
                    padding:20px 0px;
-                   color:#fff;
-                   font-size: 30px;
+                    font-size:26px;
                     &:nth-of-type(1) {
                         display: flex;
-                        font-size:18px;
-                        color:#fff;
+                       padding-bottom: 20px;
                     }
-                    .van-checkbox__label {
-                        color:#fff;
-                    }
+                    
                }
            }
            >.login {
-               width:60%;
-               margin-left:20%;
-               margin-top:20px;
+               width:80%;
+               margin-left:10%;
+               margin-top:10px;
                border-radius: 10px;
-               background-color: #A5854B;
+               background-color: #4B66AF;
                padding:30px 0px;
                color:#fff;
                text-align: center;
            }
            >.wx-login {
-               width:60%;
-               margin-left: 20%;
+               width:80%;
+               margin-left: 10%;
                display: flex;
                justify-content: space-around;
                margin-top:50px;
                >p {
                    font-size: 36px;
-                   &:nth-of-type(2) {
-                       >span {
-                           &:nth-of-type(2) {
-                               color:#fff;
-                           }
-                       }
+                   .wx-logo{
+                       font-size: 60px;
+                       display: inline-block;
+                    vertical-align: middle;
                    }
                    &:nth-of-type(3) {
-                       color:#A5854B;
+                       color:#4B66AF;
                    }
                }
            }

@@ -1,8 +1,9 @@
 <template>
     <div id="integral-cash">
-         <header class="manage loan">
-            <van-nav-bar title="积分提现" left-text="返回" left-arrow @click-left="handleReturnHome">
-            </van-nav-bar>
+         <header class="header-top row">
+            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">积分提现</div>
+            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
         <div class="cash-top">
             <van-tabs v-model="active">
@@ -64,7 +65,11 @@ export default {
         background: #EEEFF1;
         width: 100vw;
         height: 100vh;
+        padding-top: 86px;
         overflow: scroll;
+        .loan .van-nav-bar {
+           background: #4B66AF !important;
+       }
         .cash-top{
             width: 100vw;
             height: auto;
@@ -73,6 +78,7 @@ export default {
                 width: 100%;
                 height: 18vh;
                 background: white;
+                margin-top: 50px;
                 .now-integral{
                     width: 30%;
                     height: 100%;
@@ -84,7 +90,7 @@ export default {
                         margin-right: auto;
                         background: url('../../assets/bg1.png');
                         background-size: contain;
-                        font-size: 30px;
+                        font-size: 32px;
                         font-weight: bold;
                     }
                     .title{
@@ -92,14 +98,16 @@ export default {
                         height: 25%;
                         margin-left: auto;
                         margin-right: auto;
+                        font-size: 28px;
                     }
                     .all{
                         width: 100%;
                         height: 30%;
+                        font-size: 24px;
                         >div{
                             width: 60%;
                             height: 80%;
-                            background: #866E38;
+                            background: #4B66AF;
                             color: white;
                             border-radius: 15px;
                         }
@@ -126,6 +134,7 @@ export default {
                 padding-top: 20px;
                 padding-bottom: 20px;
                 line-height: 50px;
+                font-size: 26px;
                 >span{
                     color: red;
                 }
@@ -173,6 +182,7 @@ export default {
             .desc-two{
                 padding: 20px;
                 line-height: 40px;
+                font-size: 26px;
                 p:nth-child(2){
                     margin-top: 30px;
                 }
@@ -180,11 +190,12 @@ export default {
             }
             .Immediate-withdrawals{
                 width: 90%;
-                height: 100px;
+                padding-top:30px;
+                padding-bottom: 30px;
                 margin-left: auto;
                 margin-right: auto;
                 margin-top: 50px;
-                background: #8A6B2B;
+                background: #4B66AF;
                 color: white;
                 border-radius: 15px;
                 letter-spacing: 10px;

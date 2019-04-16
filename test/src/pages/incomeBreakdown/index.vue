@@ -60,7 +60,7 @@ export default {
             this.$router.push('/home')
         },
         lookMine(){
-             this.$router.push('/personCenter/income')
+             this.$router.push('/personalCenter/income')
         }
     }
 }
@@ -69,7 +69,7 @@ export default {
 <style lang="less">
    #income-breakdown {
        >header {
-           background: #000;
+             background-color:#8E9CCE;
            width:100%;
            height:86px;
            line-height:86px;
@@ -105,7 +105,7 @@ export default {
                    border-bottom: 1px solid #ccc;
                }
                >.income {
-                   background-color: #C27403;
+                    background-color:#8E9CCE;
                    position: relative;
                    margin:20px;
                    border-radius: 10px;
@@ -134,7 +134,7 @@ export default {
                        top:10%;
                        border-radius: 10px;
                        background-color: #fff;
-                       color:#C27403;
+                       color:#8E9CCE;
                    }
                }
                >.number {

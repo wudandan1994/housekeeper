@@ -1,7 +1,7 @@
 <template>
     <div id="financial-component">
-       <div class="per-message row">
-           <div class="avator center"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554102237&di=98f8ab1d8a034d1c6b7b96842732022e&imgtype=jpg&er=1&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F22%2F20170622131955_h4eZS.thumb.700_0.jpeg"></div>
+       <div class="per-message top row">
+           <div class="avator  center"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554102237&di=98f8ab1d8a034d1c6b7b96842732022e&imgtype=jpg&er=1&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F22%2F20170622131955_h4eZS.thumb.700_0.jpeg"></div>
            <div class="detail column">
                <div class="name-top row">
                    <div class="name start-center">任我行</div>
@@ -20,7 +20,9 @@
            </div>
        </div>
        <div class="per-message row">
-           <div class="avator center"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554102237&di=98f8ab1d8a034d1c6b7b96842732022e&imgtype=jpg&er=1&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F22%2F20170622131955_h4eZS.thumb.700_0.jpeg"></div>
+           <div class="avator center">
+               <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554102237&di=98f8ab1d8a034d1c6b7b96842732022e&imgtype=jpg&er=1&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F22%2F20170622131955_h4eZS.thumb.700_0.jpeg">
+               </div>
            <div class="detail column">
                <div class="name-top row">
                    <div class="name start-center">任我行</div>
@@ -69,24 +71,35 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" >
     #financial-component{
         color: black;
+        margin-bottom: 100px;
     }
    .per-message{
        width: 100vw;
        height: 120px;
        padding:20px 0px;
        border-bottom: solid 1px rgb(204, 204, 204);
+       margin-bottom: 10px;
+       >.detail {
+         margin-left:10px;
+       }
+   }
+   .van-tabs__content{
+       margin-top:40px;
    }
    .avator{
-       width: 15%;
-       height: 100%;
+        width: 100px;
+       height: 100px;
+       margin-left:20px;
+       border-radius: 50%;
+    //    border:5px solid red;
+       overflow: hidden;
    }
    .avator img{
-       width: 90px;
-       height: 90px;
-       border-radius: 50%;
+     width:100%;
+     display: block;
    }
    .detail{
        width: 65%;
@@ -99,10 +112,12 @@ export default {
    .name{
        width: auto;
        height: 100%;
-       font-size: 16px;
+       font-size: 26px;
        padding-left: 2px;
        padding-right: 2px;
        font-weight: 700;
+       padding-top:3px;
+       padding-bottom: 10px;
        color: rgb(51, 51, 51);
        overflow: hidden;
    }
@@ -157,7 +172,8 @@ export default {
         border-radius: 4px;
         background-color: rgb(159, 103, 17);
         color: white;
-        padding: 5px;
+        padding:8px;
+        margin-bottom: 30px;
    }
    .address{
        width: 100%;

@@ -27,28 +27,24 @@
             <div class="search">
                 <ul>
                     <router-link to="/home/creditEnquiry" tag="li">
-                        <p> <van-icon name="http://bc.91dianji.com.cn/101.png"  class="zx-search"  /></p>
+                        <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
                         <span>征信查询</span>
                     </router-link>
-                    <li>
-                         <p> <van-icon name="http://bc.91dianji.com.cn/102.png"  class="zx-search"  /></p>
+                    <router-link to="/vip" tag="li">
+                         <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
                         <span>升级代理</span>
-                    </li>
+                    </router-link>
                     <router-link to="/home/incomeBreakdown" tag="li">
-                         <p> <van-icon name="http://bc.91dianji.com.cn/103.png"  class="zx-search"  /></p>
+                         <p> <van-icon name="http://pay.91dianji.com.cn/103.png"  class="zx-search"  /></p>
                         <span>收益明细</span>
                     </router-link>
                     <router-link tag="li" to="/home/totalPunch">
-                        <p> <van-icon name="http://bc.91dianji.com.cn/104.png"  class="zx-search"  /></p>
+                        <p> <van-icon name="http://pay.91dianji.com.cn/104.png"  class="zx-search"  /></p>
                         <span>签到打卡</span>
                     </router-link>
                 </ul>
             </div>
             <!-- 名片咨询模块 -->
-            <!-- <div class="business-card">
-                <span class="information">名片资讯</span>
-                <span class="Investment">《投资者说》“老中青”三位嘉宾为小散解套出...</span>
-            </div> -->
             <div class="pannel-news row">
                 <div class="pannel-title center">钱夹<br/>资讯</div>
                 <div class="pannel-detail center">
@@ -61,7 +57,7 @@
                 <ul>
                     <router-link  tag="li" to="/home/cardCenter">
                         <span class="handle">
-                            <van-icon name="http://bc.91dianji.com.cn/105.png" size="40px" />
+                            <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                         </span>
                         <div class="channel">
                             <h3>信用卡办理</h3>
@@ -70,15 +66,15 @@
                         </div>
                     </router-link>
                     <router-link tag="li" to="/home/receivables">
-                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/106.png" size="40px" /></span>
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /></span>
                         <div class="channel">
                             <h3>商户收款</h3>
                             <p>快捷支付</p>
                             <span>落地商户</span>
                         </div>
                     </router-link>
-                    <router-link tag="li" to="/home/loan">
-                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/107.png" size="40px" /></span>
+                    <router-link tag="li" to="/loan/detail">
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
                         <div class="channel">
                             <h3>我要贷款</h3>
                             <p>实时审批&nbsp;授信额度</p>
@@ -86,7 +82,7 @@
                         </div>  
                     </router-link>
                     <router-link to="/home/creditHousekeeper" tag="li">
-                        <span class="handle"> <van-icon name="http://bc.91dianji.com.cn/108.png" size="40px" /></span>
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
                             <p>落地商户空卡周转</p>
@@ -100,7 +96,7 @@
                 <ul>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_49.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_49.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>授权分润</h3>
@@ -109,7 +105,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_50.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>汽车保险</h3>
@@ -118,7 +114,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_51.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_51.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>发圈素材</h3>
@@ -127,7 +123,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="http://bc.91dianji.com.cn/icon_52.png" size="30px" />
+                            <van-icon name="http://pay.91dianji.com.cn/icon_52.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>排行榜</h3>
@@ -136,7 +132,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="http://bc.91dianji.com.cn/icon_53.png" size="30px" />
+                            <van-icon name="http://pay.91dianji.com.cn/icon_53.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>意外险</h3>
@@ -145,7 +141,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_60.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_60.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>提额秘籍</h3>
@@ -154,7 +150,7 @@
                     </li>
                     <li>
                         <span>
-                            <van-icon name="http://bc.91dianji.com.cn/icon_61.png" size="30px" />
+                            <van-icon name="http://pay.91dianji.com.cn/icon_61.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>共享奖金池</h3>
@@ -163,7 +159,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_62.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_62.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>给团队绑卡</h3>
@@ -172,7 +168,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_63.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_63.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>积分兑换</h3>
@@ -181,7 +177,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_64.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_64.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>商城</h3>
@@ -190,7 +186,7 @@
                     </li>
                     <li>
                         <span>
-                           <van-icon name="http://bc.91dianji.com.cn/icon_65.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/icon_65.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>违章查询</h3>
@@ -203,8 +199,8 @@
             <div class="aside-left" v-show="showAaside" @click.self="hideAside">
                 <div class="info">
                     <div class="avatar">
-                         <span><van-icon name="manager" /></span>
-                         <p>可乐-5-2</p>
+                         <span><van-icon :name="headimg" /></span>
+                         <p>{{nickname}}</p>
                     </div>
                     <ul>
                         <router-link tag="li" to="/home/systemNews">系统消息</router-link>
@@ -213,9 +209,7 @@
                         <router-link to="/home/customerService" tag="li">联系客服</router-link>
                         <router-link to="/home/aboutUs" tag="li">关于我们</router-link>
                         <li class="switch">声音开关
-                            <p>
-                                
-                            </p>
+                           
                         </li>
                         <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
                         <router-link to="/home/clearCache" tag="li">清除缓存</router-link>
@@ -242,11 +236,11 @@ export default {
         return {
             // 轮播图图片
             images: [
-                'http://bc.91dianji.com.cn/01.png',
-                'http://bc.91dianji.com.cn/02.jpg',
-                'http://bc.91dianji.com.cn/04.png',
-                'http://bc.91dianji.com.cn/06.jpg',
-                'http://bc.91dianji.com.cn/08.jpg'
+                'http://pay.91dianji.com.cn/01.png',
+                'http://pay.91dianji.com.cn/02.jpg',
+                'http://pay.91dianji.com.cn/04.png',
+                'http://pay.91dianji.com.cn/06.jpg',
+                'http://pay.91dianji.com.cn/08.jpg'
             ],
             showAaside:false, 
             checked:true,
@@ -258,6 +252,7 @@ export default {
             // newaccess_token: '',
             nickname: '',
             photo: '',
+            headimg:''
         }
   },
    methods:{
@@ -279,12 +274,15 @@ export default {
                 });
         },
         changeActive(obj){
-            console.log('obj', obj);
         },
     },
     created(){
-        console.log(this.$store.state.wechat.nickname)
-        console.log(this.$store.state.wechat.headimg)
+        this.nickname=this.$store.state.wechat.nickname;
+        this.headimg=this.$store.state.wechat.headimg;
+        console.log('ceshi');
+    },
+    mounted(){
+        console.log('测试函数');
     }
     
 }
@@ -297,7 +295,7 @@ export default {
         height:86px;
         font-size:28px;
         line-height: 86px;
-        background-color: #000; 
+         background-color: #4B66AF;
         color:white;
         display:flex;
         justify-content: space-between;
@@ -324,7 +322,6 @@ export default {
        >.container {
            padding-bottom:96px;
            padding-top:96px;
-        //    width: 100%;
            overflow-x: hidden;
             >.swipe {
            height: 390px;
@@ -389,7 +386,7 @@ export default {
             margin-top:50px;
             margin-left: auto;
             margin-right: auto;
-            background-image: -webkit-linear-gradient(0deg, #4965AE, #8C9ACD);
+            background-image: -webkit-linear-gradient(0deg, #4965AE, #7189C4);
             .pannel-title{
                 width: 20%;
                 height: 100%;
@@ -430,11 +427,12 @@ export default {
                 >li {
                     display: flex;
                     justify-content: space-around;
+                    align-items: center;
                     width:47%;
                     border: 2px solid #ccc;
                     border-radius:10px;
-                    padding-bottom:30px;
-                    padding-top:15px;
+                    padding-bottom:20px;
+                    padding-top:35px;
                     margin-top:10px;
                     background-color:#FAFAFA;
                     >.handle {
@@ -461,7 +459,7 @@ export default {
                             color:#4B66AF;
                             background-color:#E8ECF7;
                             border-radius:15px;
-                            padding:1px 20px 5px 20px;
+                            padding:5px 20px;
                             font-size: 14px;
                             margin-bottom: 10px;
                         }
@@ -513,6 +511,7 @@ export default {
                 width: 100%;
                 height: 100%;
                 background-color: rgba(0, 0, 0, .4);
+               
                 position: absolute;
                 overflow: visible;
                 top:0px;
@@ -523,10 +522,10 @@ export default {
                 color:#fff;
                 text-align: center;
                 >.info {
-                    width:60%;
+                    width:50%;
                     height: 100%;
                     overflow-y: scroll;
-                    background-color: #222222;
+                    background-color: #4965AE;
                     position: fixed;
                     top:0px;
                     right: 0px;
@@ -549,8 +548,9 @@ export default {
                         margin-left:100px;
                         margin-right:100px;
                         >li {
-                            border-top:3px dashed #535353;
+                            border-top:3px dashed #ccc;
                             padding:50px 10px;
+                            font-size: 28px;
                              &.switch {
                              >p {
                                  margin-top:-5px;
@@ -559,14 +559,19 @@ export default {
                         }
                     }
                     >.sign-out {
-                        margin-top:100px;
-                        margin-bottom: 30px;
+                        margin-top:20px;
+                        // margin-bottom:20px;
                          >span{
                             border:2px solid #fff;
-                           background-color: #BEA664;
+                           background-color:#8E9CCE;
                            padding:30px 60px;
                            border-radius: 10px;
                          }
+                    }
+                    .van-dialog,
+                    .van-dialog__message,
+                    .van-button {
+                        font-size: 30px;
                     }
                 }
          }

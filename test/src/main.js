@@ -4,14 +4,19 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from '@/vuex/index'
+<<<<<<< HEAD
 // import wx from 'weixin-jsapi'
 // Vue.use(wx)
+=======
+import wx from 'weixin-jsapi'
+Vue.use(wx)
+>>>>>>> daff1af637bea3d6a7068ab6bba9db9a1091455c
 
 Vue.config.productionTip = false
 // 引入插件兼容Ie
 import 'babel-polyfill'
 // 引入公共css
-import './assets/css/common.css'
+import '@/assets/css/common.css'
 // 引入图标库
 import '@/assets/icon/iconfont.css'
 import '@/assets/icon/iconfont.js'
@@ -23,26 +28,30 @@ axios.defaults.withCredentials = true
 // 引入适配
 import 'lib-flexible/flexible'
 
-import { Button,Switch,Dialog,RadioGroup, Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload } from 'vant'
+import { Actionsheet,Button,Switch,Dialog,RadioGroup, Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate   } from 'vant'
+Vue.use(Actionsheet)
 Vue.use(Button)
-Vue.use(Tabbar).use(TabbarItem)
-Vue.use(Icon)
-Vue.use(Uploader)
-Vue.use(NavBar)
-Vue.use(Collapse).use(CollapseItem)
-Vue.use(Field)
-Vue.use(Swipe).use(SwipeItem)
-Vue.use(NoticeBar)
-Vue.use(Toast)
-Vue.use(Tab).use(Tabs)
-Vue.use(Popup)
 Vue.use(Switch)
 Vue.use(Dialog)
 Vue.use(RadioGroup)
+Vue.use(Uploader)
 Vue.use(Radio)
+Vue.use(Tabbar).use(TabbarItem)
+Vue.use(Popup)
+
+Vue.use(Icon)
+Vue.use(Field)
+Vue.use(NavBar)
+Vue.use(Swipe).use(SwipeItem)
+Vue.use(Collapse).use(CollapseItem)
+Vue.use(NoticeBar)
+Vue.use(Tab).use(Tabs)
 Vue.use(Checkbox).use(CheckboxGroup)
+Vue.use(Toast)
 Vue.use(Area)
-Vue.use(Lazyload);
+Vue.use(Lazyload)
+Vue.use(Loading)
+Vue.use(Rate)
 
 
 

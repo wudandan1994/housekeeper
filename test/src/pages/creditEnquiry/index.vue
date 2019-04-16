@@ -3,13 +3,16 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>大数据查询</span>
-            <router-link tag="p" to="/home/creditEnquiry/myOrder"><span><van-icon name="manager"/></span>&nbsp;我的订单</router-link>
+            <span></span>
+            <!-- <router-link tag="p" to="/home/creditEnquiry/myOrder"><span><van-icon name="manager"/></span>&nbsp;我的订单</router-link> -->
             
         </header>
         <div class="container">
            <div class="data-query">
-               <img src="" alt="">
-               <div class="large-data">
+             <h3>
+                 此功能正在上线中，敬请期待！
+             </h3>
+               <!-- <div class="large-data">
                    <div class="report">
                        <h3>大数据+运营商信用报告</h3>
                        <p>贷前基础信息</p>
@@ -17,13 +20,15 @@
                        <span>点此查询</span>
                    </div>
                    <div class="example">
-                       <img src="" alt="">
-                       <p><router-link tag="span" to="/home/creditENquiry/reporyExample">查看报告示例</router-link></p>
+                      
+                       <p>
+                          <router-link tag="span" to="/home/creditENquiry/reporyExample">查看报告示例</router-link> 
+                      </p>
                    </div>
-               </div>
+               </div> -->
            </div>
            <div class="detail"></div>
-           <router-link tag="div" to="/home/creditEnquiry/creditDataQuery" class="query-now">立即查询</router-link>
+           <!-- <router-link tag="div" to="/home/creditEnquiry/creditDataQuery" class="query-now">立即查询</router-link> -->
         </div>
     </div>
 
@@ -47,7 +52,7 @@ export default {
 <style lang="less">
    #credit-enquiry {
        >header {
-           background: #000;
+             background-color:#8E9CCE;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -75,11 +80,10 @@ export default {
            padding-bottom: 50px;
            >.data-query {
                position: relative;
-               >img {
-                   display: block;
-                   height: 300px;
-                   width:100%;
-                   background-color: red;
+               >h3 {
+                   padding-top:20px;
+                   text-align: center;
+                   font-size: 36px;
                }
                >.large-data {
                    width:96%;
