@@ -77,7 +77,7 @@
                    </div>
                </div>
             </div>
-            <van-loading type="spinner" color="white" size="40px"/>
+            <!-- <van-loading type="spinner" color="#4B66AF" size="40px"/> -->
             <van-button class="btn" @click="updateSet" type="default">更新信息</van-button>
         </div>
     </div>
@@ -227,8 +227,9 @@ export default {
 <style lang="less">
    #register {
        width: 100vw;
-       height: 100vh;
-       background-color: #E2E3E5;
+       height: auto;
+       background-color: #E2E3E5;    
+       padding-bottom: 80px;
        >header {
            background-color: #4B66AF;
            width:100%;
