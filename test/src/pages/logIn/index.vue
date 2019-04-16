@@ -16,7 +16,7 @@
                 </p>
                 <p>
                     <span><van-icon name="lock"/></span>
-                    <input type="text" v-model="password" placeholder="请输入密码">
+                    <input type="password" v-model="password" placeholder="请输入密码">
                 </p>
            </div>
            <div class="password">
