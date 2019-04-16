@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from '@/vuex/index'
+// import wx from 'weixin-jsapi'
+// Vue.use(wx)
 
 Vue.config.productionTip = false
 // 引入插件兼容Ie

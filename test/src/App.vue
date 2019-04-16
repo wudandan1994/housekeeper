@@ -53,10 +53,12 @@ export default {
     // 获取access_token
     handleAccessToken(){
       console.log('执行');
-        let url = 'http://bc.91dianji.com.cn//wxApi/sns/oauth2/access_token?appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0&code='+this.code+'&grant_type=authorization_code';
+        let url = 'http://bc.91dianji.com.cn/wxApi/sns/oauth2/access_token?appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0&code='+this.code+'&grant_type=authorization_code';
         axiosGet(url).then(res =>{
+            console.log('access_token获取成功',res);
+            storage.set('access_token',res.data.access_token); 
             // 继续请求昵称头像等信息
-            let url = 'http://bc.91dianji.com.cn//wxApi/sns/userinfo?access_token='+ res.data.access_token +'&openid='+ res.data.openid +'&lang=zh_CN';
+            let url = 'http://bc.91dianji.com.cn/wxApi/sns/userinfo?access_token='+ storage.get('access_token') +'&openid='+ res.data.openid +'&lang=zh_CN';
             axiosGet(url).then(res =>{
                 console.log('获取用户头像信息成功',res);
                 this.nickname = res.data.nickname;
@@ -106,15 +108,80 @@ export default {
         })
     },
   },
-  // created(){
-  //   this.code = this.GetUrlParam('code');
-  //   if(this.GetUrlParam('code') != ''){
-  //     // 已授权
-  //     this.handleAccessToken();
-  //   }else{
-  //     // 未授权
-  //     this.handleOauth();
-  //   }
+  created(){
+    this.code = this.GetUrlParam('code');
+    if(this.GetUrlParam('code') != '' && storage.get('access_token') != ''){
+      // 已授权
+      this.handleAccessToken();
+    }else{
+      // 未授权
+      this.handleOauth();
+    }
+  },
+  // mounted(){
+  //   // js-sdk的access_token
+    
+  //   let url = 'http://bc.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
+  //   axiosGet(url).then(res =>{
+  //     console.log('jsapi请求成功',res);
+  //     let url = 'http://bc.91dianji.com.cn/wxApi/cgi-bin/ticket/getticket?access_token='+ res.data.access_token +'&type=jsapi';
+  //     axiosGet(url).then(res =>{
+  //       console.log('jsapi_ticket请求成功',res);
+  //       storage.set('ticket',res.data.ticket);
+  //       // 请求签名信息
+  //       var jsapi_ticket = storage.get('ticket');
+  //       var radom = Math.random().toString(36).substr(2);
+  //       var timestamp = (new Date()).getTime();
+  //       var url = window.location.href;
+        
+  //       let posturl = '/customer/getSignature';
+  //       let params = {
+  //         jsapi_ticket: jsapi_ticket,
+  //         url: url,
+  //         noncestr: radom,
+  //         timestamp: timestamp
+  //       };
+  //       axiosPost(posturl,url).then(res =>{
+  //         console.log('签名请求成功',res);
+  //         wx.config({
+  //             debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+  //             appId: 'wx779a30a563ad570d', // 必填，公众号的唯一标识
+  //             timestamp: timestamp, // 必填，生成签名的时间戳
+  //             nonceStr: radom, // 必填，生成签名的随机串
+  //             signature: res.data.signature,// 必填，签名
+  //             jsApiList: [
+  //               'chooseImage',
+  //               'uploadImage',
+  //               'getLocation',
+  //               'updateAppMessageShareData',
+  //               'onMenuShareTimeline',
+  //               'onMenuShareAppMessage'
+  //             ] // 必填，需要使用的JS接口列表
+  //         });
+  //         wx.ready(function(){
+  //             wx.updateAppMessageShareData({ 
+  //                 title: '测试', // 分享标题
+  //                 desc: '测试', // 分享描述
+  //                 link: 'http://bc.91dianji.com.cn/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+  //                 imgUrl: 'http://bc.91dianji.com.cn/icon_61.png', // 分享图标
+  //                 success: function (res) {
+  //                   console.log('分享调用成功',res);
+  //                 }
+  //             })
+  //         });
+  //         wx.error(function(res){
+    
+  //         });
+  //       }).catch(res =>{
+  //         console.log('签名请求失败',res);
+  //       })
+
+  //     }).catch(res =>{
+  //       console.log('jsapi_ticket请求失败',res);
+  //     })
+  //   }).catch(res =>{
+  //     console.log('jsapi请求失败',res);
+  //   })
   // }
 }
 </script>
