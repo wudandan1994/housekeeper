@@ -24,11 +24,11 @@
                    </li>
                     <li>
                         <span>新密码:</span>
-                       <input v-model="newPassword" type="text" placeholder="输入6-18位字母加数字新密码">
+                       <input v-model="newPassword" type="password" placeholder="输入6-18位字母加数字新密码">
                    </li>
                     <li>
                         <span>再次输入新密码:</span>
-                       <input v-model="suerPassword" type="text" placeholder="输入新密码">
+                       <input v-model="suerPassword" type="password" placeholder="输入新密码">
                    </li>
                </ul>
            </div>
@@ -70,7 +70,7 @@ export default {
             } else  {
                 let data={
                     mobile:this.mobile,
-                    type:"1"
+                    type:"2"
                 }
                 axiosPost("/customer/sendSms",data)
                 .then(function(res){
@@ -102,19 +102,19 @@ export default {
         modify(){
              let that=this
             let partten=/^1\d{10}$/  // 11位手机号的正则
-             let code=/[0-9A-Za-z] {6,18} /  //密码的正则
+            //  let code=/[0-9A-Za-z] {6,18} /  //密码的正则
             if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
                 })
                  return
             }
-            if(!code.test(that.newPassword)){
-                 that.$toast({
-                    message:"输入6-18位字母加数字新密码"
-                })
-                 return
-            }
+            // if(!code.test(that.newPassword)){
+            //      that.$toast({
+            //         message:"输入6-18位字母加数字新密码"
+            //     })
+            //      return
+            // }
             if(that.authcode.trim().length===0){
                  that.$toast({
                     message:"请输入验证码"
@@ -128,7 +128,7 @@ export default {
                  return
             }
             
-            if(that.newPassword.trim().length===0){
+            if(that.suerPassword.trim().length===0){
                  that.$toast({
                     message:"请再次输入新密码"
                 })
@@ -148,11 +148,13 @@ export default {
              axiosPost("/customer/updatePassword",data)
              .then(function(res){
                  console.log(res,"result");
-                 if(res.data.code===-1){
-                      that.$toast({ 
-                         message:res.data.message
-                   })
-                 }
+                 that.$toast({
+                     message:res.data.message
+                 })
+                 that.mobile=""
+                 that.authcode=""
+                 that.newPassword=""
+                 that.suerPassword=""
              })
              .catch(function(err){
                  console.log(err,"error");
