@@ -90,7 +90,7 @@ export default {
                     axiosPost(url,params).then(res =>{
                         console.log('登陆成功',res);
                         if(res.data.success){
-                            // that.$router.push('/home');
+                            that.$router.push('/home');
                         }
                     }).catch(res =>{
                         console.log('登录失败',res);
