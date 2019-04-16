@@ -130,7 +130,7 @@ export default {
             
             if(that.suerPassword.trim().length===0){
                  that.$toast({
-                    message:"请再次输入新密码"
+                    message:"请确认密码"
                 })
                  return
             }

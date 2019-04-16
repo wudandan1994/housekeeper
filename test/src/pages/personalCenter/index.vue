@@ -290,17 +290,17 @@ export default {
                   .shou{
                       background: url('http://pay.91dianji.com.cn/3-shou.jpg') no-repeat;
                       background-size: 80% 60%;
-                      background-position: 15% 100%;
+                      background-position: 50% 100%;
                   }
                   .yu{
                       background: url('http://pay.91dianji.com.cn/3-yu.jpg') no-repeat;
                       background-size: 80% 60%;
-                      background-position: 15% 100%;
+                      background-position: 50% 100%;
                   }
                   .fen{
                       background: url('http://pay.91dianji.com.cn/3-fen.jpg') no-repeat;
                       background-size: 80% 60%;
-                      background-position: 15% 100%;
+                      background-position: 50% 100%;
                   }
                   .right{
                     border-right: solid 1px #f2f2f2;

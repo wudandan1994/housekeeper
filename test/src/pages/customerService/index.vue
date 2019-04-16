@@ -8,15 +8,15 @@
         <div class="container">
             <div class="logo center"><van-icon name="http://pay.91dianji.com.cn/logo.png" size="250px"/></div>
             <div class="per-detail row">
-                <van-icon name="phone" size="18px" color="rgb(75, 102, 175)"/>
+                <div class="per-icon center"><van-icon clase="center" name="phone" size="18px" color="rgb(75, 102, 175)"/></div>
                 <div class="detail start-center">4001059769</div>
             </div>
             <div class="per-detail row">
-                <van-icon name="card" size="18px" color="rgb(75, 102, 175)"/>
+                <div class="per-icon center"><van-icon clase="center" name="card" size="18px" color="rgb(75, 102, 175)"/></div>
                 <div class="detail start-center">chuanbangdai@126.com</div>
             </div>
             <div class="per-detail row">
-                <van-icon name="location" size="18px" color="rgb(75, 102, 175)"/>
+                <div class="per-icon center"><van-icon clase="center" name="location" size="18px" color="rgb(75, 102, 175)"/></div>
                 <div class="detail start-center">上海市宝山区泰和路2038号A座303室</div>
             </div>
         </div>
@@ -75,12 +75,16 @@ export default {
                 height: 60px;
                 margin-left: auto;
                 margin-right: auto;
+                .per-icon{
+                    line-height: 22px;
+                }
+                .detail{
+                    line-height: 22px;
+                    margin-left: 10px;
+                    font-size: 28px;
+                }
             }
-            .detail{
-                line-height: 22px;
-                margin-left: 10px;
-                font-size: 28px;
-            }
+            
        }
    }
 </style>
