@@ -67,81 +67,62 @@ export default {
         }
     },
     methods:{
-         // 返回首页
-        handleReturnHome(){
-            this.$router.push({
-                path:'/home/verified'
-            })
-        },
-        onRead(file) {
-            var formData = new FormData()
+         onRead(filez) {
+            console.log(filez);
+            // axiosPost("/upload/uploadImg",filez.file.name)
+            // .then(res=>{
+            //     console.log(res)
+                
+            // })
+            // .catch(err=>{
+            //     console.log(err);
+            //     console.log(555);
+                
+            // })
+            // this.$refs.zhengm.src=filez.content
             
-            formData.append('file',file.file)
-            let config = {
-                headers: {'Content-Type': 'multipart/form-data'}
-            }
-            // axios.post('http://localhost:8080/api/upload/uploadImg',formData,config).then(res =>{     //本地环境
-            axios.post('http://pay.91dianji.com.cn/api/upload/uploadImg',formData,config).then(res =>{ //线上环境
-                console.log('身份证正面上传成功',res);
-                this.front = res.data.data.imgUrl;
-                console.log('图片组合',this.url + res.data.data.thumImgUrl);
-                this.cardfront = this.url + res.data.data.thumImgUrl;
-            }).catch(res =>{
-                console.log('身份证正面上传失败',res);
-            })
+            //    localStorage.setItem('zhengm',filez.content)
         },
-           
-        onReadFanm(file){
-            var formData = new FormData();
-            formData.append('file',file.file);
-            let config = {
-                headers: {'Content-Type': 'multipart/form-data'}
-            };
-            // axios.post('http://localhost:8080/api/upload/uploadImg',formData,config).then(res =>{//本地环境
-            axios.post('http://pay.91dianji.com.cn/api/upload/uploadImg',formData,config).then(res =>{ //线上环境
-                console.log('身份证反面上传成功',res);
-                this.back = res.data.data.imgUrl
-                this.cardback = this.url + res.data.data.thumImgUrl
-            }).catch(res =>{
-                console.log('身份证反面上传失败',res);
-            })
+            // changeImg(e){
+            //     // console.log(filef);
+            //     // let file =this.files[0]
+            //     // console.log(this.files);
+            //     console.log(this);
+            //     let vm=this;
+            //     let _this = e.currentTarget;
+            //     console.log(_this);
+                
+            //     console.log('this.upnum: ',vm.upnum)
+            //     console.log('vm.picshowList.length: ',vm.picshowList.length);
+      
 
-        },
-        // 提交实名认证
-        submit(){
-            if(this.name == ''){
-                this.$toast('请输入姓名');
-            }else if(this.idcardnumber == ''){
-                this.$toast('请输入身份证号码');
-            }else if(this.front == ''){
-                this.$toast('请上传身份证正面图');
-            }else if(this.back == ''){
-                this.$toast('请上传身份证反面图');
-            }else{
-                this.loading = true;
-                let url = '/customer/identification';
-                let params = {
-                    openid: this.$store.state.wechat.openid,
-                    name: this.name,
-                    idcardnumber: this.idcardnumber,
-                    idcardfront: this.front,
-                    idcardback: this.back
-                };
-                axiosPost(url,params).then(res =>{
-                    // setTimeout(() =>{
-                    //     this.loading = false;
-                    //     this.$toast.success('已提交');
-                    // },1000)
-                    console.log('实名认证成功',res);
-                    if(res.data.success){
-                        this.loading = false;
-                        this.$toast.success('已提交');
-                    }
-                }).catch(res =>{
-                    console.log('实名认证失败',res);
-                })
-            }
-        },
+            //     let files=document.getElementById("zhengm").files[0];
+
+
+            //      axiosPost("/upload/uploadImg",files).then(res=>{
+            //         // console.log('上传成功',res)  
+            //     }).catch(err=>{
+            //         // console.log(err);
+            //         // console.log(555);
+                    
+            //     })  
+            // },
+    //   onReadFanm(filef){
+    //        this.$refs.fanm.src=filef.content
+    //         localStorage.setItem('fanm',filef.content)
+
+    //   },
+    //   submit(){
+    //       let  idcardnumber=this.idcardnumber
+    //       let  idcardfront=localStorage.getItem('zhengm')
+    //       console.log(typeof idcardfront);
+    //       let  idcardback=localStorage.getItem("fanm")
+    //       let name=this.name
+    //     if(!this.name.trim()){
+
+    //     }
+          
+    //   },
         goBack() {
             this.$router.push({path:'/home/verified'})
         },

@@ -107,7 +107,16 @@ export default {
 </script>
 <style lang="less" scoped>
     #cash{
-        background: #EEEFF1;
+       .van-nav-bar.van-hairline--bottom{
+           color:#fff;
+           background-color: #4B66AF;
+           height: 86px;
+           line-height: 86px;
+           padding-top:10px;
+       }
+       .van-nav-bar__title{
+           color:#fff;
+       }
         width: 100vw;
         height: 100vh;
         overflow: scroll;

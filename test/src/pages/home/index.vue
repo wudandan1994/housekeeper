@@ -459,7 +459,7 @@ export default {
                             color:#4B66AF;
                             background-color:#E8ECF7;
                             border-radius:15px;
-                            padding:1px 20px 5px 20px;
+                            padding:5px 20px;
                             font-size: 14px;
                             margin-bottom: 10px;
                         }

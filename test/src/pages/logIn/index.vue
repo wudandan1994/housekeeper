@@ -12,11 +12,11 @@
            <div class="info">
                 <p>
                     <span><van-icon name="phone"/></span>
-                    <input type="number" placeholder="请输入手机号码">
+                    <input type="number" v-model="phone" placeholder="请输入手机号码">
                 </p>
                 <p>
                     <span><van-icon name="lock"/></span>
-                    <input type="text" placeholder="请输入密码">
+                    <input type="text" v-model="password" placeholder="请输入密码">
                 </p>
            </div>
            <div class="password">
@@ -29,7 +29,7 @@
                </p>
                <p @click="forgetPassword">忘记密码？</p>
            </div>
-           <div class="login">
+           <div @click="logInPass" class="login">
                登录
            </div>
             <div class="wx-login">
@@ -46,11 +46,14 @@
 
 
 <script>
+import {axiosPost} from '@/lib/http'
 export default {
     data() {
         return {
             radio:"1",
             checked:false,
+            phone:"",
+            password:""
         }
     },
     methods:{
@@ -61,6 +64,33 @@ export default {
         },
         register() {
              this.$router.push('/logOut')
+        },
+        logInPass(){
+            let that=this
+            if(that.phone.trim().length===0){
+                that.$toast({
+                    message:"请输入手机号码"
+                })
+                return
+            }
+            if(that.password.trim().length===0){
+                that.$toast({
+                    message:"请输入密码"
+                })
+                 return
+            }
+            let data={
+                mobile:that.phone,
+                password:that.password
+            }
+            axiosPost("/customer/login",data)
+            .then(function(res){
+                console.log(res,"result");
+                that.$router.push('/home')
+            })
+            .catch(function(err){
+                console.log(err,"error");  
+            })
         },
         logIn(){
             location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
