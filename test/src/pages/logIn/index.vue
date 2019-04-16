@@ -127,7 +127,7 @@ export default {
            padding-bottom: 50px;
            background-color: #fff;
            >.logo {
-               padding-top:200px;
+               padding-top:100px;
                width:40%;
                 margin:0 auto;
                >img {
@@ -137,7 +137,7 @@ export default {
                }
            }
            >.info {
-               padding-top:160px;
+               padding-top:100px;
                width:80%;
                margin:0 auto;
                >p {

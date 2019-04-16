@@ -79,7 +79,6 @@ export default {
                 }
                 axiosPost("/customer/sendSms",data)
                 .then(function(res){
-                    
                     if(res.data.success) {
                         that.showCount=true
                          that.showCode=false
@@ -95,7 +94,6 @@ export default {
                             }
                         },1000)
                     }
-                    
                 })
                 .catch(function (err) {
                    that.$toast({
