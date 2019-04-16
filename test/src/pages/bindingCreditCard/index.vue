@@ -53,7 +53,7 @@
         </div>
 
         <!-- <div @click="bindingCard" class="next-stop center">确认绑定</div> -->
-        <div class="btn">
+        <div @click="bindingCard" class="btn">
             <van-button round size="large" type="info">确认绑定</van-button>
         </div>
     </div>
@@ -76,7 +76,8 @@ export default {
             year:"",
             month:"",
             safeCode:"",
-            autoCode:""
+            autoCode:"",
+            orderId:""
         }
     },
     created(){
@@ -169,21 +170,8 @@ export default {
                             message:res.data.message
                         })
                     }
-                    let orderId=res.data.data.orderId
-                    let validateCode=that.autoCode
-                    let datas={
-                        orderId,
-                        validateCode
-                    }
-                    axiosPost("/creditCard/bindCard",datas)
-                    .then(function(res){
-                        console.log(res,"result绑卡成功");
-                        
-                    })
-                    .catch(function(err){
-                        console.log(err,"error绑卡失败");
-                        
-                    })
+                    that.orderId=res.data.data.orderId
+                   
 
 
                 })
@@ -201,7 +189,26 @@ export default {
         },
         // 绑卡
         bindingCard(){
-
+              let that =this
+              if(that.autoCode.trim().length===0){
+                  that.$toast({
+                      message:"请输入验证码"
+                  })
+                  return
+              }
+                  let validateCode=that.autoCode
+                    let datas={
+                        orderId:that.orderId,
+                        validateCode,
+                    }
+                    axiosPost("/creditCard/bindCard",datas)
+                    .then(function(res){
+                        console.log(res,"result确认绑卡");
+                        
+                    })
+                    .catch(function(err){
+                        console.log(err,"error绑卡失败");
+                    })
         }
 
        
