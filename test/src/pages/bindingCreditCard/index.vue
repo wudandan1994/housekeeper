@@ -171,9 +171,6 @@ export default {
                         })
                     }
                     that.orderId=res.data.data.orderId
-                   
-
-
                 })
                 .catch(err=>{
                     console.log(err,"error");

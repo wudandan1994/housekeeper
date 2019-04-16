@@ -26,8 +26,18 @@
            </div>
            <div class="detail">
               <p @click="getBankList">查看已绑定的信用卡 </p>
-              <ul>
-                  <li></li>
+              <ul v-show="showCardList" >
+                   <li v-for="(item, index) in bankList" :key="index" >
+                       <div class="info">
+                           <p>{{item.payerName}}</p>
+                            <p>{{item.cardNo}}</p>
+                            <p>{{item.phone}}</p>
+                           
+                       </div>
+                       <div @click="repay(item.bindId)">
+                           <van-button round size="normal" type="info">去还款</van-button>
+                       </div>
+                   </li>
               </ul>
               <router-link to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" tag="h3">去绑定信用卡</router-link>
            </div>
@@ -41,24 +51,44 @@ import { axiosPost } from '../../lib/http'
 export default {
     data() {
         return {
-           
-            timerId:null
+           bankList:{},
+            timerId:null,
+            showCardList:false
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home/creditHousekeeper')
+           
+        },
+        repay(item){
+            this.$router.push({
+                path:"/home/creditHousekeeper/aisleHousekeeper/repayment",
+                query:{
+                    info:item
+                }
+            })
         },
         getBankList(){
             let that=this
             axiosPost("/creditCard/getBankCardbindList")
             .then(function(res){
-                console.log(res,"success")
+                that.showCardList=true
                 if(!res.data.success){
+                    
                     that.$toast=({
                         message:res.data.message
                     })
                 }
+                let list=JSON.parse(res.data.data.rt5_bindCardList)
+                if(list.length===0){
+                      that.$toast=({
+                        message:"你还没有绑定信用卡"
+                    })
+                }
+                that.bankList=list
+               
+                
             })
             .catch(function(err){
                 console.log(err,"error")
@@ -126,15 +156,38 @@ export default {
                }
            }
            >.detail {
-              margin:20px;
-              >p {
-                  
-              }
-              >h3{
-                  margin-top:20px;
-                  color:#4B66AF;
-              }
+               padding-left:20px;
+            >ul{
+                padding:20px;
+                
+                >li {
+                    border:2px solid #ccc;
+                    padding:20px;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .info {
+                         >p {
+                        font-size: 30px;
+                        padding-top:10px;
+                        margin-bottom: 10px;
+                      }
+                    }
+                    // >button {
+                    //     padding-top:5px;
+                    //     padding-bottom: 10px;
+                    // }
+                    .van-button--normal {
+                        padding:4px 16px;
+                    }
+                }
+            }
+            >h3 {
+               margin-top:20px;
+            }
            }
+           
        }
    }
 </style>

@@ -123,8 +123,8 @@ export default {
             currentWeek: 1,
             days: [],
             isPunch:false,
-             signcount:0,
-             gold:0
+             signcount:0,//连续签到
+             gold:0  //金币数量
         }
     },
     methods:{
@@ -132,7 +132,6 @@ export default {
             this.$router.push('/home')
         },
         sign(){
-            
             axiosPost("/customer/insertSign")
             .then(function(res){
                 this.isPunch=true
@@ -143,12 +142,13 @@ export default {
             
         },
          searchPunch(){
+             let that = this
            axiosPost("/customer/getSignDetail")
            .then(function(res){
                console.log('签到',res);
                 // this.count=res.data.count
-                this.signcount=res.data.data.signcount
-                this.gold=res.data.data.gold
+                that.signcount=res.data.data.signcount
+                that.gold=res.data.data.gold
            })
          },
          initData: function (cur) {

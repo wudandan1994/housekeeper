@@ -27,11 +27,11 @@
                 </div>
             </div>
         </div>
-        <router-link tag="div" class="per-menu  row" to="/personalCenter/incomedetail/integralCash">
+        <!-- <router-link tag="div" class="per-menu  row" to="/personalCenter/incomedetail/integralCash">
             <div class="icon start-center"><i class="iconfont icon-jine"></i></div>
             <div class="menu-name start-center">积分提现</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
-        </router-link>
+        </router-link> -->
          <router-link to="/personalCenter/incomedetail/cash" tag="div" class="per-menu row">
             <div class="icon start-center"><i class="iconfont icon-xianjin"></i></div>
             <div class="menu-name start-center">现金提现</div>

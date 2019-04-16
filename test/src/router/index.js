@@ -86,7 +86,8 @@ import applyCardComponent from '@/pages/applyCard'
 import previousComponent from '@/pages/previous'
 // 绑定信用卡
 import bindingCreditCardComponent from '@/pages/bindingCreditCard'
-
+// 付款
+import repaymentComponent from '@/pages/repayment'
 
 
 
@@ -104,7 +105,7 @@ export default new Router({
     {path:"/home/news",component:newsComponent},
     {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
     {path:"/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard",component:bindingCreditCardComponent,},
-
+    {path:"/home/creditHousekeeper/aisleHousekeeper/repayment",component:repaymentComponent},
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},

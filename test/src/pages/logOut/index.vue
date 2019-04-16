@@ -75,7 +75,7 @@ export default {
             } else  {
                 let data={
                     mobile:this.mobile,
-                    type:"2"
+                    type:"1"
                 }
                 axiosPost("/customer/sendSms",data)
                 .then(function(res){
