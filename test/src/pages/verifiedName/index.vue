@@ -20,7 +20,7 @@
            </div>
            <div class="upload">
                <h3>身份证持证照：</h3>
-               <p>*请确保证件和人脸能同事看清楚，文件大小不超过2M</p>
+               <p>*请确保证件和人脸能同时看清楚，文件大小不超过2M</p>
            </div>
 
            <div class="positive">
@@ -202,6 +202,7 @@ export default {
                    width: 100%;
                    height: 120px;
                    border-bottom: solid 1px #1221CA;
+                   color:#fff;
                    .name-icon{
                        width: 10%;
                        height: 100%;

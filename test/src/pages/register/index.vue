@@ -3,134 +3,82 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>个人设置</span>
-            <span>保存</span>
+            <span></span>
         </header>
         <div class="container">
             <div class="info">
                <div class="area">
-                   <ul>
-                       <li>
-                           <p><span><van-icon name="manager"/></span> 头像</p>
-                           <div class="uploadimg">
-                               <!-- <input type="file" id="photo" name="file" multiple> -->
-                               <input type="text">
-                                <div class="images">
-                                     <img :src="personInfo.photo" alt="">
-                                </div>
-                               
-                               <span><van-icon name="arrow" /></span>
-                           </div>
-                       </li>
-                       <li>
-                           <p><span><van-icon name="map-marked"/></span> 昵称</p>
-                          <input type="text" class="nickname" :placeholder="personInfo.nickname">
-                          <span><van-icon name="arrow" /></span>
-                       </li>
-                        <li>
-                           <p><span><van-icon name="phone"/></span> 手机号</p>
-                           <p>
-                               <input type="number" :placeholder="personInfo.mobile"> <span><van-icon name="arrow" /></span>
-                           </p>
-                       </li>
-                       <li>
-                           <p><span><van-icon name="lock"/></span> 登录密码</p>
-                           <p>
-                               <input type="password" :placeholder="personInfo.password"> <span><van-icon name="arrow" /></span>
-                           </p>
-                       </li>
-                       <li>
-                          <p><span><van-icon name="lock"/></span> 确认密码</p>
-                           <p>
-                               <input type="password" :placeholder="personInfo.password"> <span><van-icon name="arrow" /></span>
-                           </p>
-                       </li>
-                        <li>
-                          <p><span><van-icon name="location"/></span>所在地</p>
-                           <p>
-                               <input type="text" :placeholder="personInfo.city"> <span><van-icon name="arrow" /></span>
-                           </p>
-                       </li>
-                       <li>
-                          <p><span><van-icon name="card"/></span> 身份情况</p>
-                           <p>
-                               <input type="text" @focus="showInfo"  :placeholder="identity"> <span><van-icon name="arrow" /></span>
-                               <van-actionsheet
-                                v-model="show"
-                                :actions="actions"
-                                cancel-text="取消"
-                                @select="onSelect"
-                                @cancel="onCancel"
-                                />
-                           </p>
-                       </li> 
-                   </ul>
-               </div>
-               <div class="phone">
-                   <ul>
-                       <li>
-                         <p><span><van-icon name="lock"/></span> 是否有信用卡</p>
-                          <!-- <van-switch v-model="checked"  size="20px" /> -->
-                           <van-switch
-                         size="20px" 
-                         inactive-color="#DDDDDD"
-                         active-color="#4B66AF" 
-                         active-value="ON"
-                         inactive-value="OFF"
-                         v-model="checkedCard" 
-                         />
-                       </li>
-                       <li>
-                          <p><span><van-icon name="lock"/></span> 是否有车</p>
-                          <van-switch
-                         size="20px" 
-                         inactive-color="#DDDDDD"
-                         active-color="#4B66AF" 
-                         active-value="ON"
-                         inactive-value="OFF"
-                         v-model="checkedCar" 
-                         />
-                       </li>
-                        <li>
-                          <p><span><van-icon name="lock"/></span> 微信号</p>
-                           <p>
-                               <input type="text" :placeholder="personInfo.wechat"> <span><van-icon name="arrow" /></span>
-                           </p>
-                       </li>
-                       <li>
-                            <p><span><van-icon name="lock"/></span> 上传微信二维码</p>
-                           <div class="uploadimg">
-                               <input type="file" placeholder="请上传" name="file" multiple>
-                               <span>请上传</span>
-                               <span><van-icon name="arrow" /></span>
-                           </div>
-                       </li>
-                        <li>
-                          <p><span><van-icon name="volume"/></span> 消息声音开关</p>
-                           <p>
-                                <van-switch
-                         size="20px" 
-                         inactive-color="#DDDDDD"
-                         active-color="#CDB168" 
-                         active-value="ON"
-                         inactive-value="OFF"
-                         v-model="checkedVoice" 
-                         />
-                           </p>
-                       </li>
-                       
-                   </ul>
-               </div>
-               <div class="card-id">
-                    <p><span><van-icon name="friends"/></span> 实名认证</p>
-                    <p @click="modify">
-                        <span>未认证</span> <span><van-icon name="arrow" /></span>
-                    </p>
+                   <div class="per-userinfo top row">
+                       <div class="avator start-center"><van-icon name="manager" size="22px"/>头像</div>
+                       <div class="detail end-center">
+                           <van-uploader :after-read="onAvator" class="upload-component" accept="image/*" multiple name="zhengm">                           
+                                <img :src="photo" />
+                            </van-uploader>
+                       </div>
+                       <div class="icon-left end-center"><van-icon name="arrow" /></div>
+                   </div>
+                   <div class="per-userinfo row">
+                       <div class="avator start-center"><van-icon name="map-marked" size="22px"/>昵称</div>
+                       <div class="detail end-center">
+                          <input type="text" v-model="nickname" placeholder="请输入您的昵称">
+                       </div>
+                       <div class="icon-left end-center"><van-icon name="arrow" /></div>
+                   </div>
+                   <div class="per-userinfo row">
+                       <div class="avator start-center"><van-icon name="phone" size="22px"/>手机号</div>
+                       <div class="detail end-center">
+                          <input type="text" v-model="mobile" placeholder="请输入您的手机号">
+                       </div>
+                       <div class="icon-left end-center"><van-icon name="arrow" /></div>
+                   </div>
+                   <div class="per-userinfo row">
+                       <div class="avator start-center"><van-icon name="location" size="22px"/>所在地</div>
+                       <div class="detail end-center">
+                          <input type="text" v-model="city" placeholder="请输入您的所在地">
+                       </div>
+                       <div class="icon-left end-center"><van-icon name="arrow" /></div>
+                   </div>
+                   <div class="per-userinfo row">
+                       <div class="avator start-center"><van-icon name="card" size="22px"/>是否有信用卡</div>
+                       <div class="detail end-center">
+                           <van-switch v-model="iscreditcard" />
+                       </div>
+                       <div class="icon-left end-center"><van-icon name="arrow" /></div>
+                   </div>
+                   <div class="per-userinfo row">
+                       <div class="avator start-center"><van-icon name="shopping-cart" size="22px"/>是否有车</div>
+                       <div class="detail end-center">
+                          <van-switch v-model="iscar" />
+                       </div>
+                       <div class="icon-left end-center"><van-icon name="arrow" /></div>
+                   </div>
+                   <div class="per-userinfo row">
+                       <div class="avator start-center"><van-icon name="invition" size="22px"/>微信号</div>
+                       <div class="detail end-center">
+                          <input type="text" v-model="wechat" placeholder="请输入您的微信号">
+                       </div>
+                       <div class="icon-left end-center"><van-icon name="arrow" /></div>
+                   </div>
+                    <div class="per-userinfo row">
+                       <div class="avator start-center"><van-icon name="todo-list" size="22px"/>微信二维码</div>
+                       <div class="detail end-center">
+                            <van-uploader :after-read="onWechatQr"  class="upload-component" accept="image/*" multiple name="zhengm">                           
+                                <img :src="wechatqr" />
+                            </van-uploader>
+                       </div>
+                       <div class="icon-left end-center"><van-icon name="arrow" /></div>
+                   </div>
+                   <div class="per-userinfo row">
+                       <div class="avator start-center"><van-icon name="stop-circle" size="22px"/>声音开关</div>
+                       <div class="detail end-center">
+                           <van-switch v-model="voice" active-color="#07c160" inactive-color="#f44" />
+                       </div>
+                       <div class="icon-left end-center"><van-icon name="arrow" /></div>
+                   </div>
                </div>
             </div>
-           
-            <div class="next">
-                <span>更新信息</span>
-            </div>
+            <!-- <van-loading type="spinner" color="#4B66AF" size="40px"/> -->
+            <van-button class="btn" @click="updateSet" type="default">更新信息</van-button>
         </div>
     </div>
 
@@ -138,12 +86,12 @@
 
 <script>
 import {axiosPost,axiosGet} from '@/lib/http'
+import axios from 'axios'
 import storage from '@/lib/storage'
 export default {
-    
     data() {
         return {
-            personInfo:{},
+            url: 'http:pay.91dianji.com.cn/',
             checkedCard:"",
             checkedCar:"",
             checkedVoice:"",
@@ -154,65 +102,134 @@ export default {
                 { name:"自由职业者"},
                 { name:"企业主"},
             ],
-            identity:""
+            identity:"",
+            photo: '',
+            nickname: '',
+            mobile: '',
+            city: '',
+            iscreditcard: false,
+            iscar: false,
+            wechat: '',
+            wechatqr: '',
+            voice: '0'
         }
     },
     methods:{
         goBack() {
             this.$router.push('/personalCenter')
         },
-        onCancel(){
-
+        // 上传微信头像
+        onAvator(file){
+             var form = new FormData();
+            form.append('file',file.file);
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg';
+            let config = {
+                headers: { "Content-Type": "multipart/form-data" }
+            };
+            axios.post(url,form,config).then(res =>{
+                console.log('头像上传成功',res);
+                if(res.data.success){
+                    this.photo = res.data.data.imgUrl;
+                }
+            }).catch(res =>{
+                console.log('头像上传失败',res);
+            })
         },
-        showInfo(){
-            this.show=true
+        // 上传微信二维码头像
+        onWechatQr(file){
+            var form = new FormData();
+            form.append('file',file.file);
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg';
+            let config = {
+                headers: { "Content-Type": "multipart/form-data" }
+            };
+            axios.post(url,form,config).then(res =>{
+                console.log('微信二维码上传成功',res);
+                if(res.data.success){
+                    this.wechatqr = res.data.data.imgUrl;
+                }
+            }).catch(res =>{
+                console.log('微信二维码上传失败',res);
+            })
         },
-        onSelect(item){
-             this.show = false;
-        //    console.log(item.name);
-           this.identity=item.name;
-        },
-        modify(){
-            this.$router.push('/home/verified')
-        },
+        onRead(file){},
+        // 查询个人设置
         getSet(){
-            // 查询个人设置
             let data={
                 // openid:this.$store.state.wechat.openid,
                 openid:"ohwrlwlEuphjdvOimvqkhplpzEqo"
             }
             let that=this
             axiosPost("/customer/getCustomer",data)
-            .then(function(res){
-                    if(res.status===200){
-                        that.personInfo=res.data.data
-                        that.checkedCard=Number(that.personInfo.iscreditcard)
-                        that.checkedCar=Number(that.personInfo.iscar)
-                        that.checkedVoice=that.personInfo.voice
-                        // localStorage.setItem("personInfo",JSON.stringify(that.personInfo))
-                        // set(name,val){
-                        //         localStorage.setItem(name,val);
-                        //     }
-                    }
+            .then(res =>{
+                console.log('查询个人设置',res);
+                if(res.data.success){
+                    this.photo = res.data.data.photo;
+                    this.nickname = res.data.data.nickname;
+                    this.mobile = res.data.data.mobile;
+                    this.city = res.data.data.city;
+                    res.data.data.iscreditcard == '0' ? this.iscreditcard = false : this.iscreditcard = true;
+                    res.data.data.isca == '0' ? this.iscar = false : this.iscar = true;
+                    res.data.data.voice == '0' ? this.voice = false : this.voice = true;
+                    this.wechat = res.data.data.wechat;
+                    this.wechatqr = res.data.data.wechatqr;
+                }
             })
-            .catch(function(err){
-                // console.log(err,"error");
+            .catch(res =>{
+                this.$toast('查询失败');
             })
         },
         // 更新个人设置
         updateSet(){
+            let url = '/customer/updateCustomer';
+            var iscreditcard = false;
+            var voice = false;
+            var iscar = false;
 
+            this.iscar == true ? iscar = '1' : iscar = '0';
+            this.voice == true ? voice = '1' : voice = '0';
+            this.iscreditcard == true ? iscreditcard = '1' : iscreditcard = '0';
+            
+            let params = {
+                // openid: this.$store.state.wechat.openid,
+                openid:"ohwrlwlEuphjdvOimvqkhplpzEqo",
+                photo: this.photo,
+                nickname: this.nickname,
+                mobile: this.mobile,
+                city: this.city,
+                iscreditcard: iscreditcard,
+                iscar: iscar,
+                wechat: this.wechat,
+                wechatqr: this.wechatqr,
+                voice: voice
+            };
+            axiosPost(url,params).then(res =>{
+                
+                if(res.data.success){
+                    this.$toast('更新成功');
+                }else{
+                    this.$toast(res.data.message);
+                }
+            }).catch(res =>{
+                console.log('更新失败',res);
+            })
         }
     },
     created () {
-        this.getSet()
-
+        
     },
+    mounted(){
+        this.getSet();
+    }
 }
 </script>
 
 <style lang="less">
    #register {
+       width: 100vw;
+       height: auto;
+       background-color: #E2E3E5;    
+       padding-bottom: 80px;
        >header {
            background-color: #4B66AF;
            width:100%;
@@ -237,149 +254,56 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
-           background-color:#E2E3E5; 
            >.info {
                >.area {
-                   padding-left:15px;
-                   background-color: #fff;
-                   >ul {
-                       >li {
-                           padding-left:20px;
-                           padding-right: 20px;
-                           display: flex;
-                           justify-content: space-between;
-                           border-bottom: 1px solid #ccc;
-                           padding-top:30px;
-                           padding-bottom:30px;
-                           >p {
-                               font-size: 30px;
+                   .top{
+                       margin-top: 20px;
+                   }
+                   .per-userinfo{
+                       width: 96%;
+                       height: 100px;
+                       margin: auto;
+                       font-size: 28px;
+                       border-bottom: #ccc solid 1px;
+                       .avator{
+                           width: 32%;
+                           height: 100%;
+                       }
+                       .detail{
+                           width: 58%;
+                           height: 100%;
+                           img{
+                               width: 80px;
+                               height: 80px;
                            }
-                           &:nth-of-type(1){
-                            //    display: flex;
-                               >div {
-                                   flex:1;
-                                   width:100px;
-                                   display: flex;
-                                   justify-content: space-around;
-                                   padding-left:10px;
-                                  >.images {
-                                      width:200px;
-                                      >img {
-                                          width:100%;
-                                      }
-                                  }
-                                  >#photo {
-                                      width:300px;
-                                  }
-
-                                   >img {
-                                       width:100%;
-                                   }
-                               }
-                           }
-                           >div{
-                               cursor: pointer;
-                            //    position: relative;
-                               >input {
-                                //    position: absolute;
-                                //    left:0px;
-                                //    top:0px;
-                                //    opacity: 0;
-                                    cursor: pointer;
-                               }
-                           }
-                           input {
-                               border:none;
+                           input{
+                               width: 100%;
+                               height: 80%;
                                text-align: right;
+                               border: none;
+                               background: transparent;
                            }
+                       }
+                       .icon-left{
+                           width: 10%;
+                           height: 100%;
                        }
                    }
                }
-               >.phone {
-                   margin-top: 20px;
-                   background-color: #fff;
-                   padding-left:8px;
-                   >ul{
-                       >li{
-                           display: flex;
-                           justify-content: space-between;
-                           padding-top:30px;
-                           padding-bottom:30px;
-                           padding-right: 20px;
-                           padding-left:20px;
-                            border-bottom: 1px solid #ccc;
-                            >div {
-                                  cursor: pointer;
-                               position: relative;
-                               >input {
-                                   position: absolute;
-                                   right:0px;
-                                   top:0px;
-                                   opacity: 0;
-                                    cursor: pointer;
-                               }
-                            }
-                           >p {
-                               font-size: 30px;
-                               &:nth-of-type(2) {
-                                   >input {
-                                       border:none;
-                                       text-align: right;
-                                   }
-                               }
-                           }
-                       }
-                   }
-               }
-               >.card-id {
-                   margin-top: 20px;
-                   background-color: #fff;
-                   display: flex;
-                   justify-content: space-between;
-                   padding:30px 0px;
-                   >p {
-                       font-size: 30px;
-                      &:nth-of-type(1){
-                          margin-left:20px;
-                      }
-                      &:nth-of-type(2){
-                          margin-right:20px;
-                      }
-                   }
-                  
-               }
            }
-           >.safe {
-              display: flex;
-              padding-top:20px;
-              justify-content: space-around; 
-              >div {
-                  display: flex;
-                  >span {
-                      font-size:60px;
-                  }
-                  >h3 {
-                      margin-left:15px;
-                      color:#CBCCCE;
-                      >p {
-                          margin-bottom: 20px;
-                      }
-                  }
-              }
-           }
-           >.next {
-              padding-top:30px;
-              padding-bottom: 30px;
-              text-align: center;
-              color:#fff;
-              background-color: #4B66AF;
-              width:92%;
-              margin-top:60px;
-              margin-left:4%;
-              margin-bottom: 100px;
-              border-radius: 15px;
-
-           }
+            .btn{
+                width: 100%;
+                height:100px;
+                border: none;
+                color:#fff;
+                background-color: #4B66AF;
+                border-radius: 15px;
+                width:92%;
+                height: 100px;
+                margin-top:60px;
+                margin-left: 4%;
+                font-size: 28px;
+            }
        }
    }
 </style>
