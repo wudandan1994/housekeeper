@@ -106,7 +106,8 @@ export default {
                 })
         },
         submit(){
-            let url = 'customer/identification';
+            this.loading = true;
+            let url = '/customer/identification';
             let params = {
                 openid: this.$store.state.wechat.openid,
                 idcardnumber: this.idcardnumber,
@@ -117,7 +118,11 @@ export default {
             };
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                    console.log('实名认证成功');
+                    this.loading = false;
+                    this.$toast('提交成功');
+                }else{
+                    this.loading = false;
+                    this.$toast('认证失败');
                 }
             }).catch(res =>{
                 console.log('实名认证失败',res);
