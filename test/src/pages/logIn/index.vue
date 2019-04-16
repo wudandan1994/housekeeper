@@ -37,7 +37,7 @@
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
                 </p>
-                <!-- <p @click="register">注册</p> -->
+                <p @click="register">注册</p>
             </div>
         </div>
     </div>
@@ -92,9 +92,9 @@ export default {
                 console.log(err,"error");  
             })
         },
-        // logIn(){
-        //     location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
-        // }
+        logIn(){
+            location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+        }
     }
 }
 </script>
@@ -196,7 +196,7 @@ export default {
                    .wx-logo{
                        font-size: 60px;
                        display: inline-block;
-                    vertical-align: middle;
+                       vertical-align: middle;
                    }
                    &:nth-of-type(3) {
                        color:#4B66AF;
