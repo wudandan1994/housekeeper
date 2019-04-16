@@ -163,8 +163,29 @@ export default {
              }
                 axiosPost("/creditCard/agreementBindCardValidateCode",data)
                 .then(res=>{
-                    console.log(res,"success");
-                    
+                    console.log(res,"success")
+                    if(!res.data.success){
+                        that.$toast({
+                            message:res.data.message
+                        })
+                    }
+                    let orderId=res.data.data.orderId
+                    let validateCode=that.autoCode
+                    let datas={
+                        orderId,
+                        validateCode
+                    }
+                    axiosPost("/creditCard/bindCard",datas)
+                    .then(function(res){
+                        console.log(res,"result绑卡成功");
+                        
+                    })
+                    .catch(function(err){
+                        console.log(err,"error绑卡失败");
+                        
+                    })
+
+
                 })
                 .catch(err=>{
                     console.log(err,"error");
@@ -274,6 +295,7 @@ export default {
             margin-top:30px;
             padding-left:20px;
             padding-right: 20px;
+            font-size: 30px;
             >button {
                 height: 100px;
                 padding-top:20px;

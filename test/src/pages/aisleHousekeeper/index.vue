@@ -58,7 +58,6 @@ export default {
                     that.$toast=({
                         message:res.data.message
                     })
-                    
                 }
             })
             .catch(function(err){
