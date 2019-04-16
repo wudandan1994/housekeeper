@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <router-link tag="div" class="per-menu toTop row" to="/personalCenter/incomedetail/integralCash">
+        <router-link tag="div" class="per-menu  row" to="/personalCenter/incomedetail/integralCash">
             <div class="icon start-center"><i class="iconfont icon-jine"></i></div>
             <div class="menu-name start-center">积分提现</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
@@ -37,12 +37,12 @@
             <div class="menu-name start-center">现金提现</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
          </router-link>
-        <router-link tag="div" to="/personalCenter/incomedetail/addcard" class="per-menu toTop row">
+        <router-link tag="div" to="/personalCenter/incomedetail/addcard" class="per-menu  row">
             <div class="icon start-center"><i class="iconfont icon-yinhangqia"></i></div>
             <div class="menu-name start-center">银行卡</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
         </router-link>
-        <router-link tag="div" class="per-menu toTop row" to="/personalCenter/income">
+        <router-link tag="div" class="per-menu row" to="/personalCenter/income">
             <div class="icon start-center"><i class="iconfont icon-jine"></i></div>
             <div class="menu-name start-center">收益明细</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
@@ -160,9 +160,6 @@ export default {
                     }
                 }
             }
-        }
-        .toTop{
-            margin-top: 20px;
         }
         .per-menu{
             width: 100vw;
