@@ -1,10 +1,5 @@
 <template>
     <div id="progress-query">
-        <header>
-            <span></span>
-            <span>登录</span>
-            <span></span>
-        </header>
         <div class="container">
            <div class="logo">
                <img src="http://pay.91dianji.com.cn/logo.png" alt="">
@@ -123,21 +118,21 @@ export default {
            }
        }
        >.container {
-           padding-top:96px;
+        //    padding-top:96px;
            padding-bottom: 50px;
            background-color: #fff;
            >.logo {
-               padding-top:200px;
-               width:40%;
+               padding-top:80px;
+               width:70%;
                 margin:0 auto;
                >img {
                    display: block;
                    width:100%;
-                   padding-bottom: 50px;
+                   padding-bottom: 20px;
                }
            }
            >.info {
-               padding-top:160px;
+               padding-top:80px;
                width:80%;
                margin:0 auto;
                >p {
