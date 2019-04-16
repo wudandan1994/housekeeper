@@ -66,21 +66,22 @@ export default {
                     let url = '/customer/registered';
                     axiosPost(url,params).then(res =>{
                         console.log('注册成功',res.data);
-                        // 登录
-                        let params = {
-                            openid: this.$store.state.wechat.openid
-                        }
-                        let url = '/customer/loginByWechat';
-                        axiosPost(url,params).then(res =>{
-                            console.log('登陆成功',res);
-                            storage.set('cid',res.data.data.id);
-                        }).catch(res =>{
-                            console.log('登录失败',res);
-                        })
                     }).catch(res =>{
                         console.log('注册失败',res.data);
                     })
                   }
+                  // 登录
+                  let params = {
+                      openid: this.$store.state.wechat.openid
+                  }
+                  let url = '/customer/loginByWechat';
+                  axiosPost(url,params).then(res =>{
+                      console.log('登陆成功',res);
+                      storage.set('cid',res.data.data.id);
+                      this.$toast('登陆成功');
+                  }).catch(res =>{
+                      console.log('登录失败',res);
+                  })
                 }).catch(res =>{
                 })
             }).catch(res =>{
@@ -99,11 +100,9 @@ export default {
       // 微信浏览器
       if(this.GetUrlParam('code') === null){
       // 未授权
-        
         this.handleOauth();
       }else{
       // 已授权
-        
         this.code = this.GetUrlParam('code');
         console.log('获取code',this.code);
         this.handleAccessToken();
