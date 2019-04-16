@@ -86,9 +86,9 @@ export default {
         }  
     },
     created(){
-        this.nickname = this.$store.state.wechat.nickname;
-        this.headimg  = this.$store.state.wechat.headimg;
-        this.recomcode  = this.$store.state.wechat.recommendedcode; 
+        this.$store.state.wechat.nickname == "" ? this.nickname = '姓名' : this.nickname = this.$store.state.wechat.nickname;
+        this.$store.state.wechat.headimg == '' ? this.headimg = 'http://pay.91dianji.com.cn/avators.png' : this.headimg  = this.$store.state.wechat.headimg;
+        this.$store.state.wechat.recommendedcode == "" ? this.recomcode = '11111111' : this.recomcode  = this.$store.state.wechat.recommendedcode; 
     }
 }
 </script>
@@ -109,8 +109,8 @@ export default {
                     width: 20vw;
                     height: 100%;
                     >img{
-                        width: 100px;
-                        height: 100px;
+                        width: 120px;
+                        height: 120px;
                         border-radius: 50%;
                     }
                 }
@@ -124,13 +124,15 @@ export default {
                         .name{
                             width: auto;
                             height: 100%;
-                            font-size: 28px;
+                            font-size: 34px;
+                            color: #ffffff;
+                            font-weight: bold;
                         }
                         .level{
                             width: auto;
                             height: auto;
                             margin-left: 5%;
-                            font-size: 28px;
+                            font-size: 26px;
                         }
                     }
                     .code{
