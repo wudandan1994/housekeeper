@@ -51,6 +51,7 @@
 <script>
 import axios from 'axios'
 import {axiosPost,axiosGet} from '@/lib/http'
+import storage from '@/lib/storage'
 export default {
     data() {
         return {
@@ -67,71 +68,65 @@ export default {
         }
     },
     methods:{
-         onRead(filez) {
-            console.log(filez);
-            // axiosPost("/upload/uploadImg",filez.file.name)
-            // .then(res=>{
-            //     console.log(res)
-                
-            // })
-            // .catch(err=>{
-            //     console.log(err);
-            //     console.log(555);
-                
-            // })
-            // this.$refs.zhengm.src=filez.content
+        // 身份证正面
+         onRead(file) {
+            console.log('文件上传',file);
+            var form = new FormData();
+            form.append('file',file.file);
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg';
+            let config = {
+                headers: { "Content-Type": "multipart/form-data" }
+            };
+            axios.post(url,form,config).then(res =>{
+                console.log('文件上传成功',res);
+                if(res.data.success){
+                    this.cardfront = this.url + res.data.data.imgUrl;
+                }
+            }).catch(res =>{
+                console.log('文件上传失败',res);
+            })
             
-            //    localStorage.setItem('zhengm',filez.content)
         },
-            // changeImg(e){
-            //     // console.log(filef);
-            //     // let file =this.files[0]
-            //     // console.log(this.files);
-            //     console.log(this);
-            //     let vm=this;
-            //     let _this = e.currentTarget;
-            //     console.log(_this);
-                
-            //     console.log('this.upnum: ',vm.upnum)
-            //     console.log('vm.picshowList.length: ',vm.picshowList.length);
-      
-
-            //     let files=document.getElementById("zhengm").files[0];
-
-
-            //      axiosPost("/upload/uploadImg",files).then(res=>{
-            //         // console.log('上传成功',res)  
-            //     }).catch(err=>{
-            //         // console.log(err);
-            //         // console.log(555);
-                    
-            //     })  
-            // },
-    //   onReadFanm(filef){
-    //        this.$refs.fanm.src=filef.content
-    //         localStorage.setItem('fanm',filef.content)
-
-    //   },
-    //   submit(){
-    //       let  idcardnumber=this.idcardnumber
-    //       let  idcardfront=localStorage.getItem('zhengm')
-    //       console.log(typeof idcardfront);
-    //       let  idcardback=localStorage.getItem("fanm")
-    //       let name=this.name
-    //     if(!this.name.trim()){
-
-    //     }
-          
-    //   },
-        goBack() {
+        // 身份证反面
+        onReadFanm(file){
+            console.log('文件上传',file);
+            var form = new FormData();
+            form.append('file',file.file);
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg';
+            let config = {
+                headers: { "Content-Type": "multipart/form-data" }
+            };
+            axios.post(url,form,config).then(res =>{
+                console.log('文件上传成功',res);
+                if(res.data.success){
+                    this.cardback = this.url + res.data.data.imgUrl;
+                }
+            }).catch(res =>{
+                console.log('文件上传失败',res);
+                })
+        },
+        submit(){
+            let url = 'customer/identification';
+            let params = {
+                openid: this.$store.state.wechat.openid,
+                idcardnumber: this.idcardnumber,
+                name: this.name,
+                cardfront: this.cardfront,
+                cardback: this.cardback,
+                cid: storage.get('cid')
+            };
+            axiosPost(url,params).then(res =>{
+                if(res.data.success){
+                    console.log('实名认证成功');
+                }
+            }).catch(res =>{
+                console.log('实名认证失败',res);
+            })
+        },
+        handleReturnHome() {
             this.$router.push({path:'/home/verified'})
         },
-        test(e){
-            console.log('88',event.target.files[0]);
-            var file = event.target.files[0];
-             var reader = new FileReader();
-                console.log('测试',reader.readAsDataURL(file));
-        },
+        
         // 获取实名认证信息
         handleGetAOuth(){
             let url = '/customer/getIdentification';
