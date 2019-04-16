@@ -27,24 +27,12 @@ export default {
         location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
     },
     // 获取url参数
-    GetUrlParam(paraName) {
-　　　　var url = document.location.toString();
-　　　　var arrObj = url.split("?");
-　　　　if (arrObj.length > 1) {
-　　　　　　var arrPara = arrObj[1].split("&");
-　　　　　　var arr;
-　　　　　　for (var i = 0; i < arrPara.length; i++) {
-　　　　　　　　arr = arrPara[i].split("=");
-　　　　　　　　if (arr != null && arr[0] == paraName) {
-　　　　　　　　　　return arr[1];
-　　　　　　　　}
-　　　　　　}
-　　　　　　return "";
-　　　　}
-　　　　else {
-　　　　　　return "";
-　　　　}
-　　},
+    GetUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r != null) return decodeURI(r[2]);
+        return null;
+    },
     // 获取access_token
     handleAccessToken(){
       console.log('执行');
@@ -107,18 +95,21 @@ export default {
     // 判断是否是微信浏览器
     var ua = navigator.userAgent.toLowerCase();
     if(ua.match(/MicroMessenger/i)=="micromessenger") {
-      console.log('微信');
+      console.log('微信浏览器');
       // 微信浏览器
-      this.code = this.GetUrlParam('code');
-      if(this.GetUrlParam('code') != ''){
-      // 已授权
-        this.handleAccessToken();
-      }else{
+      if(this.GetUrlParam('code') === null){
       // 未授权
+        
         this.handleOauth();
+      }else{
+      // 已授权
+        
+        this.code = this.GetUrlParam('code');
+        console.log('获取code',this.code);
+        this.handleAccessToken();
       }
     }else{
-      console.log('非微信');
+      console.log('非微信浏览器');
       // 非微信浏览器
       this.$router.push({
         path: '/login'
@@ -126,8 +117,7 @@ export default {
     }
   },
   mounted(){
-    // js-sdk的access_token
-    
+    // js-sdk的access_token 
     let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
     axiosGet(url).then(res =>{
       console.log('jsapi请求成功',res);
@@ -148,14 +138,14 @@ export default {
           noncestr: radom,
           timestamp: timestamp
         };
-        axiosPost(posturl,url).then(res =>{
+        axiosPost(posturl,params).then(res =>{
           console.log('签名请求成功',res);
           wx.config({
               debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
               appId: 'wx779a30a563ad570d', // 必填，公众号的唯一标识
               timestamp: timestamp, // 必填，生成签名的时间戳
               nonceStr: radom, // 必填，生成签名的随机串
-              signature: res.data.signature,// 必填，签名
+              signature: res.data.data.signature,// 必填，签名
               jsApiList: [
                 'chooseImage',
                 'uploadImage',
@@ -166,7 +156,7 @@ export default {
               ] // 必填，需要使用的JS接口列表
           });
           wx.ready(function(){
-              wx.updateAppMessageShareData({ 
+              wx.onMenuShareAppMessage({ 
                   title: '测试', // 分享标题
                   desc: '测试', // 分享描述
                   link: 'http://pay.91dianji.com.cn/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
@@ -189,189 +179,7 @@ export default {
     }).catch(res =>{
       console.log('jsapi请求失败',res);
     })
-  },
-  created(){
-    console.log('纪康测试');
-  //  判断是否是微信浏览器
-    var ua = navigator.userAgent.toLowerCase();
-    if(ua.match(/MicroMessenger/i)=="micromessenger") {
-      console.log('微信');
-      // 微信浏览器
-      this.code = this.GetUrlParam('code');
-      if(this.GetUrlParam('code') != ''){
-        // 已授权
-        this.handleAccessToken();
-      }else{
-        // 未授权
-        this.handleOauth();
-      }
-    }else{
-      console.log('非微信');
-      // 非微信浏览器
-      this.$router.push({
-        path: '/login'
-      })
-    }
-  },
-  mounted(){
-    // js-sdk的access_token
-    if(storage.get('cid') != ''){
-      let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
-      axiosGet(url).then(res =>{
-        console.log('jsapi请求成功',res);
-        let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/ticket/getticket?access_token='+ res.data.access_token +'&type=jsapi';
-        axiosGet(url).then(res =>{
-          console.log('jsapi_ticket请求成功',res);
-          storage.set('ticket',res.data.ticket);
-          // 请求签名信息
-          var jsapi_ticket = storage.get('ticket');
-          var radom = Math.random().toString(36).substr(2);
-          var timestamp = parseInt(new Date().getTime()/1000);
-          var url = window.location.href;
-          let posturl = '/customer/getSignature';
-          let params = {
-            jsapi_ticket: jsapi_ticket,
-            url: url,
-            noncestr: radom,
-            timestamp: timestamp
-          };
-          axiosPost(posturl,params).then(res =>{
-            console.log('签名请求成功',res);
-            wx.config({
-                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                appId: 'wx779a30a563ad570d', // 必填，公众号的唯一标识
-                timestamp: timestamp, // 必填，生成签名的时间戳
-                nonceStr: radom, // 必填，生成签名的随机串
-                signature: res.data.data.signature,// 必填，签名
-                jsApiList: [
-                  'chooseImage',
-                  'uploadImage',
-                  'getLocation',
-                  'onMenuShareTimeline',
-                  'onMenuShareAppMessage'
-                ] // 必填，需要使用的JS接口列表
-            });
-            // wx.ready(function(){
-              console.log('微信',wx);
-                wx.onMenuShareAppMessage({
-                  title: '钱夹宝', // 分享标题
-                  desc: '钱夹宝邀请您来参加', // 分享描述
-                  link: url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                  imgUrl: 'http://pay.91dianji.com.cn/101.png', // 分享图标
-                  type: '', // 分享类型,music、video或link，不填默认为link
-                  dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                  success: function (res) {
-                  // 用户点击了分享后执行的回调函数
-                  console.log('分享成功',res);
-                  }
-                });
-            // });
-            wx.error(function(res){
-
-            });
-          }).catch(res =>{
-            console.log('签名请求失败',res);
-          })
-
-        }).catch(res =>{
-          console.log('jsapi_ticket请求失败',res);
-        })
-      }).catch(res =>{
-        console.log('jsapi请求失败',res);
-      })
-    }
-  },
-   created(){
-     console.log('纪康测试');
-    //  判断是否是微信浏览器
-     var ua = navigator.userAgent.toLowerCase();
-     if(ua.match(/MicroMessenger/i)=="micromessenger") {
-       console.log('微信');
-       // 微信浏览器
-      //  this.code = this.GetUrlParam('code');
-       if(this.GetUrlParam('code') != ''){
-         // 已授权
-         this.handleAccessToken();
-       }else{
-         // 未授权
-         this.handleOauth();
-       }
-     }else{
-       console.log('非微信');
-       // 非微信浏览器
-       this.$router.push({
-         path: '/login'
-       })
-     }
-   },
-   mounted(){
-     // js-sdk的access_token
-     if(storage.get('cid') != ''){
-       let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
-       axiosGet(url).then(res =>{
-         console.log('jsapi请求成功',res);
-         let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/ticket/getticket?access_token='+ res.data.access_token +'&type=jsapi';
-         axiosGet(url).then(res =>{
-           console.log('jsapi_ticket请求成功',res);
-           storage.set('ticket',res.data.ticket);
-           // 请求签名信息
-           var jsapi_ticket = storage.get('ticket');
-           var radom = Math.random().toString(36).substr(2);
-           var timestamp = parseInt(new Date().getTime()/1000);
-           var url = window.location.href;
-           let posturl = '/customer/getSignature';
-           let params = {
-             jsapi_ticket: jsapi_ticket,
-             url: url,
-             noncestr: radom,
-             timestamp: timestamp
-           };
-           axiosPost(posturl,params).then(res =>{
-             console.log('签名请求成功',res);
-             wx.config({
-                 debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                 appId: 'wx779a30a563ad570d', // 必填，公众号的唯一标识
-                 timestamp: timestamp, // 必填，生成签名的时间戳
-                 nonceStr: radom, // 必填，生成签名的随机串
-                 signature: res.data.data.signature,// 必填，签名
-                 jsApiList: [
-                   'chooseImage',
-                   'uploadImage',
-                   'getLocation',
-                   'onMenuShareTimeline',
-                   'onMenuShareAppMessage'
-                 ] // 必填，需要使用的JS接口列表
-             });
-             // wx.ready(function(){
-               console.log('微信',wx);
-                 wx.onMenuShareAppMessage({
-                   title: '钱夹宝', // 分享标题
-                   desc: '钱夹宝邀请您来参加', // 分享描述
-                   link: url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                   imgUrl: 'http://pay.91dianji.com.cn/101.png', // 分享图标
-                   type: '', // 分享类型,music、video或link，不填默认为link
-                   dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                   success: function (res) {
-                   // 用户点击了分享后执行的回调函数
-                   console.log('分享成功',res);
-                   }
-                 });
-             // });
-             wx.error(function(res){
-  
-             });
-           }).catch(res =>{
-             console.log('签名请求失败',res);
-           })
-
-         }).catch(res =>{
-           console.log('jsapi_ticket请求失败',res);
-         })
-       }).catch(res =>{
-         console.log('jsapi请求失败',res);
-       })
-     }
-   }
+  }
 }
 </script>
 
