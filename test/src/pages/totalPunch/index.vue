@@ -132,10 +132,17 @@ export default {
             this.$router.push('/home')
         },
         sign(){
+            let that =this
             axiosPost("/customer/insertSign")
             .then(function(res){
-                this.isPunch=true
-                this.$toast({
+               if(!res.data.success){
+                    that.$toast({
+                    message:res.data.message
+                })
+               }
+                
+                that.isPunch=true
+                that.$toast({
                     message:"签到成功"
                 })
             })
@@ -149,6 +156,9 @@ export default {
                 // this.count=res.data.count
                 that.signcount=res.data.data.signcount
                 that.gold=res.data.data.gold
+                if(res.data.success){
+                    that.isPunch=true
+                }
            })
          },
          initData: function (cur) {
