@@ -113,7 +113,7 @@
 
 
 <script>
-import {axiosPost,axiosGet} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 export default {
     data() {
         return {
@@ -133,7 +133,7 @@ export default {
         },
         sign(){
             let that =this
-            axiosPost("/customer/insertSign")
+            axiosPost("http://pay.91dianji.com.cn/api/customer/insertSign")
             .then(function(res){
                if(!res.data.success){
                     that.$toast({
@@ -150,7 +150,7 @@ export default {
         },
          searchPunch(){
              let that = this
-           axiosPost("/customer/getSignDetail")
+           axiosPost("http://pay.91dianji.com.cn/api/customer/getSignDetail")
            .then(function(res){
                console.log('签到',res);
                 // this.count=res.data.count

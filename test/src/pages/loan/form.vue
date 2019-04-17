@@ -63,7 +63,7 @@
     </div>
 </template>
 <script>
-import {axiosPost,axiosGet} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 export default {
     data(){
         return{
@@ -144,7 +144,7 @@ export default {
                    mobile:this.form.mobile,
                    certcode:this.form.idcardnumber
                }
-               axiosPost("/creditCard/getLoanUrl",data)
+               axiosPost("http://pay.91dianji.com.cn/api/creditCard/getLoanUrl",data)
               
                .then(function(res){
                    console.log("success",res);

@@ -162,7 +162,7 @@ export default {
                 P13_month:that.month,
                 P14_cvv2:that.safeCode
              }
-                axiosPost("/creditCard/agreementBindCardValidateCode",data)
+                axiosPost("http://pay.91dianji.com.cn/api/creditCard/agreementBindCardValidateCode",data)
                 .then(res=>{
                     console.log(res,"success")
                     if(!res.data.success){
@@ -198,7 +198,7 @@ export default {
                         orderId:that.orderId,
                         validateCode,
                     }
-                    axiosPost("/creditCard/bindCard",datas)
+                    axiosPost("http://pay.91dianji.com.cn/api/creditCard/bindCard",datas)
                     .then(function(res){
                         console.log(res,"result确认绑卡");
                         

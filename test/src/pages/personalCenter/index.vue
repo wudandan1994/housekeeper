@@ -122,7 +122,7 @@
 
 <script>
 import footerMenu from '@/components/footer'
-import {axiosPost,axiosGet} from '../../lib/http.js'
+import {axiosPost} from '../../lib/http.js'
 import storage from '@/lib/storage'
 export default {
     components:{

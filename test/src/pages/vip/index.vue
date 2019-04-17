@@ -216,7 +216,7 @@ export default {
             }else{
                 name = '钱夹宝铜卡'
             }
-            let url = '/order/insertOrder';
+            let url = 'http://pay.91dianji.com.cn/api/order/insertOrder';
             let params = {
                 amount: this.price,
                 name: this.level
@@ -226,7 +226,7 @@ export default {
                 if(res.data.success){
                     this.orderid = res.data.data.orderid;
                     // 请求上级推荐人
-                    let url = '/customer/getCustomerUP';
+                    let url = 'http://pay.91dianji.com.cn/api/customer/getCustomerUP';
                     let params = {
                         recommendedcode: this.$store.state.wechat.recommendedcode
                     };

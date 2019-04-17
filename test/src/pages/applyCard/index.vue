@@ -93,7 +93,7 @@ export default {
                 merCardName:that.info.merCardName,
                 bankCardId:that.info.merCardId
             }
-            axiosPost("/creditCard/insertCreditCard",data)
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/insertCreditCard",data)
             .then(function(res){
                 console.log('申请办卡',res);
                     location.href=res.data.data.data

@@ -98,7 +98,7 @@ export default {
                 phone:that.phone,
                 bankcardno:that.bankcardno
             }
-            axiosPost("/customer/checkBankCard",data)
+            axiosPost("http://pay.91dianji.com.cn/api/customer/checkBankCard",data)
             .then(function(res){
                 console.log('成功',res);
                 if(res.data.success){

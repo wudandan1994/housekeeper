@@ -41,7 +41,7 @@
 
 
 <script>
-import {axiosPost,axiosGet} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
     data() {
@@ -72,7 +72,7 @@ export default {
                     mobile:this.mobile,
                     type:"3"
                 }
-                axiosPost("/customer/sendSms",data)
+                axiosPost("http://pay.91dianji.com.cn/api/customer/sendSms",data)
                 .then(function(res){
                     if(res.data.success) {
                         that.showCount=true
@@ -144,7 +144,7 @@ export default {
                 mobile:this.mobile,
                 authcode:this.authcode
             }
-             axiosPost("/customer/updatePassword",data)
+             axiosPost("http://pay.91dianji.com.cn/api/customer/updatePassword",data)
              .then(function(res){
                  console.log(res,"result");
                  that.$toast({

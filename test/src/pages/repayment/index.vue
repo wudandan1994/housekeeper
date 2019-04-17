@@ -50,15 +50,15 @@ export default {
             }
             console.log(data);
             
-            // axiosPost("/creditCard/creditCardRepayment")
-            // .then(function(res){
-            //     console.log(res,"result");
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/creditCardRepayment")
+            .then(function(res){
+                console.log(res,"result");
                 
-            // })
-            // .catch(function(err){
-            //     console.log(err,"error");
+            })
+            .catch(function(err){
+                console.log(err,"error");
                 
-            // })
+            })
 
         }
     },

@@ -41,7 +41,7 @@
 
 
 <script>
-import {axiosPost} from '@/lib/http'
+import qs from 'qs'
 export default {
     data() {
         return {
@@ -61,6 +61,7 @@ export default {
              this.$router.push('/logOut')
         },
         logInPass(){
+             
             let that=this
             if(that.phone.trim().length===0){
                 that.$toast({
@@ -78,28 +79,16 @@ export default {
                 mobile:that.phone,
                 password:that.password
             }
-            axiosPost("/customer/login",data)
+            that.$http.post("http://pay.91dianji.com.cn/api/customer/login",qs.stringify(data))
             .then(function(res){
-                console.log(res,"result")
                 if(res.data.success){
+                   
                     that.$router.push('/home')
-                    // let url = '/customer/login';
-                    // let params = {
-                    //     mobile:that.phone,
-                    //     password:that.password
-                    // };
-                    // axiosPost(url,params).then(res =>{
-                    //     console.log('登陆成功',res);
-                    //     if(res.data.success){
-                    //         that.$router.push('/home');
-                    //     }
-                    // }).catch(res =>{
-                    //     console.log('登录失败',res);
-                    // })
                 }
             })
             .catch(function(err){
                 console.log(err,"error");  
+                alert("http://pay.91dianji.com.cn/api/customer/login");
             })
         },
         logIn(){

@@ -39,7 +39,7 @@
 </template>
 <script>
 import storage from '@/lib/storage'
-import {axiosPost,axiosGet} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 export default {
     data(){
         return{
@@ -66,7 +66,7 @@ export default {
                return
            }
            //  查询是否有绑卡
-           axiosPost("/customer/getBankCardByOpenid",data)
+           axiosPost("http://pay.91dianji.com.cn/api/customer/getBankCardByOpenid",data)
            .then(function(res){
                console.log(res,"result");
                if(res.data.data.length===0){
@@ -83,7 +83,7 @@ export default {
                       withdraw_apply_total:cash,
                       withdraw_bank_id:res.data.data[0].bankcardno
                   }
-                  axiosPost("/customer/getwithdrawalBank",data)
+                  axiosPost("http://pay.91dianji.com.cn/api/customer/getwithdrawalBank",data)
                   .then(function(res){
                       console.log(res,"提现成功");
                       that.$toast({

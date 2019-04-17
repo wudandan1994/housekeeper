@@ -71,7 +71,7 @@ export default {
         },
         getBankList(){
             let that=this
-            axiosPost("/creditCard/getBankCardbindList")
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getBankCardbindList")
             .then(function(res){
                 that.showCardList=true
                 if(!res.data.success){

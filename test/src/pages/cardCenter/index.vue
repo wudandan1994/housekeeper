@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import {axiosPost,axiosGet} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 export default {
     data(){
         return {
@@ -106,7 +106,7 @@ export default {
         },
         getCardList(){
             let that= this
-            axiosPost("/creditCard/getBankList")
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getBankList")
             .then(function(res){
                 if(res.status===200){
                     let data=res.data.data.data
