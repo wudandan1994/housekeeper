@@ -6,7 +6,7 @@
                 <div class="name-code">
                     <div class="name start-center">{{nickname}}</div>
                     <div class="unset start-center">
-                        <router-link tag="div" class="center" to="/register">未设置</router-link>
+                        <router-link tag="div" class="center" to="/register">设置</router-link>
                     </div>
                 </div>
             </div>
@@ -15,8 +15,8 @@
                 <span>运营商</span>
             </div>
             <div class="position">
-                <div class="recomcode center">推荐码:98787654</div>
-                <router-link to="/home/verified" class="authentication center" tag="div">实名认证</router-link>
+                <div class="recomcode center">推荐码:{{promotioncode}}</div>
+                <router-link to="/home/verified" class="authentication center" tag="div">{{iscertification}}</router-link>
                 <div class="isvip end-center"><img :src="vip" alt=""></div>
                 <div class="position-detail row">
                     <div class="per-position shou right">
@@ -101,14 +101,14 @@
             </div>
         </div>
         <div class="per-list row">
-            <div class="per-menu-list line">
+            <router-link tag="div" to="/personalCenter/questionandanswers" class="per-menu-list line">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/312.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">百问百答</div>
-            </div>
+            </router-link>
 
             <div class="per-menu-list line">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/313.png" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">退换说明</div>
+                <div class="per-menu-title center">联系我们</div>
             </div>
 
             <div class="per-menu-list">
@@ -133,8 +133,9 @@ export default {
             active:2,
             nickname: 'Giovanni',
             headimg: 'http://img2.imgtn.bdimg.com/it/u=1000195578,2796948806&fm=11&gp=0.jpg',
-            recommendedcode: '',
+            promotioncode: '',
             vip: 'http://pay.91dianji.com.cn/301-1.png',
+            iscertification: '实名认证'
         }
     },
     methods:{
@@ -143,13 +144,18 @@ export default {
         }
     },
     created(){
+        console.log('VUEX',window.location.href+'&promotioncode=2145');
         this.nickname = this.$store.state.wechat.nickname;
         this.headimg  = this.$store.state.wechat.headimg;
-        this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
-        if(this.$store.state.wechat.vip == '1'){
+        this.promotioncode  = this.$store.state.wechat.promotioncode; 
+        this.$store.state.wechat.iscertification == '0' ? this.iscertification = '实名认证' : (this.$store.state.wechat.iscertification == '1' ? this.iscertification = '审核中' : this.iscertification = '认证通过'); 
+        if(this.$store.state.wechat.level == '0'){
             this.vip ='http://pay.91dianji.com.cn/301.png';
+        }
+        if(this.$store.state.wechat.level == '1'){
+            this.vip ='http://pay.91dianji.com.cn/huangjinVIP.png';
         }else{
-            this.vip = 'http://pay.91dianji.com.cn/301-1.png';
+            this.vip = 'http://pay.91dianji.com.cn/zuanshivip.png';
         }
     }
 }

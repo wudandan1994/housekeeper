@@ -6,7 +6,8 @@ const state = {
     recommendedcode: '',
     mobile: '',
     vip: '',
-    level: '实习'
+    level: '实习',
+    iscertification: '0',
 }
 const mutations = {
     openid(state,openid){
@@ -32,6 +33,9 @@ const mutations = {
     },
     level(state,level){
         state.level = level;
+    },
+    iscertification(state,iscertification){
+        state.iscertification = iscertification;
     }
 
 }

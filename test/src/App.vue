@@ -35,7 +35,6 @@ export default {
     },
     // 获取access_token
     handleAccessToken(){
-      console.log('执行');
         let url = 'http://pay.91dianji.com.cn/wxApi/sns/oauth2/access_token?appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0&code='+this.code+'&grant_type=authorization_code';
         axiosGet(url).then(res =>{
             console.log('access_token获取成功',res);
@@ -61,27 +60,57 @@ export default {
                     let params = {
                         nickname: this.$store.state.wechat.nickname,
                         openid:   this.$store.state.wechat.openid,
-                        photo:    this.$store.state.wechat.headimg
+                        photo:    this.$store.state.wechat.headimg,
+                        recommendedcode: storage.get('recommendedcode')
                     }
                     let url = '/customer/registered';
                     axiosPost(url,params).then(res =>{
                         console.log('注册成功',res.data);
+                        // 登录
+                        let params = {
+                            openid: this.$store.state.wechat.openid
+                        }
+                        let url = '/customer/loginByWechat';
+                        axiosPost(url,params).then(res =>{
+                            console.log('登陆成功',res);
+                            storage.set('cid',res.data.data.id);
+                            this.$store.commit('iscertification',res.data.data.iscertification);
+                            this.$store.commit('level',res.data.data.level);
+                            this.$store.commit('promotioncode',res.data.data.promotioncode);
+                            this.$store.commit('mobile',res.data.data.mobile);
+                            this.$store.commit('vip',res.data.data.vip);
+                            this.$store.commit('recommendedcode',res.data.data.recommendedcode);
+                            this.$toast('登陆成功');
+                        }).catch(res =>{
+                            console.log('登录失败',res);
+                            this.$toast('登陆失败');
+                        })
                     }).catch(res =>{
                         console.log('注册失败',res.data);
                     })
+                  }else{
+                    // 已注册
+                    // 登录
+                    let params = {
+                        openid: this.$store.state.wechat.openid
+                    }
+                    let url = '/customer/loginByWechat';
+                    axiosPost(url,params).then(res =>{
+                        console.log('登陆成功',res);
+                        storage.set('cid',res.data.data.id);
+                        this.$store.commit('iscertification',res.data.data.iscertification);
+                        this.$store.commit('level',res.data.data.level);
+                        this.$store.commit('promotioncode',res.data.data.promotioncode);
+                        this.$store.commit('mobile',res.data.data.mobile);
+                        this.$store.commit('vip',res.data.data.vip);
+                        this.$store.commit('recommendedcode',res.data.data.recommendedcode);
+                        this.$toast('登陆成功');
+                    }).catch(res =>{
+                        console.log('登录失败',res);
+                        this.$toast('登陆失败');
+                    })
                   }
-                  // 登录
-                  let params = {
-                      openid: this.$store.state.wechat.openid
-                  }
-                  let url = '/customer/loginByWechat';
-                  axiosPost(url,params).then(res =>{
-                      console.log('登陆成功',res);
-                      storage.set('cid',res.data.data.id);
-                      this.$toast('登陆成功');
-                  }).catch(res =>{
-                      console.log('登录失败',res);
-                  })
+                  
                 }).catch(res =>{
                 })
             }).catch(res =>{
@@ -93,10 +122,13 @@ export default {
     },
   },
   created(){
+    if(this.$router.currentRoute.query.promotioncode != '' && typeof(this.$router.currentRoute.query.promotioncode) != 'undefined'){
+      storage.set('recommendedcode',this.$router.currentRoute.query.promotioncode);
+    }
     // 判断是否是微信浏览器
+    console.log('VUEX',this.$store.state.wechat);
     var ua = navigator.userAgent.toLowerCase();
     if(ua.match(/MicroMessenger/i)=="micromessenger") {
-      console.log('微信浏览器');
       // 微信浏览器
       if(this.GetUrlParam('code') === null){
       // 未授权
@@ -104,16 +136,11 @@ export default {
       }else{
       // 已授权
         this.code = this.GetUrlParam('code');
-        console.log('获取code',this.code);
         this.handleAccessToken();
       }
     }else{
-      console.log('非微信浏览器');
       // 非微信浏览器
-      this.$router.push({
-        path: '/login'
-      })
-    }
+    }  
   },
   mounted(){
     // js-sdk的access_token 
@@ -139,6 +166,7 @@ export default {
         };
         axiosPost(posturl,params).then(res =>{
           console.log('签名请求成功',res);
+          let that = this;
           wx.config({
               debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
               appId: 'wx779a30a563ad570d', // 必填，公众号的唯一标识
@@ -158,7 +186,7 @@ export default {
               wx.onMenuShareAppMessage({ 
                   title: '测试', // 分享标题
                   desc: '测试', // 分享描述
-                  link: 'http://pay.91dianji.com.cn/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                  link: 'http://pay.91dianji.com.cn/#/home?promotioncode=' + that.$store.state.wechat.promotioncode, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                   imgUrl: 'http://pay.91dianji.com.cn/icon_61.png', // 分享图标
                   success: function (res) {
                     console.log('分享调用成功',res);

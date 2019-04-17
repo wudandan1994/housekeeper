@@ -88,8 +88,8 @@ import previousComponent from '@/pages/previous'
 import bindingCreditCardComponent from '@/pages/bindingCreditCard'
 // 付款
 import repaymentComponent from '@/pages/repayment'
-
-
+// 百问百答
+import Questionandanswers from '@/pages/personalCenter/Questionandanswers'
 
 export default new Router({
   // mode:"hash",
@@ -169,5 +169,6 @@ export default new Router({
     {path: '/middle',component: middleAlipay},
     {path: '/personalCenter/incomedetail/record',component: recordComponent},
     {path: '/personalCenter/previous',component:previousComponent},
+    {path: '/personalCenter/questionandanswers',component:Questionandanswers},
   ]
 })

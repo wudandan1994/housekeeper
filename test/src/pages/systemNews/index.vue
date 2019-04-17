@@ -6,7 +6,8 @@
             <span></span>
         </header>
         <div class="container">
-            <p>钱夹宝</p>
+            <h1>如何使用</h1>
+            <p>尊敬的钱夹宝用户您好</p>
         </div>
     </div>
 

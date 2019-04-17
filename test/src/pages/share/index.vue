@@ -62,11 +62,11 @@
                         <p>新闻资讯</p>
                         <p>文章可植入广告、锁粉</p>
                     </li>
-                    <li>
+                    <router-link tag="li" to="/share/poster">
                         <p><van-icon name="http://bc.91dianji.com.cn/405.png" /></p>
                         <p>推广海报图</p>
                         <p>分享二维码、快速增粉</p>
-                    </li>
+                    </router-link>
                     <li>
                         <p><van-icon name="http://bc.91dianji.com.cn/406.png" /></p>
                         <p>邀请好友</p>
