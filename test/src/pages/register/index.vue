@@ -169,7 +169,7 @@ export default {
                     this.mobile = res.data.data.mobile;
                     this.city = res.data.data.city;
                     res.data.data.iscreditcard == '0' ? this.iscreditcard = false : this.iscreditcard = true;
-                    res.data.data.isca == '0' ? this.iscar = false : this.iscar = true;
+                    res.data.data.iscar == '0' ? this.iscar = false : this.iscar = true;
                     res.data.data.voice == '0' ? this.voice = false : this.voice = true;
                     this.wechat = res.data.data.wechat;
                     this.wechatqr = res.data.data.wechatqr;
