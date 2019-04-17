@@ -15,7 +15,7 @@ import logOutComponent from '@/pages/logOut'
 import inviteFriendsComponent from '@/pages/inviteFriends'
 import creditHousekeeperComponent from '@/pages/creditHousekeeper'
 import aisleHousekeeperComponent from '@/pages/aisleHousekeeper'
-import registerComponent from '@/pages/register'
+// import registerComponent from '@/pages/register'
 import forgetPasswordComponent from '@/pages/forgetPassword'
 import modifyLoginPasswordComponent from '@/pages/modifyLoginPassword'
 import consultationComponent from '@/pages/consultation'
@@ -99,7 +99,7 @@ export default new Router({
     {path:"/home",component:homeComponent},
     {path:"/login",component:loginComponent},
     {path:"/logOut",component:logOutComponent},  
-    {path:"/register",component:registerComponent},
+    // {path:"/register",component:registerComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
     {path:"/home/news",component:newsComponent},
