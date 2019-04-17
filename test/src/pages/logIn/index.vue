@@ -80,21 +80,22 @@ export default {
             }
             axiosPost("/customer/login",data)
             .then(function(res){
-                console.log(res,"result");
+                console.log(res,"result")
                 if(res.data.success){
-                    let url = '/customer/login';
-                    let params = {
-                        mobile:that.phone,
-                        password:that.password
-                    };
-                    axiosPost(url,params).then(res =>{
-                        console.log('登陆成功',res);
-                        if(res.data.success){
-                            that.$router.push('/home');
-                        }
-                    }).catch(res =>{
-                        console.log('登录失败',res);
-                    })
+                    that.$router.push('/home')
+                    // let url = '/customer/login';
+                    // let params = {
+                    //     mobile:that.phone,
+                    //     password:that.password
+                    // };
+                    // axiosPost(url,params).then(res =>{
+                    //     console.log('登陆成功',res);
+                    //     if(res.data.success){
+                    //         that.$router.push('/home');
+                    //     }
+                    // }).catch(res =>{
+                    //     console.log('登录失败',res);
+                    // })
                 }
             })
             .catch(function(err){

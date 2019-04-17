@@ -94,12 +94,11 @@ export default {
                             }
                         },1000)
                     }
-                    
                 })
                 .catch(function (err) {
-                   that.$toast({
-                    message:"请勿重复发送短信"
-                  })
+                //    that.$toast({
+                //     message:"请勿重复发送短信"
+                //   })
                 })
             }
             

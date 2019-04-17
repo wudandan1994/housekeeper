@@ -74,8 +74,8 @@ export default {
                  return
             } else  {
                 let data={
-                    mobile:this.mobile,
-                    type:"1"
+                    mobile:that.mobile,
+                    type:"2"
                 }
                 axiosPost("/customer/sendSms",data)
                 .then(function(res){
@@ -96,6 +96,8 @@ export default {
                     }
                 })
                 .catch(function (err) {
+                    console.log(err,"error");
+                    
                    that.$toast({
                     message:"请勿重复发送短信"
                   })

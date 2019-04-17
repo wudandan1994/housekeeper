@@ -70,14 +70,13 @@ export default {
             } else  {
                 let data={
                     mobile:this.mobile,
-                    type:"2"
+                    type:"3"
                 }
                 axiosPost("/customer/sendSms",data)
                 .then(function(res){
-                    
                     if(res.data.success) {
                         that.showCount=true
-                         that.showCode=false
+                        that.showCode=false
                     }
                     if(that.showCount){
                         that.timerId=setInterval(function(){
