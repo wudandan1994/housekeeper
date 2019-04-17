@@ -44,8 +44,9 @@
 
 
 <script>
-import {axiosPost,axiosGet} from '@/lib/http'
 import storage from '@/lib/storage'
+import {axiosPost} from '@/lib/http'
+import qs from 'qs'
 export default {
     data() {
         return {
@@ -57,13 +58,13 @@ export default {
             newPassword:"",
             suerPassword:"",
             code:"",
-            timerId:null
         }
     },
     methods:{
         goBack() {
             this.$router.push('/logIn')
         },
+        // 获取验证码
         getCode(){
             let that=this
             let partten=/^1\d{10}$/
@@ -77,7 +78,10 @@ export default {
                     mobile:that.mobile,
                     type:"2"
                 }
-                axiosPost("/customer/sendSms",data)
+                let url="http://pay.91dianji.com.cn/api/customer/sendSms"
+
+                //  that.$http.post(,qs.stringify(data))
+                 axiosPost(url,data)
                 .then(function(res){
                     if(res.data.success) {
                         that.showCount=true
@@ -104,6 +108,7 @@ export default {
                 })
             }
         },
+        // 注册
         modify(){
              let that=this
             let partten=/^1\d{10}$/  // 11位手机号的正则
@@ -153,19 +158,27 @@ export default {
             }
             let data={
                 password:that.suerPassword,
-                mobile:this.mobile,
-                authcode:this.authcode,
+                mobile:that.mobile,
+                authcode:that.authcode,
                 recommendedcode:that.code
             }
-             axiosPost("/customer/insertPhoneRegistered",data)
+             axiosPost("http://pay.91dianji.com.cn/api/customer/insertPhoneRegistered",data)
              .then(function(res){
                  console.log(res,"result");
                  that.$toast({
                      message:res.data.message
                  })
-                 that.timerId=setTimeout(function(){
-                     that.$router.push('/logIn')
-                 },4000)
+                 let datas={
+                     mobile:that.mobile,
+                     password:that.password
+                 }
+                 axiosPost("http://pay.91dianji.com.cn/api/customer/login",datas)
+                 .then(function(res){
+                     that.$router.push("/home")
+                 })
+                 .catch(function(err){
+
+                 })
                 
              })
              .catch(function(err){

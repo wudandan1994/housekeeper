@@ -3,12 +3,13 @@ import qs from 'qs'
 import { hostUrl } from './config.js'
 // 封装POST请求
 export const axiosPost = (url, params = {}) =>{
-    const _url = hostUrl + url;
+    // const _url = hostUrl + url;
+    // alert('ss'+_url);
     const _axios = axios.create({
         // timeout: 5000, //设置请求超时时间
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
     });
-    return _axios.post(_url,qs.stringify(params)).then(res =>{
+    return _axios.post(url,qs.stringify(params)).then(res =>{
         if(res.data.code == -1){
             window.location.href = '#/logIn'
         }

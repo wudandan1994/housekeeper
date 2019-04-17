@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import {axiosPost,axiosGet} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 import axios from 'axios'
 import storage from '@/lib/storage'
 export default {
@@ -160,7 +160,7 @@ export default {
                 // openid:"ohwrlwlEuphjdvOimvqkhplpzEqo"
             }
             let that=this
-            axiosPost("/customer/getCustomer",data)
+            axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer",data)
             .then(res =>{
                 console.log('查询个人设置',res);
                 if(res.data.success){
@@ -181,7 +181,7 @@ export default {
         },
         // 更新个人设置
         updateSet(){
-            let url = '/customer/updateCustomer';
+            let url = 'http://pay.91dianji.com.cn/api/customer/updateCustomer';
             var iscreditcard = false;
             var voice = false;
             var iscar = false;

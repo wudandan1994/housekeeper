@@ -107,7 +107,7 @@ export default {
         },
         submit(){
             this.loading = true;
-            let url = '/customer/identification';
+            let url = 'http://pay.91dianji.com.cn/api/customer/identification';
             let params = {
                 openid: this.$store.state.wechat.openid,
                 idcardnumber: this.idcardnumber,
@@ -134,7 +134,7 @@ export default {
         
         // 获取实名认证信息
         handleGetAOuth(){
-            let url = '/customer/getIdentification';
+            let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
                 console.log('获取实名认证状态成功',res);

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {axiosPost,axiosGet} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 export default {
     data() {
         return {
@@ -76,7 +76,7 @@ export default {
                     mobile:this.mobile,
                     type:"1"
                 }
-                axiosPost("/customer/sendSms",data)
+                axiosPost("http://pay.91dianji.com.cn/api/customer/sendSms",data)
                 .then(function(res){
                     
                     if(res.data.success) {
@@ -131,7 +131,7 @@ export default {
                 mobile:that.mobile,
                 authcode:that.authcode
             }
-             axiosPost("/customer/updateMobile",data)
+             axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",data)
              .then(function(res){
                  if(res.success){
                       that.$toast({

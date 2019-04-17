@@ -23,7 +23,7 @@
 
 <script>
 import storage from '@/lib/storage'
-import {axiosPost,axiosGet} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 export default {
     data() {
         return {
@@ -41,7 +41,7 @@ export default {
             let data={
                 cid:"5"
             }
-             axiosPost("/customer/getWithdrawalById",data)
+             axiosPost("http://pay.91dianji.com.cn/api/customer/getWithdrawalById",data)
              .then(function(res){
                  if(res.data.data.length===0){
                      that.$toast({
