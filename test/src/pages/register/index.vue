@@ -156,8 +156,8 @@ export default {
         // 查询个人设置
         getSet(){
             let data={
-                // openid:this.$store.state.wechat.openid,
-                openid:"ohwrlwlEuphjdvOimvqkhplpzEqo"
+                openid:this.$store.state.wechat.openid,
+                // openid:"ohwrlwlEuphjdvOimvqkhplpzEqo"
             }
             let that=this
             axiosPost("/customer/getCustomer",data)
@@ -191,8 +191,8 @@ export default {
             this.iscreditcard == true ? iscreditcard = '1' : iscreditcard = '0';
             
             let params = {
-                // openid: this.$store.state.wechat.openid,
-                openid:"ohwrlwlEuphjdvOimvqkhplpzEqo",
+                openid: this.$store.state.wechat.openid,
+                // openid:"ohwrlwlEuphjdvOimvqkhplpzEqo",
                 photo: this.photo,
                 nickname: this.nickname,
                 mobile: this.mobile,
