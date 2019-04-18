@@ -6,7 +6,7 @@
                 <div class="name-code">
                     <div class="name start-center">{{nickname}}</div>
                     <div class="unset start-center">
-                        <router-link tag="div" class="center" to="/register">未设置</router-link>
+                        <router-link tag="div" class="center" to="/register">设置</router-link>
                     </div>
                 </div>
             </div>
@@ -15,21 +15,21 @@
                 <span>运营商</span>
             </div>
             <div class="position">
-                <div class="recomcode center">推荐码:98787654</div>
-                <router-link to="/home/verified" class="authentication center" tag="div">实名认证</router-link>
+                <div class="recomcode center">推荐码:{{promotioncode}}</div>
+                <router-link to="/home/verified" class="authentication center" tag="div">{{iscertification}}</router-link>
                 <div class="isvip end-center"><img :src="vip" alt=""></div>
                 <div class="position-detail row">
                     <div class="per-position shou right">
                         <div class="title center">收益</div>
-                        <div class="title bold center">3456</div>
+                        <div class="title bold center">{{amountSum}}</div>
                     </div>
                     <div class="per-position yu right">
                         <div class="title center">余额</div>
-                        <div class="title bold center">3456</div>
+                        <div class="title bold center">{{amount}}</div>
                     </div>
                     <div class="per-position fen">
                         <div class="title center">分佣</div>
-                        <div class="title bold center">3456</div>
+                        <div class="title bold center">{{commission}}</div>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
         </header>
         <div class="menu-title start-center">特约服务</div>
         <div class="per-list row">
-            <router-link tag="div" class="per-menu-list line" to="/ponserCenter/userAccountManage">
+            <router-link tag="div" class="per-menu-list line" :to="{path: '/ponserCenter/userAccountManage',query: {amount: amount}}">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/303.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">账户管理</div>
             </router-link>
@@ -68,10 +68,10 @@
 
         </div>
         <div class="per-list row">
-            <div class="per-menu-list line">
+            <router-link tag="div" to="/personalCenter/cooperation" class="per-menu-list line">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/306.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">商务合作</div>
-            </div>
+            </router-link>
 
             <div class="per-menu-list line">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/307.png" size="30px" color="#dab17b"/></div>
@@ -95,21 +95,21 @@
                 <div class="per-menu-title center">流程说明</div>
             </div>
 
-            <div class="per-menu-list">
+            <router-link tag="div" to="/personalCenter/manual" class="per-menu-list">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/311.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">平台手册</div>
-            </div>
+            </router-link>
         </div>
         <div class="per-list row">
-            <div class="per-menu-list line">
+            <router-link tag="div" to="/personalCenter/questionandanswers" class="per-menu-list line">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/312.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">百问百答</div>
-            </div>
+            </router-link>
 
-            <div class="per-menu-list line">
+            <router-link tag="div" to="/personalCenter/contactus" class="per-menu-list line">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/313.png" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">退换说明</div>
-            </div>
+                <div class="per-menu-title center">联系我们</div>
+            </router-link>
 
             <div class="per-menu-list">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/314.png" size="30px" color="#dab17b"/></div>
@@ -133,24 +133,51 @@ export default {
             active:2,
             nickname: 'Giovanni',
             headimg: 'http://img2.imgtn.bdimg.com/it/u=1000195578,2796948806&fm=11&gp=0.jpg',
-            recommendedcode: '',
+            promotioncode: '',
             vip: 'http://pay.91dianji.com.cn/301-1.png',
+            iscertification: '实名认证',
+            amount: '',
+            amountSum: '',
+            commission: '',
         }
     },
     methods:{
         changeActive(obj){
             console.log('obj', obj);
+        },
+        // 请求收益余额分佣等信息
+        handleGetAmount(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+            // let url = '/customer/getCustomer';
+            let params = {
+                openid:this.$store.state.wechat.openid,
+            };
+            axiosPost(url,params).then(res =>{
+                console.log('查询个人设置成功',res);
+                if(res.data.success){
+                    this.amount = res.data.data.amount;
+                    this.amountSum = res.data.data.amountSum;
+                    this.commission = res.data.data.commission;
+                    if(res.data.data.level == '0'){
+                        this.vip ='http://pay.91dianji.com.cn/301.png';
+                    }
+                    if(res.data.data.level == '1'){
+                        this.vip ='http://pay.91dianji.com.cn/huangjinVIP.png';
+                    }else{
+                        this.vip = 'http://pay.91dianji.com.cn/zuanshivip.png';
+                    }
+                }
+            }).catch(res =>{
+                console.log('查询个人设置失败',res);
+            })
         }
     },
     created(){
         this.nickname = this.$store.state.wechat.nickname;
         this.headimg  = this.$store.state.wechat.headimg;
-        this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
-        if(this.$store.state.wechat.vip == '1'){
-            this.vip ='http://pay.91dianji.com.cn/301.png';
-        }else{
-            this.vip = 'http://pay.91dianji.com.cn/301-1.png';
-        }
+        this.promotioncode  = this.$store.state.wechat.promotioncode; 
+        this.$store.state.wechat.iscertification == '0' ? this.iscertification = '实名认证' : (this.$store.state.wechat.iscertification == '1' ? this.iscertification = '审核中' : this.iscertification = '认证通过'); 
+        this.handleGetAmount();
     }
 }
 </script>

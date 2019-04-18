@@ -11,7 +11,7 @@
                              <span @click="isShow">权益说明</span>
                              <van-popup v-model="show">
                                 <div class="cover">
-                                    <p>钱夹宝金卡卡</p>
+                                    <p>钱夹宝钻石会员</p>
                                     <p>权益说明</p>
                                 </div>
                             </van-popup>
@@ -91,6 +91,10 @@
             </div>
         </div>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> d03bc6ecf342405c92257cc178de02bd5b6502ae
         <div class="buy-detail" v-if="pup2">
             <div class="recom row">
                 <div class="avator end-center"><img :src="recomheadimg" alt=""></div>
@@ -194,7 +198,7 @@ export default {
         // 会员充值
         handleVip(obj){
             this.price = obj;
-            obj == '993' ? this.level = '金卡会员' : this.level = '铜卡会员';
+            obj == '993' ? this.level = '钱夹宝钻石会员' : this.level = '钱夹宝黄金会员';
             this.pup1 = true;
             
         },
@@ -209,9 +213,9 @@ export default {
             console.log('商品价格',this.price);
             let name = '';
             if(this.price == '993'){
-                name = '钱夹宝金卡';
+                name = '钱夹宝钻石会员';
             }else{
-                name = '钱夹宝铜卡'
+                name = '钱夹宝黄金会员'
             }
             let url = 'http://pay.91dianji.com.cn/api/order/insertOrder';
             let params = {

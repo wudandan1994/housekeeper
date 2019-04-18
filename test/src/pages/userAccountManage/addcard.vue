@@ -1,11 +1,11 @@
 <template>
     <div id="add-card">
         <header class="header-top row">
-            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">银行卡管理</div>
-            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+            <div class="right-icon center" @click="handleBankCardList"><van-icon color="white" size="20px" name="card"/></div>
         </header>
-        <div class="personal row">
+        <!-- <div class="personal row">
             <div class="avator center"><img :src="headimg"></div>
             <div class="name-code">
                 <div class="name row">
@@ -15,7 +15,7 @@
                 <div class="code start-center">推荐码：{{recommendedcode}}</div>
             </div>
             <div class="status center">(未绑定)</div>
-        </div>
+        </div> -->
         <router-link tag="div" to="/personalCenter/addcard/UnionPay" class="UnionPay row">
             <div class="pay-icon end-center"> <svg class="icon" aria-hidden="true"><use xlink:href="#icon-pay-unionpay"></use></svg></div>
             <div class="add-icon center"><van-icon name="plus"/></div>
@@ -28,16 +28,26 @@
             <div class="add-title start-center">添加支付宝</div>
             <div class="more-icon center"><van-icon name="arrow"/></div>
         </router-link>
+        <div class="card-list" v-if="showbanklist" @click="handleCloseCardList">
+            <div class="per-card" v-for="(item,index) in bankcardlist" :key="index" @click="handleCheckCard(item.id)">
+                <div class="name">{{item.name}}</div>
+                <div class="bankname">{{item.bankname}}</div>
+                <div class="bankcardno">{{item.bankcardno}}</div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
+import { axiosPost } from '../../lib/http';
 export default {
     data(){
         return {
             nickname:'',
             headimg:'',
             recommendedcode:'',
-            level:''
+            level:'',
+            bankcardlist: [],
+            showbanklist: false,
         }
     },
     methods:{
@@ -50,31 +60,49 @@ export default {
         // 绑定银行卡
         handleAddCard(){
 
+        },
+        // 获取已绑定银行卡列表
+        handleBankCardList(){
+            // let url = '/customer/getBankCardByOpenid';
+            let url = 'http://pay.91dianji.com.cn/api/customer/getBankCardByOpenid';
+            let params = {};
+            axiosPost(url,params).then(res =>{
+                console.log('获取已绑定银行卡列表成功',res);
+                if(res.data.success){
+                    if(res.data.data.length == '0'){
+                        this.$toast('您还未绑定银行卡');
+                    }else{
+                        this.showbanklist = true;
+                        this.bankcardlist = res.data.data;
+                    }
+                }
+            }).catch(res =>{
+                console.log('获取已绑定银行卡列表失败',res)
+            })
+        },
+        // 选择银行卡
+        handleCheckCard(obj){
+            this.showbanklist = false;
+        },
+        // 关闭银行卡列表
+        handleCloseCardList(){
+            this.showbanklist = false;
         }
     },
     created () {
-         this.nickname = this.$store.state.wechat.nickname;
+        this.nickname = this.$store.state.wechat.nickname;
         this.headimg  = this.$store.state.wechat.headimg;
         this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
-        this.level  = this.$store.state.wechat.level; 
-
+        this.level  = this.$store.state.wechat.level;
     }
 }
 </script>
 <style lang="less" scoped>
     #add-card{
         width: 100vw;
-        height: 100vh;
+        height: calc(100vh - 90px);
         background: #EEEFF1;
-        .loan .van-nav-bar {
-            background-color: #4B66AF!important;
-      }
-        // .loan {
-        //     height: 86px;
-        //     line-height: 86px;
-        //     font-size: 36px;
-
-        // }
+        padding-top: 90px;
         .personal{
             width: 100vw;
             height: 120px;
@@ -137,6 +165,49 @@ export default {
             .more-icon{
                 width: 10%;
                 height: 100%;
+            }
+        }
+        .card-list{
+            width: 100vw;
+            height: calc(100vh - 86px);
+            position: fixed;
+            top: 86px;
+            left: 0;
+            z-index: 10000;
+            background: rgba(0, 0, 0, 0.5);
+            .per-card{
+                width: 90%;
+                height: 200px;
+                margin-left: auto;
+                margin-right: auto;
+                background: #8b379a;
+                margin-top: 25px;
+                border-radius: 20px;
+                position: relative;
+                .name{
+                    position: absolute;
+                    top: 40px;
+                    left: 30px;
+                    color: #ffffff;
+                    font-size: 30px;
+                    font-weight: 700;
+                }
+                .bankname{
+                    position: absolute;
+                    top: 40px;
+                    right: 30px;
+                    color: #ffffff;
+                    font-size: 30px;
+                    font-weight: 700;
+                }
+                .bankcardno{
+                    position: absolute;
+                    top: 140px;
+                    left: 20px;
+                    color: #ffffff;
+                    font-size: 30px;
+                    font-weight: 700;
+                }
             }
         }
     }

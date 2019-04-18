@@ -183,6 +183,9 @@ export default {
              })
            
         }
+    },
+    created(){
+        this.code = storage.get('recommendedcode');
     }
 }
 </script>

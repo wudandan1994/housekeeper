@@ -49,21 +49,26 @@ export default {
         },
         search(){
             let that=this
-            that.shownumber=true
-            let data={
-                amount:that.repayment
-             }
-             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getPoundage",data)
-             .then(function(res){
-                 console.log(res);
-                 if(!res.data.message){
-                     that.$toast({
-                         message:res.data.message
-                     })
-                     return
-                 }
-                that.number=res.data.data
-             })
+            if(that.repayment != ''){
+                that.shownumber=true
+                let data={
+                    amount:that.repayment
+                }
+                axiosPost("http://pay.91dianji.com.cn/api/creditCard/getPoundage",data)
+                .then(function(res){
+                    console.log(res);
+                    if(!res.data.message){
+                        that.$toast({
+                            message:res.data.message
+                        })
+                        return
+                    }
+                    that.number=res.data.data
+                })
+            }
+            else{
+                this.$toast('请输入金额');
+            }
         },
         pay(){
             let that=this

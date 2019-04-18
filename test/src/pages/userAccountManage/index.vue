@@ -1,7 +1,7 @@
 <template>
     <div id="page-user-AccountManage">
         <header class="header-top row">
-            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">账户管理</div>
             <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
@@ -13,10 +13,10 @@
                         <div class="name start-center">{{nickname}}</div>
                         <div class="level center"><div>实习</div></div>
                     </div>
-                    <div class="code start-center"><div class="center">推荐码:{{recomcode}}</div></div>
+                    <div class="code start-center"><div class="center">可提现金额:{{amount}}</div></div>
                 </div>
             </div>
-            <div class="integral-cash row">
+            <!-- <div class="integral-cash row">
                 <div class="integral">
                     <div class="can-title center">可提现积分</div>
                     <div class="can-number center">123</div>
@@ -25,14 +25,14 @@
                     <div class="can-title center">可提现金额</div>
                     <div class="can-number center">123</div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <!-- <router-link tag="div" class="per-menu  row" to="/personalCenter/incomedetail/integralCash">
             <div class="icon start-center"><i class="iconfont icon-jine"></i></div>
             <div class="menu-name start-center">积分提现</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
         </router-link> -->
-         <router-link to="/personalCenter/incomedetail/cash" tag="div" class="per-menu row">
+         <router-link :to="{path:'/personalCenter/incomedetail/cash',query:{amount: amount}}" tag="div" class="per-menu row">
             <div class="icon start-center"><i class="iconfont icon-xianjin"></i></div>
             <div class="menu-name start-center">现金提现</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
@@ -47,11 +47,11 @@
             <div class="menu-name start-center">收益明细</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
         </router-link>
-         <router-link tag="div" class="per-menu row" to="/personalCenter/incomedetail/integralDetail">
+         <!-- <router-link tag="div" class="per-menu row" to="/personalCenter/incomedetail/integralDetail">
             <div class="icon start-center"><i class="iconfont icon-xianjin"></i></div>
             <div class="menu-name start-center">积分明细</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
-        </router-link>
+        </router-link> -->
          <router-link tag="div" class="per-menu row" to="/personalCenter/incomedetail/record">
             <div class="icon start-center"><i class="iconfont icon-xianjin"></i></div>
             <div class="menu-name start-center">提现记录</div>
@@ -71,6 +71,7 @@ export default {
             nickname: '',
             headimg: '',
             recomcode: '',
+            amount: '0.00',
         }
     },
     methods:{
@@ -89,6 +90,8 @@ export default {
         this.$store.state.wechat.nickname == "" ? this.nickname = '姓名' : this.nickname = this.$store.state.wechat.nickname;
         this.$store.state.wechat.headimg == '' ? this.headimg = 'http://pay.91dianji.com.cn/avators.png' : this.headimg  = this.$store.state.wechat.headimg;
         this.$store.state.wechat.recommendedcode == "" ? this.recomcode = '11111111' : this.recomcode  = this.$store.state.wechat.recommendedcode; 
+        this.amount = this.$route.query.amount;
+        console.log('传递参数',this.$route.query.amount);
     }
 }
 </script>

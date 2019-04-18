@@ -157,9 +157,7 @@ export default {
         getSet(){
             let data={
                 openid:this.$store.state.wechat.openid,
-                // openid:"ohwrlwlEuphjdvOimvqkhplpzEqo"
             }
-            let that=this
             axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer",data)
             .then(res =>{
                 console.log('查询个人设置',res);
@@ -192,7 +190,6 @@ export default {
             
             let params = {
                 openid: this.$store.state.wechat.openid,
-                // openid:"ohwrlwlEuphjdvOimvqkhplpzEqo",
                 photo: this.photo,
                 nickname: this.nickname,
                 mobile: this.mobile,
