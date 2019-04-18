@@ -156,12 +156,28 @@ export default {
                 })
                  return
             }
-            let data={
-                password:that.suerPassword,
+
+            let logindata={
                 mobile:that.mobile,
-                authcode:that.authcode,
-                recommendedcode:that.code
+                authcode:that.authcode
             }
+            // 验证手机号码是否注册过
+             axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",logindata)
+             .then(function(res){
+                 if(!res.data.success){
+                     that.$toast({
+                         message:res.data.message
+                     })
+                     return
+                 }
+
+                  let data={
+                    password:that.suerPassword,
+                    mobile:that.mobile,
+                    authcode:that.authcode,
+                    recommendedcode:that.code
+            }
+            // 注册
              axiosPost("http://pay.91dianji.com.cn/api/customer/insertPhoneRegistered",data)
              .then(function(res){
                  console.log(res,"result");
@@ -172,6 +188,7 @@ export default {
                      mobile:that.mobile,
                      password:that.password
                  }
+                //  登录
                  axiosPost("http://pay.91dianji.com.cn/api/customer/login",datas)
                  .then(function(res){
                      that.$router.push("/home")
@@ -185,6 +202,17 @@ export default {
                  console.log(err,"error");
                  
              })
+
+             })
+             .catch(function(err){
+
+             })
+
+
+
+
+
+           
         }
     }
 }
