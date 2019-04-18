@@ -9,11 +9,16 @@
             <div class="amount">
                 <p>还款说明</p>
                <h3>输入金额之后点立即查询，即可查看支付详情</h3>
+               <van-button @click="search" round type="info">立即查询</van-button>
+                <div class="num" v-show="showNum">
+                    <p>本次输入金额为：<span>{{number.endamount}}</span>元</p>
+                    <p>本次到账金额为：<span>{{number.realamount}}</span>元</p>
+                    <p>本次操作手续费为：<span>{{number.poundage}}</span>元</p>
+                </div>
                 <div class="number">
                     <span class="bold">￥</span>
-                    <input type="number" v-model="repayment" placeholder="请输入不低于500元的还款金额">
+                    <input type="number" v-model="repayment" placeholder="请输入不低于200元的还款金额">
                 </div>
-                <p @click="search">立即查询</p>
                 <div class="btn" @click="pay">
                     <van-button round size="large" type="info">立即支付</van-button>
                 </div>
@@ -31,7 +36,9 @@ export default {
     data() {
         return {
             repayment:"",
-            cardInfo:""
+            cardInfo:"",
+            number:{},
+            showNum:false
         }
     },
     methods:{
@@ -40,10 +47,11 @@ export default {
         },
         search(){
             let that=this
+            that.showNum=true
             let data={
                 amount:that.repayment
              }
-             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getPoundage")
+             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getPoundage",data)
              .then(function(res){
                  console.log(res);
                  if(!res.data.message){
@@ -52,19 +60,15 @@ export default {
                      })
                      return
                  }
-                 that.$toast({
-                         message:res.data.message
-                     })
-
-                 
+                that.number=res.data.data
              })
 
         },
         pay(){
             let that=this
-            if(Number(that.repayment)<500){
+            if(Number(that.repayment)<200){
                 that.$toast({
-                    message:"请确认输入的金额不少于500元"
+                    message:"请确认输入的金额不少于200元"
                 })
                 return
             }
@@ -72,7 +76,7 @@ export default {
                 P4_bindId:that.cardInfo,
                 P8_orderAmount:that.repayment
             }
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/creditCardRepayment")
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/creditCardRepayment",data)
             .then(function(res){
                 console.log(res,"result")
                 if(!res.data.success){
@@ -130,10 +134,21 @@ export default {
                >p {
                    padding-top:50px;
                    font-size: 30px;
-                   margin-bottom: 200px;
+                   margin-bottom: 10px;
                    text-align: center;
                }
+               >h3{
+                    margin-bottom: 50px;
+                    font-size: 28px;
+               }
+               >.num {
+                   margin-top:10px;
+                   >p {
+                       margin-top:15px;
+                   }
+               }
                >.number {
+                   margin-top:100px;
                    font-size: 36px;
                    margin-bottom: 20px;
                    display: flex;
