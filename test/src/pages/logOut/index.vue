@@ -78,8 +78,6 @@ export default {
                     type:"2"
                 }
                 let url="http://pay.91dianji.com.cn/api/customer/sendSms"
-
-                //  that.$http.post(,qs.stringify(data))
                  axiosPost(url,data)
                 .then(function(res){
                     if(!res.data.success){
@@ -168,7 +166,6 @@ export default {
                      })
                      return
                  }
-                 
                  let datas={
                      mobile:that.mobile,
                      password:that.password
@@ -179,16 +176,11 @@ export default {
                      that.$router.push("/home")
                  })
                  .catch(function(err){
-
                  })
-                
              })
              .catch(function(err){
                  console.log(err,"error");
-                 
              })
-
-
            
         }
     },

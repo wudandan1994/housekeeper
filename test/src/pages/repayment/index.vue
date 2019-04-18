@@ -7,20 +7,22 @@
         </header>
         <div class="container">
             <div class="amount">
-                <p>还款说明</p>
-               <h3>输入金额之后点立即查询，即可查看支付详情</h3>
-               <van-button @click="search" round type="info">立即查询</van-button>
-                <div class="num" v-show="showNum">
-                    <p>本次输入金额为：<span>{{number.endamount}}</span>元</p>
-                    <p>本次到账金额为：<span>{{number.realamount}}</span>元</p>
-                    <p>本次操作手续费为：<span>{{number.poundage}}</span>元</p>
-                </div>
+              
                 <div class="number">
                     <span class="bold">￥</span>
                     <input type="number" v-model="repayment" placeholder="请输入不低于200元的还款金额">
                 </div>
-                <div class="btn" @click="pay">
-                    <van-button round size="large" type="info">立即支付</van-button>
+                <div class="btn" >
+                    <van-button round size="large" @click="search" type="info">下一步</van-button>
+                    <div class="num" v-show="shownumber" >
+                        <p>本次实际支付金额为：<span>{{number.endamount}}</span>元</p>
+                        <p>本次实际还款金额为：<span>{{number.realamount}}</span>元</p>
+                        <p>本次支付手续费为：<span>{{number.poundage}}</span>元</p>
+                        <div class="pay">
+                            <van-button @click="hidenumber" round type="danger">取消</van-button>
+                            <van-button @click="pay" round type="info">确认付款</van-button>
+                        </div>
+                     </div>
                 </div>
             </div>
         </div>
@@ -38,7 +40,7 @@ export default {
             repayment:"",
             cardInfo:"",
             number:{},
-            showNum:false
+            shownumber:false
         }
     },
     methods:{
@@ -47,7 +49,7 @@ export default {
         },
         search(){
             let that=this
-            that.showNum=true
+            that.shownumber=true
             let data={
                 amount:that.repayment
              }
@@ -62,7 +64,6 @@ export default {
                  }
                 that.number=res.data.data
              })
-
         },
         pay(){
             let that=this
@@ -87,14 +88,15 @@ export default {
                  that.$toast({
                         message:res.data.message
                     })
-
-                
             })
             .catch(function(err){
                 console.log(err,"error");
                 
             })
 
+        },
+        hidenumber(){
+            this.shownumber=false
         }
     },
     created () {
@@ -134,21 +136,11 @@ export default {
                >p {
                    padding-top:50px;
                    font-size: 30px;
-                   margin-bottom: 10px;
+                   margin-bottom: 200px;
                    text-align: center;
                }
-               >h3{
-                    margin-bottom: 50px;
-                    font-size: 28px;
-               }
-               >.num {
-                   margin-top:10px;
-                   >p {
-                       margin-top:15px;
-                   }
-               }
                >.number {
-                   margin-top:100px;
+                   margin-top:300px;
                    font-size: 36px;
                    margin-bottom: 20px;
                    display: flex;
@@ -161,12 +153,34 @@ export default {
                        font-size: 40px;
                        font-weight: bold;
                    }
-                  
                }
                >.btn {
+                   position: relative;
                   > button {
                       height: 90px;
                   }
+                   >.num {
+                       width:80%;
+                    margin-top:10px;
+                    overflow-x: hidden;
+                    position: absolute;
+                    border-radius: 10px;
+                        top:200%;
+                        left:5%;
+                        border:2px solid #ccc;
+                        padding:20px;
+                   >p {
+                       margin-top:20px;
+                   }
+                   >.pay {
+                       margin-top:10px;
+                       display: flex;
+                       justify-content: space-between;
+                       >button {
+                           font-size: 28px;
+                       }
+                   }
+               }
                }
            }
        }
