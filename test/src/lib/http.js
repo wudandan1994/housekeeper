@@ -3,7 +3,6 @@ import qs from 'qs'
 // 封装POST请求
 export const axiosPost = (url, params = {}) =>{;
     const _axios = axios.create({
-        // timeout: 5000, //设置请求超时时间
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
     });
     return _axios.post(url,qs.stringify(params)).then(res =>{
