@@ -39,7 +39,8 @@ export default {
             nickname:'',
             headimg:'',
             recommendedcode:'',
-            level:''
+            level:'',
+            bankcardlist: [],
         }
     },
     methods:{
@@ -55,11 +56,18 @@ export default {
         },
         // 获取已绑定银行卡列表
         handleBankCardList(){
-            let url = '/customer/getBankCardByOpenid';
-            // let url = 'http://pay.91dianji.com.cn/api/customer/getBankCardByOpenid';
+            // let url = '/customer/getBankCardByOpenid';
+            let url = 'http://pay.91dianji.com.cn/api/customer/getBankCardByOpenid';
             let params = {};
             axiosPost(url,params).then(res =>{
                 console.log('获取已绑定银行卡列表成功',res);
+                if(res.data.success){
+                    if(res.data.data.length == '0'){
+                        this.$toast('您还未绑定银行卡');
+                    }else{
+                        this.bankcardlist = res.data.data;
+                    }
+                }
             }).catch(res =>{
                 console.log('获取已绑定银行卡列表失败',res)
             })
@@ -69,8 +77,7 @@ export default {
         this.nickname = this.$store.state.wechat.nickname;
         this.headimg  = this.$store.state.wechat.headimg;
         this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
-        this.level  = this.$store.state.wechat.level; 
-        this.handleBankCardList();
+        this.level  = this.$store.state.wechat.level;
     }
 }
 </script>
