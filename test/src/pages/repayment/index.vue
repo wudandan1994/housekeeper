@@ -77,7 +77,7 @@ export default {
                 P4_bindId:that.cardInfo,
                 P8_orderAmount:that.repayment
             }
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/creditCardRepayment",data)
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/bindCardPayWithoutCode",data)
             .then(function(res){
                 console.log(res,"result")
                 if(!res.data.success){
@@ -158,6 +158,7 @@ export default {
                    position: relative;
                   > button {
                       height: 90px;
+                      font-size: 30px;
                   }
                    >.num {
                        width:80%;
