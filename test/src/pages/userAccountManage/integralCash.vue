@@ -3,7 +3,7 @@
          <header class="header-top row">
             <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">积分提现</div>
-            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+            <div class="right-icon center"><van-icon color="white" size="20px" name="card"/></div>
         </header>
         <div class="cash-top">
             <van-tabs v-model="active">

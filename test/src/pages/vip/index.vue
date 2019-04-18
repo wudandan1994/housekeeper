@@ -91,7 +91,10 @@
             </div>
         </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d03bc6ecf342405c92257cc178de02bd5b6502ae
         <div class="buy-detail" v-if="pup2">
             <div class="recom row">
                 <div class="avator end-center"><img :src="recomheadimg" alt=""></div>

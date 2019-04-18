@@ -78,7 +78,12 @@ export default {
                 }
                 axiosPost("http://pay.91dianji.com.cn/api/customer/sendSms",data)
                 .then(function(res){
-                    
+                    if(!res.data.success){
+                        that.$toast({
+                            message:res.data.message
+                        })
+                        return
+                    }
                     if(res.data.success) {
                         that.showCount=true
                          that.showCode=false

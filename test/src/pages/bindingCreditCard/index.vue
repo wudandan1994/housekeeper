@@ -200,11 +200,15 @@ export default {
                     }
                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/bindCard",datas)
                     .then(function(res){
-                        console.log(res,"result确认绑卡");
+                        that.$toast({
+                            message:res.data.message
+                        })
                         
                     })
                     .catch(function(err){
-                        console.log(err,"error绑卡失败");
+                        that.$toast({
+                            message:err.message
+                        })
                     })
         }
 

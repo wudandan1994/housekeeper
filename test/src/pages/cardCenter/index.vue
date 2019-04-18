@@ -108,11 +108,16 @@ export default {
             let that= this
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getBankList")
             .then(function(res){
-                if(res.status===200){
-                    let data=res.data.data.data
-                    that.cardList.push(...data.notSingleCardList)
-                    that.cardList.push(...data.singleCardList)
+                if(!res.data.success){
+                    that.$toast({
+                        message:res.data.message
+                    })
+                    return
                 }
+                let data=res.data.data.data
+                that.cardList.push(...data.notSingleCardList)
+                that.cardList.push(...data.singleCardList)
+              
             })
             .catch(function(err){
                 console.log(err,"error")

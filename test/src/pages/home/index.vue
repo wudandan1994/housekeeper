@@ -227,6 +227,7 @@
 
 <script>
 import footerMenu from '@/components/footer'
+import {axiosPost} from '@/lib/http'
 export default {
   components:{
       footerMenu
@@ -267,7 +268,20 @@ export default {
                     message: '确定要退出？',
                     confirmButtonText:'是',
                 }).then(() => {
-                        this.$router.push('/login')
+                    let that =this
+                  axiosPost("http://pay.91dianji.com.cn/api/customer/loginOut") 
+                  .then(function(res){
+                      if(!res.data.success){
+                          that.$toast({
+                              message:res.data.message
+                          })
+                          return
+                      }
+                      that.$router.push("/logIn")
+                  })
+                  .catch(function(err){
+
+                  })
                 }).catch(() => {
                     // on cancel
                 });

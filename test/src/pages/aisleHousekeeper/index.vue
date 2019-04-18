@@ -75,7 +75,6 @@ export default {
             .then(function(res){
                 that.showCardList=true
                 if(!res.data.success){
-                    
                     that.$toast=({
                         message:res.data.message
                     })
@@ -87,8 +86,6 @@ export default {
                     })
                 }
                 that.bankList=list
-               
-                
             })
             .catch(function(err){
                 console.log(err,"error")

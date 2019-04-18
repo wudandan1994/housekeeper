@@ -3,7 +3,7 @@
         <header class="header-top row">
             <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">银行卡管理</div>
-            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+            <div class="right-icon center"><van-icon color="white" size="20px" name="card"/></div>
         </header>
         <div class="personal row">
             <div class="avator center"><img :src="headimg"></div>
@@ -28,9 +28,11 @@
             <div class="add-title start-center">添加支付宝</div>
             <div class="more-icon center"><van-icon name="arrow"/></div>
         </router-link>
+
     </div>
 </template>
 <script>
+import { axiosPost } from '../../lib/http';
 export default {
     data(){
         return {
@@ -50,14 +52,24 @@ export default {
         // 绑定银行卡
         handleAddCard(){
 
+        },
+        // 获取已绑定银行卡列表
+        handleBankCardList(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getBankCardByOpenid';
+            let params = {};
+            axiosPost(url,params).then(res =>{
+                console.log('获取已绑定银行卡列表成功',res);
+            }).catch(res =>{
+                console.log('获取已绑定银行卡列表失败',res)
+            })
         }
     },
     created () {
-         this.nickname = this.$store.state.wechat.nickname;
+        this.nickname = this.$store.state.wechat.nickname;
         this.headimg  = this.$store.state.wechat.headimg;
         this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
         this.level  = this.$store.state.wechat.level; 
-
+        this.handleBankCardList();
     }
 }
 </script>

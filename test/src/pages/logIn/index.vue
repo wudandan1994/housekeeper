@@ -42,6 +42,7 @@
 
 <script>
 import qs from 'qs'
+import {axiosPost} from '@/lib/http'
 export default {
     data() {
         return {
@@ -57,7 +58,7 @@ export default {
         forgetPassword() {
             this.$router.push('/forgetPassword')
         },
-        register() {
+        register(){
              this.$router.push('/logOut')
         },
         logInPass(){
@@ -81,14 +82,17 @@ export default {
             }
             that.$http.post("http://pay.91dianji.com.cn/api/customer/login",qs.stringify(data))
             .then(function(res){
-                if(res.data.success){
-                   
-                    that.$router.push('/home')
+                if(!res.data.success){
+                    that.$toast({
+                        message:res.data.message
+                    })
+                    return
                 }
+                 that.$router.push('/home')
+               
             })
             .catch(function(err){
                 console.log(err,"error");  
-                alert("http://pay.91dianji.com.cn/api/customer/login");
             })
         },
         logIn(){

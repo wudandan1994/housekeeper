@@ -8,6 +8,7 @@ const state = {
     vip: '',
     level: '实习',
     iscertification: '0',
+    amount: '0',
 }
 const mutations = {
     openid(state,openid){
@@ -36,6 +37,9 @@ const mutations = {
     },
     iscertification(state,iscertification){
         state.iscertification = iscertification;
+    },
+    amount(state,amount){
+        state.amount = amount;
     }
 
 }

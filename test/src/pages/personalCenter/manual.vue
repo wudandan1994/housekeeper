@@ -45,7 +45,7 @@
             <div class="per-bold-content"><span class="bold-title">征信查询：</span>在平台首页特色功能区点击（征信查询）进入详情页面，可在此页面查询大数据+运营商信用报告</br></div>
             <div class="per-bold-content"><span class="bold-title">信用卡办理：</span>在平台首页金融功能区点击（信用卡办理）进入详情页面，可在此页面申请办理信用卡</br></div>
             <div class="per-bold-content"><span class="bold-title">商户收款：</span>在平台首页金融通道功能区点击（商户收款）进入详情页面，可在此页面查看费率、交易记录等</br></div>
-            <div class="per-bold-content"><span class="bold-title">我要贷款：</span>在平台首页金融通道功能区点击（我要贷款）进入详情页面，可在此页面贷款获取佣金</br></div>
+            <div class="per-bold-content"><span class="bold-title">我要贷款：</span>在平台首页金融通道功能区点击（我要贷款）进入详情页面，可在此页面贷款</br></div>
             <div class="per-bold-content"><span class="bold-title">信用卡管家：</span>在平台首页金融通道功能区点击（信用卡管家）进入详情页面，可在此页面设定您的还款计划</br></div>
 
             <div class="per-bold-content"><span class="bold-title">授权分润：</span>在平台首页精品功能区点击（授权分润）进入详情页面，可在此页面给实习会员设置分润</br></div>
@@ -65,7 +65,7 @@
             <div class="per-bold-content"><span class="bold-title">个人中心：</span>点击平台底部栏（个人中心）图标进入个人中心版块，此版块包含团队管理及收益、推广等功能</br></div>
             <div class="per-bold-content"><span class="bold-title">个人设置：</span>在个人信息区点击（头像）进入个人资料设置页面，在此页面修改资料及信息等</br></div>
             <div class="per-bold-content"><span class="bold-title">积分：</span>在个人中心点击（积分）进入详情页，查看个人积分情况</br></div>
-            <div class="per-bold-content"><span class="bold-title">可结算：</span>在个人中心点击（可结算）进入详情页，查看个人可结算佣金</br></div>
+            <div class="per-bold-content"><span class="bold-title">可结算：</span>在个人中心点击（可结算）进入详情页，查看个人可结算余额</br></div>
             <div class="per-bold-content"><span class="bold-title">总收益：</span>在个人中心点击（总收益）进入详情页，查看个人总收益</br></div>
             <div class="per-bold-content"><span class="bold-title">账户管理：</span>在特约服务区点击（账户管理）进入个人账户管理页面，在此页面查看账单、提现等</br></div>
             <div class="per-bold-content"><span class="bold-title">上级推荐人：</span>在个人中心特约服务区点击（上级推荐人）进入详情页面，查看并与您的上级推荐人进行沟通</br></div>

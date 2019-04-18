@@ -21,15 +21,15 @@
                 <div class="position-detail row">
                     <div class="per-position shou right">
                         <div class="title center">收益</div>
-                        <div class="title bold center">3456</div>
+                        <div class="title bold center">{{amountSum}}</div>
                     </div>
                     <div class="per-position yu right">
                         <div class="title center">余额</div>
-                        <div class="title bold center">3456</div>
+                        <div class="title bold center">{{amount}}</div>
                     </div>
                     <div class="per-position fen">
                         <div class="title center">分佣</div>
-                        <div class="title bold center">3456</div>
+                        <div class="title bold center">{{commission}}</div>
                     </div>
                 </div>
             </div>
@@ -135,12 +135,41 @@ export default {
             headimg: 'http://img2.imgtn.bdimg.com/it/u=1000195578,2796948806&fm=11&gp=0.jpg',
             promotioncode: '',
             vip: 'http://pay.91dianji.com.cn/301-1.png',
-            iscertification: '实名认证'
+            iscertification: '实名认证',
+            amount: '',
+            amountSum: '',
+            commission: '',
         }
     },
     methods:{
         changeActive(obj){
             console.log('obj', obj);
+        },
+        // 请求收益余额分佣等信息
+        handleGetAmount(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+            // let url = '/customer/getCustomer';
+            let params = {
+                openid:this.$store.state.wechat.openid,
+            };
+            axiosPost(url,params).then(res =>{
+                console.log('查询个人设置成功',res);
+                if(res.data.success){
+                    this.amount = res.data.data.amount;
+                    this.amountSum = res.data.data.amountSum;
+                    this.commission = res.data.data.commission;
+                    if(res.data.data.level == '0'){
+                        this.vip ='http://pay.91dianji.com.cn/301.png';
+                    }
+                    if(res.data.data.level == '1'){
+                        this.vip ='http://pay.91dianji.com.cn/huangjinVIP.png';
+                    }else{
+                        this.vip = 'http://pay.91dianji.com.cn/zuanshivip.png';
+                    }
+                }
+            }).catch(res =>{
+                console.log('查询个人设置失败',res);
+            })
         }
     },
     created(){
@@ -148,14 +177,7 @@ export default {
         this.headimg  = this.$store.state.wechat.headimg;
         this.promotioncode  = this.$store.state.wechat.promotioncode; 
         this.$store.state.wechat.iscertification == '0' ? this.iscertification = '实名认证' : (this.$store.state.wechat.iscertification == '1' ? this.iscertification = '审核中' : this.iscertification = '认证通过'); 
-        if(this.$store.state.wechat.level == '0'){
-            this.vip ='http://pay.91dianji.com.cn/301.png';
-        }
-        if(this.$store.state.wechat.level == '1'){
-            this.vip ='http://pay.91dianji.com.cn/huangjinVIP.png';
-        }else{
-            this.vip = 'http://pay.91dianji.com.cn/zuanshivip.png';
-        }
+        this.handleGetAmount();
     }
 }
 </script>
