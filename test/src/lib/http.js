@@ -8,7 +8,10 @@ export const axiosPost = (url, params = {}) =>{;
     });
     return _axios.post(url,qs.stringify(params)).then(res =>{
         if(res.data.code == -1){
-            window.location.href = '#/logIn'
+            this.$toast('请重新登陆');
+            setTimeout(()=>{
+                window.location.href = '#/logIn';
+            },1000);
         }
          return res; 
     }).catch(res =>{

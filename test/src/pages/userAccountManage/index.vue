@@ -32,7 +32,7 @@
             <div class="menu-name start-center">积分提现</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
         </router-link> -->
-         <router-link to="/personalCenter/incomedetail/cash" tag="div" class="per-menu row">
+         <router-link :to="{path:'/personalCenter/incomedetail/cash',query:{amount: amount}}" tag="div" class="per-menu row">
             <div class="icon start-center"><i class="iconfont icon-xianjin"></i></div>
             <div class="menu-name start-center">现金提现</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
