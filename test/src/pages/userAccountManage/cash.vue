@@ -68,7 +68,11 @@ export default {
            //  查询是否有绑卡
            axiosPost("http://pay.91dianji.com.cn/api/customer/getBankCardByOpenid",data)
            .then(function(res){
-               console.log(res,"result");
+               if(!res.data.success){
+                   that.$toast({
+                       message:res.data.message
+                   })
+               }
                if(res.data.data.length===0){
                    that.$toast({
                        message:"还没有绑定的银行卡，请先绑卡"
@@ -78,20 +82,25 @@ export default {
                    },4000)
                } else {
                     let data={
-                    //    cid:storage.get("cid")
-                      cid:"5",
+                       cid:storage.get("cid"),
                       withdraw_apply_total:cash,
                       withdraw_bank_id:res.data.data[0].bankcardno
                   }
                   axiosPost("http://pay.91dianji.com.cn/api/customer/getwithdrawalBank",data)
                   .then(function(res){
-                      console.log(res,"提现成功");
+                      if(!res.data.success){
+                          that.$toast({
+                              message:res.data.message
+                          })
+                      }
                       that.$toast({
-                          message:"提现成功"
+                          message:res.data.message
                       })
                   })
                   .catch(function(err){
-                      console.log(err,"操作错误");
+                     that.$toast({
+                         message:err.message
+                     })
                   })
                }
            })

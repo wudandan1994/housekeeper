@@ -43,6 +43,12 @@ export default {
             }
              axiosPost("http://pay.91dianji.com.cn/api/customer/getWithdrawalById",data)
              .then(function(res){
+                 if(!res.data.success){
+                     that.$toast({
+                         message:res.data.message
+                     })
+                     return
+                 }
                  if(res.data.data.length===0){
                      that.$toast({
                          message:"您还没有提现记录哦！"

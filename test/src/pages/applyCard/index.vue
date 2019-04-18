@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import {axiosPost,axiosGet} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 export default {
     data() {
         return {
@@ -95,10 +95,14 @@ export default {
             }
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/insertCreditCard",data)
             .then(function(res){
-                console.log('申请办卡',res);
-                    location.href=res.data.data.data
-                    console.log(res);
-                    
+
+                if(!res.data.success){
+                    that.$toast({
+                        message:res.data.message
+                    })
+                    return
+                }
+                location.href=res.data.data.data
             })
             .catch(function(err){
                  that.$toast({

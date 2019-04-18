@@ -8,10 +8,12 @@
         <div class="container">
             <div class="amount">
                 <p>还款说明</p>
+               <h3>输入金额之后点立即查询，即可查看支付详情</h3>
                 <div class="number">
                     <span class="bold">￥</span>
                     <input type="number" v-model="repayment" placeholder="请输入不低于500元的还款金额">
                 </div>
+                <p @click="search">立即查询</p>
                 <div class="btn" @click="pay">
                     <van-button round size="large" type="info">立即支付</van-button>
                 </div>
@@ -36,6 +38,28 @@ export default {
         goBack() {
             this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
         },
+        search(){
+            let that=this
+            let data={
+                amount:that.repayment
+             }
+             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getPoundage")
+             .then(function(res){
+                 console.log(res);
+                 if(!res.data.message){
+                     that.$toast({
+                         message:res.data.message
+                     })
+                     return
+                 }
+                 that.$toast({
+                         message:res.data.message
+                     })
+
+                 
+             })
+
+        },
         pay(){
             let that=this
             if(Number(that.repayment)<500){
@@ -48,11 +72,18 @@ export default {
                 P4_bindId:that.cardInfo,
                 P8_orderAmount:that.repayment
             }
-            console.log(data);
-            
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/creditCardRepayment")
             .then(function(res){
-                console.log(res,"result");
+                console.log(res,"result")
+                if(!res.data.success){
+                    that.$toast({
+                        message:res.data.message
+                    })
+                }
+                 that.$toast({
+                        message:res.data.message
+                    })
+
                 
             })
             .catch(function(err){

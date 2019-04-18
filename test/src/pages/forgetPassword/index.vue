@@ -118,11 +118,15 @@ export default {
                 }
                 axiosPost("http://pay.91dianji.com.cn/api/customer/sendSms",data)
                 .then(function(res){
-                    
-                    if(res.data.success) {
-                        that.showCount=true
-                         that.showCode=false
+                    if(!res.data.success){
+                        that.$toast({
+                            message:res.data.message
+                        })
+                        return
                     }
+                        that.showCount=true
+                        that.showCode=false
+                  
                     if(that.showCount){
                         that.timerId=setInterval(function(){
                             that.count--
@@ -138,7 +142,7 @@ export default {
                 })
                 .catch(function (err) {
                    that.$toast({
-                    message:"请勿重复发送短信"
+                    message:err.message
                   })
                 })
             }
@@ -191,12 +195,15 @@ export default {
             }
              axiosPost("http://pay.91dianji.com.cn/api/customer/updatePassword",data)
              .then(function(res){
-                 console.log(res,"result");
-                 if(res.data.code===-1){
+                 if(!res.data.success){
                       that.$toast({ 
                          message:res.data.message
                    })
+                   return
                  }
+                 that.$toast({
+                     message:res.data.message
+                 })
              })
              .catch(function(err){
                  console.log(err,"error");

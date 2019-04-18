@@ -83,8 +83,12 @@ export default {
                 //  that.$http.post(,qs.stringify(data))
                  axiosPost(url,data)
                 .then(function(res){
-                    if(res.data.success) {
-                        that.showCount=true
+                    if(!res.data.success){
+                        that.$toast({
+                            message:res.data.message
+                        })
+                    } else {
+                         that.showCount=true
                          that.showCode=false
                     }
                     if(that.showCount){
@@ -100,8 +104,6 @@ export default {
                     }
                 })
                 .catch(function (err) {
-                    console.log(err,"error");
-                    
                    that.$toast({
                     message:"请勿重复发送短信"
                   })

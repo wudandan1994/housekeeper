@@ -133,26 +133,35 @@ export default {
         },
         sign(){
             let that =this
-            axiosPost("http://pay.91dianji.com.cn/api/customer/insertSign")
-            .then(function(res){
-               if(!res.data.success){
+                 axiosPost("http://pay.91dianji.com.cn/api/customer/getSignDetail")
+                 .then(function(res){
+                    if(!res.data.success){
+                        that.$toast({
+                            message:res.data.message
+                        })
+                        return
+                    }
+
+                axiosPost("http://pay.91dianji.com.cn/api/customer/insertSign")
+               .then(function(res){
+                 if(!res.data.success){
                     that.$toast({
                     message:res.data.message
                 })
                }
-                
                 that.isPunch=true
                 that.$toast({
-                    message:"签到成功"
-                })
-            })
+                    message:res.data.message
+                   })
+                 })
+   
+                 })
             
         },
          searchPunch(){
              let that = this
            axiosPost("http://pay.91dianji.com.cn/api/customer/getSignDetail")
-           .then(function(res){
-               console.log('签到',res);
+           .then(function(res){ 
                 // this.count=res.data.count
                 that.signcount=res.data.data.signcount
                 that.gold=res.data.data.gold

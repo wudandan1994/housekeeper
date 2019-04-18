@@ -147,7 +147,12 @@ export default {
                axiosPost("http://pay.91dianji.com.cn/api/creditCard/getLoanUrl",data)
               
                .then(function(res){
-                   console.log("success",res);
+                   if(!res.data.success){
+                       this.$toast({
+                           message:res.data.message
+                       })
+                       return
+                   }
                     location.href=res.data.data
                })
                .catch(function(err){

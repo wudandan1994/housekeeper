@@ -100,7 +100,12 @@ export default {
             }
             axiosPost("http://pay.91dianji.com.cn/api/customer/checkBankCard",data)
             .then(function(res){
-                console.log('成功',res);
+                if(!res.data.success){
+                    that.$toast({
+                        message:res.data.message
+                    })
+                    return
+                }
                 if(res.data.success){
                     that.$toast({
                     message:res.data.message
@@ -115,8 +120,9 @@ export default {
                 }
             })
             .catch(function(err){
-                  
-                console.log('err',err);
+               that.$toast({
+                   message:err.message
+               })
                 
             })
         }

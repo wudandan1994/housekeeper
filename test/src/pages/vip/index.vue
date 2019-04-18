@@ -91,9 +91,6 @@
             </div>
         </div>
 
-
-
-
         <div class="buy-detail" v-if="pup2">
             <div class="recom row">
                 <div class="avator end-center"><img :src="recomheadimg" alt=""></div>
