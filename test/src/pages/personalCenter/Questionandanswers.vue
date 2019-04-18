@@ -1,6 +1,6 @@
 <template>
     <div id="question">
-         <header class="header-top row">
+        <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">百问百答</div>
             <div class="right-icon varify center"></div>
@@ -89,6 +89,7 @@ export default {
         width: 100vw;
         height: auto;
         padding-top: 90px;
+        padding-bottom: 50px;
         .big-title{
             width: 96%;
             height: auto;
@@ -96,6 +97,7 @@ export default {
             margin-right: auto;
             margin-top: 50px;
             font-size: 34px;
+            font-weight: bold;
         }
         .small-title{
             width: 94%;
@@ -104,6 +106,7 @@ export default {
             margin-right: auto;
             margin-top: 50px;
             font-size: 30px;
+            font-weight: bold;
         }
         .content{
             width: 92%;
@@ -113,6 +116,8 @@ export default {
             margin-top: 20px;
             font-size: 26px;
             text-align: justify;
+            line-height: 30px;
+            letter-spacing: 2px;
         }
     }
 </style>

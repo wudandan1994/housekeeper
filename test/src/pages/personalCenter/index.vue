@@ -68,10 +68,10 @@
 
         </div>
         <div class="per-list row">
-            <div class="per-menu-list line">
+            <router-link tag="div" to="/personalCenter/cooperation" class="per-menu-list line">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/306.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">商务合作</div>
-            </div>
+            </router-link>
 
             <div class="per-menu-list line">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/307.png" size="30px" color="#dab17b"/></div>
@@ -95,10 +95,10 @@
                 <div class="per-menu-title center">流程说明</div>
             </div>
 
-            <div class="per-menu-list">
+            <router-link tag="div" to="/personalCenter/manual" class="per-menu-list">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/311.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">平台手册</div>
-            </div>
+            </router-link>
         </div>
         <div class="per-list row">
             <router-link tag="div" to="/personalCenter/questionandanswers" class="per-menu-list line">
@@ -106,10 +106,10 @@
                 <div class="per-menu-title center">百问百答</div>
             </router-link>
 
-            <div class="per-menu-list line">
+            <router-link tag="div" to="/personalCenter/contactus" class="per-menu-list line">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/313.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">联系我们</div>
-            </div>
+            </router-link>
 
             <div class="per-menu-list">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/314.png" size="30px" color="#dab17b"/></div>
@@ -144,7 +144,6 @@ export default {
         }
     },
     created(){
-        console.log('VUEX',window.location.href+'&promotioncode=2145');
         this.nickname = this.$store.state.wechat.nickname;
         this.headimg  = this.$store.state.wechat.headimg;
         this.promotioncode  = this.$store.state.wechat.promotioncode; 

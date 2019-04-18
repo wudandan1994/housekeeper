@@ -90,6 +90,12 @@ import bindingCreditCardComponent from '@/pages/bindingCreditCard'
 import repaymentComponent from '@/pages/repayment'
 // 百问百答
 import Questionandanswers from '@/pages/personalCenter/Questionandanswers'
+// 平台手册
+import manual from '@/pages/personalCenter/manual'
+// 商务合作
+import cooperation from '@/pages/personalCenter/cooperation'
+// 联系我们
+import contactUs from '@/pages/personalCenter/contactUs'
 
 export default new Router({
   // mode:"hash",
@@ -170,5 +176,8 @@ export default new Router({
     {path: '/personalCenter/incomedetail/record',component: recordComponent},
     {path: '/personalCenter/previous',component:previousComponent},
     {path: '/personalCenter/questionandanswers',component:Questionandanswers},
+    {path: '/personalCenter/manual',component:manual},
+    {path: '/personalCenter/cooperation',component:cooperation},
+    {path: '/personalCenter/contactus',component:contactUs},
   ]
 })

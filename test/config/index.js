@@ -9,15 +9,15 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: './',
+    assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
-        target: 'http://pay.91dianji.com.cn', //http://106.14.141.40:8080 192.168.101.71
-        changeOrigin: true,
-        // pathRewrite: { //需要rewrite重写的, 如果在服务器端做了处理则可以不要这段
-        //   '^/api': '/api'
-        // }
-      }
+      // '/api': {
+      //   target: 'http://pay.91dianji.com.cn', //http://106.14.141.40:8080 192.168.101.71
+      //   changeOrigin: true,
+      //   pathRewrite: { //需要rewrite重写的, 如果在服务器端做了处理则可以不要这段
+      //     '^/api': '/api'
+      //   }
+      // }
     },
 
     // Various Dev Server settings

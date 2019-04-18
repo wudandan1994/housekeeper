@@ -52,7 +52,8 @@ export default {
                 let params = {
                   openid: res.data.openid
                 };
-                let url = '/customer/getOpenidIsExist';
+                // let url = '/customer/getOpenidIsExist'; //开发环境
+                let url = 'http://pay.91dianji.com.cn/api/customer/getOpenidIsExist' // 生产环境
                 axiosPost(url,params).then(res =>{
                   console.log('openid存在',res);
                   if(res.data.data == '0'){
@@ -63,14 +64,14 @@ export default {
                         photo:    this.$store.state.wechat.headimg,
                         recommendedcode: storage.get('recommendedcode')
                     }
-                    let url = '/customer/registered';
+                    let url = 'http://pay.91dianji.com.cn/api/customer/registered';
                     axiosPost(url,params).then(res =>{
                         console.log('注册成功',res.data);
                         // 登录
+                        let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
                         let params = {
                             openid: this.$store.state.wechat.openid
-                        }
-                        let url = '/customer/loginByWechat';
+                        };
                         axiosPost(url,params).then(res =>{
                             console.log('登陆成功',res);
                             storage.set('cid',res.data.data.id);
@@ -94,7 +95,7 @@ export default {
                     let params = {
                         openid: this.$store.state.wechat.openid
                     }
-                    let url = '/customer/loginByWechat';
+                    let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
                     axiosPost(url,params).then(res =>{
                         console.log('登陆成功',res);
                         storage.set('cid',res.data.data.id);
@@ -157,7 +158,7 @@ export default {
         var timestamp = (new Date()).getTime();
         var url = window.location.href;
         
-        let posturl = '/customer/getSignature';
+        let posturl = 'http://pay.91dianji.com.cn/api/customer/getSignature';
         let params = {
           jsapi_ticket: jsapi_ticket,
           url: url,
