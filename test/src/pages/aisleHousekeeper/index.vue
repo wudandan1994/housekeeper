@@ -79,14 +79,10 @@ export default {
                         message:res.data.message
                     })
                 }
-                console.log(res);
-                
                 let list=JSON.parse(res.data.data.rt5_bindCardList)
-                console.log(list);
-                
-                if(list.length===0){
-                      that.$toast=({
-                        message:"你还没有绑定信用卡"
+                if(!res.data.success){
+                    that.$toast({
+                        message:res.data.message
                     })
                 }
                 that.bankList=list
