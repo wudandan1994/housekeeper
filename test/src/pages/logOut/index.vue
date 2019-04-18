@@ -46,7 +46,6 @@
 <script>
 import storage from '@/lib/storage'
 import {axiosPost} from '@/lib/http'
-import qs from 'qs'
 export default {
     data() {
         return {
@@ -73,7 +72,7 @@ export default {
                     message:"请填写11位手机号码"
                 })
                  return
-            } else  {
+            }  else  {
                 let data={
                     mobile:that.mobile,
                     type:"2"
@@ -114,19 +113,13 @@ export default {
         modify(){
              let that=this
             let partten=/^1\d{10}$/  // 11位手机号的正则
-            //  let code=/[0-9A-Za-z] {6,18} /  //密码的正则
             if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
                 })
                  return
             }
-            // if(!code.test(that.newPassword)){
-            //      that.$toast({
-            //         message:"输入6-18位字母加数字新密码"
-            //     })
-            //      return
-            // }
+            
             if(that.authcode.trim().length===0){
                  that.$toast({
                     message:"请输入验证码"
@@ -159,12 +152,15 @@ export default {
                  return
             }
 
-            let logindata={
+
+            let data={
                 mobile:that.mobile,
-                authcode:that.authcode
+                authcode:that.authcode,
+                recommendedcode:that.code,
+                password:that.suerPassword,
             }
-            // 验证手机号码是否注册过
-             axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",logindata)
+                 // 注册
+             axiosPost("http://pay.91dianji.com.cn/api/customer/insertPhoneRegistered",data)
              .then(function(res){
                  if(!res.data.success){
                      that.$toast({
@@ -172,20 +168,7 @@ export default {
                      })
                      return
                  }
-
-                  let data={
-                    password:that.suerPassword,
-                    mobile:that.mobile,
-                    authcode:that.authcode,
-                    recommendedcode:that.code
-            }
-            // 注册
-             axiosPost("http://pay.91dianji.com.cn/api/customer/insertPhoneRegistered",data)
-             .then(function(res){
-                 console.log(res,"result");
-                 that.$toast({
-                     message:res.data.message
-                 })
+                 
                  let datas={
                      mobile:that.mobile,
                      password:that.password
@@ -204,14 +187,6 @@ export default {
                  console.log(err,"error");
                  
              })
-
-             })
-             .catch(function(err){
-
-             })
-
-
-
 
 
            
