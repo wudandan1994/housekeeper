@@ -51,7 +51,7 @@
         </header>
         <div class="menu-title start-center">特约服务</div>
         <div class="per-list row">
-            <router-link tag="div" class="per-menu-list line" to="/ponserCenter/userAccountManage">
+            <router-link tag="div" class="per-menu-list line" :to="{path: '/ponserCenter/userAccountManage',query: {amount: amount}}">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/303.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">账户管理</div>
             </router-link>

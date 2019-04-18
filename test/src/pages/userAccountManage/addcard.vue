@@ -3,9 +3,9 @@
         <header class="header-top row">
             <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">银行卡管理</div>
-            <div class="right-icon center"><van-icon color="white" size="20px" name="card"/></div>
+            <div class="right-icon center" @click="handleBankCardList"><van-icon color="white" size="20px" name="card"/></div>
         </header>
-        <div class="personal row">
+        <!-- <div class="personal row">
             <div class="avator center"><img :src="headimg"></div>
             <div class="name-code">
                 <div class="name row">
@@ -15,7 +15,7 @@
                 <div class="code start-center">推荐码：{{recommendedcode}}</div>
             </div>
             <div class="status center">(未绑定)</div>
-        </div>
+        </div> -->
         <router-link tag="div" to="/personalCenter/addcard/UnionPay" class="UnionPay row">
             <div class="pay-icon end-center"> <svg class="icon" aria-hidden="true"><use xlink:href="#icon-pay-unionpay"></use></svg></div>
             <div class="add-icon center"><van-icon name="plus"/></div>
@@ -55,7 +55,8 @@ export default {
         },
         // 获取已绑定银行卡列表
         handleBankCardList(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getBankCardByOpenid';
+            let url = '/customer/getBankCardByOpenid';
+            // let url = 'http://pay.91dianji.com.cn/api/customer/getBankCardByOpenid';
             let params = {};
             axiosPost(url,params).then(res =>{
                 console.log('获取已绑定银行卡列表成功',res);
@@ -76,8 +77,9 @@ export default {
 <style lang="less" scoped>
     #add-card{
         width: 100vw;
-        height: 100vh;
+        height: calc(100vh - 90px);
         background: #EEEFF1;
+        padding-top: 90px;
         .loan .van-nav-bar {
             background-color: #4B66AF!important;
       }
