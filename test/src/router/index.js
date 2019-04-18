@@ -88,12 +88,10 @@ import previousComponent from '@/pages/previous'
 import bindingCreditCardComponent from '@/pages/bindingCreditCard'
 // 付款
 import repaymentComponent from '@/pages/repayment'
-<<<<<<< HEAD
 // 商户收款
 import collectComponent from '@/pages/collect'
 
 
-=======
 // 百问百答
 import Questionandanswers from '@/pages/personalCenter/Questionandanswers'
 // 平台手册
@@ -102,7 +100,6 @@ import manual from '@/pages/personalCenter/manual'
 import cooperation from '@/pages/personalCenter/cooperation'
 // 联系我们
 import contactUs from '@/pages/personalCenter/contactUs'
->>>>>>> 1849e0f47cb17536ffe879647632b0ff5c58fcc2
 
 export default new Router({
   // mode:"hash",
