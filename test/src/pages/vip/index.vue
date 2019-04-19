@@ -281,13 +281,14 @@ export default {
                 axiosPost(url,params).then(res =>{
                         console.log('发起微信支付成功',res);
                         var radom = Math.random().toString(36).substr(2);
-                        var timestamp = (new Date()).getTime();
+                        var tmp = Date.parse( new Date() ).toString();
+                        tmp = tmp.substr(0,10);
                         wx.chooseWXPay({
-                            timestamp: timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                            nonceStr: radom, // 支付签名随机串，不长于 32 位
-                            package: 'prepay_id='+res.data.prepay_id, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                            timestamp: res.data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                            nonceStr: res.data.nonceStr, // 支付签名随机串，不长于 32 位
+                            package: res.data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
                             signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                            paySign: res.data.sign, // 支付签名
+                            paySign: res.data.paySign, // 支付签名
                             success: function (res) {
                                 console.log('支付成功',res);
                             }
@@ -300,6 +301,7 @@ export default {
         }
     },
     created(){
+        console.log('时间戳',(Date.parse( new Date() ).toString()).substr(0,10));
     }
 }
 </script>

@@ -1,24 +1,27 @@
 <template>
     <div id="page-incomedetail">
-         <header class="manage loan">
-            <van-nav-bar title="收入明细" left-text="返回" left-arrow @click-left="handleReturnHome" @click-right="handleMore">
-            </van-nav-bar>
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">收益明细</div>
+            <div class="right-icon center"></div>
         </header>
         <div class="tabs">
-            <van-tabs v-model="active">
-                <van-tab title="业务收入">
-                    <div class="income-tab">
-                        <div class="top-tab row">
+
+             <div class="income-tab">
+                        <!-- <div class="top-tab row">
                             <div class="money center">总额： <span>65522.00</span></div>
                             <div class="money center">可提现：<span>54242.00</span></div>
                             <div class="info center"><van-icon name="info" size="1.5em" color="#BD3B3C"/></div>
-                        </div>
-                        <div class="per-list">
-                            <div class="type">红包入账</div>
-                            <div class="time">2019-03-30 15:62:32</div>
-                            <div class="amount center">+10</div>
+                        </div> -->
+                        <div class="per-list" v-for="(item,index) in list" :key="index">
+                            <div class="type">{{item.nickname}}</div>
+                            <div class="time">{{item.mobile}}</div>
+                            <div class="amount center">+{{item.amount}}</div>
                         </div>
                     </div>
+            <!-- <van-tabs v-model="active">
+                <van-tab title="业务收入">
+                   
                 </van-tab>
                 <van-tab title="招商收入">
                     <div class="income-tab">
@@ -47,7 +50,6 @@
                             <div class="per-switch center" :class="{checked: !now}" @click="handleChange">
                                 邀请中(68人)
                             </div>
-                            <!-- 分类隐藏菜单 -->
                             <div class="hidden-menu row" v-if="menus">
                                 <div class="hidden-small-title center" :class="[smallcheck == 'all' ? 'actives' : '']" @click="handleGetSmallType('all')">
                                     <div class="right-line center">全部</div>
@@ -119,26 +121,27 @@
                     </div>
                 </van-tab>
                 <van-tab title="分销佣金">内容 3</van-tab>
-            </van-tabs>
+            </van-tabs> -->
         </div>
     </div>
 </template>
 <script>
+import storage from '@/lib/storage'
+import { axiosPost } from '../../lib/http';
 export default {
     data(){
         return{
             active: 0,
             now: true,
             smallcheck: 'all',
-            menus: false
+            menus: false,
+            list: [],
         }
     },
     methods:{
         // 返回首页
         handleReturnHome(){
-            this.$router.push({
-                path:'/personalCenter/income'
-            })
+            this.$router.go(-1);
         },
         // 更多
         handleMore(){
@@ -160,12 +163,42 @@ export default {
             console.log('当前分类',val);
             this.smallcheck = val;
             this.menus = false;
+        },
+        // 流水明细
+        handleFlowDetails(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getAmountFrom';
+            let params = {
+                page: 1,
+                pageSize: 1000
+            };
+            axiosPost(url,params).then(res =>{
+                console.log('流水请求成功',res);
+                if(res.data.data.data.length == '0'){
+                    this.$toast('流水为空');
+                }else{
+                    this.list = res.data.data.data;
+                }
+            }).catch(res =>{
+                console.log('流水请求失败',res);
+            })
         }
+    },
+    beforeRouteEnter(to,from,next){
+        console.log('路由',from);
+        next((vm)=>{ //参数vm就是当前组件的实例。
+            storage.set('preRouters',from.fullPath);
+        })
+    },
+    created(){
+        this.handleFlowDetails();
     }
 }
 </script>
 <style lang="less" scoped>
     #page-incomedetail{
+        width: 100vw;
+        height: auto;
+        padding-top: 86px;
         .income-tab{
             .top-tab{
                 width: 100%;

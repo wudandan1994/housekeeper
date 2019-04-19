@@ -10,7 +10,7 @@
                     </div>
                 </div>
             </div>
-            <div class="operator end-center">
+            <div class="operator end-center" @click="handleExpect">
                 <van-icon name="medel" size="20px" color="#dab17b"/>
                 <span>运营商</span>
             </div>
@@ -37,15 +37,15 @@
             <div class="bottom row">
                 <div class="per-menu">
                     <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/303-check.png" size="30px" color="#dab17b"/></div>
-                    <router-link tag="div" class="per-title center" to="/personalCenter/incomedetail/integralCash">积分</router-link>
+                    <div class="per-title center" @click="handleExpect">积分</div>
                 </div>
                  <div class="per-menu">
                     <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/304-check.png" size="30px" color="#dab17b"/></div>
-                    <router-link tag="div" to="/personalCenter/incomedetail/cash" class="per-title center">可结算</router-link>
+                    <router-link tag="div" :to="{path: '/personalCenter/incomedetail/cash',query: {amount: amount}}" class="per-title center">可结算</router-link>
                 </div>
                  <div class="per-menu">
                     <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/305-check.png" size="30px" color="#dab17b"/></div>
-                    <router-link tag="div" to="/ponserCenter/userAccountManage" class="per-title center">总收益</router-link>
+                    <router-link tag="div" :to="{path: '/personalCenter/income',query: {amountSum: amountSum}}" class="per-title center">总收益</router-link>
                 </div>
             </div>
         </header>
@@ -61,7 +61,7 @@
                 <div class="per-menu-title center">上级推荐人</div>
             </router-link>
 
-            <div class="per-menu-list">
+            <div class="per-menu-list" @click="handleExpect">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/305.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">微名片</div>
             </div>
@@ -73,19 +73,19 @@
                 <div class="per-menu-title center">商务合作</div>
             </router-link>
 
-            <div class="per-menu-list line">
+            <div class="per-menu-list line" @click="handleExpect">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/307.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">共享佣金池</div>
             </div>
 
-            <div class="per-menu-list">
+            <div class="per-menu-list" @click="handleExpect">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/308.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">营销课堂</div>
             </div>
         </div>
         <div class="menu-title m-top start-center">实时工具</div>
         <div class="per-list row">
-            <div class="per-menu-list line">
+            <div class="per-menu-list line" @click="handleExpect">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/309.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">VIP视频</div>
             </div>
@@ -111,7 +111,7 @@
                 <div class="per-menu-title center">联系我们</div>
             </router-link>
 
-            <div class="per-menu-list">
+            <div class="per-menu-list" @click="handleExpect">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/314.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">名片夹</div>
             </div>
@@ -142,6 +142,10 @@ export default {
         }
     },
     methods:{
+        // 尽请期待
+        handleExpect(){
+            this.$toast('尽情期待');
+        },
         changeActive(obj){
             console.log('obj', obj);
         },
@@ -153,15 +157,19 @@ export default {
                 openid:this.$store.state.wechat.openid,
             };
             axiosPost(url,params).then(res =>{
-                console.log('查询个人设置成功',res);
+                console.log('查询个人设置成功',res.data);
                 if(res.data.success){
+                    this.nickname = res.data.data.nickname;
+                    this.headimg  = res.data.data.photo;
+                    this.promotioncode  = res.data.data.promotioncode; 
                     this.amount = res.data.data.amount;
                     this.amountSum = res.data.data.amountSum;
                     this.commission = res.data.data.commission;
+                    res.data.data.iscertification == '0' ? this.iscertification = '实名认证' : ( res.data.data.iscertification == '1' ? this.iscertification = '审核中' : this.iscertification = '认证通过'); 
                     if(res.data.data.level == '0'){
-                        this.vip ='http://pay.91dianji.com.cn/301.png';
+                        this.vip ='http://pay.91dianji.com.cn/301-1.png';
                     }
-                    if(res.data.data.level == '1'){
+                    else if(res.data.data.level == '1'){
                         this.vip ='http://pay.91dianji.com.cn/huangjinVIP.png';
                     }else{
                         this.vip = 'http://pay.91dianji.com.cn/zuanshivip.png';
@@ -173,10 +181,6 @@ export default {
         }
     },
     created(){
-        this.nickname = this.$store.state.wechat.nickname;
-        this.headimg  = this.$store.state.wechat.headimg;
-        this.promotioncode  = this.$store.state.wechat.promotioncode; 
-        this.$store.state.wechat.iscertification == '0' ? this.iscertification = '实名认证' : (this.$store.state.wechat.iscertification == '1' ? this.iscertification = '审核中' : this.iscertification = '认证通过'); 
         this.handleGetAmount();
     }
 }
