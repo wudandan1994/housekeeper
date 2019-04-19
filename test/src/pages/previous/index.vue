@@ -30,7 +30,7 @@
                           <p><van-icon name="phone"/></p>
                           <div> 
                               <p class="gray">打电话</p>
-                              <a :href="mobile">和上级电话联系</a>
+                              <a :href="'tel:' + mobile">和上级电话联系</a>
                           </div>
                       </li>
                        <li @click="handleMorePreviousDetail">
@@ -44,7 +44,7 @@
               </div>
              <div class="tips">
                  <h3>1.温馨提示</h3>
-                 <p>专属服务经理是平台对用户的第一责任人，在享用平台相关权益的同时，也肩负指导、培训和为用户排忧解难的责任和义务，投诉电话：400-801-5636</p>
+                 <p>专属服务经理是平台对用户的第一责任人，在享用平台相关权益的同时，也肩负指导、培训和为用户排忧解难的责任和义务，投诉电话：400-105-9769</p>
              </div>
         </div>
     </div>

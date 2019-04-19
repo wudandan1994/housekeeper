@@ -1,9 +1,9 @@
 <template>
     <div id="logOut">
-        <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>注册</span>
-            <span></span>
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">注册</div>
+            <div class="right-icon center"></div>
         </header>
         <div class="container">
            <p>请获取短信验证，并设置新的登录密码</p>
@@ -35,7 +35,7 @@
                    </li>
                </ul>
            </div>
-           <div @click="modify" class="at-once">立即注册</div>
+           <van-button type="default" @click="modify" class="at-once">立即注册</van-button>
         </div>
     </div>
 </template>
@@ -158,23 +158,23 @@ export default {
                  // 注册
              axiosPost("http://pay.91dianji.com.cn/api/customer/insertPhoneRegistered",data)
              .then(function(res){
-                 if(!res.data.success){
-                     that.$toast({
+                 if(res.data.success){
+                        let datas={
+                        mobile:that.mobile,
+                        password:that.password
+                    }
+                    //  登录
+                    axiosPost("http://pay.91dianji.com.cn/api/customer/login",datas)
+                    .then(function(res){
+                        that.$router.push("/home")
+                    })
+                    .catch(function(err){
+                    })
+                 }else{
+                    that.$toast({
                          message:res.data.message
-                     })
-                     return
+                    })
                  }
-                 let datas={
-                     mobile:that.mobile,
-                     password:that.password
-                 }
-                //  登录
-                 axiosPost("http://pay.91dianji.com.cn/api/customer/login",datas)
-                 .then(function(res){
-                     that.$router.push("/home")
-                 })
-                 .catch(function(err){
-                 })
              })
              .catch(function(err){
                  console.log(err,"error");
@@ -190,12 +190,15 @@ export default {
 
 <style lang="less">
    #logOut {
+       width: 100vw;
+       height: calc(100vh - 86px);
+       padding-top: 86px;
+       background-color: #EEEFF1;
        >header {
            background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
-           padding-top:10px;
            color:#fff;
            font-size:28px;
            display: flex;
@@ -212,9 +215,6 @@ export default {
            }
        }
        >.container {
-           padding-top:96px;
-           padding-bottom: 50px;
-           background-color: #EEEFF1;
            >p {
                padding:30px;
                font-size: 30px;
@@ -245,25 +245,28 @@ export default {
                                margin-right:20px;
                                line-height: 60px;
                                border-radius: 10px;
+                               font-size: 28px;
                            }
                        }
                        >input {
                            border:none;
                            flex: 1;
                            margin-left:10px;
+                           font-size: 28px;
                        }
                    }
                }
            }
            >.at-once {
                width:90%;
+               height: 80px;
                background-color: #4965AE;
                color:white;
-               margin-top:200px;
+               margin-top:100px;
                margin-left:5%;
                text-align: center;
-               padding:30px;
                border-radius: 10px;
+               font-size: 30px;
            }
        }
    }
