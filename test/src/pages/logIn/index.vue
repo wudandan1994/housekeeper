@@ -82,13 +82,14 @@ export default {
             }
             that.$http.post("http://pay.91dianji.com.cn/api/customer/login",qs.stringify(data))
             .then(function(res){
-                if(!res.data.success){
+                if(res.data.success){
+                    that.$router.push('/home')
+                }else{
                     that.$toast({
                         message:res.data.message
                     })
-                    return
                 }
-                 that.$router.push('/home')
+                 
                
             })
             .catch(function(err){

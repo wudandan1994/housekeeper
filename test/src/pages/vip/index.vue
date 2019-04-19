@@ -91,10 +91,6 @@
             </div>
         </div>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d03bc6ecf342405c92257cc178de02bd5b6502ae
         <div class="buy-detail" v-if="pup2">
             <div class="recom row">
                 <div class="avator end-center"><img :src="recomheadimg" alt=""></div>
@@ -262,20 +258,50 @@ export default {
                 // 支付宝支付
                 var ua = navigator.userAgent.toLowerCase();
                 if(ua.match(/MicroMessenger/i)=="micromessenger") {
-                    window.location.href="http://bc.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
+                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
                          
                 } else {
                     // 非微信浏览器
                     console.log('非微信');
                 } 
             }else{
-                console.log('发起微信支付');
-                this.$toast('微信支付对接中');
+                if(this.$store.state.wechat.openid != ''){
+                    var  params = {
+                        orderid: this.orderid,
+                        trade_type: 'JSAPI',
+                        openid: this.$store.state.wechat.openid
+                    };
+                }else{
+                    var  params = {
+                        orderid: this.orderid,
+                        trade_type: 'APP',
+                    }; 
+                }
+                var url = 'http://pay.91dianji.com.cn/api/order/wxPayH5';
+                axiosPost(url,params).then(res =>{
+                        console.log('发起微信支付成功',res);
+                        var radom = Math.random().toString(36).substr(2);
+                        var tmp = Date.parse( new Date() ).toString();
+                        tmp = tmp.substr(0,10);
+                        wx.chooseWXPay({
+                            timestamp: res.data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                            nonceStr: res.data.nonceStr, // 支付签名随机串，不长于 32 位
+                            package: res.data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                            signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                            paySign: res.data.paySign, // 支付签名
+                            success: function (res) {
+                                console.log('支付成功',res);
+                            }
+                        });
+                    }).catch(res =>{
+                        console.log('发起微信支付失败',res);
+                    })
             }
             
         }
     },
     created(){
+        console.log('时间戳',(Date.parse( new Date() ).toString()).substr(0,10));
     }
 }
 </script>

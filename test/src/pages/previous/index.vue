@@ -30,10 +30,10 @@
                           <p><van-icon name="phone"/></p>
                           <div> 
                               <p class="gray">打电话</p>
-                              <p>和上级电话联系</p>
+                              <a :href="'tel:' + mobile">和上级电话联系</a>
                           </div>
                       </li>
-                       <li>
+                       <li @click="handleMorePreviousDetail">
                           <p><van-icon name="manager"/></p>
                           <div> 
                               <p class="gray">我的上级</p>
@@ -44,7 +44,7 @@
               </div>
              <div class="tips">
                  <h3>1.温馨提示</h3>
-                 <p>专属服务经理是平台对用户的第一责任人，在享用平台相关权益的同时，也肩负指导、培训和为用户排忧解难的责任和义务，投诉电话：400-801-5636</p>
+                 <p>专属服务经理是平台对用户的第一责任人，在享用平台相关权益的同时，也肩负指导、培训和为用户排忧解难的责任和义务，投诉电话：400-105-9769</p>
              </div>
         </div>
     </div>
@@ -53,23 +53,46 @@
 
 
 <script>
+import storage from '@/lib/storage'
+import { axiosPost } from '@/lib/http';
 export default {
     data() {
         return {
-            nickname:"",
-            recommendedcode:"",
-            level:""
+            nickname: '',
+            mobile: '',
+            level: '',
+            recommendedcode: '',
         }
     },
     methods:{
         goBack() {
             this.$router.push('/personalCenter')
+        },
+        // 上级详细信息
+        handleMorePreviousDetail(){
+            this.$toast('暂无更多信息');
+        },
+        // 查询上级
+        handlePrevious(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomerUP';
+            let params = {
+                recommendedcode: this.$store.state.wechat.recommendedcode
+            };
+            axiosPost(url,params).then(res =>{
+                console.log('上级请求成功',res);
+                if(res.data.success){
+                    this.nickname = res.data.data.nickname;
+                    this.mobile = res.data.data.mobile,
+                    this.recommendedcode = res.data.data.promotioncode,
+                    res.data.data.level == '0' ?  this.level = '实习' : (res.data.data.level == '1' ? this.level = '黄金会员' : this.level = '钻石会员');
+                }
+            }).catch(res =>{
+                console.log('上级请求失败',res);
+            })
         }
     },
    created(){
-        this.nickname = this.$store.state.wechat.nickname
-        this.recommendedcode  = this.$store.state.wechat.recommendedcode
-        this.level = this.$store.state.wechat.level
+        this.handlePrevious();
     }
 }
 </script>

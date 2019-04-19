@@ -1,16 +1,17 @@
 <template>
     <div id="page-income">
-        <header class="manage loan">
-            <van-nav-bar title="收益明细" left-text="返回" left-arrow @click-left="handleReturnHome" @click-right="handleMore">
-            </van-nav-bar>
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">收益明细</div>
+            <div class="right-icon center"></div>
         </header>
         <div class="top">
             <div class="all-income">总收益</div>
-            <div class="integrated-services center">综合业务</div>
-            <div class="balance center">20000.00</div>
-            <div class="incomes row">
+            <!-- <div class="integrated-services center">综合业务</div> -->
+            <div class="balance center">{{amountSum}}</div>
+            <!-- <div class="incomes row">
                 <div class="today-income">
-                    <div class="today center">今日收益</div>
+                    <div class="today center">总计收益</div>
                     <div class="today-number center">78.00</div>
                 </div>
 
@@ -18,9 +19,9 @@
                     <div class="today center">今日收益</div>
                     <div class="today-number center">78.00</div>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <div class="business-investment row">
+        <!-- <div class="business-investment row">
             <div class="business">
                 <div class="per-business center"><i class="iconfont icon-xianjin"></i>业务收益</div>
                 <div class="per-business special center">今日: 0笔</div>
@@ -29,8 +30,8 @@
                 <div class="per-business center"><i class="iconfont icon-xianjin"></i>业务收益</div>
                 <div class="per-business special center">今日: 0笔</div>
             </div>
-        </div>
-        <router-link tag="div" class="running-account row" to="/personalCenter/incomedetail">
+        </div> -->
+        <router-link tag="div" class="running-account row" :to="{path: '/personalCenter/incomedetail',query: {amountSum: amountSum}}">
             <div class="left-icon center"><i class="iconfont icon-jine1"></i></div>
             <div class="run-title start-center">以入账收入流水</div>
             <div class="right-icon end-center"><i class="iconfont icon-more"></i></div>
@@ -38,26 +39,39 @@
     </div>
 </template>
 <script>
+import storage from '@/lib/storage'
 export default {
     data(){
-        return{}
+        return{
+            amountSum: '',
+            preRouter: '',
+        }
     },
     methods:{
          // 返回首页
         handleReturnHome(){
-            this.$router.push({
-                path:'/ponserCenter/userAccountManage'
-            })
+            // this.$router.push({
+            //     path: storage.get('preRouter')
+            // })
+             this.$router.go(-1);
         },
         // 更多
         handleMore(){
             this.$toast('尽请期待');
         },
+    },
+    created(){
+        this.amountSum = this.$route.query.amountSum;
+        console.log('路由',this);
+        
     }
 }
 </script>
 <style lang="less" scoped>
     #page-income{
+        width: 100vw;
+        height: auto;
+        padding-top: 90px;
         .top{
             width: 90vw;
             height: 350px;

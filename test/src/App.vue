@@ -181,7 +181,8 @@ export default {
                 'getLocation',
                 'updateAppMessageShareData',
                 'onMenuShareTimeline',
-                'onMenuShareAppMessage'
+                'onMenuShareAppMessage',
+                'chooseWXPay'
               ] // 必填，需要使用的JS接口列表
           });
           wx.ready(function(){
