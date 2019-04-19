@@ -64,23 +64,24 @@ export default {
             cardback: 'idcardback.jpg',
             back: '',
             loading: false,
-            status: ''
+            status: '',
+          
         }
     },
     methods:{
         // 身份证正面
          onRead(file) {
-            console.log('文件上传',file);
-            var form = new FormData();
-            form.append('file',file.file);
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg';
+            console.log('文件上传',file)
+            var form = new FormData()
+            form.append('file',file.file)
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
             axios.post(url,form,config).then(res =>{
                 console.log('文件上传成功',res);
                 if(res.data.success){
-                    this.cardfront = res.data.data.imgUrl;
+                    this.cardfront = res.data.data.imgUrl
                 }
             }).catch(res =>{
                 console.log('文件上传失败',res);
@@ -267,7 +268,6 @@ export default {
                         >img{
                             width: 100%;
                             height: 100%;
-                            background: #c63;
                         }
                     }
                 }

@@ -2,7 +2,7 @@
     <div id="collect">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>商户收款</span>
+            <span>商户申请</span>
             <span></span>
         </header>
         <div class="container">
@@ -77,7 +77,7 @@
                </ul>
            </div>
            <div class="at-once">
-                   <van-button  @click="register" size="large" round type="info">注册店铺</van-button>
+                   <van-button  @click="register" size="large" round type="info">下一步</van-button>
                </div>
         </div>
     </div>
@@ -206,7 +206,6 @@ export default {
                 settleAccType:that.settleAccType==="公户"? "1":"2",
                 merType:type
             }
-            console.log(data)
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg",data)
             .then(function(res){
                 console.log(res,"result");
@@ -219,30 +218,47 @@ export default {
                 that.$toast({
                     message:res.data.message
                 })
-                that.$router.push("/home/receivables")
+                let info=res.data.data.chMerCode
+                that.$router.push({
+                    path:"/home/collect/open",
+                    query:{
+                        info,
+                    }
+                })
             })
             .catch(function(err){
-                console.log(err,"error");
+                console.log(err,"error")
                 
             })
 
         },
         // 查询个人信息
          searchInfo(){
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg")
+             let that=this
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
         .then(function(res){
-            console.log(res,"result")
+           let info=res.data.data.chMerCode
+            if(res.data.success){
+                that.$router.push({
+                     path:"/home/collect/open",
+                    query:{
+                        info,
+                    }
+                })
+            }
             
         })
         .catch(function(err){
-            console.log(err,"error")
+            console.log(err,"error个人信息")
             
         })
      }
         
     },
-    created () {
+   
+    mounted () {
         this.searchInfo()
+
     }
 }
 </script>

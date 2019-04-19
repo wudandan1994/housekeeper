@@ -120,6 +120,7 @@ export default {
     data() {
         return {
             showTips:false,
+            personInfo:{}
         }
     },
     methods:{
@@ -136,10 +137,11 @@ export default {
              this.showTips=true
         },
         searchInfo(){
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg")
+            let that=this
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
         .then(function(res){
             console.log(res,"result")
-            
+            that.personInfo=res.data.data
         })
         .catch(function(err){
             console.log(err,"error")

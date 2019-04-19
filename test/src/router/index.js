@@ -90,6 +90,12 @@ import bindingCreditCardComponent from '@/pages/bindingCreditCard'
 import repaymentComponent from '@/pages/repayment'
 // 商户收款
 import collectComponent from '@/pages/collect'
+// 开通业务
+import openComponent from '@/pages/open'
+// 快捷支付
+import paymentComponent from '@/pages/payment'
+
+
 
 
 // 百问百答
@@ -101,6 +107,9 @@ import cooperation from '@/pages/personalCenter/cooperation'
 // 联系我们
 import contactUs from '@/pages/personalCenter/contactUs'
 
+
+
+
 export default new Router({
   // mode:"hash",
   routes: [
@@ -111,6 +120,8 @@ export default new Router({
     {path:"/logOut",component:logOutComponent},  
     {path:"/register",component:registerComponent},
     {path:"/home/collect",component:collectComponent},
+    {path:"/home/collect/open",component:openComponent},
+    {path:"/home/collect/payment",component:paymentComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
     {path:"/home/news",component:newsComponent},
