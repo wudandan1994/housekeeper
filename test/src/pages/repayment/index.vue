@@ -83,7 +83,6 @@ export default {
                 P8_orderAmount:that.repayment,
                 P11_terminalType:"IMEI",
                 P12_terminalId:"122121212121",
-                P13_orderIp:"127.0.0.1"
             }
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/bindCardPayWithoutCode",data)
             .then(function(res){

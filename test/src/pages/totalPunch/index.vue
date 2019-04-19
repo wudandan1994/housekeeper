@@ -162,12 +162,17 @@ export default {
              let that = this
            axiosPost("http://pay.91dianji.com.cn/api/customer/getSignDetail")
            .then(function(res){ 
-                // this.count=res.data.count
-                that.signcount=res.data.data.signcount
-                that.gold=res.data.data.gold
-                if(res.data.success){
-                    that.isPunch=true
+               console.log(res);
+               
+                if(!res.data.success){
+                    // that.isPunch=true
+                    that.$toast({
+                        message:res.data.message
+                    })
+                    return
                 }
+                 that.signcount=res.data.data.signcount
+                 that.gold=res.data.data.gold
            })
          },
          initData: function (cur) {

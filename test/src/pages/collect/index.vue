@@ -51,12 +51,28 @@
                     <li>
                         <span>结算户类型</span>
                        <input v-model="settleAccType"  type="text" placeholder="请选择结算户类型">
-                       <span><van-icon name="arrow"/></span>
+                       <span @click="showAcc"><van-icon name="arrow"/></span>
+                             <van-actionsheet
+                            v-model="show"
+                            :actions="actions"
+                            cancel-text="取消"
+                            @select="onSelect"
+                            @cancel="onCancel"
+                            />
                    </li>
                    <li>
                         <span>商户类型</span>
                        <input  v-model="merType" type="text" placeholder="请选择商户类型">
-                        <span><van-icon name="arrow"/></span>
+                        <span @click="showMer"><van-icon name="arrow"/></span>
+                         <van-actionsheet
+                            v-model="showTwo"
+                            :actions="action"
+                            cancel-text="取消"
+                            @select="onSelectTwo"
+                            @cancel="onCancelTwo"
+                            />
+
+
                    </li>
                </ul>
            </div>
@@ -81,18 +97,65 @@ export default {
            merAddress:"",
            idCard:"",
            accountName:"",
-           accountNof:"",
+           accountNo:"",
            subBankCode:"",
            settleAccType:"",
            merType:"",
+           show:false,
+           showTwo:false,
+            actions: [
+                {
+                    name: '公户'
+                },
+                {
+                    name:"私户"
+                }
+             ],
+             action:[
+                 {
+                     name: '个人户' 
+                 },
+                 {
+                      name: '小微户' 
+                 },
+                  {
+                      name: '个体户' 
+                 },
+                  {
+                      name: '公司户' 
+                 },
+             ]
         }
     },
     methods:{
         goBack() {
-            this.$router.push('/logIn')
+            this.$router.push('/home')
         },
+        onSelect(item){
+             this.show = true;
+            this.settleAccType=item.name
+        },
+        onCancel(){
+            this.show=false
+        },
+        showAcc(){
+            this.show=true
+            
+        },
+        showMer(){
+            this.showTwo=true
+        },
+        onSelectTwo(item){
+            this.showTwo=true
+             this.merType=item.name
+        },
+        onCancelTwo(){
+            this.showTwo=false
+        },
+        // 申请商铺
         register(){
             let that=this
+            let type=""
             let partten=/^1\d{10}$/
             if(that.reservedMobile.trim().length===0 || that.mobile.trim().length===0){
                 that.$toast({
@@ -107,23 +170,79 @@ export default {
                 return
             }
             if(that.realName.trim().length===0 || that.merName.trim().length===0 || that.merAddress.trim().length===0 || that.idCard.trim().length===0 || that.accountName.trim().length===0
-            
+            || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0 || that.settleAccType.trim().length===0 || that.merType.trim().length===0
             ){
                 that.$toast({
                     message:"请将信息填写完整"
                 })
+                return
+            }
+            if(that.realName!==that.accountName){
+                 that.$toast({
+                    message:"姓名与结算户名不一致"
+                })
+                return
             }
 
+            if(that.merType==="个人户"){
+                type="1"
+            } else if(that.merType==="小微户"){
+                type="2"
+            } else if(that.merType==="个体户"){
+                type="3"
+            } else {
+                type="4"
+            }
+            let data={
+                merName:that.merName,
+                realName:that.realName,
+                merAddress:that.merAddress,
+                idCard:that.idCard,
+                mobile:that.mobile,
+                accountName:that.accountName,
+                accountNo:that.accountNo,
+                reservedMobile:that.reservedMobile,
+                subBankCode:that.subBankCode,
+                settleAccType:that.settleAccType==="公户"? "1":"2",
+                merType:type
+            }
+            console.log(data)
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg",data)
+            .then(function(res){
+                console.log(res,"result");
+                if(!res.data.success){
+                    that.$toast({
+                        message:res.data.message
+                    })
+                    return
+                }
+                that.$toast({
+                    message:res.data.message
+                })
+                that.$router.push("/home/receivables")
+            })
+            .catch(function(err){
+                console.log(err,"error");
+                
+            })
 
-
-
-
-
-
-
-
-        }
-      
+        },
+        // 查询个人信息
+         searchInfo(){
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg")
+        .then(function(res){
+            console.log(res,"result")
+            
+        })
+        .catch(function(err){
+            console.log(err,"error")
+            
+        })
+     }
+        
+    },
+    created () {
+        this.searchInfo()
     }
 }
 </script>
