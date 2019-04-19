@@ -115,6 +115,7 @@
 </template>
 
 <script>
+import {axiosPost} from '@/lib/http'
 export default {
     data() {
         return {
@@ -133,8 +134,22 @@ export default {
         },
         showPay(){
              this.showTips=true
-        }
+        },
+        searchInfo(){
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg")
+        .then(function(res){
+            console.log(res,"result")
+            
+        })
+        .catch(function(err){
+            console.log(err,"error")
+            
+        })
+     }
 
+    },
+    created () {
+        this.searchInfo()
     }
 }
 </script>

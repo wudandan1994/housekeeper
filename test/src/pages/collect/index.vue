@@ -129,7 +129,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/logIn')
+            this.$router.push('/home')
         },
         onSelect(item){
              this.show = true;
@@ -207,29 +207,42 @@ export default {
                 merType:type
             }
             console.log(data)
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg")
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg",data)
             .then(function(res){
-                console.console.log(res,"result");
-                
+                console.log(res,"result");
+                if(!res.data.success){
+                    that.$toast({
+                        message:res.data.message
+                    })
+                    return
+                }
+                that.$toast({
+                    message:res.data.message
+                })
+                that.$router.push("/home/receivables")
             })
             .catch(function(err){
                 console.log(err,"error");
                 
             })
 
-
-
-
-
-
-
-
-
-
-
-
-        }
-      
+        },
+        // 查询个人信息
+         searchInfo(){
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg")
+        .then(function(res){
+            console.log(res,"result")
+            
+        })
+        .catch(function(err){
+            console.log(err,"error")
+            
+        })
+     }
+        
+    },
+    created () {
+        this.searchInfo()
     }
 }
 </script>
