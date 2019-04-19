@@ -88,6 +88,10 @@ import previousComponent from '@/pages/previous'
 import bindingCreditCardComponent from '@/pages/bindingCreditCard'
 // 付款
 import repaymentComponent from '@/pages/repayment'
+// 商户收款
+import collectComponent from '@/pages/collect'
+
+
 // 百问百答
 import Questionandanswers from '@/pages/personalCenter/Questionandanswers'
 // 平台手册
@@ -106,6 +110,7 @@ export default new Router({
     {path:"/login",component:loginComponent},
     {path:"/logOut",component:logOutComponent},  
     {path:"/register",component:registerComponent},
+    {path:"/home/collect",component:collectComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
     {path:"/home/news",component:newsComponent},

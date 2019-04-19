@@ -65,7 +65,7 @@
                             <span>官方渠道</span>
                         </div>
                     </router-link>
-                    <router-link tag="li" to="/home/receivables">
+                    <router-link tag="li" to="/home/collect">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /></span>
                         <div class="channel">
                             <h3>商户收款</h3>
