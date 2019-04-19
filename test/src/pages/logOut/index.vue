@@ -35,9 +35,7 @@
                    </li>
                </ul>
            </div>
-           <div @click="modify" class="at-once">
-                   立即注册
-               </div>
+           <div @click="modify" class="at-once">立即注册</div>
         </div>
     </div>
 </template>
