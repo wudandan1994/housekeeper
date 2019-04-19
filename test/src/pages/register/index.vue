@@ -116,7 +116,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/personalCenter')
+            this.$router.go(-1);
         },
         // 上传微信头像
         onAvator(file){
