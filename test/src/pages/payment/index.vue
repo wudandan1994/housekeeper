@@ -64,12 +64,14 @@ export default {
                 })
                 return
            }
-           if(!partten.test(that.mobile)){
-                that.$toast({
+           if(!partten.test(this.mobile)){
+                this.$toast({
                     message:"请填写11位手机号码"
                 })
                 return
             }
+            
+
             let data={
                 busCode:"2001",
                 orderAmount:this.orderAmount,

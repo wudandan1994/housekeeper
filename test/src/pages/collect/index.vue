@@ -71,8 +71,6 @@
                             @select="onSelectTwo"
                             @cancel="onCancelTwo"
                             />
-
-
                    </li>
                </ul>
            </div>
