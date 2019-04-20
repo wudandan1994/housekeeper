@@ -9,6 +9,7 @@ Vue.use(wx)
 Vue.config.productionTip = false
 // 引入插件兼容Ie
 import 'babel-polyfill'
+import "../node_modules/babel-polyfill/dist/polyfill.js"
 // 引入公共css
 import '@/assets/css/common.css'
 // 引入图标库

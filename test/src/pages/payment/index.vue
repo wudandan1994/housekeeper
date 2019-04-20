@@ -70,7 +70,7 @@ export default {
                 })
                 return
             }
-            
+
 
             let data={
                 busCode:"2001",
@@ -78,7 +78,7 @@ export default {
                 realName:this.realName,
                 idCard:this.idCard,
                 accNo:this.accNo,
-                mobile:this.mobile
+                mobile:this.mobile,
             }
 
        }

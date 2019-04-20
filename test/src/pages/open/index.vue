@@ -6,9 +6,9 @@
             <span></span>
         </header>
         <div class="container">
-           <h3 @click="open">点击开工商户业务</h3>
-           <p>开通商户业务至少要上传身份证正反面和手持身份证照片，在提交之前，请先选择上传照片的类型</p>
-           <button @click="selset">请选择</button>
+           <h3 @click="open"  v-show="showtask">点击开通商户业务</h3>
+           <p class="type">开通商户业务至少要上传身份证正反面和手持身份证照片，在提交之前，请先选择上传照片的类型</p>
+           <button class="btn" @click="selset">请选择</button>
                     <van-actionsheet
                             v-model="show"
                             :actions="actions"
@@ -47,6 +47,7 @@ export default {
             baseUrl:"",
             show:false,
             content:"",
+            showtask:false,
             type:"",
             actions:[
                     {
@@ -74,7 +75,7 @@ export default {
         },
         onSelect(item){
             this.content=item.name
-             this.show=flase
+             this.show=false
         },
         selset(){
             this.show=true
@@ -90,6 +91,9 @@ export default {
              axiosPost("http://pay.91dianji.com.cn/api/upload/uploadImg",data)
              .then(function(res){
                  console.log(res,"开户业务成功")
+                 if(res.data!==""){
+                     this.showtask=true
+                 }
                  
              })
              .catch(function(err){
@@ -120,11 +124,20 @@ export default {
                 chMerCode:this.info,
                 busCode:"2001",
                 photoType:this.type,
-                photoData:this.baseUrl
+                photoData:this.cardfront
             }
+            console.log(data)
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/photoUpload",data)
             .then(res=>{
-                console.log(res,"提交成功");
+                if(!res.data.success){
+                    this.$toast({
+                        message:res.data.message
+                    })
+                } else {
+                    this.$toast({
+                        message:res.data.message
+                    })
+                }
                 
             })
             .catch(err=>{
@@ -134,8 +147,10 @@ export default {
             // this.$router.push("/home/collect/payment")
         },
          onRead(file) {
-            console.log('文件上传',file)
-            this.baseUrl=file.content
+            let path=file.content.split(",")
+            console.log(path);
+            this.baseUrl=path[1]
+            console.log(this.baseUrl);
             var form = new FormData()
             form.append('file',file.file)
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
@@ -193,6 +208,21 @@ export default {
                margin-top:20px;
                font-size: 30px;
                font-weight: bold;
+           }
+           >.type {
+               padding:20px;
+               line-height: 38px;
+               font-size: 30px;
+           }
+           .van-actionsheet__item{
+               height: 90px;
+           }
+           .van-actionsheet__cancel, .van-actionsheet__item{
+               font-size: 28px;
+               line-height: 90px;
+           }
+           >.btn {
+               margin:20px;
            }
            >.info {
                >.positive{
