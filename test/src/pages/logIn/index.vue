@@ -6,33 +6,28 @@
            </div>
            <div class="info">
                 <p>
-                    <span><van-icon name="phone"/></span>
+                    <span><van-icon name="phone" size="28px"/></span>
                     <input type="number" v-model="phone" placeholder="请输入手机号码">
                 </p>
                 <p>
-                    <span><van-icon name="lock"/></span>
+                    <span><van-icon name="lock" size="28px"/></span>
                     <input type="password" v-model="password" placeholder="请输入密码">
                 </p>
            </div>
            <div class="password">
                <p>
-                   <!-- <van-radio-group   @click="password"  v-model="radio" >
-                             <van-radio checked-color="#A5854B" name="1"></van-radio>
-                    </van-radio-group> -->
-                    <van-checkbox v-model="checked" checked-color="#000">记住密码</van-checkbox>
+                    <van-checkbox v-model="checked" shape="square" checked-color="#4b66af">记住密码</van-checkbox>
                     <span>&nbsp;</span>
                </p>
                <p @click="forgetPassword">忘记密码？</p>
            </div>
-           <div @click="logInPass" class="login">
-               登录
-           </div>
-            <div class="wx-login">
-                <p @click="logIn">
+           <van-button @click="logInPass" class="login center" type="default">登录</van-button>
+            <div class="wx-login row">
+                <div class="logIn start-center" @click="logIn">
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
-                </p>
-                <p @click="register">注册</p>
+                </div>
+                <div class="register end-center" @click="register">注册</div>
             </div>
         </div>
     </div>
@@ -141,9 +136,8 @@ export default {
                }
            }
            >.info {
-               padding-top:100px;
                width:80%;
-               margin:0 auto;
+               margin:80px 10% 0px 10%;
                >p {
                    background-color: #f2f2f2;
                    color:#fff;
@@ -160,7 +154,12 @@ export default {
                        flex: 1;
                        color:#000;
                        background-color: #f2f2f2;
+                       font-size: 28px;
                    }
+                    input::-webkit-input-placeholder{
+                        padding-top: 10px;
+                        font-size: 26px;
+                    }
                }
            }
            >.password {
@@ -170,7 +169,7 @@ export default {
                justify-content: space-between;
                padding-bottom: 20px;
                >p {
-                   padding:20px 0px;
+                    padding:20px 0px;
                     font-size:26px;
                     &:nth-of-type(1) {
                         display: flex;
@@ -181,31 +180,33 @@ export default {
            }
            >.login {
                width:80%;
-               margin-left:10%;
-               margin-top:10px;
+               height: 100px;
                border-radius: 10px;
                background-color: #4B66AF;
-               padding:30px 0px;
+               margin-left: auto;
+               margin-right: auto;
                color:#fff;
                text-align: center;
+               border: none;
+               font-size: 28px;
            }
            >.wx-login {
-               width:80%;
-               margin-left: 10%;
-               display: flex;
-               justify-content: space-around;
-               margin-top:50px;
-               >p {
-                   font-size: 36px;
-                   .wx-logo{
-                       font-size: 60px;
-                       display: inline-block;
-                       vertical-align: middle;
-                   }
-                   &:nth-of-type(3) {
-                       color:#4B66AF;
-                   }
-               }
+                width:80%;
+                height: 80px;
+                margin-left: 10%;
+                display: flex;
+                justify-content: space-around;
+                margin-top:20px;
+                font-size: 32px;
+                .logIn{
+                    width: 70%;
+                    height: 100%;
+                }
+                .register{
+                    width: 30%;
+                    height: 100%;
+                }
+
            }
        }
    }

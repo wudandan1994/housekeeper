@@ -1,56 +1,21 @@
 <template>
-    <div id="poster">
-        <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>海报</span>
-            <span></span>
+    <div id="page-poster">
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">海报</div>
+            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
-        <div class="container">
-            <ul>
-                <li @click="cur=0" :class="{active:cur==0}">个性化</li>
-                <li @click="cur=1" :class="{active:cur==1}">自定义</li>
-            </ul>
-            <div class="changeimg">
-                <div v-show="cur==0">
-                    <img src="../../../static/images/flower.jpg.jpg" alt="">
-                </div>
-                <div v-show="cur==1">
-                    <div class="upload">
-
-                    </div>
-                </div>
-                 <div class="info">
-                     <div class="left">
-                         <p>
-                             <span><van-icon name="manager"/></span>
-                         </p>
-                         <div>
-                             <p>江辉
-                                 <span>技术总监</span>
-                             </p>
-                             <p>传帮带（上海）网络科技有限公司</p>
-                         </div>
-                     </div>
-                     <div class="right">
-                         <p> <span><van-icon name="like"/></span></p>
-                     </div>
-                </div>
-                <p class="phone">
-                    <span>手机</span>
-                    <span>18217788778</span>
-                </p>
-                <p class="save">
-                    <span>换一换</span>
-                    <span @click="savePoster">保存海报</span>
-                </p>
-                <div class="tips" v-show="showUpload">
-                    <h3>保存海报成功</h3>
-                    <p>名片海报已保存到手机相册，你可以分享到朋友圈了</p>
-                     <p>确定</p>
-                </div>
+        <div class="poster-canvas center"><canvas id="poster" width="320" height="500"></canvas>  </div>
+        <div @click="savePoster" class="rightnow center">立即合成</div>
+        <div class="load center" v-if="imgShow">
+            <div v-if="showUpload" >
+                <div class="loading center"><van-loading color="white" size="60px" /></div>
+                <div class="title center-end">海报生成中</div>
             </div>
-            
-            
+            <div class="imgs center" v-if="!showUpload">
+                <img :src="imgUrl" >
+                <div class="success center">海报生成成功,请长按图片保存</div>
+            </div>
         </div>
     </div>
 
@@ -62,142 +27,116 @@ export default {
     data() {
         return {
             cur:0 ,
-        showUpload:false,
+        showUpload:true,
+        imgUrl: '',
+        imgShow: false
 
         }
     },
     methods:{
         goBack() {
-            this.$router.push('/share')
+            this.$router.go(-1);
+        },
+        handlePoster(){
+            var poster = document.getElementById("poster");
+            var ctx = poster.getContext("2d");
+            ctx.fillStyle = "#ccc";
+            ctx.fillRect(0,0,320,500);
+
+            var img = new Image();
+            img.src = 'http://pay.91dianji.com.cn/poster_002.jpg';
+            img.onload = function(){
+                ctx.drawImage(img,0,0,320,370);
+            };
+            
+            var imgs = new Image();
+            imgs.src = 'http://pay.91dianji.com.cn/giovannicode.png';
+            imgs.onload = function(){
+                ctx.drawImage(imgs,230,380,80,80);
+            };
+            ctx.fillStyle="#FF0000";
+            ctx.font="14px Georgia";
+            ctx.fillText("姓名: GIovanni",20,400);
+            ctx.fillText("推荐码: 96582153",20,440);
+            
+            
+
         },
         savePoster(){
-            this.showUpload=!this.showUpload
+            this.imgShow = true;
+            var poster = document.getElementById("poster");
+            var dataURL = poster.toDataURL('image/png');
+            console.log('图片',dataURL);
+            this.imgUrl = dataURL;
+            if(this.imgUrl != ''){
+                setTimeout(() =>{
+                    this.showUpload = false;
+                },1000)
+            }
         }
+    },
+    mounted(){
+        this.handlePoster();
     }
 }
 </script>
 
 <style lang="less">
-   #poster {
-       >header {
-           background: #000;
-           width:100%;
-           height: 86px;
-           padding-top:10px;
-           line-height:46px;
-           color:#fff;
-           font-size:28px;
-           z-index:999;
-           display: flex;
-           position: fixed;
-           justify-content: space-between;
-           >span {
-               &:nth-of-type(1) {
-                   margin-left: 10px;
-               }
-               &:nth-of-type(3) {
-                   margin-right: 10px;
-               }
-           }
+   #page-poster{
+       width: 100vw;
+       height: calc(100vh - 86px);
+       padding-top: 86px;
+       .poster-canvas{
+           width: auto;
+           margin: 50px auto auto auto;
        }
-       >.container {
-           padding-top:96px;
-           padding-bottom: 50px;
-           >ul {
-               background-color: #252930;
-               display: flex;
-               justify-content: space-between;
-               >li {
-                   width:50%;
-                   text-align: center;
-                   padding:20px 0;
-                   color:#FEFEFE;
-                   &.active {
-                       color:#DAB17B;
-                   }
-               }
+       #scream{
+           width: 1px;
+           height: 1px;
+       }
+       #screams{
+           width: 100px;
+           height: 100px;
+       }
+       .rightnow{
+           width: 88vw;
+           height: 100px;
+           margin-left: auto;
+           margin-right: auto;
+           margin-top: 50px;
+           font-size: 28px;
+           background: #4b66af;
+           color: #ffffff;
+           border-radius: 20px;
+       }
+       .load{
+           width: 100vw;
+           height: 100vh;
+           position: fixed;
+           top: 0;
+           left: 0;
+           z-index: 2;
+           background: rgba(0, 0, 0, 0.5);
+           .loading{
+               width: 100vw;
+               height: 100px;
            }
-           >.changeimg {
-               position: relative;
-              width:60%;
-              margin-left:20%;
-              padding-top:30px;
-              img {
-                  width:100%;
-              }
-              >.info {
-                  padding:10px;
-                  background-color: #252930;
-                  display: flex;
-                  justify-content: space-around;
-                  color:#fff;
-                  >.left {
-                      display: flex;
-                      justify-content: space-around;
-                    >p {
-                      &:nth-of-type(1){
-                          font-size: 80px;
-                      }
-                    }
-                    >div {
-                        font-size:26px;
-                    }
-                  }
-                  >.right {
-                      font-size: 80px;
-                  }
-              }
-              >.phone {
-                  background-color: #252930;
-                  color:#fff;
-                  padding-left:30px;
-                  padding-bottom: 20px;
-              }
-              >.save {
-                  margin-top:30px;
-                  display: flex;
-                  justify-content: space-between;
-                 
-                 >span {
-                     display: block;
-                     width:45%;
-                      border:2px solid #DAB17C;
-                      text-align: center;
-                      padding-top:25px;
-                      padding-bottom:25px;
-                      border-radius: 10px;
-                      &:nth-of-type(2){
-                          background-color: #DAB17C;
-                          color:#fff;
-                      }
-                 }
-              }
-              >.tips {
-                  position: absolute;
-                  bottom:15%;
-                  left:-10%;
-                  width:120%;
-                  background-color:#fff;
-                  border-radius: 10px;
-                  border:2px solid #ccc;
-                  line-height: 40px;
-                  >h3 {
-                      color:#9F6711;
-                      padding-top:30px;
-                      padding-bottom: 50px;
-                      text-align: center;
-                  }
-                  >p {
-                       padding:20px 30px;
-                       &:nth-of-type(1){
-                            border-bottom: 1px solid #ccc;
-                       }
-                       &:nth-of-type(2){
-                            text-align: center;
-                       }
-                  }
-                  
-              }
+           .title{
+               width: 100vw;
+               height: 80px;
+               font-size: 28px;
+               color: #ffffff;
+           }
+           .imgs{
+               width: 100vw;
+               height: 100vh;
+               background: rgba(0, 0, 0, 0.8);
+               .success{
+                   width: 100vw;
+                   height: 100px;
+                   color: #ffffff;
+                   font-size: 28px;
+               }
            }
        }
    }

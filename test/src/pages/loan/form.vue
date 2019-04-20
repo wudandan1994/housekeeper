@@ -1,7 +1,7 @@
 <template>
     <div id="page-component-form">
          <header class="header-top row">
-            <div class="left-icon center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">申请贷款</div>
             <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
@@ -168,14 +168,12 @@ export default {
 </script>
 <style lang="less" scoped>
     #page-component-form{
-        .loan .van-nav-bar {
-            background: #4B66AF !important;
-        }
+        width: 100vw;
+        height: auto;
         padding-top: 86px;
         .swipe{
             width: 100vw;
             height: auto;
-            // background: #c97;
             .imgs{
                 width: 100vw;
                 height: 400px;
@@ -222,9 +220,9 @@ export default {
             .user-input{
                 width: 75vw;
                 height: 100%;
-                >input::placeholder{
-                    font-size:22px;
-                    color: #666666;
+                >input::-webkit-input-placeholder{
+                    font-size:24px;
+                    padding-top: 10px;
                 }
                 >input{
                     width: 100%;
@@ -237,9 +235,9 @@ export default {
             .user-code{
                 width: 50vw;
                 height: 100%;
-                >input::placeholder{
-                    font-size:22px;
-                    color: #666666;
+               input::-webkit-input-placeholder{
+                    font-size:24px;
+                    padding-top: 10px;
                 }
                 >input{
                     width: 100%;
@@ -250,7 +248,7 @@ export default {
                 }
             }
             .safe-code{
-                 width: 25vw;
+                width: 25vw;
                 height: 100%;
                 margin-left: 2vw;
                 font-size: 30px;

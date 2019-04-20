@@ -8,7 +8,41 @@
         <div class="container">
            <p>请获取短信验证，并设置新的登录密码</p>
            <div class="phone">
-               <ul>
+               <div class="per-userinfo row">
+                   <div class="left start-center">手机号:</div>
+                   <div class="right row">
+                       <div class="input"><input class="start-center" type="number" v-model="mobile" placeholder="输入11位手机号码"></div>
+                       <div class="safecode">
+                            <div class="code-btn center" v-show="showCount">{{count}}秒后再次获取</div>
+                            <div class="code-btn center" @click="getCode" v-show="showCode">获取验证码</div>
+                        </div>
+                   </div>
+               </div>
+               <div class="per-userinfo row">
+                   <div class="left start-center">验证码:</div>
+                   <div class="right row">
+                       <input class="start-center" v-model="authcode" type="number" placeholder="输入验证码">
+                   </div>
+               </div>
+               <div class="per-userinfo row">
+                   <div class="left start-center">密码:</div>
+                   <div class="right row">
+                       <input class="start-center" v-model="newPassword" type="password" placeholder="请输入6-18位字母加数字新密码">
+                   </div>
+               </div>
+               <div class="per-userinfo row">
+                   <div class="left start-center">确认密码:</div>
+                   <div class="right row">
+                       <input class="start-center" v-model="suerPassword" type="password" placeholder="请再次输入密码">
+                   </div>
+               </div>
+               <div class="per-userinfo row">
+                   <div class="left start-center">推荐码:</div>
+                   <div class="right row">
+                       <input class="start-center" v-model="code" type="number" placeholder="请输入推荐码">
+                   </div>
+               </div>
+               <!-- <ul>
                    <li>
                        <span>+86</span>
                        <input type="number" v-model="mobile" placeholder="输入11位手机号码">
@@ -18,7 +52,7 @@
                        </span>
                    </li>
                     <li>
-                        <span>输入验证码:</span>
+                        <span>验证码:</span>
                        <input v-model="authcode" type="number" placeholder="输入验证码">
                    </li>
                     <li>
@@ -30,10 +64,10 @@
                        <input v-model="suerPassword" type="password" placeholder="输入新密码">
                    </li>
                     <li>
-                        <span>输入推荐码</span>
+                        <span>推荐码:</span>
                        <input v-model="code" type="number" placeholder="输入推荐码">
                    </li>
-               </ul>
+               </ul> -->
            </div>
            <van-button type="default" @click="modify" class="at-once">立即注册</van-button>
         </div>
@@ -222,44 +256,60 @@ export default {
                font-weight: bold;
            }
            >.phone {
-               >ul{
-                   padding-left:30px;
-                   background-color: #fff;
-                   >li{
-                       display: flex;
-                       flex-wrap: nowrap;
-                       border-bottom: 1px solid #ccc;
-                       padding-top:40px;
-                       padding-bottom: 40px;
-                       height: 60px;
-                       line-height: 60px;
-                       color:#000;
-                       &:last-child {
-                           border:none;
+               .per-userinfo{
+                   width: 90%;
+                   height: 100px;
+                   margin-left: auto;
+                   margin-right: auto;
+                   border-bottom: solid 1px #ccc;
+                   .left{
+                       width: 20%;
+                       height: 100%;
+                       font-size: 28px;
+                   }
+                   .right{
+                        width: 80%;
+                        height: 100%;
+                        input{
+                                width: 100%;
+                                height: 90%;
+                                border: none;
+                                background: transparent;
+                                font-size: 28px;
+                        }
+                        input::-webkit-input-placeholder{
+                            height: 90px;
+                            padding-top: 6px;
+                        }
+                       .input{
+                            width: 60%;
+                            height: 100%;
+                            input{
+                                width: 100%;
+                                height: 90%;
+                                border: none;
+                                background: transparent;
+                                font-size: 28px;
+                            }
                        }
-                       >span {
-                           &:nth-of-type(2){
-                               color:white;
-                               background-color: #4965AE;
-                               padding:0 10px;
-                               margin-right:20px;
-                               line-height: 60px;
-                               border-radius: 10px;
-                               font-size: 28px;
-                           }
-                       }
-                       >input {
-                           border:none;
-                           flex: 1;
-                           margin-left:10px;
-                           font-size: 28px;
+                       .safecode{
+                            width: 40%;
+                            height: 100%;
+                            .code-btn{
+                                width: auto;
+                                height: 80px;
+                                margin: 10px 0px;
+                                background: #4965AE;
+                                color: #ffffff;
+                                font-size: 26px;
+                            }
                        }
                    }
                }
            }
            >.at-once {
                width:90%;
-               height: 80px;
+               height: 100px;
                background-color: #4965AE;
                color:white;
                margin-top:100px;
