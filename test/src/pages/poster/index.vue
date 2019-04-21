@@ -5,15 +5,15 @@
             <div class="top-title center">海报</div>
             <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
-        <div class="poster-canvas center"><canvas id="poster" width="320" height="500"></canvas>  </div>
+        <div class="poster-canvas center"><canvas id="poster" width="320" height="480"></canvas>  </div>
         <div @click="savePoster" class="rightnow center">立即合成</div>
         <div class="load center" v-if="imgShow">
             <div v-if="showUpload" >
                 <div class="loading center"><van-loading color="white" size="60px" /></div>
-                <div class="title center-end">海报生成中</div>
+                <div class="title center-end">海报合成中</div>
             </div>
-            <div class="imgs center" v-if="!showUpload">
-                <img :src="imgUrl" >
+            <div class="imgs" v-if="!showUpload">
+                <div class="savePoster center"><img :src="imgUrl" ></div>
                 <div class="success center">海报生成成功,请长按图片保存</div>
             </div>
         </div>
@@ -23,6 +23,7 @@
 
 
 <script>
+import storage from '@/lib/storage'
 export default {
     data() {
         return {
@@ -41,23 +42,34 @@ export default {
             var poster = document.getElementById("poster");
             var ctx = poster.getContext("2d");
             ctx.fillStyle = "#ccc";
-            ctx.fillRect(0,0,320,500);
+            ctx.fillRect(0,0,320,480);
 
-            var img = new Image();
-            img.src = 'http://pay.91dianji.com.cn/poster_002.jpg';
-            img.onload = function(){
-                ctx.drawImage(img,0,0,320,370);
+            var bigPoster = new Image();
+            bigPoster.src = 'http://pay.91dianji.com.cn/poster_002.jpg';
+            bigPoster.onload = function(){
+                ctx.drawImage(bigPoster,0,0,320,370);
             };
             
-            var imgs = new Image();
-            imgs.src = 'http://pay.91dianji.com.cn/giovannicode.png';
-            imgs.onload = function(){
-                ctx.drawImage(imgs,230,380,80,80);
+            var qrcode = new Image();
+            
+            qrcode.crossOrigin = '';
+            qrcode.src = 'http://pay.91dianji.com.cn/qrCode/barCode?site=weixin&url=http://pay.91dianji.com.cn/#/home?promotioncode='+this.$store.state.wechat.promotioncode;
+            qrcode.onload = function(){
+                ctx.drawImage(qrcode,230,380,80,80);
             };
-            ctx.fillStyle="#FF0000";
-            ctx.font="14px Georgia";
-            ctx.fillText("姓名: GIovanni",20,400);
-            ctx.fillText("推荐码: 96582153",20,440);
+            var headimg = new Image();
+            headimg.src = 'http://pay.91dianji.com.cn/wxAvator/mmopen/vi_32/DYAIOgq83ergq6eofyl10xQLzxvIY7HBUeQJiaDec2lWGkqiaoL78kkNtHUEBjaehuZd6Qbjicj9RVPfvpqHhnW8w/132';
+            headimg.onload = function(){
+                ctx.drawImage(headimg,10,390,50,50);
+            };
+
+            ctx.fillStyle="#4b66af";
+            ctx.font="14px Arial";
+            ctx.fillText("name: " + this.$store.state.wechat.nickname,70,405);
+            ctx.fillText("code: " + this.$store.state.wechat.promotioncode,70,430);
+            ctx.fillStyle="#f00";
+            ctx.font="16px Arial";
+            ctx.fillText("长按识别二维码体验更多惊喜",10,460);
             
             
 
@@ -66,7 +78,7 @@ export default {
             this.imgShow = true;
             var poster = document.getElementById("poster");
             var dataURL = poster.toDataURL('image/png');
-            console.log('图片',dataURL);
+            console.log('图片',dataURL,1);
             this.imgUrl = dataURL;
             if(this.imgUrl != ''){
                 setTimeout(() =>{
@@ -131,6 +143,11 @@ export default {
                width: 100vw;
                height: 100vh;
                background: rgba(0, 0, 0, 0.8);
+               .savePoster{
+                   width: 100vw;
+                   height: auto;
+                   margin: 100px auto auto auto;
+               }
                .success{
                    width: 100vw;
                    height: 100px;

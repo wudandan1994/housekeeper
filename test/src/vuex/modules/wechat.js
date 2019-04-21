@@ -1,6 +1,6 @@
 const state = {
     openid: '',
-    headimg: '',
+    headimg: 'http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83ergq6eofyl10xQLzxvIY7HBUeQJiaDec2lWGkqiaoL78kkNtHUEBjaehuZd6Qbjicj9RVPfvpqHhnW8w/132',
     nickname: '',
     promotioncode: '',
     recommendedcode: '',
