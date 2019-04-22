@@ -135,15 +135,19 @@ export default {
             let that =this
                  axiosPost("http://pay.91dianji.com.cn/api/customer/getSignDetail")
                  .then(function(res){
-                    if(!res.data.success){
-                        that.$toast({
-                            message:res.data.message
-                        })
-                        return
-                    }
+                     console.log(res,"签到详情");
+                     
+                    // if(!res.data.success){
+                    //     that.$toast({
+                    //         message:res.data.message
+                    //     })
+                    //     return
+                    // }
 
                 axiosPost("http://pay.91dianji.com.cn/api/customer/insertSign")
                .then(function(res){
+                   console.log(res,"每天签到");
+                   
                  if(!res.data.success){
                     that.$toast({
                     message:res.data.message
@@ -173,6 +177,7 @@ export default {
                 }
                  that.signcount=res.data.data.signcount
                  that.gold=res.data.data.gold
+                 that.isPunch=true
            })
          },
          initData: function (cur) {
