@@ -89,7 +89,7 @@ export default {
                               this.$toast('登陆失败');
                           })
                         }else{
-                          this.$toast('注册失败');
+                          this.$toast('注册失败了');
                         }
                     }).catch(res =>{
                         console.log('注册失败',res);
