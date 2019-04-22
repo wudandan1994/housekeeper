@@ -66,28 +66,33 @@ export default {
                     }
                     let url = 'http://pay.91dianji.com.cn/api/customer/registered';
                     axiosPost(url,params).then(res =>{
-                        console.log('注册成功',res.data);
-                        // 登录
-                        let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
-                        let params = {
-                            openid: this.$store.state.wechat.openid
-                        };
-                        axiosPost(url,params).then(res =>{
-                            console.log('登陆成功',res);
-                            storage.set('cid',res.data.data.id);
-                            this.$store.commit('iscertification',res.data.data.iscertification);
-                            this.$store.commit('level',res.data.data.level);
-                            this.$store.commit('promotioncode',res.data.data.promotioncode);
-                            this.$store.commit('mobile',res.data.data.mobile);
-                            this.$store.commit('vip',res.data.data.vip);
-                            this.$store.commit('recommendedcode',res.data.data.recommendedcode);
-                            this.$toast('登陆成功');
-                        }).catch(res =>{
-                            console.log('登录失败',res);
-                            this.$toast('登陆失败');
-                        })
+                        
+                        if(res.data.success){
+                          console.log('注册成功',res);
+                          // 登录
+                          let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
+                          let params = {
+                              openid: this.$store.state.wechat.openid
+                          };
+                          axiosPost(url,params).then(res =>{
+                              console.log('登陆成功',res);
+                              storage.set('cid',res.data.data.id);
+                              this.$store.commit('iscertification',res.data.data.iscertification);
+                              this.$store.commit('level',res.data.data.level);
+                              this.$store.commit('promotioncode',res.data.data.promotioncode);
+                              this.$store.commit('mobile',res.data.data.mobile);
+                              this.$store.commit('vip',res.data.data.vip);
+                              this.$store.commit('recommendedcode',res.data.data.recommendedcode);
+                              this.$toast('登陆成功');
+                          }).catch(res =>{
+                              console.log('登录失败',res);
+                              this.$toast('登陆失败');
+                          })
+                        }else{
+                          this.$toast('注册失败');
+                        }
                     }).catch(res =>{
-                        console.log('注册失败',res.data);
+                        console.log('注册失败',res);
                     })
                   }else{
                     // 已注册

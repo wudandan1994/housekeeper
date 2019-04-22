@@ -28,10 +28,10 @@ export default {
     data() {
         return {
             cur:0 ,
-        showUpload:true,
-        imgUrl: '',
-        imgShow: false
-
+            showUpload:true,
+            imgUrl: '',
+            imgShow: false,
+            url: 'http://pay.91dianji.com.cn'
         }
     },
     methods:{
@@ -45,20 +45,23 @@ export default {
             ctx.fillRect(0,0,320,480);
 
             var bigPoster = new Image();
-            bigPoster.src = 'http://pay.91dianji.com.cn/poster_002.jpg';
+            var random = Math.ceil((Math.random())*6);
+            bigPoster.src = 'http://pay.91dianji.com.cn/poster_00'+ random +'.jpg';
             bigPoster.onload = function(){
-                ctx.drawImage(bigPoster,0,0,320,370);
+                ctx.drawImage(bigPoster,0,0,320,380);
             };
             
             var qrcode = new Image();
-            
-            qrcode.crossOrigin = '';
             qrcode.src = 'http://pay.91dianji.com.cn/qrCode/barCode?site=weixin&url=http://pay.91dianji.com.cn/#/home?promotioncode='+this.$store.state.wechat.promotioncode;
             qrcode.onload = function(){
-                ctx.drawImage(qrcode,230,380,80,80);
+                ctx.drawImage(qrcode,230,390,80,80);
             };
+
             var headimg = new Image();
-            headimg.src = 'http://pay.91dianji.com.cn/wxAvator/mmopen/vi_32/DYAIOgq83ergq6eofyl10xQLzxvIY7HBUeQJiaDec2lWGkqiaoL78kkNtHUEBjaehuZd6Qbjicj9RVPfvpqHhnW8w/132';
+            var url = this.$store.state.wechat.headimg;
+            var domain = url.split('/mmopen');
+            console.log('头像',this.url + '/wxAvator' + '/mmopen' + domain[1]);
+            headimg.src = this.url + '/wxAvator' + '/mmopen' + domain[1];
             headimg.onload = function(){
                 ctx.drawImage(headimg,10,390,50,50);
             };
