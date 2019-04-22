@@ -30,6 +30,7 @@
            <div class="submit">
                <van-button @click="sbumit" round size="large" type="info">提交</van-button>
            </div>
+           <p @click="payment">图片上传已完成？去收款</p>
         </div>
     </div>
 
@@ -63,15 +64,56 @@ export default {
                     name: '银行卡正面'
                     },
                      {
-                    name: '银行卡正面'
+                    name: '银行卡反面'
                     },
                 
                 ],
-        }
+          }
     },
     methods:{
         goBack() {
             this.$router.push('/home')
+        },
+        payment(){
+            let data={
+                chMerCode:this.info
+            }
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",data)
+            .then(res=>{
+                if(!res.data.success){
+                    this.$toast({
+                        message:res.data.message
+                    })
+                    return
+                }
+                let type=res.data.data.uploadStatus
+                console.log(type);
+                if(type==="0"){
+                     this.$router.push("/home/collect/payment")
+                } else if(type==="1"){
+                    this.$toast({
+                        message:"您还未上传图片"
+                    })
+                } else if(type==="2"){
+                     this.$toast({
+                        message:"您只上传了部分图片"
+                    })
+                } else {
+                     this.$toast({
+                        message:"您的证件非法"
+                    })
+                }
+                
+                
+            })
+            .catch(err=>{
+                console.log(err,"图片审核中")
+                
+            })
+            .catch(err=>{
+
+            })
+           
         },
         onSelect(item){
             this.content=item.name
@@ -147,10 +189,6 @@ export default {
             // this.$router.push("/home/collect/payment")
         },
          onRead(file) {
-            let path=file.content.split(",")
-            console.log(path);
-            this.baseUrl=path[1]
-            console.log(this.baseUrl);
             var form = new FormData()
             form.append('file',file.file)
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
