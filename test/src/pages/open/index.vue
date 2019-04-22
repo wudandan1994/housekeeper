@@ -30,7 +30,10 @@
            <div class="submit">
                <van-button @click="sbumit" round size="large" type="info">提交</van-button>
            </div>
-           <p @click="payment">图片上传已完成？去收款</p>
+           <div class="update">
+               <van-button @click="payment" size="large" round type="info">图片上传已完成？去收款</van-button>
+           </div>
+          
         </div>
     </div>
 
@@ -160,7 +163,6 @@ export default {
             } else {
                   this.type="5"
             }
-
 
             let data={
                 chMerCode:this.info,
@@ -302,6 +304,13 @@ export default {
                >button{
                    height: 90px;
                    font-size: 30px;
+               }
+           }
+           >.update {
+               margin-top:20px;
+               >button{
+                   height: 90px;
+                   font-size: 28px;
                }
            }
        }

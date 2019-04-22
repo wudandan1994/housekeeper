@@ -5,13 +5,11 @@
                 <span>
                     <van-icon name="arrow-left" />
                 </span>
-                <span>首页</span>
+               
             </p>
             <p>信用卡办理</p>
             <p>
-                <span>
-                    <van-icon name="share" />
-                </span> &nbsp;&nbsp;
+               
                 <span>
                     <van-icon name="ellipsis" />
                 </span>
@@ -154,6 +152,14 @@ export default {
             position:fixed;
             z-index:999;
             font-size:28px;
+            >p {
+                &:nth-of-type(1){
+                    margin-left:10px;
+                }
+                &:nth-of-type(3){
+                    margin-right: 10px;
+                }
+            }
         }
         >.container {
             background-color: #ECF0F3;

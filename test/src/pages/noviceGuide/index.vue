@@ -2,10 +2,13 @@
     <div id="novice-guide">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-           
+             <span>新手指南</span>
+             <span></span>
         </header>
         <div class="container">
-           
+           <div class="image">
+               <img src="../../../static/images/intro.jpg" alt="">
+           </div>
         </div>
     </div>
 
@@ -30,7 +33,7 @@ export default {
 <style lang="less">
    #novice-guide {
        >header {
-           background: #000;
+          background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -49,6 +52,15 @@ export default {
                    margin-right: 10px;
                }
            }
+       }
+       >.container {
+           padding-top:96px;
+            >.image {
+                width:100%;
+                >img {
+                    width:100%;
+                }
+            }
        }
    }
 </style>

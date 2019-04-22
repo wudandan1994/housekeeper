@@ -12,7 +12,7 @@
                 <span>上海</span>
             </div>  
             <span>首页</span>
-            <router-link tag="span" to="/home/news" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
+            <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
         </header>
         <div class="container">
             <!-- 轮播图模块 -->
