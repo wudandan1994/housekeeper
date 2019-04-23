@@ -19,7 +19,6 @@
                                 <span v-show="showCount">{{count}}秒后获取</span>
                                 <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
                          </span>
-                        
                     </p>
                 </div>
             </div>
@@ -140,11 +139,14 @@ export default {
             }
              axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",data)
              .then(function(res){
-                 if(res.success){
-                      that.$toast({
-                    message:"操作成功"
+                 if(!res.data.success){
+                     that.$toast({
+                    message:res.data.message
+                     })
+                 }
+                    that.$toast({
+                    message:res.data.message
                 })
-              }
                this.show=true
 
              })
