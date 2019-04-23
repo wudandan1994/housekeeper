@@ -90,7 +90,6 @@ export default {
                     return
                 }
                 let type=res.data.data.uploadStatus
-                console.log(type);
                 if(type==="0"){
                      this.$router.push("/home/collect/payment")
                 } else if(type==="1"){
