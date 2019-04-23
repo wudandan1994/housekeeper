@@ -213,52 +213,58 @@ export default {
                     })
                     return
                 }
-                console.log(res,"商铺申请成功");
-                
-                // that.$toast({
-                //     message:res.data.message
-                // })
-                let info=res.data.data.chMerCode
-                // that.$router.push({
-                //     path:"/home/collect/open",
-                //     query:{
-                //         info,
-                //     }
-                // })
+                that.$toast({
+                    message:res.data.message
+                })
+                axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
+                .then(function(res){
+
+                    console.log(res,"第二次掉接口");
+                     if(res.data.success){
+                        let info=res.data.data.chMerCode
+                        that.$router.push({
+                            path:"/home/collect/open",
+                            query:{
+                                info,
+                      }
+                  })
+              }
+                })
+                .catch(function(err){
+                    console.log(err,"错误的信息");
+                })
             })
             .catch(function(err){
                 console.log(err,"error")
-                
             })
 
         },
         // 查询个人信息
          searchInfo(){
-             let that=this
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
-           .then(function(res){
-           let info=res.data.data.chMerCode
-            // if(res.data.success){
-            //     that.$router.push({
-            //          path:"/home/collect/open",
-            //         query:{
-            //             info,
-            //         }
-            //     })
-            // }
-            
+           .then(res=>{
+           console.log(this,"商户申请中的this")
+          console.log(res,"查找的结果")
+          
+            if(res.data.success){
+             let info=res.data.data.chMerCode
+                this.$router.push({
+                     path:"/home/collect/open",
+                    query:{
+                        info,
+                    }
+                })
+            }
         })
-        .catch(function(err){
+        .catch(err=>{
             console.log(err,"error个人信息")
-            
         })
      }
         
     },
    
-    mounted () {
+    created () {
         this.searchInfo()
-
     }
 }
 </script>

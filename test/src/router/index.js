@@ -115,7 +115,7 @@ import contactUs from '@/pages/personalCenter/contactUs'
 export default new Router({
   // mode:"hash",
   routes: [
-    { path: '/',redirect:'/home'},
+    { path: '/',redirect:'/logIn'},
     {path:"/vip",component:vipComponent},
     {path:"/home",component:homeComponent},
     {path:"/login",component:loginComponent},

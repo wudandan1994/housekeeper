@@ -158,9 +158,7 @@ export default {
                     message:res.data.message
                    })
                  })
-   
-                 })
-            
+                })
         },
          searchPunch(){
              let that = this

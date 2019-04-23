@@ -78,7 +78,10 @@ export default {
             that.$http.post("http://pay.91dianji.com.cn/api/customer/login",qs.stringify(data))
             .then(function(res){
                 if(res.data.success){
+                    this.$store.commit('recommendedcode',res.data.data.recommendedcode);
                     that.$router.push('/home')
+                    console.log(res);
+                    
                 }else{
                     that.$toast({
                         message:res.data.message
