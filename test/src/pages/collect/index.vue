@@ -130,8 +130,8 @@ export default {
             this.$router.push('/home')
         },
         onSelect(item){
-             this.show = true;
             this.settleAccType=item.name
+             this.show = false;
         },
         onCancel(){
             this.show=false
@@ -144,8 +144,8 @@ export default {
             this.showTwo=true
         },
         onSelectTwo(item){
-            this.showTwo=true
              this.merType=item.name
+              this.showTwo=false
         },
         onCancelTwo(){
             this.showTwo=false
@@ -341,6 +341,13 @@ export default {
                    height: 90px;
                    font-size: 28px;
                }
+           }
+           .van-actionsheet__item {
+               height: 90px;
+           }
+            .van-actionsheet__cancel, .van-actionsheet__item{
+               font-size: 28px;
+               line-height: 90px;
            }
        }
    }
