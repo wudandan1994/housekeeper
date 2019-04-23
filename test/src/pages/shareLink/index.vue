@@ -11,8 +11,8 @@
                    <van-collapse v-model="activeNames">
                          <van-collapse-item name="1">
                             <div slot="title"> <span><van-icon name="more" /></span>官网首页链接&nbsp;<span>（可锁粉）</span></div>
-                             https://m.kakoim.cn/tool/videointroduce
-                             <!-- （点击复制链接） -->
+                                <p>{{link}}</p>
+                              <!-- （点击复制链接） -->
                         </van-collapse-item>
                     </van-collapse>
                </li>
@@ -28,13 +28,17 @@
 export default {
     data() {
         return {
-            activeNames:["1","2","3","4","5","6","7"]
+            activeNames:["1","2","3","4","5","6","7"],
+            link:""
         }
     },
     methods:{
         goBack() {
             this.$router.push('/share')
         }
+    },
+    created () {
+        this.link='http://pay.91dianji.com.cn/#/home?promotioncode=' + this.$store.state.wechat.promotioncode
     }
 }
 </script>

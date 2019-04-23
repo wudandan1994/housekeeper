@@ -17,14 +17,16 @@
                         <input type="number" v-model="authcode" placeholder="请输入验证码">
                          <span>
                                 <span v-show="showCount">{{count}}秒后获取</span>
-                                <span v-show="showCode" @click="getCode">获取验证码</span>
+                                <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
                          </span>
                         
                     </p>
                 </div>
             </div>
-            <div class="at-once" @click="bindingPhone">立即绑定</div>
-           
+            <div class="at-once">
+                 <van-button size="large"  @click="bindingPhone" round type="info">立即绑定</van-button>
+            </div>
+                 
                 <van-popup >
                     <div class="cover">绑定成功</div>
                 </van-popup>
@@ -211,23 +213,23 @@ export default {
                            width:240px;
                        }
                        >span {
-                               color:#fff;
-                               background-color: #4965AE;
-                               padding:15px 10px;
-                               border-radius: 10px;
-                           }
+                           >button {
+                           height: 60px;
+
+                           padding:0 10px;
+                        }
+                       }
                    }
                }
            }
            >.at-once {
-              color:#fff;
-              background-color: #4965AE;
               margin-top:300px;
-              text-align: center;
-              width:90%;
-              margin-left:5%;
-              padding:30px 0px;
-              border-radius: 10px;
+              padding-left:30px;
+              padding-right: 30px;
+              >button {
+                  height: 90px;
+                  font-size: 28px;
+              }
            }
            .cover {
                width:500px;

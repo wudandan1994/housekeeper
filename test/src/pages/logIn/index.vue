@@ -27,7 +27,7 @@
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
                 </div>
-                <div class="register end-center" @click="register">注册</div>
+                <!-- <div class="register end-center" @click="register">注册</div> -->
             </div>
         </div>
     </div>
@@ -47,6 +47,7 @@ export default {
             password:""
         }
     },
+
     methods:{
         // password(){
         // },
@@ -78,7 +79,7 @@ export default {
             that.$http.post("http://pay.91dianji.com.cn/api/customer/login",qs.stringify(data))
             .then(function(res){
                 if(res.data.success){
-                    this.$store.commit('recommendedcode',res.data.data.recommendedcode);
+                    that.$store.commit('recommendedcode',res.data.data.recommendedcode);
                     that.$router.push('/home')
                     console.log(res);
                     
