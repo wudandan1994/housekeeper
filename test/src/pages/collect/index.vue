@@ -46,7 +46,7 @@
                    </li>
                    <li>
                         <span>联行号</span>
-                       <input v-model="subBankCode"  type="number" placeholder="请输入改支行联行号">
+                       <input v-model="subBankCode"  type="number" placeholder="请输入该支开户行行号">
                    </li>
                     <li>
                         <span>结算户类型</span>
@@ -181,7 +181,6 @@ export default {
                 })
                 return
             }
-
             if(that.merType==="个人户"){
                 type="1"
             } else if(that.merType==="小微户"){
@@ -207,32 +206,29 @@ export default {
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg",data)
             .then(function(res){
                 console.log(res,"注册之后的第一次信息");
-                
                 if(!res.data.success){
                     that.$toast({
                         message:res.data.message
                     })
                     return
+                } else {
+                    axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
+                    .then(function(res){
+                        console.log(res,"个人信息查询的结果")
+                        if(res.data.success){
+                            let info=res.data.data.chMerCode
+                            that.$router.push({
+                                path:"/home/collect/open",
+                                query:{
+                                   info,
+                              }
+                         })
+                       }
+                    })
+                    .catch(function(err){
+                        console.log(err,"错误的信息");
+                    })
                 }
-                that.$toast({
-                    message:res.data.message
-                })
-                axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
-                .then(function(res){
-                    console.log(res,"个人信息查询的结果")
-                     if(res.data.success){
-                        let info=res.data.data.chMerCode
-                    //     that.$router.push({
-                    //         path:"/home/collect/open",
-                    //         query:{
-                    //             info,
-                    //       }
-                    //  })
-                 }
-                })
-                .catch(function(err){
-                    console.log(err,"错误的信息");
-                })
             })
             .catch(function(err){
                 console.log(err,"error")

@@ -57,7 +57,6 @@ export default {
             }
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/merchantSettled",data)
             .then(res=>{
-                console.log(res,"绑定信用卡");
                 if(!res.data.success){
                     this.$toast({
                         message:res.data.message
@@ -66,7 +65,6 @@ export default {
                 }  else {
                      location.href=res.data.data
                 }
-                
             })
             .catch(err=>{
                 console.log(err,"error");
