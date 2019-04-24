@@ -22,7 +22,7 @@
                 <div>
                     <span>输入验证码：</span>
                     <p>
-                        <input type="password" v-model="authcode" placeholder="请输入验证码">
+                        <input type="number" v-model="authcode" placeholder="请输入验证码">
                          <span>
                                 <span v-show="showCount">{{count}}秒后获取</span>
                                 <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
@@ -80,6 +80,7 @@ export default {
             }
             else if(that.password != that.surepassword){
                 that.$toast('两次输入密码不一致');
+                 return
             }
             else  {
                 let data={
@@ -152,6 +153,7 @@ export default {
             }
              axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",data)
              .then(function(res){
+                 console.log(res,"绑定手机")
                  if(!res.data.success){
                      that.$toast({
                     message:res.data.message
@@ -163,10 +165,10 @@ export default {
                this.show=true
 
              })
-             .catch(function(res){
-                 if(!res.success){
+             .catch(function(err){
+                 if(!err.success){
                       that.$toast({
-                    message:"操作有误"
+                    message:err.message
                  })
                 }
              })

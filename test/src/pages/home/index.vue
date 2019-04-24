@@ -289,7 +289,8 @@ export default {
         changeActive(obj){
         },
         updateApp(){
-            var first = null;
+            var first = null
+            console.log(5555555555555)
         document.addEventListener('plusready', function() {
         var webview = plus.webview.currentWebview()
         console.log(webview,"1个打印");
