@@ -53,9 +53,7 @@ export default {
     methods:{
          // 返回首页
         handleReturnHome(){
-            this.$router.push({
-                path:'/personalCenter/incomedetail/integralCash'
-            })
+            this.$router.go(-1);
         },
         // 绑定银行卡
         handleAddCard(){

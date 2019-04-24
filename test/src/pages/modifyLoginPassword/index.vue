@@ -56,6 +56,33 @@ export default {
         }
     },
     methods:{
+        // 判断是否绑定手机号
+        handleJundeMobile(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+            // let url = '/customer/getCustomer';
+            let params = {
+                openid:this.$store.state.wechat.openid,
+            };
+            axiosPost(url,params).then(res =>{
+                console.log('查询个人设置成功',res)
+                if(res.data.success){
+                    if(res.data.data.mobile === null){
+                        this.$alert('请先绑定手机号', '提示', {
+                            confirmButtonText: '确定',
+                            callback: action => {
+                                this.$router.push({
+                                    path: '/home/bindingPhone'
+                                })
+                            }
+                        });
+                    }else{
+                        this.mobile = res.data.data.mobile;
+                    }
+                }
+            }).catch(res =>{
+                console.log('查询个人设置失败',res);
+            })
+        },
         goBack() {
             this.$router.push('/home/accountManagement')
         },
@@ -164,6 +191,9 @@ export default {
                  
              })
         }
+    },
+    created(){
+        this.handleJundeMobile();
     }
 }
 </script>

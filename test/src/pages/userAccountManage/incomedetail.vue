@@ -8,17 +8,30 @@
         <div class="tabs">
 
              <div class="income-tab">
+                        <div class="per-list" v-for="(item,index) in list" :key="index">
+                            <div class="avator center"><img :src="item.photo" alt=""></div>
+                            <div class="nickname">{{item.nickname}}</div>
+                            <div class="time">{{item.date}}</div>
+                            <div class="amount center">
+                                <span v-if="item.type == 2">分销收益</span>
+                                <span v-if="item.type == 3">代还收益</span>
+                                <span v-if="item.type == 4">商户收款收益</span>
+                                <span>+{{item.amount}}</span>
+                            </div>
+                        </div>
+                        
                         <!-- <div class="top-tab row">
                             <div class="money center">总额： <span>65522.00</span></div>
                             <div class="money center">可提现：<span>54242.00</span></div>
                             <div class="info center"><van-icon name="info" size="1.5em" color="#BD3B3C"/></div>
                         </div> -->
-                        <div class="per-list" v-for="(item,index) in list" :key="index">
-                            <div class="type">{{item.nickname}}</div>
-                            <div class="time">{{item.mobile}}</div>
+                        <!-- <div class="per-list" v-for="(item,index) in list" :key="index">
+                            <div class="avator center"><img src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83erxkZGVAXFDsQmCR3oNZZq0gdcicOfh6A6dZRd8HxQNfCpoA4JW4eicAcP1f81ibxiabuwT3EZYEh2X1Q/132" alt=""></div>
+                            <div class="nickname">{{item.nickname}}</div>
+                            <div class="time">{{item.date}}</div>
                             <div class="amount center">+{{item.amount}}</div>
                         </div>
-                    </div>
+                    </div> -->
             <!-- <van-tabs v-model="active">
                 <van-tab title="业务收入">
                    
@@ -218,22 +231,33 @@ export default {
             }
             .per-list{
                 width: 100%;
-                height: 100px;
+                height: 120px;
                 border-bottom: solid 1px #ccc;
                 position: relative;
-                .type{
+                .avator{
+                    width: auto;
+                    height: 100%;
+                    position: absolute;
+                    top: 0px;
+                    left: 10px;
+                    img{
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                    }
+                }
+                .nickname{
                     width: 50%;
                     height: auto;
-                    // border: solid 1px red;
                     color: black;
                     font-size: 30px;
                     position: absolute;
                     top: 15px;
-                    left: 20px;
+                    left: 140px;
                 }
                 .time{
                     position: absolute;
-                    left: 20px;
+                    left: 140px;
                     bottom: 15px;
                 }
                 .amount{
@@ -245,6 +269,9 @@ export default {
                     position: absolute;
                     right: 20px;
                     bottom: 0px;
+                    span:nth-child(2){
+                        margin-left: 20px;
+                    }
                 }
             }
             .Invitation-reward{

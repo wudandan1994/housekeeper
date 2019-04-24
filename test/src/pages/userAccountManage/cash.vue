@@ -61,9 +61,7 @@ export default {
     methods:{
         // 返回首页
         handleReturnHome(){
-            this.$router.push({
-                path:'/ponserCenter/userAccountManage'
-            })
+            this.$router.go(-1);
         },
         // 获取已绑定银行卡列表
         handleBankCardList(){

@@ -22,7 +22,7 @@
                 <div>
                     <span>输入验证码：</span>
                     <p>
-                        <input type="password" v-model="authcode" placeholder="请输入验证码">
+                        <input type="number" v-model="authcode" placeholder="请输入验证码">
                          <span>
                                 <span v-show="showCount">{{count}}秒后获取</span>
                                 <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>

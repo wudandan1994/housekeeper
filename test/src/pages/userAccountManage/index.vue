@@ -77,9 +77,7 @@ export default {
     methods:{
          // 返回首页
         handleReturnHome(){
-            this.$router.push({
-                path:'/personalCenter'
-            })
+            this.$router.go(-1);
         },
         // 更多
         handleMore(){

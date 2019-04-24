@@ -24,9 +24,7 @@ export default {
     methods:{
          // 返回首页
         handleReturnHome(){
-            this.$router.push({
-                path:'/personalCenter/income'
-            })
+            this.$router.go(-1);
         }
     }
 }
