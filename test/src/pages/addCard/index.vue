@@ -12,7 +12,7 @@
                     <div class="input start-center"><input type="text" required v-model="name" placeholder="请填写姓名"></div>
                 </div>
                 <div class="user-input row">
-                    <div class="title start-center">身份证卡号</div>
+                    <div class="title start-center">身份证号码</div>
                     <div class="input start-center"><input type="text" required v-model="idCard" placeholder="请填写所持身份证号码"></div>
                 </div>
                 <div class="user-input row">
@@ -57,9 +57,14 @@ export default {
             }
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/merchantSettled",data)
             .then(res=>{
-                if(res.success.success){
-                    location.href=res.data.data
-                }  
+                console.log(res,"绑定信用卡");
+                if(!res.data.success){
+                    this.$toast({
+                        message:res.data.message
+                    })
+                    return
+                }
+                 location.href=res.data.data
             })
             .catch(err=>{
                 console.log(err,"error");
