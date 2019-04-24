@@ -12,7 +12,6 @@ import accountManagementComponent from '@/pages/accountManagement'
 import loginComponent from '@/pages/login'
 import newsComponent from '@/pages/news'
 import addCardComponent from '@/pages/addCard'
-
 import logOutComponent from '@/pages/logOut'
 import inviteFriendsComponent from '@/pages/inviteFriends'
 import creditHousekeeperComponent from '@/pages/creditHousekeeper'

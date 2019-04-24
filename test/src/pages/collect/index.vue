@@ -206,7 +206,8 @@ export default {
             }
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg",data)
             .then(function(res){
-               
+                console.log(res,"注册之后的第一次信息");
+                
                 if(!res.data.success){
                     that.$toast({
                         message:res.data.message
@@ -218,17 +219,16 @@ export default {
                 })
                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
                 .then(function(res){
-
-                    console.log(res,"第二次掉接口");
+                    console.log(res,"个人信息查询的结果")
                      if(res.data.success){
                         let info=res.data.data.chMerCode
-                        that.$router.push({
-                            path:"/home/collect/open",
-                            query:{
-                                info,
-                      }
-                  })
-              }
+                    //     that.$router.push({
+                    //         path:"/home/collect/open",
+                    //         query:{
+                    //             info,
+                    //       }
+                    //  })
+                 }
                 })
                 .catch(function(err){
                     console.log(err,"错误的信息");

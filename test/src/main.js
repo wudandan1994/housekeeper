@@ -12,9 +12,6 @@ import 'babel-polyfill'
 import "../node_modules/babel-polyfill/dist/polyfill.js"
 // 引入公共css
 import '@/assets/css/common.css'
-// 引入图标库
-import '@/assets/icon/iconfont.css'
-import '@/assets/icon/iconfont.js'
 
 import axios from 'axios'
 Vue.prototype.$http = axios
@@ -22,7 +19,6 @@ Vue.prototype.$http = axios
 axios.defaults.withCredentials = true
 // 引入适配
 import 'lib-flexible/flexible'
-
 import { Actionsheet,Button,Switch,Dialog,RadioGroup, Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate   } from 'vant'
 Vue.use(Actionsheet)
 Vue.use(Button)
@@ -33,7 +29,6 @@ Vue.use(Uploader)
 Vue.use(Radio)
 Vue.use(Tabbar).use(TabbarItem)
 Vue.use(Popup)
-
 Vue.use(Icon)
 Vue.use(Field)
 Vue.use(NavBar)
@@ -47,6 +42,34 @@ Vue.use(Area)
 Vue.use(Lazyload)
 Vue.use(Loading)
 Vue.use(Rate)
+
+// 引入图标库
+import '@/assets/icon/iconfont.css'
+import '@/assets/icon/iconfont.js'
+
+
+
+
+var onPlusReady = function (callback, context = this) {
+  if (window.plus) {
+    callback.call(context)
+  } else {
+    document.addEventListener('plusready', callback.bind(context))
+  }
+}
+Vue.mixin({
+  beforeCreate () {
+    onPlusReady(() => {
+      this.plusReady = true
+    }, this)
+  },
+  methods: {
+    onPlusReady: onPlusReady
+  }
+})
+
+
+
 
 
 

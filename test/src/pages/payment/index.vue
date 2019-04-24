@@ -6,6 +6,7 @@
             <span></span>
         </header>
         <div class="container">
+             <van-button  @click="open" round type="info">点击开通商户业务</van-button>
            <div class="phone">
                <ul>
                     <li>
@@ -60,6 +61,22 @@ export default {
        goBack(){
            this.$router.push("/home")              
        },
+        open(){
+            let that=this
+            let data={
+                chMerCode:that.info
+            }
+            console.log(data)
+             axiosPost("http://pay.91dianji.com.cn/api/upload/uploadImg",data)
+             .then(function(res){
+                 console.log(res,"开户业务成功")
+                
+                 
+             })
+             .catch(function(err){
+                 console.log(err,"开户业务失败")
+             })
+        },
        record(){
            let data={
                chMerCode:this.chMerCode,
@@ -172,7 +189,7 @@ export default {
            line-height: 86px;
            padding-top:10px;
            color:#fff;
-           font-size:28px;
+           font-size:40px;
            display: flex;
            z-index:999;
            position: fixed;
@@ -190,6 +207,12 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
            background-color: #EEEFF1;
+           font-size: 40px;
+           >button {
+               margin:30px;
+               height: 90px;
+               font-size: 40px;
+           }
            >p {
                padding:30px;
                font-size: 30px;
@@ -234,7 +257,8 @@ export default {
                >button {
                    height: 90px;
                    font-size: 28px;
-               }
+                   font-size: 40px;
+                 }
            }
            >.record {
                margin-top:50px;
@@ -242,7 +266,7 @@ export default {
                >button {
                    padding:5px 20px;
                    height: 70px;
-               }
+                   font-size: 40px;               }
                .van-button--primary {
                    background-color: #767677;
                    border:1px solid #ccc;

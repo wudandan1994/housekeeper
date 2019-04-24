@@ -80,6 +80,7 @@ export default {
             }
             else if(that.password != that.surepassword){
                 that.$toast('两次输入密码不一致');
+                 return
             }
             else  {
                 let data={
@@ -152,6 +153,7 @@ export default {
             }
              axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",data)
              .then(function(res){
+                 console.log(res,"绑定手机")
                  if(!res.data.success){
                      that.$toast({
                     message:res.data.message
@@ -163,10 +165,10 @@ export default {
                this.show=true
 
              })
-             .catch(function(res){
-                 if(!res.success){
+             .catch(function(err){
+                 if(!err.success){
                       that.$toast({
-                    message:"操作有误"
+                    message:err.message
                  })
                 }
              })

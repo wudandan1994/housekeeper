@@ -2,11 +2,12 @@
     <div id="open">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
+            
             <span>开通商户业务</span>
             <span></span>
         </header>
         <div class="container">
-           <h3 @click="open"  v-show="showtask">点击开通商户业务</h3>
+          
            <p class="type">开通商户业务至少要上传身份证正反面和手持身份证照片，在提交之前，请先选择上传照片的类型</p>
            <button class="btn" @click="selset">请选择</button>
                     <van-actionsheet
@@ -51,7 +52,7 @@ export default {
             baseUrl:"",
             show:false,
             content:"",
-            showtask:false,
+            
             type:"",
             actions:[
                     {
@@ -127,23 +128,7 @@ export default {
         onCancel(){
             this.show=false
         },
-        open(){
-            let that=this
-            let data={
-                chMerCode:that.info
-            }
-             axiosPost("http://pay.91dianji.com.cn/api/upload/uploadImg",data)
-             .then(function(res){
-                 console.log(res,"开户业务成功")
-                 if(res.data!==""){
-                     this.showtask=true
-                 }
-                 
-             })
-             .catch(function(err){
-                 console.log(err,"开户业务失败")
-             })
-        },
+       
         sbumit(){
             if(this.content.trim().length===0){
                 this.$toast({
@@ -243,11 +228,7 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
-           >h3{
-               margin-top:20px;
-               font-size: 30px;
-               font-weight: bold;
-           }
+          
            >.type {
                padding:20px;
                line-height: 38px;
