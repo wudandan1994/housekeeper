@@ -6,7 +6,7 @@
             <span></span>
         </header>
         <div class="container">
-             <van-button  @click="open" round type="info">点击开通商户业务</van-button>
+             <!-- <van-button  @click="open" round type="info">点击开通商户业务</van-button> -->
            <div class="phone">
                <ul>
                     <li>
