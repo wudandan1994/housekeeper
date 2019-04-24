@@ -50,6 +50,29 @@ Vue.use(Rate)
 
 
 
+var onPlusReady = function (callback, context = this) {
+  if (window.plus) {
+    callback.call(context)
+  } else {
+    document.addEventListener('plusready', callback.bind(context))
+  }
+}
+Vue.mixin({
+  beforeCreate () {
+    onPlusReady(() => {
+      this.plusReady = true
+    }, this)
+  },
+  methods: {
+    onPlusReady: onPlusReady
+  }
+})
+
+
+
+
+
+
 
 
 /* eslint-disable no-new */

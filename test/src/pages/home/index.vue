@@ -98,7 +98,7 @@
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_49.png" size="30px" />
                         </span>
-                        <div class="detail-item">
+                        <div @click="updateApp" class="detail-item">
                             <h3>授权分润</h3>
                             <p>给实习会员设置分润</p>
                         </div>
@@ -288,15 +288,82 @@ export default {
         },
         changeActive(obj){
         },
+        updateApp(){
+            var first = null;
+        document.addEventListener('plusready', function() {
+        var webview = plus.webview.currentWebview()
+        console.log(webview,"1个打印");
+        
+        plus.key.addEventListener('backbutton', function() {
+            webview.canBack(function(e) {
+                if(e.canBack) {
+                    webview.back()
+                 } else {
+                 if(!first){
+                   first = new Date().getTime()
+                        this.$toast('再按一次退出应用')
+                        setTimeout(function(){
+                            first = null
+                        },1000)
+                    }else{
+                        if(new Date().getTime()-first<1000){
+                            plus.runtime.quit()
+                        }
+                    }
+                 }
+            })
+        })
+         var btn = ["确定升级", "取消"];
+         plus.runtime.getProperty(plus.runtime.appid, function (inf) {
+         ver = inf.version;
+         console.log(ver,"版本ver");
+         
+         axiosPost("http://pay.91dianji.com.cn/qianjiabao.apk")
+         .then(data=>{
+              if (data.result.version != ver) {
+                            var _msg="发现新版本:V" + data.result.version;
+                            mui.confirm(_msg, '升级确认', btn, function (e) {
+                                if (e.index == 0) { //执行升级操作
+                                    plus.nativeUI.toast("正在准备环境，请稍后！");
+                                    var dtask = plus.downloader.createDownload('http://218.4.57.4:19011/app/xieguan.apk', {
+                                    }, function (d, status) {
+                                        if (status == 200) {
+                                            var path = d.filename;//下载apk
+                                            plus.runtime.install(path); // 自动安装apk文件
+                                        } else {
+                                            plus.nativeUI.alert('版本更新失败:' + status);
+                                        }
+                                    });
+                                    dtask.start();
+                                }
+                            });
+                        } else {
+                            console.log('当前版本号已是最新');
+                            if (ismanual) {
+                                mui.toast('当前版本号已是最新');
+                            }
+                            return
+                        }
+         })
+         .catch((xhr, type, errerThrown)=>{
+             if (ismanual) {
+             this.$toast('网络异常,请稍候再试');
+             }
+         })
+         })
+        })
     },
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
+        // this.updateApp()
     },
     mounted(){
-    }
+    },
     
-}
+    }
+  }
+
 </script>
 
 <style lang="less" >
