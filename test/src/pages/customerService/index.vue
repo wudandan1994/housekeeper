@@ -81,6 +81,7 @@ export default {
                     line-height: 22px;
                     margin-left: 10px;
                     font-size: 28px;
+                    line-height: 38px;
                 }
             }
             

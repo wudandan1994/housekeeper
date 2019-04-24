@@ -22,7 +22,7 @@
                    </li>
                     <li>
                         <span>卡号</span>
-                       <input v-model="accNo"  type="number" placeholder="请填写储蓄卡卡号">
+                       <input v-model="accNo"  type="number" placeholder="请填写信用卡卡号">
                    </li>
                    <li>
                        <span>手机号</span>
@@ -32,6 +32,9 @@
            </div>
            <div class="at-once">
                    <van-button  @click="pay" size="large" round type="info">确认</van-button>
+           </div>
+           <div class="record">
+                <van-button  @click="record" size="middle" round type="primary">交易查询</van-button>
            </div>
         </div>
     </div>
@@ -49,12 +52,27 @@ export default {
            idCard:"",
            accNo:"",
            mobile:"",
-           chMerCode:""
+           chMerCode:"",
+           number:""
         }
     },
     methods:{
        goBack(){
            this.$router.push("/home")              
+       },
+       record(){
+           let data={
+               chMerCode:this.chMerCode,
+               orderCode:this.number
+           }
+           axiosPost("http://pay.91dianji.com.cn/api/creditCard/getTradeQuery",data)
+           .then(res=>{
+               console.log(res,"查看历史记录成功");
+               
+           })
+           .catch(err=>{
+               console.log(err,"查看历史记录失败")
+           })
        },
        pay(){
            let partten=/^1\d{10}$/
@@ -77,7 +95,7 @@ export default {
                     var r = Math.floor(Math.random() * 10);
                     rand += r
                 }
-            let number= new Date().getTime()+rand
+             this.number= new Date().getTime()+rand
              
     
                     function generateTimeReqestNumber() {
@@ -96,7 +114,7 @@ export default {
                 idCard:this.idCard,
                 accNo:this.accNo,
                 mobile:this.mobile,
-                orderCode:number,
+                orderCode:this.number,
                 chMerCode:this.chMerCode,
                 orderTime:generateTimeReqestNumber()
             }
@@ -108,17 +126,12 @@ export default {
                     })
                     return
                 }
-                this.$toast({
-                    message:res.data.message
-                })
-                
+                location.href=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
+                //  location.href=res.data.data.url
             })
             .catch(err=>{
                 console.log(err,"调取失败");
-                
             })
-
-
        },
     //    查询商户编号
         search(){
@@ -221,6 +234,18 @@ export default {
                >button {
                    height: 90px;
                    font-size: 28px;
+               }
+           }
+           >.record {
+               margin-top:50px;
+               padding-left:50px;
+               >button {
+                   padding:5px 20px;
+                   height: 70px;
+               }
+               .van-button--primary {
+                   background-color: #767677;
+                   border:1px solid #ccc;
                }
            }
        }

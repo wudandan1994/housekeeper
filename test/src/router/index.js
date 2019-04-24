@@ -11,6 +11,8 @@ import aboutUsComponent from '@/pages/aboutUs'
 import accountManagementComponent from '@/pages/accountManagement'
 import loginComponent from '@/pages/login'
 import newsComponent from '@/pages/news'
+import addCardComponent from '@/pages/addCard'
+
 import logOutComponent from '@/pages/logOut'
 import inviteFriendsComponent from '@/pages/inviteFriends'
 import creditHousekeeperComponent from '@/pages/creditHousekeeper'
@@ -114,7 +116,7 @@ import myloan from '@/pages/loan/myloan'
 export default new Router({
   // mode:"hash",
   routes: [
-    { path: '/',redirect:'/home'},
+    { path: '/',redirect:'/logIn'},
     {path:"/vip",component:vipComponent},
     {path:"/home",component:homeComponent},
     {path:"/login",component:loginComponent},
@@ -126,6 +128,7 @@ export default new Router({
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
     {path:"/home/news",component:newsComponent},
+    {path:"/home/addCard",component:addCardComponent},
     {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
     {path:"/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard",component:bindingCreditCardComponent,},
     {path:"/home/creditHousekeeper/aisleHousekeeper/repayment",component:repaymentComponent},

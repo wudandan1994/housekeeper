@@ -43,5 +43,14 @@ export default {
                height: auto;
            }
        }
+       >.container {
+           padding-top:96px;
+            >.image {
+                width:100%;
+                >img {
+                    width:100%;
+                }
+            }
+       }
    }
 </style>

@@ -23,7 +23,11 @@
                               <!-- <van-popup v-model="showRule">
                                 <div class="rule">
                                     <p>平台保证金退还说明</p>
-                                    <p>权益说明</p>
+                                    <p>钱夹宝是一家集信用卡、贷款、保险等金融业务的综合性便民服务平台。通过一个APP全程搞定您身边多样化的金融需求，打造了资源整合大平台，真正实现便民服务！
+ 
+现平台相当于免费VIP会员制度，缴纳相应会员升级费后即可获取更多后台业务使用权限，自用省钱，推广业务赚取高额佣金
+ 
+用户通过钱夹宝APP升级会员等级后，会员费不可退还，不同会员等级推广分润权限不同，越高等级会员费率越低，分润越多。</p>
                                 </div>
                             </van-popup> -->
                          </div>
@@ -272,7 +276,7 @@ export default {
                          
                 } else {
                     // 非微信浏览器
-                    console.log('非微信');
+                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
                 } 
             }else{
                 if(this.$store.state.wechat.openid != ''){
@@ -311,7 +315,7 @@ export default {
         }
     },
     created(){
-        console.log('时间戳',(Date.parse( new Date() ).toString()).substr(0,10));
+        // console.log('时间戳',(Date.parse( new Date() ).toString()).substr(0,10));
     }
 }
 </script>
@@ -398,6 +402,10 @@ export default {
                                     font-size: bold;
                                     margin-bottom: 20px;
                                     font-size: 30px;
+                                }
+                                &:nth-of-type(2){
+                                    color:#000;
+                                    line-height: 38px;
                                 }
                             }
                          }

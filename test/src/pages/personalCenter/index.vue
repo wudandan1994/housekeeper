@@ -131,7 +131,7 @@ export default {
     data(){
         return {
             active:2,
-            nickname: 'Giovanni',
+            nickname: '',
             headimg: 'http://img2.imgtn.bdimg.com/it/u=1000195578,2796948806&fm=11&gp=0.jpg',
             promotioncode: '',
             vip: 'http://pay.91dianji.com.cn/301-1.png',
@@ -147,7 +147,7 @@ export default {
             this.$toast('尽情期待');
         },
         changeActive(obj){
-            console.log('obj', obj);
+            // console.log('obj', obj);
         },
         // 请求收益余额分佣等信息
         handleGetAmount(){
@@ -157,7 +157,7 @@ export default {
                 openid:this.$store.state.wechat.openid,
             };
             axiosPost(url,params).then(res =>{
-                console.log('查询个人设置成功',res.data);
+                console.log('查询个人设置成功',res)
                 if(res.data.success){
                     this.nickname = res.data.data.nickname;
                     this.headimg  = res.data.data.photo;

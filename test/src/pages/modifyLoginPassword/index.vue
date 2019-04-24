@@ -14,7 +14,7 @@
                        <input type="number" v-model="mobile" placeholder="输入11位手机号码">
                        <span>
                             <span v-show="showCount">{{count}}秒后再次获取</span>
-                            <span @click="getCode" v-show="showCode">获取验证码</span>
+                             <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
                        </span>
                       
                    </li>
@@ -33,7 +33,7 @@
                </ul>
            </div>
            <div @click="modify" class="at-once">
-                   立即修改
+                  <van-button size="large" round type="info">立即修改</van-button>
                </div>
         </div>
     </div>
@@ -74,7 +74,11 @@ export default {
                 }
                 axiosPost("http://pay.91dianji.com.cn/api/customer/sendSms",data)
                 .then(function(res){
-                    if(res.data.success) {
+                    if(!res.data.success){
+                        that.$toast({
+                            message:res.data.message
+                        })
+                    } else {
                         that.showCount=true
                         that.showCode=false
                     }
@@ -144,7 +148,7 @@ export default {
                 mobile:this.mobile,
                 authcode:this.authcode
             }
-             axiosPost("http://pay.91dianji.com.cn/api/customer/updatePassword",data)
+             axiosPost("http://pay.91dianji.com.cn/api/customer/updatePassWord",data)
              .then(function(res){
                  console.log(res,"result");
                  that.$toast({
@@ -191,6 +195,7 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
            background-color: #EEEFF1;
+           overflow-x: hidden;
            >p {
                padding:30px;
                font-size: 30px;
@@ -214,14 +219,11 @@ export default {
                            border:none;
                        }
                        >span {
-                           &:nth-of-type(2){
-                               color:white;
-                               background-color: #4965AE;
-                               padding:0 10px;
-                               margin-right:20px;
-                               line-height: 60px;
-                               border-radius: 10px;
-                           }
+                          >button {
+                              height: 60px;
+                              padding:0 8px;
+                              margin-right:15px;
+                          }
                        }
                        >input {
                            border:none;
@@ -232,14 +234,14 @@ export default {
                }
            }
            >.at-once {
-               width:90%;
-               background-color: #4965AE;
-               color:white;
+              
                margin-top:200px;
-               margin-left:5%;
-               text-align: center;
-               padding:30px;
                border-radius: 10px;
+               padding-left: 30px;
+               padding-right:30px;
+               >button {
+                   height: 90px;
+               }
            }
        }
    }

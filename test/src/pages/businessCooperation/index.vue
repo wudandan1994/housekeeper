@@ -6,7 +6,7 @@
             <span><van-icon name="ellipsis"/></span>
         </header>
         <div class="container">
-           <div class="info">
+           <!-- <div class="info">
                <p><span>&nbsp;</span>填写商务合作信息</p>
                <ul class="phone">
                    <li>
@@ -75,7 +75,8 @@
                 <div class="contact">
                     <textarea   placeholder="如果您想对接我们渠道资源，或是您有好的资源渠道，请留下您的联系方式，我们会尽快与您联系"></textarea>
                 </div>
-           </div>
+           </div> -->
+           <p></p>
         </div>
     </div>
 
@@ -100,7 +101,7 @@ export default {
 <style lang="less">
    #business-cooperation {
        >header {
-           background: #000;
+           background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;

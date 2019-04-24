@@ -12,7 +12,7 @@
                 <span>上海</span>
             </div>  
             <span>首页</span>
-            <router-link tag="span" to="/home/news" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
+            <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
         </header>
         <div class="container">
             <!-- 轮播图模块 -->
@@ -212,7 +212,7 @@
                            
                         </li>
                         <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
-                        <router-link to="/home/clearCache" tag="li">清除缓存</router-link>
+                        <!-- <router-link to="/home/clearCache" tag="li">清除缓存</router-link> -->
                     </ul>
                    
                       <div  @click="signOut" class="sign-out">
@@ -306,7 +306,7 @@ export default {
         height:86px;
         font-size:28px;
         line-height: 86px;
-         background-color: #4B66AF;
+        background-color: #4B66AF;
         color:white;
         display:flex;
         justify-content: space-between;
@@ -518,11 +518,10 @@ export default {
                 }
             }
         }
-            >.aside-left {
+        >.aside-left {
                 width: 100%;
                 height: 100%;
                 background-color: rgba(0, 0, 0, .4);
-               
                 position: absolute;
                 overflow: visible;
                 top:0px;
@@ -585,6 +584,9 @@ export default {
                         font-size: 30px;
                     }
                 }
+         }
+         .van-dialog .van-button{
+             height: 80px;
          }
     }
    }

@@ -59,7 +59,6 @@ export default {
     methods:{
         goBack() {
             this.$router.push('/home/creditHousekeeper')
-           
         },
         repay(item){
             this.$router.push({

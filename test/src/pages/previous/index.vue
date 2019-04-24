@@ -62,6 +62,7 @@ export default {
             mobile: '',
             level: '',
             recommendedcode: '',
+            privious:""
         }
     },
     methods:{
@@ -79,8 +80,9 @@ export default {
                 recommendedcode: this.$store.state.wechat.recommendedcode
             };
             axiosPost(url,params).then(res =>{
-                console.log('上级请求成功',res);
                 if(res.data.success){
+                    console.log(res,"查询上下级的res");
+                    
                     this.nickname = res.data.data.nickname;
                     this.mobile = res.data.data.mobile,
                     this.recommendedcode = res.data.data.promotioncode,
@@ -89,10 +91,23 @@ export default {
             }).catch(res =>{
                 console.log('上级请求失败',res);
             })
-        }
+        },
+        //查询个人设置
+        settings(){
+            axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer")
+            .then(res=>{
+                console.log(res,"个人设置中的res");
+                
+            })
+            .catch(err=>{
+                console.log(err,"个人设置中的err");
+                
+            })
+        } 
     },
    created(){
-        this.handlePrevious();
+        this.handlePrevious()
+        this.settings()
     }
 }
 </script>
