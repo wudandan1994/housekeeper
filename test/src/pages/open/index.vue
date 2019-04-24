@@ -50,7 +50,7 @@
                </div>
            </div>
            <div class="submit">
-               <van-button @click="sbumit" round size="large" type="info">提交</van-button>
+               <h3>已提交图片</h3>
            </div>
             <div class="showImg">
                 <ul>
@@ -75,7 +75,7 @@ export default {
             cardback:"idcardback.jpg",
             cardWithhand:"imgwiths.jpg",
             bankfront:"01.jpg",
-            bankback:"02.jpg",
+            bankback:"bankb.jpg",
             baseUrl:"",
             show:false,
             content:"",
@@ -496,9 +496,9 @@ export default {
                margin-top:30px;
                padding-left:30px;
                padding-right: 30px;
-               >button{
-                   height: 90px;
+               >h3{
                    font-size: 30px;
+                   font-weight: bold;
                }
            }
            >.update {
