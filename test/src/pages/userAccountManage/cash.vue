@@ -41,14 +41,17 @@
                 <div class="bankcardno">{{item.bankcardno}}</div>
             </div>
         </div>
+        <loading :componentload='componentload'></loading>
     </div>
 </template>
 <script>
+import loading from '@/components/loading'
 import storage from '@/lib/storage'
 import {axiosPost} from '@/lib/http'
 export default {
     data(){
         return{
+            componentload: true,
             active: 0,
             cash: '',
             cardId:'',
@@ -57,6 +60,9 @@ export default {
             showbanklist: false,
             cardLength: '',
         }
+    },
+    components:{
+        loading
     },
     methods:{
         // 返回首页
@@ -86,6 +92,7 @@ export default {
         // 打开银行卡列表
         handleOpenBankCardList(){
             this.showbanklist = true;
+            this.handleBankCardList();
         },
         // 选择银行卡
         handleCheckCard(obj){
@@ -133,7 +140,9 @@ export default {
     },
     created(){
         this.amount = this.$route.query.amount;
-        this.handleBankCardList();
+        setTimeout(() =>{
+            this.componentload = false;
+        },500)
     }
 }
 </script>

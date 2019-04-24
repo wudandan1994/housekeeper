@@ -87,14 +87,20 @@
                  </ul>
              </div>
         </div>
+        <loading :componentload="componentload"></loading>
     </div>
 </template>
 
 <script>
+import loading from '@/components/loading'
 import {axiosPost} from '@/lib/http'
 export default {
+    components:{
+      loading
+    },
     data(){
         return {
+            componentload: true,
             cardList:[]
         }
     },
@@ -110,12 +116,14 @@ export default {
                     that.$toast({
                         message:res.data.message
                     })
-                    return
+                }else{
+                    let data = res.data.data.data
+                    that.cardList.push(...data.notSingleCardList)
+                    that.cardList.push(...data.singleCardList)
+                    setTimeout(() =>{
+                        that.componentload = false;
+                    },500)
                 }
-                let data=res.data.data.data
-                that.cardList.push(...data.notSingleCardList)
-                that.cardList.push(...data.singleCardList)
-              
             })
             .catch(function(err){
                 console.log(err,"error")

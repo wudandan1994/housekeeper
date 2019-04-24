@@ -121,9 +121,10 @@ export default {
                 if(res.data.success){
                     this.loading = false;
                     this.$toast('提交成功');
+                    this.$router.push({path:'/home'})
                 }else{
                     this.loading = false;
-                    this.$toast('认证失败');
+                    this.$toast('提交失败');
                 }
             }).catch(res =>{
                 console.log('实名认证失败',res);

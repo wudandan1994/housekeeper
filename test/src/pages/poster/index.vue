@@ -23,15 +23,22 @@
 
 
 <script>
+import loading from '@/components/loading'
 import storage from '@/lib/storage'
+import { axiosPost } from '../../lib/http';
 export default {
+    components:{
+      loading
+    },
     data() {
         return {
+            componentload: true,
             cur:0 ,
             showUpload:true,
             imgUrl: '',
             imgShow: false,
-            url: 'http://pay.91dianji.com.cn'
+            url: 'http://pay.91dianji.com.cn',
+            qrcode: '',
         }
     },
     methods:{
@@ -52,7 +59,7 @@ export default {
             };
             
             var qrcode = new Image();
-            qrcode.src = 'http://pay.91dianji.com.cn/qrCode/barCode?site=weixin&url=http://pay.91dianji.com.cn/#/home?promotioncode='+this.$store.state.wechat.promotioncode;
+            qrcode.src = 'http://pay.91dianji.com.cn/' + this.qrcode;
             qrcode.onload = function(){
                 ctx.drawImage(qrcode,230,390,80,80);
             };
@@ -88,10 +95,47 @@ export default {
                     this.showUpload = false;
                 },1000)
             }
+        },
+        // 先判断是否有二维码
+        handleJundgeQrCode(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getQrcode';
+            let params = {};
+            axiosPost(url,params).then(res =>{
+                if(res.data.success){
+                    console.log('二维码请求成功',res);
+                    if(res.data.data === null){
+                        let url = 'http://pay.91dianji.com.cn/api/customer/downloadQrcode';
+                        let params = {
+                            code: this.$store.state.wechat.promotioncode
+                        };
+                        axiosPost(url,params).then(res =>{
+                            if(res.data.success){
+                                console.log('二维码请求成功',res);
+                                this.qrcode = res.data.data;
+                                setTimeout(() =>{
+                                    this.componentload = false;
+                                },500);
+                                this.handlePoster();
+                            }else{
+                                this.$toast('二维码请求失败');
+                            }
+                        })
+                    }else{
+                        console.log('有二维码请求成功',res);
+                        this.qrcode = res.data.data;
+                        this.handlePoster();
+                    }
+                }else{
+                    console.log('无二维码',res);
+                }
+            }).catch(res =>{
+                console.log('无二维码',res);
+            })
         }
     },
     mounted(){
-        this.handlePoster();
+        this.handleJundgeQrCode();
+        // this.handlePoster();
     }
 }
 </script>
