@@ -346,20 +346,20 @@ export default {
                                     chMerCode:this.info
                                 }
                                  axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",datas)
-                                    .then(res=>{
-                                        if(!res.data.success){
-                                            this.$toast({
-                                                message:res.data.message
-                                            })
-                                            return
-                                        } else if(res.data.data.uploadStatus==="0"){
-                                            this.$router.push("/home/collect/payment")
-                                         } 
-                                        
+                                .then(res=>{
+                                    if(!res.data.success){
+                                        this.$toast({
+                                            message:res.data.message
                                         })
-                                        .catch(err=>{
-                                            console.log(err,"图片审核中")
-                                        })
+                                        return
+                                    } else if(res.data.data.uploadStatus==="0"){
+                                        this.$router.push("/home/collect/payment")
+                                        } 
+                                    
+                                    })
+                                    .catch(err=>{
+                                        console.log(err,"图片审核中")
+                                    })
                               }
                         })
 
@@ -371,7 +371,6 @@ export default {
             }).catch(res =>{
                 console.log('文件上传失败',res);
             })
-            
         },
         findphoto(){
              axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberPhoto")
