@@ -8,20 +8,24 @@
                      <div class="diamonds">
                          <div class="card">钱夹宝钻石会员</div>
                          <div class="instructions">
-                             <span @click="isShow">权益说明</span>
-                             <van-popup v-model="show">
+                             <span @click="isShowDiamonds">权益说明</span>
+                             <van-popup v-model="ShowDiamonds">
                                 <div class="cover">
-                                    <p>钱夹宝钻石会员</p>
-                                    <p>权益说明</p>
+                                    <p>钻石会员权益说明</p>
+                                    1. 钻石会员可继续升级至城市合伙人等级，享受合伙人躺赚收益<br/>
+                                    2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
+                                    3. 招商收益<br/>
+                                    4. 信用卡办卡收益<br/>
+                                    5. 智能精养、空卡周转、商户收款、车险等等分润收益<br/>
                                 </div>
                             </van-popup>
                              <span @click="isShowRule">退换规则</span>
-                              <van-popup v-model="showRule">
+                              <!-- <van-popup v-model="showRule">
                                 <div class="rule">
                                     <p>平台保证金退还说明</p>
                                     <p>权益说明</p>
                                 </div>
-                            </van-popup>
+                            </van-popup> -->
                          </div>
                      </div>
                      <div class="qualifications">
@@ -31,9 +35,7 @@
                     </div>  
                      <div class="price">
                         <span class="new-price">￥993.00</span>
-                        <!-- <span class="old-price">1680</span> -->
                         <span class="buy" @click="handleVip('993')">立即购买</span>
-                        <!-- <span class="buy-he">帮他购买</span> -->
                      </div>
                 </li>
                 <li>
@@ -41,18 +43,22 @@
                      <div class="diamonds">
                          <div class="card">钱夹宝黄金会员</div>
                          <div class="instructions">
-                             <span @click="isShow">权益说明</span>
-                             <van-popup v-model="show">
+                             <span @click="isShowGold">权益说明</span>
+                             <van-popup v-model="ShowGold">
                                 <div class="cover">
                                     <p>钱夹宝黄金会员</p>
-                                    <p>权益说明</p>
+                                    1. 黄金会员可继续升级至钻石会员<br/>
+                                    2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
+                                    3. 招商收益<br/>
+                                    4. 信用卡办卡收益<br/>
+                                    5. 智能精养、空卡周转、商户收款、车险等等分润收益<br/>
                                 </div>
                             </van-popup>
                              <span @click="isShowRule">退换规则</span>
                               <van-popup v-model="showRule">
                                 <div class="rule">
-                                    <p>平台保证金退还说明</p>
-                                    <p>权益说明</p>
+                                    <p>退换说明</p>
+                                    1.钱夹宝是一家集信用卡、贷款、保险等金融业务的综合性便民服务平台。通过一个APP全程搞定您身边多样化的金融需求，打造了资源整合大平台，真正实现便民服务<br/>2.现平台相当于免费VIP会员制度，缴纳相应会员升级费后即可获取更多后台业务使用权限，自用省钱，推广业务赚取高额佣金<br/>3.用户通过钱夹宝APP升级会员等级后，会员费不可退还，不同会员等级推广分润权限不同，越高等级会员费率越低，分润越多<br/>
                                 </div>
                             </van-popup>
                          </div>
@@ -64,9 +70,7 @@
                     </div>  
                      <div class="price">
                         <span class="new-price">￥393.00</span>
-                        <!-- <span class="old-price">1680</span> -->
                         <span class="buy" @click="handleVip('393')">立即购买</span>
-                        <!-- <span class="buy-he">帮他购买</span> -->
                      </div>
                 </li>
             </ul>
@@ -157,7 +161,8 @@ export default {
     data(){
         return{
             active: 1,
-            show:false,
+            ShowDiamonds:false,
+            ShowGold: false,
             showRule:false,
             pup1: false,
             pup2: false,
@@ -185,8 +190,13 @@ export default {
         changeActive(obj){
             console.log('obj', obj);
         },
-        isShow(){
-             this.show=true
+        // 钻石会员权益说明
+        isShowDiamonds(){
+             this.ShowDiamonds = true
+        },
+        // 黄金会员权益说明
+        isShowGold(){
+             this.ShowGold = true
         },
         isShowRule(){
             this.showRule=true
@@ -353,10 +363,13 @@ export default {
                          }
                          .cover {
                              width:500px;
-                             padding-top:30px;
+                            padding-top:30px;
                             height: 700px;
                             border-radius: 10px;
                             padding:30px;
+                            line-height: 45px;
+                            text-align: justify;
+                            font-size: 28px;
                             background-color: #fff;
                             >p{
                                 &:nth-of-type(1){
@@ -364,22 +377,27 @@ export default {
                                     text-align: center;
                                     font-size: bold;
                                     margin-bottom: 20px;
+                                    font-size: 30px;
                                 }
                             }
                          }
                          .rule {
-                             width:500px;
-                             padding-top:30px;
+                            width:500px;
+                            padding-top:30px;
                             height: 700px;
                             border-radius: 10px;
                             padding:30px;
+                            font-size: 28px;
+                            text-align: justify;
                             background-color: #fff;
+                            line-height: 40px;
                             >p{
                                 &:nth-of-type(1){
                                     color:#000;
                                     text-align: center;
                                     font-size: bold;
                                     margin-bottom: 20px;
+                                    font-size: 30px;
                                 }
                             }
                          }
