@@ -71,7 +71,7 @@
             <span>申请攻略</span>
         </div>
         <div class="strategy">
-            <p class="way center">如何快速申请？</p>
+            <router-link tag="p" to="/loan/myloan" class="way center">如何快速申请？</router-link>
             <p class="advantage center">门槛低、可取现、额度高、期限长、优惠多、速度快、</p>
         </div>
         <div class="kong"></div>

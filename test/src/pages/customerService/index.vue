@@ -71,10 +71,9 @@ export default {
                margin-top: 50px;
             }
             .per-detail{
-                width: 70%;
+                width: 95%;
                 height: 60px;
-                margin-left: auto;
-                margin-right: auto;
+                margin-left: 10%;
                 .per-icon{
                     line-height: 22px;
                 }

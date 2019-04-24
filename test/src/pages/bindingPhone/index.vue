@@ -12,9 +12,17 @@
                     <input type="number" v-model="mobile"  placeholder="请输入手机号">
                 </div>
                 <div>
+                    <span>密码：</span>
+                    <input type="password" v-model="password"  placeholder="请输入密码">
+                </div>
+                <div>
+                    <span>确认密码：</span>
+                    <input type="password" v-model="surepassword"  placeholder="请再次输入密码">
+                </div>
+                <div>
                     <span>输入验证码：</span>
                     <p>
-                        <input type="number" v-model="authcode" placeholder="请输入验证码">
+                        <input type="password" v-model="authcode" placeholder="请输入验证码">
                          <span>
                                 <span v-show="showCount">{{count}}秒后获取</span>
                                 <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
@@ -42,6 +50,8 @@ export default {
         return {
             show:false,
             mobile:"",
+            password: '',
+            surepassword: '',
             authcode:"",
             count:60,
             showCount:false,
@@ -58,20 +68,19 @@ export default {
             let that=this
             let partten=/^1\d{10}$/
             if(that.mobile.trim().length===0){
-              
-                
                 that.$toast({
                     message:"手机号码不能为空"
                 })
                 return
-
             } else if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
                 })
                  return
             }
-            
+            else if(that.password != that.surepassword){
+                that.$toast('两次输入密码不一致');
+            }
             else  {
                 let data={
                     mobile:this.mobile,
@@ -121,20 +130,24 @@ export default {
                 })
                 return
             }
-            if(!partten.test(that.mobile)){
+            else if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
                 })
                  return
             }
-            if(that.authcode.trim().length===0){
+            else if(that.authcode.trim().length===0){
                 that.$toast({
                     message:"验证码不能为空"
                 })
                  return
             }
+            else if(that.password != that.surepassword){
+                that.$toast('两次输入密码不一致');
+            }
             let data={
                 mobile:that.mobile,
+                password: that.password,
                 authcode:that.authcode
             }
              axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",data)
@@ -150,7 +163,7 @@ export default {
                this.show=true
 
              })
-             .catch(function(err){
+             .catch(function(res){
                  if(!res.success){
                       that.$toast({
                     message:"操作有误"

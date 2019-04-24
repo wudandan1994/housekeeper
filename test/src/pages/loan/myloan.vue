@@ -2,13 +2,13 @@
     <div id="novice-guide">
         <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
-            <div class="top-title center">新手指南</div>
+            <div class="top-title center">我要贷款</div>
             <div class="right-icon center"></div>
         </header>
         <div class="container">
-           <img src="http://pay.91dianji.com.cn/CreditCard_01.jpg" alt="">
-           <img src="http://pay.91dianji.com.cn/CreditCard_02.jpg" alt="">
-           <img src="http://pay.91dianji.com.cn/CreditCard_03.jpg" alt="">
+           <img src="http://pay.91dianji.com.cn/myloan_01.jpg" alt="">
+           <img src="http://pay.91dianji.com.cn/myloan_02.jpg" alt="">
+           <img src="http://pay.91dianji.com.cn/myloan_03.jpg" alt="">
         </div>
     </div>
 
@@ -42,15 +42,6 @@ export default {
                width: 100%;
                height: auto;
            }
-       }
-       >.container {
-           padding-top:96px;
-            >.image {
-                width:100%;
-                >img {
-                    width:100%;
-                }
-            }
        }
    }
 </style>
