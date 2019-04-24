@@ -8,19 +8,19 @@
         <div class="container">
             <div class="phone-numer">
                 <div>
-                    <span>手机号：</span>
+                    <span>手机：</span>
                     <input type="number" v-model="mobile"  placeholder="请输入手机号">
                 </div>
                 <div>
                     <span>密码：</span>
-                    <input type="password" v-model="password"  placeholder="请输入密码">
+                    <input type="password" v-model="password"  placeholder="字母和数字组合">
                 </div>
                 <div>
                     <span>确认密码：</span>
-                    <input type="password" v-model="surepassword"  placeholder="请再次输入密码">
+                    <input type="password" v-model="surepassword"  placeholder="字母和数字组合">
                 </div>
                 <div>
-                    <span>输入验证码：</span>
+                    <span>验证码：</span>
                     <p>
                         <input type="number" v-model="authcode" placeholder="请输入验证码">
                          <span>
@@ -129,7 +129,6 @@ export default {
                  that.$toast({
                     message:"手机号码不能为空"
                 })
-                return
             }
             else if(!partten.test(that.mobile)){
                  that.$toast({
@@ -146,32 +145,35 @@ export default {
             else if(that.password != that.surepassword){
                 that.$toast('两次输入密码不一致');
             }
-            let data={
-                mobile:that.mobile,
-                password: that.password,
-                authcode:that.authcode
-            }
-             axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",data)
-             .then(function(res){
-                 console.log(res,"绑定手机")
-                 if(!res.data.success){
-                     that.$toast({
-                    message:res.data.message
-                     })
-                 }
-                    that.$toast({
-                    message:res.data.message
-                })
-               this.show=true
+            else{
+                let data={
+                    mobile:that.mobile,
+                    password: that.password,
+                    authcode:that.authcode
+                };
+                axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",data)
+                .then(function(res){
+                    console.log("绑定手机成功",res);
+                    if(res.data.success){
+                        that.$toast({
+                            message:res.data.message
+                        })
+                        that.$router.push('/home');
+                    }else{
+                        that.$toast({
+                            message:res.data.message
+                        })
+                    }
+                // this.show=true
 
-             })
-             .catch(function(err){
-                 if(!err.success){
-                      that.$toast({
-                    message:err.message
-                 })
-                }
-             })
+                })
+                .catch(function(res){
+                    console.log("绑定手机失败",res);
+                    that.$toast({
+                        message:res.data.message
+                    })
+                })
+            }
            
         }
     }
@@ -222,12 +224,14 @@ export default {
                    }
                    >input {
                        border:none;
+                       background: transparent;
                    }
                    >p {
                        flex:1;
                        >input {
                            border:none;
                            width:240px;
+                           background: transparent;
                        }
                        >span {
                            >button {

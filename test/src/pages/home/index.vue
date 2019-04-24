@@ -34,7 +34,7 @@
                          <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
                         <span>升级代理</span>
                     </router-link>
-                    <router-link to="/home/incomeBreakdown" tag="li">
+                    <router-link to="/personalCenter/incomedetail" tag="li">
                          <p> <van-icon name="http://pay.91dianji.com.cn/103.png"  class="zx-search"  /></p>
                         <span>收益明细</span>
                     </router-link>
@@ -55,7 +55,7 @@
             <!-- 信用卡模块 -->
             <div class="credit">
                 <ul>
-                    <router-link  tag="li" to="/home/cardCenter">
+                    <li @click="handleIsAuth('/home/cardCenter')">
                         <span class="handle">
                             <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                         </span>
@@ -64,7 +64,7 @@
                             <p>佣金当天结算</p>
                             <span>官方渠道</span>
                         </div>
-                    </router-link>
+                    </li>
                     <router-link tag="li" to="/home/collect">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /></span>
                         <div class="channel">
@@ -73,22 +73,22 @@
                             <span>落地商户</span>
                         </div>
                     </router-link>
-                    <router-link tag="li" to="/loan/detail">
+                    <li @click="handleIsAuth('/loan/detail')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
                         <div class="channel">
                             <h3>我要贷款</h3>
                             <p>实时审批&nbsp;授信额度</p>
                             <span>GO>></span>
                         </div>  
-                    </router-link>
-                    <router-link to="/home/creditHousekeeper" tag="li">
+                    </li>
+                    <li @click="handleIsAuth('/home/creditHousekeeper')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
                             <p>落地商户空卡周转</p>
                             <span>智能还款</span>
                         </div>
-                    </router-link>
+                    </li>
                 </ul>
             </div>
             <!-- 详情模块 -->
@@ -252,7 +252,8 @@ export default {
             // newaccess_token: '',
             nickname: '',
             photo: '',
-            headimg:''
+            headimg:'',
+            iscertification: '',
         }
   },
    methods:{
@@ -287,17 +288,39 @@ export default {
                 });
         },
         changeActive(obj){
+        } ,
+        // 查询实名认证
+        handleSearchAuths(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+            // let url = '/customer/getCustomer';
+            let params = {
+                openid:this.$store.state.wechat.openid,
+            };
+            axiosPost(url,params).then(res =>{
+                if(res.data.success){
+                   console.log('查询个人设置成功',res)
+                   this.iscertification = res.data.data.iscertification;
+                }
+            }).catch(res =>{
+                console.log('查询个人设置失败',res);
+            })
         },
+        // 判断是否实名认证
+        handleIsAuth(obj){
+            if(this.iscertification == '0'){
+                //未认证
+                this.$toast('请先实名认证');
+            }else{
+                this.$router.push(obj);
+            }
+        }
     },
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
-    },
-    mounted(){
-    },
-    
-    
-  }
+        this.handleSearchAuths();
+    }
+}
 
 </script>
 

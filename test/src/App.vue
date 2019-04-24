@@ -77,14 +77,30 @@ export default {
                           };
                           axiosPost(url,params).then(res =>{
                               console.log('登陆成功',res);
-                              storage.set('cid',res.data.data.id);
-                              this.$store.commit('iscertification',res.data.data.iscertification);
-                              this.$store.commit('level',res.data.data.level);
-                              this.$store.commit('promotioncode',res.data.data.promotioncode);
-                              this.$store.commit('mobile',res.data.data.mobile);
-                              this.$store.commit('vip',res.data.data.vip);
-                              this.$store.commit('recommendedcode',res.data.data.recommendedcode);
-                              this.$toast('登陆成功');
+                              if(res.data.success){
+                                storage.set('cid',res.data.data.id);
+                                this.$store.commit('iscertification',res.data.data.iscertification);
+                                this.$store.commit('level',res.data.data.level);
+                                this.$store.commit('promotioncode',res.data.data.promotioncode);
+                                this.$store.commit('mobile',res.data.data.mobile);
+                                this.$store.commit('vip',res.data.data.vip);
+                                this.$store.commit('recommendedcode',res.data.data.recommendedcode);
+                                this.$toast('登陆成功');
+                                let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+                                let params = {
+                                    openid:this.$store.state.wechat.openid,
+                                };
+                                axiosPost(url,params).then(res =>{
+                                    if(res.data.success){
+                                      console.log('查询个人设置成功',res)
+                                      this.iscertification = res.data.data.iscertification;
+                                    }
+                                }).catch(res =>{
+                                    console.log('查询个人设置失败',res);
+                                })
+                              }else{
+                                this.$toast('登陆失败');
+                              }
                           }).catch(res =>{
                               console.log('登录失败',res);
                               this.$toast('登陆失败');
@@ -193,10 +209,10 @@ export default {
           });
           wx.ready(function(){
               wx.onMenuShareAppMessage({ 
-                  title: '测试', // 分享标题
-                  desc: '测试', // 分享描述
+                  title: '钱夹宝综合金融服务推广平台，点滴成就未来', // 分享标题
+                  desc: '让每个人都能找到人生的意义', // 分享描述
                   link: 'http://pay.91dianji.com.cn/#/home?promotioncode=' + that.$store.state.wechat.promotioncode, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                  imgUrl: 'http://pay.91dianji.com.cn/icon_61.png', // 分享图标
+                  imgUrl: 'http://pay.91dianji.com.cn/logo.png', // 分享图标
                   success: function (res) {
                     console.log('分享调用成功',res);
                   }

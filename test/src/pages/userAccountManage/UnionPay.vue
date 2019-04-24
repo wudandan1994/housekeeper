@@ -1,9 +1,9 @@
 <template>
     <div id="page-alipay">
-        <header class="manage loan">
-            <van-nav-bar title="添加银行卡" left-text="返回" left-arrow @click-left="handleReturnHome" @click-right="handleMore">
-                <van-icon name="weapp-nav" slot="right" />
-            </van-nav-bar>
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">添加银行卡</div>
+            <div class="right-icon center"></div>
         </header>
         <div class="user-input row">
             <div class="title start-center">真实姓名</div>
@@ -13,24 +13,11 @@
             <div class="title start-center">银行卡号</div>
             <div class="input start-center"><input type="text" v-model="bankcardno" placeholder="请填写所持银行卡号"></div>
         </div>
-        <!-- <div class="user-input top row">
-            <div class="title start-center">发卡行</div>
-            <div class="input start-center"><input type="number" placeholder="请填写发卡行"></div>
-        </div>
-        <div class="user-input top row">
-            <div class="title start-center">支行地址</div>
-            <div class="input start-center" @click="handleArea">{{area}}</div>
-        </div> -->
-        <!-- <van-area v-if="show" class="position" :area-list="areaList" @confirm="handleAreas" /> -->
         <div class="user-input top row">
             <div class="title start-center">手机号</div>
             <div class="input start-center"><input type="number" v-model="phone" placeholder="请填写银行卡预留手机号"></div>
         </div>
-        <!-- <div class="user-input row">
-            <div class="title start-center">验证码</div>
-            <div class="safe-code start-center"><input type="number" placeholder="请填写您收到的验证码"></div>
-            <div class="get-code center" @click="handleSafeCode"><div>{{title}}</div></div>
-        </div> -->
+        
         <div @click="bindingCard" class="next-stop center">确认绑定</div>
     </div>
 </template>
@@ -55,9 +42,7 @@ export default {
     },
     methods:{
         handleReturnHome(){
-            this.$router.push({
-                path:'/personalCenter/incomedetail/addcard'
-            })
+            this.$router.go(-1);
         },
         // 更多
         handleMore(){
@@ -92,8 +77,7 @@ export default {
                 return
             }
             let data={
-                //    cid:storage.get("cid"),
-                cid:"5",
+                cid:storage.get("cid"),
                 name:that.name,
                 phone:that.phone,
                 bankcardno:that.bankcardno
@@ -126,35 +110,6 @@ export default {
                 
             })
         }
-        // 获取验证码
-        // handleSafeCode(){
-        //     console.log('title',this.title);
-        //     if(this.title == '获取验证码'){
-        //         let num = 60;
-        //         let codetitle = '';
-        //         let timer = setInterval(() => {
-        //             num = num - 1;
-        //             codetitle = '已发送' + '(' + num + ' s)';
-        //             this.title = codetitle
-        //             // console.log(this.title)
-        //         }, 1000)
-        //         setTimeout(() => {
-        //             clearInterval(timer);
-        //             this.title = '获取验证码';
-        //         }, 60000)
-        //     }else{
-        //         this.$toast('验证码已发送，请勿重复操作');
-        //     }
-        // },
-        // 打开获取地区
-        // handleArea(val){
-        //     this.show = true;
-        // },
-        // 获取地区
-        // handleAreas(val){
-        //     this.show = false;
-        //     this.area = val[0].name+'/'+val[1].name+'/'+val[2].name
-        // }
     }    
 }
 </script>
@@ -162,10 +117,8 @@ export default {
     #page-alipay{
         background: #EEEFF1;
         width: 100vw;
-        height: 100vh;
-        .loan .van-nav-bar {
-          background-color: #4B66AF!important;
-         }
+        padding-top: 86px;
+        height:calc(100vh - 86px);
         .top{
             margin-top: 20px;
         }
@@ -186,34 +139,19 @@ export default {
                 height: 100%;
                 >input{
                     width: 100%;
-                    height: 90%;
+                    height: 80%;
                     margin-top: 5px;
                     border: none;
+                    font-size: 28px;
                 }
-            }
-            .safe-code{
-                width: 40vw;
-                height: 100%;
-                 >input{
-                    width: 100%;
-                    height: 90%;
-                    margin-top: 5px;
-                    border: none;
-                }
-            }
-            .get-code{
-                width: 30vw;
-                height: 100%;
-                >div{
-                    background: #8C6C2A;
-                    color: white;
-                    padding: 15px;
-                    border-radius: 10px;
+                input::-webkit-input-placeholder{
+                    padding-top: 10px;
+                    font-size: 28px;
                 }
             }
         }
         .next-stop{
-            width: 90vw;
+            width: 95vw;
             padding-top:30px;
             padding-bottom: 30px;
             margin-left: auto;
@@ -221,7 +159,8 @@ export default {
             background-color: #4B66AF;
             color: white;
             margin-top: 50px;
-            border-radius: 20px;
+            font-size: 28px;
+            border-radius: 30px;
         }
         .position{
             width: 100vw;

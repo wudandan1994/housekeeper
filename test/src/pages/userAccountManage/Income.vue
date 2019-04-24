@@ -36,13 +36,19 @@
             <div class="run-title start-center">以入账收入流水</div>
             <div class="right-icon end-center"><i class="iconfont icon-more"></i></div>
         </router-link>
+        <loading :componentload='componentload'></loading>
     </div>
 </template>
 <script>
+import loading from'@/components/loading'
 import storage from '@/lib/storage'
 export default {
+    components: {
+        loading
+    },
     data(){
         return{
+            componentload: true,
             amountSum: '',
             preRouter: '',
         }
@@ -50,9 +56,6 @@ export default {
     methods:{
          // 返回首页
         handleReturnHome(){
-            // this.$router.push({
-            //     path: storage.get('preRouter')
-            // })
              this.$router.go(-1);
         },
         // 更多
@@ -63,6 +66,9 @@ export default {
     created(){
         this.amountSum = this.$route.query.amountSum;
         console.log('路由',this);
+        setTimeout(() =>{
+            this.componentload = false;
+        },500)
         
     }
 }

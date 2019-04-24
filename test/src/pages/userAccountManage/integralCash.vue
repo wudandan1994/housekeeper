@@ -53,9 +53,7 @@ export default {
     methods:{
         // 返回首页
         handleReturnHome(){
-            this.$router.push({
-                path:'/ponserCenter/userAccountManage'
-            })
+            this.$router.go(-1);
         }
     }
 }

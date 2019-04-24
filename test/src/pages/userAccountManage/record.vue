@@ -33,7 +33,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/ponserCenter/userAccountManage')
+            this.$router.go(-1);
         },
         getRecord(){
             let that = this

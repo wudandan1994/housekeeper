@@ -70,7 +70,26 @@ export default {
                 console.log(err,"error");
                 
             })
+        },
+        // 获取实名认证信息
+        handleGetAOuth(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
+            let params = {};
+            axiosPost(url,params).then(res =>{
+                console.log('获取实名认证状态成功',res);
+                if(res.data.data.status != '0'){
+                    this.name = res.data.data.name;
+                    this.idCard = res.data.data.idcardnumber;
+                    this.phone = this.$store.state.wechat.mobile;
+                   
+                }
+            }).catch(res =>{
+                console.log('获取实名认证状态失败',res);
+            })
         }
+    },
+    created(){
+        this.handleGetAOuth();
     }
 }
 </script>

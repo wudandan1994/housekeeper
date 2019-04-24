@@ -34,9 +34,7 @@ export default {
     },
     methods:{
         handleReturnHome(){
-            this.$router.push({
-                path:'/personalCenter/incomedetail/addcard'
-            })
+            this.$router.go(-1);
         },
         // 更多
         handleMore(){

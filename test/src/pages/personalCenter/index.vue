@@ -117,19 +117,23 @@
             </div>
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
+        <loading :componentload="componentload"></loading>
     </div>
 </template>
 
 <script>
+import loading from '@/components/loading'
 import footerMenu from '@/components/footer'
 import {axiosPost} from '../../lib/http.js'
 import storage from '@/lib/storage'
 export default {
     components:{
-      footerMenu
+      footerMenu,
+      loading
     },
     data(){
         return {
+            componentload: true,
             active:2,
             nickname: '',
             headimg: 'http://img2.imgtn.bdimg.com/it/u=1000195578,2796948806&fm=11&gp=0.jpg',
@@ -159,6 +163,9 @@ export default {
             axiosPost(url,params).then(res =>{
                 console.log('查询个人设置成功',res)
                 if(res.data.success){
+                    setTimeout(()=>{
+                        this.componentload = false;
+                    },500)
                     this.nickname = res.data.data.nickname;
                     this.headimg  = res.data.data.photo;
                     this.promotioncode  = res.data.data.promotioncode; 
