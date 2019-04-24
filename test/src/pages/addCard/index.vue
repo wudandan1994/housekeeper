@@ -63,8 +63,10 @@ export default {
                         message:res.data.message
                     })
                     return
+                }  else {
+                     location.href=res.data.data
                 }
-                 location.href=res.data.data
+                
             })
             .catch(err=>{
                 console.log(err,"error");
