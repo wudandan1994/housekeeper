@@ -50,15 +50,15 @@
                </div>
            </div>
            <div class="submit">
-               <h3>已提交图片</h3>
+               <!-- <h3>已提交图片</h3> -->
            </div>
-            <div class="showImg">
+            <!-- <div class="showImg">
                 <ul>
                     <li v-for="(item, index) of photoList " :key="index">
                         <img :src="url+item.photoData" >
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -112,7 +112,8 @@ export default {
             };
             this.$http.post(url,form,config).then(res =>{
                 if(res.data.success){
-                    this.cardfront = res.data.data.imgUrl
+                     console.log(res,"上传图片")
+                    this.cardfront = res.data.data.thumImgUrl
                     let datas={
                         chMerCode:this.info,
                         busCode:"2001",
@@ -138,17 +139,8 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                             this.$router.push("/home/collect/payment")
-                                         } else {
-                                              axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberPhoto")
-                                              .then(res=>{
-                                                  console.log(res,"上传图片的res");
-                                                  this.photoList=res.data.data
-                                              })
-                                              .catch(err=>{
-                                                  console.log(err,"上传图片的错误");
-                                                  
-                                              })
                                          }
+                                        
                                         })
                                         .catch(err=>{
                                             console.log(err,"图片审核中")
@@ -175,7 +167,7 @@ export default {
             };
             this.$http.post(url,form,config).then(res =>{
                 if(res.data.success){
-                    this.cardback = res.data.data.imgUrl
+                    this.cardback = res.data.data.thumImgUrl
                     let datas={
                         chMerCode:this.info,
                         busCode:"2001",
@@ -201,23 +193,14 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                             this.$router.push("/home/collect/payment")
-                                         } else {
-                                              axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberPhoto")
-                                              .then(res=>{
-                                                  this.photoList=res.data.data
-                                              })
-                                              .catch(err=>{
-                                                  console.log(err,"上传图片的错误");
-                                                  
-                                              })
                                          }
+                                      
                                         })
                                         .catch(err=>{
                                             console.log(err,"图片审核中")
                                         })
                               }
                         })
-
                 } else{
                     this.$toast({
                         message:res.data.message
@@ -237,7 +220,7 @@ export default {
             };
             this.$http.post(url,form,config).then(res =>{
                 if(res.data.success){
-                    this.cardWithhand = res.data.data.imgUrl
+                    this.cardWithhand = res.data.data.thumImgUrl
                     let datas={
                         chMerCode:this.info,
                         busCode:"2001",
@@ -263,16 +246,8 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                             this.$router.push("/home/collect/payment")
-                                         } else {
-                                              axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberPhoto")
-                                              .then(res=>{
-                                                  this.photoList=res.data.data
-                                              })
-                                              .catch(err=>{
-                                                  console.log(err,"上传图片的错误");
-                                                  
-                                              })
-                                         }
+                                         } 
+                                       
                                         })
                                         .catch(err=>{
                                             console.log(err,"图片审核中")
@@ -299,7 +274,7 @@ export default {
             };
             this.$http.post(url,form,config).then(res =>{
                 if(res.data.success){
-                    this.bankfront = res.data.data.imgUrl
+                    this.bankfront = res.data.data.thumImgUrl
                     let datas={
                         chMerCode:this.info,
                         busCode:"2001",
@@ -325,16 +300,8 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                             this.$router.push("/home/collect/payment")
-                                         } else {
-                                              axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberPhoto")
-                                              .then(res=>{
-                                                  this.photoList=res.data.data
-                                              })
-                                              .catch(err=>{
-                                                  console.log(err,"上传图片的错误");
-                                                  
-                                              })
-                                         }
+                                         } 
+                                       
                                         })
                                         .catch(err=>{
                                             console.log(err,"图片审核中")
@@ -361,7 +328,7 @@ export default {
             };
             this.$http.post(url,form,config).then(res =>{
                 if(res.data.success){
-                    this.bankback = res.data.data.imgUrl
+                    this.bankback = res.data.data.thumImgUrl
                     let datas={
                         chMerCode:this.info,
                         busCode:"2001",
@@ -387,16 +354,8 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                             this.$router.push("/home/collect/payment")
-                                         } else {
-                                              axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberPhoto")
-                                              .then(res=>{
-                                                  this.photoList=res.data.data
-                                              })
-                                              .catch(err=>{
-                                                  console.log(err,"上传图片的错误");
-                                                  
-                                              })
-                                         }
+                                         } 
+                                        
                                         })
                                         .catch(err=>{
                                             console.log(err,"图片审核中")
@@ -414,11 +373,37 @@ export default {
             })
             
         },
+        findphoto(){
+             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberPhoto")
+                .then(res=>{
+                    console.log(res)
+                    this.photoList=res.data.data
+                    this.photoList.forEach(item => {
+                        if(item.photoType==="1"){
+                            this.cardfront=item.photoData
+                        } else if(item.photoType==="2"){
+                            this.cardback=item.photoData
+                        } else if(item.photoType==="3"){
+                            this.cardWithhand=item.photoData
+                        } else if(item.photoType==="4"){
+                            this.bankfront=item.photoData
+                        } else if(item.photoType==="5"){
+                            this.bankback=item.photoData
+                        }
+                        
+                    });
+                })
+                .catch(err=>{
+                    console.log(err,"上传图片的错误");
+                    
+                })
+        }
         
     },
     created () {
           this.info=this.$route.query.info
           this.sureSubmit()
+          this.findphoto()
     }
 }
 </script>
@@ -449,7 +434,7 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
-          
+           overflow-x: hidden;
            >.type {
                padding:20px;
                line-height: 38px;
@@ -461,7 +446,6 @@ export default {
            >.info {
                >.positive{
                 width: 95vw;
-                height: 450px;
                 margin-left: auto;
                 margin-right: auto;
                 .title{
@@ -479,28 +463,19 @@ export default {
                     padding-left:40px;
                 }
                 .uploadimg{
+                    padding:20px;
                     width: 100%;
-                    height: 400px;
                     .upload-component{
                         width: 100%;
                         height: 100%;
                         >img{
                             width: 100%;
-                            height: 100%;
                         }
                     }
                 }
             }
            }
-           >.submit {
-               margin-top:30px;
-               padding-left:30px;
-               padding-right: 30px;
-               >h3{
-                   font-size: 30px;
-                   font-weight: bold;
-               }
-           }
+           
            >.update {
                margin-top:20px;
                >button{
@@ -508,15 +483,8 @@ export default {
                    font-size: 28px;
                }
            }
-           >.showImg {
-               >ul{
-                   >li {
-                       padding:20px;
-                       >img {
-                           width:100%;
-                       }
-                   }
-               }
+           .van-uploader__input{
+               height: auto;
            }
        }
    }
