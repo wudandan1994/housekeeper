@@ -49,7 +49,7 @@
                 </div>
             </div>
         </header>
-        <div class="menu-title start-center">特约服务</div>
+        <div class="menu-title server start-center">特约服务</div>
         <div class="per-list row">
             <router-link tag="div" class="per-menu-list line" :to="{path: '/ponserCenter/userAccountManage',query: {amount: amount,amountSum: amountSum}}">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/303.png" size="30px" color="#dab17b"/></div>
@@ -83,7 +83,7 @@
                 <div class="per-menu-title center">营销课堂</div>
             </div>
         </div>
-        <div class="menu-title m-top start-center">实时工具</div>
+        <div class="menu-title m-top server start-center">实时工具</div>
         <div class="per-list row">
             <div class="per-menu-list line" @click="handleExpect">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/309.png" size="30px" color="#dab17b"/></div>
@@ -119,18 +119,19 @@
         <div  class="update">
             <ul>
                 <li>
-                    <a href="https://www.pgyer.com/vFbf">
-                        <img src="http://pay.91dianji.com.cn/Android.png" >
-                        安卓手机下载
-                    </a>
+                    <img src="http://pay.91dianji.com.cn/Android.png" >
+                    安卓手机下载
                 </li>
                  <li>
-                    <a href="http://5dq.kdfenfa.vip/KXxv61">
-                        <img src="http://pay.91dianji.com.cn/ios.png" alt="">
-                        苹果手机下载
-                    </a>
+                    <img src="http://pay.91dianji.com.cn/ios.png" alt="">
+                    苹果手机下载
                 </li>
             </ul>
+            <div class="cover">
+                    <dir class="dis">
+                        <img src="" alt="">
+                    </dir>
+                </div>
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
         <loading :componentload="componentload"></loading>
@@ -399,6 +400,10 @@ export default {
             font-size: 30px;
             color: #000;
             margin-top: 360px;
+            &.server {
+                font-size: 36px;
+                font-weight: bold;
+            }
         }
         .m-top{
             margin-top: 15px;
@@ -430,19 +435,24 @@ export default {
             margin:20px;
             >ul{
                 display: flex;
-                justify-content: space-between;
+                position: relative;
+                justify-content: space-around;
                 >li {
-                    width:50%;
+                    width:30%;
                     text-align: center;
                     padding:20px;
-                    >a {
-                        display: block;
-                        color:#000;
-                        font-size: 30px;
-                        >img {
+                    >img {
+                            display: block;
+                            margin-bottom: 15px;
                             width:100%;
                         }
-                    }
+                }
+            }
+            >.cover {
+                >.dis {
+                    width:400px;
+                    height: 400px;
+                    background-color: red;
                 }
             }
         }

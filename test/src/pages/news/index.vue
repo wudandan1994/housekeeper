@@ -2,25 +2,15 @@
     <div id="news">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
+            <span>商铺申请流程</span>
+            <span></span>
         </header>
         <div class="container">
-            <van-tabs
-                padding-top="10px"
-                title-active-color="#F3C480"
-                background="#020202"
-                color="#F3C480"
-                title-inactive-color="#fff"
-                :swipeable="true"
-               >
-                    <van-tab v-for="index in 8" :title="'标签 ' + index" :key="index">
-                        内容 {{ index }}
-                    </van-tab>
-                </van-tabs>
+           <img src="http://pay.91dianji.com.cn/collect.jpg" alt="">
         </div>
     </div>
 
 </template>
-
 
 <script>
 export default {
@@ -31,7 +21,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home')
+            this.$router.push('/home/collect')
         }
     }
 }
@@ -63,8 +53,8 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
-           .van-tab{
-               font-size: 30px;
+           >img {
+               width:100%;
            }
        }
    }
