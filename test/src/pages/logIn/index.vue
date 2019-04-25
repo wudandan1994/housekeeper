@@ -88,7 +88,7 @@ export default {
                     that.$store.commit('amount',res.data.data.amount);
                     that.$store.commit('openid',res.data.data.openid);
                     that.$store.commit('nickname',res.data.data.nickname);
-                    that.$store.commit('headimg',res.data.data.headimgurl);
+                    that.$store.commit('headimg',res.data.data.photo);
                     console.log('登陆成功',res);
                     if(that.checked){
                         // 记住密码
@@ -102,7 +102,8 @@ export default {
                         storage.remove('rempass');
                     }
                     that.$store.commit('recommendedcode',res.data.data.recommendedcode);
-                    that.$router.push('/home')
+                    that.$router.push('/home');
+                    console.log('VUEX',that.$store.state);
                 }else{
                     that.$toast({
                         message:res.data.message

@@ -16,7 +16,6 @@
                     <div class="code start-center"><div class="center">可提现金额:{{amount}}</div></div>
                 </div>
             </div>
-           
         </div>
         
          <router-link :to="{path:'/personalCenter/incomedetail/cash',query:{amount: amount}}" tag="div" class="per-menu row">
@@ -73,6 +72,7 @@ export default {
         }  
     },
     created(){
+        console.log('VUEX',this);
         this.$store.state.wechat.nickname == "" ? this.nickname = '姓名' : this.nickname = this.$store.state.wechat.nickname;
         this.$store.state.wechat.headimg == '' ? this.headimg = 'http://pay.91dianji.com.cn/avators.png' : this.headimg  = this.$store.state.wechat.headimg;
         this.$store.state.wechat.recommendedcode == "" ? this.recomcode = '11111111' : this.recomcode  = this.$store.state.wechat.recommendedcode; 

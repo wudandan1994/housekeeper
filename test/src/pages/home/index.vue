@@ -236,7 +236,7 @@ export default {
             // 轮播图图片
             images: [
                 'http://pay.91dianji.com.cn/01.png',
-                'http://pay.91dianji.com.cn/02swipe.jpg',
+                'http://pay.91dianji.com.cn/ban.jpg',
                 'http://pay.91dianji.com.cn/04.png',
                 'http://pay.91dianji.com.cn/06.jpg',
                 'http://pay.91dianji.com.cn/08.jpg'
