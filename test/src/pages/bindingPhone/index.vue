@@ -249,7 +249,7 @@ export default {
               padding-right: 30px;
               >button {
                   height: 90px;
-                  font-size: 28px;
+                  font-size: 30px;
               }
            }
            .cover {

@@ -37,9 +37,9 @@ export default {
         },
         getRecord(){
             let that = this
-            // let cid=storage.get("cid")
+            let cid=storage.get("cid")
             let data={
-                cid:"5"
+                cid:cid
             }
              axiosPost("http://pay.91dianji.com.cn/api/customer/getWithdrawalById",data)
              .then(function(res){
@@ -75,7 +75,7 @@ export default {
 <style lang="less">
    #violation-inquiry {
        >header {
-           background: #000;
+           background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;

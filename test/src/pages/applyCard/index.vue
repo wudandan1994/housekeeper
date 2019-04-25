@@ -35,7 +35,7 @@
                    </ul>
                </div>
                 <div @click="getCard" class="next">
-                    <span>下一步</span>
+                     <van-button size="large" round type="info">下一步</van-button>
                 </div>
             </div>
         </div>
@@ -118,12 +118,10 @@ export default {
             let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
-                console.log('获取实名认证状态成功',res);
                 if(res.data.data.status != '0'){
                     this.merName = res.data.data.name;
                     this.merIdentityNo = res.data.data.idcardnumber;
                     this.merMobile = this.$store.state.wechat.mobile;
-                   
                 }
             }).catch(res =>{
                 console.log('获取实名认证状态失败',res);
@@ -143,7 +141,7 @@ export default {
 <style lang="less">
    #apply-card{
        >header {
-           background: #000;
+           background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -166,7 +164,7 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
-        //    background-color:#E2E3E5; 
+           font-size: 34px;
            >.info {
                >.area {
                    padding-left:15px;
@@ -205,16 +203,12 @@ export default {
                    }
                }
                >.next {
-                   padding-top:30px;
-                   padding-bottom: 30px;
-                   text-align: center;
-                   color:#fff;
-                   background-color: #9F6711;
-                   width:60%;
-                   margin-top:60px;
-                   margin-left:20%;
-                   margin-bottom: 100px;
-                   border-radius: 15px;
+                   margin-top:100px;
+                   padding:0 30px;
+                   >button {
+                       height: 90px;
+                       font-size: 30px;
+                   }
 
              }
            }

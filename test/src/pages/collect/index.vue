@@ -310,6 +310,7 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
            background-color: #EEEFF1;
+           font-size: 34px;
            >p {
                padding:30px;
                font-size: 30px;

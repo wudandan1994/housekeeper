@@ -116,6 +116,22 @@
                 <div class="per-menu-title center">名片夹</div>
             </div>
         </div>
+        <div  class="update">
+            <ul>
+                <li>
+                    <a href="https://www.pgyer.com/vFbf">
+                        <img src="http://pay.91dianji.com.cn/Android.png" >
+                        安卓手机下载
+                    </a>
+                </li>
+                 <li>
+                    <a href="http://5dq.kdfenfa.vip/KXxv61">
+                        <img src="http://pay.91dianji.com.cn/ios.png" alt="">
+                        苹果手机下载
+                    </a>
+                </li>
+            </ul>
+        </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
         <loading :componentload="componentload"></loading>
     </div>
@@ -148,7 +164,7 @@ export default {
     methods:{
         // 尽请期待
         handleExpect(){
-            this.$toast('尽情期待');
+            this.$toast('敬请期待');
         },
         changeActive(obj){
             // console.log('obj', obj);
@@ -400,6 +416,25 @@ export default {
             }
             .line{
                     border-right: solid 1px #ccc;
+            }
+        }
+        .update {
+            margin:20px;
+            >ul{
+                display: flex;
+                justify-content: space-between;
+                >li {
+                    width:50%;
+                    text-align: center;
+                    >a {
+                        display: block;
+                        color:#000;
+                        font-size: 30px;
+                        >img {
+                            width:100%;
+                        }
+                    }
+                }
             }
         }
         

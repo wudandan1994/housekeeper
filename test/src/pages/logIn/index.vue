@@ -38,6 +38,7 @@
 <script>
 import qs from 'qs'
 import {axiosPost} from '@/lib/http'
+import storage from '@/lib/storage'
 export default {
     data() {
         return {
@@ -54,50 +55,119 @@ export default {
         forgetPassword() {
             this.$router.push('/forgetPassword')
         },
-        register(){
-             this.$router.push('/logOut')
-        },
-        logInPass(){
-             
-            let that=this
-            if(that.phone.trim().length===0){
-                that.$toast({
-                    message:"请输入手机号码"
-                })
-                return
-            }
-            if(that.password.trim().length===0){
-                that.$toast({
-                    message:"请输入密码"
-                })
-                 return
-            }
-            let data={
-                mobile:that.phone,
-                password:that.password
-            }
-            that.$http.post("http://pay.91dianji.com.cn/api/customer/login",qs.stringify(data))
-            .then(function(res){
-                if(res.data.success){
-                    that.$store.commit('recommendedcode',res.data.data.recommendedcode);
-                    that.$router.push('/home')
-                    console.log(res);
+        // register(){
+        //      this.$router.push('/logOut')
+        // },
+        // logInPass(){
+        //     let that=this
+        //     if(that.phone.trim().length===0){
+        //         that.$toast({
+        //             message:"请输入手机号码"
+        //         })
+        //         return
+        //     }
+        //     if(that.password.trim().length===0){
+        //         that.$toast({
+        //             message:"请输入密码"
+        //         })
+        //          return
+        //     }
+        //     let data={
+        //         mobile:that.phone,
+        //         password:that.password
+        //     }
+        //     if(that.checked){
+        //         storage.set("userinfo",JSON.stringify(data))
+        //     }
+        //     that.$http.post("http://pay.91dianji.com.cn/api/customer/login",qs.stringify(data))
+        //     .then(function(res){
+        //         if(res.data.success){
+        //             that.$store.commit('recommendedcode',res.data.data.recommendedcode);
+        //             that.$router.push('/home')
+        //             console.log(res);
                     
-                }else{
-                    that.$toast({
-                        message:res.data.message
-                    })
-                }
+        //         }else{
+        //             that.$toast({
+        //                 message:res.data.message
+        //             })
+        //         }
                  
                
-            })
-            .catch(function(err){
-                console.log(err,"error");  
-            })
-        },
-        logIn(){
-            location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+        //     })
+        //     .catch(function(err){
+        //         console.log(err,"error");  
+        //     })
+        // },
+        
+
+    logInPass(){
+        let that=this
+        if(that.phone.trim().length===0){
+        that.$toast({
+        message:"请输入手机号码"
+        })
+        return
         }
+        if(that.password.trim().length===0){
+        that.$toast({
+        message:"请输入密码"
+        })
+        return
+        }
+        let data={
+        mobile:that.phone,
+        password:that.password
+        }
+        that.$http.post("http://pay.91dianji.com.cn/api/customer/login",qs.stringify(data))
+        .then(function(res){
+        if(res.data.success){
+        that.$store.commit('iscertification',res.data.data.iscertification);
+        that.$store.commit('level',res.data.data.level);
+        that.$store.commit('promotioncode',res.data.data.promotioncode);
+        that.$store.commit('mobile',res.data.data.mobile);
+        that.$store.commit('vip',res.data.data.vip);
+        that.$store.commit('recommendedcode',res.data.data.recommendedcode);
+        that.$store.commit('amount',res.data.data.amount);
+        that.$store.commit('openid',res.data.data.openid);
+        that.$store.commit('nickname',res.data.data.nickname);
+        that.$store.commit('headimg',res.data.data.headimgurl);
+        console.log('登陆成功',res);
+        if(that.checked){
+        // 记住密码
+        storage.set('username',that.phone);
+        storage.set('password',that.password);
+        storage.set('rempass',true);
+        }else{
+        // 不记住密码
+        storage.remove('username');
+        storage.remove('password');
+        storage.remove('rempass');
+        }
+        that.$store.commit('recommendedcode',res.data.data.recommendedcode);
+        that.$router.push('/home')
+        }else{
+        that.$toast({
+        message:res.data.message
+        })
+        }
+        })
+        .catch(function(err){
+        console.log(err,"error");
+        that.$toast('登录失败') 
+        })
+},
+
+
+
+        // logIn(){
+        //     location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+        // },
+        
+    },
+    created () {
+        this.phone = storage.get('username');
+        this.password = storage.get('password');
+        this.checked= storage.get('rempass');
     }
 }
 </script>
@@ -172,9 +242,10 @@ export default {
                display: flex;
                justify-content: space-between;
                padding-bottom: 20px;
+               margin-top:50px;
                >p {
-                    padding:20px 0px;
-                    font-size:26px;
+                    padding:15px 0px;
+                    font-size:28px;
                     &:nth-of-type(1) {
                         display: flex;
                        padding-bottom: 20px;

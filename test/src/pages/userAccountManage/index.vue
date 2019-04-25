@@ -3,7 +3,7 @@
         <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">账户管理</div>
-            <div class="right-icon center"></div>
+            <div ></div>
         </header>
         <div class="header-bottom">
             <div class="personalCenter row">
@@ -16,7 +16,6 @@
                     <div class="code start-center"><div class="center">可提现金额:{{amount}}</div></div>
                 </div>
             </div>
-           
         </div>
         
          <router-link :to="{path:'/personalCenter/incomedetail/cash',query:{amount: amount}}" tag="div" class="per-menu row">

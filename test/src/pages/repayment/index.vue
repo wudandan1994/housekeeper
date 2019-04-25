@@ -148,7 +148,7 @@ export default {
                }
                >.number {
                    margin-top:300px;
-                   font-size: 36px;
+                   font-size: 32px;
                    margin-bottom: 20px;
                    display: flex;
                    >input {
