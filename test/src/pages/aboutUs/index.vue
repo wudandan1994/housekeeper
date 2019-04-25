@@ -3,7 +3,7 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>关于我们</span>
-            <span><van-icon name="ellipsis"/></span>
+            <span></span>
         </header>
         <div class="container">
            

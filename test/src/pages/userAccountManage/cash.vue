@@ -21,7 +21,7 @@
                 <div :class="cardLength == '0' ? 'apply-card-one' : 'apply-card-two' "></div>
                 <router-link tag="div" to="/personalCenter/incomedetail/addcard" class="more center"><i class="iconfont icon-more"></i></router-link>
             </div>
-            <div class="desc">注:钱夹宝提现秒到账，手续费5%+1元/笔，最低提现金额100元起提。<span>5%的提现手续费将全部作为城主的收益</span></div>
+            <div class="desc">注:钱夹宝提现1-3天到账，手续费5%+1元/笔，最低提现金额100元起提。<span>5%的提现手续费将全部作为城主的收益</span></div>
             <div class="user-input">
                 <div class="input-title"><span>提取金额</span></div>
                 <div class="money-input row">

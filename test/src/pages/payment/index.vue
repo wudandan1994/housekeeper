@@ -10,23 +10,23 @@
            <div class="phone">
                <ul>
                     <li>
-                        <span>订单金额:</span>
+                        <span>订单金额：</span>
                        <input v-model="orderAmount" type="number" placeholder="请填写付款金额">
                    </li>
                     <li>
-                        <span>真实姓名:</span>
+                        <span>真实姓名：</span>
                        <input v-model="realName"  type="text" placeholder="请填写真实姓名">
                    </li>
                     <li>
-                        <span>证件号</span>
+                        <span>证件号：</span>
                        <input v-model="idCard"  type="text" placeholder="请填写身份证号码">
                    </li>
                     <li>
-                        <span>卡号</span>
+                        <span>卡号：</span>
                        <input v-model="accNo"  type="number" placeholder="请填写信用卡卡号">
                    </li>
                    <li>
-                       <span>手机号</span>
+                       <span>手机号：</span>
                        <input type="number" v-model="mobile" placeholder="请输入手机号码">
                    </li>
                </ul>
