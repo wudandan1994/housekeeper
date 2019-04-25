@@ -155,87 +155,6 @@ export default {
 
 <style lang="less">
    #binding-phone {
-<<<<<<< HEAD
-       >header {
-           background-color: #4965AE;
-           width:100%;
-           height: 86px;
-           line-height: 86px;
-           padding-top:10px;
-           color:#fff;
-           display: flex;
-           z-index:999;
-           position: fixed;
-           font-size:28px;
-           justify-content: space-between;
-           >span {
-               &:nth-of-type(1) {
-                   margin-left: 10px;
-               }
-               &:nth-of-type(3) {
-                   margin-right: 10px;
-               }
-           }
-       }
-       >.container {
-           padding-top:96px;
-           padding-bottom: 50px;
-           >.phone-numer {
-               padding-left:30px;
-               >div {
-                   padding-top:40px;
-                   font-size:36px;
-                   display: flex;
-                   flex-wrap: nowrap;
-                   border-bottom: 1px solid #ccc;
-                   padding-bottom:40px;
-                   &:nth-of-type(2){
-                       >p {
-                           >input {
-                               padding-bottom: 15px;
-                           }
-                       }
-                   }
-                   >input {
-                       border:none;
-                       background: transparent;
-                   }
-                   >p {
-                       flex:1;
-                       >input {
-                           border:none;
-                           width:240px;
-                           background: transparent;
-                       }
-                       >span {
-                           >button {
-                           height: 60px;
-
-                           padding:0 10px;
-                        }
-                       }
-                   }
-               }
-           }
-           >.at-once {
-              margin-top:300px;
-              padding-left:30px;
-              padding-right: 30px;
-              >button {
-                  height: 90px;
-                  font-size: 30px;
-              }
-           }
-           .cover {
-               width:500px;
-               text-align: center;
-               line-height: 400px;
-               border-radius: 10px;
-               height: 400px;
-               background-color: #fff;
-           }
-       }
-=======
        width: 100vw;
        height: (100vh - 86px);
        padding-top: 86px;
@@ -311,6 +230,5 @@ export default {
             background-color: #fff;
         }
        
->>>>>>> 7a86eb544f4bd79f272bf94df4f0f6ab5a1aa977
    }
 </style>
