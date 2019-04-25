@@ -48,28 +48,29 @@ export default {
                 this.$toast({
                     message:"请将信息填写完整"
                 })
-                return
+            }else{
+                let data={
+                    merchantname:this.name,
+                    idcardno:this.idCard,
+                    phone:this.phone
+                };
+                axiosPost("http://pay.91dianji.com.cn/api/creditCard/merchantSettled",data)
+                .then(res=>{
+                    if(!res.data.success){
+                        this.$toast({
+                            message:res.data.message
+                        })
+                        return
+                    }  else {
+                        location.href=res.data.data
+                    }
+                })
+                .catch(err=>{
+                    console.log(err,"error");
+                    
+                })
             }
-            let data={
-                merchantname:this.name,
-                idcardno:this.idCard,
-                phone:this.phone
-            }
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/merchantSettled",data)
-            .then(res=>{
-                if(!res.data.success){
-                    this.$toast({
-                        message:res.data.message
-                    })
-                    return
-                }  else {
-                     location.href=res.data.data
-                }
-            })
-            .catch(err=>{
-                console.log(err,"error");
-                
-            })
+            
         },
         // 获取实名认证信息
         handleGetAOuth(){
