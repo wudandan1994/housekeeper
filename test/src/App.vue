@@ -60,24 +60,25 @@ export default {
                   if(res.data.data == '0'){
                     // 未注册
                     let params = {
-                        nickname: this.$store.state.wechat.nickname,
-                        openid:   this.$store.state.wechat.openid,
-                        photo:    this.$store.state.wechat.headimg,
-                        recommendedcode: storage.get('recommendedcode')
+                      nickname: this.$store.state.wechat.nickname,
+                      openid:   this.$store.state.wechat.openid,
+                      photo:    this.$store.state.wechat.headimg,
+                      recommendedcode: storage.get('recommendedcode')
                     }
                     let url = 'http://pay.91dianji.com.cn/api/customer/registered';
-                    axiosPost(url,params).then(res =>{
-                        
-                        if(res.data.success){
-                          console.log('注册成功',res);
-                          // 登录
-                          let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
-                          let params = {
-                              openid: this.$store.state.wechat.openid
-                          };
-                          axiosPost(url,params).then(res =>{
-                              console.log('登陆成功',res);
-                              if(res.data.success){
+                    axiosPost(url,params)
+                    .then(res =>{
+                      if(res.data.success){
+                        console.log('注册成功',res);
+                        // 登录
+                        let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
+                        let params = {
+                            openid: this.$store.state.wechat.openid
+                        };
+                        axiosPost(url,params)
+                        .then(res =>{
+                            console.log('登陆成功',res);
+                            if(res.data.success){
                                 storage.set('cid',res.data.data.id);
                                 this.$store.commit('iscertification',res.data.data.iscertification);
                                 this.$store.commit('level',res.data.data.level);
@@ -90,25 +91,29 @@ export default {
                                 let params = {
                                     openid:this.$store.state.wechat.openid,
                                 };
-                                axiosPost(url,params).then(res =>{
+                                axiosPost(url,params)
+                                .then(res =>{
                                     if(res.data.success){
                                       console.log('查询个人设置成功',res)
                                       this.iscertification = res.data.data.iscertification;
                                     }
-                                }).catch(res =>{
+                                })
+                                .catch(res =>{
                                     console.log('查询个人设置失败',res);
                                 })
                               }else{
                                 this.$toast('登陆失败');
                               }
-                          }).catch(res =>{
-                              console.log('登录失败',res);
-                              this.$toast('登陆失败');
-                          })
+                        })
+                        .catch(res =>{
+                            console.log('登录失败',res);
+                            this.$toast('登陆失败');
+                        })
                         }else{
                           this.$toast('注册失败了');
                         }
-                    }).catch(res =>{
+                    })
+                    .catch(res =>{
                         console.log('注册失败',res);
                     })
                   }else{

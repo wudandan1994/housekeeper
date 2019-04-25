@@ -42,33 +42,8 @@
                        <input class="start-center" v-model="code" type="number" placeholder="请输入推荐码">
                    </div>
                </div>
-               <!-- <ul>
-                   <li>
-                       <span>+86</span>
-                       <input type="number" v-model="mobile" placeholder="输入11位手机号码">
-                       <span>
-                            <span v-show="showCount">{{count}}秒后再次获取</span>
-                            <span @click="getCode" v-show="showCode">获取验证码</span>
-                       </span>
-                   </li>
-                    <li>
-                        <span>验证码:</span>
-                       <input v-model="authcode" type="number" placeholder="输入验证码">
-                   </li>
-                    <li>
-                        <span>新密码:</span>
-                       <input v-model="newPassword" type="password" placeholder="输入6-18位字母加数字新密码">
-                   </li>
-                    <li>
-                        <span>再次输入新密码:</span>
-                       <input v-model="suerPassword" type="password" placeholder="输入新密码">
-                   </li>
-                    <li>
-                        <span>推荐码:</span>
-                       <input v-model="code" type="number" placeholder="输入推荐码">
-                   </li>
-               </ul> -->
            </div>
+           <div id="tips" class="start-center">*验证码有效期为半小时,请勿重复发送</div>
            <van-button type="default" @click="modify" class="at-once">立即注册</van-button>
         </div>
     </div>
@@ -93,12 +68,12 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/logIn')
+            this.$router.go(-1);
         },
         // 获取验证码
         getCode(){
             let that=this
-            let partten=/^1\d{10}$/
+            let partten=/^1[345789]\d{9}$/
             if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"

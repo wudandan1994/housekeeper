@@ -67,10 +67,8 @@ export default {
                 })
                 .catch(err=>{
                     console.log(err,"error");
-                    
                 })
             }
-            
         },
         // 获取实名认证信息
         handleGetAOuth(){

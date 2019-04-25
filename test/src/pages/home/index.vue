@@ -547,7 +547,7 @@ export default {
                 width: 100%;
                 height: 100%;
                 background-color: rgba(0, 0, 0, .4);
-                position: absolute;
+                position: fixed;
                 overflow: visible;
                 top:0px;
                 right:0px;

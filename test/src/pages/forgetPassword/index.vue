@@ -71,6 +71,7 @@
                    </li>
                </ul>
            </div>
+           <div id="tips" class="start-center">*验证码有效期为半小时,请勿重复发送</div>
            <div @click="modify" class="at-once">
                    提交
                </div>

@@ -1,44 +1,35 @@
  <template>
     <div id="binding-phone">
-        <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>绑定手机号</span>
-            <span></span>
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">绑定手机</div>
+            <div class="right-icon center"></div>
         </header>
-        <div class="container">
-            <div class="phone-numer">
-                <div>
-                    <span>手机：</span>
-                    <input type="number" v-model="mobile"  placeholder="请输入手机号">
-                </div>
-                <div>
-                    <span>密码：</span>
-                    <input type="password" v-model="password"  placeholder="字母和数字组合">
-                </div>
-                <div>
-                    <span>确认密码：</span>
-                    <input type="password" v-model="surepassword"  placeholder="字母和数字组合">
-                </div>
-                <div>
-                    <span>验证码：</span>
-                    <p>
-                        <input type="number" v-model="authcode" placeholder="请输入验证码">
-                         <span>
-                                <span v-show="showCount">{{count}}秒后获取</span>
-                                <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
-                         </span>
-                    </p>
-                </div>
+        <div class="phone-numer">
+            <div class="per-input row">
+                <div class="input-title center">手机号</div>
+                <div class="user-input"><input type="number" v-model="mobile"  placeholder="请输入手机号"></div>
             </div>
-            <div class="at-once">
-                 <van-button size="large"  @click="bindingPhone" round type="info">立即绑定</van-button>
+            <div class="per-input row">
+                <div class="input-title center">验证码</div>
+                <div class="safecode"><input type="number" v-model="authcode" placeholder="请输入验证码"></div>
+                <div class="getcode center">
+                    <span>
+                        <span class="codebtn" v-show="showCount">{{count}}秒后获取</span>
+                        <span class="codebtn" @click="getCode" v-show="showCode">获取验证码</span>
+                    </span>
+                </div>
+                
             </div>
-                 
-                <van-popup >
-                    <div class="cover">绑定成功</div>
-                </van-popup>
-          
-          </div>
+        </div>
+        <div id="tips" class="start-center">*验证码有效期为半小时,请勿重复发送</div>
+        <div class="at-once">
+                <van-button size="large"  @click="bindingPhone" round>立即绑定</van-button>
+        </div>
+        <van-popup >
+            <div class="cover">绑定成功</div>
+        </van-popup>
+        
     </div>
 
 </template>
@@ -50,8 +41,6 @@ export default {
         return {
             show:false,
             mobile:"",
-            password: '',
-            surepassword: '',
             authcode:"",
             count:60,
             showCount:false,
@@ -67,22 +56,12 @@ export default {
         getCode(){
             let that=this
             let partten=/^1\d{10}$/
-            if(that.mobile.trim().length===0){
-                that.$toast({
-                    message:"手机号码不能为空"
-                })
-                return
-            } else if(!partten.test(that.mobile)){
+            if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
                 })
-                 return
             }
-            else if(that.password != that.surepassword){
-                that.$toast('两次输入密码不一致');
-                 return
-            }
-            else  {
+            else {
                 let data={
                     mobile:this.mobile,
                     type:"1"
@@ -124,7 +103,7 @@ export default {
         },
         bindingPhone() {
             let that=this
-            let partten=/^1\d{10}$/
+            let partten = /^1[345789]\d{9}$/
             if(this.mobile.trim().length===0){
                  that.$toast({
                     message:"手机号码不能为空"
@@ -134,21 +113,15 @@ export default {
                  that.$toast({
                     message:"请填写11位手机号码"
                 })
-                 return
             }
             else if(that.authcode.trim().length===0){
                 that.$toast({
                     message:"验证码不能为空"
                 })
-                 return
-            }
-            else if(that.password != that.surepassword){
-                that.$toast('两次输入密码不一致');
             }
             else{
                 let data={
                     mobile:that.mobile,
-                    password: that.password,
                     authcode:that.authcode
                 };
                 axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",data)
@@ -182,84 +155,80 @@ export default {
 
 <style lang="less">
    #binding-phone {
-       >header {
-           background-color: #4965AE;
-           width:100%;
-           height: 86px;
-           line-height: 86px;
-           padding-top:10px;
-           color:#fff;
-           display: flex;
-           z-index:999;
-           position: fixed;
-           font-size:28px;
-           justify-content: space-between;
-           >span {
-               &:nth-of-type(1) {
-                   margin-left: 10px;
-               }
-               &:nth-of-type(3) {
-                   margin-right: 10px;
-               }
-           }
-       }
-       >.container {
-           padding-top:96px;
-           padding-bottom: 50px;
-           >.phone-numer {
-               padding-left:30px;
-               >div {
-                   padding-top:40px;
-                   font-size:36px;
-                   display: flex;
-                   flex-wrap: nowrap;
-                   border-bottom: 1px solid #ccc;
-                   padding-bottom:40px;
-                   &:nth-of-type(2){
-                       >p {
-                           >input {
-                               padding-bottom: 15px;
-                           }
-                       }
-                   }
-                   >input {
-                       border:none;
-                       background: transparent;
-                   }
-                   >p {
-                       flex:1;
-                       >input {
-                           border:none;
-                           width:240px;
-                           background: transparent;
-                       }
-                       >span {
-                           >button {
-                           height: 60px;
-
-                           padding:0 10px;
-                        }
-                       }
-                   }
-               }
-           }
-           >.at-once {
-              margin-top:300px;
-              padding-left:30px;
-              padding-right: 30px;
-              >button {
-                  height: 90px;
-                  font-size: 28px;
-              }
-           }
-           .cover {
-               width:500px;
-               text-align: center;
-               line-height: 400px;
-               border-radius: 10px;
-               height: 400px;
-               background-color: #fff;
-           }
-       }
+       width: 100vw;
+       height: (100vh - 86px);
+       padding-top: 86px;
+        .phone-numer {
+            .per-input{
+                width: 95vw;
+                height: 100px;
+                margin-left: auto;
+                margin-right: auto;
+                border-bottom: solid 1px #ccc;
+                .input-title{
+                    width: 15%;
+                    height: 100%;
+                    font-size: 30px;
+                    font-weight: bold;
+                }
+                .user-input{
+                    margin-left: 5%;
+                    width: 80%;
+                    height: 100%;
+                    input{
+                        width: 100%;
+                        height: 88%;
+                        border: none;
+                    }
+                    input::-webkit-input-placeholder{
+                        padding-top: 5px;
+                        font-size: 26px;
+                    }
+                }
+                .safecode{
+                    margin-left: 5%;
+                    width: 50%;
+                    height: 100%;
+                    input{
+                        width: 100%;
+                        height: 88%;
+                        border: none;
+                    }
+                    input::-webkit-input-placeholder{
+                        padding-top: 5px;
+                        font-size: 26px;
+                    }
+                }
+                .getcode{
+                    width: 30%;
+                    height: 100%;
+                    font-size: 28px;
+                    .codebtn{
+                        padding: 15px;
+                        background: #4b66af;
+                        color: white;
+                        border-radius: 40px;
+                    }
+                }
+            }
+        }
+        >.at-once {
+            margin-top:200px;
+            padding-left:30px;
+            padding-right: 30px;
+            >button {
+                height: 90px;
+                font-size: 28px;
+            }
+        }
+        .cover {
+            width:500px;
+            text-align: center;
+            line-height: 400px;
+            border-radius: 10px;
+            height: 400px;
+            background-color: #fff;
+        }
+       
    }
 </style>

@@ -1,12 +1,24 @@
 <template>
-    <div id="about-us">
+    <div id="customerService">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>关于我们</span>
             <span><van-icon name="ellipsis"/></span>
         </header>
         <div class="container">
-           
+            <div class="logo center"><van-icon name="http://pay.91dianji.com.cn/logo.png" size="250px"/></div>
+            <div class="per-detail row">
+                <div class="per-icon center"><van-icon clase="center" name="phone" size="18px" color="rgb(75, 102, 175)"/></div>
+                <div class="detail start-center">4001059769</div>
+            </div>
+            <div class="per-detail row">
+                <div class="per-icon center"><van-icon clase="center" name="card" size="18px" color="rgb(75, 102, 175)"/></div>
+                <div class="detail start-center">chuanbangdai@126.com</div>
+            </div>
+            <div class="per-detail row">
+                <div class="per-icon center"><van-icon clase="center" name="location" size="18px" color="rgb(75, 102, 175)"/></div>
+                <div class="detail start-center">上海市宝山区泰和路2038号A座303室</div>
+            </div>
         </div>
     </div>
 
@@ -22,22 +34,23 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home')
+            this.$router.go(-1);
         }
     }
 }
 </script>
 
 <style lang="less">
-   #about-us{
+   #customerService {
        >header {
-            background-color: #4B66AF;
+           background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
            padding-top:10px;
            color:#fff;
            display: flex;
+           z-index:999;
            position: fixed;
            font-size:28px;
            justify-content: space-between;
@@ -52,7 +65,26 @@ export default {
        }
        >.container {
            padding-top:96px;
-           padding-bottom: 50px;
+           .logo{
+               width: 100%;
+               height: auto;
+               margin-top: 50px;
+            }
+            .per-detail{
+                width: 95%;
+                height: 60px;
+                margin-left: 10%;
+                .per-icon{
+                    line-height: 22px;
+                }
+                .detail{
+                    line-height: 22px;
+                    margin-left: 10px;
+                    font-size: 28px;
+                    line-height: 38px;
+                }
+            }
+            
        }
    }
 </style>
