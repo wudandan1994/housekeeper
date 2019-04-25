@@ -35,26 +35,31 @@
             <div class="positive top">
                 <div class="title start-center">2.身份证反面</div>
                 <div  class="uploadimg">
-                        <van-uploader :after-read="onReadFanm" class="upload-component" accept="image/*" multiple name="fanm">                           
-                            <img :src="url+cardback" />
+                    <van-uploader :after-read="onReadFanm" class="upload-component" accept="image/*" multiple name="fanm">                           
+                        <img :src="url+cardback" />
                     </van-uploader>
                 </div>
             </div>
            <div class="submit center" @click="submit" v-if="status == '未认证'"><van-button class="van-button" type="default">提交</van-button></div>
-           <div class="loading center" v-if="loading"><van-loading type="spinner" color="black" size="50px" /></div>
         </div>
+        <loading :componentload="componentload"></loading>
     </div>
 
 </template>
 
 
 <script>
+import loading from '@/components/loading'
 import axios from 'axios'
 import {axiosPost,axiosGet} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
+    components:{
+      loading
+    },
     data() {
         return {
+            componentload: true,
             url: 'http://pay.91dianji.com.cn/',
             name:"",
             idcardnumber:"",
@@ -62,6 +67,8 @@ export default {
             front: '',
             cardfront: 'idcardfront.jpg',
             cardback: 'idcardback.jpg',
+            cardfrontup: '',
+            cardbackup: '',
             back: '',
             loading: false,
             status: '',
@@ -71,7 +78,9 @@ export default {
     methods:{
         // 身份证正面
          onRead(file) {
+            this.componentload = true;
             console.log('文件上传',file)
+            // alert('文件上传'+file.file);
             var form = new FormData()
             form.append('file',file.file)
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
@@ -81,7 +90,11 @@ export default {
             axios.post(url,form,config).then(res =>{
                 console.log('文件上传成功',res);
                 if(res.data.success){
-                    this.cardfront = res.data.data.imgUrl
+                    this.cardfront = res.data.data.thumImgUrl
+                    this.cardfrontup = res.data.data.imgUrl
+                    setTimeout(()=>{
+                        this.componentload = false;
+                    },500)
                 }
             }).catch(res =>{
                 console.log('文件上传失败',res);
@@ -90,6 +103,7 @@ export default {
         },
         // 身份证反面
         onReadFanm(file){
+            this.componentload = true;
             console.log('文件上传',file);
             var form = new FormData();
             form.append('file',file.file);
@@ -100,21 +114,25 @@ export default {
             axios.post(url,form,config).then(res =>{
                 console.log('文件上传成功',res);
                 if(res.data.success){
-                    this.cardback = res.data.data.imgUrl;
+                    this.cardback = res.data.data.thumImgUrl;
+                    this.cardbackup = res.data.data.imgUrl;
+                    setTimeout(()=>{
+                        this.componentload = false;
+                    },500)
                 }
             }).catch(res =>{
                 console.log('文件上传失败',res);
                 })
         },
         submit(){
-            this.loading = true;
+            this.componentload = true;
             let url = 'http://pay.91dianji.com.cn/api/customer/identification';
             let params = {
                 openid: this.$store.state.wechat.openid,
                 idcardnumber: this.idcardnumber,
                 name: this.name,
-                idcardfront: this.cardfront,
-                idcardback: this.cardback,
+                idcardfront: this.cardfrontup,
+                idcardback: this.cardbackup,
                 cid: storage.get('cid')
             };
             axiosPost(url,params).then(res =>{
@@ -122,12 +140,22 @@ export default {
                     this.loading = false;
                     this.$toast('提交成功');
                     this.$router.push({path:'/home'})
+                     setTimeout(()=>{
+                        this.componentload = false;
+                    },500)
                 }else{
                     this.loading = false;
-                    this.$toast('提交失败');
+                    this.$toast(res.data.message);
+                    setTimeout(()=>{
+                        this.componentload = false;
+                    },500)
                 }
             }).catch(res =>{
                 console.log('实名认证失败',res);
+                 setTimeout(()=>{
+                    this.componentload = false;
+                },500)
+                this.$toast('认证失败');
             })
         },
         handleReturnHome() {
@@ -140,6 +168,9 @@ export default {
             let params = {};
             axiosPost(url,params).then(res =>{
                 console.log('获取实名认证状态成功',res);
+                setTimeout(()=>{
+                    this.componentload = false;
+                },500)
                 if(res.data.data.status != '0'){
                     this.name = res.data.data.name;
                     this.idcardnumber = res.data.data.idcardnumber;
@@ -155,6 +186,10 @@ export default {
                 }
             }).catch(res =>{
                 console.log('获取实名认证状态失败',res);
+                setTimeout(()=>{
+                    this.componentload = false;
+                    this.$toast('查询失败');
+                },500)
             })
         }
     },

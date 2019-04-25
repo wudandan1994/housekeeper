@@ -165,3 +165,18 @@ table {
 		color: #ffffff;
 		background: #4b66af;
 	}
+	.van-checkbox__icon .van-icon{
+		width: 40px;
+		height: 40px;
+		line-height: 40px;
+	}
+	.van-checkbox__icon{
+		height: auto;
+	}
+	#tips{
+		width: 95vw;
+		height: 60px;
+		color: red;
+		margin-left: auto;
+		margin-right: auto;
+	}

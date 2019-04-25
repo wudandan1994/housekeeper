@@ -51,7 +51,7 @@
         </header>
         <div class="menu-title start-center">特约服务</div>
         <div class="per-list row">
-            <router-link tag="div" class="per-menu-list line" :to="{path: '/ponserCenter/userAccountManage',query: {amount: amount}}">
+            <router-link tag="div" class="per-menu-list line" :to="{path: '/ponserCenter/userAccountManage',query: {amount: amount,amountSum: amountSum}}">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/303.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">账户管理</div>
             </router-link>
@@ -197,9 +197,18 @@ export default {
                     }else{
                         this.vip = 'http://pay.91dianji.com.cn/zuanshivip.png';
                     }
+                }else{
+                    setTimeout(()=>{
+                        this.componentload = false;
+                        this.$toast('查询失败');
+                    },500)
                 }
             }).catch(res =>{
                 console.log('查询个人设置失败',res);
+                setTimeout(()=>{
+                    this.componentload = false;
+                    this.$toast('查询失败');
+                },500)
             })
         }
     },

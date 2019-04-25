@@ -47,17 +47,23 @@
                  <p>专属服务经理是平台对用户的第一责任人，在享用平台相关权益的同时，也肩负指导、培训和为用户排忧解难的责任和义务，投诉电话：400-105-9769</p>
              </div>
         </div>
+        <loading :componentload="componentload"></loading>
     </div>
 
 </template>
 
 
 <script>
+import loading from '@/components/loading'
 import storage from '@/lib/storage'
 import { axiosPost } from '@/lib/http';
 export default {
+    components:{
+      loading
+    },
     data() {
         return {
+            componentload: true,
             nickname: '',
             mobile: '',
             level: '',
@@ -81,33 +87,32 @@ export default {
             };
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                    console.log(res,"查询上下级的res");
+                    console.log('上级请求成功',res);
                     
                     this.nickname = res.data.data.nickname;
                     this.mobile = res.data.data.mobile,
                     this.recommendedcode = res.data.data.promotioncode,
                     res.data.data.level == '0' ?  this.level = '实习' : (res.data.data.level == '1' ? this.level = '黄金会员' : this.level = '钻石会员');
+                    setTimeout(()=>{
+                        this.componentload = false;
+                    },500)
+                }else{
+                    setTimeout(()=>{
+                        this.componentload = false;
+                        this.$toast('查询失败');
+                    },500)
                 }
             }).catch(res =>{
                 console.log('上级请求失败',res);
+                setTimeout(()=>{
+                    this.componentload = false;
+                    this.$toast('查询失败');
+                },500)
             })
         },
-        //查询个人设置
-        settings(){
-            axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer")
-            .then(res=>{
-                console.log(res,"个人设置中的res");
-                
-            })
-            .catch(err=>{
-                console.log(err,"个人设置中的err");
-                
-            })
-        } 
     },
    created(){
         this.handlePrevious()
-        this.settings()
     }
 }
 </script>

@@ -28,7 +28,7 @@
             <div class="menu-name start-center">银行卡</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
         </router-link>
-        <router-link tag="div" class="per-menu row" to="/personalCenter/income">
+        <router-link tag="div" class="per-menu row" :to="{path: '/personalCenter/income',query:{amountSum: amountSum}}">
             <div class="icon start-center"><i class="iconfont icon-jine"></i></div>
             <div class="menu-name start-center">收益明细</div>
             <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
@@ -58,6 +58,7 @@ export default {
             headimg: '',
             recomcode: '',
             amount: '0.00',
+            amountSum: '',
         }
     },
     methods:{
@@ -75,7 +76,7 @@ export default {
         this.$store.state.wechat.headimg == '' ? this.headimg = 'http://pay.91dianji.com.cn/avators.png' : this.headimg  = this.$store.state.wechat.headimg;
         this.$store.state.wechat.recommendedcode == "" ? this.recomcode = '11111111' : this.recomcode  = this.$store.state.wechat.recommendedcode; 
         this.amount = this.$route.query.amount;
-        console.log('传递参数',this.$route.query.amount);
+        this.amountSum = this.$route.query.amountSum;
     }
 }
 </script>
