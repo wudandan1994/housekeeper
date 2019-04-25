@@ -53,6 +53,7 @@
                        <input type="number" v-model="mobile" placeholder="输入11位手机号码">
                        <span>
                             <span v-show="showCount">{{count}}秒后再次获取</span>
+
                             <span @click="getCode" v-show="showCode">获取验证码</span>
                        </span>
                       
@@ -73,7 +74,7 @@
            </div>
            <div id="tips" class="start-center">*验证码有效期为半小时,请勿重复发送</div>
            <div @click="modify" class="at-once">
-                   提交
+                   <van-button round size='large' type="info">确认</van-button>
                </div>
         </div>
     </div>
@@ -85,8 +86,7 @@
 
 
  <script>
-
-   import {axiosPost} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
     data() {
@@ -231,7 +231,7 @@ export default {
 
  #forget-password {
        >header {
-           background: #000;
+          background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -255,6 +255,7 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
            background-color: #EEEFF1;
+           font-size: 34px;
            >p {
                padding:30px;
                font-size: 30px;
@@ -280,7 +281,7 @@ export default {
                        >span {
                            &:nth-of-type(2){
                                color:white;
-                               background-color: #B39956;
+                               background-color: #1989fa;
                                padding:0 10px;
                                margin-right:20px;
                                line-height: 60px;
@@ -296,14 +297,12 @@ export default {
                }
            }
            >.at-once {
-               width:60%;
-               background-color: #B39956;
-               color:white;
                margin-top:200px;
-               margin-left:20%;
-               text-align: center;
-               padding:30px;
-               border-radius: 10px;
+               padding:0 30px;
+               >button {
+                   height: 90px;
+                   font-size: 30px;
+               }
            }
        }
    }

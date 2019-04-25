@@ -197,12 +197,10 @@ export default {
                display: flex;
                justify-content: space-between;
                padding-bottom: 20px;
+               margin-top:50px;
                >p {
-                    padding:20px 0px;
-                    font-size:26px;
-                    .checkbox{
-                        color: red;
-                    }
+                    padding:15px 0px;
+                    font-size:28px;
                     &:nth-of-type(1) {
                         display: flex;
                         padding-bottom: 20px;

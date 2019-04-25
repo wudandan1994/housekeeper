@@ -2,7 +2,7 @@
     <div id="modify-login-password">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>修改登录密码</span>
+            <span>设置登录密码</span>
             <span></span>
         </header>
         <div class="container">
@@ -226,6 +226,7 @@ export default {
            padding-bottom: 50px;
            background-color: #EEEFF1;
            overflow-x: hidden;
+           font-size: 34px;
            >p {
                padding:30px;
                font-size: 30px;

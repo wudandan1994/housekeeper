@@ -119,6 +119,7 @@ export default {
         width: 100vw;
         padding-top: 86px;
         height:calc(100vh - 86px);
+        font-size: 34px;
         .top{
             margin-top: 20px;
         }

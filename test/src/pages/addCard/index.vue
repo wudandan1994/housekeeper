@@ -119,6 +119,7 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
+           font-size: 34px;
            >.info {
                 .user-input{
             width: 100%;

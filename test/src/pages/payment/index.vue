@@ -11,23 +11,23 @@
                <ul>
                     <li>
                         <span>订单金额：</span>
-                       <input v-model="orderAmount" type="number" placeholder="请填写付款金额">
+                       <input v-model="orderAmount" type="number" placeholder="付款金额">
                    </li>
                     <li>
                         <span>真实姓名：</span>
-                       <input v-model="realName"  type="text" placeholder="请填写真实姓名">
+                       <input v-model="realName"  type="text" placeholder="真实姓名">
                    </li>
                     <li>
                         <span>证件号：</span>
-                       <input v-model="idCard"  type="text" placeholder="请填写身份证号码">
+                       <input v-model="idCard"  type="text" placeholder="身份证号码">
                    </li>
                     <li>
                         <span>卡号：</span>
-                       <input v-model="accNo"  type="number" placeholder="请填写信用卡卡号">
+                       <input v-model="accNo"  type="number" placeholder="信用卡卡号">
                    </li>
                    <li>
                        <span>手机号：</span>
-                       <input type="number" v-model="mobile" placeholder="请输入手机号码">
+                       <input type="number" v-model="mobile" placeholder="手机号码">
                    </li>
                </ul>
            </div>
@@ -246,7 +246,7 @@ export default {
                        >input {
                            border:none;
                            flex: 1;
-                           margin-left:10px;
+                           margin-right:50px;
                        }
                    }
                }
