@@ -6,21 +6,127 @@
             <div class="right-icon center"></div>
         </header>
         <div class="tabs">
-             <div class="income-tab">
-                <div class="per-list" v-for="(item,index) in list" :key="index">
-                    <div class="avator center"><img :src="item.photo" alt=""></div>
-                    <div class="nickname">{{item.nickname}}</div>
-                    <div class="time">{{item.date}}</div>
-                    <div class="amount center">
-                        <span v-if="item.type == 2">分销收益</span>
-                        <span v-if="item.type == 3">代还收益</span>
-                        <span v-if="item.type == 4">商户收款收益</span>
-                        <span>+{{item.amount}}</span>
+             
+
+            <van-tabs v-model="active">
+                <van-tab title="所得佣金">
+                   <div class="income-tab">
+                        <div class="per-list" v-for="(item,index) in list" :key="index">
+                            <div class="avator center"><img :src="item.photo" alt=""></div>
+                            <div class="nickname">{{item.nickname}}</div>
+                            <div class="time">{{item.date}}</div>
+                            <div class="amount center">
+                                <span v-if="item.type == 5">提现收益</span>
+                                <span v-if="item.type == 3">代还收益</span>
+                                <span v-if="item.type == 4">商户收款收益</span>
+                                <span>+{{item.amount}}</span>
+                            </div>
+                        </div>
+                    </div> 
+                </van-tab>
+                <van-tab title="推广收益">
+                    <div class="income-tab">
+                        <div class="top-tab row">
+                            <div class="money center">总额： <span>65522.00</span></div>
+                            <div class="money center">可提现：<span>54242.00</span></div>
+                            <div class="info center"><van-icon name="info" size="1.5em" color="#BD3B3C"/></div>
+                        </div>
+
+                        <div class="Invitation-reward row">
+                            <div class="per-reward">
+                                <div class="Invitation-number center">2544</div>
+                                <div class="Invitation-title center">邀请成功(人)</div>
+                            </div>
+                            <div class="per-reward">
+                                <div class="Invitation-number center">2544</div>
+                                <div class="Invitation-title center">红包奖励(元)</div>
+                            </div>
+                        </div>
+
+                        <div class="tabs-switch row">
+                            <div class="per-switch center" :class="{checked: now}" @click="handleChange">
+                                邀请成功
+                                <div class="triangle-black" @click.stop="handleInvitationType"></div>
+                            </div>
+                            <div class="per-switch center" :class="{checked: !now}" @click="handleChange">
+                                邀请中(68人)
+                            </div>
+                            <div class="hidden-menu row" v-if="menus">
+                                <div class="hidden-small-title center" :class="[smallcheck == 'all' ? 'actives' : '']" @click="handleGetSmallType('all')">
+                                    <div class="right-line center">全部</div>
+                                </div>
+                                <div class="hidden-small-title center" :class="[smallcheck == 'gold' ? 'actives' : '']" @click="handleGetSmallType('gold')">
+                                    <div class="right-line center">金牌</div>
+                                </div>
+                                <div class="hidden-small-title center" :class="[smallcheck == 'silver' ? 'actives' : '']" @click="handleGetSmallType('silver')">
+                                    <div class="center">银牌</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Invitation row">
+                            <div class="direct-invitation">
+                                <div class="center">直接邀请(人)</div>
+                                <div class="center">566</div>
+                            </div>
+                            <div class="indirect-invitation">
+                                <div class="center">间接邀请</div>
+                                <div class="center">198</div>
+                            </div>
+                        </div>
+                        <div class="invitation-list">
+                            <div class="list-per-record row">
+                                <div class="list-icon center"><van-icon name="stop-circle" color="#D09F60"/></div>
+                                <div class="name-time">
+                                    <div class="list-name start-center">Giovanni</div>
+                                    <div class="list-time start-center">2019-04-04 11:11:14</div>
+                                </div>
+                                <div class="reward-havedone">
+                                    <div class="list-reward end-center">奖励红包 &nbsp;<span>+20</span></div>
+                                    <div class="list-havedone end-center">已邀请 <span>+10人</span></div>
+                                </div>
+                                <router-link tag="div" class="list-more center" to="/personalCenter/incomedetail/personalIncomeDetail">
+                                    <i class="iconfont icon-more"></i>
+                                </router-link>
+                            </div>
+
+                            <div class="list-per-record row">
+                                <div class="list-icon center"><van-icon name="stop-circle" color="#D09F60"/></div>
+                                <div class="name-time">
+                                    <div class="list-name start-center">Giovanni</div>
+                                    <div class="list-time start-center">2019-04-04 11:11:14</div>
+                                </div>
+                                <div class="reward-havedone">
+                                    <div class="list-reward end-center">奖励红包 &nbsp;<span>+20</span></div>
+                                    <div class="list-havedone end-center">已邀请 <span>+10人</span></div>
+                                </div>
+                                <router-link tag="div" class="list-more center" to="/personalCenter/incomedetail/personalIncomeDetail">
+                                    <i class="iconfont icon-more"></i>
+                                </router-link>
+                            </div>
+
+                            <div class="list-per-record row">
+                                <div class="list-icon center"><van-icon name="stop-circle" color="#D09F60"/></div>
+                                <div class="name-time">
+                                    <div class="list-name start-center">Giovanni</div>
+                                    <div class="list-time start-center">2019-04-04 11:11:14</div>
+                                </div>
+                                <div class="reward-havedone">
+                                    <div class="list-reward end-center">奖励红包 &nbsp;<span>+20</span></div>
+                                    <div class="list-havedone end-center">已邀请 <span>+10人</span></div>
+                                </div>
+                                <router-link tag="div" class="list-more center" to="/personalCenter/incomedetail/personalIncomeDetail">
+                                    <i class="iconfont icon-more"></i>
+                                </router-link>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>  
+                </van-tab>
+                <van-tab title="招商收益">
+                    
+                </van-tab>
+            </van-tabs>
         </div>
-        <loading :componentload='componentload'></loading>
+        <!-- <loading :componentload='componentload'></loading> -->
     </div>
 </template>
 <script>
@@ -67,7 +173,7 @@ export default {
             this.smallcheck = val;
             this.menus = false;
         },
-        // 流水明细
+        // 所得佣金
         handleFlowDetails(){
             let url = 'http://pay.91dianji.com.cn/api/customer/getAmountFrom';
             let params = {
@@ -77,10 +183,10 @@ export default {
             axiosPost(url,params).then(res =>{
                 console.log('流水请求成功',res);
                 if(res.data.success){
-                    if(res.data.data.data.length == '0'){
-                        this.$toast('流水为空');
+                    if(res.data.data.list.data.length == '0'){
+                        this.$toast('查询结果为空');
                     }else{
-                        this.list = res.data.data.data;
+                        this.list = res.data.data.list.data;
                     }
                     setTimeout(() =>{
                         this.componentload = false;

@@ -7,39 +7,39 @@
         </header>
         <div class="top">
             <div class="all-income">总收益</div>
-            <!-- <div class="integrated-services center">综合业务</div> -->
             <div class="balance center">{{amountSum}}</div>
-            <!-- <div class="incomes row">
+            <div class="incomes row">
                 <div class="today-income">
-                    <div class="today center">总计收益</div>
-                    <div class="today-number center">78.00</div>
+                    <div class="today center">今日收益</div>
+                    <div class="today-number center">{{todaySum}}</div>
                 </div>
 
                 <div class="today-income">
-                    <div class="today center">今日收益</div>
-                    <div class="today-number center">78.00</div>
+                    <div class="today center">本月预计</div>
+                    <div class="today-number center">{{monthSum}}</div>
                 </div>
-            </div> -->
+            </div>
         </div>
-        <!-- <div class="business-investment row">
+        <div class="business-investment row">
             <div class="business">
                 <div class="per-business center"><i class="iconfont icon-xianjin"></i>业务收益</div>
-                <div class="per-business special center">今日: 0笔</div>
+                <div class="per-business special center">今日: {{todayCount}}笔</div>
             </div>
             <div class="investment">
-                <div class="per-business center"><i class="iconfont icon-xianjin"></i>业务收益</div>
+                <div class="per-business center"><i class="iconfont icon-xianjin"></i>招商收益</div>
                 <div class="per-business special center">今日: 0笔</div>
             </div>
-        </div> -->
+        </div>
         <router-link tag="div" class="running-account row" :to="{path: '/personalCenter/incomedetail',query: {amountSum: amountSum}}">
             <div class="left-icon center"><i class="iconfont icon-jine1"></i></div>
-            <div class="run-title start-center">以入账收入流水</div>
+            <div class="run-title start-center">入账收入流水</div>
             <div class="right-icon end-center"><i class="iconfont icon-more"></i></div>
         </router-link>
         <loading :componentload='componentload'></loading>
     </div>
 </template>
 <script>
+import {axiosPost,axiosGet} from '@/lib/http'
 import loading from'@/components/loading'
 import storage from '@/lib/storage'
 export default {
@@ -51,6 +51,9 @@ export default {
             componentload: true,
             amountSum: '',
             preRouter: '',
+            monthSum: '',
+            todayCount: '',
+            todaySum: '',
         }
     },
     methods:{
@@ -62,14 +65,39 @@ export default {
         handleMore(){
             this.$toast('尽请期待');
         },
+        // 获取数据
+        handleGetData(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getEarnings';
+            let params = {};
+            axiosPost(url,params).then(res =>{
+                if(res.data.success){
+                    console.log('详情请求成功',res);
+                    this.monthSum = res.data.data.monthSum;
+                    this.todayCount = res.data.data.todayCount;
+                    this.todaySum = res.data.data.todaySum;
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
+                }else{
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
+                    console.log('详情请求失败',res);
+                    this.$toast(res.data.message);
+                }
+            }).catch(res =>{
+                 setTimeout(() =>{
+                    this.componentload = false;
+                },500)
+                console.log('详情请求失败',res);
+                this.$toast('查询失败');
+            })
+        },
     },
     created(){
         this.amountSum = this.$route.query.amountSum;
         console.log('路由',this);
-        setTimeout(() =>{
-            this.componentload = false;
-        },500)
-        
+        this.handleGetData();
     }
 }
 </script>
@@ -91,6 +119,7 @@ export default {
                 position: absolute;
                 top: 30px;
                 left: 20px;
+                font-size: 30px;
             }
             .integrated-services{
                 width: 120px;

@@ -88,7 +88,7 @@ export default {
                     that.$store.commit('amount',res.data.data.amount);
                     that.$store.commit('openid',res.data.data.openid);
                     that.$store.commit('nickname',res.data.data.nickname);
-                    that.$store.commit('headimg',res.data.data.headimgurl);
+                    that.$store.commit('headimg',res.data.data.photo);
                     console.log('登陆成功',res);
                     if(that.checked){
                         // 记住密码
@@ -101,8 +101,8 @@ export default {
                         storage.remove('password');
                         storage.remove('rempass');
                     }
-                    that.$store.commit('recommendedcode',res.data.data.recommendedcode);
-                    that.$router.push('/home')
+                    that.$router.push('/home');
+                    console.log('VUEX',that.$store.state);
                 }else{
                     that.$toast({
                         message:res.data.message
@@ -114,6 +114,7 @@ export default {
                 that.$toast('登录失败')  
             })
         },
+        // 登录
         logIn(){
             location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
         }

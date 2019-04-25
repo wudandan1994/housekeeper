@@ -5,7 +5,7 @@
             <div class="top-title center">海报</div>
             <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
-        <div class="poster-canvas center"><canvas id="poster" width="320" height="480"></canvas>  </div>
+        <div class="poster-canvas center"><canvas id="poster" width="320" height="470"></canvas>  </div>
         <div @click="savePoster" class="rightnow center">立即合成</div>
         <div class="load center" v-if="imgShow">
             <div v-if="showUpload" >
@@ -48,11 +48,11 @@ export default {
         handlePoster(){
             var poster = document.getElementById("poster");
             var ctx = poster.getContext("2d");
-            ctx.fillStyle = "#ccc";
-            ctx.fillRect(0,0,320,480);
+            ctx.fillStyle = "#fff";
+            ctx.fillRect(0,0,320,470);
 
             var bigPoster = new Image();
-            var random = Math.ceil((Math.random())*6);
+            var random = Math.ceil((Math.random())*5);
             bigPoster.src = 'http://pay.91dianji.com.cn/poster_00'+ random +'.jpg';
             bigPoster.onload = function(){
                 ctx.drawImage(bigPoster,0,0,320,380);
@@ -61,7 +61,7 @@ export default {
             var qrcode = new Image();
             qrcode.src = 'http://pay.91dianji.com.cn/' + this.qrcode;
             qrcode.onload = function(){
-                ctx.drawImage(qrcode,230,390,80,80);
+                ctx.drawImage(qrcode,240,390,50,50);
             };
 
             var headimg = new Image();
@@ -70,16 +70,16 @@ export default {
             console.log('头像',this.url + '/wxAvator' + '/mmopen' + domain[1]);
             headimg.src = this.url + '/wxAvator' + '/mmopen' + domain[1];
             headimg.onload = function(){
-                ctx.drawImage(headimg,10,390,50,50);
+                ctx.drawImage(headimg,10,390,60,60);
             };
 
-            ctx.fillStyle="#4b66af";
+            ctx.fillStyle="#000";
             ctx.font="14px Arial";
-            ctx.fillText("name: " + this.$store.state.wechat.nickname,70,405);
-            ctx.fillText("code: " + this.$store.state.wechat.promotioncode,70,430);
-            ctx.fillStyle="#f00";
-            ctx.font="16px Arial";
-            ctx.fillText("长按识别二维码体验更多惊喜",10,460);
+            ctx.fillText("name: " + this.$store.state.wechat.nickname,80,415);
+            ctx.fillText("code: " + this.$store.state.wechat.promotioncode,80,435);
+            ctx.fillStyle="#000";
+            ctx.font="10px Arial";
+            ctx.fillText("识别二维码",240,455);
             
             
 
@@ -145,6 +145,7 @@ export default {
        width: 100vw;
        height: calc(100vh - 86px);
        padding-top: 86px;
+       background: #F2F2F2;
        .poster-canvas{
            width: auto;
            margin: 50px auto auto auto;
