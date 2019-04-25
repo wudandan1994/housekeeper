@@ -3,7 +3,7 @@
         <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">账户管理</div>
-            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+            <div class="right-icon center"></div>
         </header>
         <div class="header-bottom">
             <div class="personalCenter row">
@@ -16,22 +16,9 @@
                     <div class="code start-center"><div class="center">可提现金额:{{amount}}</div></div>
                 </div>
             </div>
-            <!-- <div class="integral-cash row">
-                <div class="integral">
-                    <div class="can-title center">可提现积分</div>
-                    <div class="can-number center">123</div>
-                </div>
-                <div class="integral">
-                    <div class="can-title center">可提现金额</div>
-                    <div class="can-number center">123</div>
-                </div>
-            </div> -->
+           
         </div>
-        <!-- <router-link tag="div" class="per-menu  row" to="/personalCenter/incomedetail/integralCash">
-            <div class="icon start-center"><i class="iconfont icon-jine"></i></div>
-            <div class="menu-name start-center">积分提现</div>
-            <div class="insert-icon center"><i class="iconfont icon-more"></i></div>
-        </router-link> -->
+        
          <router-link :to="{path:'/personalCenter/incomedetail/cash',query:{amount: amount}}" tag="div" class="per-menu row">
             <div class="icon start-center"><i class="iconfont icon-xianjin"></i></div>
             <div class="menu-name start-center">现金提现</div>
@@ -82,7 +69,7 @@ export default {
         },
         // 更多
         handleMore(){
-            this.$toast('尽请期待');
+            this.$toast('敬请期待')
         }  
     },
     created(){

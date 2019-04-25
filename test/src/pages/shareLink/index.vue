@@ -11,7 +11,8 @@
                    <van-collapse v-model="activeNames">
                          <van-collapse-item name="1">
                             <div slot="title"> <span><van-icon name="more" /></span>官网首页链接&nbsp;<span>（可锁粉）</span></div>
-                                <p>{{link}}</p>
+                            <a :href="link">点击分享</a>
+                                <!-- <p>{{link}}</p> -->
                               <!-- （点击复制链接） -->
                         </van-collapse-item>
                     </van-collapse>
