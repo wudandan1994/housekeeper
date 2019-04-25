@@ -1,9 +1,9 @@
 <template>
     <div id="customerService">
-        <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>关于我们</span>
-            <span></span>
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">关于我们</div>
+            <div class="right-icon varify center"></div>
         </header>
         <div class="container">
             <div class="logo center"><van-icon name="http://pay.91dianji.com.cn/logo.png" size="250px"/></div>

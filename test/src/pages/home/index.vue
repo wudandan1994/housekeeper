@@ -224,7 +224,6 @@
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
     </div>
 </template>
-
 <script>
 import footerMenu from '@/components/footer'
 import {axiosPost} from '@/lib/http'
@@ -321,7 +320,6 @@ export default {
         this.handleSearchAuths();
     }
 }
-
 </script>
 
 <style lang="less" >
