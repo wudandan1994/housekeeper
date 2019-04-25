@@ -3,13 +3,13 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>商户申请</span>
-            <span></span>
+            <span><van-icon name="cluster"/>操作说明</span>
         </header>
         <div class="container">
            <div class="phone">
                <ul>
                    <li>
-                       <span>输入预留手机号</span>
+                       <span>手机号：</span>
                        <input type="number" v-model="reservedMobile" placeholder="输入银行预留手机号码">
                        <!-- <span>
                             <span v-show="showCount">{{count}}秒后再次获取</span>
@@ -17,40 +17,40 @@
                        </span> -->
                    </li>
                     <li>
-                        <span>商户名称:</span>
-                       <input v-model="merName" type="text" placeholder="请填写商户名称">
+                        <span>商户名称：</span>
+                       <input v-model="merName" type="text" placeholder="商户名称">
                    </li>
                     <li>
-                        <span>真实姓名:</span>
-                       <input v-model="realName"  type="text" placeholder="请填写真实姓名">
+                        <span>真实姓名：</span>
+                       <input v-model="realName"  type="text" placeholder="真实姓名">
                    </li>
                     <li>
-                        <span>地址:</span>
-                       <input  v-model="merAddress"   type="text" placeholder="请填写除省份、城市和区县外的地址信息">
+                        <span>地址：</span>
+                       <input  v-model="merAddress"   type="text" placeholder="地址信息">
                    </li>
                     <li>
-                        <span>证件号</span>
-                       <input v-model="idCard"  type="text" placeholder="请填写身份证号码">
+                        <span>证件号：</span>
+                       <input v-model="idCard"  type="text" placeholder="身份证号码">
                    </li>
                    <li>
-                        <span>结算户名</span>
+                        <span>结算户名：</span>
                        <input  v-model="accountName" type="text" placeholder="真实姓名与结算户名必须一致">
                    </li>
                     <li>
-                        <span>卡号</span>
-                       <input v-model="accountNo"  type="number" placeholder="请填写储蓄卡卡号">
+                        <span>卡号：</span>
+                       <input v-model="accountNo"  type="number" placeholder="储蓄卡卡号">
                    </li>
                    <li>
-                       <span>手机号</span>
-                       <input type="number" v-model="mobile" placeholder="请输入手机号码">
+                       <span>手机号：</span>
+                       <input type="number" v-model="mobile" placeholder="手机号码">
                    </li>
                    <li>
-                        <span>联行号</span>
-                       <input v-model="subBankCode"  type="number" placeholder="请输入该支开户行行号">
+                        <span>联行号：</span>
+                       <input v-model="subBankCode"  type="number" placeholder="输入该支开户行行号">
                    </li>
                     <li>
-                        <span>结算户类型</span>
-                       <input v-model="settleAccType"  type="text" placeholder="请选择结算户类型">
+                        <span>结算户类型：</span>
+                       <input v-model="settleAccType"  type="text" placeholder="选择结算户类型">
                        <span @click="showAcc"><van-icon name="arrow"/></span>
                              <van-actionsheet
                             v-model="show"
@@ -61,7 +61,7 @@
                             />
                    </li>
                    <li>
-                        <span>商户类型</span>
+                        <span>商户类型：</span>
                        <input  v-model="merType" type="text" placeholder="请选择商户类型">
                         <span @click="showMer"><van-icon name="arrow"/></span>
                          <van-actionsheet
@@ -74,6 +74,7 @@
                    </li>
                </ul>
            </div>
+           <p class="serch"><a href="http://lianhanghao.com">银行联行号在线查询</a></p>
            <div class="at-once">
                    <van-button  @click="register" size="large" round type="info">下一步</van-button>
                </div>
@@ -330,6 +331,11 @@ export default {
                        height: 60px;
                        line-height: 60px;
                        color:#000;
+                       >span {
+                           &:nth-of-type(1){
+                               font-weight: bold;
+                           }
+                       }
                        &:last-child {
                            border:none;
                        }
@@ -349,8 +355,12 @@ export default {
                    }
                }
            }
+           >.serch {
+               margin-top:30px;
+               text-align: right;
+           }
            >.at-once {
-               margin-top:200px;
+               margin-top:150px;
                padding:0 20px;
                >button {
                    height: 90px;

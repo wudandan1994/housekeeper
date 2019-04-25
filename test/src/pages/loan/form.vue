@@ -228,7 +228,7 @@ export default {
                 height: 100%;
             }
             .label{
-                width: 10vw;
+                width: 12vw;
                 height: 100%;
                 font-weight: 600;
                 font-size: 26px;

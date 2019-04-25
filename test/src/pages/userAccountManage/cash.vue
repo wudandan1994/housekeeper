@@ -21,7 +21,7 @@
                 <div :class="cardLength == '0' ? 'apply-card-one' : 'apply-card-two' "></div>
                 <router-link tag="div" to="/personalCenter/incomedetail/addcard" class="more center"><i class="iconfont icon-more"></i></router-link>
             </div>
-            <div class="desc">注:钱夹宝提现1-3天到账，手续费5%+1元/笔，最低提现金额100元起提。<span>5%的提现手续费将全部作为城主的收益</span></div>
+            <div class="desc">注:钱夹宝提现工作日1-2天到账，手续费5%+1元/笔，最低提现金额100元起提。</div>
             <div class="user-input">
                 <div class="input-title"><span>提取金额</span></div>
                 <div class="money-input row">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="desc-two">
-                <p>亲爱的钱家宝会员，提现为整百提现。您提交提现申请后将进入人工审核状态，工作时间内1-3天将完成审核！请合理安排提现</p>
+                <p>亲爱的钱夹宝会员，您提交提现申请后将进入人工审核状态，工作时间内1-2天将完成审核，请合理安排提现。</p>
             </div>
             <div @click="handleCash" class="Immediate-withdrawals center">立即提现</div>
         </div>
@@ -217,9 +217,6 @@ export default {
                 padding-top: 20px;
                 padding-bottom: 20px;
                 line-height: 50px;
-                >span{
-                    color: red;
-                }
             }
             .user-input{
                 width: 100vw;

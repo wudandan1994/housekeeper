@@ -171,6 +171,7 @@ export default {
                     that.$toast({
                         message:res.data.message
                     })
+                    that.isPunch=false
                     return
                 }
                  that.signcount=res.data.data.signcount

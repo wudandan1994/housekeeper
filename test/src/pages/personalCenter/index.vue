@@ -324,8 +324,7 @@ export default {
                   right: 20px;
                   top: 20px;
                   >img{
-                      width: 60px;
-                      height: 60px;
+                      width: 100%;
                   }
               }
               .position-detail{
@@ -435,6 +434,7 @@ export default {
                 >li {
                     width:50%;
                     text-align: center;
+                    padding:20px;
                     >a {
                         display: block;
                         color:#000;

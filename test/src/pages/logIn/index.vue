@@ -161,7 +161,33 @@ export default {
                    display: block;
                    width:100%;
                    padding-bottom: 20px;
+                   -webkit-animation: spin 2s linear infinite;
+		           animation: spin 2s linear infinite;
                }
+            //    @-webkit-keyframes spin {
+            //             0%   {
+            //                 -webkit-transform: rotate(0deg);
+            //                 -ms-transform: rotate(0deg);
+            //                 transform: rotate(0deg);
+            //             }
+            //             100% {
+            //                 -webkit-transform: rotate(360deg);
+            //                 -ms-transform: rotate(360deg);
+            //                 transform: rotate(360deg);
+            //             }
+            //         }
+            //         @keyframes spin {
+            //             0%   {
+            //                 -webkit-transform: rotate(0deg);
+            //                 -ms-transform: rotate(0deg);
+            //                 transform: rotate(0deg);
+            //             }
+            //             100% {
+            //                 -webkit-transform: rotate(360deg);
+            //                 -ms-transform: rotate(360deg);
+            //                 transform: rotate(360deg);
+            //             }
+            //         }
            }
            >.info {
                width:80%;

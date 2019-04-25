@@ -2,11 +2,9 @@
     <div id="share-component">
         <header>
             <span class="left-arrow">
-               
             </span>
             <span>分享</span>
             <span class="right-arrow">
-                <van-icon name="ellipsis" />
             </span>
         </header>
         <div class="contain">

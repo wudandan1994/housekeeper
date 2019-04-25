@@ -21,7 +21,7 @@
                      <img src="../../../static/images/flower.jpg.jpg" alt=""> 
                 </router-link> -->
                 <div class="consultation">钱夹<br>
-                    咨询</div>
+                    资讯</div>
                 <div class="ring">
                     <van-notice-bar
                         text="恭喜黄金会员陈**于09：40:25完成智能还款计划  订单尾号 8888，推荐人获得7.5元总收益。"
@@ -180,6 +180,7 @@ export default {
                 background-color: #fff;
                 border-bottom: 3px solid #ccc;
                 >.consultation {
+                    color:#4B66AF;
                     width:100px;
                     font-size: 36px;
                    text-align: center;
@@ -241,9 +242,8 @@ export default {
                             }
                             >P {
                                 text-align: center;
-
                                 >.handle {
-                                background-color: #957635;
+                                background-color: #4B66AF;
                                 padding:10px 30px;
                                 border-radius: 10px;
                                 color:#eee;
