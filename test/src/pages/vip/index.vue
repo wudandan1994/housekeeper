@@ -16,7 +16,7 @@
                                     2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
                                     3. 招商收益<br/>
                                     4. 信用卡办卡收益<br/>
-                                    5. 智能精养、空卡周转、商户收款、车险等等分润收益<br/>
+                                    5. 智能精养、空卡周转、商户收款、车险等分润收益<br/>
                                 </div>
                             </van-popup>
                              <span @click="isShowRule">退换规则</span>
@@ -55,7 +55,7 @@
                                     2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
                                     3. 招商收益<br/>
                                     4. 信用卡办卡收益<br/>
-                                    5. 智能精养、空卡周转、商户收款、车险等等分润收益<br/>
+                                    5. 智能精养、空卡周转、商户收款、车险分润收益<br/>
                                 </div>
                             </van-popup>
                              <span @click="isShowRule">退换规则</span>
@@ -70,7 +70,7 @@
                      <div class="qualifications">
                          <span>授权还款额度</span>
                          <span>授权实习会员资格</span>
-                         <span>智能还款分润万38-60</span>
+                         <span>智能还款分润万16-45</span>
                     </div>  
                      <div class="price">
                         <span class="new-price">￥393.00</span>
@@ -86,11 +86,14 @@
                 <div class="level center">您现在即将购买<span class="center">【{{level}}】</span></div>
                 <div class="desc">
                     <ul>
-                        <li>恒升级成功后您将享受最高收益权限</li>
-                        <li>享受空卡最高万60分润，可攻打城主享受该城市所有用户5%的提现收益+5元/张的信用卡佣金额外提成!</li>
-                        <li><span class="van-rate">推荐指数：</span><van-rate class="van-rate" v-model="value" /></li>
+                        <li>升级成功后您将享受相应收益权限</li>
+                        <li v-if="level == '钱夹宝钻石会员'">若你成为钻石会员，垫还每万元可省下78元，空卡代还每万元可省下57元，最关键的一点在于不仅省钱还可以让你的信用卡资金利用率达到90%以上。</li>
+                        <li v-if="level == '钱夹宝黄金会员'">黄金会员无城市合伙人、城市运营商躺赢赚钱资格</li>
+                        <li v-if="level == '钱夹宝黄金会员'">开通钻石会员可享受更高级别收益权限，数据显示，黄金会员整体收益低于钻石会员80%，您确定要升级吗？</li>
+                        <li v-if="level == '钱夹宝钻石会员'"><span class="van-rate">推荐指数：</span><van-rate class="van-rate" v-model="value" /></li>
+                        <li v-if="level == '钱夹宝黄金会员'"><span class="van-rate">推荐指数：</span><van-rate class="van-rate" v-model="value" /></li>
                     </ul>
-                    <div class="tips center">(保证金将按业绩退还)</div>
+                    <!-- <div class="tips center">(保证金将按业绩退还)</div> -->
                 </div>
                 <div class="button row">
                     <van-button class="cancel" type="default" @click="handleCancelOrder">取消</van-button>
@@ -109,7 +112,7 @@
                 </div>
                 <div class="recom-info center">
                     <div class="mini-info center">
-                        Hi!,我是您的上级Giovanni,邀请您成为创业合伙人，钱夹宝大舞台等你来创造奇迹
+                        Hi!,{{recomname}}邀请您成为创业合伙人，钱夹宝大舞台等你来创造奇迹
                     </div>
                 </div>
             </div>
@@ -125,12 +128,12 @@
             <div class="per-title row">
                 <div class="goods-title start-center">付款方式</div>
                 <div class="goods-detail row">
-                    <!-- <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
+                    <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-wechatpay"></use>
                         </svg>
                         微信支付
-                    </div> -->
+                    </div>
                     <div class="paytypes center" :class="{'alipay': paytype == 'alipay'}" @click="handlePayType('alipay')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-alipay"></use>
@@ -156,6 +159,7 @@
 </template>
 
 <script>
+import storage from '@/lib/storage'
 import footerMenu from '@/components/footer'
 import { axiosPost } from '../../lib/http';
 export default {
@@ -172,12 +176,14 @@ export default {
             pup2: false,
             price: '',
             level: '',
-            value: 5,
+            value: 2,
+            value1:5, 
             paytype: 'alipay',
             orderid: '',
             recomname: '',
             recomcode: '',
             recomheadimg: '',
+            nickname: '',
         }
     },
     methods:{
@@ -279,18 +285,14 @@ export default {
                     window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
                 } 
             }else{
-                if(this.$store.state.wechat.openid != ''){
-                    var  params = {
-                        orderid: this.orderid,
-                        trade_type: 'JSAPI',
-                        openid: this.$store.state.wechat.openid
-                    };
-                }else{
-                    var  params = {
-                        orderid: this.orderid,
-                        trade_type: 'APP',
-                    }; 
-                }
+                
+                var  params = {
+                    orderid: this.orderid,
+                    trade_type: 'JSAPI',
+                    openid: storage.get('openid')
+                };
+                
+                
                 var url = 'http://pay.91dianji.com.cn/api/order/wxPayH5';
                 axiosPost(url,params).then(res =>{
                         console.log('发起微信支付成功',res);
@@ -315,7 +317,7 @@ export default {
         }
     },
     created(){
-        // console.log('时间戳',(Date.parse( new Date() ).toString()).substr(0,10));
+        this.nickname = this.$store.state.wechat.nickname;
     }
 }
 </script>
@@ -482,6 +484,8 @@ export default {
                  margin-left: auto;
                  margin-right: auto;
                  margin-top: 20px;
+                 font-size: 28px;
+                 font-weight: bold;
                  >span{
                      width: auto;
                      height: 80px;
@@ -573,7 +577,7 @@ export default {
                      width: 100%;
                      height: 25%;
                      margin-top: 8%;
-                     color: #ccc;
+                     color: #333;
                      font-size: 24px;
                  }
                  .recom-name{
@@ -584,7 +588,7 @@ export default {
                  .recom-code{
                      width: 100%;
                      height: 25%;
-                     color: #ccc;
+                     color: #333;
                      font-size: 24px;
                  }
              }
@@ -617,7 +621,7 @@ export default {
                 height: 100%;
                 margin-left: 5%;
                 font-size: 32px;
-                color: #ccc;
+                color: #333;
             }
             .goods-detail{
                 width: 75%;
@@ -672,7 +676,7 @@ export default {
             .submit{
                 width: 40%;
                 height: 100%;
-                background: #856C35;
+                background: #4b66af;
                 color:#ffffff;
                 font-size: 36px;
                 font-weight: bold;

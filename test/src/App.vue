@@ -124,16 +124,23 @@ export default {
                     }
                     let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
                     axiosPost(url,params).then(res =>{
-                        console.log('登陆成功',res);
-                        storage.set('cid',res.data.data.id);
-                        this.$store.commit('iscertification',res.data.data.iscertification);
-                        this.$store.commit('level',res.data.data.level);
-                        this.$store.commit('promotioncode',res.data.data.promotioncode);
-                        this.$store.commit('mobile',res.data.data.mobile);
-                        this.$store.commit('vip',res.data.data.vip);
-                        this.$store.commit('recommendedcode',res.data.data.recommendedcode);
-                        this.$store.commit('amount',res.data.data.amount);
-                        this.$toast('登陆成功');
+                        if(res.data.success){
+                          console.log('登陆成功',res);
+                          storage.set('cid',res.data.data.id);
+                          storage.set('openid',res.data.data.openid);
+                          this.$store.commit('iscertification',res.data.data.iscertification);
+                          this.$store.commit('level',res.data.data.level);
+                          this.$store.commit('promotioncode',res.data.data.promotioncode);
+                          this.$store.commit('mobile',res.data.data.mobile);
+                          this.$store.commit('vip',res.data.data.vip);
+                          this.$store.commit('recommendedcode',res.data.data.recommendedcode);
+                          this.$store.commit('amount',res.data.data.amount);
+                          this.$router.push('/home');
+                          this.$toast('登陆成功');
+                        }else{
+                          console.log('登录失败',res);
+                          this.$toast('登陆失败');
+                        }
                     }).catch(res =>{
                         console.log('登录失败',res);
                         this.$toast('登陆失败');
@@ -151,25 +158,60 @@ export default {
     },
   },
   created(){
-    if(this.$router.currentRoute.query.promotioncode != '' && typeof(this.$router.currentRoute.query.promotioncode) != 'undefined'){
-      storage.set('recommendedcode',this.$router.currentRoute.query.promotioncode);
-    }
-    // 判断是否是微信浏览器
-    console.log('VUEX',this.$store.state.wechat);
-    var ua = navigator.userAgent.toLowerCase();
-    if(ua.match(/MicroMessenger/i)=="micromessenger") {
-      // 微信浏览器
-      if(this.GetUrlParam('code') === null){
-      // 未授权
-        this.handleOauth();
-      }else{
-      // 已授权
-        this.code = this.GetUrlParam('code');
-        this.handleAccessToken();
+    // 首先判断是否存储了openid
+    if(storage.get('openid') != '' && storage.get('openid') !== null){
+      // 已经注册过，可直接登录，无需再次授权
+      let params = {
+        openid: storage.get('openid')
       }
+      let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
+      axiosPost(url,params).then(res =>{
+          if(res.data.success){
+            console.log('直接登陆成功',res);
+            storage.set('cid',res.data.data.id);
+            storage.set('openid',res.data.data.openid);
+            this.$store.commit('iscertification',res.data.data.iscertification);
+            this.$store.commit('level',res.data.data.level);
+            this.$store.commit('promotioncode',res.data.data.promotioncode);
+            this.$store.commit('mobile',res.data.data.mobile);
+            this.$store.commit('vip',res.data.data.vip);
+            this.$store.commit('recommendedcode',res.data.data.recommendedcode);
+            this.$store.commit('amount',res.data.data.amount);
+            this.$store.commit('headimg',res.data.data.photo);
+            this.$store.commit('nickname',res.data.data.nickname);
+            this.$store.commit('openid',res.data.data.openid);
+            this.$router.push('/home');
+            this.$toast('登陆成功');
+          }else{
+            console.log('直接登录失败',res);
+            this.$toast('登陆失败');
+          }
+      }).catch(res =>{
+          console.log('直接登录失败',res);
+          this.$toast('登陆失败');
+      })
     }else{
-      // 非微信浏览器
-    }  
+      // 拿不到openid，需要授权登录
+      if(this.$router.currentRoute.query.promotioncode != '' && typeof(this.$router.currentRoute.query.promotioncode) != 'undefined'){
+        storage.set('recommendedcode',this.$router.currentRoute.query.promotioncode);
+      }
+      // 判断是否是微信浏览器
+      console.log('VUEX',this.$store.state.wechat);
+      var ua = navigator.userAgent.toLowerCase();
+      if(ua.match(/MicroMessenger/i)=="micromessenger") {
+        // 微信浏览器
+        if(this.GetUrlParam('code') === null){
+        // 未授权
+          this.handleOauth();
+        }else{
+        // 已授权
+          this.code = this.GetUrlParam('code');
+          this.handleAccessToken();
+        }
+      }else{
+        // 非微信浏览器
+      }  
+    }
   },
   mounted(){
     // js-sdk的access_token 

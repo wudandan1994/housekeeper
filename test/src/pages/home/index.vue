@@ -65,14 +65,14 @@
                             <span>官方渠道</span>
                         </div>
                     </li>
-                    <router-link tag="li" to="/home/collect">
+                    <li @click="handleIsAuth('/home/collect')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /></span>
                         <div class="channel">
                             <h3>商户收款</h3>
                             <p>快捷支付</p>
                             <span>落地商户</span>
                         </div>
-                    </router-link>
+                    </li>
                     <li @click="handleIsAuth('/loan/detail')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
                         <div class="channel">
@@ -334,6 +334,7 @@ export default {
                 if(res.data.success){
                    console.log('查询个人设置成功',res)
                    this.iscertification = res.data.data.iscertification;
+                   this.$store.commit('mobile',res.data.data.mobile);
                 }
             }).catch(res =>{
                 console.log('查询个人设置失败',res);

@@ -157,7 +157,7 @@ export default {
             nickname: '',
             headimg: 'http://img2.imgtn.bdimg.com/it/u=1000195578,2796948806&fm=11&gp=0.jpg',
             promotioncode: '',
-            vip: 'http://pay.91dianji.com.cn/301-1.png',
+            vip: '',
             iscertification: '实名认证',
             amount: '',
             amountSum: '',
@@ -188,7 +188,7 @@ export default {
         changeActive(obj){
             // console.log('obj', obj);
         },
-        // 请求收益余额分佣等信息
+        // 查询个人设置
         handleGetAmount(){
             let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
             // let url = '/customer/getCustomer';
@@ -207,9 +207,9 @@ export default {
                     this.amount = res.data.data.amount;
                     this.amountSum = res.data.data.amountSum;
                     this.commission = res.data.data.commission;
-                    res.data.data.iscertification == '0' ? this.iscertification = '实名认证' : ( res.data.data.iscertification == '1' ? this.iscertification = '审核中' : this.iscertification = '认证通过'); 
+                    res.data.data.iscertification == '0' ? this.iscertification = '实名认证' : ( res.data.data.iscertification == '1' ? this.iscertification = '审核中' : (res.data.data.iscertification == '2' ? this.iscertification = '认证成功' : this.iscertification = '认证失败，请重试')); 
                     if(res.data.data.level == '0'){
-                        this.vip ='http://pay.91dianji.com.cn/301-1.png';
+                        this.vip ='';
                     }
                     else if(res.data.data.level == '1'){
                         this.vip ='http://pay.91dianji.com.cn/huangjinVIP.png';
@@ -326,14 +326,14 @@ export default {
                   border-radius: 60px;
               }
               .authentication{
-                  width: 120px;
+                  width: 220px;
                   height: 55px;
                   position: absolute;
-                  left: 300px;
+                  left: 280px;
                   top: 30px;
                   color: rgb(101, 121, 254);
                   font-weight: 700;
-                  font-size: 28px;
+                  font-size: 26px;
               }
               .isvip{
                   width: 120px;

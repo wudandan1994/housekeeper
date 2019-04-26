@@ -94,7 +94,11 @@ export default {
     },
     data() {
         return {
+<<<<<<< HEAD
             componentload:true,
+=======
+            value: '',
+>>>>>>> 22206c67dd69f9a77c8d5b7a6f86469fdb8169eb
             reservedMobile:"",
             mobile:"",
             merName:"",
@@ -354,10 +358,17 @@ export default {
                                border-radius: 10px;
                            }
                         }
-                       >input {
+                       input {
                            border:none;
                            flex: 1;
                            margin-left:10px;
+                           font-size: 30px;
+                       }
+                       input::-webkit-input-placeholder {
+                           font-size: 28px;
+                           padding-top: 8px;
+                           height: 30px;
+                           line-height: 30px;
                        }
                    }
                }

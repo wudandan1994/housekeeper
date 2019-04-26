@@ -6,9 +6,7 @@
             <div class="right-icon center"></div>
         </header>
         <div class="container">
-           <img src="http://pay.91dianji.com.cn/CreditCard_01.jpg" alt="">
-           <img src="http://pay.91dianji.com.cn/CreditCard_02.jpg" alt="">
-           <img src="http://pay.91dianji.com.cn/CreditCard_03.jpg" alt="">
+           <img src="http://pay.91dianji.com.cn/xinyongka.jpg" alt="">
         </div>
     </div>
 
