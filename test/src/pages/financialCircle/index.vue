@@ -10,16 +10,26 @@
         </div>
     </header>
     <div class="container">
-    <van-tabs v-model="topactive" :swipe-threshold="threshold" background="black" color="rgb(244, 197, 128)" title-inactive-color="white" title-active-color="rgb(244, 197, 128)">
-    <van-tab title="综合">
-    <financ></financ>
-    </van-tab>
-    <van-tab title="信用卡">内容 2</van-tab>
-    <van-tab title="贷款">内容 3</van-tab>
-    <van-tab title="POS机">内容 4</van-tab>
-    <van-tab title="无卡支付">内容 5</van-tab>
-    <van-tab title="保险">内容 6</van-tab>
-    </van-tabs>
+        <van-tabs v-model="topactive" :swipe-threshold="threshold" background="black" color="rgb(244, 197, 128)" title-inactive-color="white" title-active-color="rgb(244, 197, 128)">
+            <van-tab title="综合">
+                <financ></financ>
+            </van-tab>
+            <van-tab title="信用卡">
+                 <financ></financ>
+            </van-tab>
+            <van-tab title="贷款">
+                 <financ></financ>
+            </van-tab>
+            <van-tab title="POS机">
+                 <financ></financ>
+            </van-tab>
+            <van-tab title="无卡支付">
+                 <financ></financ>
+            </van-tab>
+            <van-tab title="保险">
+                 <financ></financ>
+            </van-tab>
+        </van-tabs>
     </div>
     <footerMenu :active="active" @getChange="changeActive"></footerMenu>
 </div>

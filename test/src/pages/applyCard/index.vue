@@ -12,23 +12,22 @@
                 </div>
                <div class="area">
                    <ul>
-                      
                        <li>
                            <p><span><van-icon name="map-marked"/></span> 姓名</p>
                            <p>
-                               <input type="text" v-model="merName" placeholder="请填写申请人姓名"> 
+                               <input type="text" v-model="merName" placeholder="姓名"> 
                            </p>
                        </li>
                         <li>
-                           <p><span><van-icon name="phone"/></span> 手机号</p>
+                           <p><span><van-icon name="phone"/></span> 手机</p>
                            <p>
-                               <input type="number" v-model="merMobile" placeholder="请填写申请人手机号"> 
+                               <input type="number" v-model="merMobile" placeholder="手机号"> 
                            </p>
                        </li>
                         <li>
                            <p><span><van-icon name="card"/></span> 证件</p>
                            <p>
-                               <input type="text" v-model="merIdentityNo" placeholder="请填写申请人身份证号"> 
+                               <input type="text" v-model="merIdentityNo" placeholder="身份证号"> 
                            </p>
                        </li>
                        
@@ -181,6 +180,7 @@ export default {
                                    border-bottom: 2px solid #ccc;
                                    margin-left:50px;
                                    margin-right: 30px;
+                                    
                                }
                                 input {
                                     border:none;
@@ -190,16 +190,6 @@ export default {
                            }
                           
                        }
-                   }
-               }
-               >.image {
-                   margin-top:30px;
-                   padding:30px;
-                   margin:0 auto;
-                   margin-bottom: 20px;
-                   >img {
-                       width:100%;
-                       
                    }
                }
                >.next {

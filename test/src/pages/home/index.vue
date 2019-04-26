@@ -487,14 +487,14 @@ export default {
                             font-size:28px;
                             margin-top:10px;
                             margin-bottom:10px;
-                            color:#bbb;
+                            color:#4B66AF;
                         }
                         >span {
                             color:#4B66AF;
                             background-color:#E8ECF7;
                             border-radius:15px;
                             padding:5px 20px;
-                            font-size: 14px;
+                            font-size: 28px;
                             margin-bottom: 10px;
                         }
                     }
@@ -535,7 +535,7 @@ export default {
                         >p {
                             font-size:30px;
                             margin-bottom: 20px;
-                            color:#bbb;
+                            color:#666;
                         }
                     }
                 }
@@ -608,10 +608,11 @@ export default {
                     }
                 }
          }
-         .van-dialog .van-button{
+          .van-dialog .van-button{
              height: 80px;
          }
-    }
+        
+     }
    }
 </style>
 

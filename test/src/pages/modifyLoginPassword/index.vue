@@ -19,16 +19,16 @@
                       
                    </li>
                     <li>
-                        <span>输入验证码:</span>
+                        <span>验证码:</span>
                        <input v-model="authcode" type="number" placeholder="输入验证码">
                    </li>
                     <li>
-                        <span>新密码:</span>
-                       <input v-model="newPassword" type="password" placeholder="输入6-18位字母加数字新密码">
+                        <span>密码:</span>
+                       <input v-model="newPassword" type="password" placeholder="输入6-18位字母加数字密码">
                    </li>
                     <li>
-                        <span>再次输入新密码:</span>
-                       <input v-model="suerPassword" type="password" placeholder="输入新密码">
+                        <span>确认密码:</span>
+                       <input v-model="suerPassword" type="password" placeholder="确认密码">
                    </li>
                </ul>
            </div>
@@ -250,6 +250,7 @@ export default {
                            border:none;
                        }
                        >span {
+                           font-weight: bold;
                           >button {
                               height: 60px;
                               padding:0 8px;
@@ -259,19 +260,20 @@ export default {
                        >input {
                            border:none;
                            flex: 1;
-                           margin-left:10px;
+                           margin-right:20px;
+                           text-align: right;
                        }
                    }
                }
            }
            >.at-once {
-              
                margin-top:200px;
                border-radius: 10px;
                padding-left: 30px;
                padding-right:30px;
                >button {
                    height: 90px;
+                   font-size: 30px;
                }
            }
        }

@@ -64,11 +64,11 @@
                    </li>
                     <li>
                         <span>新密码:</span>
-                       <input v-model="newPassword" type="text" placeholder="输入6-18位字母加数字新密码">
+                       <input v-model="newPassword" type="password" placeholder="输入6-18位字母加数字新密码">
                    </li>
                     <li>
                         <span>再次输入新密码:</span>
-                       <input v-model="suerPassword" type="text" placeholder="输入新密码">
+                       <input v-model="suerPassword" type="password" placeholder="输入新密码">
                    </li>
                </ul>
            </div>
@@ -158,12 +158,12 @@ export default {
                 })
                  return
             }
-            if(!code.test(that.newPassword)){
-                 that.$toast({
-                    message:"输入6-18位字母加数字新密码"
-                })
-                 return
-            }
+            // if(!code.test(that.newPassword)){
+            //      that.$toast({
+            //         message:"输入6-18位字母加数字新密码"
+            //     })
+            //      return
+            // }
             if(that.authcode.trim().length===0){
                  that.$toast({
                     message:"请输入验证码"

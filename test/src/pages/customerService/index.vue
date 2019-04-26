@@ -3,7 +3,7 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>在线客服</span>
-            <span><van-icon name="ellipsis"/></span>
+            <span></span>
         </header>
         <div class="container">
             <div class="logo center"><van-icon name="http://pay.91dianji.com.cn/logo.png" size="250px"/></div>
