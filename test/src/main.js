@@ -57,20 +57,6 @@ var onPlusReady = function (callback, context = this) {
     document.addEventListener('plusready', callback.bind(context))
   }
 }
-Vue.mixin({
-  beforeCreate () {
-    onPlusReady(() => {
-      this.plusReady = true
-    }, this)
-  },
-  methods: {
-    onPlusReady: onPlusReady
-  }
-})
-
-
-
-
 
 
 

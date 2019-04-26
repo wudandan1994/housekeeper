@@ -109,19 +109,22 @@ import cooperation from '@/pages/personalCenter/cooperation'
 import contactUs from '@/pages/personalCenter/contactUs'
 // 我要贷款
 import myloan from '@/pages/loan/myloan'
-
+// 在线查询银联
+import onlineComponent from '@/pages/online'
 
 
 export default new Router({
   // mode:"hash",
   routes: [
-    { path: '/',redirect:'/logIn'},
+    { path: '/',redirect:'/home'},
     {path:"/vip",component:vipComponent},
     {path:"/home",component:homeComponent},
     {path:"/login",component:loginComponent},
     {path:"/logOut",component:logOutComponent},  
     {path:"/register",component:registerComponent},
     {path:"/home/collect",component:collectComponent},
+    {path:"/home/online",component:onlineComponent},
+
     {path:"/home/collect/open",component:openComponent},
     {path:"/home/collect/payment",component:paymentComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},

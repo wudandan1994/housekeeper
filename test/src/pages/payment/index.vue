@@ -252,7 +252,7 @@ export default {
                }
            }
            >.at-once {
-               margin-top:200px;
+               margin-top:100px;
                padding:0 20px;
                >button {
                    height: 90px;

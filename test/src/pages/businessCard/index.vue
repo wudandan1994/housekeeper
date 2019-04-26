@@ -1,4 +1,4 @@
- <template>
+<template>
     <div id="business-card">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>

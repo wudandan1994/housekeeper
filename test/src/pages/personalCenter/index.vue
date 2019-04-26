@@ -55,17 +55,14 @@
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/303.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">账户管理</div>
             </router-link>
-
             <router-link tag="div" class="per-menu-list line" to="/personalCenter/previous">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/304.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">上级推荐人</div>
             </router-link>
-
             <div class="per-menu-list" @click="handleExpect">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/305.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">微名片</div>
             </div>
-
         </div>
         <div class="per-list row">
             <router-link tag="div" to="/personalCenter/cooperation" class="per-menu-list line">
@@ -118,20 +115,25 @@
         </div>
         <div  class="update">
             <ul>
-                <li>
+                <li @click="uploadAnd">
                     <img src="http://pay.91dianji.com.cn/Android.png" >
                     安卓手机下载
                 </li>
-                 <li>
+                 <li @click="uploadIos">
                     <img src="http://pay.91dianji.com.cn/ios.png" alt="">
                     苹果手机下载
                 </li>
             </ul>
-            <div class="cover">
+            <div v-show="showand" class="cover">
                     <dir class="dis">
-                        <img src="" alt="">
+                        <img src="http://pay.91dianji.com.cn/Aandroidem.png" alt="">
                     </dir>
-                </div>
+            </div>
+            <div v-show="showios" class="cover">
+                    <dir class="dis">
+                        <img src="http://pay.91dianji.com.cn/iosem.png" alt="">
+                    </dir>
+            </div>
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
         <loading :componentload="componentload"></loading>
@@ -160,12 +162,28 @@ export default {
             amount: '',
             amountSum: '',
             commission: '',
+            showand:false,
+            showios:false
         }
     },
     methods:{
         // 尽请期待
         handleExpect(){
-            this.$toast('敬请期待');
+            this.$toast('敬请期待')
+        },
+        uploadAnd(){
+            this.showand=!this.showand
+            this.showios=false
+            setTimeout(()=>{
+                this.showand=false
+            },6000)
+        },
+        uploadIos(){
+            this.showios=!this.showios
+            this.showand=false
+            setTimeout(()=>{
+                this.showios=false
+            },6000)
         },
         changeActive(obj){
             // console.log('obj', obj);
@@ -201,14 +219,13 @@ export default {
                 }else{
                     setTimeout(()=>{
                         this.componentload = false;
-                        this.$toast('查询失败');
+                        this.$toast('查询失败')
                     },500)
                 }
             }).catch(res =>{
-                console.log('查询个人设置失败',res);
                 setTimeout(()=>{
                     this.componentload = false;
-                    this.$toast('查询失败');
+                    this.$toast('查询失败')
                 },500)
             })
         }
@@ -433,6 +450,7 @@ export default {
         }
         .update {
             margin:20px;
+            position:relative;
             >ul{
                 display: flex;
                 position: relative;
@@ -449,10 +467,18 @@ export default {
                 }
             }
             >.cover {
+                position: absolute;
+                top:-300%;
+                left:100px;
+                background-color: #ccc;
                 >.dis {
                     width:400px;
-                    height: 400px;
-                    background-color: red;
+                    height: 350px;
+                    margin:0 auto;
+                    margin-top:20px;
+                    >img {
+                        width:80%;
+                    }
                 }
             }
         }

@@ -49,24 +49,20 @@
                     </div>
                </div>
            </div>
-           <div class="submit">
-               <!-- <h3>已提交图片</h3> -->
-           </div>
-            <!-- <div class="showImg">
-                <ul>
-                    <li v-for="(item, index) of photoList " :key="index">
-                        <img :src="url+item.photoData" >
-                    </li>
-                </ul>
-            </div> -->
+           
         </div>
+         <loading :componentload="componentload"></loading>
     </div>
 </template>
 
 
 <script>
+import loading from '@/components/loading'
 import {axiosPost} from '@/lib/http'
 export default {
+     components:{
+      loading
+    },
     data() {
         return {
              url: 'http://pay.91dianji.com.cn/',
@@ -75,6 +71,7 @@ export default {
             cardback:"idcardback.jpg",
             cardWithhand:"imgwiths.jpg",
             bankfront:"01.jpg",
+             componentload:true,
             bankback:"bankb.jpg",
             baseUrl:"",
             show:false,
@@ -95,7 +92,12 @@ export default {
             .then(res=>{
                 let type=res.data.data.uploadStatus
                 if(res.data.data.uploadStatus==="0"){
+                     setTimeout(()=>{
+                        this.componentload=false
+                    },500)
                      this.$router.push("/home/collect/payment")
+                  } else {
+                       this.componentload=false
                   } 
             })
             .catch(err=>{

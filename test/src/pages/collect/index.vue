@@ -74,34 +74,40 @@
                    </li>
                </ul>
            </div>
-           <p class="serch"><a href="http://lianhanghao.com">银行联行号在线查询</a></p>
+            <router-link to="/home/online" tag="p">联行号在线查询</router-link>
            <div class="at-once">
                    <van-button  @click="register" size="large" round type="info">下一步</van-button>
-               </div>
+            </div>
         </div>
+         <loading :componentload="componentload"></loading>
     </div>
 </template>
 
 
 <script>
+import loading from '@/components/loading'
 import storage from '@/lib/storage'
 import {axiosPost} from '@/lib/http'
 export default {
+     components:{
+      loading
+    },
     data() {
         return {
+            componentload:true,
             reservedMobile:"",
-             mobile:"",
+            mobile:"",
             merName:"",
-           realName:"",
-           merAddress:"",
-           idCard:"",
-           accountName:"",
-           accountNo:"",
-           subBankCode:"",
-           settleAccType:"",
-           merType:"",
-           show:false,
-           showTwo:false,
+            realName:"",
+            merAddress:"",
+            idCard:"",
+            accountName:"",
+            accountNo:"",
+            subBankCode:"",
+            settleAccType:"",
+            merType:"",
+            show:false,
+            showTwo:false,
             actions: [
                 {
                     name: '公户'
@@ -130,6 +136,7 @@ export default {
         goBack() {
             this.$router.push('/home')
         },
+        
         onSelect(item){
             this.settleAccType=item.name
              this.show = false;
@@ -239,17 +246,20 @@ export default {
          searchInfo(){
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
            .then(res=>{
-           console.log(this,"商户申请中的this")
-          console.log(res,"查找的结果")
-          
             if(res.data.success){
+             setTimeout(()=>{
+                 this.componentload=false
+             },500)
              let info=res.data.data.chMerCode
-                this.$router.push({
+             this.$router.push({
                      path:"/home/collect/open",
                     query:{
                         info,
-                    }
-                })
+                     }
+                 })
+               
+            }else {
+                 this.componentload=false
             }
         })
         .catch(err=>{
@@ -352,10 +362,8 @@ export default {
                    }
                }
            }
-           >.serch {
-               margin-top:30px;
-               text-align: right;
-           }
+          
+           
            >.at-once {
                margin-top:150px;
                padding:0 20px;

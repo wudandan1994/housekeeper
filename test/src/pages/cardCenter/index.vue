@@ -214,11 +214,11 @@ export default {
                         background-color: #fff;
                         >.card {
                             text-align: center;
-                            padding-top:15px;
+                            padding-top:10px;
                             width:100%;
                             border-bottom: 1px dashed #DADADA;
                             >img {
-                                width:80%;
+                                width:100%;
                             }
                             >p {
                                 &:nth-of-type(1) {

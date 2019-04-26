@@ -165,6 +165,12 @@ export default {
            padding-bottom: 50px;
            font-size: 34px;
            >.info {
+               >.image{
+                   padding:20px;
+                   >img {
+                       width:100%;
+                   }
+               }
                >.area {
                    padding-left:15px;
                    background-color: #fff;
