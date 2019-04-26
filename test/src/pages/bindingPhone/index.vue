@@ -179,6 +179,7 @@ export default {
                         width: 100%;
                         height: 88%;
                         border: none;
+                        background: transparent;
                     }
                     input::-webkit-input-placeholder{
                         padding-top: 5px;
@@ -193,6 +194,7 @@ export default {
                         width: 100%;
                         height: 88%;
                         border: none;
+                        background: transparent;
                     }
                     input::-webkit-input-placeholder{
                         padding-top: 5px;

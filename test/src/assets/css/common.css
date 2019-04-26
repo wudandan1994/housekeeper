@@ -169,6 +169,7 @@ table {
 		width: 40px;
 		height: 40px;
 		line-height: 40px;
+		font-size: 26px;
 	}
 	.van-checkbox__icon{
 		height: auto;
@@ -179,4 +180,17 @@ table {
 		color: red;
 		margin-left: auto;
 		margin-right: auto;
+	}
+	.van-dialog__header{
+		font-size: 30px;
+	}
+	.van-dialog__message--has-title{
+		font-size: 28px;
+		height: 60px;
+		line-height: 60px;
+	}
+	.van-button--large{
+		height: 80px;
+		line-height: 80px;
+		font-size: 28px;
 	}

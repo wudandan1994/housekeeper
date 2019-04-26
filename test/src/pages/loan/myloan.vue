@@ -6,9 +6,7 @@
             <div class="right-icon center"></div>
         </header>
         <div class="container">
-           <img src="http://pay.91dianji.com.cn/myloan_01.jpg" alt="">
-           <img src="http://pay.91dianji.com.cn/myloan_02.jpg" alt="">
-           <img src="http://pay.91dianji.com.cn/myloan_03.jpg" alt="">
+           <img src="http://pay.91dianji.com.cn/daikuan.jpg" alt="">
         </div>
     </div>
 

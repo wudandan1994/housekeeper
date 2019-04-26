@@ -16,7 +16,7 @@
                                     2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
                                     3. 招商收益<br/>
                                     4. 信用卡办卡收益<br/>
-                                    5. 智能精养、空卡周转、商户收款、车险等等分润收益<br/>
+                                    5. 智能精养、空卡周转、商户收款、车险等分润收益<br/>
                                 </div>
                             </van-popup>
                              <span @click="isShowRule">退换规则</span>
@@ -55,7 +55,7 @@
                                     2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
                                     3. 招商收益<br/>
                                     4. 信用卡办卡收益<br/>
-                                    5. 智能精养、空卡周转、商户收款、车险等等分润收益<br/>
+                                    5. 智能精养、空卡周转、商户收款、车险分润收益<br/>
                                 </div>
                             </van-popup>
                              <span @click="isShowRule">退换规则</span>
@@ -159,6 +159,7 @@
 </template>
 
 <script>
+import storage from '@/lib/storage'
 import footerMenu from '@/components/footer'
 import { axiosPost } from '../../lib/http';
 export default {
@@ -284,18 +285,14 @@ export default {
                     window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
                 } 
             }else{
-                if(this.$store.state.wechat.openid != ''){
-                    var  params = {
-                        orderid: this.orderid,
-                        trade_type: 'JSAPI',
-                        openid: this.$store.state.wechat.openid
-                    };
-                }else{
-                    var  params = {
-                        orderid: this.orderid,
-                        trade_type: 'APP',
-                    }; 
-                }
+                
+                var  params = {
+                    orderid: this.orderid,
+                    trade_type: 'JSAPI',
+                    openid: storage.get('openid')
+                };
+                
+                
                 var url = 'http://pay.91dianji.com.cn/api/order/wxPayH5';
                 axiosPost(url,params).then(res =>{
                         console.log('发起微信支付成功',res);

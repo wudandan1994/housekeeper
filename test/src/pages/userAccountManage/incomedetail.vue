@@ -518,7 +518,7 @@ export default {
                             height: 50%;
                         }
                         .list-name{
-                            font-size: 35px;
+                            font-size: 32px;
                         }
                         .list-time{
                             color: #999;
@@ -532,7 +532,7 @@ export default {
                             height: 50%;
                         }
                         .list-reward{
-                            font-size: 35px;
+                            font-size: 32px;
                             span{
                                 color: #4b66af;
                             }
