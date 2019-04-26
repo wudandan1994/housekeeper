@@ -3,7 +3,7 @@
          <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">申请贷款</div>
-            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+            <div class=""></div>
         </header>
         <!-- 轮播图 -->
         <div class="swipe">
@@ -110,7 +110,7 @@ export default {
             fixed: true,
             images:[
                 'http://pay.91dianji.com.cn/01.png',
-                'http://pay.91dianji.com.cn/02.jpg',
+                'http://pay.91dianji.com.cn/ban.jpg',
                 'http://pay.91dianji.com.cn/04.png',
                 'http://pay.91dianji.com.cn/06.jpg',
                 'http://pay.91dianji.com.cn/08.jpg'
@@ -192,8 +192,10 @@ export default {
                            message:res.data.message
                        })
                        return
+                   } else {
+                        location.href=res.data.data
                    }
-                    location.href=res.data.data
+                   
                })
                .catch(function(err){
                    

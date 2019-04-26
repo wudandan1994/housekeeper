@@ -94,11 +94,8 @@ export default {
     },
     data() {
         return {
-<<<<<<< HEAD
             componentload:true,
-=======
             value: '',
->>>>>>> 22206c67dd69f9a77c8d5b7a6f86469fdb8169eb
             reservedMobile:"",
             mobile:"",
             merName:"",
