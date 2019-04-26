@@ -3,7 +3,7 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>商户申请</span>
-            <router-link to="/home/news" tag="span"><van-icon name="cluster"/>操作说明</router-link>
+            <router-link to="/home/news" tag="span">操作说明</router-link>
         </header>
         <div class="container">
            <div class="phone">
@@ -46,7 +46,7 @@
                    </li>
                    <li>
                         <span>联行号：</span>
-                       <input v-model="subBankCode"  type="number" placeholder="输入该支开户行行号">
+                       <input v-model="subBankCode"  type="number" placeholder="输入该支开户行行号或者联行号">
                    </li>
                     <li>
                         <span>结算户类型：</span>
@@ -62,7 +62,7 @@
                    </li>
                    <li>
                         <span>商户类型：</span>
-                       <input  v-model="merType" type="text" placeholder="请选择商户类型">
+                       <input  v-model="merType" type="text" placeholder="选择商户类型">
                         <span @click="showMer"><van-icon name="arrow"/></span>
                          <van-actionsheet
                             v-model="showTwo"
@@ -234,7 +234,6 @@ export default {
             .catch(function(err){
                 console.log(err,"error")
             })
-
         },
         // 查询个人信息
          searchInfo(){
@@ -268,13 +267,11 @@ export default {
                 this.realName = res.data.data.name;
                 this.idCard = res.data.data.idcardnumber;
                 this.mobile = this.$store.state.wechat.mobile;
-                
             }
         }).catch(res =>{
             console.log('获取实名认证状态失败',res);
         })
     }
-        
     },
    
     created () {
