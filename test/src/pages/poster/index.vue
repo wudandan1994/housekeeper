@@ -6,7 +6,10 @@
             <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
         <div class="poster-canvas center"><canvas id="poster" width="320" height="470"></canvas>  </div>
-        <div @click="savePoster" class="rightnow center">立即合成</div>
+        <div class="btn row">
+            <div @click="handlechangeRandom" class="change center">换一换</div>
+            <div @click="savePoster" class="rightnow center">立即合成</div>
+        </div>
         <div class="load center" v-if="imgShow">
             <div v-if="showUpload" >
                 <div class="loading center"><van-loading color="white" size="60px" /></div>
@@ -39,11 +42,18 @@ export default {
             imgShow: false,
             url: 'http://pay.91dianji.com.cn',
             qrcode: '',
+            random: '1',
         }
     },
     methods:{
         goBack() {
             this.$router.go(-1);
+        },
+        // 随机数
+        handlechangeRandom(){
+            this.random = Math.ceil((Math.random())*5);
+            console.log('切换随机数',this.random);
+            this.handlePoster();
         },
         handlePoster(){
             var poster = document.getElementById("poster");
@@ -52,8 +62,8 @@ export default {
             ctx.fillRect(0,0,320,470);
 
             var bigPoster = new Image();
-            var random = Math.ceil((Math.random())*5);
-            bigPoster.src = 'http://pay.91dianji.com.cn/poster_00'+ random +'.jpg';
+            
+            bigPoster.src = 'http://pay.91dianji.com.cn/poster_00'+ this.random +'.jpg';
             bigPoster.onload = function(){
                 ctx.drawImage(bigPoster,0,0,320,380);
             };
@@ -158,16 +168,28 @@ export default {
            width: 100px;
            height: 100px;
        }
-       .rightnow{
+       .btn{
            width: 88vw;
            height: 100px;
            margin-left: auto;
            margin-right: auto;
            margin-top: 50px;
            font-size: 28px;
-           background: #4b66af;
-           color: #ffffff;
-           border-radius: 20px;
+           .change{
+               width: 45%;
+               height: 100%;
+               background: #4b66af;
+               color: #ffffff;
+               border-radius: 20px;
+           }
+           .rightnow{
+               width: 45%;
+               height: 100%;
+               margin-left: 10%;
+                background: #4b66af;
+                color: #ffffff;
+                border-radius: 20px;
+            }
        }
        .load{
            width: 100vw;

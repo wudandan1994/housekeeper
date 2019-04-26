@@ -8,7 +8,7 @@
         <div class="tabs">
              
 
-            <van-tabs v-model="active">
+            <van-tabs v-model="active" @click="handleChangeTabs">
                 <van-tab title="所得佣金">
                    <div class="income-tab">
                         <div class="per-list" v-for="(item,index) in list" :key="index">
@@ -26,19 +26,19 @@
                 </van-tab>
                 <van-tab title="推广收益">
                     <div class="income-tab">
-                        <div class="top-tab row">
+                        <!-- <div class="top-tab row">
                             <div class="money center">总额： <span>65522.00</span></div>
                             <div class="money center">可提现：<span>54242.00</span></div>
                             <div class="info center"><van-icon name="info" size="1.5em" color="#BD3B3C"/></div>
-                        </div>
+                        </div> -->
 
                         <div class="Invitation-reward row">
                             <div class="per-reward">
-                                <div class="Invitation-number center">2544</div>
+                                <div class="Invitation-number center">{{directlyCount}}</div>
                                 <div class="Invitation-title center">邀请成功(人)</div>
                             </div>
                             <div class="per-reward">
-                                <div class="Invitation-number center">2544</div>
+                                <div class="Invitation-number center">{{promoteSum}}</div>
                                 <div class="Invitation-title center">红包奖励(元)</div>
                             </div>
                         </div>
@@ -46,77 +46,45 @@
                         <div class="tabs-switch row">
                             <div class="per-switch center" :class="{checked: now}" @click="handleChange">
                                 邀请成功
-                                <div class="triangle-black" @click.stop="handleInvitationType"></div>
                             </div>
                             <div class="per-switch center" :class="{checked: !now}" @click="handleChange">
-                                邀请中(68人)
-                            </div>
-                            <div class="hidden-menu row" v-if="menus">
-                                <div class="hidden-small-title center" :class="[smallcheck == 'all' ? 'actives' : '']" @click="handleGetSmallType('all')">
-                                    <div class="right-line center">全部</div>
-                                </div>
-                                <div class="hidden-small-title center" :class="[smallcheck == 'gold' ? 'actives' : '']" @click="handleGetSmallType('gold')">
-                                    <div class="right-line center">金牌</div>
-                                </div>
-                                <div class="hidden-small-title center" :class="[smallcheck == 'silver' ? 'actives' : '']" @click="handleGetSmallType('silver')">
-                                    <div class="center">银牌</div>
-                                </div>
+                                邀请中({{notVipCount}}人)
                             </div>
                         </div>
-                        <div class="Invitation row">
-                            <div class="direct-invitation">
+                        <div class="Invitation row" v-if="Invitationing">
+                            <div class="direct-invitation" :class="{checked: indirect}" @click="handleDirectInvitation">
                                 <div class="center">直接邀请(人)</div>
-                                <div class="center">566</div>
+                                <div class="center">{{directlyCount}}</div>
+                                <div class="triangle-black" v-if="indirect" @click.stop="handleInvitationType"></div>
                             </div>
-                            <div class="indirect-invitation">
+                            <div class="indirect-invitation" :class="{checked: !indirect}" @click="handleInDirectInvitation">
                                 <div class="center">间接邀请</div>
-                                <div class="center">198</div>
+                                <div class="center">{{indirectCount}}</div>
+                                <div class="triangle-black" v-if="!indirect" @click.stop="handleInvitationType"></div>
+                            </div>
+                            <div class="hidden-menu row">
+                                <div class="hidden-small-title center" :class="[level == '' ? 'actives' : '']" @click="handleGetSmallType('')">
+                                    <div class="right-line center">全部</div>
+                                </div>
+                                <div class="hidden-small-title center" :class="[level == '1' ? 'actives' : '']" @click="handleGetSmallType('1')">
+                                    <div class="right-line center">黄金</div>
+                                </div>
+                                <div class="hidden-small-title center" :class="[level == '2' ? 'actives' : '']" @click="handleGetSmallType('2')">
+                                    <div class="center">钻石</div>
+                                </div>
                             </div>
                         </div>
                         <div class="invitation-list">
-                            <div class="list-per-record row">
-                                <div class="list-icon center"><van-icon name="stop-circle" color="#D09F60"/></div>
+                            <div class="list-per-record row" v-for="(item,index) in DirectInvitationList" :key="index">
+                                <div class="list-icon center"><van-icon name="stop-circle" color="#4b66af"/></div>
                                 <div class="name-time">
-                                    <div class="list-name start-center">Giovanni</div>
-                                    <div class="list-time start-center">2019-04-04 11:11:14</div>
+                                    <div class="list-name start-center">{{item.nickname}}</div>
+                                    <div class="list-time start-center">{{item.date}}</div>
                                 </div>
-                                <div class="reward-havedone">
-                                    <div class="list-reward end-center">奖励红包 &nbsp;<span>+20</span></div>
-                                    <div class="list-havedone end-center">已邀请 <span>+10人</span></div>
+                                <div class="reward-havedone" v-if="Invitationing">
+                                    <div class="list-reward end-center">奖励红包 &nbsp;<span>+{{item.amount}}</span></div>
+                                    <div v-if="indirect" class="list-havedone end-center">已邀请 <span>+{{item.count}}人</span></div>
                                 </div>
-                                <router-link tag="div" class="list-more center" to="/personalCenter/incomedetail/personalIncomeDetail">
-                                    <i class="iconfont icon-more"></i>
-                                </router-link>
-                            </div>
-
-                            <div class="list-per-record row">
-                                <div class="list-icon center"><van-icon name="stop-circle" color="#D09F60"/></div>
-                                <div class="name-time">
-                                    <div class="list-name start-center">Giovanni</div>
-                                    <div class="list-time start-center">2019-04-04 11:11:14</div>
-                                </div>
-                                <div class="reward-havedone">
-                                    <div class="list-reward end-center">奖励红包 &nbsp;<span>+20</span></div>
-                                    <div class="list-havedone end-center">已邀请 <span>+10人</span></div>
-                                </div>
-                                <router-link tag="div" class="list-more center" to="/personalCenter/incomedetail/personalIncomeDetail">
-                                    <i class="iconfont icon-more"></i>
-                                </router-link>
-                            </div>
-
-                            <div class="list-per-record row">
-                                <div class="list-icon center"><van-icon name="stop-circle" color="#D09F60"/></div>
-                                <div class="name-time">
-                                    <div class="list-name start-center">Giovanni</div>
-                                    <div class="list-time start-center">2019-04-04 11:11:14</div>
-                                </div>
-                                <div class="reward-havedone">
-                                    <div class="list-reward end-center">奖励红包 &nbsp;<span>+20</span></div>
-                                    <div class="list-havedone end-center">已邀请 <span>+10人</span></div>
-                                </div>
-                                <router-link tag="div" class="list-more center" to="/personalCenter/incomedetail/personalIncomeDetail">
-                                    <i class="iconfont icon-more"></i>
-                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -142,9 +110,18 @@ export default {
             componentload: true,
             active: 0,
             now: true,
-            smallcheck: 'all',
             menus: false,
             list: [],
+            directlyCount: '',
+            indirectCount: '',
+            notVipCount: '',
+            promoteSum: '',
+            page: '1',
+            pageSize: '1000',
+            level: '',
+            DirectInvitationList: [],
+            indirect: false,
+            Invitationing: true,
         }
     },
     methods:{
@@ -161,6 +138,15 @@ export default {
             console.log('当前状态',this.now);
             let now = this.now;
             now == true ? this.now = false : this.now = true;
+            if(now){
+                // 邀请中
+                this.handleInvitationing();
+                this.Invitationing = false;
+            }else{
+                // 邀请成功，也就是直接邀请
+                this.handleDirectInvitation();
+                this.Invitationing = true;
+            }
         },
         // 邀请分类
         handleInvitationType(){
@@ -170,11 +156,20 @@ export default {
         // 获取当前选中小标题分类
         handleGetSmallType(val){
             console.log('当前分类',val);
-            this.smallcheck = val;
+            this.level = val;
             this.menus = false;
+            console.log('邀请类型',this.indirect);
+            if(this.indirect){
+                // 直接邀请
+                this.handleDirectInvitation();
+            }else{
+                // 间接邀请
+                this.handleInDirectInvitation();
+            }
         },
         // 所得佣金
         handleFlowDetails(){
+            this.componentload = true;
             let url = 'http://pay.91dianji.com.cn/api/customer/getAmountFrom';
             let params = {
                 page: 1,
@@ -200,13 +195,144 @@ export default {
             }).catch(res =>{
                 console.log('流水请求失败',res);
             })
+        },
+        // 推广收益
+        handlePromotionalBenefits(){
+            this.componentload = true;
+            let url = 'http://pay.91dianji.com.cn/api/customer/getPromoteTotal';
+            let params = {};
+            axiosPost(url,params).then(res =>{
+                if(res.data.success){
+                    console.log('推广收益请求成功',res);
+                    this.directlyCount = res.data.data.directlyCount
+                    this.indirectCount = res.data.data.indirectCount
+                    this.notVipCount = res.data.data.notVipCount
+                    this.promoteSum = res.data.data.promoteSum
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
+                }else{
+                    console.log('推广收益请求失败',res);
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
+                    this.$toast('查询失败');
+                }
+            }).catch(res =>{
+                console.log('推广收益请求失败',res);
+                setTimeout(() =>{
+                    this.componentload = false;
+                },500)
+                this.$toast('查询失败');
+            })
+        },
+        // 直接邀请列表
+        handleDirectInvitation(){
+            this.componentload = true;
+            this.indirect = true;
+            console.log('直接邀请',this.indirect);
+            let url = 'http://pay.91dianji.com.cn/api/customer/getDirectlyList';
+            let params = {
+                page: this.page,
+                pageSize: this.pageSize,
+                level: this.level
+            };
+            axiosPost(url,params).then(res =>{
+                if(res.data.data){
+                    console.log('直接邀请列表查询成功',res);
+                    this.DirectInvitationList = res.data.data.data;
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
+                }else{
+                    console.log('直接邀请列表查询失败',res);
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
+                    this.$toast('查询失败');
+                }
+            }).catch(res =>{
+                setTimeout(() =>{
+                    this.componentload = false;
+                },500)
+                this.$toast('查询失败');
+            })
+        },
+        // 间接邀请列表
+        handleInDirectInvitation(){
+            this.componentload = true;
+            this.indirect = false;
+            console.log('间接邀请',this.indirect);
+            let url = 'http://pay.91dianji.com.cn/api/customer/getIndirectList';
+            let params = {
+                page: this.page,
+                pageSize: this.pageSize,
+                level: this.level
+            };
+            axiosPost(url,params).then(res =>{
+                if(res.data.data){
+                    console.log('间接邀请列表查询成功',res);
+                    this.DirectInvitationList = res.data.data.data;
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
+                }else{
+                    console.log('间接邀请列表查询失败',res);
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
+                    this.$toast('查询失败');
+                }
+            }).catch(res =>{
+                setTimeout(() =>{
+                    this.componentload = false;
+                },500)
+                this.$toast('查询失败');
+            })
+        },
+        // 邀请中
+        handleInvitationing(){
+             this.componentload = true;
+            let url = 'http://pay.91dianji.com.cn/api/customer/getNotVipList';
+            let params = {
+                page: this.page,
+                pageSize: this.pageSize,
+            };
+            axiosPost(url,params).then(res =>{
+                if(res.data.data){
+                    console.log('邀请中列表查询成功',res);
+                    this.DirectInvitationList = res.data.data.data;
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
+                }else{
+                    console.log('邀请中列表查询失败',res);
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
+                    this.$toast('查询失败');
+                }
+            }).catch(res =>{
+                setTimeout(() =>{
+                    this.componentload = false;
+                },500)
+                this.$toast('查询失败');
+            })
+        },
+        handleChangeTabs(obj){
+            console.log('选择',obj);
+            if(obj == '0'){
+                // 所得佣金
+                this.handleFlowDetails();
+            }
+            else if(obj == '1'){
+                // 推广收益
+                this.handlePromotionalBenefits();
+                this.handleDirectInvitation();
+            }else{
+                // 招商收益
+            }
         }
-    },
-    beforeRouteEnter(to,from,next){
-        console.log('路由',from);
-        next((vm)=>{ //参数vm就是当前组件的实例。
-            storage.set('preRouters',from.fullPath);
-        })
     },
     created(){
         this.handleFlowDetails();
@@ -283,13 +409,14 @@ export default {
             .Invitation-reward{
                 width: 100%;
                 height: 100px;
+                margin-top: 60px;
                 .per-reward{
                     width: 50%;
                     height: 100%;
                     .Invitation-number{
                         width: 100%;
                         height: 50%;
-                        color: rgb(207, 158, 94);
+                        color: #4b66af;
                         font-weight: bold;
                         font-size: 30px;
                     }
@@ -300,13 +427,33 @@ export default {
                 }
             }
             .tabs-switch{
-                width: 99%;
+                width: 95vw;
                 height: 100px;
                 margin-left: auto;
                 margin-right: auto;
-                border: solid 1px #D09F60;
+                border: solid 1px #4b66af;
                 position: relative;
                 .per-switch{
+                    width: 50%;
+                    height: 100%;
+                }
+                .checked{
+                    background: #4b66af;
+                    color: white;
+                }
+            }
+            .Invitation{
+                width: 95vw;
+                height: 100px;
+                margin-left: auto;
+                margin-right: auto;
+                border-bottom: solid 2px #ccc;
+                position: relative;
+                .checked{
+                    background: #4b66af;
+                    color: white;
+                }
+                .direct-invitation,.indirect-invitation{
                     width: 50%;
                     height: 100%;
                     position: relative;
@@ -318,13 +465,13 @@ export default {
                         bottom: 0;
                         z-index: 2;
                         border-color: transparent #000 #000 transparent;
-                        border-width: 18px;
+                        border-width: 20px;
                         border-style: solid;
                     }
-                }
-                .checked{
-                    background: #D09F60;
-                    color: white;
+                    div{
+                        width: 100%;
+                        height: 50%;
+                    }
                 }
                 .hidden-menu{
                     width: 100%;
@@ -344,22 +491,7 @@ export default {
                         border-right: solid 1px #ccc;
                     }
                     .actives{
-                        border-bottom: solid 5px #D09F60;
-                    }
-                }
-            }
-            .Invitation{
-                width: 95vw;
-                height: 100px;
-                margin-left: auto;
-                margin-right: auto;
-                border-bottom: solid 2px #ccc;
-                .direct-invitation,.indirect-invitation{
-                    width: 50%;
-                    height: 100%;
-                    div{
-                        width: 100%;
-                        height: 50%;
+                        border-bottom: solid 5px #4b66af;
                     }
                 }
             }
@@ -368,6 +500,7 @@ export default {
                 height: auto;
                 margin-left: auto;
                 margin-right: auto;
+                margin-top: 100px;
                 .list-per-record{
                     width: 100%;
                     height: 120px;
@@ -401,7 +534,7 @@ export default {
                         .list-reward{
                             font-size: 35px;
                             span{
-                                color: #D09F60;
+                                color: #4b66af;
                             }
                         }
                         .list-havedone{
