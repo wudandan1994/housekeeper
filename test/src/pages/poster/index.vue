@@ -153,8 +153,8 @@ export default {
 <style lang="less">
    #page-poster{
        width: 100vw;
-       height: calc(100vh - 86px);
        padding-top: 86px;
+       padding-bottom: 60px;
        background: #F2F2F2;
        .poster-canvas{
            width: auto;
