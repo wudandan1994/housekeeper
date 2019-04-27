@@ -9,10 +9,7 @@
             </p>
             <p>信用卡办理</p>
             <p>
-               
-                <span>
-                    <van-icon name="ellipsis" />
-                </span>
+                <span></span>
             </p>
         </header>
         <div class="container">

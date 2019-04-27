@@ -7,8 +7,8 @@
         </header>
         <div class="container">
            <div class="online">
-               <p class="serch" @click="webview">联行号在线查询</p>
-               <p  @click="close">点击关闭</p>
+               <!-- <p class="serch" @click="webview">联行号在线查询</p> -->
+               <!-- <p >点击关闭</p> -->
            </div>
         </div>
     </div>
@@ -24,19 +24,21 @@ export default {
     },
     methods:{
         goBack() {
+             plus.webview.close( "yinlian");
             this.$router.push('/home/collect')
         },
         webview(){
             let self= plus.webview.currentWebview(); 
             var yinlian= plus.webview.create("http://www.kaihuhang.cn/", "yinlian", {  
-            top: "100px",  
+            top: "80px",  
             bottom: 0  
         });  
         self.append(yinlian);
         },
-        close(){
-            plus.webview.close( "yinlian");
-        },
+        
+    },
+    created(){
+        this.webview()
     }
 }
 </script>

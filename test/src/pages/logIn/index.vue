@@ -160,7 +160,7 @@ export default {
                    display: block;
                    width:100%;
                    padding-bottom: 20px;
-                   -webkit-animation: spin 2s linear infinite;
+                   -webkit-animation: spin 4s linear infinite;
 		           animation: spin 2s linear infinite;
                }
             //    @-webkit-keyframes spin {

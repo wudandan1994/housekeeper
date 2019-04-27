@@ -164,7 +164,7 @@ export default new Router({
     {path:"/home/bindingPhone",component:bindingPhoneComponent,},
     {path:"/home/customerService",component:customerServiceComponent,},
     {path:"/home/aboutUs",component:aboutUsComponent,},
-    {path:"/home/creditEnquiry/myOrder",component:myOrderComponent,},
+    {path:"/loan/form/myOrder",component:myOrderComponent,},
     {path:"/home/creditEnquiry/creditDataQuery",component:creditDataQueryComponent,},
     {path:"/home/creditEnquiry/reporyExample",component:reportExampleComponent,},
     {path:"/home/cardCenter/liftingAmount",component:liftingAmountComponent,},

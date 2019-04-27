@@ -49,18 +49,6 @@ import '@/assets/icon/iconfont.js'
 
 
 
-
-var onPlusReady = function (callback, context = this) {
-  if (window.plus) {
-    callback.call(context)
-  } else {
-    document.addEventListener('plusready', callback.bind(context))
-  }
-}
-
-
-
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

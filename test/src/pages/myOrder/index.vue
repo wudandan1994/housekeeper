@@ -2,11 +2,11 @@
     <div id="my-order">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>大数据查询订单</span>
-            <span><van-icon name="ellipsis"/></span>
+            <span>信用卡业务</span>
+            <span></span>
         </header>
         <div class="container">
-            334893479
+           
         </div>
     </div>
 
@@ -17,13 +17,26 @@
 export default {
     data() {
         return {
-
+            url:""
         }
     },
     methods:{
         goBack() {
-            this.$router.push('/home/creditEnquiry')
-        }
+            plus.webview.close( "yinlian")
+            this.$router.go(-1)
+        },
+        webview(){
+            let self= plus.webview.currentWebview(); 
+            var yinlian= plus.webview.create(this.url, "yinlian", {  
+            top: "80px",  
+            bottom: 0  
+        });  
+        self.append(yinlian)
+        },
+    },
+    created(){
+        this.url=this.$route.query.info
+        this.webview();
     }
 }
 </script>
@@ -31,7 +44,7 @@ export default {
 <style lang="less">
    #my-order {
        >header {
-           background: #000;
+            background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;

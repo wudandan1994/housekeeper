@@ -62,7 +62,14 @@ export default {
                         })
                         return
                     }  else {
-                        location.href=res.data.data
+                        // location.href=res.data.data
+                        let url=res.data.data
+                        this.$router.push({
+                            path:"/home/cardCenter/progressQuery",
+                            query:{
+                                info:url
+                              }
+                        })
                     }
                 })
                 .catch(err=>{

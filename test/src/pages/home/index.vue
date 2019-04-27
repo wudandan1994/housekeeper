@@ -644,6 +644,9 @@ export default {
                         font-size: 30px;
                     }
                 }
+                .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
+                    height:70px;
+                }
          }
           .van-dialog .van-button{
              height: 80px;

@@ -133,39 +133,30 @@ export default {
         },
         sign(){
             let that =this
-                 axiosPost("http://pay.91dianji.com.cn/api/customer/getSignDetail")
-                 .then(function(res){
-                     console.log(res,"签到详情");
-                     
-                    // if(!res.data.success){
-                    //     that.$toast({
-                    //         message:res.data.message
-                    //     })
-                    //     return
-                    // }
-
-                axiosPost("http://pay.91dianji.com.cn/api/customer/insertSign")
-               .then(function(res){
-                   console.log(res,"每天签到");
-                   
-                 if(!res.data.success){
+            axiosPost("http://pay.91dianji.com.cn/api/customer/insertSign")
+           .then(function(res){
+            if(!res.data.success){
                     that.$toast({
                     message:res.data.message
-                })
-               }
+             })
+        } else {
                 that.isPunch=true
                 that.$toast({
                     message:res.data.message
                    })
-                 })
+                axiosPost("http://pay.91dianji.com.cn/api/customer/getSignDetail")
+                .then(function(res){
+                    that.signcount=res.data.data.signcount
+                    that.gold=res.data.data.gold
+                    that.isPunch=true
                 })
+            }
+          })   
         },
          searchPunch(){
              let that = this
            axiosPost("http://pay.91dianji.com.cn/api/customer/getSignDetail")
            .then(function(res){ 
-               console.log(res);
-               
                 if(!res.data.success){
                     // that.isPunch=true
                     that.$toast({
