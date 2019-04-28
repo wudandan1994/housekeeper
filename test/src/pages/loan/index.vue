@@ -122,7 +122,7 @@ export default {
         },
         // 智能排序选择
         handleNowCheck(val){
-            console.log('当前选择',val);
+            // console.log('当前选择',val);
             this.key = val;
             this.sort = false;
         },

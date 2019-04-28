@@ -37,6 +37,13 @@
            <div class="record">
                 <van-button  @click="record" size="middle" round type="primary">交易查询</van-button>
            </div>
+           <div class="trade" v-show="showrecord">
+               <div>
+                   <p>交易状态：{{record.resMsg}}</p>
+                   <p>交易金额：{{record.tranAmount}}</p>
+                   <p>交易时间：{{record.tranTime}}</p>
+               </div>
+           </div>
         </div>
     </div>
 </template>
@@ -54,41 +61,50 @@ export default {
            accNo:"",
            mobile:"",
            chMerCode:"",
-           number:""
+           number:"",
+           record:{},
+           showrecord:false
         }
     },
     methods:{
        goBack(){
            this.$router.push("/home")              
        },
-        open(){
-            let that=this
-            let data={
-                chMerCode:that.info
-            }
-            console.log(data)
-             axiosPost("http://pay.91dianji.com.cn/api/upload/uploadImg",data)
-             .then(function(res){
-                 console.log(res,"开户业务成功")
-                
-                 
-             })
-             .catch(function(err){
-                 console.log(err,"开户业务失败")
-             })
-        },
+        // open(){
+        //     let that=this
+        //     let data={
+        //         chMerCode:that.info
+        //     }
+        //      axiosPost("http://pay.91dianji.com.cn/api/upload/uploadImg",data)
+        //      .then(function(res){
+        //          console.log(res,"开户业务成功")
+        //      })
+        //      .catch(function(err){
+        //          console.log(err,"开户业务失败")
+        //      })
+        // },
        record(){
            let data={
-               chMerCode:this.chMerCode,
-               orderCode:this.number
+            //    chMerCode:this.chMerCode,
+            //    orderCode:this.number
+                chMerCode:"207887783404",
+                orderCode:"2019042519033078016"
+                // 2019042519033078016
            }
            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getTradeQuery",data)
            .then(res=>{
-               console.log(res,"查看历史记录成功");
+               if(!res.data.success){
+                   this.$toast({
+                       message:res.data.message
+                   })
+               } else {
+                   this.showrecord=true
+                    this.record=res.data.data
+               }
+              
                
            })
            .catch(err=>{
-               console.log(err,"查看历史记录失败")
            })
        },
        pay(){
@@ -153,14 +169,12 @@ export default {
                
             })
             .catch(err=>{
-                console.log(err,"调取失败");
             })
        },
     //    查询商户编号
         search(){
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
             .then(res=>{
-                console.log(res,"result");
                 if(!res.data.success){
                     this.$toast({
                         message:res.data.message
@@ -170,7 +184,7 @@ export default {
                  this.chMerCode=res.data.data.chMerCode
             })
             .catch(err=>{
-                console.log(err,"error");
+                // console.log(err,"error");
                 
             })
         }
@@ -276,6 +290,14 @@ export default {
                .van-button--primary {
                    background-color: #767677;
                    border:1px solid #ccc;
+               }
+           }
+           >.trade{
+               margin-top:20px;
+               >div {
+                   display:flex;
+                   justify-content: space-around;
+                   font-size: 30px;
                }
            }
        }

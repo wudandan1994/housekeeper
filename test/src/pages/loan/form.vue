@@ -148,15 +148,15 @@ export default {
             this.show = false;
         },
         // 验证码
-        // safeCode(){
-        //     var codeLength = this.codeLength;
-        //     var ran = new Array(0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z')
-        //     for(var i = 0; i < codeLength; i++ ){
-        //         var index = Math.floor(Math.random()*36);
-        //         this.realCode += ran[index];
-        //     }
+        safeCode(){
+            var codeLength = this.codeLength;
+            var ran = new Array(0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z')
+            for(var i = 0; i < codeLength; i++ ){
+                var index = Math.floor(Math.random()*36);
+                this.realCode += ran[index];
+            }
             
-        // },
+        },
         // 切换验证码
         changeCode(){
             this.realCode = '';
@@ -174,9 +174,9 @@ export default {
            }else if(this.form.mobile == ''){
                this.$toast('请填写申请人手机号')
            }
-        //    else if(this.form.code == '' || this.form.code != this.realCode){
-        //        this.$toast('请检查验证码');
-        //    }
+           else if(this.form.code == '' || this.form.code != this.realCode){
+               this.$toast('请检查验证码');
+           }
            else if(this.checked == false){
                this.$toast('请阅读并同意服务协议');
            }
@@ -215,7 +215,7 @@ export default {
             let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
-                console.log('获取实名认证状态成功',res);
+                // console.log('获取实名认证状态成功',res);
                 if(res.data.data.status != '0'){
                     this.form.name = res.data.data.name;
                     this.form.idcardnumber = res.data.data.idcardnumber;
@@ -223,12 +223,12 @@ export default {
                    
                 }
             }).catch(res =>{
-                console.log('获取实名认证状态失败',res);
+                // console.log('获取实名认证状态失败',res);
             })
         }
     },
     created(){
-        // this.safeCode();
+        this.safeCode();
         this.handleGetAOuth();
     }
 }

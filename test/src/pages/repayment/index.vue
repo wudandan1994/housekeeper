@@ -56,7 +56,7 @@ export default {
                 }
                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getPoundage",data)
                 .then(function(res){
-                    console.log(res);
+                    // console.log(res);
                     if(!res.data.message){
                         that.$toast({
                             message:res.data.message
@@ -86,7 +86,7 @@ export default {
             }
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/bindCardPayWithoutCode",data)
             .then(function(res){
-                console.log(res,"result")
+                // console.log(res,"result")
                 if(!res.data.success){
                     that.$toast({
                         message:res.data.message
@@ -97,7 +97,7 @@ export default {
                     })
             })
             .catch(function(err){
-                console.log(err,"error");
+                // console.log(err,"error");
                 
             })
 

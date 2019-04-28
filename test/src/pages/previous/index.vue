@@ -87,8 +87,6 @@ export default {
             };
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                    console.log('上级请求成功',res);
-                    
                     this.nickname = res.data.data.nickname;
                     this.mobile = res.data.data.mobile,
                     this.recommendedcode = res.data.data.promotioncode,
@@ -103,7 +101,6 @@ export default {
                     },500)
                 }
             }).catch(res =>{
-                console.log('上级请求失败',res);
                 setTimeout(()=>{
                     this.componentload = false;
                     this.$toast('查询失败');

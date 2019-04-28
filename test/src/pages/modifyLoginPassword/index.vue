@@ -64,7 +64,7 @@ export default {
                 openid:this.$store.state.wechat.openid,
             };
             axiosPost(url,params).then(res =>{
-                console.log('查询个人设置成功',res)
+                // console.log('查询个人设置成功',res)
                 if(res.data.success){
                     if(res.data.data.mobile === null){
                         this.$alert('请先绑定手机号', '提示', {
@@ -80,7 +80,7 @@ export default {
                     }
                 }
             }).catch(res =>{
-                console.log('查询个人设置失败',res);
+                // console.log('查询个人设置失败',res);
             })
         },
         goBack() {
@@ -177,7 +177,7 @@ export default {
             }
              axiosPost("http://pay.91dianji.com.cn/api/customer/updatePassWord",data)
              .then(function(res){
-                 console.log(res,"result");
+                //  console.log(res,"result");
                  that.$toast({
                      message:res.data.message
                  })
@@ -187,7 +187,7 @@ export default {
                  that.suerPassword=""
              })
              .catch(function(err){
-                 console.log(err,"error");
+                //  console.log(err,"error");
                  
              })
         }

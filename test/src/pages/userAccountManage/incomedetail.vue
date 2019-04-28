@@ -135,7 +135,7 @@ export default {
         },
         // 切换样式
         handleChange(){
-            console.log('当前状态',this.now);
+            // console.log('当前状态',this.now);
             let now = this.now;
             now == true ? this.now = false : this.now = true;
             if(now){
@@ -150,15 +150,15 @@ export default {
         },
         // 邀请分类
         handleInvitationType(){
-            console.log('邀请分类');
+            // console.log('邀请分类');
             this.menus = true;
         },
         // 获取当前选中小标题分类
         handleGetSmallType(val){
-            console.log('当前分类',val);
+            // console.log('当前分类',val);
             this.level = val;
             this.menus = false;
-            console.log('邀请类型',this.indirect);
+            // console.log('邀请类型',this.indirect);
             if(this.indirect){
                 // 直接邀请
                 this.handleDirectInvitation();
@@ -176,7 +176,7 @@ export default {
                 pageSize: 1000
             };
             axiosPost(url,params).then(res =>{
-                console.log('流水请求成功',res);
+                // console.log('流水请求成功',res);
                 if(res.data.success){
                     if(res.data.data.list.data.length == '0'){
                         this.$toast('查询结果为空');
@@ -193,7 +193,7 @@ export default {
                     },500)
                 }
             }).catch(res =>{
-                console.log('流水请求失败',res);
+                // console.log('流水请求失败',res);
             })
         },
         // 推广收益
@@ -203,7 +203,6 @@ export default {
             let params = {};
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                    console.log('推广收益请求成功',res);
                     this.directlyCount = res.data.data.directlyCount
                     this.indirectCount = res.data.data.indirectCount
                     this.notVipCount = res.data.data.notVipCount
@@ -212,14 +211,12 @@ export default {
                         this.componentload = false;
                     },500)
                 }else{
-                    console.log('推广收益请求失败',res);
                     setTimeout(() =>{
                         this.componentload = false;
                     },500)
                     this.$toast('查询失败');
                 }
             }).catch(res =>{
-                console.log('推广收益请求失败',res);
                 setTimeout(() =>{
                     this.componentload = false;
                 },500)
@@ -230,7 +227,6 @@ export default {
         handleDirectInvitation(){
             this.componentload = true;
             this.indirect = true;
-            console.log('直接邀请',this.indirect);
             let url = 'http://pay.91dianji.com.cn/api/customer/getDirectlyList';
             let params = {
                 page: this.page,
@@ -239,13 +235,11 @@ export default {
             };
             axiosPost(url,params).then(res =>{
                 if(res.data.data){
-                    console.log('直接邀请列表查询成功',res);
                     this.DirectInvitationList = res.data.data.data;
                     setTimeout(() =>{
                         this.componentload = false;
                     },500)
                 }else{
-                    console.log('直接邀请列表查询失败',res);
                     setTimeout(() =>{
                         this.componentload = false;
                     },500)
@@ -262,7 +256,6 @@ export default {
         handleInDirectInvitation(){
             this.componentload = true;
             this.indirect = false;
-            console.log('间接邀请',this.indirect);
             let url = 'http://pay.91dianji.com.cn/api/customer/getIndirectList';
             let params = {
                 page: this.page,
@@ -271,13 +264,11 @@ export default {
             };
             axiosPost(url,params).then(res =>{
                 if(res.data.data){
-                    console.log('间接邀请列表查询成功',res);
                     this.DirectInvitationList = res.data.data.data;
                     setTimeout(() =>{
                         this.componentload = false;
                     },500)
                 }else{
-                    console.log('间接邀请列表查询失败',res);
                     setTimeout(() =>{
                         this.componentload = false;
                     },500)
@@ -300,13 +291,11 @@ export default {
             };
             axiosPost(url,params).then(res =>{
                 if(res.data.data){
-                    console.log('邀请中列表查询成功',res);
                     this.DirectInvitationList = res.data.data.data;
                     setTimeout(() =>{
                         this.componentload = false;
                     },500)
                 }else{
-                    console.log('邀请中列表查询失败',res);
                     setTimeout(() =>{
                         this.componentload = false;
                     },500)
@@ -320,7 +309,6 @@ export default {
             })
         },
         handleChangeTabs(obj){
-            console.log('选择',obj);
             if(obj == '0'){
                 // 所得佣金
                 this.handleFlowDetails();

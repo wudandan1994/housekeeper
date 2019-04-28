@@ -196,7 +196,7 @@ export default {
                 openid:this.$store.state.wechat.openid,
             };
             axiosPost(url,params).then(res =>{
-                console.log('查询个人设置成功',res)
+                // console.log('查询个人设置成功',res)
                 if(res.data.success){
                     setTimeout(()=>{
                         this.componentload = false;

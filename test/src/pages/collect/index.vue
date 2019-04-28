@@ -214,7 +214,7 @@ export default {
             }
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg",data)
             .then(function(res){
-                console.log(res,"注册之后的第一次信息");
+                // console.log(res,"注册之后的第一次信息");
                 if(!res.data.success){
                     that.$toast({
                         message:res.data.message
@@ -223,7 +223,7 @@ export default {
                 } else {
                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
                     .then(function(res){
-                        console.log(res,"个人信息查询的结果")
+                        // console.log(res,"个人信息查询的结果")
                         if(res.data.success){
                             let info=res.data.data.chMerCode
                             that.$router.push({
@@ -235,12 +235,13 @@ export default {
                        }
                     })
                     .catch(function(err){
-                        console.log(err,"错误的信息");
+                        // console.log(err,"错误的信息");
+
                     })
                 }
             })
             .catch(function(err){
-                console.log(err,"error")
+                // console.log(err,"error")
             })
         },
         // 查询个人信息
@@ -264,7 +265,7 @@ export default {
             }
         })
         .catch(err=>{
-            console.log(err,"error个人信息")
+            // console.log(err,"error个人信息")
         })
      },
      // 获取实名认证信息
@@ -272,7 +273,6 @@ export default {
         let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
         let params = {};
         axiosPost(url,params).then(res =>{
-            console.log('获取实名认证状态成功',res);
             if(res.data.data.status != '0'){
                 this.reservedMobile = res.data.data.mobile;
                 this.realName = res.data.data.name;
@@ -280,7 +280,7 @@ export default {
                 this.mobile = this.$store.state.wechat.mobile;
             }
         }).catch(res =>{
-            console.log('获取实名认证状态失败',res);
+            // console.log('获取实名认证状态失败',res);
         })
     }
     },

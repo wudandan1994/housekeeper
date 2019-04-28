@@ -65,7 +65,7 @@ export default {
             let url = 'http://pay.91dianji.com.cn/api/customer/getBankCardByOpenid';
             let params = {};
             axiosPost(url,params).then(res =>{
-                console.log('获取已绑定银行卡列表成功',res);
+                // console.log('获取已绑定银行卡列表成功',res);
                 if(res.data.success){
                     if(res.data.data.length == '0'){
                         this.$toast('您还未绑定银行卡');
@@ -75,7 +75,7 @@ export default {
                     }
                 }
             }).catch(res =>{
-                console.log('获取已绑定银行卡列表失败',res)
+                // console.log('获取已绑定银行卡列表失败',res)
             })
         },
         // 选择银行卡

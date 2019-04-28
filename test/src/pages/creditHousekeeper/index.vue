@@ -72,7 +72,6 @@ export default {
         searchInfo(){
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMerchantSettled")
             .then(res=>{
-                console.log(res,"调用接口")
                 if(res.data.code==="1"){
                     this.$router.push("/home/addCard")
                 } else if(res.data.code==="0"){
@@ -88,7 +87,7 @@ export default {
                 }
             })
             .catch(err=>{
-                console.log(err,"失败");
+                // console.log(err,"失败");
                 
             })
         },

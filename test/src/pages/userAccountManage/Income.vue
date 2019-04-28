@@ -71,7 +71,7 @@ export default {
             let params = {};
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                    console.log('详情请求成功',res);
+                    // console.log('详情请求成功',res);
                     this.monthSum = res.data.data.monthSum;
                     this.todayCount = res.data.data.todayCount;
                     this.todaySum = res.data.data.todaySum;
@@ -82,21 +82,21 @@ export default {
                     setTimeout(() =>{
                         this.componentload = false;
                     },500)
-                    console.log('详情请求失败',res);
+                    // console.log('详情请求失败',res);
                     this.$toast(res.data.message);
                 }
             }).catch(res =>{
                  setTimeout(() =>{
                     this.componentload = false;
                 },500)
-                console.log('详情请求失败',res);
+                // console.log('详情请求失败',res);
                 this.$toast('查询失败');
             })
         },
     },
     created(){
         this.amountSum = this.$route.query.amountSum;
-        console.log('路由',this);
+        // console.log('路由',this);
         this.handleGetData();
     }
 }

@@ -198,7 +198,6 @@ export default {
             this.$toast('尽请期待');
         },
         changeActive(obj){
-            console.log('obj', obj);
         },
         // 钻石会员权益说明
         isShowDiamonds(){
@@ -226,7 +225,6 @@ export default {
         handleBuy(){
             this.pup1 = false;
             this.pup2 = true;
-            console.log('商品价格',this.price);
             let name = '';
             if(this.price == '993'){
                 name = '钱夹宝钻石会员';
@@ -239,7 +237,6 @@ export default {
                 name: this.level
             };
             axiosPost(url,params).then(res =>{
-                console.log('下单成功',res);
                 if(res.data.success){
                     this.orderid = res.data.data.orderid;
                     // 请求上级推荐人
@@ -248,18 +245,15 @@ export default {
                         recommendedcode: this.$store.state.wechat.recommendedcode
                     };
                     axiosPost(url,params).then(res =>{
-                        console.log('上级请求成功',res);
                         if(res.data.success){
                             this.recomname = res.data.data.nickname;
                             this.recomcode = res.data.data.promotioncode;
                             this.recomheadimg = res.data.data.photo;
                         }
                     }).catch(res =>{
-                        console.log('上级请求失败',res);
                     })
                 }
             }).catch(res =>{
-                console.log('下单失败',res);
             })
         },
         // 选择支付方式
@@ -295,7 +289,6 @@ export default {
                 
                 var url = 'http://pay.91dianji.com.cn/api/order/wxPayH5';
                 axiosPost(url,params).then(res =>{
-                        console.log('发起微信支付成功',res);
                         var radom = Math.random().toString(36).substr(2);
                         var tmp = Date.parse( new Date() ).toString();
                         tmp = tmp.substr(0,10);
@@ -306,11 +299,9 @@ export default {
                             signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                             paySign: res.data.paySign, // 支付签名
                             success: function (res) {
-                                console.log('支付成功',res);
                             }
                         });
                     }).catch(res =>{
-                        console.log('发起微信支付失败',res);
                     })
             }
             

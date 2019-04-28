@@ -61,51 +61,7 @@
                        <li>我的任务</li>
                    </ul>
             </div>
-             <div class="calendar">
-                 <!-- 年份 -->
-                 <div class="month">
-                    <ul>
-                        <!--点击会触发pickpre函数，重新刷新当前日期 @click(vue v-on:click缩写) -->
-                        <li class="arrow" @click="pickPre(currentYear,currentMonth)">❮</li>
-                        <li class="year-month" @click="pickYear(currentYear,currentMonth)">
-                            <span class="choose-year">{{ currentYear }}</span>
-                            <span class="choose-month">{{ currentMonth }}月</span>
-                        </li>
-                        <li class="arrow" @click="pickNext(currentYear,currentMonth)">❯</li>
-                    </ul>
-               </div>
-
-                <!-- 星期 -->
-            <ul class="weekdays">
-                <li>一</li>
-                <li>二</li>
-                <li>三</li>
-                <li>四</li>
-                <li>五</li>
-                <li style="color:red">六</li>
-                <li style="color:red">日</li>
-            </ul>
-
-                <!-- 日期 -->
-            <ul class="days">
-                <!-- 核心 v-for循环 每一次循环用<li>标签创建一天 -->
-                <li v-for="(dayobject,index) in days" :key="index" >
-                    <!--本月-->
-                    <!--如果不是本月  改变类名加灰色-->
-
-                    <span v-if="dayobject.day.getMonth()+1 != currentMonth" class="other-month">{{ dayobject.day.getDate() }}</span>
-
-                    <!--如果是本月  还需要判断是不是这一天-->
-                    <span v-else>
-                        <!--今天  同年同月同日-->
-                        <span v-if="dayobject.day.getFullYear() == new Date().getFullYear() && dayobject.day.getMonth() == new Date().getMonth() && dayobject.day.getDate() == new Date().getDate()"
-                            class="active">{{ dayobject.day.getDate() }}</span>
-                        <span v-else>{{ dayobject.day.getDate() }}</span>
-                    </span>
-
-                </li>
-            </ul>
-             </div>
+            
         </div>
     </div>
 
@@ -135,6 +91,7 @@ export default {
             let that =this
             axiosPost("http://pay.91dianji.com.cn/api/customer/insertSign")
            .then(function(res){
+               console.log(res,"每日签到")
             if(!res.data.success){
                     that.$toast({
                     message:res.data.message
@@ -148,15 +105,16 @@ export default {
                 .then(function(res){
                     that.signcount=res.data.data.signcount
                     that.gold=res.data.data.gold
-                    that.isPunch=true
                 })
             }
           })   
         },
          searchPunch(){
              let that = this
+
            axiosPost("http://pay.91dianji.com.cn/api/customer/getSignDetail")
            .then(function(res){ 
+               console.log(res,"查询签到详情")
                 if(!res.data.success){
                     // that.isPunch=true
                     that.$toast({
@@ -170,78 +128,78 @@ export default {
                  that.isPunch=true
            })
          },
-         initData: function (cur) {
-                    let that = this;
-                    let leftcount = 0; //存放剩余数量
-                    let date;
-                    if (cur) {
-                        date = new Date(cur);
-                    } else {
-                        let now = new Date();
-                        let d = new Date(that.formatDate(now.getFullYear(), now.getMonth(), 1));
-                        d.setDate(35);
-                        date = new Date(that.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
-                    }
-                    that.currentDay = date.getDate();
-                    that.currentYear = date.getFullYear();
-                    that.currentMonth = date.getMonth() + 1;
-                    that.currentWeek = date.getDay(); // 1...6,0
-                    if (that.currentWeek == 0) {
-                        that.currentWeek = 7;
-                    }
-                    let str = that.formatDate(that.currentYear, that.currentMonth, that.currentDay);
-                    that.days.length = 0;
-                    // 今天是周日，放在第一行第7个位置，前面6个
-                    //初始化本周
-                    for (let i = that.currentWeek - 1; i >= 0; i--) {
-                        let d = new Date(str);
-                        d.setDate(d.getDate() - i);
-                        let dayobject = {}; //用一个对象包装Date对象  以便为以后预定功能添加属性
-                        dayobject.day = d;
-                        that.days.push(dayobject); //将日期放入data 中的days数组 供页面渲染使用
-                    }
-                    //其他周
-                    for (let i = 1; i <= 35 - that.currentWeek; i++) {
-                        let d = new Date(str);
-                        d.setDate(d.getDate() + i);
-                        let dayobject = {};
-                        dayobject.day = d;
-                        that.days.push(dayobject);
-                    }
+        //  initData: function (cur) {
+        //             let that = this;
+        //             let leftcount = 0; //存放剩余数量
+        //             let date;
+        //             if (cur) {
+        //                 date = new Date(cur);
+        //             } else {
+        //                 let now = new Date();
+        //                 let d = new Date(that.formatDate(now.getFullYear(), now.getMonth(), 1));
+        //                 d.setDate(35);
+        //                 date = new Date(that.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
+        //             }
+        //             that.currentDay = date.getDate();
+        //             that.currentYear = date.getFullYear();
+        //             that.currentMonth = date.getMonth() + 1;
+        //             that.currentWeek = date.getDay(); // 1...6,0
+        //             if (that.currentWeek == 0) {
+        //                 that.currentWeek = 7;
+        //             }
+        //             let str = that.formatDate(that.currentYear, that.currentMonth, that.currentDay);
+        //             that.days.length = 0;
+        //             // 今天是周日，放在第一行第7个位置，前面6个
+        //             //初始化本周
+        //             for (let i = that.currentWeek - 1; i >= 0; i--) {
+        //                 let d = new Date(str);
+        //                 d.setDate(d.getDate() - i);
+        //                 let dayobject = {}; //用一个对象包装Date对象  以便为以后预定功能添加属性
+        //                 dayobject.day = d;
+        //                 that.days.push(dayobject); //将日期放入data 中的days数组 供页面渲染使用
+        //             }
+        //             //其他周
+        //             for (let i = 1; i <= 35 - that.currentWeek; i++) {
+        //                 let d = new Date(str);
+        //                 d.setDate(d.getDate() + i);
+        //                 let dayobject = {};
+        //                 dayobject.day = d;
+        //                 that.days.push(dayobject);
+        //             }
 
-                },
-                pickPre: function (year, month) {
-                    let that = this;
-                    // setDate(0); 上月最后一天
-                    // setDate(-1); 上月倒数第二天
-                    // setDate(dx) 参数dx为 上月最后一天的前后dx天
-                    let d = new Date(that.formatDate(year, month, 1));
-                    d.setDate(0);
-                    that.initData(that.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
-                },
-                pickNext: function (year, month) {
-                    let that = this;
-                    let d = new Date(that.formatDate(year, month, 1));
-                    d.setDate(35);
-                    that.initData(that.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
-                },
-                pickYear: function (year, month) {
-                    alert(year + "," + month);
-                },
-                // 返回 类似 2016-01-02 格式的字符串
-                formatDate: function (year, month, day) {
-                    let y = year;
-                    let m = month;
-                    if (m < 10) m = "0" + m;
-                    let d = day;
-                    if (d < 10) d = "0" + d;
-                    return y + "-" + m + "-" + d
-                },
+        //         },
+        //         pickPre: function (year, month) {
+        //             let that = this;
+        //             // setDate(0); 上月最后一天
+        //             // setDate(-1); 上月倒数第二天
+        //             // setDate(dx) 参数dx为 上月最后一天的前后dx天
+        //             let d = new Date(that.formatDate(year, month, 1));
+        //             d.setDate(0);
+        //             that.initData(that.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
+        //         },
+        //         pickNext: function (year, month) {
+        //             let that = this;
+        //             let d = new Date(that.formatDate(year, month, 1));
+        //             d.setDate(35);
+        //             that.initData(that.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
+        //         },
+        //         pickYear: function (year, month) {
+        //             alert(year + "," + month);
+        //         },
+        //         // 返回 类似 2016-01-02 格式的字符串
+        //         formatDate: function (year, month, day) {
+        //             let y = year;
+        //             let m = month;
+        //             if (m < 10) m = "0" + m;
+        //             let d = day;
+        //             if (d < 10) d = "0" + d;
+        //             return y + "-" + m + "-" + d
+        //         },
          },
       
     created () {
-         let that = this
-         that.initData(null)
+        //  let that = this
+        //  that.initData(null)
           this.searchPunch()
     }
 }

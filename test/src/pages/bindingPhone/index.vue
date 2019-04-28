@@ -126,7 +126,6 @@ export default {
                 };
                 axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",data)
                 .then(function(res){
-                    console.log("绑定手机成功",res);
                     if(res.data.success){
                         that.$toast({
                             message:res.data.message
@@ -137,8 +136,6 @@ export default {
                             message:res.data.message
                         })
                     }
-                // this.show=true
-
                 })
                 .catch(function(res){
                     console.log("绑定手机失败",res);

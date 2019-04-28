@@ -164,7 +164,6 @@ export default {
              }
                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/agreementBindCardValidateCode",data)
                 .then(res=>{
-                    console.log(res,"success")
                     if(!res.data.success){
                         that.$toast({
                             message:res.data.message
@@ -173,7 +172,7 @@ export default {
                     that.orderId=res.data.data.orderId
                 })
                 .catch(err=>{
-                    console.log(err,"error");
+                    // console.log(err,"error");
                     
                 })
                 setTimeout(() => {

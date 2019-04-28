@@ -140,11 +140,9 @@ export default {
             let that=this
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
         .then(function(res){
-            console.log(res,"result")
             that.personInfo=res.data.data
         })
         .catch(function(err){
-            console.log(err,"error")
             
         })
      }
