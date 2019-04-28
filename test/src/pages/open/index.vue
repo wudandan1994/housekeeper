@@ -114,7 +114,6 @@ export default {
             };
             this.$http.post(url,form,config).then(res =>{
                 if(res.data.success){
-                     console.log(res,"上传图片")
                     this.cardfront = res.data.data.thumImgUrl
                     let datas={
                         chMerCode:this.info,
@@ -145,7 +144,7 @@ export default {
                                         
                                         })
                                         .catch(err=>{
-                                            console.log(err,"图片审核中")
+                                            // console.log(err,"图片审核中")
                                         })
                               }
                         })
@@ -156,7 +155,8 @@ export default {
                     })
                 }
             }).catch(res =>{
-                console.log('文件上传失败',res);
+                // console.log('文件上传失败',res);
+
             })
             
         },
@@ -199,7 +199,7 @@ export default {
                                       
                                         })
                                         .catch(err=>{
-                                            console.log(err,"图片审核中")
+                                            // console.log(err,"图片审核中")
                                         })
                               }
                         })
@@ -209,7 +209,7 @@ export default {
                     })
                 }
             }).catch(res =>{
-                console.log('文件上传失败',res);
+                // console.log('文件上传失败',res);
             })
             
         },
@@ -252,7 +252,7 @@ export default {
                                        
                                         })
                                         .catch(err=>{
-                                            console.log(err,"图片审核中")
+                                            // console.log(err,"图片审核中")
                                         })
                               }
                         })
@@ -263,7 +263,7 @@ export default {
                     })
                 }
             }).catch(res =>{
-                console.log('文件上传失败',res);
+                // console.log('文件上传失败',res);
             })
             
         },
@@ -306,7 +306,7 @@ export default {
                                        
                                         })
                                         .catch(err=>{
-                                            console.log(err,"图片审核中")
+                                            // console.log(err,"图片审核中")
                                         })
                               }
                         })
@@ -317,7 +317,7 @@ export default {
                     })
                 }
             }).catch(res =>{
-                console.log('文件上传失败',res);
+                // console.log('文件上传失败',res);
             })
             
         },
@@ -360,7 +360,7 @@ export default {
                                     
                                     })
                                     .catch(err=>{
-                                        console.log(err,"图片审核中")
+                                        // console.log(err,"图片审核中")
                                     })
                               }
                         })
@@ -371,13 +371,12 @@ export default {
                     })
                 }
             }).catch(res =>{
-                console.log('文件上传失败',res);
+                // console.log('文件上传失败',res);
             })
         },
         findphoto(){
              axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberPhoto")
                 .then(res=>{
-                    console.log(res)
                     this.photoList=res.data.data
                     this.photoList.forEach(item => {
                         if(item.photoType==="1"){
@@ -395,7 +394,7 @@ export default {
                     });
                 })
                 .catch(err=>{
-                    console.log(err,"上传图片的错误");
+                    // console.log(err,"上传图片的错误");
                     
                 })
         }

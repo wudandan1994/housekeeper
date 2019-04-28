@@ -52,7 +52,6 @@ export default {
         // 随机数
         handlechangeRandom(){
             this.random = Math.ceil((Math.random())*5);
-            console.log('切换随机数',this.random);
             this.handlePoster();
         },
         handlePoster(){
@@ -77,7 +76,6 @@ export default {
             var headimg = new Image();
             var url = this.$store.state.wechat.headimg;
             var domain = url.split('/mmopen');
-            console.log('头像',this.url + '/wxAvator' + '/mmopen' + domain[1]);
             headimg.src = this.url + '/wxAvator' + '/mmopen' + domain[1];
             headimg.onload = function(){
                 ctx.drawImage(headimg,10,390,60,60);
@@ -98,7 +96,6 @@ export default {
             this.imgShow = true;
             var poster = document.getElementById("poster");
             var dataURL = poster.toDataURL('image/png');
-            console.log('图片',dataURL,1);
             this.imgUrl = dataURL;
             if(this.imgUrl != ''){
                 setTimeout(() =>{
@@ -112,7 +109,6 @@ export default {
             let params = {};
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                    console.log('二维码请求成功',res);
                     if(res.data.data === null){
                         let url = 'http://pay.91dianji.com.cn/api/customer/downloadQrcode';
                         let params = {
@@ -120,7 +116,6 @@ export default {
                         };
                         axiosPost(url,params).then(res =>{
                             if(res.data.success){
-                                console.log('二维码请求成功',res);
                                 this.qrcode = res.data.data;
                                 setTimeout(() =>{
                                     this.componentload = false;
@@ -131,15 +126,12 @@ export default {
                             }
                         })
                     }else{
-                        console.log('有二维码请求成功',res);
                         this.qrcode = res.data.data;
                         this.handlePoster();
                     }
                 }else{
-                    console.log('无二维码',res);
                 }
             }).catch(res =>{
-                console.log('无二维码',res);
             })
         }
     },

@@ -75,7 +75,7 @@ export default {
             let url = 'http://pay.91dianji.com.cn/api/customer/getBankCardByOpenid';
             let params = {};
             axiosPost(url,params).then(res =>{
-                console.log('获取已绑定银行卡列表成功',res);
+                // console.log('获取已绑定银行卡列表成功',res);
                 if(res.data.success){
                     if(res.data.data.length == '0'){
                         this.cardLength = '0'
@@ -86,7 +86,7 @@ export default {
                     }
                 }
             }).catch(res =>{
-                console.log('获取已绑定银行卡列表失败',res)
+                // console.log('获取已绑定银行卡列表失败',res)
             })
         },
         // 打开银行卡列表
@@ -125,14 +125,14 @@ export default {
                    withdraw_apply_total: this.cash 
                 };
                 axiosPost(url,params).then(res =>{
-                    console.log('提现申请成功',res);
+                    // console.log('提现申请成功',res);
                     if(res.data.success){
                         this.$toast('提现申请成功');
                     }else{
                         this.$toast(res.data.message);
                     }
                 }).catch(res =>{
-                    console.log('提现申请失败',res);
+                    // console.log('提现申请失败',res);
                 })
             }
             

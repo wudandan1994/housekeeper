@@ -150,7 +150,7 @@ export default {
             this.showFlag=false
         },
         changeActive(obj){
-            console.log('obj', obj);
+            // console.log('obj', obj);
         }
     }
     

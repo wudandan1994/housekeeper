@@ -87,7 +87,7 @@ export default {
                 that.bankList=list
             })
             .catch(function(err){
-                console.log(err,"error")
+                // console.log(err,"error")
             })
         }
     },

@@ -58,11 +58,10 @@ export default {
         },
         // 获取更多
         handleMore(){
-            console.log(this);
             this.$toast('尽请期待');
         },
         changeActive(obj){
-            console.log('obj', obj);
+            // console.log('obj', obj);
         }
     }
 }

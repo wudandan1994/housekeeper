@@ -127,12 +127,10 @@ export default {
                 headers: { "Content-Type": "multipart/form-data" }
             };
             axios.post(url,form,config).then(res =>{
-                console.log('头像上传成功',res);
                 if(res.data.success){
                     this.photo = res.data.data.imgUrl;
                 }
             }).catch(res =>{
-                console.log('头像上传失败',res);
             })
         },
         // 上传微信二维码头像
@@ -144,12 +142,10 @@ export default {
                 headers: { "Content-Type": "multipart/form-data" }
             };
             axios.post(url,form,config).then(res =>{
-                console.log('微信二维码上传成功',res);
                 if(res.data.success){
                     this.wechatqr = res.data.data.imgUrl;
                 }
             }).catch(res =>{
-                console.log('微信二维码上传失败',res);
             })
         },
         onRead(file){},
@@ -160,7 +156,6 @@ export default {
             }
             axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer",data)
             .then(res =>{
-                console.log('查询个人设置',res);
                 if(res.data.success){
                     this.photo = res.data.data.photo;
                     this.nickname = res.data.data.nickname;
@@ -208,7 +203,6 @@ export default {
                     this.$toast(res.data.message);
                 }
             }).catch(res =>{
-                console.log('更新失败',res);
             })
         }
     },

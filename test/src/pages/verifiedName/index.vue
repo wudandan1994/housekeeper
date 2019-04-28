@@ -79,8 +79,6 @@ export default {
         // 身份证正面
          onRead(file) {
             this.componentload = true;
-            console.log('文件上传',file)
-            // alert('文件上传'+file.file);
             var form = new FormData()
             form.append('file',file.file)
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
@@ -88,7 +86,6 @@ export default {
                 headers: { "Content-Type": "multipart/form-data" }
             };
             axios.post(url,form,config).then(res =>{
-                console.log('文件上传成功',res);
                 if(res.data.success){
                     this.cardfront = res.data.data.thumImgUrl
                     this.cardfrontup = res.data.data.imgUrl
@@ -97,14 +94,12 @@ export default {
                     },500)
                 }
             }).catch(res =>{
-                console.log('文件上传失败',res);
             })
             
         },
         // 身份证反面
         onReadFanm(file){
             this.componentload = true;
-            console.log('文件上传',file);
             var form = new FormData();
             form.append('file',file.file);
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg';
@@ -112,7 +107,6 @@ export default {
                 headers: { "Content-Type": "multipart/form-data" }
             };
             axios.post(url,form,config).then(res =>{
-                console.log('文件上传成功',res);
                 if(res.data.success){
                     this.cardback = res.data.data.thumImgUrl;
                     this.cardbackup = res.data.data.imgUrl;
@@ -121,7 +115,6 @@ export default {
                     },500)
                 }
             }).catch(res =>{
-                console.log('文件上传失败',res);
                 })
         },
         submit(){
@@ -151,7 +144,6 @@ export default {
                     },500)
                 }
             }).catch(res =>{
-                console.log('实名认证失败',res);
                  setTimeout(()=>{
                     this.componentload = false;
                 },500)
@@ -167,7 +159,6 @@ export default {
             let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
-                console.log('获取实名认证状态成功',res);
                 setTimeout(()=>{
                     this.componentload = false;
                 },500)
@@ -185,7 +176,6 @@ export default {
                     this.status = '未认证'
                 }
             }).catch(res =>{
-                console.log('获取实名认证状态失败',res);
                 setTimeout(()=>{
                     this.componentload = false;
                     this.$toast('查询失败');

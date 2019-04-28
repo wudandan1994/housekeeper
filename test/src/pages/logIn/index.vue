@@ -23,11 +23,11 @@
            </div>
            <van-button @click="logInPass" class="login center" type="default">登录</van-button>
             <div class="wx-login row">
-                <!-- <div class="logIn start-center" @click="logIn">
+                <div class="logIn start-center" @click="logIn">
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
                 </div>
-                <div class="register end-center" @click="register">注册</div> -->
+                <div class="register end-center" @click="register">注册</div>
             </div>
         </div>
     </div>
@@ -60,13 +60,13 @@ export default {
         },
         logInPass(){
             let that=this
-            if(that.phone.trim().length===0){
+            if(that.phone.trim().length===0 || that.phone.trim()===""){
                 that.$toast({
                     message:"请输入手机号码"
                 })
                 return
             }
-            if(that.password.trim().length===0){
+            if(that.password.trim().length===0 || that.phone.trim()===""){
                 that.$toast({
                     message:"请输入密码"
                 })
@@ -109,7 +109,7 @@ export default {
                 }
             })
             .catch(function(err){
-                console.log(err,"error");
+                // console.log(err,"error");
                 that.$toast('登录失败')  
             })
         },

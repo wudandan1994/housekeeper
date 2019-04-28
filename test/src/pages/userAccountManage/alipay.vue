@@ -42,7 +42,7 @@ export default {
         },
         // 获取验证码
         handleSafeCode(){
-            console.log('title',this.title);
+            // console.log('title',this.title);
             if(this.title == '获取验证码'){
                 let num = 60;
                 let codetitle = '';
