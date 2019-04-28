@@ -90,6 +90,7 @@ export default {
                     that.$store.commit('nickname',res.data.data.nickname);
                     that.$store.commit('headimg',res.data.data.photo);
                     console.log('登陆成功',res);
+                    that.$toast('登陆成功');
                     if(that.checked){
                         // 记住密码
                         storage.set('username',that.phone);

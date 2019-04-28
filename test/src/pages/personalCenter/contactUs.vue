@@ -27,7 +27,7 @@ export default {
     },
     methods:{
         handleReturnHome() {
-            this.$router.push({path:'/personalCenter'})
+            this.$router.go(-1);
         },
     }
 }

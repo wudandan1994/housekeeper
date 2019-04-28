@@ -47,8 +47,8 @@
             <!-- 名片咨询模块 -->
             <div class="pannel-news row">
                 <div class="pannel-title center">钱夹<br/>资讯</div>
-                <div class="pannel-detail center">
-                    <p>《投资者说》“老中青”三位嘉宾为小散解套出...</p>
+                <div class="pannel-detail center" @click="handleContactUs">
+                    <van-notice-bar text="钱夹宝1.0正式上线啦,若您在使用中有任何问题请联系客服"/>
                 </div>
             </div>
 
@@ -313,6 +313,10 @@ export default {
             }else{
                 this.$router.push(obj);
             }
+        },
+        // 联系客服
+        handleContactUs(){
+            this.$router.push('/personalCenter/contactus')
         }
     },
     created(){
@@ -437,7 +441,6 @@ export default {
                 color: white;
                 font-size: 28px;
                 animation: pannleRoll 1s ease-in-out;
-
             }
             @keyframes pannelRoll {
                0% {

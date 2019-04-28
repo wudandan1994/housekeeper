@@ -94,7 +94,7 @@
                 </van-tab>
             </van-tabs>
         </div>
-        <!-- <loading :componentload='componentload'></loading> -->
+        <loading :componentload='componentload'></loading>
     </div>
 </template>
 <script>
