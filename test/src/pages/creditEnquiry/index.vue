@@ -12,23 +12,10 @@
              <h3>
                  此功能正在上线中，敬请期待！
              </h3>
-               <!-- <div class="large-data">
-                   <div class="report">
-                       <h3>大数据+运营商信用报告</h3>
-                       <p>贷前基础信息</p>
-                       <p><span>￥9.9元</span><span>原价￥298.00</span></p>
-                       <span>点此查询</span>
-                   </div>
-                   <div class="example">
-                      
-                       <p>
-                          <router-link tag="span" to="/home/creditENquiry/reporyExample">查看报告示例</router-link> 
-                      </p>
-                   </div>
-               </div> -->
+              
            </div>
            <div class="detail"></div>
-           <!-- <router-link tag="div" to="/home/creditEnquiry/creditDataQuery" class="query-now">立即查询</router-link> -->
+           
         </div>
     </div>
 

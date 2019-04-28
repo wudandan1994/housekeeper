@@ -3,7 +3,7 @@
          <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">申请贷款</div>
-            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+            <div class=""></div>
         </header>
         <!-- 轮播图 -->
         <div class="swipe">
@@ -110,7 +110,7 @@ export default {
             fixed: true,
             images:[
                 'http://pay.91dianji.com.cn/01.png',
-                'http://pay.91dianji.com.cn/02.jpg',
+                'http://pay.91dianji.com.cn/ban.jpg',
                 'http://pay.91dianji.com.cn/04.png',
                 'http://pay.91dianji.com.cn/06.jpg',
                 'http://pay.91dianji.com.cn/08.jpg'
@@ -148,19 +148,19 @@ export default {
             this.show = false;
         },
         // 验证码
-        safeCode(){
-            var codeLength = this.codeLength;
-            var ran = new Array(0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z')
-            for(var i = 0; i < codeLength; i++ ){
-                var index = Math.floor(Math.random()*36);
-                this.realCode += ran[index];
-            }
+        // safeCode(){
+        //     var codeLength = this.codeLength;
+        //     var ran = new Array(0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z')
+        //     for(var i = 0; i < codeLength; i++ ){
+        //         var index = Math.floor(Math.random()*36);
+        //         this.realCode += ran[index];
+        //     }
             
-        },
+        // },
         // 切换验证码
         changeCode(){
             this.realCode = '';
-            this.safeCode();
+            // this.safeCode();
         },
         // 服务条款
         handleAgree(val){
@@ -172,10 +172,12 @@ export default {
            }else if(this.form.idcardnumber == ''){
                this.$toast('请填写申请人身份证号')
            }else if(this.form.mobile == ''){
-               this.$toast('请填写申请人手机号');
-           }else if(this.form.code == '' || this.form.code != this.realCode){
-               this.$toast('请检查验证码');
-           }else if(this.checked == false){
+               this.$toast('请填写申请人手机号')
+           }
+        //    else if(this.form.code == '' || this.form.code != this.realCode){
+        //        this.$toast('请检查验证码');
+        //    }
+           else if(this.checked == false){
                this.$toast('请阅读并同意服务协议');
            }
            else{
@@ -186,16 +188,24 @@ export default {
                }
                axiosPost("http://pay.91dianji.com.cn/api/creditCard/getLoanUrl",data)
               
-               .then(function(res){
+               .then(res=>{
                    if(!res.data.success){
                        this.$toast({
                            message:res.data.message
                        })
                        return
+                   } else {
+                        let url=res.data.data;
+                        this.$router.push({
+                            path:"/loan/form/myOrder",
+                            query:{
+                                info:url
+                              }
+                        })
                    }
-                    location.href=res.data.data
+                   
                })
-               .catch(function(err){
+               .catch(err=>{
                    
                })
            }
@@ -218,7 +228,7 @@ export default {
         }
     },
     created(){
-        this.safeCode();
+        // this.safeCode();
         this.handleGetAOuth();
     }
 }

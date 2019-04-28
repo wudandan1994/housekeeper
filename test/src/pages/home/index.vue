@@ -227,6 +227,7 @@
 <script>
 import footerMenu from '@/components/footer'
 import {axiosPost} from '@/lib/http'
+import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu
@@ -262,12 +263,40 @@ export default {
         hideAside() {
             this.showAaside=false
         },
+         // 自动登录
+        automatic(){
+            let data={
+                 mobile:storage.get('username'),
+                 password:storage.get('password')
+            }
+             axiosPost("http://pay.91dianji.com.cn/api/customer/login",data) 
+             .then(res=>{
+                if(!res.data.success){
+                     this.$router.push("/logIn")
+                }else {
+                    this.$store.commit('iscertification',res.data.data.iscertification);
+                    this.$store.commit('level',res.data.data.level);
+                    this.$store.commit('promotioncode',res.data.data.promotioncode);
+                    this.$store.commit('mobile',res.data.data.mobile);
+                    this.$store.commit('vip',res.data.data.vip);
+                    this.$store.commit('recommendedcode',res.data.data.recommendedcode);
+                    this.$store.commit('amount',res.data.data.amount);
+                    this.$store.commit('openid',res.data.data.openid);
+                    this.$store.commit('nickname',res.data.data.nickname);
+                    this.$store.commit('headimg',res.data.data.photo);
+                }
+             })
+             .catch(err=>{
+
+             })
+        },
         signOut(){
             this.$dialog.confirm({
                     title: '提示',
                     message: '确定要退出？',
                     confirmButtonText:'是',
-                }).then(() => {
+                })
+                .then(() => {
                     let that =this
                   axiosPost("http://pay.91dianji.com.cn/api/customer/loginOut") 
                   .then(function(res){
@@ -276,8 +305,14 @@ export default {
                               message:res.data.message
                           })
                           return
+                      } else {
+                          that.$router.push("/logIn")
+                          storage.remove('username');
+                          storage.remove('password');
+                          storage.remove('rempass');
+                          storage.clear()
                       }
-                      that.$router.push("/logIn")
+                     
                   })
                   .catch(function(err){
 
@@ -306,7 +341,7 @@ export default {
             })
         },
         // 判断是否实名认证
-        handleIsAuth(obj){
+        handleIsAuth(obj){ 
             if(this.iscertification == '0'){
                 //未认证
                 this.$toast('请先实名认证');
@@ -322,7 +357,8 @@ export default {
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
-        this.handleSearchAuths();
+        this.handleSearchAuths()
+        this.automatic()
     }
 }
 </script>
@@ -610,6 +646,9 @@ export default {
                     .van-button {
                         font-size: 30px;
                     }
+                }
+                .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
+                    height:70px;
                 }
          }
           .van-dialog .van-button{

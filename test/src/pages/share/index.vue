@@ -7,7 +7,7 @@
             <span class="right-arrow">
             </span>
         </header>
-        <div class="contain">
+        <div @click="showTips" class="contain">
             <div class="poster">
                 <ul class="top">
                     <li>
@@ -95,11 +95,11 @@
                         <p>信用卡链接</p>
                         <p>分享带锁粉功能哦!</p>
                     </li>
-                    <router-link to="/share/shareLink" tag="li">
+                    <li>
                         <p><van-icon name="http://bc.91dianji.com.cn/412.png" /></p>
                         <p>分享链接</p>
                         <p>分享钱夹宝链接</p>
-                    </router-link>
+                    </li>
                     <li>
                         <p><van-icon name="http://bc.91dianji.com.cn/413.png" /></p>
                         <p>推广素材图</p>
@@ -145,6 +145,9 @@ export default {
     methods:{
         flagDown(){
             this.showFlag=!this.showFlag
+        },
+        showTips(){
+            this.showFlag=false
         },
         changeActive(obj){
             console.log('obj', obj);

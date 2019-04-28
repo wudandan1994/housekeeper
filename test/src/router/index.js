@@ -109,19 +109,22 @@ import cooperation from '@/pages/personalCenter/cooperation'
 import contactUs from '@/pages/personalCenter/contactUs'
 // 我要贷款
 import myloan from '@/pages/loan/myloan'
-
+// 在线查询银联
+import onlineComponent from '@/pages/online'
 
 
 export default new Router({
   // mode:"hash",
   routes: [
-    { path: '/',redirect:'/logIn'},
+    { path: '/',redirect:'/home'},
     {path:"/vip",component:vipComponent},
     {path:"/home",component:homeComponent},
     {path:"/login",component:loginComponent},
     {path:"/logOut",component:logOutComponent},  
     {path:"/register",component:registerComponent},
     {path:"/home/collect",component:collectComponent},
+    {path:"/home/online",component:onlineComponent},
+
     {path:"/home/collect/open",component:openComponent},
     {path:"/home/collect/payment",component:paymentComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
@@ -161,7 +164,7 @@ export default new Router({
     {path:"/home/bindingPhone",component:bindingPhoneComponent,},
     {path:"/home/customerService",component:customerServiceComponent,},
     {path:"/home/aboutUs",component:aboutUsComponent,},
-    {path:"/home/creditEnquiry/myOrder",component:myOrderComponent,},
+    {path:"/loan/form/myOrder",component:myOrderComponent,},
     {path:"/home/creditEnquiry/creditDataQuery",component:creditDataQueryComponent,},
     {path:"/home/creditEnquiry/reporyExample",component:reportExampleComponent,},
     {path:"/home/cardCenter/liftingAmount",component:liftingAmountComponent,},

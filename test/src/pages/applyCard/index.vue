@@ -100,8 +100,17 @@ export default {
                         message:res.data.message
                     })
                     return
+                } else {
+                    let url=res.data.data.data
+                        that.$router.push({
+                            path:"/loan/form/myOrder",
+                            query:{
+                                info:url
+                              }
+                        })
+                    //  location.href=res.data.data.data
                 }
-                location.href=res.data.data.data
+               
             })
             .catch(function(err){
                  that.$toast({
@@ -130,7 +139,6 @@ export default {
     },
     created () {
       this.info=this.$route.query.info
-    //   console.log(this.info);
     this.handleGetAOuth();
       
     },
@@ -165,6 +173,12 @@ export default {
            padding-bottom: 50px;
            font-size: 34px;
            >.info {
+               >.image{
+                   padding:20px;
+                   >img {
+                       width:100%;
+                   }
+               }
                >.area {
                    padding-left:15px;
                    background-color: #fff;

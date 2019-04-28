@@ -113,7 +113,6 @@ export default {
                     rand += r
                 }
              this.number= new Date().getTime()+rand
-             
     
                     function generateTimeReqestNumber() {
                             var date = new Date();
@@ -122,8 +121,6 @@ export default {
                         }
                     
                     function pad2(n) { return n < 10 ? '0' + n : n }
-
-
             let data={
                 busCode:"2001",
                 orderAmount:this.orderAmount,
@@ -142,9 +139,18 @@ export default {
                         message:res.data.message
                     })
                     return
-                }
-                location.href=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
+                } else {
+                     // location.href=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
                 //  location.href=res.data.data.url
+                let url=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
+                        this.$router.push({
+                            path:"/loan/form/myOrder",
+                            query:{
+                                info:url
+                              }
+                        })
+                }
+               
             })
             .catch(err=>{
                 console.log(err,"调取失败");
@@ -252,7 +258,7 @@ export default {
                }
            }
            >.at-once {
-               margin-top:200px;
+               margin-top:100px;
                padding:0 20px;
                >button {
                    height: 90px;

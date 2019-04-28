@@ -23,11 +23,11 @@
            </div>
            <van-button @click="logInPass" class="login center" type="default">登录</van-button>
             <div class="wx-login row">
-                <div class="logIn start-center" @click="logIn">
+                <!-- <div class="logIn start-center" @click="logIn">
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
                 </div>
-                <div class="register end-center" @click="register">注册</div>
+                <div class="register end-center" @click="register">注册</div> -->
             </div>
         </div>
     </div>
@@ -92,9 +92,6 @@ export default {
                     console.log('登陆成功',res);
                     that.$toast('登陆成功');
                     if(that.checked){
-                        // 记住密码
-                        storage.set('username',that.phone);
-                        storage.set('password',that.password);
                         storage.set('rempass',true);
                     }else{
                         // 不记住密码
@@ -102,8 +99,9 @@ export default {
                         storage.remove('password');
                         storage.remove('rempass');
                     }
-                    that.$router.push('/home');
-                    console.log('VUEX',that.$store.state);
+                     storage.set('username',that.phone);
+                     storage.set('password',that.password);
+                     that.$router.push('/home');
                 }else{
                     that.$toast({
                         message:res.data.message
@@ -118,7 +116,8 @@ export default {
         // 登录
         logIn(){
             location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
-        }
+        },
+       
     },
     created(){
         this.phone = storage.get('username');
@@ -163,7 +162,7 @@ export default {
                    display: block;
                    width:100%;
                    padding-bottom: 20px;
-                   -webkit-animation: spin 2s linear infinite;
+                   -webkit-animation: spin 4s linear infinite;
 		           animation: spin 2s linear infinite;
                }
             //    @-webkit-keyframes spin {
