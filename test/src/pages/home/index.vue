@@ -307,13 +307,6 @@ export default {
                           return
                       } else {
                           that.$router.push("/logIn")
-<<<<<<< HEAD
-=======
-                        //   storage.remove('username');
-                        //   storage.remove('password');
-                        //   storage.remove('rempass');
-                        //   storage.clear()
->>>>>>> 2a2eed7b780895e19fceb8e00c4779c9dcf48c69
                       }
                      
                   })
