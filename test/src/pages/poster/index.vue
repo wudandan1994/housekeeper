@@ -3,7 +3,7 @@
         <header class="header-top row">
             <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">海报</div>
-            <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+            <div @click="showCover" class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
         <div class="poster-canvas center"><canvas id="poster" width="320" height="470"></canvas>  </div>
         <div class="btn row">
@@ -20,15 +20,31 @@
                 <div class="success center">海报生成成功,请长按图片保存</div>
             </div>
         </div>
+        <!-- <div class="cover" v-show="showShare">
+            <div>
+                <ul>
+                    <li >
+                        <p><van-icon name="http://pay.91dianji.com.cn/wx.png"/></p>
+                        <p>微信</p>
+                    </li>
+                    <li>
+                        <p><van-icon name="http://pay.91dianji.com.cn/wx.png"/></p>
+                        <p>朋友圈</p>
+                    </li>
+               </ul>
+               <div class="cancle">
+                  <van-button @click="cancleCover" type="default" size="large">取消</van-button>
+               </div>
+            </div>
+        </div> -->
     </div>
 
 </template>
-
-
 <script>
 import loading from '@/components/loading'
 import storage from '@/lib/storage'
-import { axiosPost } from '../../lib/http';
+import share from '@/lib/share'
+import { axiosPost,axiosGet } from '../../lib/http';
 export default {
     components:{
       loading
@@ -43,11 +59,19 @@ export default {
             url: 'http://pay.91dianji.com.cn',
             qrcode: '',
             random: '1',
+            showShare:false
         }
     },
     methods:{
         goBack() {
             this.$router.go(-1);
+        },
+        cancleCover(){
+            this.showShare=false
+        },
+        
+        showCover(){
+            this.showShare=true
         },
         // 随机数
         handlechangeRandom(){
@@ -133,7 +157,14 @@ export default {
                 }
             }).catch(res =>{
             })
+        },
+        shareApp(){
+            
         }
+
+    },
+    created () {
+       
     },
     mounted(){
         this.handleJundgeQrCode();
@@ -144,6 +175,7 @@ export default {
 
 <style lang="less">
    #page-poster{
+       position: relative;
        width: 100vw;
        padding-top: 86px;
        padding-bottom: 60px;
@@ -218,5 +250,50 @@ export default {
                }
            }
        }
+        >.cover {
+            z-index:1000;
+            background-color: rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top:0px;
+            bottom:0px;
+            left:0px;
+            right:0px;
+            >div{
+                position: fixed;
+                bottom:0;
+                left:0px;
+                right:0px;
+                padding:15px;
+                >ul{
+                    background-color: #fff;
+                    border-radius:20px;
+                    display: flex;
+                    margin-bottom: 15px;
+                    >li {
+                        width:20%;
+                        text-align: center;
+                        >p {
+                            &:nth-of-type(2){
+                                padding-top:10px;
+                                padding-bottom: 10px;
+                            }
+                            &:nth-of-type(1){
+                                font-size: 40px;
+                            }
+                        }
+                    }
+                }
+               
+                >.cancle {
+                    //  margin:10px;
+                     .van-button--default{
+                        background-color: #fff;
+                        color:#000;
+                        margin-bottom:40px;
+                        border-radius: 15px;
+                  }
+                }
+            }
+        }
    }
 </style>

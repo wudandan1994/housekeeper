@@ -85,11 +85,9 @@ export default {
         // },
        record(){
            let data={
-            //    chMerCode:this.chMerCode,
-            //    orderCode:this.number
-                chMerCode:"207887783404",
-                orderCode:"2019042519033078016"
-                // 2019042519033078016
+               chMerCode:this.chMerCode,
+               orderCode:this.number
+               
            }
            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getTradeQuery",data)
            .then(res=>{
@@ -101,8 +99,6 @@ export default {
                    this.showrecord=true
                     this.record=res.data.data
                }
-              
-               
            })
            .catch(err=>{
            })

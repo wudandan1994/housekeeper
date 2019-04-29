@@ -74,7 +74,7 @@
                    </li>
                </ul>
            </div>
-            <router-link to="/home/online" tag="p">联行号在线查询</router-link>
+            <router-link to="/home/online" tag="p" class="online">联行号在线查询</router-link>
            <div class="at-once">
                    <van-button  @click="register" size="large" round type="info">下一步</van-button>
             </div>
@@ -226,12 +226,20 @@ export default {
                         // console.log(res,"个人信息查询的结果")
                         if(res.data.success){
                             let info=res.data.data.chMerCode
-                            that.$router.push({
+                            that.componentload=true
+                            setTimeout(()=>{
+                                that.$router.push({
                                 path:"/home/collect/open",
                                 query:{
                                    info,
-                              }
-                         })
+                                }
+                             })
+                            },500)
+                            
+                       } else {
+                           that.$toast({
+                               message:res.data.message
+                           })
                        }
                     })
                     .catch(function(err){
@@ -320,12 +328,7 @@ export default {
            padding-bottom: 50px;
            background-color: #EEEFF1;
            font-size: 34px;
-           >p {
-               padding:30px;
-               font-size: 30px;
-               color:#767677;
-               font-weight: bold;
-           }
+          
            >.phone {
                >ul{
                    padding-left:30px;
@@ -336,6 +339,7 @@ export default {
                        border-bottom: 1px solid #ccc;
                        padding-top:40px;
                        padding-bottom: 40px;
+                       padding-right: 40px;
                        height: 60px;
                        line-height: 60px;
                        color:#000;
@@ -360,6 +364,8 @@ export default {
                            flex: 1;
                            margin-left:10px;
                            font-size: 30px;
+                           text-align: right;
+
                        }
                        input::-webkit-input-placeholder {
                            font-size: 28px;
@@ -370,7 +376,13 @@ export default {
                    }
                }
            }
-          
+          >.online {
+              padding:30px;
+               font-size: 30px;
+               color:blue;
+               font-weight: bold;
+               text-align: right;
+          }
            
            >.at-once {
                margin-top:150px;

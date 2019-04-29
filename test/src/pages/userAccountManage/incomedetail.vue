@@ -502,7 +502,7 @@ export default {
                         height: 100%;
                         margin-left: 2%;
                         div{
-                            width: 100%;
+                            width: 200%;
                             height: 50%;
                         }
                         .list-name{

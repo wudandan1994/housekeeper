@@ -29,8 +29,10 @@ export default {
             if(window.plus){  
                 let self= plus.webview.currentWebview(); 
             var yinlian= plus.webview.create(this.url, "yinlian", {  
-            top: "80px",  
-            bottom: 0  
+            top: "40px",  
+            bottom: 0 ,
+            left:0,
+            right:0
         });  
            self.append(yinlian)
      }else{  

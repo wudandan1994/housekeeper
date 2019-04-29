@@ -100,13 +100,19 @@
                 </div>
             </div>
         </van-popup>
+        <loading :componentload="componentload"></loading>
     </div>
 </template>
 <script>
 import {axiosPost} from '@/lib/http'
+import loading from '@/components/loading'
 export default {
+     components:{
+      loading
+    },
     data(){
         return{
+             componentload:false,
             fixed: true,
             images:[
                 'http://pay.91dianji.com.cn/01.png',
@@ -160,7 +166,7 @@ export default {
         // 切换验证码
         changeCode(){
             this.realCode = '';
-            // this.safeCode();
+            this.safeCode();
         },
         // 服务条款
         handleAgree(val){
@@ -196,12 +202,16 @@ export default {
                        return
                    } else {
                         let url=res.data.data;
-                        this.$router.push({
+                        this.componentload=true
+                        setTimeout(()=>{
+                            this.$router.push({
                             path:"/loan/form/myOrder",
                             query:{
                                 info:url
                               }
-                        })
+                          })
+                        },1000)
+                        
                    }
                    
                })

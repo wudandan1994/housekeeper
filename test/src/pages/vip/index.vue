@@ -309,6 +309,9 @@ export default {
     },
     created(){
         this.nickname = this.$store.state.wechat.nickname;
+    },
+    mounted(){
+        
     }
 }
 </script>

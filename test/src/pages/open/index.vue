@@ -460,7 +460,9 @@ export default {
                     border:none;
                     font-size: 30px;
                     font-weight: bold;
-                    padding-left:40px;
+                    padding-left:20px;
+                    padding-right:20px;
+
                 }
                 .uploadimg{
                     padding:20px;

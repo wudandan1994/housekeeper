@@ -87,7 +87,7 @@
                 <div class="per-menu-title center">VIP视频</div>
             </div>
 
-            <div class="per-menu-list line">
+            <div class="per-menu-list line"  @click="handleExpect">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/310.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">流程说明</div>
             </div>
@@ -113,7 +113,7 @@
                 <div class="per-menu-title center">名片夹</div>
             </div>
         </div>
-        <div  class="update">
+        <!-- <div  class="update">
             <ul>
                 <li @click="uploadAnd">
                     <img src="http://pay.91dianji.com.cn/Android.png" >
@@ -134,7 +134,7 @@
                         <img src="http://pay.91dianji.com.cn/iosem.png" alt="">
                     </dir>
             </div>
-        </div>
+        </div> -->
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
         <loading :componentload="componentload"></loading>
     </div>
@@ -162,8 +162,8 @@ export default {
             amount: '',
             amountSum: '',
             commission: '',
-            showand:false,
-            showios:false
+            // showand:false,
+            // showios:false
         }
     },
     methods:{
@@ -171,20 +171,20 @@ export default {
         handleExpect(){
             this.$toast('敬请期待')
         },
-        uploadAnd(){
-            this.showand=!this.showand
-            this.showios=false
-            setTimeout(()=>{
-                this.showand=false
-            },6000)
-        },
-        uploadIos(){
-            this.showios=!this.showios
-            this.showand=false
-            setTimeout(()=>{
-                this.showios=false
-            },6000)
-        },
+        // uploadAnd(){
+        //     this.showand=!this.showand
+        //     this.showios=false
+        //     setTimeout(()=>{
+        //         this.showand=false
+        //     },6000)
+        // },
+        // uploadIos(){
+        //     this.showios=!this.showios
+        //     this.showand=false
+        //     setTimeout(()=>{
+        //         this.showios=false
+        //     },6000)
+        // },
         changeActive(obj){
             // console.log('obj', obj);
         },

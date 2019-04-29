@@ -94,7 +94,7 @@
             <!-- 详情模块 -->
             <div class="details">
                 <ul>
-                    <li>
+                    <li @click="handleExpect">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_49.png" size="30px" />
                         </span>
@@ -103,7 +103,7 @@
                             <p>给实习会员设置分润</p>
                         </div>
                     </li>
-                    <li>
+                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.4008000000.com'}}">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" />
                         </span>
@@ -111,8 +111,8 @@
                             <h3>汽车保险</h3>
                             <p>没有中间商差价</p>
                         </div>
-                    </li>
-                    <li>
+                    </router-link>
+                    <li @click="handleExpect">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_51.png" size="30px" />
                         </span>
@@ -121,7 +121,7 @@
                             <p>发朋友圈获得奖金</p>
                         </div>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <span>
                             <van-icon name="http://pay.91dianji.com.cn/icon_52.png" size="30px" />
                         </span>
@@ -130,7 +130,7 @@
                             <p>钱夹宝业务排名</p>
                         </div>
                     </li>
-                    <li>
+                    <router-link tag="li"  :to="{path: '/loan/form/myOrder',query: {info: 'http://www.baoxian.pingan.com'}}">
                         <span>
                             <van-icon name="http://pay.91dianji.com.cn/icon_53.png" size="30px" />
                         </span>
@@ -138,8 +138,8 @@
                             <h3>意外险</h3>
                             <p>出行安全有保障</p>
                         </div>
-                    </li>
-                    <li>
+                    </router-link>
+                    <li @click="handleExpect">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_60.png" size="30px" />
                         </span>
@@ -148,7 +148,7 @@
                             <p>快速提额</p>
                         </div>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <span>
                             <van-icon name="http://pay.91dianji.com.cn/icon_61.png" size="30px" />
                         </span>
@@ -157,7 +157,7 @@
                             <p>参与奖金池奖励分配</p>
                         </div>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_62.png" size="30px" />
                         </span>
@@ -166,7 +166,7 @@
                             <p>TA绑卡开通注册</p>
                         </div>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_63.png" size="30px" />
                         </span>
@@ -175,7 +175,7 @@
                             <p>积分不失/换乐无穷</p>
                         </div>
                     </li>
-                    <li>
+                    <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.jd.com'}}" tag="li" >
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_64.png" size="30px" />
                         </span>
@@ -183,8 +183,8 @@
                             <h3>商城</h3>
                             <p>商城</p>
                         </div>
-                    </li>
-                    <li>
+                    </router-link>
+                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://chaxun.weizhang8.cn/guanfangwang.php'}}" >
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_65.png" size="30px" />
                         </span>
@@ -192,7 +192,7 @@
                             <h3>违章查询</h3>
                             <p>违章查询</p>
                         </div>
-                    </li>
+                    </router-link>
                 </ul>
             </div>
             <!-- 遮盖层 -->
@@ -236,11 +236,11 @@ export default {
         return {
             // 轮播图图片
             images: [
-                'http://pay.91dianji.com.cn/01.png',
-                'http://pay.91dianji.com.cn/ban.jpg',
-                'http://pay.91dianji.com.cn/04.png',
-                'http://pay.91dianji.com.cn/06.jpg',
-                'http://pay.91dianji.com.cn/08.jpg'
+                'http://pay.91dianji.com.cn/banner01.jpg',
+                'http://pay.91dianji.com.cn/banner02.jpg',
+                'http://pay.91dianji.com.cn/banner03.jpg',
+                'http://pay.91dianji.com.cn/banner04.jpg',
+                'http://pay.91dianji.com.cn/banner05.jpg'
             ],
             showAaside:false, 
             checked:true,
@@ -259,6 +259,9 @@ export default {
    methods:{
         isShow() {
             this.showAaside=true
+        },
+        handleExpect(){
+            this.$toast('敬请期待')
         },
         hideAside() {
             this.showAaside=false
@@ -307,13 +310,6 @@ export default {
                           return
                       } else {
                           that.$router.push("/logIn")
-<<<<<<< HEAD
-=======
-                        //   storage.remove('username');
-                        //   storage.remove('password');
-                        //   storage.remove('rempass');
-                        //   storage.clear()
->>>>>>> 2a2eed7b780895e19fceb8e00c4779c9dcf48c69
                       }
                      
                   })
@@ -361,7 +357,7 @@ export default {
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
         this.handleSearchAuths()
-        // this.automatic()
+        this.automatic()
     }
 }
 </script>

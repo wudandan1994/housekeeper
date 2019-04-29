@@ -22,7 +22,6 @@
                 <div class="ring">
                     <van-notice-bar
                         text="恭喜黄金会员陈**于09：40:25完成智能还款计划  订单尾号 8888，推荐人获得7.5元总收益。"
-                        left-icon="volume-o"
                     />
                 </div>
             </div>
@@ -53,34 +52,34 @@
             </div>
              <div class="bottom">
                  <ul>
-                     <router-link tag="li" to="/home/cardCenter/businessCooperation">
+                     <li @click="handleExpect">
                          <h3>
                              <p>信用卡商务合作</p>
                              <p>可上传当地银行业务</p>
                          </h3>
-                         <span><van-icon name="column" /></span>
-                     </router-link>
+                         <span><van-icon name="http://pay.91dianji.com.cn/306.png" /></span>
+                     </li>
                       <router-link tag="li"  to="/home/cardCenter/noviceGuide">
                          <h3>
                              <p>新手指南</p>
                              <p>快速掌握办卡秘籍</p>
                          </h3>
-                         <span><van-icon name="column" /></span>
+                         <span><van-icon name="http://pay.91dianji.com.cn/311.png" /></span>
                       </router-link>
-                      <router-link to="/home/cardCenter/liftingAmount" tag="li">
+                      <li  @click="handleExpect">
                          <h3>
                              <p>信用卡提额</p>
                              <p>在线免费提额</p>
                          </h3>
-                         <span><van-icon name="column" /></span>
-                      </router-link>
-                      <router-link to="/home/cardCenter/progressQuery" tag="li">
+                         <span><van-icon name="http://pay.91dianji.com.cn/307.png" /></span>
+                      </li>
+                      <li  @click="handleExpect">
                          <h3>
                              <p>进度查询</p>
                              <p>快速查询办卡详情</p>
                          </h3>
-                         <span><van-icon name="column" /></span>
-                      </router-link>
+                         <span><van-icon name="http://pay.91dianji.com.cn/310.png" /></span>
+                      </li>
                  </ul>
              </div>
         </div>
@@ -104,6 +103,9 @@ export default {
     methods:{
         goBack(){
             this.$router.push('/home')
+        },
+         handleExpect(){
+            this.$toast('敬请期待')
         },
         getCardList(){
             let that= this
@@ -174,7 +176,7 @@ export default {
                 display: flex;
                 height: 100px;
                 justify-content: space-between;
-                background-color: #fff;
+                // background-color: #fff;
                 border-bottom: 3px solid #ccc;
                 >.consultation {
                     color:#4B66AF;
@@ -196,6 +198,10 @@ export default {
                     margin-bottom: 25px;
                     padding-left:10px;
                     border-left: 2px solid #ccc;
+                    .van-notice-bar__wrap{
+                        color:#4B66AF;
+                    }
+
                 }
             }
             >.center {

@@ -111,15 +111,10 @@ export default {
         },
          searchPunch(){
              let that = this
-
            axiosPost("http://pay.91dianji.com.cn/api/customer/getSignDetail")
            .then(function(res){ 
-               console.log(res,"查询签到详情")
                 if(!res.data.success){
-                    // that.isPunch=true
-                    that.$toast({
-                        message:res.data.message
-                    })
+                    
                     that.isPunch=false
                     return
                 }

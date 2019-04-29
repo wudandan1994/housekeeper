@@ -2,7 +2,7 @@
     <div id="my-order">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>信用卡业务</span>
+            <span>钱夹宝</span>
             <span></span>
         </header>
         <div class="container">
@@ -31,7 +31,7 @@ export default {
             top: "80px",  
             bottom: 0  
         });  
-        self.append(yinlian)
+           self.append(yinlian)
         },
     },
     created(){
@@ -51,7 +51,7 @@ export default {
            padding-top:10px;
            color:#fff;
            z-index:999;
-           font-size:28px;
+           font-size:34px;
            display: flex;
            position: fixed;
            justify-content: space-between;

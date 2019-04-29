@@ -6,17 +6,16 @@
             <span></span>
         </header>
         <div class="container">
-           <p>请获取短信验证，并设置新的登录密码</p>
+           <p>请获取短信验证，并设置登录密码</p>
            <div class="phone">
                <ul>
                    <li>
                        <span>+86</span>
                        <input type="number" v-model="mobile" placeholder="输入11位手机号码">
                        <span>
-                            <span v-show="showCount">{{count}}秒后再次获取</span>
-                             <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
+                            <span v-show="showCount" class="second">{{count}}秒后</span>
+                            <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
                        </span>
-                      
                    </li>
                     <li>
                         <span>验证码:</span>
@@ -38,8 +37,6 @@
         </div>
     </div>
 </template>
-
-
 <script>
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -246,11 +243,24 @@ export default {
                        height: 60px;
                        line-height: 60px;
                        color:#000;
+                       .second{
+                            background-color: #4965AE;
+                             padding:4px 8px;
+                             color:#fff;
+                             border-radius: 5px;
+                             display: inline-block;
+                       }
+                       .van-button--info{
+                           background-color: #4965AE;
+                           font-size: 30px;
+                       }
                        &:last-child {
                            border:none;
                        }
                        >span {
-                           font-weight: bold;
+                           &:nth-of-type(1){
+                               font-weight: bold;
+                           }
                           >button {
                               height: 60px;
                               padding:0 8px;
@@ -271,6 +281,9 @@ export default {
                border-radius: 10px;
                padding-left: 30px;
                padding-right:30px;
+               .van-button--info{
+                   background-color: #4965AE;
+               }
                >button {
                    height: 90px;
                    font-size: 30px;

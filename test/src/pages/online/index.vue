@@ -7,8 +7,12 @@
         </header>
         <div class="container">
            <div class="online">
-               <!-- <p class="serch" @click="webview">联行号在线查询</p> -->
-               <!-- <p >点击关闭</p> -->
+                <div class="ring">
+                    <van-notice-bar
+                        text="提示：选择地区，开户银行，输入支行名称，点击搜索即可查询联行号。"
+                    />
+                </div>
+
            </div>
         </div>
     </div>
@@ -70,11 +74,10 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
              >.online {
-               margin-top:50px;
-               display:flex;
-               justify-content: space-around;
-               color:blue;
-               font-size:30px;
+                 margin-top:15px;
+             .van-notice-bar__wrap{
+                    color:#4B66AF;
+                }
            }
        }
    }

@@ -51,7 +51,6 @@
                 <span>继续</span>
             </router-link>
         </div> -->
-
     </div>
 
 </template>
@@ -83,7 +82,6 @@ export default {
                                 info:url
                               }
                         })
-
                 }
             })
             .catch(err=>{

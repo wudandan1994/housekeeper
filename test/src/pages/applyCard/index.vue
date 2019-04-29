@@ -38,15 +38,21 @@
                 </div>
             </div>
         </div>
+         <loading :componentload="componentload"></loading>
     </div>
 
 </template>
 
 <script>
+import loading from '@/components/loading'
 import {axiosPost} from '@/lib/http'
 export default {
+     components:{
+      loading
+    },
     data() {
         return {
+           componentload:false,
            info:"",
            merName:"",
            merMobile:"",
@@ -101,13 +107,18 @@ export default {
                     })
                     return
                 } else {
-                    let url=res.data.data.data
-                        that.$router.push({
+                    that.componentload=true
+                     let url=res.data.data.data
+                    setTimeout(()=>{
+                         that.$router.push({
                             path:"/loan/form/myOrder",
                             query:{
                                 info:url
                               }
                         })
+                    },1000)
+                   
+                       
                     //  location.href=res.data.data.data
                 }
                
