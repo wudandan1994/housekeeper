@@ -12,10 +12,10 @@
                    <li>
                        <span>+86</span>
                        <input type="number" v-model="mobile" placeholder="输入11位手机号码">
-                       <span>
-                            <span v-show="showCount" class="second">{{count}}秒后</span>
+                       <div>
+                             <van-button size="middle"  class="second" v-show="showCount"  round type="info">{{count}}秒后</van-button>
                             <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
-                       </span>
+                       </div>
                    </li>
                     <li>
                         <span>验证码:</span>
@@ -243,11 +243,23 @@ export default {
                        height: 60px;
                        line-height: 60px;
                        color:#000;
+                       &:nth-of-type(1){
+                           padding-left:15px;
+                       }
+                       >div {
+                           >.van-button--info {
+                                background-color: #4965AE;
+                                padding:5px 10px;
+                                margin-right: 10px;
+                                font-size: 30px;
+
+                           }
+                       }
                        .second{
                             background-color: #4965AE;
                              padding:4px 8px;
                              color:#fff;
-                             border-radius: 5px;
+                             border-radius:10px;
                              display: inline-block;
                        }
                        .van-button--info{
@@ -260,6 +272,7 @@ export default {
                        >span {
                            &:nth-of-type(1){
                                font-weight: bold;
+                               padding-left:10px;
                            }
                           >button {
                               height: 60px;

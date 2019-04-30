@@ -179,7 +179,7 @@ export default {
                 // console.log('流水请求成功',res);
                 if(res.data.success){
                     if(res.data.data.list.data.length == '0'){
-                        this.$toast('查询结果为空');
+                        this.$toast('您目前还没有收益记录');
                     }else{
                         this.list = res.data.data.list.data;
                     }
@@ -333,6 +333,7 @@ export default {
         height: auto;
         padding-top: 86px;
         .income-tab{
+           
             .top-tab{
                 width: 100%;
                 height: 100px;
@@ -438,7 +439,7 @@ export default {
                 border-bottom: solid 2px #ccc;
                 position: relative;
                 .checked{
-                    background: #4b66af;
+                    background: olivedrab;
                     color: white;
                 }
                 .direct-invitation,.indirect-invitation{

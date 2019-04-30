@@ -115,11 +115,11 @@ export default {
              componentload:false,
             fixed: true,
             images:[
-                'http://pay.91dianji.com.cn/01.png',
-                'http://pay.91dianji.com.cn/ban.jpg',
-                'http://pay.91dianji.com.cn/04.png',
-                'http://pay.91dianji.com.cn/06.jpg',
-                'http://pay.91dianji.com.cn/08.jpg'
+                'http://pay.91dianji.com.cn/banner01.jpg',
+                'http://pay.91dianji.com.cn/banner02.jpg',
+                'http://pay.91dianji.com.cn/banner03.jpg',
+                'http://pay.91dianji.com.cn/banner04.jpg',
+                'http://pay.91dianji.com.cn/banner05.jpg'
             ],
             form:{
                 name: '',
@@ -129,7 +129,7 @@ export default {
             },
             checked: false,
             show: false,
-            remarks: '注:在钱夹宝申请贷款一律不收取任何费用，如有向您索要手续费的请拨打111-222-3333向平台举报',
+            remarks: '注:在钱夹宝申请贷款一律不收取任何费用，如有向您索要手续费的请拨打400-1059-769向平台举报',
             codeLength: 4,
             realCode: ''
         }

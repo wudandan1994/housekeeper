@@ -114,14 +114,24 @@ export default {
            axiosPost("http://pay.91dianji.com.cn/api/customer/getSignDetail")
            .then(function(res){ 
                 if(!res.data.success){
-                    
                     that.isPunch=false
                     return
                 }
                  that.signcount=res.data.data.signcount
                  that.gold=res.data.data.gold
-                 that.isPunch=true
+                 axiosPost("http://pay.91dianji.com.cn/api/customer/insertSign")
+                 .then(res=>{
+                     if(!res.data.success){
+                         that.isPunch=true
+                     }
+                 })
            })
+
+
+
+
+
+
          },
         //  initData: function (cur) {
         //             let that = this;

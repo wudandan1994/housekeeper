@@ -159,7 +159,13 @@ export default {
             })
         },
         shareApp(){
-            
+            let share={}
+            share.info={
+                id:"",
+                name:"",
+                head_image:"",
+                introduce:""
+            }
         }
 
     },

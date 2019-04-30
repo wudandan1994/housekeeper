@@ -22,10 +22,9 @@ export default {
     },
     methods:{
         goBack() {
-            // plus.webview.close( "yinlian")
+            plus.webview.close( "yinlian")
             this.$router.go(-1)
         },
-<<<<<<< HEAD
         webview(){
             let self= plus.webview.currentWebview(); 
             var yinlian= plus.webview.create(this.url, "yinlian", {  
@@ -34,7 +33,6 @@ export default {
         });  
            self.append(yinlian)
         },
-=======
         // webview(){
         //     let self= plus.webview.currentWebview(); 
         //     var yinlian= plus.webview.create(this.url, "yinlian", {  
@@ -43,12 +41,11 @@ export default {
         // });  
         // self.append(yinlian)
         // },
->>>>>>> 1bf789192a3e882a900ab8f50b0abf359085101b
     },
     created(){
         this.url=this.$route.query.info;
         // window.location.href = this.url;
-        // this.webview();
+        this.webview();
     }
 }
 </script>

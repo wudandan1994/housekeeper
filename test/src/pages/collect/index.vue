@@ -74,7 +74,7 @@
                    </li>
                </ul>
            </div>
-            <router-link to="/home/online" tag="p" class="online">联行号在线查询</router-link>
+            <!-- <router-link to="/home/online" tag="p" class="online">联行号在线查询</router-link> -->
            <div class="at-once">
                    <van-button  @click="register" size="large" round type="info">下一步</van-button>
             </div>

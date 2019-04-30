@@ -26,7 +26,7 @@
             <!-- 查询模块 -->
             <div class="search">
                 <ul>
-                    <router-link to="/home/creditEnquiry" tag="li">
+                    <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14'}}" tag="li">
                         <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
                         <span>征信查询</span>
                     </router-link>
@@ -48,7 +48,7 @@
             <div class="pannel-news row">
                 <div class="pannel-title center">钱夹<br/>资讯</div>
                 <div class="pannel-detail center" @click="handleContactUs">
-                    <van-notice-bar text="钱夹宝1.0正式上线啦,若您在使用中有任何问题请联系客服"/>
+                    <van-notice-bar text="钱夹宝1.0正式上线啦,若您在使用中有任何问题请联系客服：400-1059-769"/>
                 </div>
             </div>
 
@@ -103,7 +103,7 @@
                             <p>给实习会员设置分润</p>
                         </div>
                     </li>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.4008000000.com'}}">
+                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/'}}">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" />
                         </span>
