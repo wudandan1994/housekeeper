@@ -34,7 +34,11 @@
                      </div>
                      <div class="qualifications">
                          <span>授权还款额度</span>
+<<<<<<< HEAD
                          <span>授权钻石会员资格</span>
+=======
+                         <span>授权免费粉丝资格</span>
+>>>>>>> 423e6e2166c68bbaa20133d37d38a53e0f34f258
                          <span>智能还款分润万38-60</span>
                     </div>  
                      <div class="price">
@@ -90,8 +94,8 @@
                         <li v-if="level == '钱夹宝钻石会员'">若你成为钻石会员，垫还每万元可省下78元，空卡代还每万元可省下57元，最关键的一点在于不仅省钱还可以让你的信用卡资金利用率达到90%以上。</li>
                         <li v-if="level == '钱夹宝黄金会员'">黄金会员无城市合伙人、城市运营商躺赢赚钱资格</li>
                         <li v-if="level == '钱夹宝黄金会员'">开通钻石会员可享受更高级别收益权限，数据显示，黄金会员整体收益低于钻石会员80%，您确定要升级吗？</li>
-                        <li v-if="level == '钱夹宝钻石会员'"><span class="van-rate">推荐指数：</span><van-rate class="van-rate" v-model="value" /></li>
-                        <li v-if="level == '钱夹宝黄金会员'"><span class="van-rate">推荐指数：</span><van-rate class="van-rate" v-model="value" /></li>
+                        <li v-if="level == '钱夹宝钻石会员'"><span class="van-rate">推荐指数：</span><van-rate class="van-rate" readonly  v-model="value" /></li>
+                        <li v-if="level == '钱夹宝黄金会员'"><span class="van-rate">推荐指数：</span><van-rate class="van-rate" readonly  v-model="value1" /></li>
                     </ul>
                     <!-- <div class="tips center">(保证金将按业绩退还)</div> -->
                 </div>
@@ -176,8 +180,8 @@ export default {
             pup2: false,
             price: '',
             level: '',
-            value: 2,
-            value1:5, 
+            value: 5,
+            value1:4, 
             paytype: 'alipay',
             orderid: '',
             recomname: '',
@@ -309,6 +313,9 @@ export default {
     },
     created(){
         this.nickname = this.$store.state.wechat.nickname;
+    },
+    mounted(){
+        
     }
 }
 </script>

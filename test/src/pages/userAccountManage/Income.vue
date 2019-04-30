@@ -216,6 +216,7 @@ export default {
             .run-title{
                 width: 73vw;
                 height: 100%;
+                font-size:30px;
             }
             .icon-jine1{
                 font-size: 50px;

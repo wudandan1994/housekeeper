@@ -55,7 +55,7 @@
             </div>
             <div class="business">
                 <ul>
-                    <li>
+                    <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/404.png" /></p>
                         <p>新闻资讯</p>
                         <p>文章可植入广告、锁粉</p>
@@ -65,64 +65,64 @@
                         <p>推广海报图</p>
                         <p>分享二维码、快速增粉</p>
                     </router-link>
-                    <li>
+                    <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/406.png" /></p>
                         <p>邀请好友</p>
                         <p>邀请新人注册,有红包奖励</p>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/407.png" /></p>
                         <p>名片玩家视频</p>
                         <p>钱夹报视频.一键分享</p>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/408.png" /></p>
                         <p>名片推广</p>
                         <p>分享名片.快速增粉</p>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/409.png" /></p>
                         <p>生成短链接</p>
                         <p>快速分享短链接</p>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/410.png" /></p>
                         <p>链接转化二维码</p>
                         <p>快速转粉.一键分享</p>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/411.png" /></p>
                         <p>信用卡链接</p>
                         <p>分享带锁粉功能哦!</p>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/412.png" /></p>
                         <p>分享链接</p>
                         <p>分享钱夹宝链接</p>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/413.png" /></p>
                         <p>推广素材图</p>
                         <p>各种视频+图片</p>
                     </li>
-                    <li>
+                    <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/414.png" /></p>
                         <p>信用卡推广图</p>
                         <p>信用卡推广图.一键锁粉</p>
                     </li>
-                    <li @click="flagDown">
+                    <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/415.png" /></p>
                         <p>物料下载</p>
                         <p>海量宣传资料</p>
                     </li>
-                    <div class="tips" v-show="showFlag">
+                    <!-- <div class="tips" v-show="showFlag">
                         <h3>温馨提示</h3>
                         <p>如您想下载百度网盘的物料，请先下载百度网盘客户端或者APP，并且先注册百度账号，如您有账号可直接下载物料！</p>
                         <p>
                             <span>下载说明</span>
                             <span>去下载</span>
                         </p>
-                    </div>
+                    </div> -->
                 </ul>
             </div>
         </div>
@@ -143,8 +143,11 @@ export default {
         }
     },
     methods:{
-        flagDown(){
-            this.showFlag=!this.showFlag
+        // flagDown(){
+        //     this.showFlag=!this.showFlag
+        // },
+         handleExpect(){
+            this.$toast('敬请期待')
         },
         showTips(){
             this.showFlag=false

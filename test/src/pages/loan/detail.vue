@@ -10,15 +10,15 @@
             <div class="desc row">
                 <div class="desc-title column">
                     <div class="big-title center">当天</div>
-                    <div class="small-title center">平均办理时间</div>
+                    <div class="small-title gray center">平均办理时间</div>
                 </div>
                 <div class="desc-title column">
                     <div class="big-title center">24个月以上</div>
-                    <div class="small-title center">借款期限</div>
+                    <div class="small-title gray center">借款期限</div>
                 </div>
                 <div class="desc-titles column">
                     <div class="big-title center">345904人</div>
-                    <div class="small-title center">申请人数</div>
+                    <div class="small-title gray center">申请人数</div>
                 </div>
             </div>
         </div>
@@ -54,15 +54,15 @@
         <div class="rate-specification row">
             <div class="explain column">
                 <div class="explain-big-title center">0.04%/天</div>
-                <div class="explain-small-title center">利率</div>
+                <div class="explain-small-title gray center">利率</div>
             </div>
             <div class="explain column">
                 <div class="explain-big-title center">30天</div>
-                <div class="explain-small-title center">贷款期限</div>
+                <div class="explain-small-title gray center">贷款期限</div>
             </div>
             <div class="explain column">
                 <div class="explain-big-title center">10120.00元</div>
-                <div class="explain-small-title center">总还款</div>
+                <div class="explain-small-title gray center">总还款</div>
             </div>
         </div>
         <div class="kong"></div>
@@ -118,6 +118,9 @@ export default {
         overflow: scroll;
         .loan .van-nav-bar {
             background-color: #4B66AF !important;
+        }
+        .gray {
+            color:#666;
         }
         .logo{
             width: 100%;
@@ -209,6 +212,9 @@ export default {
             .explain{
                 width: 30vw;
                 height: 100px;
+            }
+            .gray{
+                color:#666;
             }
             .explain-big-title{
                 width: 100%;

@@ -71,7 +71,7 @@
                    <div class="per-userinfo row">
                        <div class="avator start-center"><van-icon name="stop-circle" size="22px"/>声音开关</div>
                        <div class="detail end-center">
-                           <van-switch v-model="voice" active-color="#07c160" inactive-color="#f44" />
+                           <van-switch v-model="voice" active-color="#1989fa" inactive-color="#f44" />
                        </div>
                        <div class="icon-left end-center"><van-icon name="arrow" /></div>
                    </div>

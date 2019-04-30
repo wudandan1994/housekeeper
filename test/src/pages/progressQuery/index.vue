@@ -23,26 +23,27 @@ export default {
             // plus.webview.close( "yinlian")
             this.$router.push("/home")
         },
-        // webview(){
-        //     if(window.plus){  
-        //         let self= plus.webview.currentWebview(); 
-        //         var yinlian= plus.webview.create(this.url, "yinlian", {  
-        //         top: "80px",  
-        //         bottom: 0  
-        //     });  
-        //     self.append(yinlian)
-        // }else{  
-        //     document.addEventListener('plusready',function () {  
-        //         let self= plus.webview.currentWebview(); 
-        //             var yinlian= plus.webview.create(this.url, "yinlian", {  
-        //             top: "80px",  
-        //             bottom: 0  
-        //         });  
-        //     self.append(yinlian)
-//         // },false);  
-//   }  
-            
-//         },
+        webview(){
+            if(window.plus){  
+                let self= plus.webview.currentWebview(); 
+                var yinlian= plus.webview.create(this.url, "yinlian", {  
+                top: "40px",  
+                bottom: 0 ,
+                left:0,
+                right:0
+                });  
+                self.append(yinlian)
+            }else{  
+                document.addEventListener('plusready',function () {  
+                    let self= plus.webview.currentWebview(); 
+                        var yinlian= plus.webview.create(this.url, "yinlian", {  
+                        top: "80px",  
+                        bottom: 0  
+                    });  
+                    self.append(yinlian)
+                },false);  
+            }  
+        }
     },
     // mounted(){
     //     this.url=this.$route.query.info
