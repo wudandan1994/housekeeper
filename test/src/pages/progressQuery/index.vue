@@ -1,13 +1,11 @@
 <template>
     <div id="progress-query">
-        <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>信用卡业务</span>
-            <span></span>
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">信用卡业务</div>
+            <div class="right-icon center"></div>
         </header>
-        <div class="container">
-           
-        </div>
+        <iframe class="iframe"  :src="url" frameborder="0"></iframe>
     </div>
 
 </template>
@@ -22,31 +20,30 @@ export default {
     },
     methods:{
         goBack() {
-            plus.webview.close( "yinlian")
+            // plus.webview.close( "yinlian")
             this.$router.push("/home")
         },
         webview(){
             if(window.plus){  
                 let self= plus.webview.currentWebview(); 
-            var yinlian= plus.webview.create(this.url, "yinlian", {  
-            top: "40px",  
-            bottom: 0 ,
-            left:0,
-            right:0
-        });  
-           self.append(yinlian)
-     }else{  
-         document.addEventListener('plusready',function () {  
-            let self= plus.webview.currentWebview(); 
                 var yinlian= plus.webview.create(this.url, "yinlian", {  
-                top: "80px",  
-                bottom: 0  
-            });  
-         self.append(yinlian)
-    },false);  
-  }  
-            
-        },
+                top: "40px",  
+                bottom: 0 ,
+                left:0,
+                right:0
+                });  
+                self.append(yinlian)
+            }else{  
+                document.addEventListener('plusready',function () {  
+                    let self= plus.webview.currentWebview(); 
+                        var yinlian= plus.webview.create(this.url, "yinlian", {  
+                        top: "80px",  
+                        bottom: 0  
+                    });  
+                    self.append(yinlian)
+                },false);  
+            }  
+        }
     },
     // mounted(){
     //     this.url=this.$route.query.info
@@ -55,36 +52,19 @@ export default {
     // },
     created(){
         this.url=this.$route.query.info
-        this.webview();
+        // this.webview();
     }
 }
 </script>
 
 <style lang="less">
    #progress-query{
-       >header {
-            background-color: red;
-           width:100%;
-           height: 86px;
-           line-height: 86px;
-           padding-top:10px;
-           color:#fff;
-           z-index:999;
-           font-size:28px;
-           display: flex;
-           position: fixed;
-           justify-content: space-between;
-           >span {
-               &:nth-of-type(1) {
-                   margin-left: 10px;
-               }
-               &:nth-of-type(3) {
-                   margin-right: 10px;
-               }
-           }
-       }
-       >.container {
-           padding-top:96px;
-       }
+       width: 100vw;
+       height: calc(100vh - 86px);
+       padding-top: 86px;
+        .iframe{
+            width: 100vw;
+            height: calc(100vh - 86px);
+        }
    }
 </style>

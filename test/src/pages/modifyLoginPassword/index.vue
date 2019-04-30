@@ -249,9 +249,10 @@ export default {
                        >div {
                            >.van-button--info {
                                 background-color: #4965AE;
-                                padding:5px 10px;
+                                height: 60px;
+                                line-height: 60px;
                                 margin-right: 10px;
-                                font-size: 30px;
+                                font-size: 28px;
 
                            }
                        }
@@ -285,6 +286,13 @@ export default {
                            flex: 1;
                            margin-right:20px;
                            text-align: right;
+                           font-size: 28px;
+                           box-sizing:content-box;
+                           height: 60px;
+                       }
+                       input::-webkit-input-placeholder {
+                           font-size: 28px;
+                           line-height: 1rem;
                        }
                    }
                }

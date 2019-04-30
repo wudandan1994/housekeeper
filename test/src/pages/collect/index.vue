@@ -45,8 +45,13 @@
                        <input type="number" v-model="mobile" placeholder="手机号码">
                    </li>
                    <li>
+                       <span>开户行：</span>
+                       <span @click="handleBankNumber">{{bankName}}</span>
+                       <!-- <span @click="handleBankNumber">测试</span> -->
+                   </li>
+                   <li>
                         <span>联行号：</span>
-                       <input v-model="subBankCode"  type="number" placeholder="输入该支开户行行号或者联行号">
+                       <input v-model="subBankCode" type="number" placeholder="输入该支开户行行号或者联行号">
                    </li>
                     <li>
                         <span>结算户类型：</span>
@@ -74,17 +79,26 @@
                    </li>
                </ul>
            </div>
-            <!-- <router-link to="/home/online" tag="p" class="online">联行号在线查询</router-link> -->
+           <!-- <router-link to="/home/online" tag="p">联行号在线查询</router-link> -->
            <div class="at-once">
                    <van-button  @click="register" size="large" round type="info">下一步</van-button>
             </div>
         </div>
-         <loading :componentload="componentload"></loading>
+         <!-- <loading :componentload="componentload"></loading> -->
+         <div class="meng" v-if="bankNumberShow">
+             <div class="close" @click="handleClose"></div>
+             <div class="picker">
+                <input type="text" @input="handleChangeSearchName" v-model="searchName" placeholder="搜索开户行,如忘记请搜索总行">
+                <van-picker show-toolbar :columns="columns" @change="onChange" @confirm="onConfirm" />
+            </div>
+         </div>
     </div>
 </template>
 
 
 <script>
+// 联行号JSON文件
+import bankNumber from '@/lib/banklist'
 import loading from '@/components/loading'
 import storage from '@/lib/storage'
 import {axiosPost} from '@/lib/http'
@@ -109,6 +123,7 @@ export default {
             merType:"",
             show:false,
             showTwo:false,
+            bankName: '请选择开户行',
             actions: [
                 {
                     name: '公户'
@@ -130,10 +145,32 @@ export default {
                   {
                       name: '公司户' 
                  },
-             ]
+             ],
+             columns: [],
+             searchName: '',
+             bankNumber: [],
+             bankNumberShow: false,
         }
     },
     methods:{
+        onChange(picker, value, index) {
+            console.log('当前值：',value);
+            this.bankName = value;
+            // 根据当前关键字查询联行号
+            var subBankCode = bankNumber.filter(item =>item.bankName == value);
+            console.log('联行号',subBankCode[0].bankCode);
+            this.subBankCode = subBankCode[0].bankCode;
+        },
+        // 选择器确定时间
+        onConfirm(value){
+            console.log('当前选择',value);
+            this.bankName = value;
+            // 根据当前关键字查询联行号
+            var subBankCode = bankNumber.filter(item =>item.bankName == value);
+            console.log('联行号',subBankCode[0].bankCode);
+            this.subBankCode = subBankCode[0].bankCode;
+            this.bankNumberShow = false;
+        },
         goBack() {
             this.$router.push('/home')
         },
@@ -158,6 +195,31 @@ export default {
         },
         onCancelTwo(){
             this.showTwo=false
+        },
+        // 选择联行号
+        handleBankNumber(){
+            this.bankNumberShow = true;
+            
+        },
+        // 搜索关键字
+        handleChangeSearchName(obj){
+            // console.log('当前关键字',obj.target.value);
+            // 根据关键字过滤json
+            var list = bankNumber.filter(item =>(item.bankName).indexOf(obj.target.value) > -1);
+            // console.log('关键字过滤后',list);
+            if(list.length == '0'){
+                this.$toast('查询为空');
+            }else{
+                this.columns = [];
+                for(var item in list){
+                    this.columns[item] = list[item].bankName
+                }
+                console.log(this.columns);
+            }
+        },
+        // 关闭联行号选择器
+        handleClose(){
+            this.bankNumberShow = false;
         },
         // 申请商铺
         register(){
@@ -277,25 +339,32 @@ export default {
         })
      },
      // 获取实名认证信息
-    handleGetAOuth(){
-        let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
-        let params = {};
-        axiosPost(url,params).then(res =>{
-            if(res.data.data.status != '0'){
-                this.reservedMobile = res.data.data.mobile;
-                this.realName = res.data.data.name;
-                this.idCard = res.data.data.idcardnumber;
-                this.mobile = this.$store.state.wechat.mobile;
-            }
-        }).catch(res =>{
-            // console.log('获取实名认证状态失败',res);
-        })
-    }
+        handleGetAOuth(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
+            let params = {};
+            axiosPost(url,params).then(res =>{
+                if(res.data.data.status != '0'){
+                    this.reservedMobile = res.data.data.mobile;
+                    this.realName = res.data.data.name;
+                    this.idCard = res.data.data.idcardnumber;
+                    this.mobile = this.$store.state.wechat.mobile;
+                }
+            }).catch(res =>{
+                // console.log('获取实名认证状态失败',res);
+            })
+        }
     },
    
     created () {
         this.searchInfo();
         this.handleGetAOuth();
+        // 将json对象转换为数组
+        for(var item in bankNumber){
+            console.log('循环',bankNumber[item].bankName);
+            this.columns[item] = bankNumber[item].bankName
+        }
+        // this.columns = bankNumber.bankName;
+        console.log(bankNumber);
     }
 }
 </script>
@@ -399,6 +468,39 @@ export default {
                font-size: 28px;
                line-height: 90px;
            }
+       }
+       .meng{
+            width: 100vw;
+            height: calc(100vh - 96px);
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 10000;
+            .close{
+                width: 100vw;
+                height: calc(100% - 500px);
+            }
+           .picker{
+                width: 100vw;
+                height: 500px;
+                background: white;
+                background: #F2F2F2;
+                >input{
+                    width: 98vw;
+                    height: 80px;
+                    padding-left: 2vw;
+                    font-size: 26px;
+                    color: #333;
+                    border: none;
+                    background: #D9D9D9;
+                    font-size: 26px;
+                }
+                input::-webkit-input-placeholder{
+                    font-size: 26px;
+                    padding-top: 5px;
+                }
+            }
        }
    }
 </style>

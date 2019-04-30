@@ -6,7 +6,7 @@ const state = {
     recommendedcode: '',
     mobile: '',
     vip: '',
-    level: '实习',
+    level: '免费粉丝',
     iscertification: '0',
     amount: '0',
 }

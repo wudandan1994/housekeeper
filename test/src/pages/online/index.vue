@@ -7,12 +7,9 @@
         </header>
         <div class="container">
            <div class="online">
-                <div class="ring">
-                    <van-notice-bar
-                        text="提示：选择地区，开户银行，输入支行名称，点击搜索即可查询联行号。"
-                    />
-                </div>
-
+               <!-- <p class="serch" @click="webview">联行号在线查询</p> -->
+               <!-- <p >点击关闭</p> -->
+               <iframe class="iframe" src="http://www.kaihuhang.cn/" frameborder="0"></iframe>
            </div>
         </div>
     </div>
@@ -28,21 +25,21 @@ export default {
     },
     methods:{
         goBack() {
-             plus.webview.close( "yinlian");
+            //  plus.webview.close( "yinlian");
             this.$router.push('/home/collect')
         },
-        webview(){
-            let self= plus.webview.currentWebview(); 
-            var yinlian= plus.webview.create("http://www.kaihuhang.cn/", "yinlian", {  
-            top: "80px",  
-            bottom: 0  
-        });  
-        self.append(yinlian);
-        },
+        // webview(){
+        //     let self= plus.webview.currentWebview(); 
+        //     var yinlian= plus.webview.create("http://www.kaihuhang.cn/", "yinlian", {  
+        //     top: "80px",  
+        //     bottom: 0  
+        // });  
+        // self.append(yinlian);
+        // },
         
     },
     created(){
-        this.webview()
+        // this.webview()
     }
 }
 </script>
@@ -74,10 +71,15 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
              >.online {
-                 margin-top:15px;
-             .van-notice-bar__wrap{
-                    color:#4B66AF;
-                }
+               margin-top:50px;
+               display:flex;
+               justify-content: space-around;
+               color:blue;
+               font-size:30px;
+               .iframe{
+                   width: 100vw;
+                   height: calc(100vh - 86px);
+               }
            }
        }
    }

@@ -34,7 +34,11 @@
                      </div>
                      <div class="qualifications">
                          <span>授权还款额度</span>
+<<<<<<< HEAD
+                         <span>授权钻石会员资格</span>
+=======
                          <span>授权免费粉丝资格</span>
+>>>>>>> 423e6e2166c68bbaa20133d37d38a53e0f34f258
                          <span>智能还款分润万38-60</span>
                     </div>  
                      <div class="price">
@@ -69,7 +73,7 @@
                      </div>
                      <div class="qualifications">
                          <span>授权还款额度</span>
-                         <span>授权免费粉丝资格</span>
+                         <span>授权黄金会员资格</span>
                          <span>智能还款分润万16-45</span>
                     </div>  
                      <div class="price">
@@ -128,12 +132,12 @@
             <div class="per-title row">
                 <div class="goods-title start-center">付款方式</div>
                 <div class="goods-detail row">
-                    <!-- <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
+                    <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-wechatpay"></use>
                         </svg>
                         微信支付
-                    </div> -->
+                    </div>
                     <div class="paytypes center" :class="{'alipay': paytype == 'alipay'}" @click="handlePayType('alipay')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-alipay"></use>
@@ -195,7 +199,7 @@ export default {
         },
         // 更多
         handleMore(){
-            this.$toast('尽请期待');
+            this.$toast('敬请期待');
         },
         changeActive(obj){
         },

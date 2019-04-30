@@ -80,17 +80,20 @@
             <!-- <van-loading type="spinner" color="#4B66AF" size="40px"/> -->
             <van-button class="btn" @click="updateSet" type="default">更新信息</van-button>
         </div>
+        <loading :componentload='componentload'></loading>
     </div>
 
 </template>
 
 <script>
+import loading from'@/components/loading'
 import {axiosPost} from '@/lib/http'
 import axios from 'axios'
 import storage from '@/lib/storage'
 export default {
     data() {
         return {
+            componentload: true,
             url: 'http:pay.91dianji.com.cn/',
             checkedCard:"",
             checkedCar:"",
@@ -103,14 +106,14 @@ export default {
                 { name:"企业主"},
             ],
             identity:"",
-            photo: '',
+            photo: 'http://pay.91dianji.com.cn/logo.png',
             nickname: '',
             mobile: '',
             city: '',
             iscreditcard: false,
             iscar: false,
             wechat: '',
-            wechatqr: '',
+            wechatqr: 'http://pay.91dianji.com.cn/logo.png',
             voice: '0'
         }
     },
@@ -120,6 +123,7 @@ export default {
         },
         // 上传微信头像
         onAvator(file){
+            this.componentload = true;
              var form = new FormData();
             form.append('file',file.file);
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg';
@@ -128,13 +132,19 @@ export default {
             };
             axios.post(url,form,config).then(res =>{
                 if(res.data.success){
+                    console.log('微信头像上传成功',res);
                     this.photo = res.data.data.imgUrl;
+                     this.wechatqr = res.data.data.thumImgUrl;
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
                 }
             }).catch(res =>{
             })
         },
         // 上传微信二维码头像
         onWechatQr(file){
+            this.componentload = true;
             var form = new FormData();
             form.append('file',file.file);
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg';
@@ -143,7 +153,11 @@ export default {
             };
             axios.post(url,form,config).then(res =>{
                 if(res.data.success){
-                    this.wechatqr = res.data.data.imgUrl;
+                    console.log('二维码上传成功',res);
+                    this.wechatqr = res.data.data.thumImgUrl;
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },500)
                 }
             }).catch(res =>{
             })
@@ -211,6 +225,9 @@ export default {
     },
     mounted(){
         this.getSet();
+        setTimeout(() =>{
+            this.componentload = false;
+        },500)
     }
 }
 </script>

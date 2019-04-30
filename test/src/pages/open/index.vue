@@ -467,6 +467,7 @@ export default {
                 .uploadimg{
                     padding:20px;
                     width: 100%;
+                    box-sizing: border-box;
                     .upload-component{
                         width: 100%;
                         height: 100%;

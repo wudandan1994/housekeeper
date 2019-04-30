@@ -77,8 +77,7 @@ export default {
            padding-top:96px;
            .iframe{
                width: 100vw;
-               height: auto;
-               margin-top: 90px;
+               height: calc(100vh - 86px);
            }
        }
    }

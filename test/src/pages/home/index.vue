@@ -9,7 +9,7 @@
                <span class="location">
                     <van-icon name="location-o" />
                 </span>
-                <span>上海</span>
+                <span>{{city}}</span>
             </div>  
             <span>首页</span>
             <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
@@ -103,16 +103,16 @@
                             <p>给实习会员设置分润</p>
                         </div>
                     </li>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/'}}">
+                    <router-link tag="li" :to="{path: '/url',query: {url: 'http://www.4008000000.com',title: '汽车保险'}}">
                         <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" />
+                        <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>汽车保险</h3>
                             <p>没有中间商差价</p>
                         </div>
                     </router-link>
-                    <li @click="handleExpect">
+                    <li>
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_51.png" size="30px" />
                         </span>
@@ -130,7 +130,7 @@
                             <p>钱夹宝业务排名</p>
                         </div>
                     </li>
-                    <router-link tag="li"  :to="{path: '/loan/form/myOrder',query: {info: 'http://www.baoxian.pingan.com'}}">
+                    <router-link tag="li" :to="{path: '/url',query: {url: 'http://baoxian.pingan.com',title: '意外险'}}">
                         <span>
                             <van-icon name="http://pay.91dianji.com.cn/icon_53.png" size="30px" />
                         </span>
@@ -139,7 +139,7 @@
                             <p>出行安全有保障</p>
                         </div>
                     </router-link>
-                    <li @click="handleExpect">
+                    <li>
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_60.png" size="30px" />
                         </span>
@@ -175,7 +175,7 @@
                             <p>积分不失/换乐无穷</p>
                         </div>
                     </li>
-                    <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.jd.com'}}" tag="li" >
+                    <router-link tag="li" :to="{path: '/url',query: {url: 'http://www.jd.com',title: '商城'}}">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_64.png" size="30px" />
                         </span>
@@ -184,7 +184,7 @@
                             <p>商城</p>
                         </div>
                     </router-link>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://chaxun.weizhang8.cn/guanfangwang.php'}}" >
+                    <router-link tag="li" :to="{path: '/url',query: {url: 'http://chaxun.weizhang8.cn/guanfangwang.php',title: '违章查询'}}">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_65.png" size="30px" />
                         </span>
@@ -221,6 +221,7 @@
                 </div>
             </div>
         </div>
+        <div v-show="allmap" id="allmap"></div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
     </div>
 </template>
@@ -254,6 +255,10 @@ export default {
             photo: '',
             headimg:'',
             iscertification: '',
+            city: '',
+            allmap: false,
+            longitude: '',
+            latitude: ''
         }
   },
    methods:{
@@ -357,14 +362,38 @@ export default {
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
         this.handleSearchAuths()
-        this.automatic()
-    }
+        // this.automatic()
+    },
+    mounted(){
+        var that = this;
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(116.331398,39.897445);
+        map.centerAndZoom(point,12);
+
+        function myFun(result){
+            var cityName = result.name;
+            map.setCenter(cityName);
+            // alert("当前定位城市:"+cityName);
+            that.city = cityName;
+        }
+        var myCity = new BMap.LocalCity();
+            myCity.get(myFun); 
+        }
 }
 </script>
 
 <style lang="less" >
    #home-component {
        background-color: #eee;
+       #allmap{
+            position: fixed !important;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: 99999;
+            background: white;
+        }
        >header {
         height:86px;
         font-size:28px;

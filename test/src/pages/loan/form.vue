@@ -180,7 +180,7 @@ export default {
            }else if(this.form.mobile == ''){
                this.$toast('请填写申请人手机号')
            }
-           else if(this.form.code == '' || this.form.code != this.realCode){
+           else if((this.form.code).trim() == '' || (this.form.code).trim() != (this.realCode).trim()){
                this.$toast('请检查验证码');
            }
            else if(this.checked == false){

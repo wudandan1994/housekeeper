@@ -8,8 +8,8 @@
         <div class="integral">
             <div class="avator"><img src="http://img007.hc360.cn/g6/M00/42/87/wKhQsVQZOgKEK5FZAAAAAANX5o4873.jpg" alt=""></div>
             <div class="name-level start-center">
-                <div class="name">Giovanni</div>
-                <div class="level">实习</div>
+                <div class="name">{{nickname}}</div>
+                <div class="level">{{level}}</div>
             </div>
             <div class="centers">
                 <div class="number center">25.00</div>
@@ -22,7 +22,10 @@
 <script>
 export default {
     data(){
-        return{}
+        return{
+            nickname: '',
+            level: '',
+        }
     },
     methods:{
         // 返回首页
@@ -33,6 +36,10 @@ export default {
         handleMore(){
             this.$toast('尽请期待');
         },
+    },
+    created(){
+        this.$store.state.wechat.nickname == "" ? this.nickname = '姓名' : this.nickname = this.$store.state.wechat.nickname;
+        this.$store.state.wechat.level == "0" ? this.level = '免费粉丝' : (this.$store.state.wechat.level == "1" ? this.level = '黄金会员' : this.level = '钻石会员');
     }
 }
 </script>
