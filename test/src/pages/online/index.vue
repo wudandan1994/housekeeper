@@ -9,6 +9,7 @@
            <div class="online">
                <!-- <p class="serch" @click="webview">联行号在线查询</p> -->
                <!-- <p >点击关闭</p> -->
+               <iframe class="iframe" src="http://www.kaihuhang.cn/" frameborder="0"></iframe>
            </div>
         </div>
     </div>
@@ -24,21 +25,21 @@ export default {
     },
     methods:{
         goBack() {
-             plus.webview.close( "yinlian");
+            //  plus.webview.close( "yinlian");
             this.$router.push('/home/collect')
         },
-        webview(){
-            let self= plus.webview.currentWebview(); 
-            var yinlian= plus.webview.create("http://www.kaihuhang.cn/", "yinlian", {  
-            top: "80px",  
-            bottom: 0  
-        });  
-        self.append(yinlian);
-        },
+        // webview(){
+        //     let self= plus.webview.currentWebview(); 
+        //     var yinlian= plus.webview.create("http://www.kaihuhang.cn/", "yinlian", {  
+        //     top: "80px",  
+        //     bottom: 0  
+        // });  
+        // self.append(yinlian);
+        // },
         
     },
     created(){
-        this.webview()
+        // this.webview()
     }
 }
 </script>
@@ -75,6 +76,10 @@ export default {
                justify-content: space-around;
                color:blue;
                font-size:30px;
+               .iframe{
+                   width: 100vw;
+                   height: calc(100vh - 86px);
+               }
            }
        }
    }

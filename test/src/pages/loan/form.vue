@@ -123,7 +123,7 @@ export default {
             },
             checked: false,
             show: false,
-            remarks: '注:在钱夹宝申请贷款一律不收取任何费用，如有向您索要手续费的请拨打111-222-3333向平台举报',
+            remarks: '注:在钱夹宝申请贷款一律不收取任何费用，如有向您索要手续费的请拨打400-801-5636向平台举报',
             codeLength: 4,
             realCode: ''
         }
@@ -174,7 +174,7 @@ export default {
            }else if(this.form.mobile == ''){
                this.$toast('请填写申请人手机号')
            }
-           else if(this.form.code == '' || this.form.code != this.realCode){
+           else if((this.form.code).trim() == '' || (this.form.code).trim() != (this.realCode).trim()){
                this.$toast('请检查验证码');
            }
            else if(this.checked == false){

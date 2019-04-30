@@ -159,14 +159,15 @@ export default {
             let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
+                console.log('实名认证成功',res);
                 setTimeout(()=>{
                     this.componentload = false;
                 },500)
                 if(res.data.data.status != '0'){
                     this.name = res.data.data.name;
                     this.idcardnumber = res.data.data.idcardnumber;
-                    this.cardback = res.data.data.idcardback;
-                    this.cardfront = res.data.data.idcardfront;
+                    this.cardback = 'thum_' + res.data.data.idcardback;
+                    this.cardfront = 'thum_' + res.data.data.idcardfront;
                    if(res.data.data.status == '1'){
                         this.status = '审核中'
                     }else{

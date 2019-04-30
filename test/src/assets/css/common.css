@@ -205,3 +205,14 @@ table {
 		height: 40px;
 		line-height: 40px;
 	}
+	.van-picker-column__item{
+		font-size: 28px;
+	}
+	.van-picker__cancel{
+		color: white;
+	}
+	.van-picker__confirm{
+		color: #4b66af;
+		font-size: 30px;
+		font-weight: bold;
+	}

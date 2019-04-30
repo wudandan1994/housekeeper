@@ -29,13 +29,14 @@
                     <div class="getnumber start-center"><input type="number" v-model="cash" placeholder="请输入提现金额"></div>
                 </div>
             </div>
+            <div class="cashcard start-center" v-if="abridge != ''">您已选择提现到<span>{{abridge}}</span>的银行卡</div>
             <div class="desc-two">
                 <p>亲爱的钱夹宝会员，您提交提现申请后将进入人工审核状态，工作时间内1-2天将完成审核，请合理安排提现。</p>
             </div>
             <div @click="handleCash" class="Immediate-withdrawals center">立即提现</div>
         </div>
         <div class="card-list" v-if="showbanklist" @click="handleCloseCardList">
-            <div class="per-card" v-for="(item,index) in bankcardlist" :key="index" @click="handleCheckCard(item.id)">
+            <div class="per-card" v-for="(item,index) in bankcardlist" :key="index" @click="handleCheckCard(item)">
                 <div class="name">{{item.name}}</div>
                 <div class="bankname">{{item.bankname}}</div>
                 <div class="bankcardno">{{item.bankcardno}}</div>
@@ -59,6 +60,8 @@ export default {
             amount: '',
             showbanklist: false,
             cardLength: '',
+            bankcardlist: [],
+            abridge: '',
         }
     },
     components:{
@@ -77,16 +80,19 @@ export default {
             axiosPost(url,params).then(res =>{
                 // console.log('获取已绑定银行卡列表成功',res);
                 if(res.data.success){
+                    console.log('查询银行卡成功',res);
                     if(res.data.data.length == '0'){
                         this.cardLength = '0'
                         this.$toast('您还未绑定银行卡');
                     }else{
+                         console.log('查询银行卡成功',res);
                         // this.showbanklist = true;
                         this.bankcardlist = res.data.data;
                     }
                 }
             }).catch(res =>{
                 // console.log('获取已绑定银行卡列表失败',res)
+                 console.log('查询银行卡成功',res);
             })
         },
         // 打开银行卡列表
@@ -96,8 +102,10 @@ export default {
         },
         // 选择银行卡
         handleCheckCard(obj){
+            console.log('选择银行卡',obj);
             this.showbanklist = false;
-            this.cardId = obj;
+            this.cardId = obj.id;
+            this.abridge = obj.abridge;
         },
         // 关闭银行卡列表
         handleCloseCardList(){
@@ -112,12 +120,16 @@ export default {
             if(this.cardLength == '0'){
                 this.$toast('您还未绑定银行卡');
             }
-            else if(this.cash == ''){
-                this.$toast('请输入提现金额')
+            else if(this.cash == '' && this.cash < this.amount){
+                this.$toast('请输入正确金额')
+            }
+            else if(this.cash < 100){
+                this.$toast('金额需大于100')
             }
             else if(this.cardId == ''){
-                this.$toast('请点击右上角选择提现银行卡')
-            }else{
+                this.$toast('请点击右上角选择银行卡')
+            }
+            else{
                 let url = 'http://pay.91dianji.com.cn/api/customer/getwithdrawalBank';
                 let params = {
                    cid: storage.get('cid'),
@@ -178,6 +190,7 @@ export default {
                         height: 25%;
                         margin-left: auto;
                         margin-right: auto;
+                        font-size: 28px;
                     }
                     .all{
                         width: 100%;
@@ -188,6 +201,7 @@ export default {
                             background: #4b66af;
                             color: white;
                             border-radius: 15px;
+                            font-size: 28px;
                         }
                     }
                 }
@@ -217,6 +231,7 @@ export default {
                 padding-top: 20px;
                 padding-bottom: 20px;
                 line-height: 50px;
+                font-size: 26px;
             }
             .user-input{
                 width: 100vw;
@@ -255,6 +270,17 @@ export default {
                             border: none;
                         }
                     }
+                }
+            }
+            .cashcard{
+                width: 95vw;
+                height: 60px;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 26px;
+                >span{
+                    color: #4b66af;
+                    font-weight: bold;
                 }
             }
             .desc-two{

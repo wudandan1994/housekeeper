@@ -5,7 +5,7 @@
             <div class="top-title center">海报</div>
             <div class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
         </header>
-        <div class="poster-canvas center"><canvas id="poster" width="320" height="470"></canvas>  </div>
+        <div class="poster-canvas center"><canvas id="poster" width="375" height="667"></canvas>  </div>
         <div class="btn row">
             <div @click="handlechangeRandom" class="change center">换一换</div>
             <div @click="savePoster" class="rightnow center">立即合成</div>
@@ -20,6 +20,7 @@
                 <div class="success center">海报生成成功,请长按图片保存</div>
             </div>
         </div>
+        <loading :componentload="componentload"></loading>
     </div>
 
 </template>
@@ -42,7 +43,7 @@ export default {
             imgShow: false,
             url: 'http://pay.91dianji.com.cn',
             qrcode: '',
-            random: '1',
+            random: '01',
         }
     },
     methods:{
@@ -51,26 +52,36 @@ export default {
         },
         // 随机数
         handlechangeRandom(){
-            this.random = Math.ceil((Math.random())*5);
+            this.componentload = true;
+            var ran = Math.ceil((Math.random())*26);
+            var random = '';
+            if(ran < 10){
+                random = '0' + ran;
+                console.log('随机数',random);
+                this.random = random;
+            }else{
+                this.random = ran;
+                console.log('随机数',ran);
+            }
             this.handlePoster();
         },
         handlePoster(){
             var poster = document.getElementById("poster");
             var ctx = poster.getContext("2d");
             ctx.fillStyle = "#fff";
-            ctx.fillRect(0,0,320,470);
+            ctx.fillRect(0,0,375,667);
 
             var bigPoster = new Image();
             
-            bigPoster.src = 'http://pay.91dianji.com.cn/poster_00'+ this.random +'.jpg';
+            bigPoster.src = 'http://pay.91dianji.com.cn/pop'+ this.random +'.jpg';
             bigPoster.onload = function(){
-                ctx.drawImage(bigPoster,0,0,320,380);
+                ctx.drawImage(bigPoster,0,0,375,600);
             };
             
             var qrcode = new Image();
             qrcode.src = 'http://pay.91dianji.com.cn/' + this.qrcode;
             qrcode.onload = function(){
-                ctx.drawImage(qrcode,240,390,50,50);
+                ctx.drawImage(qrcode,300,610,50,50);
             };
 
             var headimg = new Image();
@@ -78,18 +89,16 @@ export default {
             var domain = url.split('/mmopen');
             headimg.src = this.url + '/wxAvator' + '/mmopen' + domain[1];
             headimg.onload = function(){
-                ctx.drawImage(headimg,10,390,60,60);
+                ctx.drawImage(headimg,10,610,50,50);
             };
 
             ctx.fillStyle="#000";
             ctx.font="14px Arial";
-            ctx.fillText("name: " + this.$store.state.wechat.nickname,80,415);
-            ctx.fillText("code: " + this.$store.state.wechat.promotioncode,80,435);
-            ctx.fillStyle="#000";
-            ctx.font="10px Arial";
-            ctx.fillText("识别二维码",240,455);
-            
-            
+            ctx.fillText(this.$store.state.wechat.nickname,80,630);
+            ctx.fillText(this.$store.state.wechat.promotioncode,80,650);
+             setTimeout(()=>{
+                this.componentload = false;
+            },1000);
 
         },
         savePoster(){
@@ -137,7 +146,7 @@ export default {
     },
     mounted(){
         this.handleJundgeQrCode();
-        // this.handlePoster();
+        this.handlePoster();
     }
 }
 </script>
@@ -145,27 +154,22 @@ export default {
 <style lang="less">
    #page-poster{
        width: 100vw;
-       padding-top: 86px;
-       padding-bottom: 60px;
+       padding-top: 100px;
+       height: calc(100vh - 100px);
        background: #F2F2F2;
        .poster-canvas{
-           width: auto;
-           margin: 50px auto auto auto;
-       }
-       #scream{
-           width: 1px;
-           height: 1px;
-       }
-       #screams{
-           width: 100px;
-           height: 100px;
+           width: 100%;
+           height: 970px;
+           #poster{
+                transform: scale(0.6);
+                border: solid 1px red;
+            }   
        }
        .btn{
            width: 88vw;
            height: 100px;
            margin-left: auto;
            margin-right: auto;
-           margin-top: 50px;
            font-size: 28px;
            .change{
                width: 45%;
@@ -209,6 +213,10 @@ export default {
                    width: 100vw;
                    height: auto;
                    margin: 100px auto auto auto;
+                   >img{
+                       width: 450px;
+                       height: 800.4px;
+                   }
                }
                .success{
                    width: 100vw;

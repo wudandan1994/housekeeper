@@ -95,7 +95,8 @@ import collectComponent from '@/pages/collect'
 import openComponent from '@/pages/open'
 // 快捷支付
 import paymentComponent from '@/pages/payment'
-
+// 第三方跳转
+import url from '@/pages/home/url'
 
 
 
@@ -202,5 +203,6 @@ export default new Router({
     {path: '/personalCenter/cooperation',component:cooperation},
     {path: '/personalCenter/contactus',component:contactUs},
     {path: '/loan/myloan',component:myloan},
+    {path: '/url',component: url},
   ]
 })
