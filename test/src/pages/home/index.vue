@@ -103,7 +103,7 @@
                             <p>给实习会员设置分润</p>
                         </div>
                     </li>
-                    <router-link tag="li" :to="{path: '/url',query: {url: 'http://www.4008000000.com',title: '汽车保险'}}">
+                    <router-link tag="li" :to="{path: '/url',query: {url: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
                         <span>
                         <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" />
                         </span>
@@ -362,7 +362,7 @@ export default {
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
         this.handleSearchAuths()
-        // this.automatic()
+        this.automatic()
     },
     mounted(){
         var that = this;

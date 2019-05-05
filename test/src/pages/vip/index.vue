@@ -34,11 +34,7 @@
                      </div>
                      <div class="qualifications">
                          <span>授权还款额度</span>
-<<<<<<< HEAD
                          <span>授权钻石会员资格</span>
-=======
-                         <span>授权免费粉丝资格</span>
->>>>>>> 423e6e2166c68bbaa20133d37d38a53e0f34f258
                          <span>智能还款分润万38-60</span>
                     </div>  
                      <div class="price">

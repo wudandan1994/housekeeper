@@ -20,27 +20,7 @@
                 <div class="success center">海报生成成功,请长按图片保存</div>
             </div>
         </div>
-<<<<<<< HEAD
         <loading :componentload="componentload"></loading>
-=======
-        <!-- <div class="cover" v-show="showShare">
-            <div>
-                <ul>
-                    <li >
-                        <p><van-icon name="http://pay.91dianji.com.cn/wx.png"/></p>
-                        <p>微信</p>
-                    </li>
-                    <li>
-                        <p><van-icon name="http://pay.91dianji.com.cn/wx.png"/></p>
-                        <p>朋友圈</p>
-                    </li>
-               </ul>
-               <div class="cancle">
-                  <van-button @click="cancleCover" type="default" size="large">取消</van-button>
-               </div>
-            </div>
-        </div> -->
->>>>>>> 423e6e2166c68bbaa20133d37d38a53e0f34f258
     </div>
 
 </template>

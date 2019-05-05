@@ -46,7 +46,7 @@
                    </li>
                    <li>
                        <span>开户行：</span>
-                       <span @click="handleBankNumber">{{bankName}}</span>
+                       <span class="bank" @click="handleBankNumber">{{bankName}}</span>
                        <!-- <span @click="handleBankNumber">测试</span> -->
                    </li>
                    <li>
