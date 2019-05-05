@@ -13,8 +13,12 @@
                 </p>
                 <p>
                     <span>手机号</span>
-                    <router-link to="/home/bindingPhone" tag="span"><van-icon name="arrow"/></router-link>
+                    <span >{{phone}}</span>
                 </p>
+                <!-- <p>
+                    <span>手机号</span>
+                    <router-link to="/home/bindingPhone" tag="span"><van-icon name="arrow"/></router-link>
+                </p> -->
                 <!-- <p>
                     <span>修改手势密码</span>
                     <span  @click="changeGesture"><van-icon name="arrow"/></span>
@@ -30,24 +34,37 @@
 export default {
     data() {
         return {
-
+            phone:""
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home')
         },
-          changeGesture() {
-              this.$dialog.confirm({
-                    title: '温馨提示',
-                    message: '当前未开启手势密码，是否开启？',
-                    confirmButtonText:'开启',
-                }).then(() => {
-//                     点击确定按钮时做什么？
-                }).catch(() => {
-                    // on cancel
-                });
-          }   
+        showPhone(){
+            let data={
+                openid:this.$store.state.wechat.openid,
+            }
+             axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer",data)
+             .then(res=>{
+                  this.phone = res.data.data.mobile;
+             })
+
+        }
+//           changeGesture() {
+//               this.$dialog.confirm({
+//                     title: '温馨提示',
+//                     message: '当前未开启手势密码，是否开启？',
+//                     confirmButtonText:'开启',
+//                 }).then(() => {
+// //                     点击确定按钮时做什么？
+//                 }).catch(() => {
+//                     // on cancel
+//                 });
+//           }   
+    },
+    created () {
+        this.showPhone()
     }
 }
 </script>
@@ -81,7 +98,7 @@ export default {
            >.management {
                padding-left: 20px;
                >p {
-                   padding:30px 10px;
+                   padding:30px 20px;
                    border-bottom: 2px solid #ccc;
                    font-size:30px;
                    display: flex;

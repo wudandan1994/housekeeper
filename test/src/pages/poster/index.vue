@@ -17,7 +17,10 @@
             </div>
             <div class="imgs" v-if="!showUpload">
                 <div class="savePoster center"><img :src="imgUrl" ></div>
-                <div class="success center">海报生成成功,请长按图片保存</div>
+                <div class="success center">
+                    海报生成成功
+
+                </div>
             </div>
         </div>
         <loading :componentload="componentload"></loading>

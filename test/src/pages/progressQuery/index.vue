@@ -2,10 +2,10 @@
     <div id="progress-query">
         <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
-            <div class="top-title center">信用卡业务</div>
+            <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
-        <iframe class="iframe"  :src="url" frameborder="0"></iframe>
+        <!-- <iframe class="iframe"  :src="url" frameborder="0"></iframe> -->
     </div>
 
 </template>
@@ -15,7 +15,8 @@
 export default {
     data() {
         return {
-            url:""
+            url:"",
+            title:""
         }
     },
     methods:{
@@ -45,14 +46,11 @@ export default {
             }  
         }
     },
-    // mounted(){
-    //     this.url=this.$route.query.info
-    //     console.log(this.url)
-    //     this.webview();
-    // },
+    
     created(){
         this.url=this.$route.query.info
-        // this.webview();
+         this.title=this.$route.query.title
+        this.webview();
     }
 }
 </script>

@@ -79,7 +79,8 @@ export default {
                         this.$router.push({
                             path:"/home/cardCenter/progressQuery",
                             query:{
-                                info:url
+                                info:url,
+                                title:"还款"
                               }
                         })
                 }

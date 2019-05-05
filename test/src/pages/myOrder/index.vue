@@ -2,12 +2,12 @@
     <div id="my-order">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>钱夹宝</span>
+            <span>{{title}}</span>
             <span></span>
         </header>
-        <div class="container">
+        <!-- <div class="container">
            <iframe class="iframe" :src="url" frameborder="0"></iframe>
-        </div>
+        </div> -->
     </div>
 
 </template>
@@ -17,7 +17,8 @@
 export default {
     data() {
         return {
-            url:""
+            url:"",
+            title:""
         }
     },
     methods:{
@@ -44,6 +45,7 @@ export default {
     },
     created(){
         this.url=this.$route.query.info;
+        this.title=this.$route.query.title;
         // window.location.href = this.url;
         this.webview();
     }

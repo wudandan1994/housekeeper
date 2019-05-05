@@ -22,7 +22,7 @@ export default {
         }
     },
     created(){
-        console.log('传递参数',this.$router.currentRoute.query);
+        // console.log('传递参数',this.$router.currentRoute.query);
         this.url = this.$router.currentRoute.query.url;
         this.title = this.$router.currentRoute.query.title;
     }
