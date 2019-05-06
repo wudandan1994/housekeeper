@@ -22,13 +22,13 @@
                <p @click="forgetPassword">忘记密码？</p>
            </div>
            <van-button @click="logInPass" class="login center" type="default">登录</van-button>
-            <div class="wx-login row">
+            <!-- <div class="wx-login row">
                 <div class="logIn start-center" @click="logIn">
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
                 </div>
                 <div class="register end-center" @click="register">注册</div>
-            </div>
+            </div> -->
         </div>
     </div>
 

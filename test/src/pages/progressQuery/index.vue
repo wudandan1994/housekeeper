@@ -1,7 +1,7 @@
 <template>
     <div id="progress-query">
         <header class="header-top row">
-            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
@@ -9,7 +9,7 @@
     </div>
 
 </template>
-
+ 
 
 <script>
 export default {
@@ -21,7 +21,7 @@ export default {
     },
     methods:{
         goBack() {
-            // plus.webview.close( "yinlian")
+            plus.webview.close( "yinlian")
             this.$router.push("/home")
         },
         webview(){
@@ -50,7 +50,7 @@ export default {
     created(){
         this.url=this.$route.query.info
          this.title=this.$route.query.title
-        this.webview();
+         this.webview();
     }
 }
 </script>

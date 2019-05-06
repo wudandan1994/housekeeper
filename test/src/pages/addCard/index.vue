@@ -68,7 +68,7 @@ export default {
                             path:"/home/cardCenter/progressQuery",
                             query:{
                                 info:url,
-                                title:"行用卡办理"
+                                title:"信用卡办理"
                               }
                         })
                     }

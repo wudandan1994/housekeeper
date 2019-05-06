@@ -7,14 +7,15 @@
         </header>
         <div class="container">
             <div class="management">
+                 <p v-show="show">
+                    <span>手机号</span>
+                    <span >{{phone}}</span>
+                </p>
                 <p>
                     <span>修改登录密码</span>
                     <router-link to="/home/accountManagement/modifyLoginPassword" tag="span"><van-icon name="arrow"/></router-link>
                 </p>
-                <p>
-                    <span>手机号</span>
-                    <span >{{phone}}</span>
-                </p>
+               
                 <!-- <p>
                     <span>手机号</span>
                     <router-link to="/home/bindingPhone" tag="span"><van-icon name="arrow"/></router-link>
@@ -31,10 +32,12 @@
 
 
 <script>
+import {axiosPost} from '@/lib/http'
 export default {
     data() {
         return {
-            phone:""
+            phone:"",
+            show:false
         }
     },
     methods:{
@@ -47,7 +50,11 @@ export default {
             }
              axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer",data)
              .then(res=>{
-                  this.phone = res.data.data.mobile;
+                 if(res.data.success){
+                     this.show=true
+                     this.phone = res.data.data.mobile;
+                 }
+                 
              })
 
         }

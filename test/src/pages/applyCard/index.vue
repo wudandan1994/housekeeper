@@ -113,7 +113,8 @@ export default {
                          that.$router.push({
                             path:"/loan/form/myOrder",
                             query:{
-                                info:url
+                                info:url,
+                                title:"办卡"
                               }
                         })
                     },1000)

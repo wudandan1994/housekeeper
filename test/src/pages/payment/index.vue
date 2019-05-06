@@ -158,7 +158,8 @@ export default {
                         this.$router.push({
                             path:"/loan/form/myOrder",
                             query:{
-                                info:url
+                                info:url,
+                                title:"支付"
                               }
                         })
                 }
