@@ -5,9 +5,9 @@
             <span>{{title}}</span>
             <span></span>
         </header>
-        <!-- <div class="container">
+        <div class="container">
            <iframe class="iframe" :src="url" frameborder="0"></iframe>
-        </div> -->
+        </div>
     </div>
 
 </template>
@@ -23,17 +23,17 @@ export default {
     },
     methods:{
         goBack() {
-            plus.webview.close( "yinlian")
+            // plus.webview.close( "yinlian")
             this.$router.go(-1)
         },
-        webview(){
-            let self= plus.webview.currentWebview(); 
-            var yinlian= plus.webview.create(this.url, "yinlian", {  
-            top: "80px",  
-            bottom: 0  
-        });  
-           self.append(yinlian)
-        },
+        // webview(){
+        //     let self= plus.webview.currentWebview(); 
+        //     var yinlian= plus.webview.create(this.url, "yinlian", {  
+        //     top: "80px",  
+        //     bottom: 0  
+        // });  
+        //    self.append(yinlian)
+        // },
         // webview(){
         //     let self= plus.webview.currentWebview(); 
         //     var yinlian= plus.webview.create(this.url, "yinlian", {  
@@ -47,7 +47,7 @@ export default {
         this.url=this.$route.query.info;
         this.title=this.$route.query.title;
         // window.location.href = this.url;
-        this.webview();
+        // this.webview();
     }
 }
 </script>

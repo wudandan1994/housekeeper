@@ -9,6 +9,7 @@ const state = {
     level: '免费粉丝',
     iscertification: '0',
     amount: '0',
+    city: '',
 }
 const mutations = {
     openid(state,openid){
@@ -40,7 +41,9 @@ const mutations = {
     },
     amount(state,amount){
         state.amount = amount;
+    },
+    city(state,city){
+        state.city = city;
     }
-
 }
 export default {state,mutations}

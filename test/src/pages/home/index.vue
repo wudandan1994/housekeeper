@@ -255,8 +255,7 @@ export default {
             photo: '',
             headimg:'',
             iscertification: '',
-            // city: '',
-            allmap: false,
+            city: '',
             longitude: '',
             latitude: ''
         }
@@ -280,7 +279,8 @@ export default {
              axiosPost("http://pay.91dianji.com.cn/api/customer/login",data) 
              .then(res=>{
                 if(!res.data.success){
-                     this.$router.push("/logIn")
+                     this.$router.push("/logIn");
+                     this.$toast('登录失败');
                 }else {
                     this.$store.commit('iscertification',res.data.data.iscertification);
                     this.$store.commit('level',res.data.data.level);
@@ -292,6 +292,7 @@ export default {
                     this.$store.commit('openid',res.data.data.openid);
                     this.$store.commit('nickname',res.data.data.nickname);
                     this.$store.commit('headimg',res.data.data.photo);
+                    this.$store.commit('city',res.data.data.city);
                 }
              })
              .catch(err=>{
@@ -361,39 +362,16 @@ export default {
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
+        this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-        this.automatic()
-    },
-    mounted(){
-        // var that = this;
-        // var map = new BMap.Map("allmap");
-        // var point = new BMap.Point(116.331398,39.897445);
-        // map.centerAndZoom(point,12);
-
-        // function myFun(result){
-        //     var cityName = result.name;
-        //     map.setCenter(cityName);
-        //     // alert("当前定位城市:"+cityName);
-        //     that.city = cityName;
-        // }
-        // var myCity = new BMap.LocalCity();
-        //     myCity.get(myFun); 
-        }
+        // this.automatic()
+    }  
 }
 </script>
 
 <style lang="less" >
    #home-component {
        background-color: #eee;
-       #allmap{
-            position: fixed !important;
-            width: 100vw;
-            height: 100vh;
-            top: 0;
-            left: 0;
-            z-index: 99999;
-            background: white;
-        }
        >header {
         height:86px;
         font-size:28px;
