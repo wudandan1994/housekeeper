@@ -3,7 +3,7 @@
          <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">申请贷款</div>
-            <div class=""></div>
+            <div class="right-icon center"></div>
         </header>
         <!-- 轮播图 -->
         <div class="swipe">
@@ -207,7 +207,8 @@ export default {
                             this.$router.push({
                             path:"/loan/form/myOrder",
                             query:{
-                                info:url
+                                info:url,
+                                title: '贷款'
                               }
                           })
                         },1000)
@@ -281,7 +282,7 @@ export default {
             margin-top: 30px;
         }
         .per-input {
-            width: 100vw;
+            // width: 100vw;
             height: 80px;
             .icon{
                 width:8vw;
@@ -307,6 +308,7 @@ export default {
                     border: none;
                     text-align: right;
                     font-size: 26px;
+                    background: transparent;
                 }
             }
             .user-code{
@@ -322,6 +324,7 @@ export default {
                     border: none;
                     font-size: 26px;
                     text-align: right;
+                    background: transparent;
                 }
             }
             .safe-code{

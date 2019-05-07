@@ -20,9 +20,6 @@
                 <div class="success center">海报生成成功,请长按图片保存</div>
             </div>
         </div>
-<<<<<<< HEAD
-        <loading :componentload="componentload"></loading>
-=======
         <!-- <div class="cover" v-show="showShare">
             <div>
                 <ul>
@@ -40,7 +37,7 @@
                </div>
             </div>
         </div> -->
->>>>>>> 423e6e2166c68bbaa20133d37d38a53e0f34f258
+        <loading :componentload="componentload"></loading>
     </div>
 
 </template>
@@ -92,6 +89,7 @@ export default {
             this.handlePoster();
         },
         handlePoster(){
+            this.componentload = true;
             var poster = document.getElementById("poster");
             var ctx = poster.getContext("2d");
             ctx.fillStyle = "#fff";
@@ -102,6 +100,9 @@ export default {
             bigPoster.src = 'http://pay.91dianji.com.cn/pop'+ this.random +'.jpg';
             bigPoster.onload = function(){
                 ctx.drawImage(bigPoster,0,0,375,600);
+                setTimeout(()=>{
+                    this.componentload = false;
+                },2500);
             };
             
             var qrcode = new Image();
@@ -122,9 +123,9 @@ export default {
             ctx.font="14px Arial";
             ctx.fillText(this.$store.state.wechat.nickname,80,630);
             ctx.fillText(this.$store.state.wechat.promotioncode,80,650);
-             setTimeout(()=>{
+            setTimeout(()=>{
                 this.componentload = false;
-            },1000);
+            },2500);
 
         },
         savePoster(){
@@ -202,7 +203,6 @@ export default {
            height: 970px;
            #poster{
                 transform: scale(0.6);
-                border: solid 1px red;
             }   
        }
        .btn{

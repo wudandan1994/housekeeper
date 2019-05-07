@@ -86,6 +86,7 @@ export default {
                                 this.$store.commit('mobile',res.data.data.mobile);
                                 this.$store.commit('vip',res.data.data.vip);
                                 this.$store.commit('recommendedcode',res.data.data.recommendedcode);
+                                this.$store.commit('city',res.data.data.city);
                                 this.$toast('登陆成功');
                                 let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
                                 let params = {
@@ -135,6 +136,7 @@ export default {
                           this.$store.commit('vip',res.data.data.vip);
                           this.$store.commit('recommendedcode',res.data.data.recommendedcode);
                           this.$store.commit('amount',res.data.data.amount);
+                          this.$store.commit('city',res.data.data.city);
                           this.$router.push('/home');
                           this.$toast('登陆成功');
                         }else{
@@ -180,6 +182,7 @@ export default {
             this.$store.commit('headimg',res.data.data.photo);
             this.$store.commit('nickname',res.data.data.nickname);
             this.$store.commit('openid',res.data.data.openid);
+            this.$store.commit('city',res.data.data.city);
             this.$router.push('/home');
             this.$toast('登陆成功');
           }else{

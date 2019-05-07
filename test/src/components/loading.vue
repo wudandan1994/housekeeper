@@ -27,7 +27,7 @@ export default {
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 99999;
+        z-index: 999999;
         background: rgba(0, 0, 0, 0.5);
         .load{
             width: 100vw;
