@@ -17,26 +17,12 @@
             </div>
             <div class="imgs" v-if="!showUpload">
                 <div class="savePoster center"><img :src="imgUrl" ></div>
-                <div class="success center">海报生成成功,请长按图片保存</div>
+                <div class="success center">
+                    <!-- 海报生成成功 -->
+                    海报生成成功，长按保存或分享
+                </div>
             </div>
         </div>
-        <!-- <div class="cover" v-show="showShare">
-            <div>
-                <ul>
-                    <li >
-                        <p><van-icon name="http://pay.91dianji.com.cn/wx.png"/></p>
-                        <p>微信</p>
-                    </li>
-                    <li>
-                        <p><van-icon name="http://pay.91dianji.com.cn/wx.png"/></p>
-                        <p>朋友圈</p>
-                    </li>
-               </ul>
-               <div class="cancle">
-                  <van-button @click="cancleCover" type="default" size="large">取消</van-button>
-               </div>
-            </div>
-        </div> -->
         <loading :componentload="componentload"></loading>
     </div>
 

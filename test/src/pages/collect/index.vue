@@ -46,7 +46,8 @@
                    </li>
                    <li>
                        <span>开户行：</span>
-                       <span @click="handleBankNumber">{{bankName}}</span>
+                       <!-- <span class="bank" @click="handleBankNumber">{{bankName}}</span> -->
+                       <input type="text"  @click="handleBankNumber" :placeholder="bankName">
                        <!-- <span @click="handleBankNumber">测试</span> -->
                    </li>
                    <li>
@@ -360,11 +361,11 @@ export default {
         this.handleGetAOuth();
         // 将json对象转换为数组
         for(var item in bankNumber){
-            console.log('循环',bankNumber[item].bankName);
+            // console.log('循环',bankNumber[item].bankName);
             this.columns[item] = bankNumber[item].bankName
         }
         // this.columns = bankNumber.bankName;
-        console.log(bankNumber);
+        // console.log(bankNumber);
     }
 }
 </script>

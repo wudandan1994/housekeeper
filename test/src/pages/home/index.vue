@@ -9,7 +9,7 @@
                <span class="location">
                     <van-icon name="location-o" />
                 </span>
-                <span>{{city}}</span>
+                <!-- <span>{{city}}</span> -->
             </div>  
             <span>首页</span>
             <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
@@ -26,7 +26,7 @@
             <!-- 查询模块 -->
             <div class="search">
                 <ul>
-                    <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14'}}" tag="li">
+                    <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14',title: '征信查询'}}" tag="li">
                         <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
                         <span>征信查询</span>
                     </router-link>
@@ -103,7 +103,7 @@
                             <p>给实习会员设置分润</p>
                         </div>
                     </li>
-                    <router-link tag="li" :to="{path: '/url',query: {url: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
+                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
                         <span>
                         <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" />
                         </span>
@@ -130,7 +130,7 @@
                             <p>钱夹宝业务排名</p>
                         </div>
                     </li>
-                    <router-link tag="li" :to="{path: '/url',query: {url: 'http://baoxian.pingan.com',title: '意外险'}}">
+                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://baoxian.pingan.com',title: '意外险'}}">
                         <span>
                             <van-icon name="http://pay.91dianji.com.cn/icon_53.png" size="30px" />
                         </span>
@@ -175,7 +175,7 @@
                             <p>积分不失/换乐无穷</p>
                         </div>
                     </li>
-                    <router-link tag="li" :to="{path: '/url',query: {url: 'http://www.jd.com',title: '商城'}}">
+                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_64.png" size="30px" />
                         </span>
@@ -184,7 +184,7 @@
                             <p>商城</p>
                         </div>
                     </router-link>
-                    <router-link tag="li" :to="{path: '/url',query: {url: 'http://chaxun.weizhang8.cn/guanfangwang.php',title: '违章查询'}}">
+                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://chaxun.weizhang8.cn/guanfangwang.php',title: '违章查询'}}">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_65.png" size="30px" />
                         </span>
@@ -221,6 +221,7 @@
                 </div>
             </div>
         </div>
+        <!-- <div v-show="allmap" id="allmap"></div> -->
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
     </div>
 </template>

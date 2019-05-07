@@ -208,7 +208,7 @@ export default {
                             path:"/loan/form/myOrder",
                             query:{
                                 info:url,
-                                title: '贷款'
+                                title:"贷款"
                               }
                           })
                         },1000)

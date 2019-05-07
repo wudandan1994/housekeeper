@@ -114,7 +114,7 @@ export default {
                             path:"/loan/form/myOrder",
                             query:{
                                 info:url,
-                                title: '办卡'
+                                title:"办卡"
                               }
                         })
                     },1000)

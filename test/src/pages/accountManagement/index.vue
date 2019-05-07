@@ -5,24 +5,26 @@
             <span>账户管理</span>
             <span></span>
         </header>
-    <div class="container">
-        <div class="management">
-            <p v-show="show">
-                <span>手机号</span>
-                <span >{{phone}}</span>
-            </p >
-            <p>
-                <span>修改登录密码</span>
-                <router-link to="/home/accountManagement/modifyLoginPassword" tag="span"><van-icon name="arrow"/></router-link>
-                </p >
-            <!-- <p>
-            <span>手机号</span>
-            <router-link to="/home/bindingPhone" tag="span"><van-icon name="arrow"/></router-link>
-            </p > -->
-            <!-- <p>
-            <span>修改手势密码</span>
-            <span @click="changeGesture"><van-icon name="arrow"/></span>
-            </p > -->
+        <div class="container">
+            <div class="management">
+                 <p v-show="show">
+                    <span>手机号</span>
+                    <span >{{phone}}</span>
+                </p>
+                <p>
+                    <span>修改登录密码</span>
+                    <router-link to="/home/accountManagement/modifyLoginPassword" tag="span"><van-icon name="arrow"/></router-link>
+                </p>
+               
+                <!-- <p>
+                    <span>手机号</span>
+                    <router-link to="/home/bindingPhone" tag="span"><van-icon name="arrow"/></router-link>
+                </p> -->
+                <!-- <p>
+                    <span>修改手势密码</span>
+                    <span  @click="changeGesture"><van-icon name="arrow"/></span>
+                </p> -->
+            </div>
         </div>
     </div>
     </div>
@@ -47,24 +49,27 @@ export default {
             let data={
                 openid:this.$store.state.wechat.openid,
             }
-            axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer",data).then(res=>{
-                if(res.data.success){
-                    this.show=true
-                    this.phone = res.data.data.mobile;
-                }
-            })
+             axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer",data)
+             .then(res=>{
+                 if(res.data.success){
+                     this.show=true
+                     this.phone = res.data.data.mobile;
+                 }
+                 
+             })
+
         }
-// changeGesture() {
-// this.$dialog.confirm({
+//           changeGesture() {
+//               this.$dialog.confirm({
 //                     title: '温馨提示',
 //                     message: '当前未开启手势密码，是否开启？',
-// confirmButtonText:'开启',
+//                     confirmButtonText:'开启',
 //                 }).then(() => {
 // //                     点击确定按钮时做什么？
 //                 }).catch(() => {
 //                     // on cancel
 //                 });
-// } 
+//           }   
     },
     created () {
         this.showPhone()
@@ -73,41 +78,42 @@ export default {
 </script>
 
 <style lang="less">
-    #account-management {
-        >header {
-            background-color: #4965AE;
-            width:100%;
-            height: 86px;
-            line-height: 86px;
-            padding-top:10px;
-            color:#fff;
-            display: flex;
-            position: fixed;
-            z-index:999;
-            font-size: 28px;
-            justify-content: space-between;
-            >span {
-                &:nth-of-type(1) {
-                    margin-left: 10px;
-                }
-                &:nth-of-type(3) {
-                    margin-right: 10px;
-                }
-            }
-        }
-        >.container {
-            padding-top:96px;
-            padding-bottom: 50px;
-            >.management {
-                padding-left: 20px;
-                >p {
-                    padding:30px 20px;
-                    border-bottom: 2px solid #ccc;
-                    font-size:30px;
-                    display: flex;
-                    justify-content: space-between;
-                }
-            }
-        }
-    }
+   #account-management {
+       >header {
+           background-color: #4965AE;
+           width:100%;
+           height: 86px;
+           line-height: 86px;
+           padding-top:10px;
+           color:#fff;
+           display: flex;
+           position: fixed;
+           z-index:999;
+           font-size: 28px;
+           justify-content: space-between;
+           >span {
+               &:nth-of-type(1) {
+                   margin-left: 10px;
+               }
+               &:nth-of-type(3) {
+                   margin-right: 10px;
+               }
+           }
+       }
+       >.container {
+           padding-top:96px;
+           padding-bottom: 50px;
+           >.management {
+               padding-left: 20px;
+               >p {
+                   padding:30px 20px;
+                   border-bottom: 2px solid #ccc;
+                   font-size:30px;
+                   display: flex;
+                   justify-content: space-between;
+               }
+                        
+           }
+       }
+   }
 </style>

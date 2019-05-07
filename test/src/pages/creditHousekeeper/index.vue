@@ -77,9 +77,10 @@ export default {
                     // location.href=res.data.data.url
                     let url=res.data.data.url
                         this.$router.push({
-                            path:"/home/cardCenter/progressQuery",
+                            path:"/loan/form/myOrder",
                             query:{
-                                info:url
+                                info:url,
+                                title:"还款"
                               }
                         })
                 }
