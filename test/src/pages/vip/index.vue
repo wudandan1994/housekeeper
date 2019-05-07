@@ -279,14 +279,11 @@ export default {
                     window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
                 } 
             }else{
-                
                 var  params = {
                     orderid: this.orderid,
                     trade_type: 'JSAPI',
                     openid: storage.get('openid')
                 };
-                
-                
                 var url = 'http://pay.91dianji.com.cn/api/order/wxPayH5';
                 axiosPost(url,params).then(res =>{
                         var radom = Math.random().toString(36).substr(2);
@@ -304,7 +301,6 @@ export default {
                     }).catch(res =>{
                     })
             }
-            
         }
     },
     created(){

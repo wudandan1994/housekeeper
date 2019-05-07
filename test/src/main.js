@@ -12,6 +12,8 @@ import 'babel-polyfill'
 import "../node_modules/babel-polyfill/dist/polyfill.js"
 // 引入公共css
 import '@/assets/css/common.css'
+// 引入分享的css
+import '@/assets/css/share.css'
 
 import axios from 'axios'
 Vue.prototype.$http = axios

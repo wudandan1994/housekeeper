@@ -224,7 +224,7 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
            background-color: #EEEFF1;
-           font-size:34px;
+           font-size:30px;
            >button {
                margin:30px;
                height: 90px;

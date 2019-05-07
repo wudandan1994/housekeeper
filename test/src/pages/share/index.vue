@@ -72,8 +72,8 @@
                     </li>
                     <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/407.png" /></p>
-                        <p>名片玩家视频</p>
-                        <p>钱夹报视频.一键分享</p>
+                        <p>钱夹宝视频</p>
+                        <p>钱夹宝视频.一键分享</p>
                     </li>
                     <li @click="handleExpect">
                         <p><van-icon name="http://bc.91dianji.com.cn/408.png" /></p>
