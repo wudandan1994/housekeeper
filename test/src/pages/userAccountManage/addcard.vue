@@ -3,33 +3,16 @@
         <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">银行卡管理</div>
-            <div class="right-icon center" @click="handleBankCardList"><van-icon color="white" size="20px" name="card"/></div>
+            <div class="right-icon center"></div>
         </header>
-        <!-- <div class="personal row">
-            <div class="avator center"><img :src="headimg"></div>
-            <div class="name-code">
-                <div class="name row">
-                    <div class="start-center">{{nickname}}</div>
-                    <div class="center">{{level}}</div>
-                </div>
-                <div class="code start-center">推荐码：{{recommendedcode}}</div>
-            </div>
-            <div class="status center">(未绑定)</div>
-        </div> -->
         <router-link tag="div" to="/personalCenter/addcard/UnionPay" class="UnionPay row">
             <div class="pay-icon end-center"> <svg class="icon" aria-hidden="true"><use xlink:href="#icon-pay-unionpay"></use></svg></div>
             <div class="add-icon center"><van-icon name="plus" size="20px"/></div>
             <div class="add-title start-center">添加银行卡</div>
             <div class="more-icon center"><van-icon name="arrow"/></div>
         </router-link>
-        <!-- <router-link tag="div" to="/personalCenter/addcard/alipay" class="UnionPay row">
-            <div class="pay-icon end-center"><van-icon name="alipay" color="#0398E2"/></div>
-            <div class="add-icon center"><van-icon name="plus"/></div>
-            <div class="add-title start-center">添加支付宝</div>
-            <div class="more-icon center"><van-icon name="arrow"/></div>
-        </router-link> -->
-        <div class="card-list" v-if="showbanklist" @click="handleCloseCardList">
-            <div class="per-card" v-for="(item,index) in bankcardlist" :key="index" @click="handleCheckCard(item.id)">
+        <div class="card-list">
+            <div class="per-card" v-for="(item,index) in bankcardlist" :key="index">
                 <div class="name">{{item.name}}</div>
                 <div class="bankname">{{item.bankname}}</div>
                 <div class="bankcardno">{{item.bankcardno}}</div>
@@ -47,7 +30,6 @@ export default {
             recommendedcode:'',
             level:'',
             bankcardlist: [],
-            showbanklist: false,
         }
     },
     methods:{
@@ -70,7 +52,6 @@ export default {
                     if(res.data.data.length == '0'){
                         this.$toast('您还未绑定银行卡');
                     }else{
-                        this.showbanklist = true;
                         this.bankcardlist = res.data.data;
                     }
                 }
@@ -78,20 +59,13 @@ export default {
                 // console.log('获取已绑定银行卡列表失败',res)
             })
         },
-        // 选择银行卡
-        handleCheckCard(obj){
-            this.showbanklist = false;
-        },
-        // 关闭银行卡列表
-        handleCloseCardList(){
-            this.showbanklist = false;
-        }
     },
     created () {
         this.nickname = this.$store.state.wechat.nickname;
         this.headimg  = this.$store.state.wechat.headimg;
         this.recommendedcode  = this.$store.state.wechat.recommendedcode; 
         this.level  = this.$store.state.wechat.level;
+        this.handleBankCardList();
     }
 }
 </script>
@@ -169,17 +143,13 @@ export default {
         .card-list{
             width: 100vw;
             height: calc(100vh - 86px);
-            position: fixed;
-            top: 86px;
-            left: 0;
-            z-index: 10000;
-            background: rgba(0, 0, 0, 0.5);
+            margin-top: 86px;
             .per-card{
-                width: 90%;
+                width: 97%;
                 height: 200px;
                 margin-left: auto;
                 margin-right: auto;
-                background: #8b379a;
+                background: #4b66af;
                 margin-top: 25px;
                 border-radius: 20px;
                 position: relative;

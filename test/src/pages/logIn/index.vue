@@ -22,13 +22,13 @@
                <p @click="forgetPassword">忘记密码？</p>
            </div>
            <van-button @click="logInPass" class="login center" type="default">登录</van-button>
-            <!-- <div class="wx-login row">
+            <div class="wx-login row">
                 <div class="logIn start-center" @click="logIn">
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
                 </div>
                 <div class="register end-center" @click="register">注册</div>
-            </div> -->
+            </div>
         </div>
     </div>
 
@@ -118,8 +118,7 @@ export default {
                 // console.log(location.href)
 
 
-            //  location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=
-            // http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+             window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
       
           
 

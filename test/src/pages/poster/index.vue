@@ -97,18 +97,18 @@ export default {
                 ctx.drawImage(qrcode,300,610,50,50);
             };
 
-            var headimg = new Image();
-            var url = this.$store.state.wechat.headimg;
-            var domain = url.split('/mmopen');
-            headimg.src = this.url + '/wxAvator' + '/mmopen' + domain[1];
-            headimg.onload = function(){
-                ctx.drawImage(headimg,10,610,50,50);
-            };
+            // var headimg = new Image();
+            // var url = this.$store.state.wechat.headimg;
+            // var domain = url.split('/mmopen');
+            // headimg.src = this.url + '/wxAvator' + '/mmopen' + domain[1];
+            // headimg.onload = function(){
+            //     ctx.drawImage(headimg,10,610,50,50);
+            // };
 
-            ctx.fillStyle="#000";
-            ctx.font="14px Arial";
-            ctx.fillText(this.$store.state.wechat.nickname,80,630);
-            ctx.fillText(this.$store.state.wechat.promotioncode,80,650);
+            // ctx.fillStyle="#000";
+            // ctx.font="14px Arial";
+            // ctx.fillText(this.$store.state.wechat.nickname,80,630);
+            // ctx.fillText(this.$store.state.wechat.promotioncode,80,650);
             setTimeout(()=>{
                 this.componentload = false;
             },2500);
