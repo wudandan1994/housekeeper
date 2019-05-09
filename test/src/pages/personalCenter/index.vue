@@ -16,7 +16,7 @@
             </div>
             <div v-show="isUpgrade" class="operator end-center"  @click="Upgrade">
                 <van-icon name="gem" size="20px" color="#dab17b"/>
-                <span>立刻升级为钻石会员</span>
+                <span>升级为钻石会员</span>
             </div>
             
             <div class="position">
@@ -60,7 +60,7 @@
                         <h3>温馨提示</h3>
                         <p>您现在即将升级成<span class="colum">钱夹宝钻石会员</span>升级成功后,您将享受相应收益权限。</p>
                         <p class="vip">
-                            若你成为钻石会员，垫还每万元可省下78元，空卡代还每万元可省下57元，最关键的一点在于不仅省钱还可以让你的信用卡资金利用率达到90%以上。
+                            若你成为钻石会员，垫还手续费降到万72+1元/笔，收款手续费降到万47+1元/笔，预计垫还收款每年可省3000元，最关键的一点在于不仅省钱还可以让你的信用卡资金利用率达到90%以上。
                         </p>
                         <p>
                             由于您当前已经是黄金会员，若您确认升级，您除了需支付与钻石会员的差价600元，还需另外支付10元手续费，共计610元。
@@ -154,7 +154,7 @@
             <div class="price center">¥{{price}}</div>
             <div class="per-title row">
                 <div class="goods-title start-center">商品名称</div>
-                <div class="goods-detail start-center">钱夹宝黄金会员升级钻石会员</div>
+                <div class="goods-detail start-center">黄金会员升级钻石会员</div>
             </div>
             <div class="per-title row">
                 <div class="goods-title start-center">付款类型</div>
@@ -524,7 +524,6 @@ export default {
                   position: absolute;
                   left: 2.5%;
                   bottom: 20px;
-                  
                   .per-position{
                       width: 33%;
                       height: 100%;
@@ -653,7 +652,7 @@ export default {
         }
         .per-list{
             background: white;
-            // border-bottom: solid 1px #ccc;
+            border-bottom: solid 1px #ccc;
             .per-menu-list{
                 width: 33%;
                 height: 180px;

@@ -101,7 +101,10 @@ export default {
                     }
                      storage.set('username',that.phone);
                      storage.set('password',that.password);
-                     that.$router.push('/home');
+                     setTimeout(()=>{
+                         that.$router.push('/home');
+                     },2000)
+                     
                 }else{
                     that.$toast({
                         message:res.data.message
@@ -114,15 +117,9 @@ export default {
             })
         },
         // 登录
-            logIn(){
-                // console.log(location.href)
-
-
-            //  location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=
-            // http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+            // logIn(){
+            //  location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
       
-          
-
         //    var auths=null
         //    let that=this
         //    plus.oauth.getServices( function(services){
@@ -161,9 +158,7 @@ export default {
         // },function(e){
         //     that.$toast("登录认证失败")
         // })
-        
-       
-    },
+    // },
 
     created(){
         this.phone = storage.get('username');

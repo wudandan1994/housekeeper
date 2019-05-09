@@ -364,7 +364,7 @@ export default {
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-        // this.automatic()
+        this.automatic()
     }  
 }
 </script>
