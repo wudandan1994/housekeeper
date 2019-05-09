@@ -280,7 +280,7 @@ export default {
              .then(res=>{
                 if(!res.data.success){
                      this.$router.push("/logIn");
-                     this.$toast('登录失败');
+                    //  this.$toast('登录失败');
                 }else {
                     this.$store.commit('iscertification',res.data.data.iscertification);
                     this.$store.commit('level',res.data.data.level);

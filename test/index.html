@@ -7,9 +7,21 @@
     <title>钱夹宝</title>
   </head>
   <body >
-    <div id="app"></div>
+    <div id="app">
+      <span id="close">关闭</span>
+    </div>
     <!-- built files will be auto injected -->
     <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script>
+
+      document.getElementById("close").onclick=function(){
+        plus.navigator.closeSplashscreen()
+      }
+
+       
+       
+       
+    </script>
     <!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=G308Fw8Vn49PgKzy9QNvozMkEFah2GRo"></script> -->
   </body>
 </html>

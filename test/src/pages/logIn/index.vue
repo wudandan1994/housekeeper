@@ -101,10 +101,7 @@ export default {
                     }
                      storage.set('username',that.phone);
                      storage.set('password',that.password);
-                     setTimeout(()=>{
                          that.$router.push('/home');
-                     },2000)
-                     
                 }else{
                     that.$toast({
                         message:res.data.message

@@ -5,7 +5,9 @@
             <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
-        <!-- <iframe class="iframe"  :src="url" frameborder="0"></iframe> -->
+        <div class="out">
+               <!-- <iframe class="iframe"  :src="url" frameborder="0"></iframe> -->
+        </div>
     </div>
 
 </template>
@@ -63,6 +65,11 @@ export default {
         .iframe{
             width: 100vw;
             height: calc(100vh - 86px);
+        }
+        .out {
+            overflow: auto;
+            -webkit-overflow-scrolling:touch;
+            width:100%;
         }
    }
 </style>

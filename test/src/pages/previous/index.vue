@@ -15,7 +15,7 @@
                             </div>
                             <div>
                                 <p class="recommend gray">推荐人</p>
-                                <p>{{nickname}}</p>
+                                <p v-show="showConnect">{{nickname}}</p>
                             </div>
                       </div>
                       <div>
@@ -82,7 +82,7 @@ export default {
         },
         // 上级详细信息
         handleMorePreviousDetail(){
-            this.$toast('暂无更多信息');
+            this.$toast('暂无更多信息')
         },
         // 查询上级
         handlePrevious(){
