@@ -81,7 +81,7 @@ export default {
             })
         },
         goBack() {
-            this.$router.push('/home/accountManagement')
+            this.$router.push('/logIn')
         },
         getCode(){
             let that=this

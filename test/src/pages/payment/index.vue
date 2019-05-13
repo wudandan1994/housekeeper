@@ -162,9 +162,8 @@ export default {
                                 title:"支付"
                               }
                         })
-                }
-               
-            })
+                   }
+               })
             .catch(err=>{
             })
        },
@@ -182,7 +181,6 @@ export default {
             })
             .catch(err=>{
                 // console.log(err,"error");
-                
             })
         }
         

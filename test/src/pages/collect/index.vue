@@ -433,7 +433,6 @@ export default {
                        input {
                            border:none;
                            flex: 1;
-                        //    margin-left:10px;
                            font-size: 30px;
                            text-align: right;
 

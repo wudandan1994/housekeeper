@@ -180,7 +180,7 @@ export default {
            }else if(this.form.mobile == ''){
                this.$toast('请填写申请人手机号')
            }
-           else if((this.form.code).trim() == '' || (this.form.code).trim() != (this.realCode).trim()){
+           else if((this.form.code).replace(/\s*/g,"")=='' || (this.form.code). replace(/\s*/g,"")!= (this.realCode).replace(/\s*/g,"")){
                this.$toast('请检查验证码');
            }
            else if(this.checked == false){
@@ -244,7 +244,7 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less" >
     #page-component-form{
         width: 100vw;
         height: auto;
@@ -371,6 +371,9 @@ export default {
             padding-top: 40px;
             padding-bottom: 50px;
             background: #F7F6FB;
+            .van-checkbox__icon{
+                border:1px solid #000;
+            }
             span{
                 color: #4B66AF;
             }
