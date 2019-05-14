@@ -46,6 +46,8 @@ import financialCircleComponent from '@/pages/financialCircle'
 import realNameComponent from '@/pages/realName'
 import creditEnquiryComponent from '@/pages/creditEnquiry'
 import inviteShareComponent from '@/pages/inviteShare'
+import repaymentChannelComponent from '@/pages/repaymentChannel'
+
 import loan from '@/pages/loan'
 import loandetail from '@/pages/loan/detail'
 import form from '@/pages/loan/form'
@@ -143,6 +145,7 @@ export default new Router({
     {path:"/share/promotionMaterial",component:promotionMaterialComponent},
     {path:"/share/principle",component:principleComponent},
     {path:"/share/data",component:dataComponent},
+    {path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",component:repaymentChannelComponent},
     {path:"/share/adsNews",component:adsNewsComponent},
     {path:"/share/businessCard",component:businessCardComponent},
     {path:"/share/creditCardLink",component:creditCardLinkComponent},

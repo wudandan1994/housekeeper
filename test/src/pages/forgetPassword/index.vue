@@ -172,16 +172,19 @@ export default {
                 mobile:that.mobile,
                 authcode:that.authcode
             }
-             axiosPost("http://pay.91dianji.com.cn/api/customer/updatePassWord",data)
+             axiosPost("http://pay.91dianji.com.cn/api/customer/forgetPassWord",data)
              .then(function(res){
                 //  console.log(res,"result");
-                 that.$toast({
-                     message:res.data.message
-                 })
-                 that.mobile=""
-                 that.authcode=""
-                 that.newPassword=""
-                 that.suerPassword=""
+                if(res.data.success){
+                     that.$toast({
+                        message:res.data.message
+                    })
+                    that.mobile=""
+                    that.authcode=""
+                    that.newPassword=""
+                    that.suerPassword=""
+                }
+                
              })
              .catch(function(err){
                 //  console.log(err,"error");
