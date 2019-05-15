@@ -109,7 +109,7 @@ export default {
         },
         getCardList(){
             let that= this
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getBankList")
+            axiosPost("/creditCard/getBankList")
             .then(function(res){
                 if(!res.data.success){
                     that.$toast({

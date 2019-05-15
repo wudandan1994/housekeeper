@@ -66,7 +66,7 @@ export default {
                     mobile:this.mobile,
                     type:"1"
                 }
-                axiosPost("http://pay.91dianji.com.cn/api/customer/sendSms",data)
+                axiosPost("/customer/sendSms",data)
                 .then(function(res){
                     if(!res.data.success){
                         that.$toast({
@@ -124,7 +124,7 @@ export default {
                     mobile:that.mobile,
                     authcode:that.authcode
                 };
-                axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",data)
+                axiosPost("/customer/updateMobile",data)
                 .then(function(res){
                     if(res.data.success){
                         that.$toast({

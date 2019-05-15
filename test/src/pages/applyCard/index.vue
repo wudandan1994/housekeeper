@@ -98,7 +98,7 @@ export default {
                 merCardName:that.info.merCardName,
                 bankCardId:that.info.merCardId
             }
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/insertCreditCard",data)
+            axiosPost("/creditCard/insertCreditCard",data)
             .then(function(res){
 
                 if(!res.data.success){
@@ -135,7 +135,7 @@ export default {
         },
         // 获取实名认证信息
         handleGetAOuth(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
+            let url = '/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
                 if(res.data.data.status != '0'){

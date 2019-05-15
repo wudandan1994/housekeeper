@@ -127,12 +127,12 @@ export default {
         },
         // 先判断是否有二维码
         handleJundgeQrCode(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getQrcode';
+            let url = '/customer/getQrcode';
             let params = {};
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
                     if(res.data.data === null){
-                        let url = 'http://pay.91dianji.com.cn/api/customer/downloadQrcode';
+                        let url = '/customer/downloadQrcode';
                         let params = {
                             code: this.$store.state.wechat.promotioncode
                         };

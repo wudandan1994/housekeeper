@@ -86,7 +86,7 @@ export default {
         },
         // 查询上级
         handlePrevious(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomerUP';
+            let url = '/customer/getCustomerUP';
             let params = {
                 recommendedcode: this.$store.state.wechat.recommendedcode
             };

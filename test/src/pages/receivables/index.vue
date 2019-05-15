@@ -138,7 +138,7 @@ export default {
         },
         searchInfo(){
             let that=this
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
+            axiosPost("/creditCard/getMemberReg")
         .then(function(res){
             that.personInfo=res.data.data
         })

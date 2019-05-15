@@ -1,8 +1,8 @@
 <template>
-    <div id="repayment-channel">
+    <div id="violation-inquiry">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>智能还款</span>
+            <span>设置还款计划</span>
             <span></span>
         </header>
         <div class="container">
@@ -35,92 +35,126 @@
                        <div class="bottom">
                            <ul>
                                <li>
-                                   <p>未知</p>
-                                   <p>还款金额</p>
+                                   <p>未设置</p>
+                                   <p>本期账单</p>
                                </li>
                                <li>
-                                   <p>智能还款</p>
-                                   <p>还款模式</p>
+                                   <!-- <p>{{item.billdate}}<span>日</span></p> -->
+                                   <p>账单日</p>
                                </li>
                                 <li>
-                                   <p>未知</p>
-                                   <p>还款笔数</p>
+                                   <!-- <p>{{item.duedate}}<span>日</span></p> -->
+                                   <p>还款日</p>
                                </li>
                                 <li>
-                                   <p>未知</p>
-                                   <p>手续费</p>
+                                   <p>3天</p>
+                                   <p>还款宽限期</p>
                                </li>
-                               <li>
-                                   <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" />
-                               </li>
+                              
                            </ul>
                        </div>
                    </li>
                </ul>
            </div>
-           <div class="tips">
-               <h3>温馨提示</h3>
-               <div class="channel">
-                   <p>尊敬的用户您好！本支付通道为真实商户消费通道，为了修复完善您信用卡账单就，建议您最好预留<span class="red">11%-12%</span>的资金，
-                   要确保在执行消费还款计划期间，卡内有足够的金额（期间尽量避免使用：<span class="bold">微信扫码、支付宝、京东</span>等地方消费使用，并注意卡内临时额、
-                   产生分期费用等），否则可能会导致余额不足或扫码消费笔数限制，还款计划执行失败。</p>
-                   <div>注：请如实填写账单日、还款日，如填写不实导致未全额还款的，责任由客户自行承担。
-                        <div class="center"><van-checkbox v-model="checked" @change="handleAgree" shape="square" checked-color="#4b66af">本人已阅读同意</van-checkbox></div>
-                   </div>
+           <div class="notice">
+               <p>*在经济条件允许范围内，不要长期低于总额度30%，可以降低银行系统风控</p>
+           </div>
+           <div class="plan">
+               <p><van-icon name="setting" />系统计划</p>
+               <div class="content">
+                  <div class="eara">
+                      <p>请输入还款金额</p>
+                      <input class="input" v-model="payment" type="number" placeholder="请输入还款金额">
+                  </div>
+                  <div class="eara">
+                      <p>当前账户可用余额</p>
+                      <input class="input" v-model="amount" type="number" placeholder="当前账户可用余额(不能低于还款额的5%)">
+                  </div>
+                   <div class="eara">
+                      <p>请选择消费城市</p>
+                      <div class="last">
+                          <van-icon name="location"/>
+                          <input class="city" v-model="city" type="number" placeholder="位置">
+                          <van-icon name="arrow-down"/>
+                      </div>
+                      
+                  </div>
                </div>
            </div>
-
-          <div class="button">
-              <van-button round size="large" @click="makePlan" type="info">制定计划</van-button>
-          </div>
+            <div class="make">
+                <van-button size="large" @click="makePlan" round type="info">制定计划</van-button>
+            </div>
+        </div>
+        <div class="li">
 
         </div>
     </div>
-
 </template>
 
-
 <script>
+import { axiosPost } from '../../lib/http'
 export default {
     data() {
         return {
-            item:"",
-            checked:false
+           payment:"",
+           amount:"",
+           item:"",
+           planList:{}
         }
     },
     methods:{
         goBack() {
-            this.$router.push("/home/creditHousekeeper/aisleHousekeeper");
-        },
-        handleAgree(val){
+            this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
         },
         makePlan(){
-            if(!this.checked){
+            if(this.payment.trim().length===0 || this.amount.trim().length===0){
                 this.$toast({
-                    message:"请阅读并同意协议"
+                    message:"请输入金额"
                 })
                 return
             }
-            this.$router.push({
-                path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
-                query:{
-                    info:this.item
-                }
-            })
-
+            if(Number(this.amount)<Number(this.payment)*0.05){
+                this.$toast({
+                    message:"当前账户可用余额不能低于还款额的5%"
+                })
+                return
+            }
+            let data={
+                bindId:item.bindId,
+                amount:this.amount,
+                payment:this.payment
+            }
+             axiosPost("/creditCard/getPlan")
+             .then(res=>{
+                 console.log(res);
+                 if(!res.data.success){
+                     this.$toast({
+                         message:res.data.message
+                     })
+                 } else {
+                     this.planList=res.data.data
+                     this.$router.push({
+                         path:"/home/creditHousekeeper/aisleHousekeeper/planList",
+                         params:{list:this.planList}
+                     })
+                 }
+             })
+             .catch(err=>{
+                 console.log(err)
+             })
         }
-
     },
     created () {
-       this.item=this.$route.query.info 
+         this.item=this.$route.query.info 
+         console.log(this.item)
     }
 }
 </script>
 
 <style lang="less">
-   #repayment-channel {
+   #violation-inquiry {
        >header {
-           background-color: #4B66AF;
+           background: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -143,7 +177,7 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
-            .bind {
+           .bind {
                 box-sizing: border-box;
               >ul{
                   padding:30px;
@@ -152,8 +186,7 @@ export default {
                       width:100%;
                       border-radius: 10px;
                       border:2px solid #ccc;
-                      background-color:#4AA3E2;
-                      color:#fff;
+                      color:#000;
                       padding:10px;
                        box-sizing: border-box;
                        >.top {
@@ -169,12 +202,11 @@ export default {
                           bottom: 0px;
                           left:0px;
                           right:0px;
-                          background-color: rgba(0, 0, 0, .2);
                           >ul{
                               display: flex;
                               justify-content: space-around;
                               >li {
-                                  width:20%;
+                                  width:25%;
                                   text-align: center;
                                   .van-icon--image {
                                       font-size: 40px;
@@ -211,32 +243,58 @@ export default {
                   }
               }
           }
-          >.tips {
-               padding:20px;
-              >h3 {
-                  font-weight: bold;
-                  margin-bottom: 10px;
-              }
-              >.channel {
-                  background-color: #eee;
-                  padding:10px;
-                  line-height: 38px;
-                  border-radius: 10px;
-                  border:2px solid #ccc;
-                  .red {
-                      color:red;
-                  }
-                  .bold {
-                      font-weight: bold;
-                  }
+          >.notice {
+              background-color: #eee;
+              line-height: 38px;
+              padding:10px 0px;
+          }
+          >.plan {
+            //  padding:15px;
+            // margin:15px;
+             >p {
+                 margin:20px;
+                 color:#4B66AF;
+             }
+             >.content {
+                  margin:15px;
+                 >.eara {
+                     margin-bottom: 15px;
+                     >p {
+                     margin-bottom: 10px;
+                   }
+                   >.last {
+                        width:100%;
+                       height:60px;
+                       line-height:55px;
+                       border:2px solid #ccc;
+                       background-color: #eee;
+                       border-radius: 10px;
+                        >.city {
+                         border:none;
+                         background-color: #eee;
+                       }
+                   }
+                   >.input {
+                       border:none;
+                       width:100%;
+                       height:60px;
+                       border:2px solid #ccc;
+                       background-color: #eee;
+                       border-radius: 10px;
+                       padding-left:20px;
+                       box-sizing: border-box;
+                   }
+                 }
+                 
+             }
+          }
+          >.make {
+              margin-top:50px;
+              padding:0 30px;
+              .van-button--info {
+                  background-color: #4B66AF;
               }
           }
-          .button {
-                  padding:0 30px;
-                  .van-button--info {
-                      background-color: #4B66AF;
-                  }
-              }
        }
    }
 </style>

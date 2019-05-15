@@ -76,7 +76,7 @@ export default {
                 mobile:that.phone,
                 password:that.password
             }
-            that.$http.post("http://pay.91dianji.com.cn/api/customer/login",qs.stringify(data))
+            that.$http.post("/customer/login",qs.stringify(data))
             .then(function(res){
                 if(res.data.success){
                     that.$store.commit('iscertification',res.data.data.iscertification);

@@ -224,7 +224,7 @@ export default {
                  billdate:this.billdate,
                  duedate:this.duedate
              }
-              axiosPost("http://pay.91dianji.com.cn/api/creditCard/bindCreditCard",data)
+              axiosPost("/creditCard/bindCreditCard",data)
               .then(res=>{
                   console.log(res)
                   if(!res.data.success){

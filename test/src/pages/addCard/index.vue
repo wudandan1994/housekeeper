@@ -54,7 +54,7 @@ export default {
                     idcardno:this.idCard,
                     phone:this.phone
                 };
-                axiosPost("http://pay.91dianji.com.cn/api/creditCard/merchantSettled",data)
+                axiosPost("/creditCard/merchantSettled",data)
                 .then(res=>{
                     if(!res.data.success){
                         this.$toast({
@@ -80,7 +80,7 @@ export default {
         },
         // 获取实名认证信息
         handleGetAOuth(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
+            let url = '/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
                 // console.log('获取实名认证状态成功',res);

@@ -54,7 +54,7 @@
                                   </div>
                               </div>
                               <p>
-                                  <van-button @click="repayment" round type="info">立即还款</van-button>
+                                  <van-button @click="repayment(item)" round type="info">立即还款</van-button>
                               </p>
                           </div>
                        </div>
@@ -109,7 +109,6 @@
                    </li>
               </ul> -->
               <router-link to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" tag="h3">添加信用卡</router-link>
-              <van-button @click="repayment" round type="info">立即还款</van-button>
            </div>
         </div>
     </div>
@@ -141,22 +140,22 @@ export default {
     },
     methods:{
         goBack() {
-            // this.$router.push('/home/creditHousekeeper')
+            this.$router.push('/home/creditHousekeeper')
             // console.log(bankCardAttribution("6229015220764104").bankName)
-            let a=bankCardAttribution("6229015220764104").bankName
-            console.log(a)
+            // let a=bankCardAttribution("6229015220764104").bankName
+            // console.log(a)
         },
-        repayment(){
+        repayment(item){
             this.$router.push({
-                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                // query:{
-
-                // }
+                path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
+                query:{
+                    info:item
+                }
             })
         },
         // 查询绑卡列表
         getCardList(){
-             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMyCreditCard")
+             axiosPost("/creditCard/getMyCreditCard")
              .then(res=>{
                  if(res.data.success){
                      console.log(res)
@@ -204,7 +203,7 @@ export default {
         //     })
         // },
          handleGetAmount(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+            let url = '/customer/getCustomer';
             let params = {
                 openid:this.$store.state.wechat.openid,
             };
@@ -275,7 +274,7 @@ export default {
            >.swipe {
                width:100%;
                height:200px;
-               background-color: red;
+            //    background-color: red;
                font-size: 28px;
                margin-bottom:15px;
                .top{
@@ -309,7 +308,7 @@ export default {
                       height: 50px;
                       margin-top: 5px;
                       font-size: 28px;
-                      color:#ffffff; 
+                      color:#000; 
                       >div{
                         width: auto;
                         border: solid 0.02rem #ccc;

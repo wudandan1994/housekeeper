@@ -55,7 +55,7 @@ export default {
     methods:{
         // 判断是否绑定手机号
         handleJundeMobile(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+            let url = '/customer/getCustomer';
             // let url = '/customer/getCustomer';
             let params = {
                 openid:this.$store.state.wechat.openid,
@@ -96,7 +96,7 @@ export default {
                     mobile:this.mobile,
                     type:"3"
                 }
-                axiosPost("http://pay.91dianji.com.cn/api/customer/sendSms",data)
+                axiosPost("/customer/sendSms",data)
                 .then(function(res){
                     if(!res.data.success){
                         that.$toast({
@@ -172,7 +172,7 @@ export default {
                 mobile:that.mobile,
                 authcode:that.authcode
             }
-             axiosPost("http://pay.91dianji.com.cn/api/customer/forgetPassWord",data)
+             axiosPost("/customer/forgetPassWord",data)
              .then(function(res){
                 //  console.log(res,"result");
                 if(res.data.success){

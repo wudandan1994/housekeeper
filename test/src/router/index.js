@@ -47,6 +47,9 @@ import realNameComponent from '@/pages/realName'
 import creditEnquiryComponent from '@/pages/creditEnquiry'
 import inviteShareComponent from '@/pages/inviteShare'
 import repaymentChannelComponent from '@/pages/repaymentChannel'
+import makePlanComponent from '@/pages/makePlan'
+import planListComponent from '@/pages/planList'
+
 
 import loan from '@/pages/loan'
 import loandetail from '@/pages/loan/detail'
@@ -137,6 +140,10 @@ export default new Router({
     {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
     {path:"/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard",component:bindingCreditCardComponent,},
     {path:"/home/creditHousekeeper/aisleHousekeeper/repayment",component:repaymentComponent},
+    {path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",component:makePlanComponent},
+    {path:"/home/creditHousekeeper/aisleHousekeeper/planList",component:planListComponent},
+
+
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},

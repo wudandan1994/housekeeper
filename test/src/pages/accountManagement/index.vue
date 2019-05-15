@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    </div>
+  
 
 </template>
 
@@ -49,7 +49,7 @@ export default {
             let data={
                 openid:this.$store.state.wechat.openid,
             }
-             axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer",data)
+             axiosPost("customer/getCustomer",data)
              .then(res=>{
                  if(res.data.success){
                      this.show=true
