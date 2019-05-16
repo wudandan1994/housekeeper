@@ -15,7 +15,7 @@
                             </div>
                             <div>
                                 <p class="recommend gray">推荐人</p>
-                                <p>{{nickname}}</p>
+                                <p v-show="showConnect">{{nickname}}</p>
                             </div>
                       </div>
                       <div>
@@ -28,9 +28,12 @@
                   <ul>
                       <li>
                           <p><van-icon name="phone"/></p>
-                          <div> 
+                          <div v-show="showConnect"> 
                               <p class="gray">打电话</p>
                               <a :href="'tel:' + mobile">和上级电话联系</a>
+                          </div>
+                          <div v-show="showConnect?false:true">
+                              <p>暂无更多</p>
                           </div>
                       </li>
                        <li @click="handleMorePreviousDetail">
@@ -43,7 +46,8 @@
                   </ul>
               </div>
              <div class="tips">
-                 <h3>1.温馨提示</h3>
+                 <h3>温馨提示</h3>
+                 <span class="update">若您不想下级联系到自己，可前往“个人中心 ---》设置”中更新信息即可。</span>
                  <p>专属服务经理是平台对用户的第一责任人，在享用平台相关权益的同时，也肩负指导、培训和为用户排忧解难的责任和义务，投诉电话：400-105-9769</p>
              </div>
         </div>
@@ -68,7 +72,8 @@ export default {
             mobile: '',
             level: '',
             recommendedcode: '',
-            privious:""
+            privious:"",
+            showConnect:""
         }
     },
     methods:{
@@ -87,9 +92,11 @@ export default {
             };
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                    this.nickname = res.data.data.nickname;
-                    this.mobile = res.data.data.mobile,
-                    this.recommendedcode = res.data.data.promotioncode,
+                    console.log(res)
+                    this.nickname = res.data.data.nickname
+                    this.mobile = res.data.data.mobile
+                    this.recommendedcode = res.data.data.promotioncode
+                    this.showConnect=res.data.data.ispermit=="1"?true:false
                     res.data.data.level == '0' ?  this.level = '实习' : (res.data.data.level == '1' ? this.level = '黄金会员' : this.level = '钻石会员');
                     setTimeout(()=>{
                         this.componentload = false;
@@ -222,9 +229,14 @@ export default {
                    color:#000;
                    padding-bottom: 30px;
                }
+               >.update {
+                   color:#999;
+                   line-height: 38px;
+               }
                >p {
                    line-height:40px;
                    color:#999;
+                   margin-top:10px;
                }
            }
        }

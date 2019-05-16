@@ -1,47 +1,8 @@
- <!-- <template>
-    <div id="modify-login-password">
-        <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>忘记密码</span>
-            <span></span>
-        </header> 
-        <div class="container">
-           <div class="phone">
-               <ul>
-                   <li>
-                       <span><van-icon name="phone" />&nbsp;&nbsp;&nbsp;手机号</span>
-                       <input type="number" placeholder="请输入11位手机号码">
-                       
-                   </li>
-                    <li>
-                        <span><van-icon name="checked" />&nbsp;&nbsp;&nbsp;验证码</span>
-                       <input type="number" placeholder="注意查收短信">
-                       <span>获取验证码</span>
-                   </li>
-                    <li>
-                        <span><van-icon name="lock" />&nbsp;&nbsp;&nbsp;新密码</span>
-                       <input type="text" placeholder="6-16位数字或字母">
-                   </li>
-                    <li>
-                        <span><van-icon name="lock" />&nbsp;&nbsp;&nbsp;确认密码</span>
-                       <input type="text" placeholder="再次输入密码">
-                   </li>
-               </ul>
-           </div>
-           <div class="at-once">
-                   提交
-               </div>
-        </div>
-    </div> 
-
-</template>
--->
-
 <template>
     <div id="forget-password">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>修改登录密码</span>
+            <span>设置新密码</span>
             <span></span>
         </header>
         <div class="container">
@@ -51,41 +12,32 @@
                    <li>
                        <span>+86</span>
                        <input type="number" v-model="mobile" placeholder="输入11位手机号码">
-                       <span>
-                            <span v-show="showCount">{{count}}秒后再次获取</span>
-
-                            <span @click="getCode" v-show="showCode">获取验证码</span>
-                       </span>
-                      
+                       <div>
+                             <van-button size="middle"  class="second" v-show="showCount"  round type="info">{{count}}秒后</van-button>
+                            <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
+                       </div>
                    </li>
                     <li>
-                        <span>输入验证码:</span>
+                        <span>验证码:</span>
                        <input v-model="authcode" type="number" placeholder="输入验证码">
                    </li>
                     <li>
-                        <span>新密码:</span>
-                       <input v-model="newPassword" type="password" placeholder="输入6-18位字母加数字新密码">
+                        <span>密码:</span>
+                       <input v-model="newPassword" type="password" placeholder="输入6-18位字母加数字密码">
                    </li>
                     <li>
-                        <span>再次输入新密码:</span>
-                       <input v-model="suerPassword" type="password" placeholder="输入新密码">
+                        <span>确认密码:</span>
+                       <input v-model="suerPassword" type="password" placeholder="确认密码">
                    </li>
                </ul>
            </div>
-           <div id="tips" class="start-center">*验证码有效期为半小时,请勿重复发送</div>
            <div @click="modify" class="at-once">
-                   <van-button round size='large' type="info">确认</van-button>
+                  <van-button size="large" round type="info">立即修改</van-button>
                </div>
         </div>
     </div>
 </template>
-
-
-
-
-
-
- <script>
+<script>
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
@@ -101,8 +53,35 @@ export default {
         }
     },
     methods:{
+        // 判断是否绑定手机号
+        handleJundeMobile(){
+            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+            // let url = '/customer/getCustomer';
+            let params = {
+                openid:this.$store.state.wechat.openid,
+            };
+            axiosPost(url,params).then(res =>{
+                // console.log('查询个人设置成功',res)
+                if(res.data.success){
+                    if(res.data.data.mobile === null){
+                        this.$alert('请先绑定手机号', '提示', {
+                            confirmButtonText: '确定',
+                            callback: action => {
+                                this.$router.push({
+                                    path: '/home/bindingPhone'
+                                })
+                            }
+                        });
+                    }else{
+                        this.mobile = res.data.data.mobile;
+                    }
+                }
+            }).catch(res =>{
+                // console.log('查询个人设置失败',res);
+            })
+        },
         goBack() {
-            this.$router.push('/logIn')
+            this.$router.push('/home/accountManagement')
         },
         getCode(){
             let that=this
@@ -115,7 +94,7 @@ export default {
             } else  {
                 let data={
                     mobile:this.mobile,
-                    type:"1"
+                    type:"3"
                 }
                 axiosPost("http://pay.91dianji.com.cn/api/customer/sendSms",data)
                 .then(function(res){
@@ -123,11 +102,10 @@ export default {
                         that.$toast({
                             message:res.data.message
                         })
-                        return
-                    }
+                    } else {
                         that.showCount=true
                         that.showCode=false
-                  
+                    }
                     if(that.showCount){
                         that.timerId=setInterval(function(){
                             that.count--
@@ -143,7 +121,7 @@ export default {
                 })
                 .catch(function (err) {
                    that.$toast({
-                    message:err.message
+                    message:"请勿重复发送短信"
                   })
                 })
             }
@@ -151,7 +129,7 @@ export default {
         modify(){
              let that=this
             let partten=/^1\d{10}$/  // 11位手机号的正则
-             let code=/[0-9A-Za-z] {6,18} /  //密码的正则
+            //  let code=/[0-9A-Za-z] {6,18} /  //密码的正则
             if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
@@ -177,9 +155,9 @@ export default {
                  return
             }
             
-            if(that.newPassword.trim().length===0){
+            if(that.suerPassword.trim().length===0){
                  that.$toast({
-                    message:"请再次输入新密码"
+                    message:"请确认密码"
                 })
                  return
             }
@@ -191,47 +169,36 @@ export default {
             }
             let data={
                 password:that.suerPassword,
-                mobile:this.mobile,
-                authcode:this.authcode
+                mobile:that.mobile,
+                authcode:that.authcode
             }
-             axiosPost("http://pay.91dianji.com.cn/api/customer/updatePassword",data)
+             axiosPost("http://pay.91dianji.com.cn/api/customer/updatePassWord",data)
              .then(function(res){
-                 if(!res.data.success){
-                      that.$toast({ 
-                         message:res.data.message
-                   })
-                   return
-                 }
+                //  console.log(res,"result");
                  that.$toast({
                      message:res.data.message
                  })
+                 that.mobile=""
+                 that.authcode=""
+                 that.newPassword=""
+                 that.suerPassword=""
              })
              .catch(function(err){
                 //  console.log(err,"error");
                  
              })
         }
+    },
+    created(){
+        this.handleJundeMobile();
     }
 }
-
-// export default {
-//     data() {
-//         return {
-//         }
-//     },
-//     methods:{
-//         goBack() {
-//             this.$router.push('/login')
-//         }
-//     }
-// }
- </script>
+</script>
 
 <style lang="less">
-
- #forget-password {
+   #forget-password {
        >header {
-          background-color: #4965AE;
+           background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -255,6 +222,7 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
            background-color: #EEEFF1;
+           overflow-x: hidden;
            font-size: 34px;
            >p {
                padding:30px;
@@ -275,30 +243,68 @@ export default {
                        height: 60px;
                        line-height: 60px;
                        color:#000;
+                       &:nth-of-type(1){
+                           padding-left:15px;
+                       }
+                       >div {
+                           >.van-button--info {
+                                background-color: #4965AE;
+                                height: 60px;
+                                line-height: 60px;
+                                margin-right: 10px;
+                                font-size: 28px;
+
+                           }
+                       }
+                       .second{
+                            background-color: #4965AE;
+                             padding:4px 8px;
+                             color:#fff;
+                             border-radius:10px;
+                             display: inline-block;
+                       }
+                       .van-button--info{
+                           background-color: #4965AE;
+                           font-size: 30px;
+                       }
                        &:last-child {
                            border:none;
                        }
                        >span {
-                           &:nth-of-type(2){
-                               color:white;
-                               background-color: #1989fa;
-                               padding:0 10px;
-                               margin-right:20px;
-                               line-height: 60px;
-                               border-radius: 10px;
+                           &:nth-of-type(1){
+                               font-weight: bold;
+                               padding-left:10px;
                            }
+                          >button {
+                              height: 60px;
+                              padding:0 8px;
+                              margin-right:15px;
+                          }
                        }
                        >input {
                            border:none;
                            flex: 1;
-                           margin-left:10px;
+                           margin-right:20px;
+                           text-align: right;
+                           font-size: 28px;
+                           box-sizing:content-box;
+                           height: 60px;
+                       }
+                       input::-webkit-input-placeholder {
+                           font-size: 28px;
+                           line-height: 1rem;
                        }
                    }
                }
            }
            >.at-once {
                margin-top:200px;
-               padding:0 30px;
+               border-radius: 10px;
+               padding-left: 30px;
+               padding-right:30px;
+               .van-button--info{
+                   background-color: #4965AE;
+               }
                >button {
                    height: 90px;
                    font-size: 30px;
@@ -306,103 +312,4 @@ export default {
            }
        }
    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    #modify-login-password {
-//        >header {
-//            background: #000;
-//            width:100%;
-//            height: 86px;
-//            line-height: 86px;
-//            padding-top:10px;
-//            color:#fff;
-//            display: flex;
-//            position: fixed;
-//            font-size:28px;
-//            z-index:999;
-//            justify-content: space-between;
-//            >span {
-//                &:nth-of-type(1) {
-//                    margin-left: 10px;
-//                }
-//                &:nth-of-type(3) {
-//                    margin-right: 10px;
-//                }
-//            }
-//        }
-//        >.container {
-//            padding-top:96px;
-//            padding-bottom: 50px;
-//            background-color: #EEEFF1;
-           
-//            >.phone {
-//                >ul{
-//                    padding-left:30px;
-//                    background-color: #fff;
-//                    >li{
-//                        display: flex;
-//                        flex-wrap: nowrap;
-//                        border-bottom: 1px solid #ccc;
-//                        padding-top:40px;
-//                        padding-bottom: 40px;
-//                        height: 60px;
-//                        line-height: 60px;
-//                        color:#000;
-//                        &:last-child {
-//                            border:none;
-//                        }
-//                        >span {
-//                            &:nth-of-type(1) {
-//                                margin-right:10px;
-//                            }
-//                            &:nth-of-type(2){
-//                                color:white;
-//                                background-color: #FDA426;
-//                                padding:0 10px;
-//                                margin-right:20px;
-//                                line-height: 60px;
-//                                border-radius: 10px;
-//                            }
-//                        }
-//                        >input {
-//                            border:none;
-//                            flex: 1;
-//                            margin-left:10px;
-//                        }
-//                    }
-//                }
-//            }
-//            >.at-once {
-//                width:60%;
-//                background-color: #4A4849;
-//                color:white;
-//                margin-top:200px;
-//                margin-left:20%;
-//                text-align: center;
-//                padding:30px;
-//                border-radius: 10px;
-//            }
-//        }
-//    }
 </style>

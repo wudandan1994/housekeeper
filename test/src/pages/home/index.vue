@@ -81,7 +81,7 @@
                             <span>GO>></span>
                         </div>  
                     </li>
-                    <li @click="handleIsAuth('/home/creditHousekeeper')">
+                    <li @click="searchInfo">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
@@ -357,7 +357,25 @@ export default {
         // 联系客服
         handleContactUs(){
             this.$router.push('/personalCenter/contactus')
-        }
+        },
+        searchInfo(){
+            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMerchantSettled")
+            .then(res=>{
+                if(res.data.code==="1"){
+                    this.$router.push("/home/addCard")
+                } else if(res.data.code==="0"){
+                    // window.location.href = res.data.data.url;
+                    storage.set('cardManager',res.data.data.url);
+                    this.$router.push({
+                        path: '/cardManager'
+                    })
+                }
+            })
+            .catch(err=>{
+                // console.log(err,"失败");
+                
+            })
+        },
     },
     created(){
         this.nickname=this.$store.state.wechat.nickname;

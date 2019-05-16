@@ -52,6 +52,13 @@
                        </div>
                        <div class="icon-left end-center"><van-icon name="arrow" /></div>
                    </div>
+                    <div class="per-userinfo row">
+                       <div class="avator start-center"><van-icon name="chat" size="22px"/>是否允许下级联系</div>
+                       <div class="detail end-center">
+                          <van-switch v-model="isconnect" />
+                       </div>
+                       <div class="icon-left end-center"><van-icon name="arrow" /></div>
+                   </div>
                    <div class="per-userinfo row">
                        <div class="avator start-center"><van-icon name="invition" size="22px"/>微信号</div>
                        <div class="detail end-center">
@@ -104,7 +111,7 @@ export default {
                 { name:"个体户"},
                 { name:"自由职业者"},
                 { name:"企业主"},
-            ],
+               ],
             identity:"",
             photo: 'http://pay.91dianji.com.cn/logo.png',
             nickname: '',
@@ -114,7 +121,8 @@ export default {
             iscar: false,
             wechat: '',
             wechatqr: 'http://pay.91dianji.com.cn/logo.png',
-            voice: '0'
+            voice: '0',
+            isconnect:true
         }
     },
     methods:{
@@ -192,7 +200,9 @@ export default {
             var iscreditcard = false;
             var voice = false;
             var iscar = false;
+            var isconnect=null
 
+            this.isconnect==true? isconnect="1":"0"
             this.iscar == true ? iscar = '1' : iscar = '0';
             this.voice == true ? voice = '1' : voice = '0';
             this.iscreditcard == true ? iscreditcard = '1' : iscreditcard = '0';
@@ -207,7 +217,8 @@ export default {
                 iscar: iscar,
                 wechat: this.wechat,
                 wechatqr: this.wechatqr,
-                voice: voice
+                voice: voice,
+                ispermit:isconnect
             };
             axiosPost(url,params).then(res =>{
                 
@@ -274,7 +285,7 @@ export default {
                        font-size: 28px;
                        border-bottom: #ccc solid 1px;
                        .avator{
-                           width: 32%;
+                           width: 50%;
                            height: 100%;
                        }
                        .detail{

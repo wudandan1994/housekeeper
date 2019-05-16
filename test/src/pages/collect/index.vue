@@ -425,6 +425,7 @@ export default {
                            &:nth-of-type(2){
                                padding:0 10px;
                                margin-right:20px;
+                               margin-top:8px;
                                line-height: 60px;
                                border-radius: 10px;
                            }
@@ -432,7 +433,7 @@ export default {
                        input {
                            border:none;
                            flex: 1;
-                           margin-left:10px;
+                        //    margin-left:10px;
                            font-size: 30px;
                            text-align: right;
 

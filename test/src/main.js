@@ -12,6 +12,8 @@ import 'babel-polyfill'
 import "../node_modules/babel-polyfill/dist/polyfill.js"
 // 引入公共css
 import '@/assets/css/common.css'
+// 引入分享的css
+// import '@/assets/css/share.css'
 
 import axios from 'axios'
 Vue.prototype.$http = axios
@@ -19,7 +21,7 @@ Vue.prototype.$http = axios
 axios.defaults.withCredentials = true
 // 引入适配
 import 'lib-flexible/flexible'
-import { Actionsheet,Button,Switch,Dialog,RadioGroup, Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker    } from 'vant'
+import { Actionsheet,Button,Switch,Dialog,RadioGroup, Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker,Step, Steps    } from 'vant'
 Vue.use(Actionsheet)
 Vue.use(Button)
 Vue.use(Switch)
@@ -43,6 +45,7 @@ Vue.use(Lazyload)
 Vue.use(Loading)
 Vue.use(Rate)
 Vue.use(Picker)
+Vue.use(Step).use(Steps);
 
 // 引入图标库
 import '@/assets/icon/iconfont.css'

@@ -112,7 +112,8 @@ import contactUs from '@/pages/personalCenter/contactUs'
 import myloan from '@/pages/loan/myloan'
 // 在线查询银联
 import onlineComponent from '@/pages/online'
-
+// 信用卡管家
+import cardManager from '@/pages/progressQuery/cardManager'
 
 export default new Router({
   // mode:"hash",
@@ -204,5 +205,6 @@ export default new Router({
     {path: '/personalCenter/contactus',component:contactUs},
     {path: '/loan/myloan',component:myloan},
     {path: '/url',component: url},
+    {path: '/cardManager',component: cardManager},
   ]
 })

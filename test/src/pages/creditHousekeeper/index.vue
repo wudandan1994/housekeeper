@@ -71,13 +71,14 @@ export default {
         searchInfo(){
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMerchantSettled")
             .then(res=>{
+                console.log('链接请求成功',res);
                 if(res.data.code==="1"){
                     this.$router.push("/home/addCard")
                 } else if(res.data.code==="0"){
                     // location.href=res.data.data.url
                     let url=res.data.data.url
                         this.$router.push({
-                            path:"/loan/form/myOrder",
+                            path:"/home/cardCenter/progressQuery",
                             query:{
                                 info:url,
                                 title:"还款"

@@ -45,6 +45,7 @@
                </div>
            </div>
         </div>
+        <loading :componentload="componentload"></loading>
     </div>
 </template>
 
@@ -52,9 +53,11 @@
 <script>
 import storage from '@/lib/storage'
 import {axiosPost} from '@/lib/http'
+import loading from '@/components/loading'
 export default {
     data() {
         return {
+           componentload: false,
            orderAmount:"",
            realName:"",
            idCard:"",
@@ -65,6 +68,9 @@ export default {
            record:{},
            showrecord:false
         }
+    },
+     components:{
+      loading
     },
     methods:{
        goBack(){
@@ -144,9 +150,13 @@ export default {
                 chMerCode:this.chMerCode,
                 orderTime:generateTimeReqestNumber()
             }
+            this.componentload = true;
             axiosPost("http://pay.91dianji.com.cn/api/creditCard/quickPay",data)
             .then(res=>{
                 if(!res.data.success){
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },2000)
                     this.$toast({
                         message:res.data.message
                     })
@@ -155,6 +165,9 @@ export default {
                      // location.href=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
                 //  location.href=res.data.data.url
                 let url=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
+                        setTimeout(() =>{
+                            this.componentload = false;
+                        },2000)
                         this.$router.push({
                             path:"/loan/form/myOrder",
                             query:{
@@ -224,7 +237,7 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
            background-color: #EEEFF1;
-           font-size:34px;
+           font-size:30px;
            >button {
                margin:30px;
                height: 90px;
