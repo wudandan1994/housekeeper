@@ -44,7 +44,7 @@ export default {
             let data={
                 cid:cid
             }
-             axiosPost("http://pay.91dianji.com.cn/api/customer/getWithdrawalById",data)
+             axiosPost("/customer/getWithdrawalById",data)
              .then(function(res){
                  if(!res.data.success){
                      that.$toast({

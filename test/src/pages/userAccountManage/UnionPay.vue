@@ -82,7 +82,7 @@ export default {
                 phone:that.phone,
                 bankcardno:that.bankcardno
             }
-            axiosPost("http://pay.91dianji.com.cn/api/customer/checkBankCard",data)
+            axiosPost("/customer/checkBankCard",data)
             .then(function(res){
                 if(!res.data.success){
                     that.$toast({

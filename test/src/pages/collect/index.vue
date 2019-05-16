@@ -275,7 +275,7 @@ export default {
                 settleAccType:that.settleAccType==="公户"? "1":"2",
                 merType:type
             }
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/memberReg",data)
+            axiosPost("/creditCard/memberReg",data)
             .then(function(res){
                 // console.log(res,"注册之后的第一次信息");
                 if(!res.data.success){
@@ -284,7 +284,7 @@ export default {
                     })
                     return
                 } else {
-                    axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
+                    axiosPost("/creditCard/getMemberReg")
                     .then(function(res){
                         // console.log(res,"个人信息查询的结果")
                         if(res.data.success){
@@ -317,7 +317,7 @@ export default {
         },
         // 查询个人信息
          searchInfo(){
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
+            axiosPost("/creditCard/getMemberReg")
            .then(res=>{
             if(res.data.success){
              setTimeout(()=>{
@@ -341,7 +341,7 @@ export default {
      },
      // 获取实名认证信息
         handleGetAOuth(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
+            let url = '/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
                 if(res.data.data.status != '0'){
@@ -433,7 +433,6 @@ export default {
                        input {
                            border:none;
                            flex: 1;
-                        //    margin-left:10px;
                            font-size: 30px;
                            text-align: right;
 

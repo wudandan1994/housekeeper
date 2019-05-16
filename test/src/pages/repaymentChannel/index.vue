@@ -1,0 +1,242 @@
+<template>
+    <div id="repayment-channel">
+        <header>
+            <span @click="goBack"><van-icon name="arrow-left"/></span>
+            <span>智能还款</span>
+            <span></span>
+        </header>
+        <div class="container">
+            <div class="bind">
+               <ul >
+                   <li >
+                       <div class="top">
+                          <div class="bankName">
+                              <!-- <p >{{bankCardAttribution(item.idCardNo).bankName}}</p> -->
+                              <!-- <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p> -->
+                              <!-- <p>
+                                  还款状态
+                              </p> -->
+                          </div>
+                          <div class="now">
+                              <div>
+                                  <!-- <p class="botton">未添加</p> -->
+                                   <!-- <p>本期账单</p> -->
+                              </div>
+                              <div class="pay">
+                                  <!-- <p class="days">16</p> -->
+                                  <div>
+                                      <!-- <p class="botton">天后还款日</p> -->
+                                      <!-- <p><span>{{item.billdate}}</span>-<span>{{item.duedate}}</span></p> -->
+                                  </div>
+                              </div>
+                             
+                          </div>
+                       </div>
+                       <div class="bottom">
+                           <ul>
+                               <li>
+                                   <p>未知</p>
+                                   <p>还款金额</p>
+                               </li>
+                               <li>
+                                   <p>智能还款</p>
+                                   <p>还款模式</p>
+                               </li>
+                                <li>
+                                   <p>未知</p>
+                                   <p>还款笔数</p>
+                               </li>
+                                <li>
+                                   <p>未知</p>
+                                   <p>手续费</p>
+                               </li>
+                               <li>
+                                   <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" />
+                               </li>
+                           </ul>
+                       </div>
+                   </li>
+               </ul>
+           </div>
+           <div class="tips">
+               <h3>温馨提示</h3>
+               <div class="channel">
+                   <p>尊敬的用户您好！本支付通道为真实商户消费通道，为了修复完善您信用卡账单就，建议您最好预留<span class="red">11%-12%</span>的资金，
+                   要确保在执行消费还款计划期间，卡内有足够的金额（期间尽量避免使用：<span class="bold">微信扫码、支付宝、京东</span>等地方消费使用，并注意卡内临时额、
+                   产生分期费用等），否则可能会导致余额不足或扫码消费笔数限制，还款计划执行失败。</p>
+                   <div>注：请如实填写账单日、还款日，如填写不实导致未全额还款的，责任由客户自行承担。
+                        <div class="center"><van-checkbox v-model="checked" @change="handleAgree" shape="square" checked-color="#4b66af">本人已阅读同意</van-checkbox></div>
+                   </div>
+               </div>
+           </div>
+
+          <div class="button">
+              <van-button round size="large" @click="makePlan" type="info">制定计划</van-button>
+          </div>
+
+        </div>
+    </div>
+
+</template>
+
+
+<script>
+export default {
+    data() {
+        return {
+            item:"",
+            checked:false
+        }
+    },
+    methods:{
+        goBack() {
+            this.$router.push("/home/creditHousekeeper/aisleHousekeeper");
+        },
+        handleAgree(val){
+        },
+        makePlan(){
+            if(!this.checked){
+                this.$toast({
+                    message:"请阅读并同意协议"
+                })
+                return
+            }
+            this.$router.push({
+                path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
+                query:{
+                    info:this.item
+                }
+            })
+
+        }
+
+    },
+    created () {
+       this.item=this.$route.query.info 
+    }
+}
+</script>
+
+<style lang="less">
+   #repayment-channel {
+       >header {
+           background-color: #4B66AF;
+           width:100%;
+           height: 86px;
+           line-height: 86px;
+           padding-top:10px;
+           color:#fff;
+           display: flex;
+           position: fixed;
+           font-size:28px;
+           z-index:999;
+           justify-content: space-between;
+           >span {
+               &:nth-of-type(1) {
+                   margin-left: 10px;
+               }
+               &:nth-of-type(3) {
+                   margin-right: 10px;
+               }
+           }
+       }
+       >.container {
+           padding-top:96px;
+           padding-bottom: 50px;
+            .bind {
+                box-sizing: border-box;
+              >ul{
+                  padding:30px;
+                  >li {
+                      position: relative;
+                      width:100%;
+                      border-radius: 10px;
+                      border:2px solid #ccc;
+                      background-color:#4AA3E2;
+                      color:#fff;
+                      padding:10px;
+                       box-sizing: border-box;
+                       >.top {
+                           padding-bottom: 150px;
+                           .bankName {
+                          display: flex;
+                          justify-content: space-around;
+                          margin-bottom: 15px;
+                         }
+                       }
+                      .bottom {
+                          position: absolute;
+                          bottom: 0px;
+                          left:0px;
+                          right:0px;
+                          background-color: rgba(0, 0, 0, .2);
+                          >ul{
+                              display: flex;
+                              justify-content: space-around;
+                              >li {
+                                  width:20%;
+                                  text-align: center;
+                                  .van-icon--image {
+                                      font-size: 40px;
+                                  }
+                                  >p {
+                                      &:nth-of-type(1){
+                                          margin-top:20px;
+                                          margin-bottom: 20px;
+                                      }
+                                      &:nth-of-type(2){
+                                          margin-bottom: 20px;
+                                      }
+                                  }
+
+                              }
+                          }
+                      }
+                      .now {
+                          display: flex;
+                          justify-content: space-around;
+                          >.pay {
+                              display: flex;
+                              >.days {
+                                  font-size: 38px;
+                                  font-weight: bold;
+                                  margin-right: 10px;
+                                  margin-top:10px;
+                              }
+                          }
+                          .botton {
+                              margin-bottom: 10px;
+                          }
+                      }
+                  }
+              }
+          }
+          >.tips {
+               padding:20px;
+              >h3 {
+                  font-weight: bold;
+                  margin-bottom: 10px;
+              }
+              >.channel {
+                  background-color: #eee;
+                  padding:10px;
+                  line-height: 38px;
+                  border-radius: 10px;
+                  border:2px solid #ccc;
+                  .red {
+                      color:red;
+                  }
+                  .bold {
+                      font-weight: bold;
+                  }
+              }
+          }
+          .button {
+                  padding:0 30px;
+                  .van-button--info {
+                      background-color: #4B66AF;
+                  }
+              }
+       }
+   }
+</style>

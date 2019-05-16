@@ -46,6 +46,11 @@ import financialCircleComponent from '@/pages/financialCircle'
 import realNameComponent from '@/pages/realName'
 import creditEnquiryComponent from '@/pages/creditEnquiry'
 import inviteShareComponent from '@/pages/inviteShare'
+import repaymentChannelComponent from '@/pages/repaymentChannel'
+import makePlanComponent from '@/pages/makePlan'
+import planListComponent from '@/pages/planList'
+
+
 import loan from '@/pages/loan'
 import loandetail from '@/pages/loan/detail'
 import form from '@/pages/loan/form'
@@ -136,6 +141,10 @@ export default new Router({
     {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
     {path:"/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard",component:bindingCreditCardComponent,},
     {path:"/home/creditHousekeeper/aisleHousekeeper/repayment",component:repaymentComponent},
+    {path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",component:makePlanComponent},
+    {path:"/home/creditHousekeeper/aisleHousekeeper/planList",component:planListComponent},
+
+
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/share/inviteFriends",component:inviteFriendsComponent},
@@ -144,6 +153,7 @@ export default new Router({
     {path:"/share/promotionMaterial",component:promotionMaterialComponent},
     {path:"/share/principle",component:principleComponent},
     {path:"/share/data",component:dataComponent},
+    {path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",component:repaymentChannelComponent},
     {path:"/share/adsNews",component:adsNewsComponent},
     {path:"/share/businessCard",component:businessCardComponent},
     {path:"/share/creditCardLink",component:creditCardLinkComponent},

@@ -5,7 +5,7 @@
             <span>信用卡管家</span>
             <span></span>
         </header>
-        <!-- <div class="container">
+       <div class="container">
            <h3>钱夹宝智能还款</h3>
            <p class="mode">空卡,智能,急速3种模式</p>
            <div class="light">
@@ -50,7 +50,7 @@
             <router-link to="/home/creditHousekeeper/aisleHousekeeper" tag="li" class="next" >
                 <span>继续</span>
             </router-link>
-        </div> -->
+        </div> 
     </div>
 
 </template>
@@ -69,7 +69,7 @@ export default {
             this.$router.push('/home')
         },
         searchInfo(){
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMerchantSettled")
+            axiosPost("/creditCard/getMerchantSettled")
             .then(res=>{
                 console.log('链接请求成功',res);
                 if(res.data.code==="1"){
@@ -94,7 +94,7 @@ export default {
 
     },
     created () {
-        this.searchInfo()
+        // this.searchInfo()
     }
 }
 </script>

@@ -155,12 +155,12 @@ export default {
         },
         // 先判断是否有二维码
         handleJundgeQrCode(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getQrcode';
+            let url = '/customer/getQrcode';
             let params = {};
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
                     if(res.data.data === null){
-                        let url = 'http://pay.91dianji.com.cn/api/customer/downloadQrcode';
+                        let url = '/customer/downloadQrcode';
                         let params = {
                             code: this.$store.state.wechat.promotioncode
                         };
@@ -188,18 +188,16 @@ export default {
         handlePrivacySettings(){
             this.$dialog.confirm({
                 title: '提示',
-                message: '确定要开启隐私设置吗？开启后将在海报中展示您的微信头像、昵称和推荐码等信息',
-                confirmButtonText:'是',
-                cancelButtonText: '否',
+                message: '确定要开启隐私设置吗？开启后将在海报中隐藏您的微信头像、昵称和推荐码等信息',
+                confirmButtonText:'开启',
+                cancelButtonText: '关闭',
             })
             .then(() => {
-                console.log('开启'); 
-                this.handleJundgeQrCode();   
-                this.handlePoster();
+                console.log('开启');   
+                this.handlePosterWithoutDetail();
             }).catch(() => {
                 console.log('关闭');
-                this.handleJundgeQrCode();
-                this.handlePosterWithoutDetail();
+                this.handlePoster();
             });
         },
         shareApp(){
@@ -218,7 +216,6 @@ export default {
     },
     mounted(){
         this.handleJundgeQrCode();
-        this.handlePosterWithoutDetail();
     }
 }
 </script>

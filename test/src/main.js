@@ -17,8 +17,6 @@ import '@/assets/css/common.css'
 
 import axios from 'axios'
 Vue.prototype.$http = axios
-// 允许跨域
-axios.defaults.withCredentials = true
 // 引入适配
 import 'lib-flexible/flexible'
 import { Actionsheet,Button,Switch,Dialog,RadioGroup, Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker,Step, Steps    } from 'vant'

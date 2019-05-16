@@ -44,7 +44,7 @@ export default {
         // 获取已绑定银行卡列表
         handleBankCardList(){
             // let url = '/customer/getBankCardByOpenid';
-            let url = 'http://pay.91dianji.com.cn/api/customer/getBankCardByOpenid';
+            let url = '/customer/getBankCardByOpenid';
             let params = {};
             axiosPost(url,params).then(res =>{
                 // console.log('获取已绑定银行卡列表成功',res);

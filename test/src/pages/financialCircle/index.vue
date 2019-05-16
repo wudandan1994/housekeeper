@@ -3,7 +3,6 @@
     <header class="header">
         <div class="more end-center">
             <van-icon name="weapp-nav" size='20px' @click="handleMore" />
-            
         </div>
         <div class="topTwo row center">
             <div class="center" :class="{ checked: isActive == '1' }" @click="getIndex">金融人脉圈</div>
@@ -33,7 +32,7 @@
         </van-tabs>
         <!-- <div class="share" v-show="showShare">
             <ul>
-                <li id="wxFriends" @click="wxFriends">
+                <li id="wxF"  @click="wxfri">
                     <p>微信好友</p>
                 </li>
                 <li>
@@ -70,22 +69,21 @@ export default {
         getIndex(val){
             val.target.innerText == '金融人脉圈' ? this.isActive = '1' : this.isActive = '2';
         },
-        wxFriends(){
-            var obj = new plus.share.Authorize("wxFriends", true);
-            console.log(obj,"创建的对象");
-            obj.send({content:"钱夹宝",href:"http://www.dcloud.io/",extra:{scene:"WXSceneTimeline"}},
-                function(){
-                    console.log("分享成功")
-                },
-                function(){
-                    console.log("分享失败")
-                }
-            )
-        },
+        // wxfri(){
+        //     var obj = new plus.share.Authorize("wxF", true);
+        //     console.log(obj,"创建的对象");
+        //     obj.send({content:"钱夹宝",href:"http://www.dcloud.io/",extra:{scene:"WXSceneTimeline"}},
+        //         function(){
+        //             console.log("分享成功")
+        //         },
+        //         function(){
+        //             console.log("分享失败")
+        //         }
+        //     )
+        // },
         // 获取更多
         handleMore(){
-            this.showShare=true
-
+            // this.showShare=true
             //  let config = {
             //     url:'http://pay.91dianji.com.cn/#/home?promotioncode=02400219',// 分享的网页链接
             //     title:'钱夹宝',// 标题
@@ -96,36 +94,33 @@ export default {
             // };
             // // var share_obj = new nativeShare('nativeShare',config);
             // var share_obj = new nativeShare('nativeShare',config);
-
-
-
-            // this.$toast('敬请期待');
+            this.$toast('敬请期待');
             // 监听plusready事件  
-                 var  shares=null
+                //  var  shares=null
                 // 扩展API加载完毕，现在可以正常调用扩展API
-                plus.share.getServices(function(s){
-                     shares = s;
-                     let a=shares[0]
-                      if(!a.authenticated){
-                        a.authorize(function(){
-                            // plus.share.sendWithSystem({content:'分享内容',href:'http://www.dcloud.io/'}, function(){
-                            //         console.log('分享成功');
-                            //     }, function(e){
-                            //         console.log('分享失败：'+JSON.stringify(e));
-                            //     });
-                            console.log("认证完成！")
-                        },function(e){
-                            console.log("未进行认证")
-                        },{
-                            "appid":"wx14b0bd9f1c7e0c41"
-                        })
-                    }
-                    // console.log(shares,"获取分享列表成功")
-                    // alert(shares,"获取分享列表成功")
-                }, function(e){
-                    // alert("获取分享服务列表失败："+e.message)
-                    //  console.log("获取分享服务列表失败："+e.message);
-                });
+                // plus.share.getServices(function(s){
+                //      shares = s;
+                //      let a=shares[0]
+                //       if(!a.authenticated){
+                //         a.authorize(function(){
+                //             // plus.share.sendWithSystem({content:'分享内容',href:'http://www.dcloud.io/'}, function(){
+                //             //         console.log('分享成功');
+                //             //     }, function(e){
+                //             //         console.log('分享失败：'+JSON.stringify(e));
+                //             //     });
+                //             console.log("认证完成！")
+                //         },function(e){
+                //             console.log("未进行认证")
+                //         },{
+                //             "appid":"wx14b0bd9f1c7e0c41"
+                //         })
+                //     }
+                //     // console.log(shares,"获取分享列表成功")
+                //     // alert(shares,"获取分享列表成功")
+                // }, function(e){
+                //     // alert("获取分享服务列表失败："+e.message)
+                //     //  console.log("获取分享服务列表失败："+e.message);
+                // });
                 // function shareAction(){
                 //     let s=shares[0]
                 //     console.log(s);
@@ -189,7 +184,6 @@ export default {
             padding:20px;
             >ul{
                 display: flex;
-
                 >li {
                     width:30%;
                 }

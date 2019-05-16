@@ -48,6 +48,31 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks (module) {
+          return (
+          module.resource &&
+          /\.js$/.test(module.resource) &&
+          module.resource.indexOf(
+              path.join(__dirname, '../node_modules')
+          ) === 0
+          )
+      }
+  }),
+  
+  new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      minChunks: Infinity
+  }),
+  
+  new webpack.optimize.CommonsChunkPlugin({
+      name: 'app',
+      async: 'vendor-async',
+      children: true,
+      minChunks: 3
+  }),
+
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
@@ -67,6 +92,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
+
+
+var compiler = webpack(devWebpackConfig)
+
+var devMiddleware = require('webpack-dev-middleware-hard-disk')(compiler, {
+  publicPath: devWebpackConfig.output.publicPath,
+  quiet: true
+})
+
+
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port

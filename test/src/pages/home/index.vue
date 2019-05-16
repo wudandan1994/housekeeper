@@ -276,11 +276,11 @@ export default {
                  mobile:storage.get('username'),
                  password:storage.get('password')
             }
-             axiosPost("http://pay.91dianji.com.cn/api/customer/login",data) 
+             axiosPost("/customer/login",data) 
              .then(res=>{
                 if(!res.data.success){
                      this.$router.push("/logIn");
-                     this.$toast('登录失败');
+                    //  this.$toast('登录失败');
                 }else {
                     this.$store.commit('iscertification',res.data.data.iscertification);
                     this.$store.commit('level',res.data.data.level);
@@ -307,7 +307,7 @@ export default {
                 })
                 .then(() => {
                     let that =this
-                  axiosPost("http://pay.91dianji.com.cn/api/customer/loginOut") 
+                  axiosPost("/customer/loginOut") 
                   .then(function(res){
                       if(!res.data.success){
                           that.$toast({
@@ -330,7 +330,7 @@ export default {
         } ,
         // 查询实名认证
         handleSearchAuths(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+            let url = '/customer/getCustomer';
             // let url = '/customer/getCustomer';
             let params = {
                 openid:this.$store.state.wechat.openid,

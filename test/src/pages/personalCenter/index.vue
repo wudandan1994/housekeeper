@@ -291,7 +291,7 @@ export default {
                  if(res.data.success){
                     this.orderid = res.data.data.orderid;
                     // 查询上级
-                    let url = 'http://pay.91dianji.com.cn/api/customer/getCustomerUP';
+                    let url = '/customer/getCustomerUP';
                     let params = {
                         recommendedcode: this.$store.state.wechat.recommendedcode
                     }
@@ -324,7 +324,7 @@ export default {
                     trade_type: 'JSAPI',
                     openid: storage.get('openid')
                 };
-                var url = 'http://pay.91dianji.com.cn/api/order/wxPayH5';
+                var url = '/order/wxPayH5';
                 axiosPost(url,params).then(res =>{
                         var radom = Math.random().toString(36).substr(2);
                         var tmp = Date.parse( new Date() ).toString();
@@ -361,7 +361,7 @@ export default {
         },
         // 查询个人设置
         handleGetAmount(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+            let url = '/customer/getCustomer';
             // let url = '/customer/getCustomer';
             let params = {
                 openid:this.$store.state.wechat.openid,

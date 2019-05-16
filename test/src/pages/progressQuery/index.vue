@@ -64,5 +64,10 @@ export default {
             width: 100vw;
             height: calc(100vh - 86px);
         }
+        .out {
+            overflow: auto;
+            -webkit-overflow-scrolling:touch;
+            width:100%;
+        }
    }
 </style>

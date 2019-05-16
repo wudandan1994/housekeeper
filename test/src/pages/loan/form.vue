@@ -192,7 +192,7 @@ export default {
                    mobile:this.form.mobile,
                    certcode:this.form.idcardnumber
                }
-               axiosPost("http://pay.91dianji.com.cn/api/creditCard/getLoanUrl",data)
+               axiosPost("/creditCard/getLoanUrl",data)
               
                .then(res=>{
                    if(!res.data.success){
@@ -223,7 +223,7 @@ export default {
         },
          // 获取实名认证信息
         handleGetAOuth(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
+            let url = '/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
                 // console.log('获取实名认证状态成功',res);
@@ -244,7 +244,7 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less" >
     #page-component-form{
         width: 100vw;
         height: auto;
@@ -282,7 +282,7 @@ export default {
             margin-top: 30px;
         }
         .per-input {
-            width: 100vw;
+            width: auto;
             height: 80px;
             .icon{
                 width:8vw;
@@ -373,6 +373,9 @@ export default {
             padding-top: 40px;
             padding-bottom: 50px;
             background: #F7F6FB;
+            .van-checkbox__icon{
+                border:1px solid #000;
+            }
             span{
                 color: #4B66AF;
             }
@@ -381,7 +384,7 @@ export default {
                 height: auto;
                 margin-left: auto;
                 margin-right: auto;
-                margin-top: 40px;
+                margin-top: 45px;
                 line-height: 40px;
             }
         }

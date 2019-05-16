@@ -76,7 +76,7 @@ export default {
                 mobile:that.phone,
                 password:that.password
             }
-            that.$http.post("http://pay.91dianji.com.cn/api/customer/login",qs.stringify(data))
+            that.$http.post("/customer/login",qs.stringify(data))
             .then(function(res){
                 if(res.data.success){
                     that.$store.commit('iscertification',res.data.data.iscertification);
@@ -136,25 +136,25 @@ export default {
         //     }
         //   }
 
-        //   if(!s.authResult){
-		// 	s.login(function(e){
-		// 		// 获取登录操作结果
-		// 		s.getUserInfo( function(e){
-		// 			console.log( "获取用户信息成功："+JSON.stringify(s.userInfo) );
-        //             that.$toast('登录成功');
-        //            that.$router.push('/home');
-		// 		}, function(e){
-		// 			console.log( "获取用户信息失败："+e.message+" - "+e.code );
-		// 			that.$toast('获取用户信息失败');
-		// 		} );
+    //       if(!s.authResult){
+	// 		s.login(function(e){
+	// 			// 获取登录操作结果
+	// 			s.getUserInfo( function(e){
+	// 				console.log( "获取用户信息成功："+JSON.stringify(s.userInfo) );
+    //                 that.$toast('登录成功');
+    //                that.$router.push('/home');
+	// 			}, function(e){
+	// 				console.log( "获取用户信息失败："+e.message+" - "+e.code );
+	// 				that.$toast('获取用户信息失败');
+	// 			});
 				
-		// 	}, function(e){
-		// 		that.$toast('登录认证失败');
-		// 	});
-		// }else{
-		// 	//已经登录认证
-		// 	that.$toast('登录成功');
-		// }
+	// 		}, function(e){
+	// 			that.$toast('登录认证失败');
+	// 		});
+	// 	}else{
+	// 		//已经登录认证
+	// 		that.$toast('登录成功');
+	// 	}
 
         // },function(e){
         //     that.$toast("登录认证失败")

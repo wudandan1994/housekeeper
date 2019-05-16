@@ -134,7 +134,7 @@ export default {
             this.componentload = true;
              var form = new FormData();
             form.append('file',file.file);
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg';
+            let url = '/upload/uploadImg';
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -155,7 +155,7 @@ export default {
             this.componentload = true;
             var form = new FormData();
             form.append('file',file.file);
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg';
+            let url = '/upload/uploadImg';
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -176,7 +176,7 @@ export default {
             let data={
                 openid:this.$store.state.wechat.openid,
             }
-            axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer",data)
+            axiosPost("/customer/getCustomer",data)
             .then(res =>{
                 if(res.data.success){
                     this.photo = res.data.data.photo;
@@ -188,6 +188,7 @@ export default {
                     res.data.data.voice == '0' ? this.voice = false : this.voice = true;
                     this.wechat = res.data.data.wechat;
                     this.wechatqr = res.data.data.wechatqr;
+                    res.data.data.ispermit == '0' ? this.isconnect = true : this.isconnect = false;
                 }
             })
             .catch(res =>{
@@ -196,7 +197,7 @@ export default {
         },
         // 更新个人设置
         updateSet(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/updateCustomer';
+            let url = '/customer/updateCustomer';
             var iscreditcard = false;
             var voice = false;
             var iscar = false;

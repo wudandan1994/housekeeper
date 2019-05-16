@@ -95,7 +95,7 @@ export default {
                orderCode:this.number
                
            }
-           axiosPost("http://pay.91dianji.com.cn/api/creditCard/getTradeQuery",data)
+           axiosPost("/creditCard/getTradeQuery",data)
            .then(res=>{
                if(!res.data.success){
                    this.$toast({
@@ -175,15 +175,14 @@ export default {
                                 title:"支付"
                               }
                         })
-                }
-               
-            })
+                   }
+               })
             .catch(err=>{
             })
        },
     //    查询商户编号
         search(){
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberReg")
+            axiosPost("/creditCard/getMemberReg")
             .then(res=>{
                 if(!res.data.success){
                     this.$toast({
@@ -195,7 +194,6 @@ export default {
             })
             .catch(err=>{
                 // console.log(err,"error");
-                
             })
         }
         

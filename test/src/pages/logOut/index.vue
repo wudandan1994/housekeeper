@@ -84,7 +84,7 @@ export default {
                     mobile:that.mobile,
                     type:"2"
                 }
-                let url="http://pay.91dianji.com.cn/api/customer/sendSms"
+                let url="/customer/sendSms"
                  axiosPost(url,data)
                 .then(function(res){
                     if(!res.data.success){
@@ -165,7 +165,7 @@ export default {
                 password:that.suerPassword,
             }
                  // 注册
-             axiosPost("http://pay.91dianji.com.cn/api/customer/insertPhoneRegistered",data)
+             axiosPost("/customer/insertPhoneRegistered",data)
              .then(function(res){
                  if(res.data.success){
                         let datas={
@@ -173,7 +173,7 @@ export default {
                         password:that.password
                     }
                     //  登录
-                    axiosPost("http://pay.91dianji.com.cn/api/customer/login",datas)
+                    axiosPost("/customer/login",datas)
                     .then(function(res){
                         that.$router.push("/home")
                     })

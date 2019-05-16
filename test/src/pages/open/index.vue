@@ -88,7 +88,7 @@ export default {
             let data={
                 chMerCode:this.info
             }
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",data)
+            axiosPost("/creditCard/getMemberRegLine",data)
             .then(res=>{
                 let type=res.data.data.uploadStatus
                 if(res.data.data.uploadStatus==="0"){
@@ -121,7 +121,7 @@ export default {
                         photoType:"1",
                         photoData:this.cardfront
                     }
-                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/photoUpload",datas)
+                     axiosPost("/creditCard/photoUpload",datas)
                         .then(res=>{
                             if(!res.data.success){
                                 this.$toast({
@@ -131,7 +131,7 @@ export default {
                                  let datas={
                                     chMerCode:this.info
                                 }
-                                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",datas)
+                                 axiosPost("/creditCard/getMemberRegLine",datas)
                                     .then(res=>{
                                         if(!res.data.success){
                                             this.$toast({
@@ -176,7 +176,7 @@ export default {
                         photoType:"2",
                         photoData:this.cardback
                     }
-                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/photoUpload",datas)
+                     axiosPost("/creditCard/photoUpload",datas)
                         .then(res=>{
                             if(!res.data.success){
                                 this.$toast({
@@ -186,7 +186,7 @@ export default {
                                  let datas={
                                     chMerCode:this.info
                                 }
-                                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",datas)
+                                 axiosPost("/creditCard/getMemberRegLine",datas)
                                     .then(res=>{
                                         if(!res.data.success){
                                             this.$toast({
@@ -229,7 +229,7 @@ export default {
                         photoType:"3",
                         photoData:this.cardWithhand
                     }
-                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/photoUpload",datas)
+                     axiosPost("/creditCard/photoUpload",datas)
                         .then(res=>{
                             if(!res.data.success){
                                 this.$toast({
@@ -239,7 +239,7 @@ export default {
                                  let datas={
                                     chMerCode:this.info
                                 }
-                                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",datas)
+                                 axiosPost("/creditCard/getMemberRegLine",datas)
                                     .then(res=>{
                                         if(!res.data.success){
                                             this.$toast({
@@ -283,7 +283,7 @@ export default {
                         photoType:"4",
                         photoData:this.bankfront
                     }
-                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/photoUpload",datas)
+                     axiosPost("/creditCard/photoUpload",datas)
                         .then(res=>{
                             if(!res.data.success){
                                 this.$toast({
@@ -293,7 +293,7 @@ export default {
                                  let datas={
                                     chMerCode:this.info
                                 }
-                                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",datas)
+                                 axiosPost("/creditCard/getMemberRegLine",datas)
                                     .then(res=>{
                                         if(!res.data.success){
                                             this.$toast({
@@ -324,7 +324,7 @@ export default {
          onReadH(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            let url = '/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -337,7 +337,7 @@ export default {
                         photoType:"5",
                         photoData:this.bankback
                     }
-                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/photoUpload",datas)
+                     axiosPost("/creditCard/photoUpload",datas)
                         .then(res=>{
                             if(!res.data.success){
                                 this.$toast({
@@ -347,7 +347,7 @@ export default {
                                  let datas={
                                     chMerCode:this.info
                                 }
-                                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",datas)
+                                 axiosPost("/creditCard/getMemberRegLine",datas)
                                 .then(res=>{
                                     if(!res.data.success){
                                         this.$toast({
@@ -375,7 +375,7 @@ export default {
             })
         },
         findphoto(){
-             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberPhoto")
+             axiosPost("/creditCard/getMemberPhoto")
                 .then(res=>{
                     this.photoList=res.data.data
                     this.photoList.forEach(item => {
