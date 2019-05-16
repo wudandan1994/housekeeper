@@ -14,7 +14,6 @@ import "../node_modules/babel-polyfill/dist/polyfill.js"
 import '@/assets/css/common.css'
 // 引入分享的css
 // import '@/assets/css/share.css'
-
 import axios from 'axios'
 Vue.prototype.$http = axios
 // 允许跨域
@@ -22,13 +21,14 @@ axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://test.91dianji.com.cn/api';
 // 引入适配
 import 'lib-flexible/flexible'
-import { Actionsheet,Button,Switch,Dialog,RadioGroup, Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker    } from 'vant'
+import { Actionsheet,Button,Switch,Dialog,RadioGroup,Pagination , Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker    } from 'vant'
 Vue.use(Actionsheet)
 Vue.use(Button)
 Vue.use(Switch)
 Vue.use(Dialog)
 Vue.use(RadioGroup)
 Vue.use(Uploader)
+Vue.use(Pagination)
 Vue.use(Radio)
 Vue.use(Tabbar).use(TabbarItem)
 Vue.use(Popup)

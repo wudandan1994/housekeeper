@@ -96,9 +96,7 @@ export default {
     },
     methods:{
         handleReturnHome(){
-            this.$router.push({
-                path:'/home/creditHousekeeper/aisleHousekeeper'
-            })
+            this.$router.go(-1)
         },
          // 获取验证码
         // handleSafeCode(){

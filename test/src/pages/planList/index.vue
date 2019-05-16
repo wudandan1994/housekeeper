@@ -12,14 +12,14 @@
                 <p>还款日:<span>还剩11天</span></p>
             </div>
             <div class="time">
-                <p>制定时间：</p>
+                <p>制定时间：{{currentTime}}</p>
                 <div class="num">
-                    <p>消费笔数：<span>12+6</span>笔</p>
-                    <p>笔数费：<span>6</span>元</p>
+                    <p>消费笔数：<span>{{planlist.paycount}} + {{planlist.repaycount}}</span>笔</p>
+                    <p>笔数费：<span>{{planlist.countamount}}</span>元</p>
                 </div>
                 <div class="num">
-                    <p>还款金额：<span>2010.74</span>元</p>
-                    <p>手续费：<span>15.27</span>元</p>
+                    <p>还款金额：<span>{{planlist.realamount}}</span>元</p>
+                    <p>手续费：<span>{{planlist.poundage}}</span>元</p>
                 </div>
             </div>
             <div class="list">
@@ -32,15 +32,26 @@
                             <th>手续费</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- <tr v-for="(data,index) in planlist.plans" :key="index">
-                            <td>{{data.type}}</td>
+                    <tbody class="tbody">
+                        <tr v-for="(data,index) in planlist.plans" :key="index"  v-show="data.type!=3">
+                            <td>消费</td>
                             <td>{{data.date}}</td>
                             <td>{{data.amount}}</td>
                             <td>{{data.poundage}}</td>
-                        </tr> -->
+                        </tr>
                     </tbody>
                 </table>
+                <div class="page">
+                    <van-pagination 
+                    v-model="currentPage" 
+                    :items-per-page=5
+                    :total-items="page"
+                    mode="simple" 
+                    />
+                </div>
+            </div>
+            <div class="submit">
+                 <van-button size="large" @click="makePlan" round type="info">提交计划</van-button>
             </div>
         </div>
         
@@ -52,17 +63,46 @@
 export default {
     data() {
         return {
-            planlist:{}
+            planlist:{},
+            currentPage:1,
+            page:0,
+            // total:5,
+            currentTime:""
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home/creditHousekeeper/aisleHousekeeper/makePlan')
-        }
+        },
+        fnDate(){
+                var date=new Date();
+                var year=date.getFullYear();//当前年份
+                var month=date.getMonth();//当前月份
+                var data=date.getDate();//天
+                var hours=date.getHours();//小时
+                var minute=date.getMinutes();//分
+                var second=date.getSeconds();//秒
+                this.currentTime=year+"-"+this.fnW((month+1))+"-"+this.fnW(data)+" "+this.fnW(hours)+":"+this.fnW(minute)+":"+this.fnW(second);
+            },
+            //补位 当某个字段不是两位数时补0
+            fnW(str){
+                var num;
+                str>10?num=str:num="0"+str;
+                return num;
+            } 
     },
     created () {
-        this.planlist=this.$route.params.list
-        console.log(this.planlist)
+        this.planlist=this.$route.query.list 
+        // console.log(this.planlist)
+        // this.page=this.planlist.plans.length
+        console.log(this.page=this.planlist.plans.length)
+        // this.planlist.plans.forEach(element => {
+        //     if(element.type !=3){
+        //         this.page++;
+        //     }
+            
+        // });
+        this.fnDate();
     }
 }
 </script>
@@ -118,7 +158,22 @@ export default {
                table {
                  border:1;
                  width:100%;
-
+                 >.tbody {
+                     tr {
+                         td{
+                             border:1px solid #ccc;
+                         }
+                     }
+                 }
+               }
+               .page {
+                   height:60px;
+                   .van-pagination {
+                       width:50%;
+                       text-align: right;
+                       font-size: 30px;
+                       float: right;
+                   }
                }
                tr,th {
                    text-align: center;

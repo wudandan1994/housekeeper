@@ -99,7 +99,6 @@ export default {
            payment:"",
            amount:"",
            item:"",
-           planList:{}
         }
     },
     methods:{
@@ -120,22 +119,22 @@ export default {
                 return
             }
             let data={
-                bindId:item.bindId,
+                bindId:this.item.bindId,
                 amount:this.amount,
                 payment:this.payment
             }
-             axiosPost("/creditCard/getPlan")
+             axiosPost("/creditCard/getPlan",data)
              .then(res=>{
-                 console.log(res);
+                //  console.log(res);
                  if(!res.data.success){
                      this.$toast({
                          message:res.data.message
                      })
                  } else {
-                     this.planList=res.data.data
+                    let planList=res.data.data
                      this.$router.push({
                          path:"/home/creditHousekeeper/aisleHousekeeper/planList",
-                         params:{list:this.planList}
+                         query:{list:planList}
                      })
                  }
              })
@@ -146,7 +145,6 @@ export default {
     },
     created () {
          this.item=this.$route.query.info 
-         console.log(this.item)
     }
 }
 </script>

@@ -65,13 +65,13 @@ export default {
                       photo:    this.$store.state.wechat.headimg,
                       recommendedcode: storage.get('recommendedcode')
                     }
-                    let url = 'http://pay.91dianji.com.cn/api/customer/registered';
+                    let url = '/customer/registered';
                     axiosPost(url,params)
                     .then(res =>{
                       if(res.data.success){
                         console.log('注册成功',res);
                         // 登录
-                        let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
+                        let url = '/customer/loginByWechat';
                         let params = {
                             openid: this.$store.state.wechat.openid
                         };
@@ -88,7 +88,7 @@ export default {
                                 this.$store.commit('recommendedcode',res.data.data.recommendedcode);
                                 this.$store.commit('city',res.data.data.city);
                                 this.$toast('登陆成功');
-                                let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+                                let url = '/customer/getCustomer';
                                 let params = {
                                     openid:this.$store.state.wechat.openid,
                                 };
@@ -123,7 +123,7 @@ export default {
                     let params = {
                         openid: this.$store.state.wechat.openid
                     }
-                    let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
+                    let url = '/customer/loginByWechat';
                     axiosPost(url,params).then(res =>{
                         if(res.data.success){
                           console.log('登陆成功',res);
@@ -166,7 +166,7 @@ export default {
       let params = {
         openid: storage.get('openid')
       }
-      let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
+      let url = '/customer/loginByWechat';
       axiosPost(url,params).then(res =>{
           if(res.data.success){
             console.log('直接登陆成功',res);
@@ -231,7 +231,7 @@ export default {
         var timestamp = (new Date()).getTime();
         var url = window.location.href;
         
-        let posturl = 'http://pay.91dianji.com.cn/api/customer/getSignature';
+        let posturl = '/customer/getSignature';
         let params = {
           jsapi_ticket: jsapi_ticket,
           url: url,

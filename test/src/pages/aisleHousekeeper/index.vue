@@ -7,13 +7,6 @@
         </header>
         <div class="container">
            <div class="swipe">
-               <!-- 轮播图部分 -->
-               <!-- <van-swipe :autoplay="3000">
-                    <van-swipe-item v-for="(image, index) in images" :key="index">
-                        <img v-lazy="image" />
-                    </van-swipe-item>
-               </van-swipe> -->
-               <!-- <img src="http://bc.91dianji.com.cn/zhaoshang.png" alt=""> -->
                  <div class="top row">
                     <div class="avator"><img :src="headimg" alt=""></div>
                     <div class="name-code">
@@ -35,8 +28,8 @@
                    <li v-for="(item, index) in cardList" :key="index">
                        <div class="top">
                           <div class="bankName">
-                              <!-- <p >{{bankCardAttribution(item.idCardNo).bankName}}</p> -->
-                              <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
+                              <p @click="getName(item.cardNo)" >{{bankname}}</p>
+                              <p>*<span>{{(item.cardNo).substr(item.cardNo.length-4)}}</span></p>
                               <!-- <p>
                                   还款状态
                               </p> -->
@@ -133,10 +126,16 @@ export default {
             vip:"",
             promotioncode:"",
             headimg:"",
-            cardList:[],
+            cardList:[{
+
+            }],
             cardNum:'',
-            // cardname:""
+            // cardname:"",
+            bankname:""
         }
+    },
+    mounted () {
+        this.getName();
     },
     methods:{
         goBack() {
@@ -145,6 +144,10 @@ export default {
             // let a=bankCardAttribution("6229015220764104").bankName
             // console.log(a)
         },
+        getName(item){
+            this.bankname=bankCardAttribution(item).bankName
+        },
+
         repayment(item){
             this.$router.push({
                 path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",

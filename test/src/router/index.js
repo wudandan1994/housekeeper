@@ -49,6 +49,8 @@ import inviteShareComponent from '@/pages/inviteShare'
 import repaymentChannelComponent from '@/pages/repaymentChannel'
 import makePlanComponent from '@/pages/makePlan'
 import planListComponent from '@/pages/planList'
+import changeCardComponent from '@/pages/changeCard'
+
 
 
 import loan from '@/pages/loan'
@@ -142,6 +144,8 @@ export default new Router({
     {path:"/home/creditHousekeeper/aisleHousekeeper/repayment",component:repaymentComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",component:makePlanComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper/planList",component:planListComponent},
+    {path:"/home/changeCard",component:changeCardComponent},
+
 
 
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},

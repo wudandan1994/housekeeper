@@ -3,10 +3,34 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>快捷支付</span>
-            <span></span>
+            <span @click="showCard"><van-icon name="card"/>选择卡</span>
         </header>
         <div class="container">
-             <!-- <van-button  @click="open" round type="info">点击开通商户业务</van-button> -->
+            <div class="popup">
+                <van-popup v-model="show" :overlay="true" >
+                     <div class="pop">
+                         <p>请选择支付卡</p>
+                         <div class="binding" v-show="showBinding">
+                              <p>您还没有绑定信用卡</p>
+                              <div>
+                                  <van-button round @click="show=flase" size="normal"  >取消</van-button>
+                                  <van-button round size="normal" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" type="default">去绑卡</van-button>
+                              </div>
+                         </div>
+                         <ul v-show="showCardList">
+                             <li v-for="(item,index) in cardList" :key="index">
+                                 <div @click="getCard(item)" :class="showClass ? 'round':''"></div>
+                                 <div class="info">
+                                     <p>华夏银行</p>
+                                     <p>{{item.payerName}}</p>
+                                     <p>尾号：*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
+                                 </div>
+                             </li>
+                         </ul>
+                     </div>
+                </van-popup>
+                
+            </div>
            <div class="phone">
                <ul>
                     <li>
@@ -35,7 +59,8 @@
                    <van-button  @click="pay" size="large" round type="info">确认</van-button>
            </div>
            <div class="record">
-                <van-button  @click="record" size="middle" round type="primary">交易查询</van-button>
+                <van-button  @click="recordSearch" size="middle" round type="primary">交易查询</van-button>
+                <van-button  @click="change" size="middle" round type="primary">更改收款账户</van-button>
            </div>
            <div class="trade" v-show="showrecord">
                <div>
@@ -63,31 +88,54 @@ export default {
            chMerCode:"",
            number:"",
            record:{},
-           showrecord:false
+           showrecord:false,
+           show:false,
+           showClass:false,
+           cardList:[],
+           showCardList:false,
+           showBinding:false
         }
     },
     methods:{
        goBack(){
            this.$router.push("/home")              
        },
-        // open(){
-        //     let that=this
-        //     let data={
-        //         chMerCode:that.info
-        //     }
-        //      axiosPost("http://pay.91dianji.com.cn/api/upload/uploadImg",data)
-        //      .then(function(res){
-        //          console.log(res,"开户业务成功")
-        //      })
-        //      .catch(function(err){
-        //          console.log(err,"开户业务失败")
-        //      })
-        // },
-       record(){
+       showCard(){
+           this.show=!this.show
+        //    请求卡列表
+         axiosPost("/creditCard/getMyCreditCard")
+         .then(res=>{
+             if(!res.data.success){
+                 this.$toast({
+                     message:res.data.message
+                 })
+             } else {
+                 this.cardList=res.data.data
+                 if(this.cardList.length===0){
+                     this.showBinding=true
+                 } else {
+                     this.showCardList=true
+                 }
+             }
+
+         })
+       },
+       change(){
+           this.$router.push("/home/changeCard")
+       },
+       getCard(item){
+           this.showClass=!this.showClass
+           this.realName=item.payerName
+            this.idCard=item.idCardNo
+            this.accNo=item.cardNo
+            this.mobile=item.phone
+            this.show=false
+       },
+       
+       recordSearch(){
            let data={
                chMerCode:this.chMerCode,
                orderCode:this.number
-               
            }
            axiosPost("/creditCard/getTradeQuery",data)
            .then(res=>{
@@ -208,6 +256,7 @@ export default {
            display: flex;
            z-index:999;
            position: fixed;
+           
            justify-content: space-between;
            >span {
                &:nth-of-type(1) {
@@ -223,6 +272,57 @@ export default {
            padding-bottom: 50px;
            background-color: #EEEFF1;
            font-size:30px;
+           >.popup {
+               .pop {
+                  width:600px;
+                //   height: 800px;
+                  background-color: #fff;
+                  >p {
+                      margin-top:15px;
+                      text-align: center;
+                      font-weight: bold;
+                  }
+                  >.binding {
+                      margin-top:30px;
+                      padding-left:20px;
+                      padding-right: 20px;
+                      >p {
+                          margin-bottom: 20px;
+                      }
+                      >div {
+                          display: flex;
+                          justify-content: space-around;
+                          margin-bottom: 30px;
+                      }
+                  }
+                      >ul {
+                          padding:15px;
+                          >li {
+                              display: flex;
+                              justify-content: space-around;
+                              align-items: center;
+                              margin-bottom: 15px;
+                              >div{
+                                  &:nth-of-type(1){
+                                       width:30px;
+                                    height:30px;
+                                    border:2px solid #ccc;
+                                    border-radius: 50%;
+                                    margin-right: 15px;
+                                  }
+                                  &.round {
+                                       background-color: #4965AE;
+                                  }
+                              }
+                              >.info {
+                                  flex:1;
+                                  display: flex;
+                                  justify-content: space-between;
+                              }
+                          }
+                      }
+               }
+           }
            >button {
                margin:30px;
                height: 90px;
@@ -269,6 +369,9 @@ export default {
            >.at-once {
                margin-top:100px;
                padding:0 20px;
+               .van-button--info {
+                   background-color: #4965AE;
+               }
                >button {
                    height: 90px;
                    font-size: 28px;
@@ -278,6 +381,9 @@ export default {
            >.record {
                margin-top:50px;
                padding-left:50px;
+               display: flex;
+               justify-content: space-around;
+
                >button {
                    padding:5px 20px;
                    height: 70px;
