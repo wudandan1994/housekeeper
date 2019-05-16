@@ -57,7 +57,7 @@
         <div class="pop" v-show="showCover">
                 <van-popup v-model="show" :overlay="false" >
                    <div class="content">
-                        <h3>温馨提示</h3>
+                        <h1>温馨提示</h1>
                         <p>您现在即将升级成<span class="colum">钱夹宝钻石会员</span>升级成功后,您将享受相应收益权限。</p>
                         <p class="vip">
                             若你成为钻石会员，垫还手续费降到万72+1元/笔，收款手续费降到万47+1元/笔，预计垫还收款每年可省3000元，最关键的一点在于不仅省钱还可以让你的信用卡资金利用率达到90%以上。
@@ -163,12 +163,12 @@
             <div class="per-title row">
                 <div class="goods-title start-center">付款方式</div>
                 <div class="goods-detail row">
-                    <!-- <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayTypeWX">
+                    <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayTypeWX">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-wechatpay"></use>
                         </svg>
                         微信支付
-                    </div> -->
+                    </div>
                     <div class="paytypes center" :class="{'alipay': paytype == 'alipay'}" @click="handlePayTypeZFB">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-alipay"></use>
@@ -192,7 +192,7 @@
         </div>
 
 
-        <!-- <div  class="update">
+        <div  class="update">
             <ul>
                 <li @click="uploadAnd">
                     <img src="http://pay.91dianji.com.cn/Android.png" >
@@ -213,7 +213,7 @@
                         <img src="http://pay.91dianji.com.cn/iosem.png" alt="">
                     </dir>
             </div>
-        </div> -->
+        </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
         <loading :componentload="componentload"></loading>
     </div>
@@ -342,20 +342,20 @@ export default {
                     })
             }
         },
-        // uploadAnd(){
-        //     this.showand=!this.showand
-        //     this.showios=false
-        //     setTimeout(()=>{
-        //         this.showand=false
-        //     },6000)
-        // },
-        // uploadIos(){
-        //     this.showios=!this.showios
-        //     this.showand=false
-        //     setTimeout(()=>{
-        //         this.showios=false
-        //     },6000)
-        // },
+        uploadAnd(){
+            this.showand=!this.showand
+            this.showios=false
+            setTimeout(()=>{
+                this.showand=false
+            },6000)
+        },
+        uploadIos(){
+            this.showios=!this.showios
+            this.showand=false
+            setTimeout(()=>{
+                this.showios=false
+            },6000)
+        },
         changeActive(obj){
             // console.log('obj', obj);
         },
@@ -596,18 +596,23 @@ export default {
               padding:15px;
               box-sizing:border-box;
               line-height: 38px;
-              >h3 {
+              >h1 {
                   text-align: center;
                   margin-top:10px;
                   font-weight: bold;
               }
+              p{
+                  font-size: 30px;
+              }
               .colum {
                   color:#DAB17D;
                   font-weight: bold;
+                  font-size: 30px;
               }
               .vip {
                   margin-top:20px;
                   margin-bottom:20px;
+                  font-size: 30px;
               }
                .button{
                  width: 80%;

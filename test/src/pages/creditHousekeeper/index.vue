@@ -71,6 +71,7 @@ export default {
         searchInfo(){
             axiosPost("/creditCard/getMerchantSettled")
             .then(res=>{
+                console.log('链接请求成功',res);
                 if(res.data.code==="1"){
                     this.$router.push("/home/addCard")
                 } else if(res.data.code==="0"){

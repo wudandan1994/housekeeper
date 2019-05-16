@@ -6,7 +6,11 @@
             <span></span>
         </header>
         <div class="container">
-           <!-- <iframe class="iframe" :src="url" frameborder="0"></iframe> -->
+           <iframe class="iframe" :src="url" frameborder="0"></iframe>
+           <!-- <div style="overflow: auto;-webkit-overflow-scrolling:touch;width:100%;height:100%;">　
+            　　<iframe v-if="type" :src="url" scrolling="auto" frameborder="0" width="100%" height="100%"></iframe>
+            　　<iframe v-else :src="url" frameborder="0" height="100%" scrolling='no' style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
+            </div> -->
         </div>
     </div>
 
@@ -18,12 +22,13 @@ export default {
     data() {
         return {
             url:"",
-            title:""
+            title:"",
+            type: true
         }
     },
     methods:{
         goBack() {
-            plus.webview.close( "yinlian")
+            // plus.webview.close( "yinlian")
             this.$router.go(-1);
         },
         webview(){
@@ -47,7 +52,14 @@ export default {
         this.url=this.$route.query.info;
         this.title=this.$route.query.title;
         // window.location.href = this.url;
-        this.webview();
+        // this.webview();
+        // var u = navigator.userAgent;
+        // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        // if(isAndroid){
+        // 　　this.type = true
+        // }else{
+        // 　　this.type = false
+        // }
     }
 }
 </script>

@@ -8,6 +8,7 @@
         <div class="poster-canvas center"><canvas id="poster" width="375" height="667"></canvas>  </div>
         <div class="btn row">
             <div @click="handlechangeRandom" class="change center">换一换</div>
+            <div @click="handlePrivacySettings" class="rightnow center">隐私设置</div>
             <div @click="savePoster" class="rightnow center">立即合成</div>
         </div>
         <div class="load center" v-if="imgShow">
@@ -18,8 +19,8 @@
             <div class="imgs" v-if="!showUpload">
                 <div class="savePoster center"><img :src="imgUrl" ></div>
                 <div class="success center">
-                    海报生成成功
-                    <!-- 海报生成成功，长按保存或分享 -->
+                    <!-- 海报生成成功 -->
+                    海报生成成功，长按保存或分享
                 </div>
             </div>
         </div>
@@ -74,6 +75,35 @@ export default {
             }
             this.handlePoster();
         },
+        handlePosterWithoutDetail(){
+            this.componentload = true;
+            var poster = document.getElementById("poster");
+            var ctx = poster.getContext("2d");
+            ctx.fillStyle = "#fff";
+            ctx.fillRect(0,0,375,667);
+
+            var bigPoster = new Image();
+            
+            bigPoster.src = 'http://pay.91dianji.com.cn/pop'+ this.random +'.jpg';
+            bigPoster.onload = function(){
+                ctx.drawImage(bigPoster,0,0,375,600);
+                setTimeout(()=>{
+                    this.componentload = false;
+                },2500);
+            };
+            
+            var qrcode = new Image();
+            qrcode.src = 'http://pay.91dianji.com.cn/' + this.qrcode;
+            qrcode.onload = function(){
+                ctx.drawImage(qrcode,10,610,50,50);
+            };
+            ctx.fillStyle="#000";
+            ctx.font="14px Arial";
+            ctx.fillText('长按识别二维码体验更多惊喜',80,640);
+            setTimeout(()=>{
+                this.componentload = false;
+            },2500);
+        },
         handlePoster(){
             this.componentload = true;
             var poster = document.getElementById("poster");
@@ -96,7 +126,6 @@ export default {
             qrcode.onload = function(){
                 ctx.drawImage(qrcode,300,610,50,50);
             };
-
             var headimg = new Image();
             var url = this.$store.state.wechat.headimg;
             var domain = url.split('/mmopen');
@@ -112,7 +141,6 @@ export default {
             setTimeout(()=>{
                 this.componentload = false;
             },2500);
-
         },
         savePoster(){
             this.imgShow = true;
@@ -156,6 +184,22 @@ export default {
             }).catch(res =>{
             })
         },
+        // 隐私设置
+        handlePrivacySettings(){
+            this.$dialog.confirm({
+                title: '提示',
+                message: '确定要开启隐私设置吗？开启后将在海报中隐藏您的微信头像、昵称和推荐码等信息',
+                confirmButtonText:'开启',
+                cancelButtonText: '关闭',
+            })
+            .then(() => {
+                console.log('开启');   
+                this.handlePosterWithoutDetail();
+            }).catch(() => {
+                console.log('关闭');
+                this.handlePoster();
+            });
+        },
         shareApp(){
             let share={}
             share.info={
@@ -172,7 +216,6 @@ export default {
     },
     mounted(){
         this.handleJundgeQrCode();
-        this.handlePoster();
     }
 }
 </script>
@@ -189,6 +232,7 @@ export default {
            height: 970px;
            #poster{
                 transform: scale(0.6);
+                margin-top: -20px;
             }   
        }
        .btn{
@@ -197,17 +241,18 @@ export default {
            margin-left: auto;
            margin-right: auto;
            font-size: 28px;
+           margin-top: -50px;
            .change{
-               width: 45%;
+               width: 30%;
                height: 100%;
                background: #4b66af;
                color: #ffffff;
                border-radius: 20px;
            }
            .rightnow{
-               width: 45%;
+               width: 30%;
                height: 100%;
-               margin-left: 10%;
+               margin-left: 5%;
                 background: #4b66af;
                 color: #ffffff;
                 border-radius: 20px;

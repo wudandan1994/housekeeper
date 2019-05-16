@@ -3,7 +3,7 @@
         <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">现金提现</div>
-            <div class="right-icon center" @click="handleOpenBankCardList"><van-icon color="white" size="20px" name="card"/></div>
+            <div class="right-icon center"></div>
         </header>
         <div class="cash-top">
             <!-- <van-tabs v-model="active">
@@ -22,27 +22,51 @@
                 <router-link tag="div" to="/personalCenter/incomedetail/addcard" class="more center"><i class="iconfont icon-more"></i></router-link>
             </div>
             <div class="desc">注:钱夹宝提现工作日1-2天到账，手续费5%+1元/笔，最低提现金额100元起提。</div>
+            <div class="checkbank row">
+                <div class="bankname start-center">{{bankname}}</div>
+                <div class="selectbank" @click="handleOpenBankList"><i class="iconfont icon-more"></i></div>
+            </div>
+            <!-- 银行卡选择器 -->
+            <div class="bank-picker" v-if="bank_select">
+                <div class="close" @click="handleCloseBankList"></div>
+                <div class="check-bankname">
+                    <div class="select-title">请选择您要提现到哪张银行卡</div>
+                    <van-picker show-toolbar :columns="columns" @change="onChange" @confirm="handleConfirm"/>
+                </div>
+            </div>
             <div class="user-input">
                 <div class="input-title"><span>提取金额</span></div>
                 <div class="money-input row">
                     <div class="icon-rmb center">¥</div>
-                    <div class="getnumber start-center"><input type="number" v-model="cash" placeholder="请输入提现金额"></div>
+                    <div class="getnumber start-center"><input type="number" @input="handleServiceChange" @blur="handleServiceCharge" v-model="cash" placeholder="请输入提现金额"></div>
                 </div>
             </div>
-            <div class="cashcard start-center" v-if="abridge != ''">您已选择提现到<span>{{abridge}}</span>的银行卡</div>
+            <div class="service">
+                <p v-if="service">本次提现所需手续费为<span>¥{{charge}}</span>,实际到账金额为<span>¥{{truecash}}</span></p>
+            </div>
             <div class="desc-two">
                 <p>亲爱的钱夹宝会员，您提交提现申请后将进入人工审核状态，工作时间内1-2天将完成审核，请合理安排提现。</p>
             </div>
             <div @click="handleCash" class="Immediate-withdrawals center">立即提现</div>
         </div>
-        <div class="card-list" v-if="showbanklist" @click="handleCloseCardList">
-            <div class="per-card" v-for="(item,index) in bankcardlist" :key="index" @click="handleCheckCard(item)">
-                <div class="name">{{item.name}}</div>
-                <div class="bankname">{{item.bankname}}</div>
-                <div class="bankcardno">{{item.bankcardno}}</div>
+        <loading :componentload='componentload'></loading>
+        <!-- 提现成功 -->
+        <div class="cash_success" v-if="success">
+            <div class="cash_title" @click="handleReturnHome">完成</div>
+            <div class="avator">
+                <img :src="avator" alt="">
+                <p>{{nickname}}</p>
+            </div>
+            <div class="cash_tips">提现申请已发起,等待银行处理</div>
+            <div class="cash_detail row">
+                <div class="left-title">到账账户</div>
+                <div class="right-detail">{{abridge}}</div>
+            </div>
+            <div class="cash_detail row">
+                <div class="left-title">预计到账时间</div>
+                <div class="right-detail">{{time}}</div>
             </div>
         </div>
-        <loading :componentload='componentload'></loading>
     </div>
 </template>
 <script>
@@ -52,25 +76,100 @@ import {axiosPost} from '@/lib/http'
 export default {
     data(){
         return{
+            active: 1,
+            columns: [
+                // "中国民生银行5323"
+            ],
             componentload: true,
             active: 0,
             cash: '',
             cardId:'',
             timerId:null,
-            amount: '',
-            showbanklist: false,
+            amount: '222',
             cardLength: '',
-            bankcardlist: [],
-            abridge: '',
+            bankcardlist: [
+                // {
+                //     abridge: '中国民生银行5323',
+                //     id: '2'
+                // }
+            ],
+            abridge: '中国民生银行5323',
+            bank_select: false,
+            bankname: '请选择您要提现的银行卡',
+            avator: 'http://pay.91dianji.com.cn/logo.png',
+            nickname: 'JACK',
+            time: '',
+            success: false,
+            charge: 0,
+            truecash: 0,
+            service: false,
         }
     },
     components:{
         loading
     },
     methods:{
+        // 打开选择银行卡列表
+        handleOpenBankList(){
+            this.bank_select = true;
+        },
+        // 关闭选择银行卡列表
+        handleCloseBankList(){
+            this.bank_select = false;
+        },
+        // 选择银行
+        onChange(picker, value, index) {
+             if(value.length == '0'){
+                 this.bank_select = false;
+                this.$toast('请先绑定银行卡');
+             }else{
+                 this.bank_select = false;
+                this.bankname = value;
+                this.cardId = ((this.bankcardlist).filter(item =>item.abridge == value))[0].id
+             }
+        },
+        // 应付只绑定一张银行卡的情况
+        handleConfirm(value, index){
+            console.log('选择银行卡',value);
+            if(value.length == '0'){
+                this.bank_select = false;
+                this.$toast('请先绑定银行卡');
+            }else{
+                this.bank_select = false;
+                this.bankname = value;
+                this.cardId = ((this.bankcardlist).filter(item =>item.abridge == value))[0].id;
+                console.log('当前选择银行卡id',this.cardId);
+            }
+            
+        },
+        // 计算手续费
+        handleServiceCharge(){
+            if(parseInt(this.cash) >= 100){
+                this.service = true;
+                this.charge =( parseInt(this.cash)*0.05 + 1).toFixed(2);
+                this.truecash = (parseInt(this.cash) - (parseInt(this.cash)*0.05 + 1)).toFixed(2);
+            }else{
+                this.service = false;
+            }
+        },
+        // 输入框内容变化时计算手续费
+        handleServiceChange(){
+            console.log('当前提现金额',this.cash);
+            if(parseInt(this.cash) > parseInt(this.amount)){
+                this.$toast('提现金额不能大于余额');
+            }else if(parseInt(this.cash) >= 100){
+                this.service = true;
+                this.charge =( parseInt(this.cash)*0.05 + 1).toFixed(2);
+                this.truecash = (parseInt(this.cash) - (parseInt(this.cash)*0.05 + 1)).toFixed(2);
+            }
+            else{
+                this.service = false;
+            }
+        },
         // 返回首页
         handleReturnHome(){
             this.$router.go(-1);
+            this.success = false;
         },
         // 获取已绑定银行卡列表
         handleBankCardList(){
@@ -86,8 +185,13 @@ export default {
                         this.$toast('您还未绑定银行卡');
                     }else{
                          console.log('查询银行卡成功',res);
-                        // this.showbanklist = true;
                         this.bankcardlist = res.data.data;
+                        var arr = [];
+                        for (var item in this.bankcardlist) {
+                            arr.push((this.bankcardlist)[item].abridge)
+                        }
+                        console.log('银行卡列表',arr);
+                        this.columns = arr;
                     }
                 }
             }).catch(res =>{
@@ -95,25 +199,16 @@ export default {
                  console.log('查询银行卡成功',res);
             })
         },
-        // 打开银行卡列表
-        handleOpenBankCardList(){
-            this.showbanklist = true;
-            this.handleBankCardList();
-        },
-        // 选择银行卡
-        handleCheckCard(obj){
-            console.log('选择银行卡',obj);
-            this.showbanklist = false;
-            this.cardId = obj.id;
-            this.abridge = obj.abridge;
-        },
-        // 关闭银行卡列表
-        handleCloseCardList(){
-            this.showbanklist = false;
-        },
         // 全部提现
         handleAllCash(){
-            this.cash = this.amount 
+            if(parseInt(this.amount) < 100){
+                this.$toast('余额过低，暂无法提现')
+            }else{
+                this.cash = this.amount;
+                this.service = true;
+                this.charge =( parseInt(this.cash)*0.05 + 1).toFixed(2);
+                this.truecash = (parseInt(this.cash) - (parseInt(this.cash)*0.05 + 1)).toFixed(2); 
+            }
         },
         // 提现
         handleCash(){
@@ -127,7 +222,7 @@ export default {
                 this.$toast('金额需大于100')
             }
             else if(this.cardId == ''){
-                this.$toast('请点击右上角选择银行卡')
+                this.$toast('请选择提现到账银行卡')
             }
             else{
                 let url = '/customer/getwithdrawalBank';
@@ -137,9 +232,10 @@ export default {
                    withdraw_apply_total: this.cash 
                 };
                 axiosPost(url,params).then(res =>{
-                    // console.log('提现申请成功',res);
+                    console.log('提现申请成功',res);
                     if(res.data.success){
                         this.$toast('提现申请成功');
+                        this.success = true;
                     }else{
                         this.$toast(res.data.message);
                     }
@@ -151,10 +247,24 @@ export default {
         }
     },
     created(){
+        this.handleBankCardList();
         this.amount = this.$route.query.amount;
         setTimeout(() =>{
             this.componentload = false;
         },500)
+        this.avator = this.$store.state.wechat.headimg;
+        this.nickname = this.$store.state.wechat.nickname;
+        var d = new Date();
+        var tdayLater = d.getTime() + parseInt(172800000);
+        var t = new Date(tdayLater);
+        var years = t.getFullYear();
+        var month = (t.getMonth() + 1) < 10 ? '0' + (t.getMonth() + 1) : (t.getMonth() + 1);
+        var day =  (t.getDate()) < 10 ? '0' + t.getDate() : t.getDate();
+        var hours = (t.getHours()) < 10 ? '0' +t.getHours() : t.getHours();
+        var minutes = (t.getMinutes()) < 10 ? '0' + t.getMinutes() : t.getMinutes();
+        var second = (t.getSeconds()) < 10 ? '0' + t.getSeconds() : t.getSeconds();
+        var time = years + '-' + month + '-' + day + ' ' + hours + ":" + minutes + ':' + second;
+        this.time = time;
     }
 }
 </script>
@@ -233,11 +343,70 @@ export default {
                 line-height: 50px;
                 font-size: 26px;
             }
+            .checkbank{
+                width: 95vw;
+                height: 100px;
+                margin-left: auto;
+                margin-right: auto;
+                background: #f2f2f2;
+                .bankname{
+                    width: 88%;
+                    height: 100%;
+                    text-align: left;
+                    margin-left: 2%;
+                    font-size: 30px;
+                    font-weight: 700;
+                }
+                .selectbank{
+                    width: 10%;
+                    height: 100%;
+                    line-height: 100px;
+                    text-align: center;
+                    font-size: 1.5em;
+                    font-weight: 700;
+                    >i{
+                        font-size: 45px;
+                    }
+                }
+            }
+            .bank-picker{
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.3);
+                position: fixed;
+                bottom: 0px;
+                left: 0px;
+                z-index: 10;
+                .close{
+                    width: 100vw;
+                    height: 65vh;
+                }
+                .check-bankname{
+                    width: 100vw;
+                    height: 35vh;
+                    position: absolute;
+                    bottom: 0px;
+                    left: 0px;
+                    z-index: 11;
+                    .select-title{
+                        width: 100vw;
+                        height: 80px;
+                        border-bottom: solid 1px #f2f2f2;
+                        background: white;
+                        font-size: 30px;
+                        font-weight: 700;
+                        text-align: center;
+                        line-height: 80px;
+                        color: #4b66af;
+                    }
+                }
+            }
             .user-input{
                 width: 100vw;
                 height: 200px;
                 background: white;
                 padding-top: 50px;
+                border-bottom: solid 1px #f2f2f2;
                 .input-title{
                     width: 90%;
                     height: 50px;
@@ -272,20 +441,23 @@ export default {
                     }
                 }
             }
-            .cashcard{
+            .service{
                 width: 95vw;
                 height: 60px;
                 margin-left: auto;
                 margin-right: auto;
-                font-size: 26px;
-                >span{
-                    color: #4b66af;
-                    font-weight: bold;
+                line-height: 60px;
+                color: red;
+                p{
+                    >span{
+                        color: black;
+                        font-weight: 600;
+                    }
                 }
             }
             .desc-two{
                 margin-bottom:100px;
-                padding: 20px;
+                padding: 5px 20px 0px 20px;
                 line-height: 40px;
                 p:nth-child(2){
                     margin-top: 30px;
@@ -359,6 +531,66 @@ export default {
                     color: #ffffff;
                     font-size: 30px;
                     font-weight: 700;
+                }
+            }
+        }
+        .cash_success{
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 999999;
+            background: #fff;
+            .cash_title{
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 30px;
+                font-weight: 700;
+                color: #4b66af;
+            }
+            .avator{
+                width: 100%;
+                height: 200px;
+                margin-top: 10vh;
+                text-align: center;
+                >img{
+                    width: 120px;
+                    height: 120px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                >p{
+                    margin-top: 10px;
+                    font-size: 28px;
+                }
+            }
+            .cash_tips{
+                width: 100%;
+                height: 80px;
+                text-align: center;
+                line-height: 80px;
+                font-size: 28px;
+            }
+            .cash_detail{
+                width: 95vw;
+                height: 100px;
+                line-height: 100px;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 28px;
+                font-weight: 400;
+                border-bottom: solid 1px #f2f2f2;
+                .left-title{
+                    width: 40%;
+                    height: 100%;
+                    text-align: left;
+                }
+                .right-detail{
+                    width: 60%;
+                    height: 100%;
+                    text-align: right;
                 }
             }
         }

@@ -9,8 +9,11 @@
            <div  v-show="showRecord" class="total">
                <ul>
                    <li v-for="(item, index) in recordList" :key="index">
-                       <span>+{{item.withdraw_apply_total}}</span>
-                       <span>提现</span>
+                       <span>提现金额：{{item.withdraw_apply_total}}</span>
+                       <span>到账金额：{{item.withdraw_apply_amount}}</span>
+                       <span v-if="item.status == 0">被驳回</span>
+                       <span v-if="item.status == 1">待审核</span>
+                       <span v-if="item.status == 3">已完成</span>
                        <span>{{item.withdraw_apply_time}}</span>
                    </li>
                </ul>
@@ -54,6 +57,7 @@ export default {
                          message:"您还没有提现记录哦！"
                      })
                  } else {
+                     console.log('提现记录',res);
                      that.showRecord=true
                       that.recordList=res.data.data
                  }

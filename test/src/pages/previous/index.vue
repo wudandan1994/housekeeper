@@ -73,7 +73,7 @@ export default {
             level: '',
             recommendedcode: '',
             privious:"",
-            showConnect:"",
+            showConnect: true,
         }
     },
     methods:{
@@ -96,7 +96,7 @@ export default {
                     this.nickname = res.data.data.nickname
                     this.mobile = res.data.data.mobile
                     this.recommendedcode = res.data.data.promotioncode
-                    this.showConnect=res.data.data.ispermit=="1"?true:false
+                    res.data.data.ispermit=="1" ? this.showConnect = true : this.showConnect = false;
                     res.data.data.level == '0' ?  this.level = '实习' : (res.data.data.level == '1' ? this.level = '黄金会员' : this.level = '钻石会员');
                     setTimeout(()=>{
                         this.componentload = false;

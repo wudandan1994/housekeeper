@@ -23,10 +23,10 @@
            </div>
            <van-button @click="logInPass" class="login center" type="default">登录</van-button>
             <div class="wx-login row">
-                <!-- <div class="logIn start-center" @click="logIn">
+                <div class="logIn start-center" @click="logIn">
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
-                </div> -->
+                </div>
                 <!-- <div class="register end-center" @click="register">注册</div> -->
             </div>
         </div>
@@ -101,7 +101,10 @@ export default {
                     }
                      storage.set('username',that.phone);
                      storage.set('password',that.password);
+                    //  setTimeout(()=>{
                          that.$router.push('/home');
+                    //  },2000)
+                     
                 }else{
                     that.$toast({
                         message:res.data.message
@@ -114,22 +117,24 @@ export default {
             })
         },
         // 登录
-    //         logIn(){
-    //         //  location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"   
-    //        var auths=null
-    //        let that=this
-    //        plus.oauth.getServices( function(services){
-	// 	   auths = services;
-	// 	for(var k in auths){
-	// 		console.log(auths[k].id)
-	// 	}
-	// 	var s;
-	// 	for (var i = 0; i < auths.length; i++){
-	// 		if (auths[i].id == 'weixin'){
-    //             s = auths[i];
-    //             break; 
-    //         }
-    //       }
+            logIn(){
+                // console.log(location.href)
+                window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+            }
+        //    var auths=null
+        //    let that=this
+        //    plus.oauth.getServices( function(services){
+		//    auths = services;
+		// for(var k in auths){
+		// 	console.log(auths[k].id)
+		// }
+		// var s;
+		// for (var i = 0; i < auths.length; i++){
+		// 	if (auths[i].id == 'weixin'){
+        //         s = auths[i];
+        //         break; 
+        //     }
+        //   }
 
     //       if(!s.authResult){
 	// 		s.login(function(e){
@@ -151,17 +156,16 @@ export default {
 	// 		that.$toast('登录成功');
 	// 	}
 
-    //     },function(e){
-    //         that.$toast("登录认证失败")
-    //     })
-    // },
+        // },function(e){
+        //     that.$toast("登录认证失败")
+        // })
+    },
 
     created(){
         this.phone = storage.get('username');
         this.password = storage.get('password');
         this.checked= storage.get('rempass');
     },
-}
 }
 </script>
 
