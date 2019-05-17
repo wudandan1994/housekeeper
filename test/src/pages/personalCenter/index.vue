@@ -281,7 +281,7 @@ export default {
         handleBuy(){
             this.pup2=true
             // 获取orderId
-            let url = 'http://pay.91dianji.com.cn/api/order/insertOrder';
+            let url = '/order/insertOrder';
             let params = {
                 amount: this.price,
                 name:"升级为钻石会员"

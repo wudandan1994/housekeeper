@@ -29,7 +29,7 @@
                        <div class="top">
                           <div class="bankName">
                               <p @click="getName(item.cardNo)" >{{bankname}}</p>
-                              <p>*<span>{{(item.cardNo).substr(item.cardNo.length-4)}}</span></p>
+                              <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
                               <!-- <p>
                                   还款状态
                               </p> -->
@@ -185,7 +185,7 @@ export default {
         // },
         // getBankList(){
         //     let that=this
-        //     axiosPost("http://pay.91dianji.com.cn/api/creditCard/getBankCardbindList")
+        //     axiosPost("/creditCard/getBankCardbindList")
         //     .then(function(res){
         //         that.showCardList=true
         //         if(!res.data.success){

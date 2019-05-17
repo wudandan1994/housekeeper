@@ -199,7 +199,7 @@ export default {
                 orderTime:generateTimeReqestNumber()
             }
             this.componentload = true;
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/quickPay",data)
+            axiosPost("/creditCard/quickPay",data)
             .then(res=>{
                 if(!res.data.success){
                     setTimeout(() =>{

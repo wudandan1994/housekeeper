@@ -54,7 +54,7 @@ export default {
                   openid: res.data.openid
                 };
                 // let url = '/customer/getOpenidIsExist'; //开发环境
-                let url = 'http://pay.91dianji.com.cn/api/customer/getOpenidIsExist' // 生产环境
+                let url = '/customer/getOpenidIsExist' // 生产环境
                 axiosPost(url,params).then(res =>{
                   console.log('openid存在',res);
                   if(res.data.data == '0'){

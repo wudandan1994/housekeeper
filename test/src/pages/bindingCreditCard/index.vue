@@ -171,7 +171,7 @@ export default {
         //         P13_month:that.month,
         //         P14_cvv2:that.safeCode
         //      }
-        //         axiosPost("http://pay.91dianji.com.cn/api/creditCard/agreementBindCardValidateCode",data)
+        //         axiosPost("/creditCard/agreementBindCardValidateCode",data)
         //         .then(res=>{
         //             if(!res.data.success){
         //                 that.$toast({
@@ -259,7 +259,7 @@ export default {
             //             orderId:that.orderId,
             //             validateCode,
             //         }
-            //         axiosPost("http://pay.91dianji.com.cn/api/creditCard/bindCard",datas)
+            //         axiosPost("/creditCard/bindCard",datas)
             //         .then(function(res){
             //             if(!res.data.success){
             //                 that.$toast({

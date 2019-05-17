@@ -108,7 +108,7 @@ export default {
          onRead(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            let url = '    /upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -163,7 +163,7 @@ export default {
          onReadF(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            let url = ' /upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -216,7 +216,7 @@ export default {
          onReadS(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            let url = '/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -270,7 +270,7 @@ export default {
          onReadQ(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            let url = '/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };

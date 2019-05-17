@@ -23,10 +23,10 @@
            </div>
            <van-button @click="logInPass" class="login center" type="default">登录</van-button>
             <div class="wx-login row">
-                <div class="logIn start-center" @click="logIn">
+                <!-- <div class="logIn start-center" @click="logIn">
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
-                </div>
+                </div> -->
                 <!-- <div class="register end-center" @click="register">注册</div> -->
             </div>
         </div>
@@ -76,7 +76,7 @@ export default {
                 mobile:that.phone,
                 password:that.password
             }
-            that.$http.post("/customer/login",qs.stringify(data))
+            axiosPost("/customer/login",data)
             .then(function(res){
                 if(res.data.success){
                     that.$store.commit('iscertification',res.data.data.iscertification);

@@ -359,7 +359,7 @@ export default {
             this.$router.push('/personalCenter/contactus')
         },
         searchInfo(){
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMerchantSettled")
+            axiosPost("/creditCard/getMerchantSettled")
             .then(res=>{
                 if(res.data.code==="1"){
                     this.$router.push("/home/addCard")
