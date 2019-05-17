@@ -104,7 +104,8 @@ import openComponent from '@/pages/open'
 import paymentComponent from '@/pages/payment'
 // 第三方跳转
 import url from '@/pages/home/url'
-
+// 计划详情
+import planDetailComponent from '@/pages/planDetail'
 
 
 // 百问百答
@@ -133,11 +134,11 @@ export default new Router({
     {path:"/register",component:registerComponent},
     {path:"/home/collect",component:collectComponent},
     {path:"/home/online",component:onlineComponent},
-
     {path:"/home/collect/open",component:openComponent},
     {path:"/home/collect/payment",component:paymentComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
+    {path:"/home/punch/planDetail",component:planDetailComponent},
     {path:"/home/news",component:newsComponent},
     {path:"/home/addCard",component:addCardComponent},
     {path:"/home/cardCenter/applyCard",component:applyCardComponent,},

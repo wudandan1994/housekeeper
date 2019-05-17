@@ -28,11 +28,11 @@
                    <li v-for="(item, index) in cardList" :key="index">
                        <div class="top">
                           <div class="bankName">
-                              <p @click="getName(item.cardNo)" >{{bankname}}</p>
+                              <p>{{item.bankNick}}</p>
                               <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
-                              <!-- <p>
-                                  还款状态
-                              </p> -->
+                              <p>
+                                  {{item.payerName.replace(1,"*")}}
+                              </p>
                           </div>
                           <div class="now">
                               <div>
@@ -119,33 +119,25 @@ export default {
     data() {
         return {
             componentload:true,
-           bankList:{},
+            bankList:{},
             timerId:null,
             showCardList:false,
             nickname:"",
             vip:"",
             promotioncode:"",
             headimg:"",
-            cardList:[{
-
-            }],
+            cardList:[],
             cardNum:'',
             // cardname:"",
             bankname:""
         }
     },
     mounted () {
-        this.getName();
+        
     },
     methods:{
         goBack() {
             this.$router.push('/home/creditHousekeeper')
-            // console.log(bankCardAttribution("6229015220764104").bankName)
-            // let a=bankCardAttribution("6229015220764104").bankName
-            // console.log(a)
-        },
-        getName(item){
-            this.bankname=bankCardAttribution(item).bankName
         },
 
         repayment(item){
@@ -161,12 +153,17 @@ export default {
              axiosPost("/creditCard/getMyCreditCard")
              .then(res=>{
                  if(res.data.success){
-                     console.log(res)
-                     this.cardList=res.data.data
+                    //  console.log(res)
+                     let arr= res.data.data
+                     let arrXun=[]
+                     arr.forEach((item,i) => {
+                        //  console.log(item)
+                         item.bankNick=bankCardAttribution(item.cardNo).bankName
+                        //  console.log(item)
+                         arrXun.push(item)
+                     });
+                     this.cardList=arrXun
                      this.cardNum=this.cardList.length
-                    //  this.cardList.forEach(element => {
-                    //      this.cardname=bankCardAttribution(element.idCardNo).bankName
-                    //  });
                  }
              })
              .catch(err=>{
@@ -339,6 +336,7 @@ export default {
                       color:#fff;
                       padding:10px;
                        box-sizing: border-box;
+                       margin-bottom: 15px;
                        >.top {
                            padding-bottom: 150px;
                            .bankName {

@@ -16,7 +16,8 @@ import '@/assets/css/common.css'
 // import '@/assets/css/share.css'
 import axios from 'axios'
 Vue.prototype.$http = axios
-axios.defaults.baseURL = 'http://pay.91dianji.com.cn/api';
+// axios.defaults.withCredentials = true
+// axios.defaults.baseURL = 'http://pay.91dianji.com.cn/api';
 // 引入适配
 import 'lib-flexible/flexible'
 import { Actionsheet,Button,Switch,Dialog,RadioGroup,Pagination , Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker    } from 'vant'

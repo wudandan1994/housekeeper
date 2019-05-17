@@ -44,14 +44,15 @@
                 <div class="page">
                     <van-pagination 
                     v-model="currentPage" 
-                    :items-per-page=5
+                    :items-per-page="5"
                     :total-items="page"
                     mode="simple" 
                     />
                 </div>
             </div>
             <div class="submit">
-                 <van-button size="large" @click="makePlan" round type="info">提交计划</van-button>
+                 <van-button size="large" @click="makePlan" round type="default">提交计划</van-button>
+                  <van-button size="large" to="/home/creditHousekeeper/aisleHousekeeper" type="info" round >取消计划</van-button>
             </div>
         </div>
         
@@ -60,6 +61,8 @@
 </template>
 
 <script>
+import { axiosPost } from '../../lib/http'
+import qs from 'qs'
 export default {
     data() {
         return {
@@ -73,6 +76,30 @@ export default {
     methods:{
         goBack() {
             this.$router.push('/home/creditHousekeeper/aisleHousekeeper/makePlan')
+        },
+        makePlan(){
+            let datas={
+                data:JSON.stringify(this.planlist)
+            }
+            axiosPost("/creditCard/insertPlans",datas)
+            .then(res=>{
+                if(!res.data.success){
+                    this.$toast({
+                        message:res.data.message
+                    })
+                } else {
+                        // console.log(this.planlist.bindId)
+                    this.$router.push({
+                        path:"/home/punch",
+                        query:{
+                            bindId:this.planlist.bindId
+                        }
+                    })
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+            })
         },
         fnDate(){
                 var date=new Date();
@@ -93,15 +120,14 @@ export default {
     },
     created () {
         this.planlist=this.$route.query.list 
-        // console.log(this.planlist)
-        // this.page=this.planlist.plans.length
-        console.log(this.page=this.planlist.plans.length)
-        // this.planlist.plans.forEach(element => {
-        //     if(element.type !=3){
-        //         this.page++;
-        //     }
-            
-        // });
+        let num=0
+        // console.log(this.page=this.planlist.plans.length)
+        this.planlist.plans.forEach(element => {
+            if(element.type !=3){
+                this.num++;
+            }
+            this.page=num
+        });
         this.fnDate();
     }
 }
@@ -182,6 +208,20 @@ export default {
                }
                .crow {
                    padding:5px 10px;
+               }
+           }
+           .submit {
+               margin-top:20px;
+               padding:0 30px;
+               .van-button--info {
+                   color:#000;
+                   background-color: #fff;
+                   border: 2px solid #ccc;
+               }
+               >button {
+                   &:nth-of-type(1){
+                       margin-bottom:50px;
+                   }
                }
            }
        }

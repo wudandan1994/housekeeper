@@ -81,14 +81,23 @@
                             <span>GO>></span>
                         </div>  
                     </li>
-                    <li @click="searchInfo">
+                    <!-- <li @click="searchInfo">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
                             <p>落地商户空卡周转</p>
                             <span>智能还款</span>
                         </div>
-                    </li>
+                    </li> -->
+                     <router-link tag="li" to="/home/creditHousekeeper">
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
+                        <div class="channel">
+                            <h3>信用卡管家</h3>
+                            <p>落地商户空卡周转</p>
+                            <span>智能还款</span>
+                        </div>
+                     </router-link>
+
                 </ul>
             </div>
             <!-- 详情模块 -->
@@ -358,31 +367,31 @@ export default {
         handleContactUs(){
             this.$router.push('/personalCenter/contactus')
         },
-        searchInfo(){
-            axiosPost("/creditCard/getMerchantSettled")
-            .then(res=>{
-                if(res.data.code==="1"){
-                    this.$router.push("/home/addCard")
-                } else if(res.data.code==="0"){
-                    // window.location.href = res.data.data.url;
-                    storage.set('cardManager',res.data.data.url);
-                    this.$router.push({
-                        path: '/cardManager'
-                    })
-                }
-            })
-            .catch(err=>{
-                // console.log(err,"失败");
+        // searchInfo(){
+        //     axiosPost("/creditCard/getMerchantSettled")
+        //     .then(res=>{
+        //         if(res.data.code==="1"){
+        //             this.$router.push("/home/addCard")
+        //         } else if(res.data.code==="0"){
+        //             // window.location.href = res.data.data.url;
+        //             storage.set('cardManager',res.data.data.url);
+        //             this.$router.push({
+        //                 path: '/cardManager'
+        //             })
+        //         }
+        //     })
+        //     .catch(err=>{
+        //         // console.log(err,"失败");
                 
-            })
-        },
+        //     })
+        // },
     },
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-        // this.automatic()
+        this.automatic()
     }  
 }
 </script>
