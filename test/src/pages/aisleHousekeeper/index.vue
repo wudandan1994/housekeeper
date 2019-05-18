@@ -101,7 +101,8 @@
                        </div>
                    </li>
               </ul> -->
-              <router-link to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" tag="h3">添加信用卡</router-link>
+               <van-button round to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
+              <!-- <router-link to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" tag="h3"></router-link> -->
            </div>
         </div>
     </div>

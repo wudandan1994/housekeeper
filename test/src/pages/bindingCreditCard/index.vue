@@ -281,11 +281,14 @@ export default {
 </script>
 <style lang="less" scoped >
     #binding-credit-card{
+
         background: #EEEFF1;
         width: 100vw;
         height: 120vh;
         .loan .van-nav-bar {
           background-color: #4B66AF!important;
+          height: 80px;
+          line-height: 80px;
          }
          .van-nav-bar__title {
              color:#fff;

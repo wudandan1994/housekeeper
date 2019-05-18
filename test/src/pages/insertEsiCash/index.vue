@@ -136,13 +136,14 @@ export default {
                          return
                      } else {
                          let url=res.data.data
-                         this.$router.push({
-                             path:"/home/insertEsiCash/iframe",
-                             query:{
-                                 url,
-                                 title:"绑信用卡"
-                             }
-                         })
+                        document.write(url)
+                        //  this.$router.push({
+                        //      path:"/home/insertEsiCash/iframe",
+                        //      query:{
+                        //          url,
+                        //          title:"业务开通"
+                        //      }
+                        //  })
                      }
                  })
                  .catch(err=>{
