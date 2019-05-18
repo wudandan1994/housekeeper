@@ -22,7 +22,7 @@
                    </li>
                    <li>
                        <span>开户证件号：</span>
-                       <input type="number"  v-model="idcardNo" placeholder="身份证号码" >
+                       <input type="text"  v-model="idcardNo" placeholder="身份证号码" >
                    </li>
                    <li>
                         <span>开户地区：</span>
