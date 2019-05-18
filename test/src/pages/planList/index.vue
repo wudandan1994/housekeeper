@@ -55,6 +55,7 @@
                   <van-button size="large" to="/home/creditHousekeeper/aisleHousekeeper" type="info" round >取消计划</van-button>
             </div>
         </div>
+         <loading :componentload="componentload"></loading>
         
     </div>
 
@@ -62,15 +63,20 @@
 
 <script>
 import { axiosPost } from '../../lib/http'
+import loading from '@/components/loading'
 import qs from 'qs'
 export default {
+      components:{
+      loading
+    },
     data() {
         return {
             planlist:{},
             currentPage:1,
             page:0,
             // total:5,
-            currentTime:""
+            currentTime:"",
+            componentload:false
         }
     },
     methods:{
@@ -89,12 +95,16 @@ export default {
                     })
                 } else {
                         // console.log(this.planlist.bindId)
-                    this.$router.push({
-                        path:"/home/punch",
-                        query:{
-                            bindId:this.planlist.bindId
-                        }
-                    })
+                        this.componentload=true
+                        setTimeout(()=>{
+                            this.componentload=false
+                                 this.$router.push({
+                                    path:"/home/punch",
+                                    query:{
+                                        bindId:this.planlist.bindId
+                                    }
+                                })
+                          },2000)
                 }
             })
             .catch(err=>{

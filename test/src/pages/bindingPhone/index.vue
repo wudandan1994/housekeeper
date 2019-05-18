@@ -103,7 +103,7 @@ export default {
         },
         bindingPhone() {
             let that=this
-            let partten = /^1[345789]\d{9}$/
+            let partten = /0?(13|14|15|17|18|19)[0-9]{9}/
             if(this.mobile.trim().length===0){
                  that.$toast({
                     message:"手机号码不能为空"

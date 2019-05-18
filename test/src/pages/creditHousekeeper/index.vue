@@ -7,7 +7,7 @@
         </header>
        <div class="container">
            <h3>钱夹宝智能还款</h3>
-           <p class="mode">空卡,智能,急速3种模式</p>
+           <p class="mode">智能,急速2种模式</p>
            <div class="light">
                <ul>
                    <li>

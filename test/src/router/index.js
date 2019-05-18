@@ -13,7 +13,9 @@ import loginComponent from '@/pages/login'
 import newsComponent from '@/pages/news'
 import addCardComponent from '@/pages/addCard'
 import logOutComponent from '@/pages/logOut'
-import inviteFriendsComponent from '@/pages/inviteFriends'
+import insertEsiCashComponent from '@/pages/insertEsiCash'
+import iframeComponent from '@/pages/insertEsiCash/iframe.vue'
+
 import creditHousekeeperComponent from '@/pages/creditHousekeeper'
 import aisleHousekeeperComponent from '@/pages/aisleHousekeeper'
 import registerComponent from '@/pages/register'
@@ -148,11 +150,11 @@ export default new Router({
     {path:"/home/creditHousekeeper/aisleHousekeeper/planList",component:planListComponent},
     {path:"/home/changeCard",component:changeCardComponent},
 
-
-
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
-    {path:"/share/inviteFriends",component:inviteFriendsComponent},
+    {path:"/home/insertEsiCash",component:insertEsiCashComponent}, //绑定第三方信用卡
+    {path:"/home/insertEsiCash/iframe",component:iframeComponent}, //绑定第三方信用卡返回页面
+
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},
     {path:"/share/promotionMaterial",component:promotionMaterialComponent},

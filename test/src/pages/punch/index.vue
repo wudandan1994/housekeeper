@@ -20,12 +20,12 @@
                     <van-tab title="全部">
                          <div class="waiting">
                             <ul>
-                                <li @click="goPlanDetail">
+                                <li @click="goPlanDetail" v-for="(item,index) in list" :key="index">
                                     <div class="top">
                                         <p>0551</p>
                                         <p>江</p>
                                         <p>7天后到期</p>
-                                        <p>本期账单：￥3012.63</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
                                     </div>
                                     <div class="middle">
                                         <div class="m-left">
@@ -68,7 +68,7 @@
                     <van-tab title="执行中">333333</van-tab>
                     <van-tab title="失败">内容 4</van-tab>
                      <van-tab title="成功">内容 5</van-tab>
-                      <van-tab title="审核中">内容 6</van-tab>
+                      <van-tab title="取消">内容 6</van-tab>
                 </van-tabs>
            </div>
            
@@ -83,7 +83,8 @@ export default {
     data() {
         return {
             active:0,
-            bindId:""
+            bindId:"",
+            list:[]
         }
     },
     methods:{
@@ -100,12 +101,22 @@ export default {
         getMainPlan(){
             //  console.log(this.bandId)
             let data={
-                bindId:this.bindId
+                bindId:this.bindId,
+                page:"1",
+                pageSize:"100",
+                state:""
             }
-            console.log(data)
             axiosPost("/creditCard/getMainPlan",data)
             .then(res=>{
                 console.log(res)
+                if(!res.data.success){
+                    this.$toast({
+                        message:res.data.message
+                    })
+                } else {
+                    this.list=res.data.data.data
+                    console.log(this.list)
+                }
             })
             .catch(err=>{
                 console.log(err)
@@ -114,11 +125,10 @@ export default {
     },
     created () {
         this.bindId=  this.$route.query.bindId 
-        console.log('路由',this.$router.currentRoute.query.bindId);
-        console.log(this.bindId)
-        // this.getMainPlan()
+        this.getMainPlan()
     },
     mounted () {
+
     }
 
 }

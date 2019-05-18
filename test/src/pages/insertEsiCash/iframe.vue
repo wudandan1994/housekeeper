@@ -1,48 +1,56 @@
 <template>
-    <div id="invite-friends">
+    <div id="my-order">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>邀请好友</span>
-            <span><van-icon name="ellipsis"/></span>
+            <span>{{title}}</span>
+            <span></span>
         </header>
         <div class="container">
-           <router-link to="/share/inviteFriends/inviteShare" tag="div" class="invite">
-              立即邀请好友加入
-           </router-link>
+           <iframe class="iframe" :src="url" frameborder="0"></iframe>
+           
         </div>
     </div>
 
 </template>
 
 
-
 <script>
 export default {
     data() {
         return {
-
+            url:"",
+            type: true,
+            title:""
         }
     },
     methods:{
         goBack() {
-            this.$router.push('/share')
-        }
+            this.$router.go(-1);
+        },
+       
+       
+    },
+    created(){
+        this.url=this.$route.query.url;
+        this.title=this.$route.query.title;
+        console.log(this.url)
+       
     }
 }
 </script>
 
 <style lang="less">
-   #invite-friends {
+   #my-order {
        >header {
-           background: #000;
+            background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
            padding-top:10px;
            color:#fff;
-           display: flex;
-           font-size:28px;
            z-index:999;
+           font-size:34px;
+           display: flex;
            position: fixed;
            justify-content: space-between;
            >span {
@@ -56,19 +64,9 @@ export default {
        }
        >.container {
            padding-top:96px;
-           padding-bottom: 50px;
-           >.invite {
-               width:70%;
-               margin-left:15%;
-               text-align: center;
-               padding:30px 0;
-               background-color: #AA6808;
-               color:#fff;
-               border:1px solid #fff;
-               border-radius: 10px;
-               position: fixed;
-               left:0px;
-               bottom:100px;
+           .iframe{
+               width: 100vw;
+               height: calc(100vh - 86px);
            }
        }
    }

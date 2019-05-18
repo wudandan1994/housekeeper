@@ -11,8 +11,8 @@
                    <li >
                        <div class="top">
                           <div class="bankName">
-                              <!-- <p >{{bankCardAttribution(item.idCardNo).bankName}}</p> -->
-                              <!-- <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p> -->
+                              <p >{{item.bankNick}}</p>
+                              <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
                               <!-- <p>
                                   还款状态
                               </p> -->
@@ -20,13 +20,11 @@
                           <div class="now">
                               <div>
                                   <!-- <p class="botton">未添加</p> -->
-                                   <!-- <p>本期账单</p> -->
                               </div>
                               <div class="pay">
                                   <!-- <p class="days">16</p> -->
                                   <div>
                                       <!-- <p class="botton">天后还款日</p> -->
-                                      <!-- <p><span>{{item.billdate}}</span>-<span>{{item.duedate}}</span></p> -->
                                   </div>
                               </div>
                              
@@ -39,11 +37,11 @@
                                    <p>本期账单</p>
                                </li>
                                <li>
-                                   <!-- <p>{{item.billdate}}<span>日</span></p> -->
+                                   <p>{{item.billdate}}<span>日</span></p>
                                    <p>账单日</p>
                                </li>
                                 <li>
-                                   <!-- <p>{{item.duedate}}<span>日</span></p> -->
+                                   <p>{{item.duedate}}<span>日</span></p>
                                    <p>还款日</p>
                                </li>
                                 <li>
@@ -125,16 +123,21 @@ export default {
             }
              axiosPost("/creditCard/getPlan",data)
              .then(res=>{
-                //  console.log(res);
-                 if(!res.data.success){
-                     this.$toast({
-                         message:res.data.message
-                     })
-                 } else {
+                  if( res.data.code=="1001" && res.data.success==false){
+                      this.$toast({
+                          message:res.data.message
+                        })
+                     this.$router.push("/home/insertEsiCash")
+                 } else if (res.data.success) {
                     let planList=res.data.data
                      this.$router.push({
                          path:"/home/creditHousekeeper/aisleHousekeeper/planList",
                          query:{list:planList}
+                     })
+                   }
+                 else {
+                      this.$toast({
+                         message:res.data.message
                      })
                  }
              })
@@ -145,6 +148,7 @@ export default {
     },
     created () {
          this.item=this.$route.query.info 
+        //  console.log(this.item)
     }
 }
 </script>

@@ -21,7 +21,7 @@
                              <li v-for="(item,index) in cardList" :key="index">
                                  <div @click="getCard(item)" :class="showClass ? 'round':''"></div>
                                  <div class="info">
-                                     <p>华夏银行</p>
+                                     <p>{{item.bankNick}}</p>
                                      <p>{{item.payerName}}</p>
                                      <p>尾号：*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
                                  </div>
@@ -79,6 +79,7 @@
 import storage from '@/lib/storage'
 import {axiosPost} from '@/lib/http'
 import loading from '@/components/loading'
+import { bankCardAttribution } from '../../lib/bankName'
 export default {
     data() {
         return {
@@ -116,7 +117,15 @@ export default {
                      message:res.data.message
                  })
              } else {
-                 this.cardList=res.data.data
+                     let arr= res.data.data
+                     let arrXun=[]
+                     arr.forEach((item,i) => {
+                        //  console.log(item)
+                         item.bankNick=bankCardAttribution(item.cardNo).bankName
+                        //  console.log(item)
+                         arrXun.push(item)
+                     });
+                     this.cardList=arrXun
                  if(this.cardList.length===0){
                      this.showBinding=true
                  } else {
@@ -130,7 +139,7 @@ export default {
            this.$router.push("/home/changeCard")
        },
        getCard(item){
-           this.showClass=!this.showClass
+           this.showClass=true
            this.realName=item.payerName
             this.idCard=item.idCardNo
             this.accNo=item.cardNo
