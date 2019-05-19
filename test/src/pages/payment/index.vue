@@ -18,8 +18,8 @@
                               </div>
                          </div>
                          <ul v-show="showCardList">
-                             <li v-for="(item,index) in cardList" :key="index">
-                                 <div @click="getCard(item)" :class="showClass ? 'round':''"></div>
+                             <li v-for="(item,index)   in cardList" :key="index" >
+                                 <div @click="getCard(item)" :ref="'back'+index"  :class="showClass ? 'round':''"></div>
                                  <div class="info">
                                      <p>{{item.bankNick}}</p>
                                      <p>{{item.payerName}}</p>
@@ -138,13 +138,14 @@ export default {
        change(){
            this.$router.push("/home/changeCard")
        },
-       getCard(item){
+       getCard(item,index){
            this.showClass=true
            this.realName=item.payerName
             this.idCard=item.idCardNo
             this.accNo=item.cardNo
             this.mobile=item.phone
             this.show=false
+            console.log(this.$refs)
        },
        
        recordSearch(){
@@ -323,11 +324,12 @@ export default {
                               display: flex;
                               justify-content: space-around;
                               align-items: center;
-                              margin-bottom: 15px;
+                              margin-bottom:30px;
+                              padding:10px 0px;
                               >div{
                                   &:nth-of-type(1){
-                                       width:30px;
-                                    height:30px;
+                                    width:40px;
+                                    height:40px;
                                     border:2px solid #ccc;
                                     border-radius: 50%;
                                     margin-right: 15px;

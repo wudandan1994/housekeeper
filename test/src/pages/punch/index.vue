@@ -20,21 +20,21 @@
                     <van-tab title="全部">
                          <div class="waiting">
                             <ul>
-                                <li @click="goPlanDetail" v-for="(item,index) in list" :key="index">
+                                <li @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in list" :key="index">
                                     <div class="top">
-                                        <p>0551</p>
-                                        <p>江</p>
-                                        <p>7天后到期</p>
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
                                         <p>本期账单：￥<span>{{item.realamount}}</span></p>
                                     </div>
                                     <div class="middle">
                                         <div class="m-left">
-                                            <p>招商银行</p>
+                                            <p>{{item.bankNick}}</p>
                                             <p>等待执行：2019/5/17:14:33:37</p>
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-                                            <van-button type="default" round>停止计划</van-button>
+                                            <p>{{item.state}}</p>
+                                            <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             
                                         </div>
                                     </div>
@@ -49,11 +49,11 @@
                                                 <p>还款金额</p>
                                             </li>
                                               <li>
-                                                <p>￥30.37</p>
+                                                <p>{{item.poundage}}</p>
                                                 <p>手续费</p>
                                             </li>
                                               <li>
-                                                <p>6</p>
+                                                <p>{{item.repaycount}}</p>
                                                 <p>还款笔数</p>
                                             </li>
                                         </ul>
@@ -79,6 +79,7 @@
 
 <script>
 import { axiosPost } from '../../lib/http'
+import { bankCardAttribution } from '../../lib/bankName'
 export default {
     data() {
         return {
@@ -91,8 +92,35 @@ export default {
         goBack(){
             this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
         },
-        goPlanDetail(){
-            this.$router.push("/home/punch/planDetail")
+        goPlanDetail(id,bankName,name,nick){
+            this.$router.push({
+                path:"/home/punch/planDetail",
+                query:{
+                    id:id,
+                    bankName:bankName,
+                    name:name,
+                    nick:nick
+                }
+            })
+        },
+        stopPlan(id){
+              let data={
+                  id,
+              }
+              axiosPost("/creditCard/cancelMainPlan",data)
+              .then(res=>{
+                  console.log(res)
+                  if(!res.data.success){
+                      this.$toast({
+                          message:res.data.message
+                      })
+                  } else {
+                       this.getMainPlan()
+                  }
+              })
+              .catch(err=>{
+                  console.log(err)
+              })
         },
         onClick(index, title){
              this.$toast(title);
@@ -108,14 +136,19 @@ export default {
             }
             axiosPost("/creditCard/getMainPlan",data)
             .then(res=>{
-                console.log(res)
+                // console.log(res)
                 if(!res.data.success){
                     this.$toast({
                         message:res.data.message
                     })
                 } else {
-                    this.list=res.data.data.data
-                    console.log(this.list)
+                     let arr= res.data.data.data
+                     let arrXun=[]
+                     arr.forEach((item,i) => {
+                         item.bankNick=bankCardAttribution(item.cardNo).bankName
+                         arrXun.push(item)
+                     });
+                     this.list=arrXun
                 }
             })
             .catch(err=>{

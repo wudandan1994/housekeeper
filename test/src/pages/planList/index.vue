@@ -82,7 +82,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home/creditHousekeeper/aisleHousekeeper/makePlan')
+            this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
         },
         makePlan(){
             let datas={
@@ -132,9 +132,9 @@ export default {
     },
     created () {
         this.planlist=this.$route.query.list 
+        console.log(planlist,"planList页面")
          this.area=this.$route.query.area 
         let num=0
-        // console.log(this.page=this.planlist.plans.length)
         this.planlist.plans.forEach(element => {
             if(element.type !=3){
                 this.num++;

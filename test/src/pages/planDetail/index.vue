@@ -11,8 +11,8 @@
                       <span>信用卡</span> &nbsp;&nbsp;<span>落地通道</span>
                   </p>
                   <div class="waiting">
-                      <p>招商银行</p>
-                      <p>5187******0551</p>
+                      <p>{{bankName}}</p>
+                      <p>尾号：{{name.substr(name.length-4)}}</p>   
                       <p>
                           <van-button type="info">等待执行</van-button>
                       </p>
@@ -20,17 +20,17 @@
                   <div class="amount">
                       <ul>
                           <li>总额度：<span>￥3041</span></li>
-                          <li>本期账单：<span>￥3010.61</span></li>
+                          <li>本期账单：￥<span>{{cardInfo.realamount}}</span></li>
                           <li>预留额度：<span>￥1000</span></li>
                           <li>已还金额：<span>￥0</span></li>
                       </ul>
                   </div>
                   <div class="num">
                        <ul>
-                          <li>消费手续费：<span>￥18.39</span></li>
-                          <li>消费笔数：<span>18+6</span></li>
-                          <li>自用减免：<span>0.61</span></li>
-                          <li>还款笔数：<span>￥12</span></li>
+                          <li>消费笔数：<span>{{cardInfo.paycount}}</span></li>
+                          <li>消费手续费：￥<span>{{cardInfo.poundage}}</span></li>
+                          <li>还款笔数：<span>{{cardInfo.repaycount}}</span></li>
+                          <li>还款笔数费：￥<span>{{cardInfo.countamount}}</span></li>
                       </ul>
                   </div>
                   <div class="button">
@@ -39,69 +39,26 @@
                </div>
                <div class="detail">
                    <ul>
-                       <li>
+                        <li v-for="(item,index) in listOut" :key="index">
                            <div class="top">
-                               <p>招商银行：0551</p>
-                               <p>主订单：588051</p>
+                               <p>{{bankName}}：{{name.substr(name.length-4)}}</p>
+                               <p>主订单：{{cardInfo.orderId.substr(cardInfo.orderId.length-6)}}</p>
                                <p>手续费：5.05元</p>
                            </div>
                            <div class="list">
                               <ul>
-                                  <li>
+                                  <li v-for="(info,i) in item" :key="i">
                                       <div class="left">
-                                          <p><span>消费账单&nbsp;</span><span class="gray">2019-05-18</span></p>
-                                          <p><span class="gray">订单号：</span><span>201905171757354950</span></p>
-                                          <p class="gray">智还&nbsp;落地通道&nbsp;持卡者：江*锋</p>
+                                          <p><span>消费账单&nbsp;</span><span class="gray">{{info.date}}</span></p>
+                                          <p><span class="gray">订单号：</span><span>{{info.parentNo}}</span></p>
+                                          <p class="gray">智还&nbsp;落地通道&nbsp;持卡者：{{nick}}</p>
                                       </div>
                                       <div class="right">
-                                          <p class="bold">-￥179.00</p>
+                                          <p class="bold">{{info.amount}}</p>
                                           <p class="gray">等待执行</p>
                                       </div>
                                   </li>
-                                  <li>
-                                      <div class="left">
-                                          <p><span>消费账单&nbsp;</span><span class="gray">2019-05-18</span></p>
-                                          <p><span class="gray">订单号：</span><span>201905171757354950</span></p>
-                                          <p class="gray">智还&nbsp;落地通道&nbsp;持卡者：江*锋</p>
-                                      </div>
-                                      <div class="right">
-                                          <p class="bold">-￥179.00</p>
-                                          <p class="gray">等待执行</p>
-                                      </div>
-                                  </li>
-                              </ul>
-                           </div>
-                       </li>
-                        <li>
-                           <div class="top">
-                               <p>招商银行：0551</p>
-                               <p>主订单：588051</p>
-                               <p>手续费：5.05元</p>
-                           </div>
-                           <div class="list">
-                              <ul>
-                                  <li>
-                                      <div class="left">
-                                          <p><span>消费账单&nbsp;</span><span class="gray">2019-05-18</span></p>
-                                          <p><span class="gray">订单号：</span><span>201905171757354950</span></p>
-                                          <p class="gray">智还&nbsp;落地通道&nbsp;持卡者：江*锋</p>
-                                      </div>
-                                      <div class="right">
-                                          <p class="bold">-￥179.00</p>
-                                          <p class="gray">等待执行</p>
-                                      </div>
-                                  </li>
-                                  <li>
-                                      <div class="left">
-                                          <p><span>消费账单&nbsp;</span><span class="gray">2019-05-18</span></p>
-                                          <p><span class="gray">订单号：</span><span>201905171757354950</span></p>
-                                          <p class="gray">智还&nbsp;落地通道&nbsp;持卡者：江*锋</p>
-                                      </div>
-                                      <div class="right">
-                                          <p class="bold">-￥179.00</p>
-                                          <p class="gray">等待执行</p>
-                                      </div>
-                                  </li>
+                                 
                               </ul>
                            </div>
                        </li>
@@ -114,16 +71,64 @@
 </template>
 
 <script>
+import { axiosPost } from '../../lib/http'
 export default {
     data() {
         return {
-
+            id:"",
+            cardInfo:{},
+            list:[],
+            bankName:"",
+            name:"",
+            nick:"",
+            listOut:[]
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home/punch')
+        },
+        getPlans(){
+             let data={
+                 id:this.id
+             }
+             axiosPost("creditCard/getMainPlanAndPlans",data)
+             .then(res=>{
+                 console.log(res,"主计划和子计划")
+                 if(!res.data.success){
+                     this.$toast({
+                         message:res.data.message
+                     })
+                 } else {
+                     this.cardInfo=res.data.data
+                     this.list=res.data.data.plans
+                     let arr=[]
+                     let arrOut=[]
+                     this.list.forEach((item ,i)=> {
+                         arr.push(item)
+                         if(arr.length==3){
+                             arrOut.push(arr)
+                             arr=[]
+                            //  console.log(arr)
+                            //  console.log(arrOut)
+                         }
+                     });
+                      this.listOut=arrOut
+                    //   console.log(this.listOut)
+                 }
+             })
+             .catch(err=>{
+                 console.log(err,"子计划")
+             })
         }
+    },
+    created () {
+         this.id= this.$route.query.id 
+          this.bankName= this.$route.query.bankName
+         this.name= this.$route.query.name 
+         this.nick= this.$route.query.nick
+
+         this.getPlans()
     }
 }
 </script>
@@ -221,6 +226,7 @@ export default {
                   margin-top:20px;
                   background-color: #eee;
                   margin-bottom: 20px;
+                  width:100% !important;
                   >ul {
                       box-sizing: border-box;
                       margin:30px 15px;
