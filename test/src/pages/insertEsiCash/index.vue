@@ -59,6 +59,7 @@ export default {
             idcardNo:"",
             area:"",
             showFlag:false,
+            item:"",
             columns: [
                 {
                 values: Object.keys(citys),
@@ -151,6 +152,13 @@ export default {
                  })
           
         }
+    },
+    created () {
+        this.item=this.$route.query.info 
+        this.name=this.item.payerName
+        this.accountNo=this.item.cardNo
+        this.mobileNo=this.item.phone
+         this.idcardNo=this.item.idCardNo
     }
 }
 </script>

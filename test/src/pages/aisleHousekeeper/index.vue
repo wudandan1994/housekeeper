@@ -77,32 +77,11 @@
                    </li>
                </ul>
            </div>
-           <!-- <div class="plan">
-               <p>
-                   <span>&nbsp;</span>
-                   <span>已绑定卡示例</span>
-               </p>
-           </div>
-           <div class="example">
-               <img src="http://bc.91dianji.com.cn/ka.png" alt="">
-           </div> -->
+         
            <div class="detail">
-              <!-- <p @click="getBankList">查看已绑定的信用卡 </p>
-              <ul v-show="showCardList" >
-                   <li v-for="(item, index) in bankList" :key="index" >
-                       <div class="info">
-                           <p>{{item.payerName}}</p>
-                            <p>{{item.cardNo}}</p>
-                            <p>{{item.phone}}</p>
-                           
-                       </div>
-                       <div @click="repay(item.bindId)">
-                           <van-button round size="normal" type="info">去还款</van-button>
-                       </div>
-                   </li>
-              </ul> -->
+             
                <van-button round to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
-              <!-- <router-link to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" tag="h3"></router-link> -->
+                <van-button round to="/home/punch" size="normal" type="default">查看全部计划</van-button>
            </div>
         </div>
     </div>

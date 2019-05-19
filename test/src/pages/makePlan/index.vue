@@ -72,9 +72,10 @@
                       <p>请选择消费城市</p>
                       <div class="last">
                           <van-icon name="location"/>
-                          <input class="city" v-model="city" type="number" placeholder="位置">
-                          <van-icon name="arrow-down"/>
+                          <input class="city" v-model="area" type="text" placeholder="位置">
+                          <span @click="showPick"><van-icon name="arrow"/></span>
                       </div>
+                         <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
                       
                   </div>
                </div>
@@ -91,22 +92,48 @@
 
 <script>
 import { axiosPost } from '../../lib/http'
+import { citys } from '../../lib/city.js'
 export default {
     data() {
         return {
            payment:"",
            amount:"",
            item:"",
+           showFlag:false,
+           columns: [
+                {
+                values: Object.keys(citys),
+                className: 'column1'
+                },
+                {
+                values: citys['浙江'],
+                className: 'column2',
+                defaultIndex: 2
+                }
+            ],
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
         },
+         onChange(picker, values) {
+            picker.setColumnValues(1, citys[values[0]]);
+         }, 
+          onCancel(){
+             this.showFlag=false
+         },
+         onConfirm(value){
+            this.area=value.join("-")
+            this.showFlag=false
+         },
+         showPick(){
+             this.showFlag=true
+         },
         makePlan(){
-            if(this.payment.trim().length===0 || this.amount.trim().length===0){
+            if(this.payment.trim().length===0 || this.amount.trim().length===0 || this.area.trim().length===0){
                 this.$toast({
-                    message:"请输入金额"
+                    message:"请将信息填写完整"
                 })
                 return
             }
@@ -127,12 +154,18 @@ export default {
                       this.$toast({
                           message:res.data.message
                         })
-                     this.$router.push("/home/insertEsiCash")
+                     this.$router.push({
+                         path:"/home/insertEsiCash",
+                         query:{info:this.item}
+                     })
                  } else if (res.data.success) {
                     let planList=res.data.data
                      this.$router.push({
                          path:"/home/creditHousekeeper/aisleHousekeeper/planList",
-                         query:{list:planList}
+                         query:{
+                             list:planList,
+                             area:this.area
+                         }
                      })
                    }
                  else {
@@ -286,6 +319,15 @@ export default {
                        padding-left:20px;
                        box-sizing: border-box;
                    }
+                    .van-picker__cancel{
+                      color:#000;
+                      font-size: 30px;
+                    }
+                    .van-picker__toolbar{
+                        height: 40px;
+                        line-height: 40px;
+                        font-size: 30px;
+                    }
                  }
                  
              }

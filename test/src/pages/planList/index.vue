@@ -76,7 +76,8 @@ export default {
             page:0,
             // total:5,
             currentTime:"",
-            componentload:false
+            componentload:false,
+            area:""
         }
     },
     methods:{
@@ -85,7 +86,8 @@ export default {
         },
         makePlan(){
             let datas={
-                data:JSON.stringify(this.planlist)
+                data:JSON.stringify(this.planlist),
+                area:this.area
             }
             axiosPost("/creditCard/insertPlans",datas)
             .then(res=>{
@@ -105,7 +107,7 @@ export default {
                                     }
                                 })
                           },2000)
-                }
+                   }
             })
             .catch(err=>{
                 console.log(err)
@@ -130,6 +132,7 @@ export default {
     },
     created () {
         this.planlist=this.$route.query.list 
+         this.area=this.$route.query.area 
         let num=0
         // console.log(this.page=this.planlist.plans.length)
         this.planlist.plans.forEach(element => {
