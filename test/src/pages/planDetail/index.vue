@@ -19,9 +19,9 @@
                   </div>
                   <div class="amount">
                       <ul>
-                          <li>总额度：<span>￥3041</span></li>
+                          <li>总额度：￥<span>{{Number(cardInfo.countamount)+Number(cardInfo.poundage)+Number(cardInfo.realamount)}}</span></li>
                           <li>本期账单：￥<span>{{cardInfo.realamount}}</span></li>
-                          <li>预留额度：<span>￥1000</span></li>
+                          <li>预留额度：<span>{{cardInfo.balance}}</span></li>
                           <li>已还金额：<span>￥0</span></li>
                       </ul>
                   </div>
@@ -43,7 +43,7 @@
                            <div class="top">
                                <p>{{bankName}}：{{name.substr(name.length-4)}}</p>
                                <p>主订单：{{cardInfo.orderId.substr(cardInfo.orderId.length-6)}}</p>
-                               <p>手续费：5.05元</p>
+                               <p>手续费：<span>{{rate[index]}}</span>元</p>
                            </div>
                            <div class="list">
                               <ul>
@@ -81,7 +81,8 @@ export default {
             bankName:"",
             name:"",
             nick:"",
-            listOut:[]
+            listOut:[],
+            rate:{}
         }
     },
     methods:{
@@ -102,17 +103,32 @@ export default {
                  } else {
                      this.cardInfo=res.data.data
                      this.list=res.data.data.plans
+                     let type=res.data.data.type
                      let arr=[]
                      let arrOut=[]
                      this.list.forEach((item ,i)=> {
                          arr.push(item)
-                         if(arr.length==3){
-                             arrOut.push(arr)
-                             arr=[]
-                            //  console.log(arr)
-                            //  console.log(arrOut)
-                         }
+                         if(type=="1" && arr.length==3){
+                                 arrOut.push(arr)
+                                arr=[]
+                             
+                         } else if(type=="2" && arr.length==4) {
+                                arrOut.push(arr)
+                                arr=[]
+                             }
                      });
+                     arrOut.forEach((ele,i)=>{
+                         let num=0
+                         ele.forEach(list=>{
+                             if(list.type!=9){
+                                 num+=Number(list.poundage)
+                             }
+                         })
+                         this.rate[i]=num.toFixed(2)
+                        //  console.log(this.rate)
+                         
+                     })
+                      console.log(this.rate)
                       this.listOut=arrOut
                     //   console.log(this.listOut)
                  }

@@ -11,8 +11,8 @@
                    <li >
                        <div class="top">
                           <div class="bankName">
-                              <!-- <p >{{bankCardAttribution(item.idCardNo).bankName}}</p> -->
-                              <!-- <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p> -->
+                              <p >{{item.bankNick}}</p>
+                              <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
                               <!-- <p>
                                   还款状态
                               </p> -->
@@ -36,24 +36,45 @@
                            <ul>
                                <li>
                                    <p>未知</p>
-                                   <p>还款金额</p>
+                                   <p>本期账单</p>
                                </li>
                                <li>
-                                   <p>智能还款</p>
-                                   <p>还款模式</p>
+                                   <p>{{item.billdate}}<span>日</span></p>
+                                   <p>账单日</p>
                                </li>
                                 <li>
-                                   <p>未知</p>
-                                   <p>还款笔数</p>
-                               </li>
-                                <li>
-                                   <p>未知</p>
-                                   <p>手续费</p>
-                               </li>
-                               <li>
-                                   <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" />
+                                   <p>{{item.duedate}}<span>日</span></p>
+                                   <p>还款日</p>
                                </li>
                            </ul>
+                       </div>
+                   </li>
+               </ul>
+           </div>
+           <div class="type">
+               <ul>
+                   <li @click="makePlanOne">
+                       <div class="image">
+                            <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
+                       </div>
+                       <div class="middle">
+                           <h3><span class="bold">本地真实落地商户</span>&nbsp;&nbsp;<span class="orange">还款通道&nbsp;</span>(预留5%起)</h3>
+                           <p>智能精养信用卡，设置计划智能养信用卡</p>
+                       </div>
+                       <div class="arrow">
+                            <van-icon name="arrow" size="30px" />
+                       </div>
+                   </li>
+                   <li @click="makePlanTwo">
+                       <div class="image">
+                            <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
+                       </div>
+                       <div class="middle">
+                           <h3><span class="bold">刷3还1</span>&nbsp;(预留5%起)</h3>
+                           <p>落地商户，完美模拟真实消费账单</p>
+                       </div>
+                       <div class="arrow">
+                            <van-icon name="arrow" size="30px" />
                        </div>
                    </li>
                </ul>
@@ -70,9 +91,9 @@
                </div>
            </div>
 
-          <div class="button">
+          <!-- <div class="button">
               <van-button round size="large" @click="makePlan" type="info">制定计划</van-button>
-          </div>
+          </div> -->
 
         </div>
     </div>
@@ -85,7 +106,8 @@ export default {
     data() {
         return {
             item:"",
-            checked:false
+            checked:false,
+            type:""
         }
     },
     methods:{
@@ -93,6 +115,38 @@ export default {
             this.$router.push("/home/creditHousekeeper/aisleHousekeeper");
         },
         handleAgree(val){
+        },
+        makePlanOne(){
+             if(!this.checked){
+                this.$toast({
+                    message:"请阅读并同意协议"
+                })
+                return
+            }
+            this.type="1"
+             this.$router.push({
+                path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
+                query:{
+                    info:this.item,
+                    type:this.type
+                }
+            })
+        },
+        makePlanTwo(){
+             if(!this.checked){
+                this.$toast({
+                    message:"请阅读并同意协议"
+                })
+                return
+            }
+             this.type="2"
+             this.$router.push({
+                path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
+                query:{
+                    info:this.item,
+                     type:this.type
+                }
+            })
         },
         makePlan(){
             if(!this.checked){
@@ -174,7 +228,7 @@ export default {
                               display: flex;
                               justify-content: space-around;
                               >li {
-                                  width:20%;
+                                  width:33%;
                                   text-align: center;
                                   .van-icon--image {
                                       font-size: 40px;
@@ -211,6 +265,40 @@ export default {
                   }
               }
           }
+          .type {
+              padding:10px 15px;
+              >ul {
+                  >li {
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between;
+                      border-bottom: 1px solid #ccc;
+                      margin-bottom:20px;
+                      padding-bottom:15px;
+                      >.middle {
+                          flex:1;
+                          margin-left:20px;
+                          >p {
+                              color:#999;
+                              font-weight:bold;
+                              margin-top:10px;
+                          }
+                          >h3 {
+                              margin-bottom: 10px;
+                              >.bold {
+                                  font-weight: bold;
+                              }
+                              >.orange {
+                                  color:cornflowerblue;
+                              }
+                          }
+                      }
+                      &:nth-of-type(2){
+                          border:none;
+                      }
+                  }
+              }
+          }
           >.tips {
                padding:20px;
               >h3 {
@@ -223,6 +311,9 @@ export default {
                   line-height: 38px;
                   border-radius: 10px;
                   border:2px solid #ccc;
+                  .van-checkbox__icon .van-icon{
+                      border:1px solid #000;
+                  }
                   .red {
                       color:red;
                   }

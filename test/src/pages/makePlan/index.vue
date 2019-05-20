@@ -99,6 +99,7 @@ export default {
            payment:"",
            amount:"",
            item:"",
+           type:"",
            area:"",
            showFlag:false,
            columns: [
@@ -147,7 +148,8 @@ export default {
             let data={
                 bindId:this.item.bindId,
                 amount:this.amount,
-                payment:this.payment
+                payment:this.payment,
+                type:this.type
             }
              axiosPost("/creditCard/getPlan",data)
              .then(res=>{
@@ -183,6 +185,8 @@ export default {
     },
     created () {
          this.item=this.$route.query.info 
+          this.type=this.$route.query.type
+          console.log(this.type)
         //  console.log(this.item)
     }
 }

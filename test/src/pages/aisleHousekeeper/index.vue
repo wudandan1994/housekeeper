@@ -80,12 +80,13 @@
          
            <div class="detail">
              
-               <van-button round to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
-                <van-button round to="/home/punch" size="normal" type="default">查看全部计划</van-button>
+               <van-button  plain to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
+                <van-button plain to="/home/punch" size="normal" type="default">查看全部计划</van-button>
            </div>
         </div>
     </div>
 </template>
+
 
 
 <script>
@@ -122,7 +123,7 @@ export default {
 
         repayment(item){
             this.$router.push({
-                path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
+                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
                 query:{
                     info:item
                 }
@@ -254,7 +255,6 @@ export default {
            >.swipe {
                width:100%;
                height:200px;
-            //    background-color: red;
                font-size: 28px;
                margin-bottom:15px;
                .top{
@@ -392,31 +392,13 @@ export default {
                }
            }
            >.detail {
-               padding-left:20px;
-            >ul{
-                padding:20px;
-                >li {
-                    border:2px solid #ccc;
-                    padding:20px;
-                    border-radius: 10px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    .info {
-                         >p {
-                        font-size: 30px;
-                        padding-top:10px;
-                        margin-bottom: 10px;
-                      }
-                    }
-                    .van-button--normal {
-                        padding:4px 16px;
-                    }
-                }
-            }
-            >h3 {
-               margin-top:20px;
-            }
+               padding:0 20px;
+               display: flex;
+               justify-content: space-between;
+               .van-button--default {
+                   height:60px;
+               }
+           
            }
            
        }

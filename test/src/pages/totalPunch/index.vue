@@ -126,19 +126,12 @@ export default {
                      that.gold=res.data.data.gold
                      that.days=res.data.data.list
                      that.days.forEach(element => {
-                         console.log(element)
                          if(element.signtime==that.currentTime){
                              that.isPunch=true
                          }
                      })
                 }
-                //  axiosPost("/customer/insertSign")
-                //  .then(res=>{
-                //       console.log(res,"created中的查询每日签到")
-                //      if(!res.data.success){
-                //          that.isPunch=true
-                //      }
-                //  })
+                
            })
          },
         fnDate(){
@@ -146,11 +139,7 @@ export default {
                 var year=date.getFullYear();//当前年份
                 var month=date.getMonth();//当前月份
                 var data=date.getDate();//天
-                // var hours=date.getHours();//小时
-                // var minute=date.getMinutes();//分
-                // var second=date.getSeconds();//秒
                 this.currentTime=year+"-"+this.fnW((month+1))+"-"+this.fnW(data);
-                console.log(this.currentTime)
           },
             //补位 当某个字段不是两位数时补0
             fnW(str){

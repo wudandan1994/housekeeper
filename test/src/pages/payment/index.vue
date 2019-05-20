@@ -19,7 +19,7 @@
                          </div>
                          <ul v-show="showCardList">
                              <li v-for="(item,index)   in cardList" :key="index" >
-                                 <div @click="getCard(item)" :ref="'back'+index"  :class="showClass ? 'round':''"></div>
+                                 <div @click="getCard(item ,$event)"   :class="showClass ? 'round':''"></div>
                                  <div class="info">
                                      <p>{{item.bankNick}}</p>
                                      <p>{{item.payerName}}</p>
@@ -138,14 +138,15 @@ export default {
        change(){
            this.$router.push("/home/changeCard")
        },
-       getCard(item,index){
-           this.showClass=true
+       getCard(item,event){
+        //    this.showClass=true
            this.realName=item.payerName
             this.idCard=item.idCardNo
             this.accNo=item.cardNo
             this.mobile=item.phone
             this.show=false
-            console.log(this.$refs)
+            console.log(event)
+           event.target.className="round"
        },
        
        recordSearch(){

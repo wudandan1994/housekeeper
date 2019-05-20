@@ -33,7 +33,7 @@
                         </tr>
                     </thead>
                     <tbody class="tbody">
-                        <tr v-for="(data,index) in planlist.plans" :key="index"  v-show="data.type!=3">
+                        <tr v-for="(data,index) in planlist.plans" :key="index"  v-show="data.type!=9">
                             <td>消费</td>
                             <td>{{data.date}}</td>
                             <td>{{data.amount}}</td>
@@ -138,7 +138,7 @@ export default {
 
         let num=0
         this.planlist.plans.forEach(element => {
-            if(element.type !=3){
+            if(element.type !=9){
                 this.num++;
             }
             this.page=num

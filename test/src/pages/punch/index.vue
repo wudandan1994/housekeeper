@@ -63,12 +63,230 @@
                         </div>
                     </van-tab>
                     <van-tab title="等待执行">
-                       
+                         <div class="waiting">
+                            <ul>
+                                <li v-show="item.state=='0'" @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                    <div class="top">
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="m-left">
+                                            <p>{{item.bankNick}}</p>
+                                            <p>等待执行：2019/5/17:14:33:37</p>
+                                        </div>
+                                        <div class="m-right">
+                                            <p>执行状态</p>
+                                            <p>{{item.state}}</p>
+                                            <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li>
+                                                <p>0</p>
+                                                <p>已消费金额</p>
+                                            </li>
+                                              <li>
+                                                <p>0</p>
+                                                <p>还款金额</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.poundage}}</p>
+                                                <p>手续费</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.repaycount}}</p>
+                                                <p>还款笔数</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </van-tab>
-                    <van-tab title="执行中">333333</van-tab>
-                    <van-tab title="失败">内容 4</van-tab>
-                     <van-tab title="成功">内容 5</van-tab>
-                      <van-tab title="取消">内容 6</van-tab>
+                    <van-tab title="已成功">
+                         <div class="waiting">
+                            <ul>
+                                <li v-show="item.state=='1'" @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                    <div class="top">
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="m-left">
+                                            <p>{{item.bankNick}}</p>
+                                            <p>等待执行：2019/5/17:14:33:37</p>
+                                        </div>
+                                        <div class="m-right">
+                                            <p>执行状态</p>
+                                            <p>{{item.state}}</p>
+                                            <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li>
+                                                <p>0</p>
+                                                <p>已消费金额</p>
+                                            </li>
+                                              <li>
+                                                <p>0</p>
+                                                <p>还款金额</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.poundage}}</p>
+                                                <p>手续费</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.repaycount}}</p>
+                                                <p>还款笔数</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </van-tab>
+                    <van-tab title="已取消">
+                         <div class="waiting">
+                            <ul>
+                                <li v-show="item.state=='2'" @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                    <div class="top">
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="m-left">
+                                            <p>{{item.bankNick}}</p>
+                                            <p>等待执行：2019/5/17:14:33:37</p>
+                                        </div>
+                                        <div class="m-right">
+                                            <p>执行状态</p>
+                                            <p>{{item.state}}</p>
+                                            <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li>
+                                                <p>0</p>
+                                                <p>已消费金额</p>
+                                            </li>
+                                              <li>
+                                                <p>0</p>
+                                                <p>还款金额</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.poundage}}</p>
+                                                <p>手续费</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.repaycount}}</p>
+                                                <p>还款笔数</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </van-tab>
+                     <van-tab title="进行中">
+                          <div class="waiting">
+                            <ul>
+                                <li v-show="item.state=='3'" @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                    <div class="top">
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="m-left">
+                                            <p>{{item.bankNick}}</p>
+                                            <p>等待执行：2019/5/17:14:33:37</p>
+                                        </div>
+                                        <div class="m-right">
+                                            <p>执行状态</p>
+                                            <p>{{item.state}}</p>
+                                            <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li>
+                                                <p>0</p>
+                                                <p>已消费金额</p>
+                                            </li>
+                                              <li>
+                                                <p>0</p>
+                                                <p>还款金额</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.poundage}}</p>
+                                                <p>手续费</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.repaycount}}</p>
+                                                <p>还款笔数</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                     </van-tab>
+                      <van-tab title="取消">
+                           <div class="waiting">
+                            <ul>
+                                <li v-show="item.state=='4'" @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                    <div class="top">
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="m-left">
+                                            <p>{{item.bankNick}}</p>
+                                            <p>等待执行：2019/5/17:14:33:37</p>
+                                        </div>
+                                        <div class="m-right">
+                                            <p>执行状态</p>
+                                            <p>{{item.state}}</p>
+                                            <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li>
+                                                <p>0</p>
+                                                <p>已消费金额</p>
+                                            </li>
+                                              <li>
+                                                <p>0</p>
+                                                <p>还款金额</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.poundage}}</p>
+                                                <p>手续费</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.repaycount}}</p>
+                                                <p>还款笔数</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                      </van-tab>
                 </van-tabs>
            </div>
            
@@ -85,7 +303,8 @@ export default {
         return {
             active:0,
             bindId:"",
-            list:[]
+            list:[],
+            planList:[]
         }
     },
     methods:{
@@ -123,7 +342,43 @@ export default {
               })
         },
         onClick(index, title){
-             this.$toast(title);
+            //  this.$toast(title);
+            //  console.log(index)
+             let data={
+                  bindId:this.bindId,
+                    page:"1",
+                    pageSize:"100",
+                    state:index-1
+                }
+                if(data.state=="-1"){
+                    this.getMainPlan()
+                } else{
+                     axiosPost("/creditCard/getMainPlan",data)
+                 .then(res=>{
+                // console.log(res)
+                if(!res.data.success){
+                    this.$toast({
+                        message:res.data.message
+                    })
+                } else {
+                     let arr= res.data.data.data
+                     let arrXun=[]
+                     arr.forEach((item,i) => {
+                        //  console.log(item.state)
+                         item.bankNick=bankCardAttribution(item.cardNo).bankName
+                         arrXun.push(item)
+                     });
+                     this.planList=arrXun
+                     if(this.planList.length==0){
+                         this.$toast("暂无数据")
+                     }
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+                }
+                
         },
         //获取主还款
         getMainPlan(){
