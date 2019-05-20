@@ -99,6 +99,7 @@ export default {
            payment:"",
            amount:"",
            item:"",
+           area:"",
            showFlag:false,
            columns: [
                 {
@@ -160,6 +161,7 @@ export default {
                      })
                  } else if (res.data.success) {
                     let planList=res.data.data
+                    // console.log(this.area)
                      this.$router.push({
                          path:"/home/creditHousekeeper/aisleHousekeeper/planList",
                          query:{

@@ -132,8 +132,10 @@ export default {
     },
     created () {
         this.planlist=this.$route.query.list 
-        console.log(planlist,"planList页面")
+        console.log(this.planlist,"planList页面")
          this.area=this.$route.query.area 
+        console.log(this.area,"planList页面")
+
         let num=0
         this.planlist.plans.forEach(element => {
             if(element.type !=3){
