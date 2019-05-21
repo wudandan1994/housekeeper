@@ -44,10 +44,10 @@
                                    <p>{{item.duedate}}<span>日</span></p>
                                    <p>还款日</p>
                                </li>
-                                <li>
+                                <!-- <li>
                                    <p>3天</p>
                                    <p>还款宽限期</p>
-                               </li>
+                               </li> -->
                               
                            </ul>
                        </div>
@@ -186,8 +186,6 @@ export default {
     created () {
          this.item=this.$route.query.info 
           this.type=this.$route.query.type
-          console.log(this.type)
-        //  console.log(this.item)
     }
 }
 </script>
@@ -247,7 +245,7 @@ export default {
                               display: flex;
                               justify-content: space-around;
                               >li {
-                                  width:25%;
+                                  width:33%;
                                   text-align: center;
                                   .van-icon--image {
                                       font-size: 40px;

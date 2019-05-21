@@ -115,7 +115,7 @@ export default {
              let that = this
            axiosPost("/customer/getSignDetail")
            .then(function(res){
-               console.log(res,"created中的签到详情") 
+            //    console.log(res,"created中的签到详情") 
                 if(!res.data.success){
                     that.$toast({
                         message:res.data.message
