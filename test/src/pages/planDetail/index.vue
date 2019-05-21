@@ -13,9 +13,13 @@
                   <div class="waiting">
                       <p>{{bankName}}</p>
                       <p>尾号：{{name.substr(name.length-4)}}</p>   
-                      <p>
-                          <van-button type="info">等待执行</van-button>
-                      </p>
+                      <p v-if="cardInfo.type=='0'">等待中</p>
+                      <p v-if="cardInfo.type=='1'">已成功</p>
+                      <p v-if="cardInfo.type=='2'">已取消</p>
+                      <p v-if="cardInfo.type=='3'">进行中</p>
+                      <p v-if="cardInfo.type=='4'">失败</p>
+
+
                   </div>
                   <div class="amount">
                       <ul>
@@ -55,7 +59,11 @@
                                       </div>
                                       <div class="right">
                                           <p class="bold">{{info.amount}}</p>
-                                          <p class="gray">等待执行</p>
+                                          <!-- <p class="gray">{{info.type==type[i]?type[i]:info.type}}</p> -->
+                                          <p class="gray" v-if="info.type=='1'">消费</p>
+                                          <p class="gray" v-if="info.type=='2'">消费</p>
+                                          <p class="gray" v-if="info.type=='3'">消费</p>
+                                          <p class="gray" v-if="info.type=='9'">还款</p>
                                       </div>
                                   </li>
                                  
@@ -82,7 +90,14 @@ export default {
             name:"",
             nick:"",
             listOut:[],
-            rate:{}
+            rate:{},
+            type:{
+                 "0":"等待中",
+                 "1":"已成功",
+                 "2":"已取消",
+                 "3":"进行中",
+                 "4":"失败",
+            }
         }
     },
     methods:{
@@ -124,13 +139,10 @@ export default {
                                  num+=Number(list.poundage)
                              }
                          })
+                        //  四舍五入
                          this.rate[i]=num.toFixed(2)
-                        //  console.log(this.rate)
-                         
                      })
-                      console.log(this.rate)
                       this.listOut=arrOut
-                    //   console.log(this.listOut)
                  }
              })
              .catch(err=>{
@@ -180,6 +192,7 @@ export default {
                   >.top {
                       font-weight: bold;
                       padding:10px 0px 10px 10px;
+                      margin:0 !important;
                       >span {
                           &:nth-of-type(2){
                               color:#4B66AF;

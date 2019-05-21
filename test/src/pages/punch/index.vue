@@ -462,7 +462,7 @@ export default {
                               padding:20px 5px;
                               display: flex;
                               justify-content: space-around;
-                              margin-top:0px !important;
+                              margin:0px !important;
                           }
                           >.middle{
                                display: flex;

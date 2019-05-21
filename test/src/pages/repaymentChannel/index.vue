@@ -54,7 +54,7 @@
            </div>
            <div class="type">
                <ul>
-                   <li @click="makePlanOne">
+                   <li @click="makePlan('1')">
                        <div class="image">
                             <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                        </div>
@@ -66,7 +66,7 @@
                             <van-icon name="arrow" size="30px" />
                        </div>
                    </li>
-                   <li @click="makePlanTwo">
+                   <li @click="makePlan('2')">
                        <div class="image">
                             <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                        </div>
@@ -108,7 +108,6 @@ export default {
         return {
             item:"",
             checked:false,
-            type:""
         }
     },
     methods:{
@@ -117,39 +116,8 @@ export default {
         },
         handleAgree(val){
         },
-        makePlanOne(){
-             if(!this.checked){
-                this.$toast({
-                    message:"请阅读并同意协议"
-                })
-                return
-            }
-            this.type="1"
-             this.$router.push({
-                path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
-                query:{
-                    info:this.item,
-                    type:this.type
-                }
-            })
-        },
-        makePlanTwo(){
-             if(!this.checked){
-                this.$toast({
-                    message:"请阅读并同意协议"
-                })
-                return
-            }
-             this.type="2"
-             this.$router.push({
-                path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
-                query:{
-                    info:this.item,
-                     type:this.type
-                }
-            })
-        },
-        makePlan(){
+      
+        makePlan(i){
             if(!this.checked){
                 this.$toast({
                     message:"请阅读并同意协议"
@@ -159,7 +127,8 @@ export default {
             this.$router.push({
                 path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
                 query:{
-                    info:this.item
+                    info:this.item,
+                    type:i
                 }
             })
 

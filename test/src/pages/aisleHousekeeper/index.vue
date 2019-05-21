@@ -95,7 +95,6 @@
 import { axiosPost } from '../../lib/http'
 import { bankCardAttribution } from '../../lib/bankName'
 import loading from '@/components/loading'
-import moment from "moment"
 export default {
      components:{
       loading
