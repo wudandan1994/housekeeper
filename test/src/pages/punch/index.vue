@@ -163,12 +163,12 @@
                                     </div>
                                     <div class="middle">
                                         <div class="m-left">
-                                            <p>已取消</p>
+                                             <p>{{item.bankNick}}</p>
                                             <p>已手动取消</p>
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-                                            <p>{{item.state}}</p>
+                                            <p>已取消</p>
                                             <!-- <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
                                             
                                         </div>
@@ -242,7 +242,7 @@
                             </ul>
                         </div>
                      </van-tab>
-                      <van-tab title="取消">
+                      <van-tab title="失败">
                            <div class="waiting">
                             <ul>
                                 <li v-show="item.state=='4'" @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
@@ -258,8 +258,8 @@
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-                                            <p>{{item.state}}</p>
-                                            <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            <p>已失败</p>
+                                            <!-- <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
                                             
                                         </div>
                                     </div>

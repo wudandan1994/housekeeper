@@ -19,7 +19,7 @@
                          </div>
                          <ul v-show="showCardList">
                              <li v-for="(item,index)   in cardList" :key="index" >
-                                 <div @click="getCard(item ,$event)"   :class="showClass ? 'round':''"></div>
+                                 <div @click.self="getCard(item ,$event)"   :class="showClass ? 'round':''"></div>
                                  <div class="info">
                                      <p>{{item.bankNick}}</p>
                                      <p>{{item.payerName}}</p>

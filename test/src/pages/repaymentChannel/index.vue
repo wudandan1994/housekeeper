@@ -12,6 +12,7 @@
                        <div class="top">
                           <div class="bankName">
                               <p >{{item.bankNick}}</p>
+                               <p >{{item.payerName}}</p>
                               <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
                               <!-- <p>
                                   还款状态

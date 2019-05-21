@@ -40,10 +40,12 @@
                                    <p>本期账单</p>
                               </div>
                               <div class="pay">
-                                  <p class="days">16</p>
+                                  <!-- <p class="days">16</p> -->
                                   <div>
-                                      <p class="botton">天后还款日</p>
-                                      <!-- <p><span>{{item.billdate}}</span>-<span>{{item.duedate}}</span></p> -->
+                                      <p class="botton">还款日</p>
+                                      <!-- <p><span>{{String(new Date().getMonth()+1)+-&nbsp;+item.duedate}}</span></p> -->
+                                      <p><span>{{new Date().getMonth()+1}}</span>&nbsp;-&nbsp;<span>{{item.duedate}}</span></p>
+                            
                                   </div>
                               </div>
                               <p>
@@ -69,9 +71,9 @@
                                    <p>未知</p>
                                    <p>手续费</p>
                                </li>
-                               <li>
+                               <!-- <li>
                                    <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" />
-                               </li>
+                               </li> -->
                            </ul>
                        </div>
                    </li>
@@ -93,6 +95,7 @@
 import { axiosPost } from '../../lib/http'
 import { bankCardAttribution } from '../../lib/bankName'
 import loading from '@/components/loading'
+import moment from "moment"
 export default {
      components:{
       loading
@@ -335,7 +338,7 @@ export default {
                               display: flex;
                               justify-content: space-around;
                               >li {
-                                  width:20%;
+                                  width:25%;
                                   text-align: center;
                                   .van-icon--image {
                                       font-size: 40px;
@@ -356,6 +359,7 @@ export default {
                       .now {
                           display: flex;
                           justify-content: space-around;
+                          align-items: center;
                           >.pay {
                               display: flex;
                               >.days {
