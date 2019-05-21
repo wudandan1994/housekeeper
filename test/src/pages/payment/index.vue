@@ -19,7 +19,7 @@
                          </div>
                          <ul v-show="showCardList">
                              <li v-for="(item,index)   in cardList" :key="index" >
-                                 <div @click.self="getCard(item ,$event)"   :class="showClass ? 'round':''"></div>
+                                 <div @click.self="getCard(item ,index)"   :class="showClass == index ? 'round':''"></div>
                                  <div class="info">
                                      <p>{{item.bankNick}}</p>
                                      <p>{{item.payerName}}</p>
@@ -94,7 +94,7 @@ export default {
            record:{},
            showrecord:false,
            show:false,
-           showClass:false,
+           showClass:'',
            cardList:[],
            showCardList:false,
            showBinding:false
@@ -120,9 +120,7 @@ export default {
                      let arr= res.data.data
                      let arrXun=[]
                      arr.forEach((item,i) => {
-                        //  console.log(item)
                          item.bankNick=bankCardAttribution(item.cardNo).bankName
-                        //  console.log(item)
                          arrXun.push(item)
                      });
                      this.cardList=arrXun
@@ -138,15 +136,14 @@ export default {
        change(){
            this.$router.push("/home/changeCard")
        },
-       getCard(item,event){
-        //    this.showClass=true
+       getCard(item,i){
+           this.showClass=i
+           console.log(this.showClass)
            this.realName=item.payerName
             this.idCard=item.idCardNo
             this.accNo=item.cardNo
             this.mobile=item.phone
             this.show=false
-            console.log(event)
-           event.target.className="round"
        },
        
        recordSearch(){

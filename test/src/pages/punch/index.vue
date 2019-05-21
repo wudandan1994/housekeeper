@@ -33,7 +33,12 @@
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-                                            <p>{{item.state}}</p>
+                                            <!-- <p>{{item.state}}</p> -->
+                                            <p v-if="item.type=='0'">等待中</p>
+                                            <p v-if="item.type=='1'">已成功</p>
+                                            <p v-if="item.type=='2'">已取消</p>
+                                            <p v-if="item.type=='3'">进行中</p>
+                                            <p v-if="item.type=='4'">失败</p>
                                             <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             
                                         </div>
@@ -78,7 +83,8 @@
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-                                            <p>{{item.state}}</p>
+                                            <p>等待执行</p>
+                                            
                                             <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             
                                         </div>
@@ -119,7 +125,7 @@
                                     <div class="middle">
                                         <div class="m-left">
                                             <p>{{item.bankNick}}</p>
-                                            <p>还款成功</p>
+                                            <p>等待执行：2019/5/17:14:33:37</p>
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
@@ -254,11 +260,11 @@
                                     <div class="middle">
                                         <div class="m-left">
                                             <p>{{item.bankNick}}</p>
-                                            <p>取消</p>
+                                            <p>失败</p>
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-                                            <p>已失败</p>
+                                            <p>失败</p>
                                             <!-- <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
                                             
                                         </div>
@@ -477,6 +483,7 @@ export default {
                                           background-color: rgba(0, 0, 0, .2);
                                           padding:15px;
                                           border-radius:20px;
+                                          margin-top:15px;
                                       }
                                   }
                               }
@@ -485,12 +492,11 @@ export default {
                                       &:nth-of-type(1){
                                           padding-bottom: 10px;
                                       }
+                                      &:nth-of-type(2){
+                                          margin:10px 0px;
+                                      }
                                   }
-                                  .van-button--default{
-                                      color:#000;
-                                      background-color: #fff;
-
-                                  }
+                                  
                               }
                           }
                           >.bottom {
