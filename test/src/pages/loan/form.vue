@@ -373,9 +373,10 @@ export default {
             padding-top: 40px;
             padding-bottom: 50px;
             background: #F7F6FB;
-            .van-checkbox__icon{
-                border:1px solid #000;
-            }
+            .van-checkbox__icon .van-icon{
+                      border:1px solid #000;
+                  }
+            
             span{
                 color: #4B66AF;
             }

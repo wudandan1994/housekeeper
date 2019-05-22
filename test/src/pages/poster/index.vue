@@ -22,6 +22,10 @@
                     海报生成成功
                     <!-- 海报生成成功，长按保存或分享 -->
                 </div>
+                <div class="save">
+                    <van-button @click="save" type="default">保存至手机</van-button>
+                </div>
+
             </div>
         </div>
         <loading :componentload="componentload"></loading>
@@ -59,6 +63,15 @@ export default {
         
         showCover(){
             this.showShare=true
+        },
+        save(){
+            plus.gallery.save( '/wx.png', (result) => {
+                console.log(result.file)
+                this.$toast("保存成功")
+                } ,(e) => {
+                console.log(JSON.stringify(e))
+                 this.$toast("保存失败")
+                });
         },
         // 随机数
         handlechangeRandom(){

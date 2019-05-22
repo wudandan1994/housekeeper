@@ -204,6 +204,10 @@
                     </router-link>
                 </ul>
             </div>
+            <!-- 客服 -->
+            <div class="serve">
+               <router-link tag="p" :to="{path: '/home/cardCenter/progressQuery',query: {info: 'https://kefu.easemob.com/webim/im.html?configId=9cb49ac7-e183-4e98-afbd-e5860ff3b6a0',title: '在线客服'}}"> <van-icon  name="friends" />在线客服</router-link>
+            </div>
             <!-- 遮盖层 -->
             <div class="aside-left" v-show="showAaside" @click.self="hideAside">
                 <div class="info">
@@ -522,6 +526,7 @@ export default {
                 }
             }
         }
+       
         >.credit {
             margin-top:20px;
             background-color: #fff;
@@ -573,13 +578,13 @@ export default {
                     }
                 }
             }
-        }
+        }   
         >.details {
             margin-top:10px;
             border-top:1px solid #ccc;
             background-color: #fff;
             padding-bottom:100px;
-            margin-bottom: 100px;
+            margin-bottom: 50px;
             >ul{
                 display: flex;
                 flex-wrap: wrap;
@@ -613,6 +618,14 @@ export default {
                     }
                 }
             }
+        }
+         >.serve {
+            //  background-color: red;
+             margin-bottom: 50px;
+             padding:20px 20px 50px 30px;
+             font-size:34px;
+             color:#4965AE;
+
         }
         >.aside-left {
                 width: 100%;

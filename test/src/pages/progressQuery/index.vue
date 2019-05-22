@@ -5,7 +5,7 @@
             <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
-        <iframe class="iframe"  :src="url" frameborder="0"></iframe>
+        <!-- <iframe class="iframe"  :src="url" frameborder="0"></iframe> -->
     </div>
 
 </template>
@@ -21,7 +21,7 @@ export default {
     },
     methods:{
         goBack() {
-            // plus.webview.close( "yinlian")
+            plus.webview.close( "yinlian")
             this.$router.push("/home")
         },
         webview(){
@@ -50,13 +50,16 @@ export default {
     created(){
         this.url=this.$route.query.info
          this.title=this.$route.query.title
-        //  this.webview();
+         this.webview();
     }
 }
 </script>
 
 <style lang="less">
    #progress-query{
+       header {
+            background-color: #4965AE;
+       }
        width: 100vw;
        height: calc(100vh - 86px);
        padding-top: 86px;
