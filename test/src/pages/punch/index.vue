@@ -39,8 +39,9 @@
                                             <p v-if="item.type=='2'">已取消</p>
                                             <p v-if="item.type=='3'">进行中</p>
                                             <p v-if="item.type=='4'">失败</p>
-                                            <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
-                                            
+                                            <div   class="sign-out">
+                                                <van-button v-show="item.type=='0' || item.type=='3'" @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            </div> 
                                         </div>
                                     </div>
                                     <div class="bottom">
@@ -116,7 +117,7 @@
                     <van-tab title="已成功">
                          <div class="waiting">
                             <ul>
-                                <li v-show="item.state=='1'" @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                <li v-show="item.state=='1'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
                                     <div class="top">
                                         <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
                                         <p>{{item.payerName}}</p>
@@ -329,7 +330,13 @@ export default {
             })
         },
         stopPlan(id){
-              let data={
+                 this.$dialog.confirm({
+                    title: '提示',
+                    message: '确定要取消计划？',
+                    confirmButtonText:'是',
+                })
+                .then(()=>{
+                     let data={
                   id,
               }
               axiosPost("/creditCard/cancelMainPlan",data)
@@ -346,6 +353,12 @@ export default {
               .catch(err=>{
                   console.log(err)
               })
+                })
+                .catch(()=>{
+                    //on cancel
+                })
+
+             
         },
         onClick(index, title){
             //  this.$toast(title);
@@ -496,6 +509,22 @@ export default {
                                           margin:10px 0px;
                                       }
                                   }
+                                  .sign-out {
+                                       margin-top:20px;
+                                        .van-dialog,
+                                        .van-dialog__message,
+                                        .van-button {
+                                            font-size: 30px;
+                                        }
+                                         .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
+                                            height:70px;
+                                        }
+                                         .van-dialog .van-button{
+                                            height: 80px;
+                                        }
+
+                                  }
+
                                   
                               }
                           }

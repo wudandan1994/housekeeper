@@ -85,6 +85,7 @@
                <van-button  plain to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
                 <van-button plain to="/home/punch" size="normal" type="default">查看全部计划</van-button>
            </div>
+          
         </div>
     </div>
 </template>
@@ -313,14 +314,17 @@ export default {
                       position: relative;
                       width:100%;
                       border-radius: 10px;
-                      border:2px solid #ccc;
-                      background-color:#4AA3E2;
+                    //   border:2px solid #ccc;
+                    //   background-color:#4AA3E2;
                       color:#fff;
                       padding:10px;
                        box-sizing: border-box;
                        margin-bottom: 15px;
+                       background-image:url("http://pay.91dianji.com.cn/big2.png");
+                       background-size:100%;
                        >.top {
                            padding-bottom: 150px;
+                           padding-top:10px;
                            .bankName {
                           display: flex;
                           justify-content: space-around;
@@ -332,20 +336,23 @@ export default {
                           bottom: 0px;
                           left:0px;
                           right:0px;
-                          background-color: rgba(0, 0, 0, .2);
+                        //   background-color: rgba(0, 0, 0, .2);
                           >ul{
                               display: flex;
                               justify-content: space-around;
                               >li {
-                                  width:25%;
+                                  width:20%;
                                   text-align: center;
+                                  margin-bottom: 15px;
+                                  color:#000;
+                                      padding-bottom: 13px;
                                   .van-icon--image {
                                       font-size: 40px;
                                   }
                                   >p {
                                       &:nth-of-type(1){
                                           margin-top:20px;
-                                          margin-bottom: 20px;
+                                          margin-bottom:10px;
                                       }
                                       &:nth-of-type(2){
                                           margin-bottom: 20px;
@@ -359,6 +366,7 @@ export default {
                           display: flex;
                           justify-content: space-around;
                           align-items: center;
+                          padding-top:15px;
                           >.pay {
                               display: flex;
                               >.days {
@@ -398,12 +406,18 @@ export default {
                padding:0 20px;
                display: flex;
                justify-content: space-between;
+               >button {
+                   &:nth-of-type(1){
+                       margin-right:20px;
+                   }
+               }
                .van-button--default {
                    height:60px;
+                //    width:50%;
+                   font-size: 30px;
                }
            
            }
-           
        }
    }
 </style>

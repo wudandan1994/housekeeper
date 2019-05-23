@@ -47,26 +47,51 @@
                    </li>
                </ul>
            </div>
-            <router-link to="/home/creditHousekeeper/aisleHousekeeper" tag="li" class="next" >
+            <!-- <router-link to="/home/creditHousekeeper/aisleHousekeeper" tag="li" class="next" >
                 <span>继续</span>
-            </router-link>
+                <van-button round size="large" type="default">继续</van-button>
+            </router-link> -->
+            <div class="keep">
+                  <div class="next">
+                      <van-button @click="keep" round size="large" type="default">继续</van-button>
+                  </div>
+                  <div class="cover" v-show="showSelect">
+                      <div class="select" >
+                      <ul>
+                          <li @click="searchInfo">
+                              <p>普通贷还</p>
+                              <div><img src="http://pay.91dianji.com.cn/putong.png" alt=""></div>
+                               <p> <van-icon name="arrow" size="30px"/></p>
+                          </li>
+                          <router-link tag="li" to="/home/creditHousekeeper/aisleHousekeeper">
+                              <p>完美账单</p>
+                              <div> <img src="http://pay.91dianji.com.cn/wanmei.png" alt=""></div>
+                              <p> <van-icon name="arrow" size="30px"/></p>
+                          </router-link>
+                      </ul>
+                  </div>
+                  </div>
+                  
+                  
+            </div>
         </div> 
     </div>
 
 </template>
-
-
 <script>
 import {axiosPost} from '@/lib/http'
 export default {
     data() {
         return {
-
+            showSelect:false
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home')
+        },
+        keep(){
+            this.showSelect=!this.showSelect
         },
         searchInfo(){
             axiosPost("/creditCard/getMerchantSettled")
@@ -94,7 +119,6 @@ export default {
 
     },
     created () {
-        // this.searchInfo()
     }
 }
 </script>
@@ -202,18 +226,58 @@ export default {
                    }
                }
            }
-           >.next {
-              padding-top:30px;
-              padding-bottom: 30px;
-              text-align: center;
-              color:#fff;
-              background-color: #4B66AF;
-              width:90%;
-              margin-top:60px;
-              margin-left:5%;
-              margin-bottom: 100px;
-              border-radius: 15px;
-
+           >.keep {
+               position: relative;
+               .next {
+                   padding:0px 30px;
+                }
+                .cover {
+                    position: fixed;
+                    top:0px;
+                    bottom: 0px;
+                    left:0px;
+                    right:0px;
+                    background-color: rgba(0, 0, 0, .4);
+                    box-sizing: border-box;
+                    .select {
+                    position: absolute;
+                    top:30%;
+                    left:0px;
+                    width:100%;
+                    background-color: #fff;
+                    border:1px solid #ccc;
+                     box-sizing: border-box;
+                       margin:10px;
+                   > ul{
+                       display: flex;
+                       flex-wrap: wrap;
+                       >li {
+                           width:100%;
+                           text-align: center;
+                           padding:10px;
+                            display: flex;
+                           justify-content: space-around;
+                           border-bottom: 1px solid #ccc;
+                           align-items: center;
+                           >p {
+                               padding-bottom: 15px;
+                               font-weight: bold;
+                               font-size: 30px;
+                           }
+                           >div {
+                               width:300px;
+                               margin:0 auto;
+                               padding-bottom: 10px;
+                               >img {
+                                   width:100%;
+                               }
+                           }
+                       }
+                    }
+                }
+                }
+                
+               
            }
        }
    }
