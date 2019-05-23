@@ -166,7 +166,7 @@ export default {
            })
        },
        pay(){
-           let partten=/^1\d{10}$/
+           let partten=/0?(13|14|15|17|18|19)[0-9]{9}/ 
            if(this.orderAmount.trim().length===0 || this.realName.trim().length===0 || this.idCard.trim().length===0
            || this.accNo.trim().length===0 || this.mobile.trim().length===0){
                 this.$toast({
@@ -177,6 +177,14 @@ export default {
            if(!partten.test(this.mobile)){
                 this.$toast({
                     message:"请填写11位手机号码"
+                })
+                return
+            }
+
+            let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+            if(!parttenId.test(this.idCard)){
+                this.$toast({
+                    message:"请填写正确的身份证号"
                 })
                 return
             }

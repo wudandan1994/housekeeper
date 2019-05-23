@@ -158,7 +158,7 @@ export default {
         register(){
             let that=this
             let type=""
-            let partten=/^1\d{10}$/
+            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/
             if(that.mobile.trim().length===0){
                 that.$toast({
                     message:"手机号码不能为空"
@@ -171,6 +171,15 @@ export default {
                 })
                 return
             }
+            // let parttenCard=/^([1-9]{1})(\d{15}|\d{18})$/
+            //  if( !parttenCard.test(that.accountNo)){
+            //     that.$toast({
+            //         message:"请填写正确卡号"
+            //     })
+            //     return
+            // }
+
+
             if( that.accountName.trim().length===0 || that.mobile.trim().length===0
             || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0 || that.settleAccType.trim().length===0 
             ){

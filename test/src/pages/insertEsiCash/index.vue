@@ -106,13 +106,7 @@ export default {
                 })
                 return
               }
-              let parttenCard=/([1-9]{1})(\d{14}|\d{18})$/
-                   if(!parttenCard.test(this.accountNo)){
-                    this.$toast({
-                        message:"请填正确的卡号"
-                    })
-                    return
-                } 
+              
               let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
                 if(!parttenId.test(this.idcardNo)){
                     this.$toast({

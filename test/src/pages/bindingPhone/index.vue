@@ -55,7 +55,7 @@ export default {
         // 获取验证码
         getCode(){
             let that=this
-            let partten=/^1\d{10}$/
+            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/
             if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
