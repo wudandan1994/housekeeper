@@ -91,7 +91,7 @@ export default {
             this.$router.push('/home')
         },
         keep(){
-            this.showSelect=!this.showSelect
+            this.showSelect=true
         },
         searchInfo(){
             axiosPost("/creditCard/getMerchantSettled")

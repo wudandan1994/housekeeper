@@ -29,7 +29,10 @@
                                     <div class="middle">
                                         <div class="m-left">
                                             <p>{{item.bankNick}}</p>
-                                            <p>等待执行：2019/5/17:14:33:37</p>
+                                            <!-- <p>等待执行：2019/5/17:14:33:37</p> -->
+                                             <div   class="sign-out">
+                                                <van-button v-show="item.type=='0' || item.type=='3'" @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            </div> 
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
@@ -39,28 +42,21 @@
                                             <p v-if="item.type=='2'">已取消</p>
                                             <p v-if="item.type=='3'">进行中</p>
                                             <p v-if="item.type=='4'">失败</p>
-                                            <div   class="sign-out">
-                                                <van-button v-show="item.type=='0' || item.type=='3'" @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
-                                            </div> 
+                                           
                                         </div>
                                     </div>
                                     <div class="bottom">
                                         <ul>
                                             <li>
-                                                <p>0</p>
-                                                <p>已消费金额</p>
-                                            </li>
-                                              <li>
-                                                <p>0</p>
-                                                <p>还款金额</p>
-                                            </li>
-                                              <li>
                                                 <p>{{item.poundage}}</p>
                                                 <p>手续费</p>
                                             </li>
                                               <li>
                                                 <p>{{item.repaycount}}</p>
                                                 <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
                                             </li>
                                         </ul>
                                     </div>
@@ -93,20 +89,15 @@
                                     <div class="bottom">
                                         <ul>
                                             <li>
-                                                <p>0</p>
-                                                <p>已消费金额</p>
-                                            </li>
-                                              <li>
-                                                <p>0</p>
-                                                <p>还款金额</p>
-                                            </li>
-                                              <li>
                                                 <p>{{item.poundage}}</p>
                                                 <p>手续费</p>
                                             </li>
                                               <li>
                                                 <p>{{item.repaycount}}</p>
                                                 <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
                                             </li>
                                         </ul>
                                     </div>
@@ -138,20 +129,15 @@
                                     <div class="bottom">
                                         <ul>
                                             <li>
-                                                <p>0</p>
-                                                <p>已消费金额</p>
-                                            </li>
-                                              <li>
-                                                <p>0</p>
-                                                <p>还款金额</p>
-                                            </li>
-                                              <li>
                                                 <p>{{item.poundage}}</p>
                                                 <p>手续费</p>
                                             </li>
                                               <li>
                                                 <p>{{item.repaycount}}</p>
                                                 <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
                                             </li>
                                         </ul>
                                     </div>
@@ -183,20 +169,16 @@
                                     <div class="bottom">
                                         <ul>
                                             <li>
-                                                <p>0</p>
-                                                <p>已消费金额</p>
-                                            </li>
-                                              <li>
-                                                <p>0</p>
-                                                <p>还款金额</p>
-                                            </li>
-                                              <li>
+                                              
                                                 <p>{{item.poundage}}</p>
                                                 <p>手续费</p>
                                             </li>
                                               <li>
                                                 <p>{{item.repaycount}}</p>
                                                 <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
                                             </li>
                                         </ul>
                                     </div>
@@ -227,14 +209,6 @@
                                     </div>
                                     <div class="bottom">
                                         <ul>
-                                            <li>
-                                                <p>0</p>
-                                                <p>已消费金额</p>
-                                            </li>
-                                              <li>
-                                                <p>0</p>
-                                                <p>还款金额</p>
-                                            </li>
                                               <li>
                                                 <p>{{item.poundage}}</p>
                                                 <p>手续费</p>
@@ -242,6 +216,9 @@
                                               <li>
                                                 <p>{{item.repaycount}}</p>
                                                 <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
                                             </li>
                                         </ul>
                                     </div>
@@ -273,20 +250,15 @@
                                     <div class="bottom">
                                         <ul>
                                             <li>
-                                                <p>0</p>
-                                                <p>已消费金额</p>
-                                            </li>
-                                              <li>
-                                                <p>0</p>
-                                                <p>还款金额</p>
-                                            </li>
-                                              <li>
                                                 <p>{{item.poundage}}</p>
                                                 <p>手续费</p>
                                             </li>
                                               <li>
                                                 <p>{{item.repaycount}}</p>
                                                 <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
                                             </li>
                                         </ul>
                                     </div>
@@ -311,7 +283,8 @@ export default {
             active:0,
             bindId:"",
             list:[],
-            planList:[]
+            planList:[],
+            i:"",
         }
     },
     methods:{
@@ -402,6 +375,7 @@ export default {
         //获取主还款
         getMainPlan(){
             //  console.log(this.bandId)
+            this.i="1"
             let data={
                 bindId:this.bindId,
                 page:"1",
@@ -472,13 +446,23 @@ export default {
                    >ul{
                        padding:15px;
                        >li {
-                          border:2px solid #ccc;
-                          background-color:#4AA3E2;
+                        //   border:2px solid #ccc;
+                        //   background-color:#4AA3E2;
                           color:#fff;
                           border-radius: 10px;
+                          box-sizing: border-box;
+                        margin-bottom: 15px;
+                        background-image:url("http://pay.91dianji.com.cn/big2.png");
+                        background-repeat: no-repeat;
+                        height: 350px;
+                        background-size:100%;
+                        padding:10px;
+
                           >.top {
-                              background-color: rgba(0, 0, 0, .5);
-                              padding:20px 5px;
+                            //   background-color: rgba(0, 0, 0, .5);
+                             padding-top:13px;
+                             height:20px !important;
+                              padding:20px 5px 20px 10px;
                               display: flex;
                               justify-content: space-around;
                               margin:0px !important;
@@ -533,9 +517,10 @@ export default {
                               >ul{
                                   display: flex;
                                   padding:20px 5px;
-                                  background-color: rgba(0, 0, 0, .1);
+                                //   background-color: rgba(0, 0, 0, .1);
                                   >li {
-                                      width:25%;
+                                      padding-top:20px;
+                                      width:33%;
                                       text-align: center;
                                       >p {
                                           &:nth-of-type(1){

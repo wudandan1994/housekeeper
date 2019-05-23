@@ -105,15 +105,8 @@ export default {
 
         // 获取更多
         handleMore(){
-            this.showShare=true
-            //  let config = {
-            //     url:'http://pay.91dianji.com.cn/#/home?promotioncode=02400219',// 分享的网页链接
-            //     title:'钱夹宝',// 标题
-            //     desc:'金融圈',// 描述
-            //     img:'http://pay.91dianji.com.cn/banner03.jpg',// 图片
-            //     img_title:'轮播图图片',// 图片标题
-            //     from:'钱夹宝APP' // 来源
-            // };
+            // this.showShare=true
+            this.$toast("敬请期待")
            
         },
         changeActive(obj){

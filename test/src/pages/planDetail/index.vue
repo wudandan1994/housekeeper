@@ -38,7 +38,7 @@
                       </ul>
                   </div>
                   <div class="button">
-                     <van-button round size="large" type="default">终止计划</van-button>
+                     <van-button @click="stopPlan(cardInfo.id)" v-show="cardInfo.type=='0' || cardInfo.type=='3'" round size="large" type="default">终止计划</van-button>
                   </div>
                </div>
                <div class="detail">
@@ -103,6 +103,37 @@ export default {
     methods:{
         goBack() {
             this.$router.push('/home/punch')
+        },
+        stopPlan(id){
+             this.$dialog.confirm({
+                    title: '提示',
+                    message: '确定要取消计划？',
+                    confirmButtonText:'是',
+                })
+                .then(()=>{
+                     let data={
+                  id,
+              }
+              axiosPost("/creditCard/cancelMainPlan",data)
+              .then(res=>{
+                  console.log(res)
+                  if(!res.data.success){
+                      this.$toast({
+                          message:res.data.message
+                      })
+                  } else {
+                       this.getMainPlan()
+                  }
+              })
+              .catch(err=>{
+                  console.log(err)
+              })
+                })
+                .catch(()=>{
+                    //on cancel
+                })
+
+
         },
         getPlans(){
              let data={
@@ -249,6 +280,20 @@ export default {
                       .van-button--default {
                           background-color: #666;
                       }
+                         margin-top:20px;
+                            .van-dialog,
+                            .van-dialog__message,
+                            .van-button {
+                                font-size: 30px;
+                            }
+                                .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
+                                height:70px;
+                            }
+                                .van-dialog .van-button{
+                                height: 80px;
+                            }
+
+
                   }
               }
               >.detail {

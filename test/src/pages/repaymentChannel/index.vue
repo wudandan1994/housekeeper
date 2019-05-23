@@ -8,7 +8,7 @@
         <div class="container">
             <div class="bind">
                <ul >
-                   <li >
+                   <li>
                        <div class="top">
                           <div class="bankName">
                               <p >{{item.bankNick}}</p>
@@ -56,7 +56,7 @@
                <ul>
                    <li @click="makePlan('1')">
                        <div class="image">
-                            <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
+                            <van-icon name="http://pay.91dianji.com.cn/luodi.png" size="40px" />
                        </div>
                        <div class="middle">
                            <h3><span class="bold">本地真实落地商户</span>&nbsp;&nbsp;<span class="orange">还款通道&nbsp;</span>(预留5%起)</h3>
@@ -68,7 +68,7 @@
                    </li>
                    <li @click="makePlan('2')">
                        <div class="image">
-                            <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
+                            <van-icon name="http://pay.91dianji.com.cn/shau3huan1.png" size="40px" />
                        </div>
                        <div class="middle">
                            <h3><span class="bold">刷3还1</span>&nbsp;(预留5%起)</h3>
@@ -174,14 +174,18 @@ export default {
                   >li {
                       position: relative;
                       width:100%;
-                      border-radius: 10px;
-                      border:2px solid #ccc;
-                      background-color:#4AA3E2;
                       color:#fff;
+                      border-radius: 10px;
+                      box-sizing: border-box;
+                      margin-bottom: 15px;
+                      background-image:url("http://pay.91dianji.com.cn/big2.png");
+                      background-repeat: no-repeat;
+                      height: 350px;
+                      background-size:100%;
                       padding:10px;
-                       box-sizing: border-box;
                        >.top {
-                           padding-bottom: 150px;
+                           padding-top:13px;
+                           height:20px !important;
                            .bankName {
                           display: flex;
                           justify-content: space-around;
@@ -189,14 +193,11 @@ export default {
                          }
                        }
                       .bottom {
-                          position: absolute;
-                          bottom: 0px;
-                          left:0px;
-                          right:0px;
-                          background-color: rgba(0, 0, 0, .2);
+                         margin-bottom:35px;
                           >ul{
                               display: flex;
                               justify-content: space-around;
+                              margin-top:10px;
                               >li {
                                   width:33%;
                                   text-align: center;
@@ -216,22 +217,7 @@ export default {
                               }
                           }
                       }
-                      .now {
-                          display: flex;
-                          justify-content: space-around;
-                          >.pay {
-                              display: flex;
-                              >.days {
-                                  font-size: 38px;
-                                  font-weight: bold;
-                                  margin-right: 10px;
-                                  margin-top:10px;
-                              }
-                          }
-                          .botton {
-                              margin-bottom: 10px;
-                          }
-                      }
+                     
                   }
               }
           }

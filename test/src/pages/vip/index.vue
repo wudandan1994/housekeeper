@@ -128,12 +128,12 @@
             <div class="per-title row">
                 <div class="goods-title start-center">付款方式</div>
                 <div class="goods-detail row">
-                    <!-- <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
+                    <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-wechatpay"></use>
                         </svg>
                         微信支付
-                    </div> -->
+                    </div>
                     <div class="paytypes center" :class="{'alipay': paytype == 'alipay'}" @click="handlePayType('alipay')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-alipay"></use>

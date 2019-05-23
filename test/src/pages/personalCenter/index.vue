@@ -193,7 +193,7 @@
 
 
         <div  class="update">
-            <!-- <ul>
+            <ul>
                 <li @click="uploadAnd">
                     <img src="http://pay.91dianji.com.cn/Android.png" >
                     安卓手机下载
@@ -212,7 +212,7 @@
                     <dir class="dis">
                         <img src="http://pay.91dianji.com.cn/iosem.png" alt="">
                     </dir>
-            </div> -->
+            </div>
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
         <loading :componentload="componentload"></loading>

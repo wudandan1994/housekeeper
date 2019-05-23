@@ -68,8 +68,8 @@
                                    <p>还款笔数</p>
                                </li>
                                 <li>
-                                   <p>未知</p>
-                                   <p>手续费</p>
+                                   <!-- <p>未知</p>
+                                   <p>手续费</p> -->
                                </li>
                                <!-- <li>
                                    <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" />
@@ -321,6 +321,8 @@ export default {
                        box-sizing: border-box;
                        margin-bottom: 15px;
                        background-image:url("http://pay.91dianji.com.cn/big2.png");
+                        height: 350px;
+                        background-repeat: no-repeat;
                        background-size:100%;
                        >.top {
                            padding-bottom: 150px;

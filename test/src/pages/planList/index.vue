@@ -7,9 +7,12 @@
         </header>
         <div class="container">
             <div class="info">
-                <p>招商银行</p>
-                <p>尾号0551</p>
-                <p>还款日:<span>还剩11天</span></p>
+                <!-- <p>招商银行</p>
+                <p>尾号0551</p> -->
+                <!-- <p>还款日:<span>还剩11天</span></p> -->
+                 <p >{{item.bankNick}}</p>
+                <p >{{item.payerName}}</p>
+                <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
             </div>
             <div class="time">
                 <p>制定时间：{{currentTime}}</p>
@@ -44,8 +47,9 @@
                 <div class="page">
                     <van-pagination 
                     v-model="currentPage" 
-                    :items-per-page="5"
-                    :total-items="page"
+                    :items-per-page="size"
+                    :total-items="5"
+                    :page-count="total"
                     mode="simple" 
                     />
                 </div>
@@ -74,10 +78,12 @@ export default {
             planlist:{},
             currentPage:1,
             page:0,
-            // total:5,
             currentTime:"",
+            size:10,
             componentload:false,
-            area:""
+            area:"",
+            item:"",
+            page:5
         }
     },
     methods:{
@@ -132,9 +138,10 @@ export default {
     },
     created () {
         this.planlist=this.$route.query.list 
-        console.log(this.planlist,"planList页面")
+        this.item=this.$route.query.item
+        // console.log(this.planlist,"planList页面")
          this.area=this.$route.query.area 
-        console.log(this.area,"planList页面")
+        // console.log(this.area,"planList页面")
 
         let num=0
         this.planlist.plans.forEach(element => {
@@ -199,6 +206,9 @@ export default {
                table {
                  border:1;
                  width:100%;
+                 td{
+                     padding:10px;
+                 }
                  >.tbody {
                      tr {
                          td{

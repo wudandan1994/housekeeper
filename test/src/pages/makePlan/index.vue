@@ -45,10 +45,10 @@
                                    <p>{{item.duedate}}<span>日</span></p>
                                    <p>还款日</p>
                                </li>
-                                <!-- <li>
-                                   <p>3天</p>
-                                   <p>还款宽限期</p>
-                               </li> -->
+                                <li>
+                                   <!-- <p>3天</p>
+                                   <p>还款宽限期</p> -->
+                               </li>
                               
                            </ul>
                        </div>
@@ -72,9 +72,9 @@
                    <div class="eara">
                       <p>请选择消费城市</p>
                       <div class="last">
-                          <van-icon name="location"/>
+                          <p> <van-icon  size="20px" name="location"/></p>
                           <input class="city" v-model="area" type="text" placeholder="位置">
-                          <span @click="showPick"><van-icon name="arrow"/></span>
+                          <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
                          <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
                       
@@ -85,9 +85,7 @@
                 <van-button size="large" @click="makePlan" round type="info">制定计划</van-button>
             </div>
         </div>
-        <div class="li">
-
-        </div>
+       
     </div>
 </template>
 
@@ -169,7 +167,8 @@ export default {
                          path:"/home/creditHousekeeper/aisleHousekeeper/planList",
                          query:{
                              list:planList,
-                             area:this.area
+                             area:this.area,
+                             item:this.item
                          }
                      })
                    }
@@ -228,9 +227,19 @@ export default {
                       border:2px solid #ccc;
                       color:#000;
                       padding:10px;
+                      box-sizing: border-box;
+                      margin-bottom: 15px;
+                      background-image:url("http://pay.91dianji.com.cn/big2.png");
+                      background-repeat: no-repeat;
+                      height: 350px;
+                      background-size:100%;
+                      color:#fff;
+                      padding:10px;
                        box-sizing: border-box;
                        >.top {
+                           padding-top:13px;
                            padding-bottom: 150px;
+                            height:20px !important;
                            .bankName {
                           display: flex;
                           justify-content: space-around;
@@ -238,15 +247,13 @@ export default {
                          }
                        }
                       .bottom {
-                          position: absolute;
-                          bottom: 0px;
-                          left:0px;
-                          right:0px;
+                           padding-top:13px;
+                            margin-bottom:35px;
                           >ul{
                               display: flex;
                               justify-content: space-around;
                               >li {
-                                  width:33%;
+                                  width:25%;
                                   text-align: center;
                                   .van-icon--image {
                                       font-size: 40px;
@@ -254,7 +261,7 @@ export default {
                                   >p {
                                       &:nth-of-type(1){
                                           margin-top:20px;
-                                          margin-bottom: 20px;
+                                          margin-bottom:10px;
                                       }
                                       &:nth-of-type(2){
                                           margin-bottom: 20px;
@@ -305,10 +312,12 @@ export default {
                    >.last {
                         width:100%;
                        height:60px;
-                       line-height:55px;
+                       line-height:53px;
                        border:2px solid #ccc;
                        background-color: #eee;
                        border-radius: 10px;
+                       display:flex;
+                       justify-content: space-around;
                         >.city {
                          border:none;
                          background-color: #eee;
