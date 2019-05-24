@@ -64,6 +64,9 @@
                                           <p class="gray" v-if="info.type=='2'">消费</p>
                                           <p class="gray" v-if="info.type=='3'">消费</p>
                                           <p class="gray" v-if="info.type=='9'">还款</p>
+                                          <p  class="default" v-if="info.state=='0'">待执行</p>
+                                          <p  class="success" v-if="info.state=='1'">成功</p>
+                                          <p  class="error" v-if="info.state=='2'">失败</p>
                                       </div>
                                   </li>
                                  
@@ -332,6 +335,15 @@ export default {
                                       }
                                       .bold {
                                           font-weight: bold;
+                                      }
+                                      .success {
+                                          color:green;
+                                      }
+                                      .error {
+                                          color:red;
+                                      }
+                                      .default {
+                                          color:#4B66AF;
                                       }
                                   }
                               }

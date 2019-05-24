@@ -97,7 +97,7 @@ export default {
              let that=this
               console.log(JSON.stringify(that.sharewx),"55555555555555555")
              that.sharewx.send({ content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝", href: "http://pay.91dianji.com.cn/#/home?promotioncode=02400219", extra: { scene: "WXSceneSession" } }, function () {
-            alert("分享成功！");
+            // alert("分享成功！");
         }, function (e) {
             alert("分享失败：" + e.message);
         });
@@ -105,8 +105,8 @@ export default {
 
         // 获取更多
         handleMore(){
-            // this.showShare=true
-            this.$toast("敬请期待")
+            this.showShare=true
+            // this.$toast("敬请期待")
            
         },
         changeActive(obj){

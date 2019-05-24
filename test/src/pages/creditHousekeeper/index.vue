@@ -59,7 +59,7 @@
                       <div class="select" >
                       <ul>
                           <li @click="searchInfo">
-                              <p>普通贷还</p>
+                              <p>普通代还</p>
                               <div><img src="http://pay.91dianji.com.cn/putong.png" alt=""></div>
                                <p> <van-icon name="arrow" size="30px"/></p>
                           </li>

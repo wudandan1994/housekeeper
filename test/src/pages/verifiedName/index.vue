@@ -81,7 +81,7 @@ export default {
             this.componentload = true;
             var form = new FormData()
             form.append('file',file.file)
-            let url = '/upload/uploadImg'
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -102,7 +102,7 @@ export default {
             this.componentload = true;
             var form = new FormData();
             form.append('file',file.file);
-            let url = '/upload/uploadImg';
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg';
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };

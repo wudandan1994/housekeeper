@@ -224,7 +224,7 @@ export default {
                       position: relative;
                       width:100%;
                       border-radius: 10px;
-                      border:2px solid #ccc;
+                    //   border:2px solid #ccc;
                       color:#000;
                       padding:10px;
                       box-sizing: border-box;

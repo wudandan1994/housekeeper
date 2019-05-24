@@ -48,8 +48,8 @@
                     <van-pagination 
                     v-model="currentPage" 
                     :items-per-page="size"
-                    :total-items="5"
                     :page-count="total"
+                    :total-items="page"
                     mode="simple" 
                     />
                 </div>
@@ -83,7 +83,6 @@ export default {
             componentload:false,
             area:"",
             item:"",
-            page:5
         }
     },
     methods:{

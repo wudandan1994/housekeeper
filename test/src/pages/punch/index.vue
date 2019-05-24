@@ -37,11 +37,11 @@
                                         <div class="m-right">
                                             <p>执行状态</p>
                                             <!-- <p>{{item.state}}</p> -->
-                                            <p v-if="item.type=='0'">等待中</p>
-                                            <p v-if="item.type=='1'">已成功</p>
-                                            <p v-if="item.type=='2'">已取消</p>
-                                            <p v-if="item.type=='3'">进行中</p>
-                                            <p v-if="item.type=='4'">失败</p>
+                                            <p v-if="item.state=='0'">待执行</p>
+                                            <p v-if="item.state=='1'">已成功</p>
+                                            <p v-if="item.state=='2'">已取消</p>
+                                            <p v-if="item.state=='3'">进行中</p>
+                                            <p v-if="item.state=='4'">失败</p>
                                            
                                         </div>
                                     </div>
@@ -76,7 +76,7 @@
                                     <div class="middle">
                                         <div class="m-left">
                                             <p>{{item.bankNick}}</p>
-                                            <p>等待执行：2019/5/17:14:33:37</p>
+                                            <!-- <p>等待执行：2019/5/17:14:33:37</p> -->
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
@@ -117,7 +117,7 @@
                                     <div class="middle">
                                         <div class="m-left">
                                             <p>{{item.bankNick}}</p>
-                                            <p>等待执行：2019/5/17:14:33:37</p>
+                                            <!-- <p>等待执行：2019/5/17:14:33:37</p> -->
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
@@ -157,7 +157,7 @@
                                     <div class="middle">
                                         <div class="m-left">
                                              <p>{{item.bankNick}}</p>
-                                            <p>已手动取消</p>
+                                            <!-- <p>已手动取消</p> -->
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
@@ -198,7 +198,7 @@
                                     <div class="middle">
                                         <div class="m-left">
                                             <p>{{item.bankNick}}</p>
-                                            <p>进行中</p>
+                                            <!-- <p>进行中</p> -->
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
@@ -238,7 +238,7 @@
                                     <div class="middle">
                                         <div class="m-left">
                                             <p>{{item.bankNick}}</p>
-                                            <p>失败</p>
+                                            <!-- <p>失败</p> -->
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>

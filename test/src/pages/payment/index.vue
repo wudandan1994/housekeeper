@@ -3,38 +3,44 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>快捷支付</span>
-            <span @click="showCard"><van-icon name="card"/>选择卡</span>
+            <span @click="showCard"><van-icon name="card"/>选卡</span>
         </header>
         <div class="container">
             <div class="popup">
                 <van-popup v-model="show" :overlay="true" >
                      <div class="pop">
-                         <p>请选择支付卡</p>
+                        
                          <div class="binding" v-show="showBinding">
                               <p>您还没有绑定信用卡</p>
-                              <div>
-                                  <van-button round @click="show=flase" size="normal"  >取消</van-button>
-                                  <van-button round size="normal" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" type="default">去绑卡</van-button>
+                              <div class="butt">
+                                  <!-- <van-button round  size="normal"  >取消</van-button> -->
+                                  <div class="cancle" @click="show=flase">取消</div>
+                                  <div class="bindCard" @click="gobindCard">去绑卡</div>
+
+                                  <!-- <van-button round size="normal" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" type="default">去绑卡</van-button> -->
                               </div>
                          </div>
                          <ul v-show="showCardList">
+                              <p>请选择支付卡</p>
                              <li v-for="(item,index)   in cardList" :key="index" >
                                  <div @click.self="getCard(item ,index)"   :class="showClass == index ? 'round':''"></div>
                                  <div class="info">
-                                     <p>{{item.bankNick}}</p>
-                                     <p>{{item.payerName}}</p>
-                                     <p>尾号：*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
+                                     <p><span>{{item.bankNick}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{item.payerName}}</span></p>
+                                    
+                                     <!-- <p>尾号：*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p> -->
+                                     <p><span>{{item.cardNo.replace(/^(\d{4})\d+(\d{4})$/,"$1 ****  **** $2")}}</span></p>
+                                      <p></p>
+                                     <!-- "6226621406110260".replace(/^(\d{4})\d+(\d{4})$/,"$1 **** **** $2" -->
                                  </div>
                              </li>
                          </ul>
                      </div>
                 </van-popup>
-                
             </div>
            <div class="phone">
                <ul>
                     <li>
-                        <span>订单金额：</span>
+                        <span>订单金额：<span>￥</span></span>
                        <input v-model="orderAmount" type="number" placeholder="付款金额">
                    </li>
                     <li>
@@ -52,7 +58,7 @@
                    <li>
                        <span>手机号：</span>
                        <input type="number" v-model="mobile" placeholder="手机号码">
-                   </li>
+                   </li> 
                </ul>
            </div>
            <div class="at-once">
@@ -95,9 +101,18 @@ export default {
            showrecord:false,
            show:false,
            showClass:'',
-           cardList:[],
-           showCardList:false,
-           showBinding:false
+        //    cardList:[],
+            cardList:[
+               {
+                bankNick:"华夏银行",
+                payerName:"吴",
+                cardNo:"6226621406110260"
+               }
+           ],
+        //    showCardList:false,
+        //    showBinding:false,
+           showCardList:true,
+           showBinding:true
         }
     },
      components:{
@@ -106,6 +121,9 @@ export default {
     methods:{
        goBack(){
            this.$router.push("/home")              
+       },
+       gobindCard(){
+            this.$router.push("/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard")      
        },
        showCard(){
            this.show=!this.show
@@ -267,7 +285,7 @@ export default {
     },
    
     mounted () {
-       this.search()
+    //    this.search()
     }
 }
 </script>
@@ -302,10 +320,11 @@ export default {
            background-color: #EEEFF1;
            font-size:30px;
            >.popup {
+            //    width:600px;
                .pop {
-                  width:600px;
-                //   height: 800px;
+                    width:700px;
                   background-color: #fff;
+                    overflow-y: scroll;
                   >p {
                       margin-top:15px;
                       text-align: center;
@@ -313,41 +332,79 @@ export default {
                   }
                   >.binding {
                       margin-top:30px;
-                      padding-left:20px;
-                      padding-right: 20px;
+                      padding:10px;
+                    //   padding-right: 20px;
                       >p {
-                          margin-bottom: 20px;
+                          margin-bottom: 40px;
+                          text-align: center;
                       }
                       >div {
                           display: flex;
                           justify-content: space-around;
                           margin-bottom: 30px;
+                          text-align: center;
+                          >.cancle {
+                              width:30%;
+                              border:1px solid #ccc;
+                              padding:10px 0px;
+                          }
+                          >.bindCard {
+                             width:30%;
+                              border:1px solid #ccc;
+                              padding:10px 0px;
+                               background-color: #4965AE;
+                              color:#fff;
+                          }
                       }
                   }
                       >ul {
+                          width:100%;
+                          box-sizing: border-box;
                           padding:15px;
                           >li {
                               display: flex;
-                              justify-content: space-around;
+                             position: relative;
+                              width:100%;
+                              justify-content: space-between;
                               align-items: center;
                               margin-bottom:30px;
-                              padding:10px 0px;
-                              >div{
+                               box-sizing: border-box;
+                            //   padding:10px 0px;
+                            //   height:300px;
+                            //   background-size: contain;
+                            //   background: url("http://pay.91dianji.com.cn/ka03.png") no-repeat;
+                            //    height: 350px;
+                             >div{
                                   &:nth-of-type(1){
                                     width:40px;
                                     height:40px;
                                     border:2px solid #ccc;
                                     border-radius: 50%;
                                     margin-right: 15px;
-                                  }
+                                   }
                                   &.round {
                                        background-color: #4965AE;
                                   }
                               }
                               >.info {
                                   flex:1;
-                                  display: flex;
-                                  justify-content: space-between;
+                                  border:2px solid #ccc;
+                                  background-image: -webkit-linear-gradient(0deg, #57A4DD, #B8DDFF);
+                                  border-radius: 10px;
+                                  padding:10px 0px 20px 15px;
+                                  color:#fff;
+                                //   color:#fff;
+                                  >p {
+                                      &:nth-of-type(1){
+                                          padding:10px 0px;
+                                      }
+                                      &:nth-of-type(2){
+                                          padding:15px 0px;
+                                          text-align: center;
+                                      }
+                                  }
+                                //   display: flex;
+                                //   justify-content: space-between;
                               }
                           }
                       }
