@@ -488,7 +488,7 @@ export default {
                  margin-left: auto;
                  margin-right: auto;
                  >ul{
-                     list-style: square;
+                     list-style: none;
                      .van-rate{
                          float: left;
                      }

@@ -5,7 +5,7 @@
             <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
-        <iframe class="iframe"  :src="url" frameborder="0"></iframe>
+        <!-- <iframe class="iframe"  :src="url" frameborder="0"></iframe> -->
     </div>
 
 </template>
@@ -21,7 +21,7 @@ export default {
     },
     methods:{
         goBack() {
-            // plus.webview.close( "yinlian")
+            plus.webview.close( "yinlian")
             this.$router.push("/home")
         },
         webview(){
@@ -38,8 +38,8 @@ export default {
                 document.addEventListener('plusready',function () {  
                     let self= plus.webview.currentWebview(); 
                         var yinlian= plus.webview.create(this.url, "yinlian", {  
-                        top: "80px",  
-                        bottom: 0  
+                        top: "40px",  
+                        bottom: 0  ,
                     });  
                     self.append(yinlian)
                 },false);  
@@ -50,7 +50,7 @@ export default {
     created(){
         this.url=this.$route.query.info
          this.title=this.$route.query.title
-        //  this.webview();
+         this.webview();
     }
 }
 </script>
