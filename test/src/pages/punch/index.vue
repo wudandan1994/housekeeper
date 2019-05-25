@@ -20,7 +20,7 @@
                     <van-tab title="全部">
                          <div class="waiting">
                             <ul>
-                                <li @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in list" :key="index">
+                                <li @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in list" :key="index">
                                     <div class="top">
                                         <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
                                         <p>{{item.payerName}}</p>
@@ -29,9 +29,8 @@
                                     <div class="middle">
                                         <div class="m-left">
                                             <p>{{item.bankNick}}</p>
-                                            <!-- <p>等待执行：2019/5/17:14:33:37</p> -->
                                              <div   class="sign-out">
-                                                <van-button v-show="item.type=='0' || item.type=='3'" @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                                <van-button v-show="item.state=='0' || item.state=='3'" @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             </div> 
                                         </div>
                                         <div class="m-right">
@@ -67,7 +66,7 @@
                     <van-tab title="等待执行">
                          <div class="waiting">
                             <ul>
-                                <li v-show="item.state=='0'" @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                <li v-show="item.state=='0'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
                                     <div class="top">
                                         <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
                                         <p>{{item.payerName}}</p>
@@ -148,7 +147,7 @@
                     <van-tab title="已取消">
                          <div class="waiting">
                             <ul>
-                                <li v-show="item.state=='2'" @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                <li v-show="item.state=='2'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
                                     <div class="top">
                                         <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
                                         <p>{{item.payerName}}</p>
@@ -189,7 +188,7 @@
                      <van-tab title="进行中">
                           <div class="waiting">
                             <ul>
-                                <li v-show="item.state=='3'" @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                <li v-show="item.state=='3'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
                                     <div class="top">
                                         <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
                                         <p>{{item.payerName}}</p>
@@ -229,7 +228,7 @@
                       <van-tab title="失败">
                            <div class="waiting">
                             <ul>
-                                <li v-show="item.state=='4'" @click.self="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                <li v-show="item.state=='4'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
                                     <div class="top">
                                         <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
                                         <p>{{item.payerName}}</p>
@@ -441,6 +440,10 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
+            .van-dialog .van-button {
+                /* border: 0; */
+                border: 1px solid #4b66af;
+            }
            >.ranking {
                .waiting {
                    >ul{

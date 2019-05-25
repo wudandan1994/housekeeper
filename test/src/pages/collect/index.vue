@@ -310,6 +310,7 @@ export default {
                             let info=res.data.data.chMerCode
                             that.componentload=true
                             setTimeout(()=>{
+                                that.componentload=false
                                 that.$router.push({
                                 path:"/home/collect/open",
                                 query:{

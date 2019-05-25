@@ -13,11 +13,11 @@
                   <div class="waiting">
                       <p>{{bankName}}</p>
                       <p>尾号：{{name.substr(name.length-4)}}</p>   
-                      <p v-if="cardInfo.type=='0'">等待中</p>
-                      <p v-if="cardInfo.type=='1'">已成功</p>
-                      <p v-if="cardInfo.type=='2'">已取消</p>
-                      <p v-if="cardInfo.type=='3'">进行中</p>
-                      <p v-if="cardInfo.type=='4'">失败</p>
+                      <p v-if="cardInfo.state=='0'">等待中</p>
+                      <p v-if="cardInfo.state=='1'">已成功</p>
+                      <p v-if="cardInfo.state=='2'">已取消</p>
+                      <p v-if="cardInfo.state=='3'">进行中</p>
+                      <p v-if="cardInfo.state=='4'">失败</p>
 
 
                   </div>
@@ -38,7 +38,7 @@
                       </ul>
                   </div>
                   <div class="button">
-                     <van-button @click="stopPlan(cardInfo.id)" v-show="cardInfo.type=='0' || cardInfo.type=='3'" round size="large" type="default">终止计划</van-button>
+                     <van-button @click="stopPlan(cardInfo.id)" v-show="cardInfo.state=='0' || cardInfo.state=='3'" round size="large" type="default">终止计划</van-button>
                   </div>
                </div>
                <div class="detail">
@@ -135,8 +135,6 @@ export default {
                 .catch(()=>{
                     //on cancel
                 })
-
-
         },
         getPlans(){
              let data={
@@ -221,6 +219,10 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
+            .van-dialog .van-button {
+                /* border: 0; */
+                border: 1px solid #4b66af;
+            }
              >.card {
                   padding-top:30px;
                   >.top {

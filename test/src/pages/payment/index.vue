@@ -348,7 +348,7 @@ export default {
            font-size:30px;
            >.popup {
                .pop {
-                    width:500px;
+                    width:600px;
                   background-color: #fff;
                     overflow-y: scroll;
                   >p {
