@@ -31,11 +31,11 @@
         <!-- <p class="tips"> 提示：若您绑定的是信用卡，以下信息为必填项</p> -->
          <div class="user-input top row">
             <div class="title year start-center">有效期年份</div>
-            <div class="input start-center"><input type="number" v-model="year" placeholder="信用卡有效期年份"></div>
+            <div class="input start-center"><input type="number" v-model="year" placeholder="信用卡有效期年份如 22"></div>
         </div>
          <div class="user-input  row">
             <div class="title year start-center">有效期月份</div>
-            <div class="input start-center"><input type="number" v-model="month" placeholder="信用卡有效期月份"></div>
+            <div class="input start-center"><input type="number" v-model="month" placeholder="信用卡有效期月份 如 05"></div>
         </div>
          <div class="user-input  row">
             <div class="title year start-center">安全码</div>
@@ -48,11 +48,11 @@
         </div>
          <div class="user-input  row">
             <div class="title start-center">账单日</div>
-            <div class="input start-center"><input type="number" v-model="billdate" required placeholder="账单日"></div>
+            <div class="input start-center"><input type="number" v-model="billdate" required placeholder="账单日 如06"></div>
         </div>
         <div class="user-input  row">
             <div class="title start-center">最后还款日</div>
-            <div class="input start-center"><input type="number" v-model="duedate" required placeholder="还款日"></div>
+            <div class="input start-center"><input type="number" v-model="duedate" required placeholder="还款日 如23"></div>
         </div>
         
         <!-- <div class="user-input row">
@@ -202,8 +202,11 @@ export default {
                 })
                 return
             }
+            // if (this.year.trim().length===0 || this.month.trim().length===0 || this.billdate.trim().length===0 || this.duedate.trim().length===0 ||){
+
+            // }
             if(this.name.trim().length===0 || this.phone.trim().length===0 || this.bankcardno.trim().length===0 || this.idCard.trim().length===0 ||
-                this.year.trim().length===0 || this.month.trim().length===0 || this.safeCode.trim().length===0 || this.billdate.trim().length===0 || this.duedate.trim().length===0 
+                this.year.trim().length!=2 || this.month.trim().length!=2 || this.safeCode.trim().length!=3 || this.billdate.trim().length!=2 || this.duedate.trim().length!=2
             ){
                  this.$toast({
                     message:"请将信息填写完整"

@@ -71,7 +71,7 @@ export default {
             cardback:"idcardback.jpg",
             cardWithhand:"imgwiths.jpg",
             bankfront:"01.jpg",
-             componentload:true,
+             componentload:false,
             bankback:"bankb.jpg",
             baseUrl:"",
             show:false,
@@ -84,27 +84,7 @@ export default {
         goBack() {
             this.$router.push('/home')
         },
-        sureSubmit(){
-            let data={
-                chMerCode:this.info
-            }
-            axiosPost("/creditCard/getMemberRegLine",data)
-            .then(res=>{
-                let type=res.data.data.uploadStatus
-                if(res.data.data.uploadStatus==="0"){
-                     setTimeout(()=>{
-                        this.componentload=false
-                    },500)
-                     this.$router.push("/home/collect/payment")
-                  } else {
-                       this.componentload=false
-                  } 
-            })
-            .catch(err=>{
-
-            })
-            
-        },
+        
          onRead(file) {
             var form = new FormData()
             form.append('file',file.file)
@@ -402,7 +382,6 @@ export default {
     },
     created () {
           this.info=this.$route.query.info
-          this.sureSubmit()
           this.findphoto()
     }
 }

@@ -52,6 +52,8 @@ import repaymentChannelComponent from '@/pages/repaymentChannel'
 import makePlanComponent from '@/pages/makePlan'
 import planListComponent from '@/pages/planList'
 import changeCardComponent from '@/pages/changeCard'
+import recordsComponent from '@/pages/records'
+
 
 
 
@@ -149,7 +151,7 @@ export default new Router({
     {path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",component:makePlanComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper/planList",component:planListComponent},
     {path:"/home/changeCard",component:changeCardComponent},
-
+    {path:"/home/collect/payment/records",component:recordsComponent},
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/home/insertEsiCash",component:insertEsiCashComponent}, //绑定第三方信用卡

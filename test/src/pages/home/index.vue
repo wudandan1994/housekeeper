@@ -195,7 +195,7 @@
                             <p>商城</p>
                         </div>
                     </router-link>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://chaxun.weizhang8.cn/guanfangwang.php',title: '违章查询'}}">
+                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_65.png" size="30px" />
                         </span>
@@ -223,9 +223,8 @@
                         <router-link to="/home/bindingPhone" tag="li">绑定手机</router-link>
                         <router-link to="/home/customerService" tag="li">联系客服</router-link>
                         <router-link to="/home/aboutUs" tag="li">关于我们</router-link>
-                        <li class="switch">声音开关
-                           
-                        </li>
+                        <!-- <li class="switch">声音开关
+                        </li> -->
                         <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
                         <!-- <router-link to="/home/clearCache" tag="li">清除缓存</router-link> -->
                     </ul>

@@ -73,7 +73,7 @@ export default {
             level: '',
             recommendedcode: '',
             privious:"",
-            showConnect: true,
+            showConnect: false,
         }
     },
     methods:{

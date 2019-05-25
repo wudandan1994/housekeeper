@@ -65,16 +65,19 @@
                    <van-button  @click="pay" size="large" round type="info">确认</van-button>
            </div>
            <div class="record">
-                <van-button  @click="recordSearch" size="middle" round type="primary">交易查询</van-button>
-                <van-button  @click="change" size="middle" round type="primary">更改收款账户</van-button>
+                <!-- <van-button to="/home/collect/payment/records"  round size="middle"  type="default">交易查询</van-button> -->
+                <van-button   :to="{path: '/home/collect/payment/records',query: {chMerCode:chMerCode}}" round size="middle"  type="default">交易查询</van-button>
+
+                 <!-- :to="{path: '/loan/form/myOrder',query: {info: 'http://chaxun.weizhang8.cn/guanfangwang.php',title: '违章查询'}}" -->
+                <van-button  @click="change" round size="middle"  type="default">更改收款账户</van-button>
            </div>
-           <div class="trade" v-show="showrecord">
+           <!-- <div class="trade" v-show="showrecord">
                <div>
                    <p>交易状态：{{record.resMsg}}</p>
                    <p>交易金额：{{record.tranAmount}}</p>
                    <p>交易时间：{{record.tranTime}}</p>
                </div>
-           </div>
+           </div> -->
         </div>
         <loading :componentload="componentload"></loading>
     </div>
@@ -89,7 +92,7 @@ import { bankCardAttribution } from '../../lib/bankName'
 export default {
     data() {
         return {
-           componentload: false,
+           componentload: true,
            orderAmount:"",
            realName:"",
            idCard:"",
@@ -98,7 +101,7 @@ export default {
            chMerCode:"",
            number:"",
            record:{},
-           showrecord:false,
+        //    showrecord:false,
            show:false,
            showClass:'',
         //    cardList:[],
@@ -109,10 +112,10 @@ export default {
                 cardNo:"6226621406110260"
                }
            ],
-        //    showCardList:false,
-        //    showBinding:false,
-           showCardList:true,
-           showBinding:true
+           showCardList:false,
+           showBinding:false,
+        //    showCardList:true,
+        //    showBinding:true
         }
     },
      components:{
@@ -164,25 +167,25 @@ export default {
             this.show=false
        },
        
-       recordSearch(){
-           let data={
-               chMerCode:this.chMerCode,
-               orderCode:this.number
-           }
-           axiosPost("/creditCard/getTradeQuery",data)
-           .then(res=>{
-               if(!res.data.success){
-                   this.$toast({
-                       message:res.data.message
-                   })
-               } else {
-                   this.showrecord=true
-                    this.record=res.data.data
-               }
-           })
-           .catch(err=>{
-           })
-       },
+    //    recordSearch(){
+        //    let data={
+        //        chMerCode:this.chMerCode,
+        //        orderCode:this.number
+        //    }
+        //    axiosPost("/creditCard/getTradeQuery",data)
+        //    .then(res=>{
+        //        if(!res.data.success){
+        //            this.$toast({
+        //                message:res.data.message
+        //            })
+        //        } else {
+        //         //    this.showrecord=true
+        //             this.record=res.data.data
+        //        }
+        //    })
+        //    .catch(err=>{
+        //    })
+    //    },
        pay(){
            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/ 
            if(this.orderAmount.trim().length===0 || this.realName.trim().length===0 || this.idCard.trim().length===0
@@ -277,15 +280,38 @@ export default {
             .catch(err=>{
                 // console.log(err,"error");
             })
-        }
+        },
+        sureSubmit(){
+            let data={
+                chMerCode:this.chMerCode
+            }
+            axiosPost("/creditCard/getMemberRegLine",data)
+            .then(res=>{
+                let type=res.data.data.uploadStatus
+                if(res.data.data.uploadStatus!="0"){
+                     setTimeout(()=>{
+                        this.componentload=false
+                    },500)
+                     this.$router.push("/home/collect/open")
+                  } else {
+                      this.componentload=false
+                  }
+            })
+            .catch(err=>{
+
+            })
+            
+        },
         
     },
     created () {
-        
+         this.chMerCode=this.$route.query.info
+        //  this.search()
+         this.sureSubmit()
     },
    
     mounted () {
-    //    this.search()
+      
     }
 }
 </script>
@@ -299,11 +325,10 @@ export default {
            line-height: 86px;
            padding-top:10px;
            color:#fff;
-           font-size:40px;
+           font-size:30px;
            display: flex;
            z-index:999;
            position: fixed;
-           
            justify-content: space-between;
            >span {
                &:nth-of-type(1) {
@@ -311,6 +336,8 @@ export default {
                }
                &:nth-of-type(3) {
                    margin-right: 10px;
+                   display:flex;
+                   align-items: center;
                }
            }
        }
@@ -320,9 +347,8 @@ export default {
            background-color: #EEEFF1;
            font-size:30px;
            >.popup {
-            //    width:600px;
                .pop {
-                    width:700px;
+                    width:500px;
                   background-color: #fff;
                     overflow-y: scroll;
                   >p {
@@ -333,7 +359,6 @@ export default {
                   >.binding {
                       margin-top:30px;
                       padding:10px;
-                    //   padding-right: 20px;
                       >p {
                           margin-bottom: 40px;
                           text-align: center;
@@ -369,6 +394,7 @@ export default {
                               align-items: center;
                               margin-bottom:30px;
                                box-sizing: border-box;
+                              
                             //   padding:10px 0px;
                             //   height:300px;
                             //   background-size: contain;
@@ -434,6 +460,9 @@ export default {
                        height: 60px;
                        line-height: 60px;
                        color:#000;
+                       >span {
+                           font-weight: bold;
+                       }
                        &:last-child {
                            border:none;
                        }
@@ -467,18 +496,17 @@ export default {
            }
            >.record {
                margin-top:50px;
-               padding-left:50px;
+               padding: 0px 50px;
                display: flex;
-               justify-content: space-around;
-
+               justify-content: space-between;
                >button {
                    padding:5px 20px;
                    height: 70px;
                    font-size: 40px;               }
-               .van-button--primary {
-                   background-color: #767677;
-                   border:1px solid #ccc;
-               }
+            //    .van-button--primary {
+            //        background-color: #767677;
+            //        border:1px solid #ccc;
+            //    }
            }
            >.trade{
                margin-top:20px;

@@ -344,12 +344,11 @@ export default {
              },500)
              let info=res.data.data.chMerCode
              this.$router.push({
-                     path:"/home/collect/open",
+                     path:"/home/collect/payment",
                     query:{
                         info,
                      }
                  })
-               
             }else {
                  this.componentload=false
             }

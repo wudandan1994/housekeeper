@@ -10,13 +10,13 @@
            <p class="mode">智能,极速2种模式</p>
            <div class="light">
                <ul>
-                   <li>
+                   <!-- <li>
                        <p ><van-icon name="http://pay.91dianji.com.cn/110.png"/></p>
                        <div>
                            <p>凡是钻石会员等级，即可操作！</p>
                            <p>打破部分人群绑卡操作困难痛点，自己后台替他人操作。一帮到底，真正做到一站式扶持，加速团队裂变！</p>
                        </div>
-                   </li>
+                   </li> -->
                    <li>
                        <p><van-icon name="http://pay.91dianji.com.cn/112.png"/></p>
                        <div>
@@ -52,24 +52,24 @@
                 <van-button round size="large" type="default">继续</van-button>
             </router-link> -->
             <div class="keep">
-                  <div class="next">
+                  <!-- <div class="next">
                       <van-button @click="keep" round size="large" type="default">继续</van-button>
-                  </div>
-                  <div class="cover" v-show="showSelect">
+                  </div> -->
                       <div class="select" >
+                          <p>请选择还款模式</p>
                       <ul>
                           <li @click="searchInfo">
+                              <div><van-icon name="http://pay.91dianji.com.cn/putong.png" size="40px"/></div>
                               <p>普通代还</p>
-                              <div><img src="http://pay.91dianji.com.cn/putong.png" alt=""></div>
                                <p> <van-icon name="arrow" size="30px"/></p>
                           </li>
                           <router-link tag="li" to="/home/creditHousekeeper/aisleHousekeeper">
+                              <div><van-icon name="http://pay.91dianji.com.cn/wanmei.png" size="40px"/></div>
                               <p>完美账单</p>
-                              <div> <img src="http://pay.91dianji.com.cn/wanmei.png" alt=""></div>
                               <p> <van-icon name="arrow" size="30px"/></p>
                           </router-link>
                       </ul>
-                  </div>
+                 
                   </div>
                   
                   
@@ -228,56 +228,48 @@ export default {
            }
            >.keep {
                position: relative;
-               .next {
-                   padding:0px 30px;
-                }
-                .cover {
-                    position: fixed;
-                    top:0px;
-                    bottom: 0px;
-                    left:0px;
-                    right:0px;
-                    background-color: rgba(0, 0, 0, .4);
-                    box-sizing: border-box;
+               margin-top:80px;
                     .select {
-                    position: absolute;
-                    top:30%;
-                    left:0px;
-                    width:100%;
-                    background-color: #fff;
-                    border:1px solid #ccc;
-                     box-sizing: border-box;
+                        width:100%;
+                        background-color: #fff;
+                        box-sizing: border-box;
                        margin:10px;
+                       >p {
+                           text-align: center;
+                           color:#4B66AF;
+                           font-weight: bold;
+                           padding-bottom: 20px;
+                       }
                    > ul{
                        display: flex;
                        flex-wrap: wrap;
+                        margin-right:20px;
+                         margin-left:40px;
                        >li {
                            width:100%;
-                           text-align: center;
                            padding:10px;
                             display: flex;
-                           justify-content: space-around;
-                           border-bottom: 1px solid #ccc;
+                           justify-content: space-between;
+
+                           &:nth-of-type(1){
+                               padding-bottom: 30px;
+                              border-bottom: 1px solid #ccc;
+                           }
+                            &:nth-of-type(2){
+                               padding-top: 30px;
+                           }
                            align-items: center;
                            >p {
-                               padding-bottom: 15px;
                                font-weight: bold;
-                               font-size: 30px;
-                           }
-                           >div {
-                               width:300px;
-                               margin:0 auto;
-                               padding-bottom: 10px;
-                               >img {
-                                   width:100%;
+                            
+                               margin-left:30px;
+                               &:nth-of-type(1){
+                                      flex:1;
                                }
                            }
                        }
                     }
                 }
-                }
-                
-               
            }
        }
    }

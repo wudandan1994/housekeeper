@@ -355,5 +355,9 @@ export default {
                 }
             }
         }
+         .van-dialog .van-button {
+                /* border: 0; */
+                border: 1px solid #4b66af;
+            }
    }
 </style>

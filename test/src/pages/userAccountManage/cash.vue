@@ -380,7 +380,7 @@ export default {
                 .close{
                     width: 100vw;
                     height: 65vh;
-                }
+                } 
                 .check-bankname{
                     width: 100vw;
                     height: 35vh;
