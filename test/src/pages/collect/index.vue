@@ -48,6 +48,7 @@
                        <span>开户行：</span>
                        <!-- <span class="bank" @click="handleBankNumber">{{bankName}}</span> -->
                        <input type="text"  @click="handleBankNumber" :placeholder="bankName">
+                       <span><van-icon name="search" size="20px" /></span>
                        <!-- <span @click="handleBankNumber">测试</span> -->
                    </li>
                    <li>
@@ -89,7 +90,12 @@
          <div class="meng" v-if="bankNumberShow">
              <div class="close" @click="handleClose"></div>
              <div class="picker">
+                 <div class="select">
+                     
                 <input type="text" @input="handleChangeSearchName" v-model="searchName" placeholder="搜索开户行,如忘记请搜索总行">
+                <span><van-icon name="search" size="20px" /></span>
+                 </div>
+                  
                 <van-picker show-toolbar :columns="columns" @change="onChange" @confirm="onConfirm" />
             </div>
          </div>
@@ -500,7 +506,13 @@ export default {
                 height: 500px;
                 background: white;
                 background: #F2F2F2;
-                >input{
+                >.select {
+                     background: #D9D9D9;
+                    display: flex;
+                    height: 80px;
+                    line-height: 100px;
+                    padding-right:15px;
+                     input{
                     width: 98vw;
                     height: 80px;
                     padding-left: 2vw;
@@ -514,6 +526,10 @@ export default {
                     font-size: 26px;
                     padding-top: 5px;
                 }
+
+                }
+                // display: flex;
+                
             }
        }
    }

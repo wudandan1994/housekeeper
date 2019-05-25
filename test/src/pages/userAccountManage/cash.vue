@@ -393,7 +393,7 @@ export default {
                         height: 80px;
                         border-bottom: solid 1px #f2f2f2;
                         background: white;
-                        font-size: 30px;
+                        font-size: 34px;
                         font-weight: 700;
                         text-align: center;
                         line-height: 80px;

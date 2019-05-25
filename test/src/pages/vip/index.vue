@@ -16,7 +16,7 @@
                                     2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
                                     3. 招商收益<br/>
                                     4. 信用卡办卡收益<br/>
-                                    5. 智能精养、空卡周转、商户收款、车险等分润收益<br/>
+                                    5. 费率说明：垫还为万72+1元/笔，商户收款为万47+1元/笔<br/>
                                 </div>
                             </van-popup>
                              <span @click="isShowRule">退换规则</span>
@@ -55,7 +55,7 @@
                                     2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
                                     3. 招商收益<br/>
                                     4. 信用卡办卡收益<br/>
-                                    5. 智能精养、空卡周转、商户收款、车险分润收益<br/>
+                                    5. 费率说明：垫还为万81+2元/笔，商户收款为万54+2元/笔<br/>
                                 </div>
                             </van-popup>
                              <span @click="isShowRule">退换规则</span>
@@ -499,7 +499,7 @@ export default {
                          margin-top: 20px;
                          margin-left: auto;
                          margin-right: auto;
-                        list-style: square; 
+                        list-style: none; 
                         line-height: 40px;
                      }
                  }

@@ -21,7 +21,9 @@
                </p>
                <p @click="forgetPassword">忘记密码？</p>
            </div>
-           <van-button @click="logInPass" class="login center" type="default">登录</van-button>
+           <div class="button">
+                <van-button @click="logInPass" class=" center" size="large" type="default">登录</van-button>
+           </div>
             <div class="wx-login row">
                 <div class="logIn start-center" @click="logIn">
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
@@ -277,18 +279,15 @@ export default {
                     
                }
            }
-           >.login {
+           .button {
                width:80%;
-               height: 100px;
-               border-radius: 10px;
-               background-color: #4B66AF;
-               margin-left: auto;
-               margin-right: auto;
-               color:#fff;
-               text-align: center;
-               border: none;
-               font-size: 28px;
+                 margin:0 auto;
+               padding:0 30px;
+               >button {
+                   border-radius: 10px;
+               }
            }
+           
            >.wx-login {
                 width:80%;
                 height: 80px;

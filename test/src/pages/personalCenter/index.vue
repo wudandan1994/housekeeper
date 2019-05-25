@@ -10,10 +10,10 @@
                     </div>
                 </div>
             </div>
-            <div v-show="showYYS" class="operator end-center" @click="handleExpect">
+            <!-- <div v-show="showYYS" class="operator end-center" @click="handleExpect">
                 <van-icon name="medel" size="20px" color="#dab17b"/>
                 <span>运营商</span>
-            </div>
+            </div> -->
             <div v-show="isUpgrade" class="operator end-center"  @click="Upgrade">
                 <van-icon name="gem" size="20px" color="#dab17b"/>
                 <span>升级为钻石会员</span>
@@ -163,12 +163,12 @@
             <div class="per-title row">
                 <div class="goods-title start-center">付款方式</div>
                 <div class="goods-detail row">
-                    <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayTypeWX">
+                    <!-- <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayTypeWX">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-wechatpay"></use>
                         </svg>
                         微信支付
-                    </div>
+                    </div> -->
                     <div class="paytypes center" :class="{'alipay': paytype == 'alipay'}" @click="handlePayTypeZFB">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-alipay"></use>
@@ -243,7 +243,7 @@ export default {
             commission: '',
             showand:false,
             showios:false,
-            showYYS:true,
+            // showYYS:true,
             isUpgrade:false,
             show:false,
             showCover:false,
@@ -383,7 +383,7 @@ export default {
                         this.vip ='';
                     }
                     else if(res.data.data.level == '1'){
-                        this.showYYS=false
+                        // this.showYYS=false
                         this.isUpgrade=true
                         this.vip ='http://pay.91dianji.com.cn/huangjinVIP.png';
                     }else{

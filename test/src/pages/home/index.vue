@@ -26,7 +26,9 @@
             <!-- 查询模块 -->
             <div class="search">
                 <ul>
-                    <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14',title: '征信查询'}}" tag="li">
+                    <!-- <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14',title: '征信查询'}}" tag="li"> -->
+                    <router-link :to="{path: '/loan/form/myOrder',query: {info:'https://ipcrs.pbccrc.org.cn/',title: '征信查询'}}" tag="li">
+
                         <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
                         <span>征信查询</span>
                     </router-link>
@@ -295,6 +297,7 @@ export default {
                      this.$router.push("/logIn");
                     //  this.$toast('登录失败');
                 }else {
+                    console.log(res,"自动登录成功")
                     this.$store.commit('iscertification',res.data.data.iscertification);
                     this.$store.commit('level',res.data.data.level);
                     this.$store.commit('promotioncode',res.data.data.promotioncode);
@@ -391,12 +394,22 @@ export default {
         // },
     },
     created(){
-        this.nickname=this.$store.state.wechat.nickname;
-        this.headimg=this.$store.state.wechat.headimg;
+         this.automatic()
+        // this.nickname=this.$store.state.wechat.nickname;
+        // this.headimg=this.$store.state.wechat.headimg;
+        console.log(this.$store.state.wechat.nickname)
+        console.log(this.$store.state.wechat.headimg)
+
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-        // this.automatic()
-    }  
+       
+    }  ,
+    mounted () {
+        this.nickname=this.$store.state.wechat.nickname;
+        this.headimg=this.$store.state.wechat.headimg;
+         console.log(this.$store.state.wechat.nickname,"nickname")
+        console.log(this.$store.state.wechat.headimg,"headimg")
+    }
 }
 </script>
 
@@ -687,6 +700,11 @@ export default {
                            border-radius: 10px;
                          }
                     }
+                    .van-dialog .van-button {
+                        /* border: 0; */
+                        border: 1px solid #4b66af;
+                    }
+
                     .van-dialog,
                     .van-dialog__message,
                     .van-button {

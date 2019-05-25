@@ -7,13 +7,13 @@
         </header>
        <div class="container">
            <h3>钱夹宝智能还款</h3>
-           <p class="mode">智能,急速2种模式</p>
+           <p class="mode">智能,极速2种模式</p>
            <div class="light">
                <ul>
                    <li>
                        <p ><van-icon name="http://pay.91dianji.com.cn/110.png"/></p>
                        <div>
-                           <p>凡是钻石会员等级，即可帮助他人进行绑卡操作！</p>
+                           <p>凡是钻石会员等级，即可操作！</p>
                            <p>打破部分人群绑卡操作困难痛点，自己后台替他人操作。一帮到底，真正做到一站式扶持，加速团队裂变！</p>
                        </div>
                    </li>
@@ -24,13 +24,13 @@
                            <p>卡内预留2%以上即可，大额也支持，笔笔落地商户，健康消费，智能完美账单</p>
                        </div>
                    </li>
-                   <li>
+                   <!-- <li>
                        <p><van-icon name="http://pay.91dianji.com.cn/113.png"/></p>
                        <div>
                            <p>空卡周转，解决急需，维护信用</p>
                            <p>全程只需手续费，我给额度你来还，避免逾期，保你信用无忧</p>
                        </div>
-                   </li>
+                   </li> -->
                    <li>
                        <p><van-icon name="http://pay.91dianji.com.cn/114.png"/></p>
                        <div>
