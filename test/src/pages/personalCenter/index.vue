@@ -192,7 +192,7 @@
         <div  class="update">
             <ul>
                 <li  @click="uploadAnd"  >
-                    <van-icon name="http://pay.91dianji.com.cn/Android.png"  size="50px" color="#dab17b"/>
+                    <van-icon name="http://pay.91dianji.com.cn/Android.png"  size="70px" color="#dab17b"/>
                     <p> 安卓手机下载</p>
                 </li>
                  <!-- <router-link @click="uploadIos"  tag="li"  :to="{path: '/loan/form/myOrder',query: {info: 'http://znd.hvv.dnf-w3.cn/KXxv61',title: '苹果下载'}}" >
@@ -201,7 +201,7 @@
                     <p>苹果手机下载</p>
                  </router-link> -->
                  <li  @click="uploadIos">
-                     <van-icon name="http://pay.91dianji.com.cn/ios.png"  size="50px" color="#dab17b"/>
+                     <van-icon name="http://pay.91dianji.com.cn/ios.png"  size="70px" color="#dab17b"/>
                     <p>苹果手机下载</p>
                  </li>
             </ul>

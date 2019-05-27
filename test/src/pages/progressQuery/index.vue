@@ -10,10 +10,10 @@
             <iframe class="iframe" id="ifram" :src="url" frameborder="0"></iframe>
         </div> -->
        
-         <div style="overflow: auto;-webkit-overflow-scrolling:touch;width:100%;height:100%;">　
+         <!-- <div style="overflow: auto;-webkit-overflow-scrolling:touch;width:100%;height:100%;">　
             　　<iframe v-if="type" :src="url" scrolling="auto" frameborder="0" width="100%" height="100%"></iframe>
             　　<iframe v-else :src="url" frameborder="0" height="100%" scrolling='no' style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
-        </div>
+        </div> -->
     </div>
 
 </template>
@@ -51,6 +51,7 @@ export default {
                 let self= plus.webview.currentWebview(); 
                 var yinlian= plus.webview.create(this.url, "yinlian", {  
                 top: "40px",  
+                width:"100%",
                 bottom: 0 ,
                 left:0,
                 right:0

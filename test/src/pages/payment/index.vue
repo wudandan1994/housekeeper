@@ -347,9 +347,11 @@ export default {
            background-color: #EEEFF1;
            font-size:30px;
                 input::-webkit-input-placeholder{
-                    font-size: 26px;
+                    font-size: 30px;
                     padding-top:4px;
                     background-color: red;
+                    height: 40px;
+                     line-height: 1.2rem;
                 }
            >.popup {
                .pop {

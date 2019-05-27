@@ -526,6 +526,8 @@ export default {
                     font-size: 26px;
                     padding-top: 4px;
                     background-color: red;
+                    line-height: 1.2rem;
+
                  }
                 }
             }
