@@ -18,7 +18,6 @@
                 <van-icon name="gem" size="20px" color="#dab17b"/>
                 <span>升级为钻石会员</span>
             </div>
-            
             <div class="position">
                 <div class="recomcode center">推荐码:{{promotioncode}}</div>
                 <router-link to="/home/verified" class="authentication center" tag="div">{{iscertification}}</router-link>
@@ -190,29 +189,32 @@
                 <van-button type="info" class="submit" @click="handleBuyNow">立即支付</van-button>
             </div>
         </div>
-
-
         <div  class="update">
             <ul>
-                <li @click="uploadAnd">
-                    <img src="http://pay.91dianji.com.cn/Android.png" >
-                    安卓手机下载
+                <li  @click="uploadAnd"  >
+                    <van-icon name="http://pay.91dianji.com.cn/Android.png"  size="50px" color="#dab17b"/>
+                    <p> 安卓手机下载</p>
                 </li>
-                 <li @click="uploadIos">
-                    <img src="http://pay.91dianji.com.cn/ios.png" alt="">
-                    苹果手机下载
-                </li>
+                 <!-- <router-link @click="uploadIos"  tag="li"  :to="{path: '/loan/form/myOrder',query: {info: 'http://znd.hvv.dnf-w3.cn/KXxv61',title: '苹果下载'}}" >
+           
+                     <van-icon name="http://pay.91dianji.com.cn/Android.png"  size="40px" color="#dab17b"/>
+                    <p>苹果手机下载</p>
+                 </router-link> -->
+                 <li  @click="uploadIos">
+                     <van-icon name="http://pay.91dianji.com.cn/ios.png"  size="50px" color="#dab17b"/>
+                    <p>苹果手机下载</p>
+                 </li>
             </ul>
-            <div v-show="showand" class="cover">
+            <!-- <div v-show="showand" class="cover">
                     <dir class="dis">
-                        <img src="http://pay.91dianji.com.cn/Aandroidem.png" alt="">
+                         <van-icon name="http://pay.91dianji.com.cn/Aandroidem.png"  size="30px" color="#dab17b"/>
                     </dir>
             </div>
             <div v-show="showios" class="cover">
                     <dir class="dis">
                         <img src="http://pay.91dianji.com.cn/iosem.png" alt="">
                     </dir>
-            </div>
+            </div> -->
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
         <loading :componentload="componentload"></loading>
@@ -343,18 +345,20 @@ export default {
             }
         },
         uploadAnd(){
-            this.showand=!this.showand
-            this.showios=false
-            setTimeout(()=>{
-                this.showand=false
-            },6000)
+            location.href=" https://www.pgyer.com/vFbf"
+            // this.showand=!this.showand
+            // this.showios=false
+            // setTimeout(()=>{
+            //     this.showand=false
+            // },6000)
         },
         uploadIos(){
-            this.showios=!this.showios
-            this.showand=false
-            setTimeout(()=>{
-                this.showios=false
-            },6000)
+            location.href="http://znd.hvv.dnf-w3.cn/KXxv61"
+            // this.showios=!this.showios
+            // this.showand=false
+            // setTimeout(()=>{
+            //     this.showios=false
+            // },6000)
         },
         changeActive(obj){
             // console.log('obj', obj);

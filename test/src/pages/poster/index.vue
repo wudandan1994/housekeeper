@@ -11,6 +11,24 @@
             <div @click="handlePrivacySettings" class="rightnow center">隐私设置</div>
             <div @click="savePoster" class="rightnow center">立即合成</div>
         </div>
+        <div class="share" v-show="Sharewxf">
+             <div class="wx">
+                <van-button  class="shareBtn" @click="Sharewxf=true" type="default">分享</van-button>
+                    <ul>
+                        <li id="wxF"  @click="wxfri">
+                            <p><van-icon name="http://pay.91dianji.com.cn/wx.png" size="40px"/></p>
+                            <p>好友</p>
+                        </li>
+                        <li @click="wxcir">
+                            <p><van-icon color="white"  size="30px"  name="http://pay.91dianji.com.cn/pyq.png"/></p>
+                            <p>朋友圈</p>
+                        </li>
+                    </ul>
+               <div class="button">
+                     <van-button  size="large" @click="Sharewxf=false" type="default">取消</van-button>
+               </div>
+            </div>
+        </div>
         <div class="load center" v-if="imgShow">
             <div v-if="showUpload" >
                 <div class="loading center"><van-loading color="white" size="60px" /></div>
@@ -19,13 +37,10 @@
             <div class="imgs" v-if="!showUpload">
                 <div class="savePoster center"><img :src="imgUrl" ></div>
                 <div class="success center">
-                    <!-- 海报生成成功 -->
-                    海报生成成功，长按保存或分享
+                    <!-- 海报生成成功，长按保存或分享 -->
+                     海报生成成功
                 </div>
-                <div class="save">
-                    <!-- <van-button @click="save" type="default">保存至手机</van-button> -->
-                </div>
-
+                
             </div>
         </div>
         <loading :componentload="componentload"></loading>
@@ -51,18 +66,87 @@ export default {
             url: 'http://pay.91dianji.com.cn',
             qrcode: '',
             random: '01',
+             shares:null,
+            sharewx:null,
+            Sharewxf:false
         }
     },
     methods:{
         goBack() {
             this.$router.go(-1);
         },
+        wxcir(){
+             let that=this
+            plus.share.getServices(function (s) {
+                that.shares = s;
+                for (var i in s) {
+                    if ('weixin' == s[i].id) {
+                        that.sharewx = s[i];
+                    }
+                }
+                console.log(JSON.stringify(that.sharewx))
+                console.log(new Date())
+                 that.sharewxCirMessage()
+            }, function (e) {
+                alert("获取分享服务列表失败：" + e.message);
+            });
+        },
+        wxfri(){
+             let that=this
+            plus.share.getServices(function (s) {
+                that.shares = s;
+                for (var i in s) {
+                    if ('weixin' == s[i].id) {
+                        that.sharewx = s[i];
+                    }
+                }
+                console.log(JSON.stringify(that.sharewx))
+                console.log(new Date())
+                    that.shareWeixinMessage()
+
+            }, function (e) {
+                alert("获取分享服务列表失败：" + e.message);
+            });
+        },
+        sharewxCirMessage(){
+              let that=this
+          that.sharewx.send( 
+                // {
+                //      type:"image",
+                //       pictures: that.imgUrl,
+                //     content:"钱夹宝综合金融服务推广平台，点滴成就未来",
+                //     // href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode,
+                //     extra:{scene:"WXSceneTimeline"}
+                // }
+                { content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝",thumbs:"http://pay.91dianji.com.cn/wxc.png", href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode, extra: { scene: "WXSceneTimeline" } }
+                , function(){
+                alert("分享成功！");
+            }, function(e){
+                alert("分享失败："+e.message);
+            });
+        },
+         shareWeixinMessage() {
+             let that=this
+              console.log(JSON.stringify(that.sharewx),"55555555555555555")
+              console.log(that.imgUrl)
+             that.sharewx.send(
+                 { 
+                     content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝", 
+                     thumbs:"http://pay.91dianji.com.cn/wxc.png",
+                     href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode,
+                     extra: { scene: "WXSceneSession" } 
+                 }, function () {
+            // alert("分享成功！");
+        }, function (e) {
+            alert("分享失败：" + e.message);
+        });
+    },
         cancleCover(){
             this.showShare=false
         },
         
         showCover(){
-            this.showShare=true
+           this.Sharewxf=true
         },
         // save(){
         //     plus.gallery.save( '/wx.png', (result) => {
@@ -271,6 +355,33 @@ export default {
                 border-radius: 20px;
             }
        }
+       .share {
+                >.shareBtn {
+                    margin:50px 0px 30px 30px;
+                    width:100px;
+                }
+                ul{
+                    display: flex;
+                    justify-content: space-between;
+                    box-sizing: border-box;
+                    >li {
+                        width:50%;
+                        box-sizing: border-box;
+                        text-align: center;
+                        >p {
+                            &:nth-of-type(2){
+                                // color:#fff;
+                                padding:20px;
+                            }
+                        }
+                    }
+                }
+                .button {
+                    padding:20px 30px;
+
+                }
+              
+            }
        .load{
            width: 100vw;
            height: 100vh;
@@ -307,6 +418,8 @@ export default {
                    height: 100px;
                    color: #ffffff;
                    font-size: 28px;
+                  
+                     
                }
            }
        }

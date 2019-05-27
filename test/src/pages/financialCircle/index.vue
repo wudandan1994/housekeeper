@@ -32,12 +32,16 @@
         </van-tabs>
         <div class="share" v-show="showShare">
             <ul>
-                <li id="wxF"  @click="wxfri">
-                    <p>微信好友</p>
-                </li>
-                <li>
-                    <p>微信朋友圈</p>
-                </li>
+               <ul>
+                                <li id="wxF"  @click="wxfri">
+                                    <p><van-icon name="http://pay.91dianji.com.cn/wx.png"/></p>
+                                    <p>好友</p>
+                                </li>
+                                <li @click="wxcir">
+                                    <p><van-icon color="white" size="20px" name="http://pay.91dianji.com.cn/pyq.png"/></p>
+                                    <p>朋友圈</p>
+                                </li>
+                            </ul>
             </ul>
         </div>
     </div>
@@ -73,26 +77,22 @@ export default {
         },
         wxfri(){
             let that=this
-                //   var shares = null, sharewx = null;
-            
-                            plus.share.getServices(function (s) {
-                             that.shares = s;
-                                for (var i in s) {
-                                    if ('weixin' == s[i].id) {
-                                      that.sharewx = s[i];
-                                    }
-                                }
-                                console.log(JSON.stringify(that.sharewx))
-                                console.log(new Date())
-                                 that.shareWeixinMessage()
+            plus.share.getServices(function (s) {
+                that.shares = s;
+                for (var i in s) {
+                    if ('weixin' == s[i].id) {
+                        that.sharewx = s[i];
+                    }
+                }
+                console.log(JSON.stringify(that.sharewx))
+                console.log(new Date())
+                    that.shareWeixinMessage()
 
-                            }, function (e) {
-                                alert("获取分享服务列表失败：" + e.message);
-                            });
+            }, function (e) {
+                alert("获取分享服务列表失败：" + e.message);
+            });
         },
-        plus(){
-
-        },
+       
          shareWeixinMessage() {
              let that=this
               console.log(JSON.stringify(that.sharewx),"55555555555555555")

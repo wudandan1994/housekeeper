@@ -30,7 +30,7 @@
                                         <div class="m-left">
                                             <p>{{item.bankNick}}</p>
                                              <div   class="sign-out">
-                                                <van-button v-show="item.state=='0' || item.state=='3'" @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                                <van-button v-show="item.state=='0' || item.state=='3'" @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             </div> 
                                         </div>
                                         <div class="m-right">
@@ -81,7 +81,7 @@
                                             <p>执行状态</p>
                                             <p>等待执行</p>
                                             
-                                            <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            <van-button @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             
                                         </div>
                                     </div>
@@ -202,7 +202,7 @@
                                         <div class="m-right">
                                             <p>执行状态</p>
                                             <p>进行中</p>
-                                            <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            <van-button @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             
                                         </div>
                                     </div>

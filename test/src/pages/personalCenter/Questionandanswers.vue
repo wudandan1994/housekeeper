@@ -45,7 +45,7 @@
 
 
         <div class="small-title">卡内预留多少额度来还款比较好？</div>
-        <div class="content">建议预留10%以上的额度，促进大额度还款，有助于快速提额。</div>
+        <div class="content">建议预留5%以上的额度，促进大额度还款，有助于快速提额。</div>
 
         <div class="small-title">智还的手续费是怎么扣的？</div>
         <div class="content">手续费是直接在信用卡额度里面扣的，预览账单后显示出的周转金包含了手续费；还款成功一笔，扣除这笔的手续费。</div>

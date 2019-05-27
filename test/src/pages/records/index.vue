@@ -35,7 +35,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home/collect/payment')
+            this.$router.push('/home')
         },
         getRecord(){
             let data={

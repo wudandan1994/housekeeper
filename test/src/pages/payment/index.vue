@@ -346,6 +346,11 @@ export default {
            padding-bottom: 50px;
            background-color: #EEEFF1;
            font-size:30px;
+                input::-webkit-input-placeholder{
+                    font-size: 26px;
+                    padding-top:4px;
+                    background-color: red;
+                }
            >.popup {
                .pop {
                     width:600px;
@@ -394,12 +399,6 @@ export default {
                               align-items: center;
                               margin-bottom:30px;
                                box-sizing: border-box;
-                              
-                            //   padding:10px 0px;
-                            //   height:300px;
-                            //   background-size: contain;
-                            //   background: url("http://pay.91dianji.com.cn/ka03.png") no-repeat;
-                            //    height: 350px;
                              >div{
                                   &:nth-of-type(1){
                                     width:40px;
@@ -429,8 +428,6 @@ export default {
                                           text-align: center;
                                       }
                                   }
-                                //   display: flex;
-                                //   justify-content: space-between;
                               }
                           }
                       }

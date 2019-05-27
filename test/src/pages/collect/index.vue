@@ -524,12 +524,10 @@ export default {
                 }
                 input::-webkit-input-placeholder{
                     font-size: 26px;
-                    padding-top: 5px;
+                    padding-top: 4px;
+                    background-color: red;
+                 }
                 }
-
-                }
-                // display: flex;
-                
             }
        }
    }

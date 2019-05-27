@@ -21,7 +21,7 @@
                        <p><van-icon name="http://pay.91dianji.com.cn/112.png"/></p>
                        <div>
                            <p>精养卡智能规划，千城布局，省时省心</p>
-                           <p>卡内预留2%以上即可，大额也支持，笔笔落地商户，健康消费，智能完美账单</p>
+                           <p>卡内预留5%以上即可，大额也支持，笔笔落地商户，健康消费，智能完美账单</p>
                        </div>
                    </li>
                    <!-- <li>
@@ -100,15 +100,15 @@ export default {
                 if(res.data.code==="1"){
                     this.$router.push("/home/addCard")
                 } else if(res.data.code==="0"){
-                    // location.href=res.data.data.url
-                    let url=res.data.data.url
-                        this.$router.push({
-                            path:"/home/cardCenter/progressQuery",
-                            query:{
-                                info:url,
-                                title:"还款"
-                              }
-                        })
+                    window.location.href=res.data.data.url
+                    // let url=res.data.data.url
+                        // this.$router.push({
+                        //     path:"/home/cardCenter/progressQuery",
+                        //     query:{
+                        //         info:url,
+                        //         title:"还款"
+                        //       }
+                        // })
                 }
             })
             .catch(err=>{
@@ -228,16 +228,17 @@ export default {
            }
            >.keep {
                position: relative;
-               margin-top:80px;
+               margin-top:50px;
                     .select {
                         width:100%;
-                        background-color: #fff;
+                        // background-color: #fff;
                         box-sizing: border-box;
                        margin:10px;
                        >p {
                            text-align: center;
                            color:#4B66AF;
                            font-weight: bold;
+                           font-size: 36px;
                            padding-bottom: 20px;
                        }
                    > ul{

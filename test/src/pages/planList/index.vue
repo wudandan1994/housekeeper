@@ -36,7 +36,9 @@
                         </tr>
                     </thead>
                     <tbody class="tbody">
-                        <tr v-for="(data,index) in planlist.plans" :key="index"  v-show="data.type!=9">
+                        <tr v-for="(data,index) in details" :key="index" >
+                        <!-- <tr v-for="(data,index) in plans" :key="index" > -->
+                        <!-- <tr v-for="(data,index) in plans.slice((currentPage-1)*10,10)" :key="index" > -->
                             <td>消费</td>
                             <td>{{data.date}}</td>
                             <td>{{data.amount}}</td>
@@ -51,6 +53,7 @@
                     :page-count="total"
                     :total-items="page"
                     mode="simple" 
+                   @change="changePage"
                     />
                 </div>
             </div>
@@ -83,11 +86,18 @@ export default {
             componentload:false,
             area:"",
             item:"",
+            total:0,
+            plans:[],
+            details:[],
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
+        },
+        changePage(){
+           this.details= this.plans.splice((this.currentPage-1)*10,10)
+          this.plans.splice((this.currentPage-1)*10,0,...this.details)
         },
         makePlan(){
             let datas={
@@ -101,7 +111,6 @@ export default {
                         message:res.data.message
                     })
                 } else {
-                        // console.log(this.planlist.bindId)
                         this.componentload=true
                         setTimeout(()=>{
                             this.componentload=false
@@ -138,18 +147,22 @@ export default {
     created () {
         this.planlist=this.$route.query.list 
         this.item=this.$route.query.item
-        // console.log(this.planlist,"planList页面")
          this.area=this.$route.query.area 
-        // console.log(this.area,"planList页面")
-
-        let num=0
+        let arr=[]
         this.planlist.plans.forEach(element => {
             if(element.type !=9){
                 this.num++;
+                arr.push(element)
             }
-            this.page=num
+             this.plans=arr
         });
         this.fnDate();
+    },
+    mounted () {
+         this.total=Math.ceil(this.plans.length/this.size)
+        this.details=this.plans.splice((this.currentPage-1)*10,10) 
+        this.plans.splice((this.currentPage-1)*10,0,...this.details)
+
     }
 }
 </script>

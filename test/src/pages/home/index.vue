@@ -307,6 +307,8 @@ export default {
                     this.$store.commit('openid',res.data.data.openid);
                     this.$store.commit('nickname',res.data.data.nickname);
                     this.$store.commit('headimg',res.data.data.photo);
+                    this.headimg=res.data.data.photo
+                    this.nickname=res.data.data.nickname
                     this.$store.commit('city',res.data.data.city);
                 }
              })
@@ -393,21 +395,16 @@ export default {
         // },
     },
     created(){
-         this.automatic()
-        // this.nickname=this.$store.state.wechat.nickname;
-        // this.headimg=this.$store.state.wechat.headimg;
-        console.log(this.$store.state.wechat.nickname)
-        console.log(this.$store.state.wechat.headimg)
+        this.nickname=this.$store.state.wechat.nickname;
+        this.headimg=this.$store.state.wechat.headimg;
+        //  this.automatic()
 
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
        
     }  ,
     mounted () {
-        this.nickname=this.$store.state.wechat.nickname;
-        this.headimg=this.$store.state.wechat.headimg;
-         console.log(this.$store.state.wechat.nickname,"nickname")
-        console.log(this.$store.state.wechat.headimg,"headimg")
+        sole.log(this.$store.state.wechat.headimg,"headimg")
     }
 }
 </script>

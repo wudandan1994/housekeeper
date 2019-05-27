@@ -125,7 +125,7 @@ export default {
                           message:res.data.message
                       })
                   } else {
-                       this.getMainPlan()
+                       this.getPlans()
                   }
               })
               .catch(err=>{

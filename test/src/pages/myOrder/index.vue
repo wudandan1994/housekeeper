@@ -6,7 +6,11 @@
             <span></span>
         </header>
         <div class="container">
-           <iframe class="iframe" :src="url" frameborder="0"></iframe>
+           <!-- <iframe class="iframe" :src="url" id="ifram" frameborder="0"></iframe> -->
+            <!-- <div style="webkit-overflow-scrolling: touch;overflow-y: scroll;width:100%;">
+                <iframe class="iframe" id="ifram" :src="url" frameborder="0"></iframe>
+            </div> -->
+
            <div style="overflow: auto;-webkit-overflow-scrolling:touch;width:100%;height:100%;">　
             　　<iframe v-if="type" :src="url" scrolling="auto" frameborder="0" width="100%" height="100%"></iframe>
             　　<iframe v-else :src="url" frameborder="0" height="100%" scrolling='no' style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
@@ -23,7 +27,7 @@ export default {
         return {
             url:"",
             title:"",
-            type: true
+            type: null
         }
     },
     methods:{
@@ -31,6 +35,19 @@ export default {
             plus.webview.close( "yinlian")
             this.$router.go(-1);
         },
+        // getIfram(){
+        //     let ifram = document.getElementById('ifram');
+        //         if (navigator.userAgent.match(/iPad|iPhone/i)) {
+        //         let iframe_box = document.getElementById('iframe-box');
+        //         iframe_box.style.width = 100 + '%';
+        //         iframe_box.style.overflowX = 'hidden';
+        //         iframe_box.style.overflowY = 'scroll';
+        //         iframe_box.style.webkitOverflowScrolling = 'touch';
+        //         ifram.setAttribute('scrolling', 'no');
+        //         iframe_box.appendChild(ifram)
+        //         console.log(222)
+        //         }
+        // },
         webview(){
             let self= plus.webview.currentWebview(); 
             var yinlian= plus.webview.create(this.url, "yinlian", {  
@@ -39,6 +56,10 @@ export default {
         });  
            self.append(yinlian)
         },
+        mounted () {
+            // this.getIfram()
+        }
+
        
     },
     created(){
@@ -53,6 +74,7 @@ export default {
         // }else{
         // 　　this.type = false
         // }
+        // console.log(this.type)
     }
 }
 </script>
