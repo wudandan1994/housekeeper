@@ -356,11 +356,13 @@ export default {
             }
        }
        .share {
-                >.shareBtn {
-                    margin:50px 0px 30px 30px;
+                .shareBtn {
+                    margin:100px 0px 50px 100px;
                     width:100px;
+                    text-align: center;
                 }
                 ul{
+                    padding-top:50px;
                     display: flex;
                     justify-content: space-between;
                     box-sizing: border-box;
