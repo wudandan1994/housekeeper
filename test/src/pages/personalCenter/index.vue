@@ -653,7 +653,7 @@ export default {
         }
         .per-list{
             background: white;
-            // border-bottom: solid 1px #ccc;
+            border-bottom: solid 1px #ccc;
             .per-menu-list{
                 width: 33%;
                 height: 180px;
