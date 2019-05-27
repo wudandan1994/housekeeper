@@ -37,7 +37,7 @@ export default {
 <style lang="less">
    #violation-inquiry {
        >header {
-           background: #000;
+           background: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;

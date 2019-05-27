@@ -15,7 +15,7 @@
                             </div>
                             <div>
                                 <p class="recommend gray">推荐人</p>
-                                <p>{{nickname}}</p>
+                                <p v-show="showConnect">{{nickname}}</p>
                             </div>
                       </div>
                       <div>
@@ -73,7 +73,7 @@ export default {
             level: '',
             recommendedcode: '',
             privious:"",
-            showConnect:""
+            showConnect: false,
         }
     },
     methods:{
@@ -82,11 +82,11 @@ export default {
         },
         // 上级详细信息
         handleMorePreviousDetail(){
-            this.$toast('暂无更多信息');
+            this.$toast('暂无更多信息')
         },
         // 查询上级
         handlePrevious(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomerUP';
+            let url = '/customer/getCustomerUP';
             let params = {
                 recommendedcode: this.$store.state.wechat.recommendedcode
             };
@@ -96,7 +96,7 @@ export default {
                     this.nickname = res.data.data.nickname
                     this.mobile = res.data.data.mobile
                     this.recommendedcode = res.data.data.promotioncode
-                    this.showConnect=res.data.data.ispermit=="1"?true:false
+                    res.data.data.ispermit=="1" ? this.showConnect = true : this.showConnect = false;
                     res.data.data.level == '0' ?  this.level = '实习' : (res.data.data.level == '1' ? this.level = '黄金会员' : this.level = '钻石会员');
                     setTimeout(()=>{
                         this.componentload = false;

@@ -170,7 +170,7 @@ export default {
         // 所得佣金
         handleFlowDetails(){
             this.componentload = true;
-            let url = 'http://pay.91dianji.com.cn/api/customer/getAmountFrom';
+            let url = '/customer/getAmountFrom';
             let params = {
                 page: 1,
                 pageSize: 1000
@@ -199,7 +199,7 @@ export default {
         // 推广收益
         handlePromotionalBenefits(){
             this.componentload = true;
-            let url = 'http://pay.91dianji.com.cn/api/customer/getPromoteTotal';
+            let url = '/customer/getPromoteTotal';
             let params = {};
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
@@ -227,7 +227,7 @@ export default {
         handleDirectInvitation(){
             this.componentload = true;
             this.indirect = true;
-            let url = 'http://pay.91dianji.com.cn/api/customer/getDirectlyList';
+            let url = '/customer/getDirectlyList';
             let params = {
                 page: this.page,
                 pageSize: this.pageSize,
@@ -256,7 +256,7 @@ export default {
         handleInDirectInvitation(){
             this.componentload = true;
             this.indirect = false;
-            let url = 'http://pay.91dianji.com.cn/api/customer/getIndirectList';
+            let url = '/customer/getIndirectList';
             let params = {
                 page: this.page,
                 pageSize: this.pageSize,
@@ -284,7 +284,7 @@ export default {
         // 邀请中
         handleInvitationing(){
              this.componentload = true;
-            let url = 'http://pay.91dianji.com.cn/api/customer/getNotVipList';
+            let url = '/customer/getNotVipList';
             let params = {
                 page: this.page,
                 pageSize: this.pageSize,

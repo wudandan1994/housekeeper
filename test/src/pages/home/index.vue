@@ -26,7 +26,9 @@
             <!-- 查询模块 -->
             <div class="search">
                 <ul>
-                    <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14',title: '征信查询'}}" tag="li">
+                    <!-- <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14',title: '征信查询'}}" tag="li"> -->
+                    <router-link :to="{path: '/loan/form/myOrder',query: {info:'https://ipcrs.pbccrc.org.cn/',title: '征信查询'}}" tag="li">
+
                         <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
                         <span>征信查询</span>
                     </router-link>
@@ -81,14 +83,23 @@
                             <span>GO>></span>
                         </div>  
                     </li>
-                    <li @click="handleIsAuth('/home/creditHousekeeper')">
+                    <!-- <li @click="searchInfo">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
                         <div class="channel">
                             <h3>信用卡管家</h3>
                             <p>落地商户空卡周转</p>
                             <span>智能还款</span>
                         </div>
-                    </li>
+                    </li> -->
+                     <router-link tag="li" to="/home/creditHousekeeper">
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
+                        <div class="channel">
+                            <h3>信用卡管家</h3>
+                            <p>落地商户空卡周转</p>
+                            <span>智能还款</span>
+                        </div>
+                     </router-link>
+
                 </ul>
             </div>
             <!-- 详情模块 -->
@@ -184,7 +195,7 @@
                             <p>商城</p>
                         </div>
                     </router-link>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://chaxun.weizhang8.cn/guanfangwang.php',title: '违章查询'}}">
+                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
                         <span>
                            <van-icon name="http://pay.91dianji.com.cn/icon_65.png" size="30px" />
                         </span>
@@ -194,6 +205,10 @@
                         </div>
                     </router-link>
                 </ul>
+            </div>
+            <!-- 客服 -->
+            <div class="serve">
+               <router-link tag="p" :to="{path: '/home/cardCenter/progressQuery',query: {info: 'https://kefu.easemob.com/webim/im.html?configId=9cb49ac7-e183-4e98-afbd-e5860ff3b6a0',title: '在线客服'}}"> <van-icon  name="friends" />在线客服</router-link>
             </div>
             <!-- 遮盖层 -->
             <div class="aside-left" v-show="showAaside" @click.self="hideAside">
@@ -208,9 +223,8 @@
                         <router-link to="/home/bindingPhone" tag="li">绑定手机</router-link>
                         <router-link to="/home/customerService" tag="li">联系客服</router-link>
                         <router-link to="/home/aboutUs" tag="li">关于我们</router-link>
-                        <li class="switch">声音开关
-                           
-                        </li>
+                        <!-- <li class="switch">声音开关
+                        </li> -->
                         <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
                         <!-- <router-link to="/home/clearCache" tag="li">清除缓存</router-link> -->
                     </ul>
@@ -276,12 +290,13 @@ export default {
                  mobile:storage.get('username'),
                  password:storage.get('password')
             }
-             axiosPost("http://pay.91dianji.com.cn/api/customer/login",data) 
+             axiosPost("/customer/login",data) 
              .then(res=>{
                 if(!res.data.success){
                      this.$router.push("/logIn");
-                     this.$toast('登录失败');
+                    //  this.$toast('登录失败');
                 }else {
+                    console.log(res,"自动登录成功")
                     this.$store.commit('iscertification',res.data.data.iscertification);
                     this.$store.commit('level',res.data.data.level);
                     this.$store.commit('promotioncode',res.data.data.promotioncode);
@@ -292,6 +307,8 @@ export default {
                     this.$store.commit('openid',res.data.data.openid);
                     this.$store.commit('nickname',res.data.data.nickname);
                     this.$store.commit('headimg',res.data.data.photo);
+                    this.headimg=res.data.data.photo
+                    this.nickname=res.data.data.nickname
                     this.$store.commit('city',res.data.data.city);
                 }
              })
@@ -307,7 +324,7 @@ export default {
                 })
                 .then(() => {
                     let that =this
-                  axiosPost("http://pay.91dianji.com.cn/api/customer/loginOut") 
+                  axiosPost("/customer/loginOut") 
                   .then(function(res){
                       if(!res.data.success){
                           that.$toast({
@@ -330,7 +347,7 @@ export default {
         } ,
         // 查询实名认证
         handleSearchAuths(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+            let url = '/customer/getCustomer';
             // let url = '/customer/getCustomer';
             let params = {
                 openid:this.$store.state.wechat.openid,
@@ -357,15 +374,38 @@ export default {
         // 联系客服
         handleContactUs(){
             this.$router.push('/personalCenter/contactus')
-        }
+        },
+        // searchInfo(){
+        //     axiosPost("/creditCard/getMerchantSettled")
+        //     .then(res=>{
+        //         if(res.data.code==="1"){
+        //             this.$router.push("/home/addCard")
+        //         } else if(res.data.code==="0"){
+        //             // window.location.href = res.data.data.url;
+        //             storage.set('cardManager',res.data.data.url);
+        //             this.$router.push({
+        //                 path: '/cardManager'
+        //             })
+        //         }
+        //     })
+        //     .catch(err=>{
+        //         // console.log(err,"失败");
+                
+        //     })
+        // },
     },
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
+        //  this.automatic()
+
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-        // this.automatic()
-    }  
+       
+    }  ,
+    mounted () {
+        sole.log(this.$store.state.wechat.headimg,"headimg")
+    }
 }
 </script>
 
@@ -495,6 +535,7 @@ export default {
                 }
             }
         }
+       
         >.credit {
             margin-top:20px;
             background-color: #fff;
@@ -546,13 +587,13 @@ export default {
                     }
                 }
             }
-        }
+        }   
         >.details {
             margin-top:10px;
             border-top:1px solid #ccc;
             background-color: #fff;
             padding-bottom:100px;
-            margin-bottom: 100px;
+            margin-bottom: 50px;
             >ul{
                 display: flex;
                 flex-wrap: wrap;
@@ -586,6 +627,14 @@ export default {
                     }
                 }
             }
+        }
+         >.serve {
+            //  background-color: red;
+             margin-bottom: 50px;
+             padding:20px 20px 50px 30px;
+             font-size:34px;
+             color:#4965AE;
+
         }
         >.aside-left {
                 width: 100%;
@@ -647,6 +696,11 @@ export default {
                            border-radius: 10px;
                          }
                     }
+                    .van-dialog .van-button {
+                        /* border: 0; */
+                        border: 1px solid #4b66af;
+                    }
+
                     .van-dialog,
                     .van-dialog__message,
                     .van-button {

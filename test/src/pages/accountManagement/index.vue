@@ -11,10 +11,14 @@
                     <span>手机号</span>
                     <span >{{phone}}</span>
                 </p>
-                <p>
+                <!-- <p>
                     <span>修改登录密码</span>
                     <router-link to="/home/accountManagement/modifyLoginPassword" tag="span"><van-icon name="arrow"/></router-link>
-                </p>
+                </p> -->
+                  <router-link tag="p" to="/home/accountManagement/modifyLoginPassword" >
+                    <span>修改登录密码</span>
+                   <van-icon name="arrow"/>
+                  </router-link>
                
                 <!-- <p>
                     <span>手机号</span>
@@ -27,7 +31,7 @@
             </div>
         </div>
     </div>
-    </div>
+  
 
 </template>
 
@@ -49,7 +53,7 @@ export default {
             let data={
                 openid:this.$store.state.wechat.openid,
             }
-             axiosPost("http://pay.91dianji.com.cn/api/customer/getCustomer",data)
+             axiosPost("customer/getCustomer",data)
              .then(res=>{
                  if(res.data.success){
                      this.show=true

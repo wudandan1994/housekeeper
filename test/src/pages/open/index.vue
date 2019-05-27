@@ -71,7 +71,7 @@ export default {
             cardback:"idcardback.jpg",
             cardWithhand:"imgwiths.jpg",
             bankfront:"01.jpg",
-             componentload:true,
+             componentload:false,
             bankback:"bankb.jpg",
             baseUrl:"",
             show:false,
@@ -84,31 +84,11 @@ export default {
         goBack() {
             this.$router.push('/home')
         },
-        sureSubmit(){
-            let data={
-                chMerCode:this.info
-            }
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",data)
-            .then(res=>{
-                let type=res.data.data.uploadStatus
-                if(res.data.data.uploadStatus==="0"){
-                     setTimeout(()=>{
-                        this.componentload=false
-                    },500)
-                     this.$router.push("/home/collect/payment")
-                  } else {
-                       this.componentload=false
-                  } 
-            })
-            .catch(err=>{
-
-            })
-            
-        },
+        
          onRead(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            let url = '    /upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -121,7 +101,7 @@ export default {
                         photoType:"1",
                         photoData:this.cardfront
                     }
-                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/photoUpload",datas)
+                     axiosPost("/creditCard/photoUpload",datas)
                         .then(res=>{
                             if(!res.data.success){
                                 this.$toast({
@@ -131,7 +111,7 @@ export default {
                                  let datas={
                                     chMerCode:this.info
                                 }
-                                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",datas)
+                                 axiosPost("/creditCard/getMemberRegLine",datas)
                                     .then(res=>{
                                         if(!res.data.success){
                                             this.$toast({
@@ -163,7 +143,7 @@ export default {
          onReadF(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            let url = ' /upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -176,7 +156,7 @@ export default {
                         photoType:"2",
                         photoData:this.cardback
                     }
-                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/photoUpload",datas)
+                     axiosPost("/creditCard/photoUpload",datas)
                         .then(res=>{
                             if(!res.data.success){
                                 this.$toast({
@@ -186,7 +166,7 @@ export default {
                                  let datas={
                                     chMerCode:this.info
                                 }
-                                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",datas)
+                                 axiosPost("/creditCard/getMemberRegLine",datas)
                                     .then(res=>{
                                         if(!res.data.success){
                                             this.$toast({
@@ -216,7 +196,7 @@ export default {
          onReadS(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            let url = '/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -229,7 +209,7 @@ export default {
                         photoType:"3",
                         photoData:this.cardWithhand
                     }
-                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/photoUpload",datas)
+                     axiosPost("/creditCard/photoUpload",datas)
                         .then(res=>{
                             if(!res.data.success){
                                 this.$toast({
@@ -239,7 +219,7 @@ export default {
                                  let datas={
                                     chMerCode:this.info
                                 }
-                                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",datas)
+                                 axiosPost("/creditCard/getMemberRegLine",datas)
                                     .then(res=>{
                                         if(!res.data.success){
                                             this.$toast({
@@ -270,7 +250,7 @@ export default {
          onReadQ(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            let url = '/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -283,7 +263,7 @@ export default {
                         photoType:"4",
                         photoData:this.bankfront
                     }
-                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/photoUpload",datas)
+                     axiosPost("/creditCard/photoUpload",datas)
                         .then(res=>{
                             if(!res.data.success){
                                 this.$toast({
@@ -293,7 +273,7 @@ export default {
                                  let datas={
                                     chMerCode:this.info
                                 }
-                                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",datas)
+                                 axiosPost("/creditCard/getMemberRegLine",datas)
                                     .then(res=>{
                                         if(!res.data.success){
                                             this.$toast({
@@ -324,7 +304,7 @@ export default {
          onReadH(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            let url = '/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -337,7 +317,7 @@ export default {
                         photoType:"5",
                         photoData:this.bankback
                     }
-                     axiosPost("http://pay.91dianji.com.cn/api/creditCard/photoUpload",datas)
+                     axiosPost("/creditCard/photoUpload",datas)
                         .then(res=>{
                             if(!res.data.success){
                                 this.$toast({
@@ -347,7 +327,7 @@ export default {
                                  let datas={
                                     chMerCode:this.info
                                 }
-                                 axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberRegLine",datas)
+                                 axiosPost("/creditCard/getMemberRegLine",datas)
                                 .then(res=>{
                                     if(!res.data.success){
                                         this.$toast({
@@ -375,7 +355,7 @@ export default {
             })
         },
         findphoto(){
-             axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMemberPhoto")
+             axiosPost("/creditCard/getMemberPhoto")
                 .then(res=>{
                     this.photoList=res.data.data
                     this.photoList.forEach(item => {
@@ -402,7 +382,6 @@ export default {
     },
     created () {
           this.info=this.$route.query.info
-          this.sureSubmit()
           this.findphoto()
     }
 }

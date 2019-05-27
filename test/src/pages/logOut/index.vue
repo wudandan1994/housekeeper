@@ -84,7 +84,7 @@ export default {
                     mobile:that.mobile,
                     type:"2"
                 }
-                let url="http://pay.91dianji.com.cn/api/customer/sendSms"
+                let url="/customer/sendSms"
                  axiosPost(url,data)
                 .then(function(res){
                     if(!res.data.success){
@@ -117,7 +117,7 @@ export default {
         // 注册
         modify(){
              let that=this
-            let partten=/^1\d{10}$/  // 11位手机号的正则
+            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/  // 11位手机号的正则
             if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
@@ -165,7 +165,7 @@ export default {
                 password:that.suerPassword,
             }
                  // 注册
-             axiosPost("http://pay.91dianji.com.cn/api/customer/insertPhoneRegistered",data)
+             axiosPost("/customer/insertPhoneRegistered",data)
              .then(function(res){
                  if(res.data.success){
                         let datas={
@@ -173,7 +173,7 @@ export default {
                         password:that.password
                     }
                     //  登录
-                    axiosPost("http://pay.91dianji.com.cn/api/customer/login",datas)
+                    axiosPost("/customer/login",datas)
                     .then(function(res){
                         that.$router.push("/home")
                     })

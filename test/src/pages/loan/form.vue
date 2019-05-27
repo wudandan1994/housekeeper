@@ -16,25 +16,25 @@
         <div class="per-input top row">
             <div class="icon end-center"><van-icon name="manager" size="1.5em" /></div>
             <div class="label start-center">姓名</div>
-            <div class="user-input"><input type="text" v-model='form.name' class="end-center" placeholder="请填写申请人姓名"/></div>
+            <div class="user-input"><input type="text" v-model='form.name' placeholder="请填写申请人姓名"/></div>
         </div>
 
         <div class="per-input  row">
             <div class="icon end-center"><van-icon name="card" size="1.5em" /></div>
             <div class="label start-center">证件</div>
-            <div class="user-input"><input type="text" v-model="form.idcardnumber" class="end-center" placeholder="请填写申请人身份证号码"/></div>
+            <div class="user-input"><input type="text" v-model="form.idcardnumber" placeholder="请填写申请人身份证号码"/></div>
         </div>
 
         <div class="per-input  row">
             <div class="icon end-center"><van-icon name="graphic" size="1.5em" /></div>
             <div class="label start-center">电话</div>
-            <div class="user-input"><input type="number" v-model="form.mobile" class="end-center" placeholder="请填写申请人手机号码"/></div>
+            <div class="user-input"><input type="number" v-model="form.mobile" placeholder="请填写申请人手机号码"/></div>
         </div>
 
         <div class="per-input  row">
             <div class="icon end-center"><van-icon name="coupon" size="1.5em" /></div>
             <div class="label start-center">验证码</div>
-            <div class="user-code"><input type="text" v-model="form.code" class="end-center" placeholder="请输入验证码"/></div>
+            <div class="user-code"><input type="text" v-model="form.code" placeholder="请输入验证码"/></div>
             <div class="safe-code center" @click="changeCode">{{realCode}}</div>
         </div>
 
@@ -180,7 +180,7 @@ export default {
            }else if(this.form.mobile == ''){
                this.$toast('请填写申请人手机号')
            }
-           else if((this.form.code).trim() == '' || (this.form.code).trim() != (this.realCode).trim()){
+           else if((this.form.code).replace(/\s*/g,"") == '' || (this.form.code).replace(/\s*/g,"") != (this.realCode).replace(/\s*/g,"")){
                this.$toast('请检查验证码');
            }
            else if(this.checked == false){
@@ -192,7 +192,7 @@ export default {
                    mobile:this.form.mobile,
                    certcode:this.form.idcardnumber
                }
-               axiosPost("http://pay.91dianji.com.cn/api/creditCard/getLoanUrl",data)
+               axiosPost("/creditCard/getLoanUrl",data)
               
                .then(res=>{
                    if(!res.data.success){
@@ -208,7 +208,7 @@ export default {
                             path:"/loan/form/myOrder",
                             query:{
                                 info:url,
-                                title:"贷款"
+                                title:"贷款中心"
                               }
                           })
                         },1000)
@@ -223,7 +223,7 @@ export default {
         },
          // 获取实名认证信息
         handleGetAOuth(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
+            let url = '/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
                 // console.log('获取实名认证状态成功',res);
@@ -244,7 +244,7 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less" >
     #page-component-form{
         width: 100vw;
         height: auto;
@@ -282,7 +282,7 @@ export default {
             margin-top: 30px;
         }
         .per-input {
-            // width: 100vw;
+            width: auto;
             height: 80px;
             .icon{
                 width:8vw;
@@ -296,7 +296,7 @@ export default {
                 margin-left: 2vw;
             }
             .user-input{
-                width: 75vw;
+                width: 73vw;
                 height: 100%;
                 >input::-webkit-input-placeholder{
                     font-size:24px;
@@ -306,13 +306,14 @@ export default {
                     width: 100%;
                     height: 99%;
                     border: none;
-                    text-align: right;
+                    text-align: left;
                     font-size: 26px;
                     background: transparent;
+                    padding-left: 10px;
                 }
             }
             .user-code{
-                width: 50vw;
+                width: 48vw;
                 height: 100%;
                input::-webkit-input-placeholder{
                     font-size:24px;
@@ -323,8 +324,9 @@ export default {
                     height: 92%;
                     border: none;
                     font-size: 26px;
-                    text-align: right;
+                    text-align: left;
                     background: transparent;
+                    padding-left: 10px;
                 }
             }
             .safe-code{
@@ -333,8 +335,8 @@ export default {
                 margin-left: 2vw;
                 font-size: 30px;
                 letter-spacing: 5px;
-                background: #F7F8FC;
-                color: #236B8F;
+                background:rgba(75,102,175,0.5);
+                color: #f2f2f2;
                 font-weight: 700;
             }
         }
@@ -371,6 +373,10 @@ export default {
             padding-top: 40px;
             padding-bottom: 50px;
             background: #F7F6FB;
+            .van-checkbox__icon .van-icon{
+                      border:1px solid #000;
+                  }
+            
             span{
                 color: #4B66AF;
             }
@@ -379,7 +385,7 @@ export default {
                 height: auto;
                 margin-left: auto;
                 margin-right: auto;
-                margin-top: 40px;
+                margin-top: 45px;
                 line-height: 40px;
             }
         }

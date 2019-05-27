@@ -2,9 +2,7 @@
 <div id="financial-circle-component">
     <header class="header">
         <div class="more end-center">
-            <div id="nativeShare">
-                 <van-icon name="weapp-nav" size='20px' @click="handleMore" />
-            </div>
+            <van-icon name="weapp-nav" size='20px' @click="handleMore" />
         </div>
         <div class="topTwo row center">
             <div class="center" :class="{ checked: isActive == '1' }" @click="getIndex">金融人脉圈</div>
@@ -32,7 +30,22 @@
                  <financ></financ>
             </van-tab>
         </van-tabs>
+        <div class="share" v-show="showShare">
+            <ul>
+               <ul>
+                                <li id="wxF"  @click="wxfri">
+                                    <p><van-icon name="http://pay.91dianji.com.cn/wx.png"/></p>
+                                    <p>好友</p>
+                                </li>
+                                <li @click="wxcir">
+                                    <p><van-icon color="white" size="20px" name="http://pay.91dianji.com.cn/pyq.png"/></p>
+                                    <p>朋友圈</p>
+                                </li>
+                            </ul>
+            </ul>
+        </div>
     </div>
+    
     <footerMenu :active="active" @getChange="changeActive"></footerMenu>
 </div>
 </template>
@@ -40,7 +53,7 @@
 <script>
 import financ from '@/components/financial/index'
 import footerMenu from '@/components/footer'
-import {nativeShare} from '@/lib/share.js'
+// import {nativeShare} from '@/lib/share.js'
 export default {
     data(){
         return{
@@ -49,6 +62,9 @@ export default {
             threshold: 6,
             isActive: '1',
             active: 4,
+            showShare:false,
+            shares:null,
+            sharewx:null,
         }
     },
     components: {
@@ -59,61 +75,39 @@ export default {
         getIndex(val){
             val.target.innerText == '金融人脉圈' ? this.isActive = '1' : this.isActive = '2';
         },
+        wxfri(){
+            let that=this
+            plus.share.getServices(function (s) {
+                that.shares = s;
+                for (var i in s) {
+                    if ('weixin' == s[i].id) {
+                        that.sharewx = s[i];
+                    }
+                }
+                console.log(JSON.stringify(that.sharewx))
+                console.log(new Date())
+                    that.shareWeixinMessage()
+
+            }, function (e) {
+                alert("获取分享服务列表失败：" + e.message);
+            });
+        },
+       
+         shareWeixinMessage() {
+             let that=this
+              console.log(JSON.stringify(that.sharewx),"55555555555555555")
+             that.sharewx.send({ content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝", href: "http://pay.91dianji.com.cn/#/home?promotioncode=02400219", extra: { scene: "WXSceneSession" } }, function () {
+            // alert("分享成功！");
+        }, function (e) {
+            alert("分享失败：" + e.message);
+        });
+    },
+
         // 获取更多
         handleMore(){
-             let config = {
-                url:'http://pay.91dianji.com.cn/#/home?promotioncode=02400219',// 分享的网页链接
-                title:'钱夹宝',// 标题
-                desc:'金融圈',// 描述
-                img:'http://pay.91dianji.com.cn/banner03.jpg',// 图片
-                img_title:'轮播图图片',// 图片标题
-                from:'钱夹宝APP' // 来源
-            };
-            // var share_obj = new nativeShare('nativeShare',config);
-            var share_obj = new nativeShare('nativeShare',config);
-
-
-
-            // this.$toast('敬请期待');
-            // 监听plusready事件  
-                //  var  shares=null
-                // 扩展API加载完毕，现在可以正常调用扩展API
-                // plus.share.getServices(function(s){
-                //      shares = s;
-                //      let a=shares[0]
-                //       if(!a.authenticated){
-                //         a.authorize(function(){
-                //             // plus.share.sendWithSystem({content:'分享内容',href:'http://www.dcloud.io/'}, function(){
-                //             //         console.log('分享成功');
-                //             //     }, function(e){
-                //             //         console.log('分享失败：'+JSON.stringify(e));
-                //             //     });
-                //             console.log("认证完成！")
-                //         },function(e){
-                //             console.log("未进行认证")
-                //         },{
-                //             "appid":"wx14b0bd9f1c7e0c41"
-                //         })
-                //     }
-                //     // console.log(shares,"获取分享列表成功")
-                //     // alert(shares,"获取分享列表成功")
-                // }, function(e){
-                //     // alert("获取分享服务列表失败："+e.message)
-                //     //  console.log("获取分享服务列表失败："+e.message);
-                // });
-                // function shareAction(){
-                //     let s=shares[0]
-                //     console.log(s);
-                //     if(!s.authenticated){
-                //         s.authorize(function(){
-                //             console.log("认证完成！")
-                //         },function(e){
-                //             console.log("未进行认证")
-                //         },{
-                //             "appid":"wx14b0bd9f1c7e0c41"
-                //         })
-                //     }
-                // }
+            this.showShare=true
+            // this.$toast("敬请期待")
+           
         },
         changeActive(obj){
             // console.log('obj', obj);
@@ -155,6 +149,19 @@ export default {
         }
         .container{
             height:auto;
+        }
+        .share {
+            background-color: red;
+            width:100%;
+            height: 300px;
+            color:#ccc;
+            padding:20px;
+            >ul{
+                display: flex;
+                >li {
+                    width:30%;
+                }
+            }
         }
 }
 </style>

@@ -16,7 +16,7 @@
                                     2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
                                     3. 招商收益<br/>
                                     4. 信用卡办卡收益<br/>
-                                    5. 智能精养、空卡周转、商户收款、车险等分润收益<br/>
+                                    5. 费率说明：垫还为万72+1元/笔，商户收款为万47+1元/笔<br/>
                                 </div>
                             </van-popup>
                              <span @click="isShowRule">退换规则</span>
@@ -55,7 +55,7 @@
                                     2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
                                     3. 招商收益<br/>
                                     4. 信用卡办卡收益<br/>
-                                    5. 智能精养、空卡周转、商户收款、车险分润收益<br/>
+                                    5. 费率说明：垫还为万81+2元/笔，商户收款为万54+2元/笔<br/>
                                 </div>
                             </van-popup>
                              <span @click="isShowRule">退换规则</span>
@@ -128,12 +128,12 @@
             <div class="per-title row">
                 <div class="goods-title start-center">付款方式</div>
                 <div class="goods-detail row">
-                    <!-- <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
+                    <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-wechatpay"></use>
                         </svg>
                         微信支付
-                    </div> -->
+                    </div>
                     <div class="paytypes center" :class="{'alipay': paytype == 'alipay'}" @click="handlePayType('alipay')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-alipay"></use>
@@ -231,7 +231,7 @@ export default {
             }else{
                 name = '钱夹宝黄金会员'
             }
-            let url = 'http://pay.91dianji.com.cn/api/order/insertOrder';
+            let url = '/order/insertOrder';
             let params = {
                 amount: this.price,
                 name: this.level
@@ -240,7 +240,7 @@ export default {
                 if(res.data.success){
                     this.orderid = res.data.data.orderid;
                     // 请求上级推荐人
-                    let url = 'http://pay.91dianji.com.cn/api/customer/getCustomerUP';
+                    let url = '/customer/getCustomerUP';
                     let params = {
                         recommendedcode: this.$store.state.wechat.recommendedcode
                     };
@@ -284,7 +284,7 @@ export default {
                     trade_type: 'JSAPI',
                     openid: storage.get('openid')
                 };
-                var url = 'http://pay.91dianji.com.cn/api/order/wxPayH5';
+                var url = '/order/wxPayH5';
                 axiosPost(url,params).then(res =>{
                         var radom = Math.random().toString(36).substr(2);
                         var tmp = Date.parse( new Date() ).toString();
@@ -488,7 +488,7 @@ export default {
                  margin-left: auto;
                  margin-right: auto;
                  >ul{
-                     list-style: square;
+                     list-style: none;
                      .van-rate{
                          float: left;
                      }
@@ -499,7 +499,7 @@ export default {
                          margin-top: 20px;
                          margin-left: auto;
                          margin-right: auto;
-                        list-style: square; 
+                        list-style: none; 
                         line-height: 40px;
                      }
                  }

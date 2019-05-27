@@ -67,7 +67,7 @@ export default {
         },
         // 获取数据
         handleGetData(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getEarnings';
+            let url = '/customer/getEarnings';
             let params = {};
             axiosPost(url,params).then(res =>{
                 if(res.data.success){

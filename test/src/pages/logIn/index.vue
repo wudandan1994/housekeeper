@@ -21,14 +21,16 @@
                </p>
                <p @click="forgetPassword">忘记密码？</p>
            </div>
-           <van-button @click="logInPass" class="login center" type="default">登录</van-button>
-            <!-- <div class="wx-login row">
+           <div class="button">
+                <van-button @click="logInPass" class=" center" size="large" type="default">登录</van-button>
+           </div>
+            <div class="wx-login row">
                 <div class="logIn start-center" @click="logIn">
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
                     <span>微信登录</span>
                 </div>
-                <div class="register end-center" @click="register">注册</div>
-            </div> -->
+                <!-- <div class="register end-center" @click="register">注册</div> -->
+            </div>
         </div>
     </div>
 
@@ -76,7 +78,7 @@ export default {
                 mobile:that.phone,
                 password:that.password
             }
-            that.$http.post("http://pay.91dianji.com.cn/api/customer/login",qs.stringify(data))
+            axiosPost("/customer/login",data)
             .then(function(res){
                 if(res.data.success){
                     that.$store.commit('iscertification',res.data.data.iscertification);
@@ -101,7 +103,10 @@ export default {
                     }
                      storage.set('username',that.phone);
                      storage.set('password',that.password);
-                     that.$router.push('/home');
+                    //  setTimeout(()=>{
+                         that.$router.push('/home');
+                    //  },2000)
+                     
                 }else{
                     that.$toast({
                         message:res.data.message
@@ -116,13 +121,8 @@ export default {
         // 登录
             logIn(){
                 // console.log(location.href)
-
-
-            //  location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=
-            // http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
-      
+                window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
           
-
         //    var auths=null
         //    let that=this
         //    plus.oauth.getServices( function(services){
@@ -137,7 +137,6 @@ export default {
         //         break; 
         //     }
         //   }
-
         //   if(!s.authResult){
 		// 	s.login(function(e){
 		// 		// 获取登录操作结果
@@ -148,7 +147,7 @@ export default {
 		// 		}, function(e){
 		// 			console.log( "获取用户信息失败："+e.message+" - "+e.code );
 		// 			that.$toast('获取用户信息失败');
-		// 		} );
+		// 		});
 				
 		// 	}, function(e){
 		// 		that.$toast('登录认证失败');
@@ -161,8 +160,7 @@ export default {
         // },function(e){
         //     that.$toast("登录认证失败")
         // })
-        
-       
+          }
     },
 
     created(){
@@ -170,7 +168,6 @@ export default {
         this.password = storage.get('password');
         this.checked= storage.get('rempass');
     },
-}
 }
 </script>
 
@@ -281,18 +278,16 @@ export default {
                     
                }
            }
-           >.login {
+           .button {
                width:80%;
-               height: 100px;
-               border-radius: 10px;
-               background-color: #4B66AF;
-               margin-left: auto;
-               margin-right: auto;
-               color:#fff;
-               text-align: center;
-               border: none;
-               font-size: 28px;
+                 margin:0 auto;
+               padding:0 30px;
+               >button {
+                   border-radius: 10px;
+                   text-align: center;
+               }
            }
+           
            >.wx-login {
                 width:80%;
                 height: 80px;

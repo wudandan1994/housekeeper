@@ -54,7 +54,7 @@ export default {
                 let data={
                     amount:that.repayment
                 }
-                axiosPost("http://pay.91dianji.com.cn/api/creditCard/getPoundage",data)
+                axiosPost("/creditCard/getPoundage",data)
                 .then(function(res){
                     // console.log(res);
                     if(!res.data.message){
@@ -84,7 +84,7 @@ export default {
                 P11_terminalType:"IMEI",
                 P12_terminalId:"122121212121",
             }
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/bindCardPayWithoutCode",data)
+            axiosPost("/creditCard/bindCardPayWithoutCode",data)
             .then(function(res){
                 // console.log(res,"result")
                 if(!res.data.success){

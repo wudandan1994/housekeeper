@@ -5,32 +5,32 @@
             <span>信用卡管家</span>
             <span></span>
         </header>
-        <!-- <div class="container">
+       <div class="container">
            <h3>钱夹宝智能还款</h3>
-           <p class="mode">空卡,智能,急速3种模式</p>
+           <p class="mode">智能,极速2种模式</p>
            <div class="light">
                <ul>
-                   <li>
+                   <!-- <li>
                        <p ><van-icon name="http://pay.91dianji.com.cn/110.png"/></p>
                        <div>
-                           <p>凡是钻石会员等级，即可帮助他人进行绑卡操作！</p>
+                           <p>凡是钻石会员等级，即可操作！</p>
                            <p>打破部分人群绑卡操作困难痛点，自己后台替他人操作。一帮到底，真正做到一站式扶持，加速团队裂变！</p>
                        </div>
-                   </li>
+                   </li> -->
                    <li>
                        <p><van-icon name="http://pay.91dianji.com.cn/112.png"/></p>
                        <div>
                            <p>精养卡智能规划，千城布局，省时省心</p>
-                           <p>卡内预留2%以上即可，大额也支持，笔笔落地商户，健康消费，智能完美账单</p>
+                           <p>卡内预留5%以上即可，大额也支持，笔笔落地商户，健康消费，智能完美账单</p>
                        </div>
                    </li>
-                   <li>
+                   <!-- <li>
                        <p><van-icon name="http://pay.91dianji.com.cn/113.png"/></p>
                        <div>
                            <p>空卡周转，解决急需，维护信用</p>
                            <p>全程只需手续费，我给额度你来还，避免逾期，保你信用无忧</p>
                        </div>
-                   </li>
+                   </li> -->
                    <li>
                        <p><van-icon name="http://pay.91dianji.com.cn/114.png"/></p>
                        <div>
@@ -47,42 +47,68 @@
                    </li>
                </ul>
            </div>
-            <router-link to="/home/creditHousekeeper/aisleHousekeeper" tag="li" class="next" >
+            <!-- <router-link to="/home/creditHousekeeper/aisleHousekeeper" tag="li" class="next" >
                 <span>继续</span>
-            </router-link>
-        </div> -->
+                <van-button round size="large" type="default">继续</van-button>
+            </router-link> -->
+            <div class="keep">
+                  <!-- <div class="next">
+                      <van-button @click="keep" round size="large" type="default">继续</van-button>
+                  </div> -->
+                      <div class="select" >
+                          <p>请选择还款模式</p>
+                      <ul>
+                          <li @click="searchInfo">
+                              <div><van-icon name="http://pay.91dianji.com.cn/putong.png" size="40px"/></div>
+                              <p>普通代还</p>
+                               <p> <van-icon name="arrow" size="30px"/></p>
+                          </li>
+                          <router-link tag="li" to="/home/creditHousekeeper/aisleHousekeeper">
+                              <div><van-icon name="http://pay.91dianji.com.cn/wanmei.png" size="40px"/></div>
+                              <p>完美账单</p>
+                              <p> <van-icon name="arrow" size="30px"/></p>
+                          </router-link>
+                      </ul>
+                 
+                  </div>
+                  
+                  
+            </div>
+        </div> 
     </div>
 
 </template>
-
-
 <script>
 import {axiosPost} from '@/lib/http'
 export default {
     data() {
         return {
-
+            showSelect:false
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home')
         },
+        keep(){
+            this.showSelect=true
+        },
         searchInfo(){
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMerchantSettled")
+            axiosPost("/creditCard/getMerchantSettled")
             .then(res=>{
+                console.log('链接请求成功',res);
                 if(res.data.code==="1"){
                     this.$router.push("/home/addCard")
                 } else if(res.data.code==="0"){
-                    // location.href=res.data.data.url
-                    let url=res.data.data.url
-                        this.$router.push({
-                            path:"/home/cardCenter/progressQuery",
-                            query:{
-                                info:url,
-                                title:"还款"
-                              }
-                        })
+                    window.location.href=res.data.data.url
+                    // let url=res.data.data.url
+                        // this.$router.push({
+                        //     path:"/home/cardCenter/progressQuery",
+                        //     query:{
+                        //         info:url,
+                        //         title:"还款"
+                        //       }
+                        // })
                 }
             })
             .catch(err=>{
@@ -93,7 +119,6 @@ export default {
 
     },
     created () {
-        this.searchInfo()
     }
 }
 </script>
@@ -201,18 +226,51 @@ export default {
                    }
                }
            }
-           >.next {
-              padding-top:30px;
-              padding-bottom: 30px;
-              text-align: center;
-              color:#fff;
-              background-color: #4B66AF;
-              width:90%;
-              margin-top:60px;
-              margin-left:5%;
-              margin-bottom: 100px;
-              border-radius: 15px;
+           >.keep {
+               position: relative;
+               margin-top:50px;
+                    .select {
+                        width:100%;
+                        // background-color: #fff;
+                        box-sizing: border-box;
+                       margin:10px;
+                       >p {
+                           text-align: center;
+                           color:#4B66AF;
+                           font-weight: bold;
+                           font-size: 36px;
+                           padding-bottom: 20px;
+                       }
+                   > ul{
+                       display: flex;
+                       flex-wrap: wrap;
+                        margin-right:20px;
+                         margin-left:40px;
+                       >li {
+                           width:100%;
+                           padding:10px;
+                            display: flex;
+                           justify-content: space-between;
 
+                           &:nth-of-type(1){
+                               padding-bottom: 30px;
+                              border-bottom: 1px solid #ccc;
+                           }
+                            &:nth-of-type(2){
+                               padding-top: 30px;
+                           }
+                           align-items: center;
+                           >p {
+                               font-weight: bold;
+                            
+                               margin-left:30px;
+                               &:nth-of-type(1){
+                                      flex:1;
+                               }
+                           }
+                       }
+                    }
+                }
            }
        }
    }

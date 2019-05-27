@@ -9,7 +9,7 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath:'/',
     proxyTable: {
       '/api': {
         target: 'http://pay.91dianji.com.cn', //http://106.14.141.40:8080 192.168.101.71

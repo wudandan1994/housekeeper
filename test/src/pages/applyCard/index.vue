@@ -2,7 +2,7 @@
     <div id="apply-card">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>办卡中心</span>
+            <span>信用卡申请</span>
             <span></span>
         </header>
         <div class="container">
@@ -98,7 +98,7 @@ export default {
                 merCardName:that.info.merCardName,
                 bankCardId:that.info.merCardId
             }
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/insertCreditCard",data)
+            axiosPost("/creditCard/insertCreditCard",data)
             .then(function(res){
 
                 if(!res.data.success){
@@ -114,7 +114,7 @@ export default {
                             path:"/loan/form/myOrder",
                             query:{
                                 info:url,
-                                title:"办卡"
+                                title:"办卡中心"
                               }
                         })
                     },1000)
@@ -135,7 +135,7 @@ export default {
         },
         // 获取实名认证信息
         handleGetAOuth(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getIdentification';
+            let url = '/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
                 if(res.data.data.status != '0'){

@@ -55,7 +55,7 @@ export default {
         // 获取验证码
         getCode(){
             let that=this
-            let partten=/^1\d{10}$/
+            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/
             if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
@@ -66,7 +66,7 @@ export default {
                     mobile:this.mobile,
                     type:"1"
                 }
-                axiosPost("http://pay.91dianji.com.cn/api/customer/sendSms",data)
+                axiosPost("/customer/sendSms",data)
                 .then(function(res){
                     if(!res.data.success){
                         that.$toast({
@@ -103,7 +103,7 @@ export default {
         },
         bindingPhone() {
             let that=this
-            let partten = /^1[345789]\d{9}$/
+            let partten = /0?(13|14|15|17|18|19)[0-9]{9}/
             if(this.mobile.trim().length===0){
                  that.$toast({
                     message:"手机号码不能为空"
@@ -124,7 +124,7 @@ export default {
                     mobile:that.mobile,
                     authcode:that.authcode
                 };
-                axiosPost("http://pay.91dianji.com.cn/api/customer/updateMobile",data)
+                axiosPost("/customer/updateMobile",data)
                 .then(function(res){
                     if(res.data.success){
                         that.$toast({

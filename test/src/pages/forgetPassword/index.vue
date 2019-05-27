@@ -55,7 +55,7 @@ export default {
     methods:{
         // 判断是否绑定手机号
         handleJundeMobile(){
-            let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+            let url = '/customer/getCustomer';
             // let url = '/customer/getCustomer';
             let params = {
                 openid:this.$store.state.wechat.openid,
@@ -81,11 +81,11 @@ export default {
             })
         },
         goBack() {
-            this.$router.push('/home/accountManagement')
+            this.$router.push('/logIn')
         },
         getCode(){
             let that=this
-            let partten=/^1\d{10}$/
+            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/ 
             if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
@@ -96,7 +96,7 @@ export default {
                     mobile:this.mobile,
                     type:"3"
                 }
-                axiosPost("http://pay.91dianji.com.cn/api/customer/sendSms",data)
+                axiosPost("/customer/sendSms",data)
                 .then(function(res){
                     if(!res.data.success){
                         that.$toast({
@@ -128,7 +128,7 @@ export default {
         },
         modify(){
              let that=this
-            let partten=/^1\d{10}$/  // 11位手机号的正则
+            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/   // 11位手机号的正则
             //  let code=/[0-9A-Za-z] {6,18} /  //密码的正则
             if(!partten.test(that.mobile)){
                  that.$toast({
@@ -172,16 +172,19 @@ export default {
                 mobile:that.mobile,
                 authcode:that.authcode
             }
-             axiosPost("http://pay.91dianji.com.cn/api/customer/updatePassWord",data)
+             axiosPost("/customer/forgetPassWord",data)
              .then(function(res){
                 //  console.log(res,"result");
-                 that.$toast({
-                     message:res.data.message
-                 })
-                 that.mobile=""
-                 that.authcode=""
-                 that.newPassword=""
-                 that.suerPassword=""
+                if(res.data.success){
+                     that.$toast({
+                        message:res.data.message
+                    })
+                    that.mobile=""
+                    that.authcode=""
+                    that.newPassword=""
+                    that.suerPassword=""
+                }
+                
              })
              .catch(function(err){
                 //  console.log(err,"error");
