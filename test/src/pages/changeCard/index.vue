@@ -322,12 +322,12 @@ export default {
                            flex: 1;
                            font-size: 30px;
                         //    text-align: right;
-                         height: 100px;
+                           height: 100px;
                            margin-top:-26px;
                        }
                        ::-webkit-input-placeholder {
-                            font-size: .5rem;
-                            margin-top:-30px;
+                            font-size:28px;
+                            margin-top:-22px;
                        }
                    }
                }

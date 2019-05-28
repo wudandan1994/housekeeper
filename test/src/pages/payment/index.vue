@@ -409,14 +409,17 @@ export default {
                               }
                               >.info {
                                   flex:1;
-                                  border:2px solid #ccc;
-                                  background-image: -webkit-linear-gradient(0deg, #57A4DD, #B8DDFF);
+                                //   border:2px solid #ccc;
+                                //   background-image: -webkit-linear-gradient(0deg, #57A4DD, #B8DDFF);
+                                background-color: #4b66af;
                                   border-radius: 10px;
-                                  padding:10px 0px 20px 15px;
+                                  padding:10px 20px 20px 15px;
                                   color:#fff;
                                 //   color:#fff;
                                   >p {
                                       &:nth-of-type(1){
+                                          display: flex;
+                                          justify-content: space-between;
                                           padding:10px 0px;
                                       }
                                       &:nth-of-type(2){
@@ -473,10 +476,11 @@ export default {
                            margin-right:50px;
                            height: 100px;
                             margin-top:-26px;
+                            font-size: 30px;
                        }
                         ::-webkit-input-placeholder{
-                            font-size: .5rem;
-                            margin-top:-30px;
+                            font-size:28px;
+                            margin-top:-22px;
                         }
                        
                      

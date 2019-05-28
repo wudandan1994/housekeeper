@@ -456,11 +456,9 @@ export default {
                            text-align: right;
 
                        }
-                       input::-webkit-input-placeholder {
-                           font-size: 28px;
-                           padding-top: 8px;
-                           height: 30px;
-                           line-height: 30px;
+                       ::-webkit-input-placeholder {
+                           font-size:28px;
+                            margin-top:-22px;
                        }
                    }
                }

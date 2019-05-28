@@ -397,7 +397,7 @@ export default {
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
-        //  this.automatic()
+         this.automatic()
 
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
