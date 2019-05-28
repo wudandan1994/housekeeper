@@ -104,14 +104,14 @@ export default {
         //    showrecord:false,
            show:false,
            showClass:'',
-        //    cardList:[],
-            cardList:[
-               {
-                bankNick:"华夏银行",
-                payerName:"吴",
-                cardNo:"6226621406110260"
-               }
-           ],
+           cardList:[],
+        //     cardList:[
+        //        {
+        //         bankNick:"华夏银行",
+        //         payerName:"吴",
+        //         cardNo:"6226621406110260"
+        //        }
+        //    ],
            showCardList:false,
            showBinding:false,
         //    showCardList:true,

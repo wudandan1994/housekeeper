@@ -514,7 +514,7 @@ export default {
                     padding-right:15px;
                      input{
                     width: 98vw;
-                    height: 80px;
+                    height: 100px;
                     padding-left: 2vw;
                     font-size: 26px;
                     color: #333;
@@ -527,8 +527,7 @@ export default {
                     padding-top: 4px;
                     background-color: red;
                     line-height: 1.2rem;
-
-                 }
+                  }
                 }
             }
        }
