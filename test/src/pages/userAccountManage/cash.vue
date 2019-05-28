@@ -130,7 +130,6 @@ export default {
         },
         // 应付只绑定一张银行卡的情况
         handleConfirm(value, index){
-            console.log('选择银行卡',value);
             if(value.length == '0'){
                 this.bank_select = false;
                 this.$toast('请先绑定银行卡');
@@ -138,7 +137,6 @@ export default {
                 this.bank_select = false;
                 this.bankname = value;
                 this.cardId = ((this.bankcardlist).filter(item =>item.abridge == value))[0].id;
-                console.log('当前选择银行卡id',this.cardId);
             }
             
         },
@@ -154,7 +152,6 @@ export default {
         },
         // 输入框内容变化时计算手续费
         handleServiceChange(){
-            console.log('当前提现金额',this.cash);
             if(parseInt(this.cash) > parseInt(this.amount)){
                 this.$toast('提现金额不能大于余额');
             }else if(parseInt(this.cash) >= 100){
@@ -177,26 +174,20 @@ export default {
             let url = '/customer/getBankCardByOpenid';
             let params = {};
             axiosPost(url,params).then(res =>{
-                // console.log('获取已绑定银行卡列表成功',res);
                 if(res.data.success){
-                    console.log('查询银行卡成功',res);
                     if(res.data.data.length == '0'){
                         this.cardLength = '0'
                         this.$toast('您还未绑定银行卡');
                     }else{
-                         console.log('查询银行卡成功',res);
                         this.bankcardlist = res.data.data;
                         var arr = [];
                         for (var item in this.bankcardlist) {
                             arr.push((this.bankcardlist)[item].abridge)
                         }
-                        console.log('银行卡列表',arr);
                         this.columns = arr;
                     }
                 }
             }).catch(res =>{
-                // console.log('获取已绑定银行卡列表失败',res)
-                 console.log('查询银行卡成功',res);
             })
         },
         // 全部提现
@@ -232,7 +223,6 @@ export default {
                    withdraw_apply_total: this.cash 
                 };
                 axiosPost(url,params).then(res =>{
-                    console.log('提现申请成功',res);
                     if(res.data.success){
                         this.$toast('提现申请成功');
                         this.success = true;
@@ -240,7 +230,6 @@ export default {
                         this.$toast(res.data.message);
                     }
                 }).catch(res =>{
-                    // console.log('提现申请失败',res);
                 })
             }
             

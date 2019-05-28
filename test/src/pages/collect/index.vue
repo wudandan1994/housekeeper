@@ -161,20 +161,18 @@ export default {
     },
     methods:{
         onChange(picker, value, index) {
-            console.log('当前值：',value);
+            // console.log('当前值：',value);
             this.bankName = value;
             // 根据当前关键字查询联行号
             var subBankCode = bankNumber.filter(item =>item.bankName == value);
-            console.log('联行号',subBankCode[0].bankCode);
+            // console.log('联行号',subBankCode[0].bankCode);
             this.subBankCode = subBankCode[0].bankCode;
         },
         // 选择器确定时间
         onConfirm(value){
-            console.log('当前选择',value);
             this.bankName = value;
             // 根据当前关键字查询联行号
             var subBankCode = bankNumber.filter(item =>item.bankName == value);
-            console.log('联行号',subBankCode[0].bankCode);
             this.subBankCode = subBankCode[0].bankCode;
             this.bankNumberShow = false;
         },
@@ -220,7 +218,6 @@ export default {
                 for(var item in list){
                     this.columns[item] = list[item].bankName
                 }
-                console.log(this.columns);
             }
         },
         // 关闭联行号选择器

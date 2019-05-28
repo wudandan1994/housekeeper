@@ -123,7 +123,7 @@ export default {
                 }
                  axiosPost("/creditCard/insertEsiCash",data)
                  .then(res=>{
-                     console.log(res)
+                    //  console.log(res)
                      if(!res.data.success){
                          this.$toast({
                              message:res.data.message
@@ -142,7 +142,7 @@ export default {
                      }
                  })
                  .catch(err=>{
-                     console.log(res)
+                     
                  })
           
         }

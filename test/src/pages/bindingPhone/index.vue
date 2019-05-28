@@ -138,7 +138,6 @@ export default {
                     }
                 })
                 .catch(function(res){
-                    console.log("绑定手机失败",res);
                     that.$toast({
                         message:res.data.message
                     })

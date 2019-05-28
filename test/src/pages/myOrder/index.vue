@@ -6,16 +6,17 @@
             <span></span>
         </header>
         <div class="container">
-            <!-- <div style="overflow: auto;-webkit-overflow-scrolling:touch;width:100%;height:100%;">　
-            　　<iframe v-if="type" :src="url" scrolling="auto" frameborder="0" width="100%" height="100%"></iframe>
-            　　<iframe v-else :src="url" frameborder="0" height="100%" scrolling='no' style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
+            <!-- <div class="box" style="width:100vw;height:100vh;">　
+            　　<iframe v-if="type" :src="url" scrolling="auto" class="iframe" frameborder="0" width="100vw" height="100vh"></iframe>
+            　　<iframe v-else :src="url" frameborder="0" class="iframe" height="100vh" scrolling='auto' style="width: 1px; min-width: 100vw; *width: 100vw;"></iframe>
             </div> -->
              <!-- <iframe class="iframe"  :src="url" frameborder="0" target="_self"></iframe> -->
-               <!-- <div style="webkit-overflow-scrolling: touch;overflow-y: scroll;width:100%;">
+                <!-- <div style="webkit-overflow-scrolling: touch;overflow-y: scroll;width:100%;">
                     <iframe class="iframe" id="ifram" :src="url" frameborder="0"></iframe>
                 </div> -->
         </div>
     </div>
+
 
 </template>
 
@@ -68,7 +69,6 @@ export default {
     created(){
         this.url=this.$route.query.info;
         this.title=this.$route.query.title;
-        // window.location.href = this.url;
         this.webview();
         // var u = navigator.userAgent;
         // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
@@ -77,7 +77,6 @@ export default {
         // }else{
         // 　　this.type = false
         // }
-        // // console.log(this.type)
     }
 }
 </script>
@@ -107,9 +106,13 @@ export default {
        }
        >.container {
            padding-top:96px;
+           .box {
+               overflow-x: hidden;
+           }
            .iframe{
-               width: 100vw;
-               height: calc(100vh - 86px);
+               width: 100%;
+               height:100vh !important;
+               overflow-x:hidden;
            }
        }
    }

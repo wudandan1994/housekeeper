@@ -42,7 +42,6 @@ export default {
     created(){
         this.url=this.$route.query.url;
         this.title=this.$route.query.title;
-        console.log(this.url)
          this.webview();
        
     }

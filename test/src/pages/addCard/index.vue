@@ -62,15 +62,15 @@ export default {
                         })
                         return
                     }  else {
-                        window.location.href=res.data.data
-                        // let url=res.data.data
-                        // this.$router.push({
-                        //     path:"/home/cardCenter/progressQuery",
-                        //     query:{
-                        //         info:url,
-                        //         title:"信用卡办理"
-                        //       }
-                        // })
+                        // window.location.href=res.data.data
+                        let url=res.data.data
+                        this.$router.push({
+                            path:"/home/cardCenter/progressQuery",
+                            query:{
+                                info:url,
+                                title:"信用卡办理"
+                              }
+                        })
                     }
                 })
                 .catch(err=>{

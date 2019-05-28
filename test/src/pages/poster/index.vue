@@ -4,7 +4,7 @@
             <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">海报</div>
             <div @click="showCover" class="right-icon center">
-                <van-icon color="white" size="20px" name="weapp-nav"/>
+                     <van-icon color="white" size="20px" name="weapp-nav"/>
                 </div>
         </header>
         <div class="poster-canvas center"><canvas id="poster" width="375" height="667"></canvas>  </div>
@@ -15,15 +15,15 @@
         </div>
         <div class="share" v-show="Sharewxf">
              <div class="wx">
-                <van-button  class="shareBtn" @click="Sharewxf=true" type="default">分享</van-button>
+                <!-- <van-button  class="shareBtn" @click="Sharewxf=true" type="default">分享</van-button> -->
                     <ul>
                         <li id="wxF"  @click="wxfri">
                             <p><van-icon name="http://pay.91dianji.com.cn/wx.png" size="40px"/></p>
-                            <p>好友</p>
+                            <p>分享给好友</p>
                         </li>
                         <li @click="wxcir">
                             <p><van-icon color="white"  size="30px"  name="http://pay.91dianji.com.cn/pyq.png"/></p>
-                            <p>朋友圈</p>
+                            <p>分享到朋友圈</p>
                         </li>
                     </ul>
                <div class="button">
@@ -86,8 +86,7 @@ export default {
                         that.sharewx = s[i];
                     }
                 }
-                console.log(JSON.stringify(that.sharewx))
-                console.log(new Date())
+                // console.log(JSON.stringify(that.sharewx))
                  that.sharewxCirMessage()
             }, function (e) {
                 alert("获取分享服务列表失败：" + e.message);
@@ -102,8 +101,6 @@ export default {
                         that.sharewx = s[i];
                     }
                 }
-                console.log(JSON.stringify(that.sharewx))
-                console.log(new Date())
                     that.shareWeixinMessage()
 
             }, function (e) {
@@ -129,8 +126,8 @@ export default {
         },
          shareWeixinMessage() {
              let that=this
-              console.log(JSON.stringify(that.sharewx),"55555555555555555")
-              console.log(that.imgUrl)
+            //   console.log(JSON.stringify(that.sharewx),"55555555555555555")
+            //   console.log(that.imgUrl)
              that.sharewx.send(
                  { 
                      content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝", 
@@ -148,7 +145,7 @@ export default {
         },
         
         showCover(){
-           this.Sharewxf=true
+           this.Sharewxf=!this.Sharewxf
         },
         // save(){
         //     plus.gallery.save( '/wx.png', (result) => {
@@ -166,11 +163,11 @@ export default {
             var random = '';
             if(ran < 10){
                 random = '0' + ran;
-                console.log('随机数',random);
+                // console.log('随机数',random);
                 this.random = random;
             }else{
                 this.random = ran;
-                console.log('随机数',ran);
+                // console.log('随机数',ran);
             }
             this.handlePoster();
         },
@@ -232,7 +229,6 @@ export default {
             headimg.onload = function(){
                 ctx.drawImage(headimg,10,610,50,50);
             };
-
             ctx.fillStyle="#000";
             ctx.font="14px Arial";
             ctx.fillText(this.$store.state.wechat.nickname,80,630);
@@ -292,10 +288,10 @@ export default {
                 cancelButtonText: '关闭',
             })
             .then(() => {
-                console.log('开启');   
+                // console.log('开启');   
                 this.handlePosterWithoutDetail();
             }).catch(() => {
-                console.log('关闭');
+                // console.log('关闭');
                 this.handlePoster();
             });
         },

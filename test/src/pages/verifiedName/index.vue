@@ -159,7 +159,6 @@ export default {
             let url = '/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
-                console.log('实名认证成功',res);
                 setTimeout(()=>{
                     this.componentload = false;
                 },500)

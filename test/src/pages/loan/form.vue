@@ -201,18 +201,18 @@ export default {
                        })
                        return
                    } else {
+                    //    window.location.href=res.data.data;
                         let url=res.data.data;
                         this.componentload=true
                         setTimeout(()=>{
                             this.$router.push({
-                            path:"/loan/form/myOrder",
+                            path:"/home/online",
                             query:{
                                 info:url,
                                 title:"贷款中心"
                               }
                           })
                         },1000)
-                        
                    }
                    
                })
@@ -231,7 +231,6 @@ export default {
                     this.form.name = res.data.data.name;
                     this.form.idcardnumber = res.data.data.idcardnumber;
                     this.form.mobile = this.$store.state.wechat.mobile;
-                   
                 }
             }).catch(res =>{
                 // console.log('获取实名认证状态失败',res);

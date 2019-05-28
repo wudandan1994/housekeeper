@@ -181,7 +181,6 @@ export default {
         //             that.orderId=res.data.data.orderId
         //         })
         //         .catch(err=>{
-        //             // console.log(err,"error");
                     
         //         })
         //         setTimeout(() => {
@@ -227,7 +226,6 @@ export default {
              }
               axiosPost("/creditCard/bindCreditCard",data)
               .then(res=>{
-                  console.log(res)
                   if(!res.data.success){
                       this.$toast({
                           message:res.data.message

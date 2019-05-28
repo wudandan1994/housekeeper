@@ -92,7 +92,7 @@ export default {
             };
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                    console.log(res)
+                    // console.log(res)
                     this.nickname = res.data.data.nickname
                     this.mobile = res.data.data.mobile
                     this.recommendedcode = res.data.data.promotioncode

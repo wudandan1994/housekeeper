@@ -84,8 +84,6 @@ export default {
                         that.sharewx = s[i];
                     }
                 }
-                console.log(JSON.stringify(that.sharewx))
-                console.log(new Date())
                     that.shareWeixinMessage()
 
             }, function (e) {
@@ -95,7 +93,6 @@ export default {
        
          shareWeixinMessage() {
              let that=this
-              console.log(JSON.stringify(that.sharewx),"55555555555555555")
              that.sharewx.send({ content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝", href: "http://pay.91dianji.com.cn/#/home?promotioncode=02400219", extra: { scene: "WXSceneSession" } }, function () {
             // alert("分享成功！");
         }, function (e) {

@@ -140,7 +140,7 @@ export default {
             };
             axios.post(url,form,config).then(res =>{
                 if(res.data.success){
-                    console.log('微信头像上传成功',res);
+                    // console.log('微信头像上传成功',res);
                     this.photo = res.data.data.imgUrl;
                      this.wechatqr = res.data.data.thumImgUrl;
                     setTimeout(() =>{
@@ -161,7 +161,7 @@ export default {
             };
             axios.post(url,form,config).then(res =>{
                 if(res.data.success){
-                    console.log('二维码上传成功',res);
+                    // console.log('二维码上传成功',res);
                     this.wechatqr = res.data.data.thumImgUrl;
                     setTimeout(() =>{
                         this.componentload = false;

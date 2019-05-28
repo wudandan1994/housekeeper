@@ -93,7 +93,7 @@ export default {
             let that =this
             axiosPost("/customer/insertSign")
            .then(function(res){
-               console.log(res,"每日签到")
+            //    console.log(res,"每日签到")
             if(!res.data.success){
                     that.$toast({
                     message:res.data.message

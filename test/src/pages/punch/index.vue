@@ -313,7 +313,7 @@ export default {
               }
               axiosPost("/creditCard/cancelMainPlan",data)
               .then(res=>{
-                  console.log(res)
+                //   console.log(res)
                   if(!res.data.success){
                       this.$toast({
                           message:res.data.message
@@ -323,7 +323,7 @@ export default {
                   }
               })
               .catch(err=>{
-                  console.log(err)
+                //   console.log(err)
               })
                 })
                 .catch(()=>{
@@ -366,7 +366,7 @@ export default {
                 }
             })
             .catch(err=>{
-                console.log(err)
+                // console.log(err)
             })
                 }
                 

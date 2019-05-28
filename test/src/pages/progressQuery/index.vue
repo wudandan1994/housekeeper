@@ -6,14 +6,11 @@
             <div class="right-icon center"></div>
         </header>
 
-        <!-- <div style="webkit-overflow-scrolling: touch;overflow-y: scroll;width:100%;">
-            <iframe class="iframe" id="ifram" :src="url" frameborder="0"></iframe>
-        </div> -->
-       
-         <!-- <div style="overflow: auto;-webkit-overflow-scrolling:touch;width:100%;height:100%;">　
-            　　<iframe v-if="type" :src="url" scrolling="auto" frameborder="0" width="100%" height="100%"></iframe>
-            　　<iframe v-else :src="url" frameborder="0" height="100%" scrolling='no' style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
-        </div> -->
+      
+         <!-- <div class="box" style="width:100vw;height:100vh;">　
+            　　<iframe v-if="type" :src="url"  class="iframe" scrolling="auto" frameborder="0" width="100vw" height="100vh"></iframe>
+            　　<iframe v-else :src="url"  class="iframe" frameborder="0" height="100vh" scrolling='auto' style="width: 1px; min-width: 100vw; *width: 100vw;"></iframe>
+            </div> -->
     </div>
 
 </template>
@@ -33,19 +30,7 @@ export default {
             plus.webview.close( "yinlian")
             this.$router.push("/home")
         },
-        // getIfram(){
-        //     let ifram = document.getElementById('ifram');
-        //     if (navigator.userAgent.match(/iPad|iPhone/i)) {
-        //     let iframe_box = document.getElementById('iframe-box');
-        //     iframe_box.style.width = 100 + '%';
-        //     iframe_box.style.overflowX = 'hidden';
-        //     iframe_box.style.overflowY = 'scroll';
-        //     iframe_box.style.webkitOverflowScrolling = 'touch';
-        //     ifram.setAttribute('scrolling', 'no');
-        //     iframe_box.appendChild(ifram)
-        //     console.log("ifram")
-        //     }
-        // },
+       
         webview(){
             if(window.plus){  
                 let self= plus.webview.currentWebview(); 
@@ -63,20 +48,19 @@ export default {
                 document.addEventListener('plusready',function () {  
                     let self= plus.webview.currentWebview(); 
                         var yinlian= plus.webview.create(this.url, "yinlian", {  
-                        top: "40px",  
+                        top: "100px",  
                         width:'100%',
                         bottom: '0px',
                         left:'0px',
                         scrollIndicator:'none'
                     });  
-                    self.append(yinlian)
+                    // self.append(yinlian)
+                      yinlian.show()
                 },false);  
             }  
         }
     },
     mounted () {
-        // this.getIfram()  
-        // console.log("mounted中的ifram")
     },
     
     created(){
@@ -99,17 +83,24 @@ export default {
        header {
             background-color: #4965AE;
        }
-       width: 100vw;
-       height: calc(100vh - 86px);
-       padding-top: 86px;
-        .iframe{
-            width: 100vw;
-            height: calc(100vh - 86px);
-        }
-        .out {
-            overflow: auto;
-            -webkit-overflow-scrolling:touch;
-            width:100%;
-        }
+        .box {
+               overflow-x: hidden;
+           }
+       .iframe{
+               width: 100%;
+               height:100vh !important;
+               overflow-x:hidden;
+           }
+
+    //    width: 100vw;
+    //    height: calc(100vh - 86px);
+    //    padding-top: 86px;
+        // .iframe{
+        //     width: 100vw;
+        //     height: calc(100vh - 86px);
+        // }
+        // .out {
+            
+        // }
    }
 </style>

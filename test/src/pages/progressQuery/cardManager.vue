@@ -52,7 +52,7 @@ export default {
     created(){
         //  this.webview();
         this.url = storage.get('cardManager');
-        console.log('链接',window.location);
+        // console.log('链接',window.location);
     }
 }
 </script>

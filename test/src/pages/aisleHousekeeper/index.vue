@@ -18,10 +18,11 @@
                            <p>推荐码：<span>{{promotioncode}}</span></p>
                          </div>
                     </div>
+                     <div  class="operator end-center">
+                         <span>绑卡：<span>{{cardNum}}</span>张</span>
+                     </div>
                  </div>
-                <div  class="operator end-center">
-                     <span>绑卡：<span>{{cardNum}}</span>张</span>
-                </div>
+               
            </div>
            <div class="bind">
                <ul >
@@ -56,24 +57,29 @@
                        <div class="bottom">
                            <ul>
                                <li>
-                                   <p>未知</p>
-                                   <p>还款金额</p>
+                                   <p>{{item.realamount}}</p>
+                                    <p>还款金额</p>
                                </li>
                                <li>
-                                   <p>智能还款</p>
-                                   <p>还款模式</p>
+                                    <p v-if="item.state=='0'">待执行</p>
+                                    <p v-if="item.state=='1'">已成功</p>
+                                    <p v-if="item.state=='2'">已取消</p>
+                                    <p v-if="item.state=='3'">进行中</p>
+                                    <p v-if="item.state=='4'">失败</p>
+                                    <p else-if="item.state=='null'">未知</p>
+                                   <p>还款状态</p>
                                </li>
                                 <li>
-                                   <p>未知</p>
+                                   <p>{{item.repaycount}}</p>
                                    <p>还款笔数</p>
                                </li>
                                 <li>
-                                   <!-- <p>未知</p>
-                                   <p>手续费</p> -->
+                                   <p>{{item.poundage}}</p>
+                                   <p>手续费</p>
                                </li>
-                               <!-- <li>
-                                   <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" />
-                               </li> -->
+                               <li>
+                                
+                               </li>
                            </ul>
                        </div>
                    </li>
@@ -81,8 +87,7 @@
            </div>
          
            <div class="detail">
-             
-               <van-button  plain to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
+                <van-button  plain to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
                 <van-button plain to="/home/punch" size="normal" type="default">查看全部计划</van-button>
            </div>
           
@@ -303,6 +308,7 @@ export default {
               }
           }
           .operator {
+
               margin-right:30px;
           }
            }
@@ -352,6 +358,7 @@ export default {
                                       font-size: 40px;
                                   }
                                   >p {
+                                      color:#fff;
                                       &:nth-of-type(1){
                                           margin-top:20px;
                                           margin-bottom:10px;
@@ -360,7 +367,6 @@ export default {
                                           margin-bottom: 20px;
                                       }
                                   }
-
                               }
                           }
                       }
@@ -405,6 +411,8 @@ export default {
                }
            }
            >.detail {
+               box-sizing: border-box;
+               margin-left: 50px;
                padding:0 20px;
                display: flex;
                justify-content: space-between;

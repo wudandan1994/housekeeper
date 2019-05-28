@@ -7,7 +7,7 @@
                     <van-icon name="wap-nav" />
                </div>
                <span class="location">
-                    <van-icon name="location-o" />
+                    <!-- <van-icon name="location-o" /> -->
                 </span>
                 <!-- <span>{{city}}</span> -->
             </div>  
@@ -207,9 +207,9 @@
                 </ul>
             </div>
             <!-- 客服 -->
-            <div class="serve">
+            <!-- <div class="serve">
                <router-link tag="p" :to="{path: '/home/cardCenter/progressQuery',query: {info: 'https://kefu.easemob.com/webim/im.html?configId=9cb49ac7-e183-4e98-afbd-e5860ff3b6a0',title: '在线客服'}}"> <van-icon  name="friends" />在线客服</router-link>
-            </div>
+            </div> -->
             <!-- 遮盖层 -->
             <div class="aside-left" v-show="showAaside" @click.self="hideAside">
                 <div class="info">
@@ -296,7 +296,7 @@ export default {
                      this.$router.push("/logIn");
                     //  this.$toast('登录失败');
                 }else {
-                    console.log(res,"自动登录成功")
+                    // console.log(res,"自动登录成功")
                     this.$store.commit('iscertification',res.data.data.iscertification);
                     this.$store.commit('level',res.data.data.level);
                     this.$store.commit('promotioncode',res.data.data.promotioncode);
@@ -397,14 +397,12 @@ export default {
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
-         this.automatic()
-
+        
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-       
+         this.automatic()
     }  ,
     mounted () {
-        sole.log(this.$store.state.wechat.headimg,"headimg")
     }
 }
 </script>

@@ -159,7 +159,7 @@ export default {
        },
        getCard(item,i){
            this.showClass=i
-           console.log(this.showClass)
+        //    console.log(this.showClass)
            this.realName=item.payerName
             this.idCard=item.idCardNo
             this.accNo=item.cardNo
@@ -421,7 +421,7 @@ export default {
                                           display: flex;
                                           justify-content: space-between;
                                           padding:10px 0px;
-                                      }
+                                       }
                                       &:nth-of-type(2){
                                           padding:15px 0px;
                                           text-align: center;
@@ -430,7 +430,7 @@ export default {
                               }
                           }
                       }
-               }
+                 }
            }
            >button {
                margin:30px;

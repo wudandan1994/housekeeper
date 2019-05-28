@@ -147,7 +147,7 @@ export default {
                 for(var item in list){
                     this.columns[item] = list[item].bankName
                 }
-                console.log(this.columns);
+                // console.log(this.columns);
             }
         },
         // 关闭联行号选择器
@@ -197,10 +197,8 @@ export default {
                 subBankCode:that.subBankCode,
                 settleAccType:that.settleAccType==="公户"? "1":"2"
               }
-              console.log(data,"data")
             axiosPost("/creditCard/bankCardModify",data)
             .then(function(res){
-                console.log(res,"res结果");
                 if(!res.data.success){
                     that.$toast({
                         message:res.data.message
