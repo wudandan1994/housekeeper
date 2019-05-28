@@ -22,7 +22,10 @@
                <p @click="forgetPassword">忘记密码？</p>
            </div>
            <div class="button">
-                <van-button @click="logInPass" class=" center" size="large" type="default">登录</van-button>
+                <!-- <van-button @click="logInPass" class=" center" size="large" type="default">账号密码登录</van-button> -->
+                <div @click="logInPass" class="log">
+                    <p>登录</p>
+                </div>
            </div>
             <div class="wx-login row">
                 <div class="logIn start-center" @click="logIn">
@@ -282,10 +285,22 @@ export default {
                width:80%;
                  margin:0 auto;
                padding:0 30px;
-               >button {
-                   border-radius: 10px;
-                   text-align: center;
+               >.log {
+                   width:100%;
+                   height: 100px;
+                   background-color: #4B66AF;
+                   >p {
+                       color:#fff;
+                       line-height: 100px;
+                       text-align: center;
+                       font-size: 30px;
+                   }
                }
+
+            //    >button {
+            //        border-radius: 10px;
+            //        text-align: center;
+            //    }
            }
            
            >.wx-login {
@@ -304,8 +319,11 @@ export default {
                     width: 30%;
                     height: 100%;
                 }
-
            }
        }
    }
 </style>
+
+
+
+

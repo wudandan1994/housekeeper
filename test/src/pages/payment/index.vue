@@ -22,8 +22,8 @@
                          </div>
                          <ul v-show="showCardList">
                               <p>请选择支付卡</p>
-                             <li v-for="(item,index)   in cardList" :key="index" >
-                                 <div @click.self="getCard(item ,index)"   :class="showClass == index ? 'round':''"></div>
+                             <li v-for="(item,index)   in cardList" :key="index" @click="getCard(item ,index)"  >
+                                 <div   :class="showClass == index ? 'round':''"></div>
                                  <div class="info">
                                      <p><span>{{item.bankNick}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{item.payerName}}</span></p>
                                     
@@ -346,13 +346,7 @@ export default {
            padding-bottom: 50px;
            background-color: #EEEFF1;
            font-size:30px;
-                input::-webkit-input-placeholder{
-                    font-size: 30px;
-                    padding-top:4px;
-                    background-color: red;
-                    height: 40px;
-                     line-height: 1.2rem;
-                }
+               
            >.popup {
                .pop {
                     width:600px;
@@ -477,7 +471,16 @@ export default {
                            border:none;
                            flex: 1;
                            margin-right:50px;
+                           height: 100px;
+                            margin-top:-26px;
                        }
+                        ::-webkit-input-placeholder{
+                            font-size: .5rem;
+                            margin-top:-30px;
+                        }
+                       
+                     
+                    
                    }
                }
            }

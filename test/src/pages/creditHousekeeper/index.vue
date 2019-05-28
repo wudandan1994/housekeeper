@@ -100,15 +100,15 @@ export default {
                 if(res.data.code==="1"){
                     this.$router.push("/home/addCard")
                 } else if(res.data.code==="0"){
-                    window.location.href=res.data.data.url
-                    // let url=res.data.data.url
-                        // this.$router.push({
-                        //     path:"/home/cardCenter/progressQuery",
-                        //     query:{
-                        //         info:url,
-                        //         title:"还款"
-                        //       }
-                        // })
+                    // window.location.href=res.data.data.url
+                    let url=res.data.data.url
+                        this.$router.push({
+                            path:"/home/cardCenter/progressQuery",
+                            query:{
+                                info:url,
+                                title:"还款"
+                              }
+                        })
                 }
             })
             .catch(err=>{

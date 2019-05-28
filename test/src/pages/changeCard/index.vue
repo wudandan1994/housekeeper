@@ -116,7 +116,7 @@ export default {
             this.bankNumberShow = false;
         },
         goBack() {
-            this.$router.push('/home/collect/payment')
+            this.$router.push('/home')
         },
         
         onSelect(item){
@@ -321,14 +321,13 @@ export default {
                            border:none;
                            flex: 1;
                            font-size: 30px;
-                           text-align: right;
-
+                        //    text-align: right;
+                         height: 100px;
+                           margin-top:-26px;
                        }
-                       input::-webkit-input-placeholder {
-                           font-size: 28px;
-                           padding-top: 8px;
-                           height: 30px;
-                           line-height: 30px;
+                       ::-webkit-input-placeholder {
+                            font-size: .5rem;
+                            margin-top:-30px;
                        }
                    }
                }

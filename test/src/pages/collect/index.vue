@@ -513,20 +513,20 @@ export default {
                     line-height: 100px;
                     padding-right:15px;
                      input{
-                    width: 98vw;
-                    height: 100px;
-                    padding-left: 2vw;
-                    font-size: 26px;
-                    color: #333;
-                    border: none;
-                    background: #D9D9D9;
-                    font-size: 26px;
+                        width: 98vw;
+                        height: 100px;
+                        padding-left: 2vw;
+                        font-size: 26px;
+                        color: #333;
+                          flex: 1;
+                        border: none;
+                        background: #D9D9D9;
+                        font-size: 26px;
+                        margin-top:-26px;
                 }
-                input::-webkit-input-placeholder{
-                    font-size: 26px;
-                    padding-top: 4px;
-                    background-color: red;
-                    line-height: 1.2rem;
+                ::-webkit-input-placeholder{
+                    font-size: .5rem;
+                    margin-top:-30px;
                   }
                 }
             }

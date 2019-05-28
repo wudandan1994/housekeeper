@@ -3,7 +3,9 @@
         <header class="header-top row">
             <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">海报</div>
-            <div @click="showCover" class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+            <div @click="showCover" class="right-icon center">
+                <van-icon color="white" size="20px" name="weapp-nav"/>
+                </div>
         </header>
         <div class="poster-canvas center"><canvas id="poster" width="375" height="667"></canvas>  </div>
         <div class="btn row">
@@ -37,8 +39,8 @@
             <div class="imgs" v-if="!showUpload">
                 <div class="savePoster center"><img :src="imgUrl" ></div>
                 <div class="success center">
-                    <!-- 海报生成成功，长按保存或分享 -->
-                     海报生成成功
+                    海报生成成功，长按保存或分享
+                     <!-- 海报生成成功 -->
                 </div>
                 
             </div>

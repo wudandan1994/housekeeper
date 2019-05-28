@@ -33,36 +33,41 @@ export default {
             plus.webview.close( "yinlian")
             this.$router.push("/home")
         },
-        getIfram(){
-            let ifram = document.getElementById('ifram');
-            if (navigator.userAgent.match(/iPad|iPhone/i)) {
-            let iframe_box = document.getElementById('iframe-box');
-            iframe_box.style.width = 100 + '%';
-            iframe_box.style.overflowX = 'hidden';
-            iframe_box.style.overflowY = 'scroll';
-            iframe_box.style.webkitOverflowScrolling = 'touch';
-            ifram.setAttribute('scrolling', 'no');
-            iframe_box.appendChild(ifram)
-            console.log("ifram")
-            }
-        },
+        // getIfram(){
+        //     let ifram = document.getElementById('ifram');
+        //     if (navigator.userAgent.match(/iPad|iPhone/i)) {
+        //     let iframe_box = document.getElementById('iframe-box');
+        //     iframe_box.style.width = 100 + '%';
+        //     iframe_box.style.overflowX = 'hidden';
+        //     iframe_box.style.overflowY = 'scroll';
+        //     iframe_box.style.webkitOverflowScrolling = 'touch';
+        //     ifram.setAttribute('scrolling', 'no');
+        //     iframe_box.appendChild(ifram)
+        //     console.log("ifram")
+        //     }
+        // },
         webview(){
             if(window.plus){  
                 let self= plus.webview.currentWebview(); 
                 var yinlian= plus.webview.create(this.url, "yinlian", {  
                 top: "40px",  
-                width:"100%",
-                bottom: 0 ,
-                left:0,
-                right:0
+                // width:"100%",
+                bottom: "0px",
+                 right:"0px",
+                left:"0px",
+                scrollIndicator:"vertical"
                 });  
-                self.append(yinlian)
+                // self.append(yinlian)
+                yinlian.show()
             }else{  
                 document.addEventListener('plusready',function () {  
                     let self= plus.webview.currentWebview(); 
                         var yinlian= plus.webview.create(this.url, "yinlian", {  
                         top: "40px",  
-                        bottom: 0  ,
+                        width:'100%',
+                        bottom: '0px',
+                        left:'0px',
+                        scrollIndicator:'none'
                     });  
                     self.append(yinlian)
                 },false);  
