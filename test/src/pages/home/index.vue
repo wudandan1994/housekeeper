@@ -234,6 +234,18 @@
                     </div> 
                 </div>
             </div>
+            <div v-show="showUpdate" class="update">
+                <div  class="cover">
+                    <div class="verson">
+                       <h3>版本更新</h3>
+                        <p>钱夹宝升级了，快来体验吧！</p>
+                        <div class="butt">
+                            <div class="cancle">取消</div>
+                            <div class="upd">更新</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- <div v-show="allmap" id="allmap"></div> -->
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
@@ -271,7 +283,11 @@ export default {
             iscertification: '',
             city: '',
             longitude: '',
-            latitude: ''
+            latitude: '',
+            showUpdate:false,
+            versonAndroid:"",
+            versonIos:"",
+            updateVerson:""
         }
   },
    methods:{
@@ -281,6 +297,40 @@ export default {
         handleExpect(){
             this.$toast('敬请期待')
         },
+        getUpdate(){
+               axiosPost("/customer/getVersion")
+               .then(res=>{
+                   console.lgo(res)
+                   if(res.data.cuccess){
+                      let verson=res.data.data
+                    //   this.versonAndroid=verson[0].verson
+                      this.versonAndroid="1.0"
+
+                      this.versonIos=verson[1].verson
+                   }
+               }) 
+               .catch(err=>{
+                   
+               })
+        },
+        update(){
+            let that=this
+              // 获取设备的版本号
+              if(window.plus){  
+                   that.updateVerson=plus.runtime.version;
+                   if(Number(that.versonAndroid)>Number(that.updateVerson)){
+                       that.showUpdate=true
+                   }
+                    console.log(that.updateVerson)
+                    console.log(555555555555)
+            }else{  
+                document.addEventListener('plusready',function () {  
+                        that.updateVerson=plus.runtime.version;
+                        console.log(that.updateVerson)
+                        console.log(555555555555) 
+                },false);  
+            }  
+        } ,
         hideAside() {
             this.showAaside=false
         },
@@ -400,8 +450,10 @@ export default {
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
          this.automatic()
+         this.getUpdate()
     }  ,
     mounted () {
+        this.update()
     }
 }
 </script>
@@ -441,6 +493,62 @@ export default {
            padding-bottom:96px;
            padding-top:96px;
            overflow-x: hidden;
+            position: relative;
+           .update {
+               position: absolute;
+               top:0;
+               bottom:0;
+               left:0;
+               right:0;
+               background-color: rgba(0, 0, 0, .2);
+               >.cover {
+                   width:600px;
+                   height: 400px;
+                   z-index: 99;
+                   position: absolute;
+                   top:50%;
+                   left:10%;
+                   border-radius: 15px;
+                   >.verson {
+                       background-color: #fff;
+                       padding:10px;
+                         height: 400px;
+                       box-sizing: border-box;
+                       border-radius: 15px;
+                       >h3 {
+                           margin-top:20px;
+                           text-align: center;
+                           font-size: 34px;
+                           color:#4B66AF;
+                           padding:20px 0px;
+                           font-weight: bolder;
+                       }
+                       >p {
+                           margin-top:20px;
+                           text-align: center;
+                       }
+                       >.butt {
+                           display: flex;
+                           justify-content: space-between;
+                           height: 80px;
+                           >div {
+                               margin-top:90px;
+                               width:49%;
+                               height: 100%;
+                               border:1px solid #ccc;
+                               line-height: 80px;
+                               text-align: center;
+                               &.upd {
+                                   background-color: #4965AE;
+                                   color:#fff;
+                               }
+                           }
+                       }
+                       
+                   }
+               }
+
+           }
             >.swipe {
            height: 390px;
            .per-img{

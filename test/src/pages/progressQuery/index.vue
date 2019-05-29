@@ -5,10 +5,6 @@
             <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
-         <!-- <div class="box" style="width:100vw;height:100vh;">　
-            　　<iframe v-if="type" :src="url"  class="iframe" scrolling="auto" frameborder="0" width="100vw" height="100vh"></iframe>
-            　　<iframe v-else :src="url"  class="iframe" frameborder="0" height="100vh" scrolling='auto' style="width: 1px; min-width: 100vw; *width: 100vw;"></iframe>
-        </div> -->
     </div>
 
 </template>
@@ -54,9 +50,9 @@ export default {
                    top:"40px",
                    left:"0px",
                   right:"0px",
+                  bottom:"10px",
                   scalable: true,
                   margin:"auto",
-                //   background:"#4965AE",
                })
                 yinlian.show()
             }else{  
@@ -68,7 +64,6 @@ export default {
                                 left:"0px",
                                 right:"0px",
                                 margin:"auto",
-                                //  background:"#4965AE"
                         })
                             yinlian.show()
 

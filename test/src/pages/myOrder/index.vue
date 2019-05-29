@@ -38,37 +38,21 @@ export default {
        
         webview(){
             if(window.plus){  
-                //  var yinlian = plus.webview.open(this.url,"yinlian",{
-                //          top: "40px",  
-                //         bottom: '0px',
-                //         left:'0px',
-                //         scrollIndicator:'none'
-                //     });
-                // let self= plus.webview.currentWebview(); 
-                // var yinlian= plus.webview.create(this.url, "yinlian", {  
-                // top: "40px",  
-                // // width:"100%",
-                // bottom: "0px",
-                //  right:"0px",
-                // left:"0px",
-                // scrollIndicator:"vertical"
-                // });  
-                // yinlian.show()
-                //  self.append(yinlian)
-
-
-             var yinlian= plus.webview.create(this.url, "yinlian");  
-               yinlian.setStyle({
-                   width:"100%",
-                   top:"40px",
-                   left:"0px",
-                  right:"0px",
-                  scalable: true,
-                  margin:"auto",
-               })
-                yinlian.show()
-
-
+                 var yinlian= plus.webview.create(this.url, "yinlian",{
+                     width:"100%",
+                     top:"40px",
+                     left:"0px",
+                     right:"0px",
+                      bottom:"10px",
+                  });  
+                        //     yinlian.setStyle({
+                        //         width:"100%",
+                        //         top:"40px",
+                        //         left:"0px",
+                        //         right:"0px",
+                        //         margin:"auto",
+                        // })
+                            yinlian.show()
             }else{  
                 document.addEventListener('plusready',function () {  
                          var yinlian= plus.webview.create(this.url, "yinlian");  

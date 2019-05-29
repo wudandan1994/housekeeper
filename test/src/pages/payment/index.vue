@@ -21,7 +21,7 @@
                               </div>
                          </div>
                          <ul v-show="showCardList">
-                              <p>请选择支付卡</p>
+                              <p class="pay">请选择支付卡</p>
                              <li v-for="(item,index)   in cardList" :key="index" @click="getCard(item ,index)"  >
                                  <div   :class="showClass == index ? 'round':''"></div>
                                  <div class="info">
@@ -349,7 +349,8 @@ export default {
                
            >.popup {
                .pop {
-                    width:800px; 
+                    width:700px; 
+                    border-radius: 10px;
                    background-color: #fff;
                     overflow-y: scroll;
                   >p {
@@ -360,6 +361,7 @@ export default {
                   >.binding {
                       margin-top:30px;
                       padding:10px;
+                     
                       >p {
                           margin-bottom: 40px;
                           text-align: center;
@@ -387,6 +389,13 @@ export default {
                           width:100%;
                           box-sizing: border-box;
                           padding:15px;
+                           .pay {
+                            text-align: center;
+                            margin-top:30px;
+                            margin-bottom: 40px;
+                            font-weight: bold;
+                            font-size: 36px;
+                        }
                           >li {
                               display: flex;
                              position: relative;
@@ -482,9 +491,6 @@ export default {
                             font-size:28px;
                             margin-top:-22px;
                         }
-                       
-                     
-                    
                    }
                }
            }

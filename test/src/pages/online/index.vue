@@ -1,23 +1,14 @@
 <template>
-    <div id="my-order">
-        <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>{{title}}</span>
-            <span></span>
+    <div id="online">
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">{{title}}</div>
+            <div class="right-icon center"></div>
         </header>
-        <div class="container">
-             <div ref="iframeBox">
-                  <iframe class="iframe" id="ifram"  :src="url" frameborder="0" scrolling="auto" ></iframe>
-             </div>
-               <!-- <div style="webkit-overflow-scrolling: touch;overflow-y: scroll;width:100%;">
-                    <iframe class="iframe" id="ifram" :src="url" frameborder="0"></iframe>
-              </div> -->
-        </div>
     </div>
 
-
 </template>
-
+ 
 
 <script>
 export default {
@@ -25,65 +16,52 @@ export default {
         return {
             url:"",
             title:"",
-            type: null
+             type: null
         }
     },
     methods:{
         goBack() {
-            // plus.webview.close( "yinlian")
-            this.$router.go(-1);
+            plus.webview.close( "yinlian")
+            this.$router.push("/home")
         },
-        // getIfram(){
-        //     let that=this
-        //     let ifram =that.$refs.ifram;
-        //             if (navigator.userAgent.match(/iPad|iPhone/i)) {
-        //             let iframe_box = that.$refs.iframeBox;
-        //             console.log(iframe_box)
-        //             iframe_box.style.width = 100 + '%';
-        //             iframe_box.style.overflowX = 'hidden';
-        //             iframe_box.style.overflowY = 'scroll';
-        //             iframe_box.style.webkitOverflowScrolling = 'touch';
-        //             ifram.setAttribute('scrolling', 'no');
-        //             iframe_box.appendChild(ifram)
-        //             console.log(222)
-        //         }
-        // },
-        getcontent(){
-             var iframe = document.getElementById("ifram")
-              const deviceWidth = document.documentElement.clientWidth;
-              const deviceHeight = document.documentElement.clientHeight;
-               iframe.style.width = deviceWidth + 'px';
-             iframe.style.height = deviceHeight + 'px';
-            //  console.log(2119)
-               
-        },
+       
         webview(){
-            let self= plus.webview.currentWebview(); 
-            var yinlian= plus.webview.create(this.url, "yinlian", {  
-            top: "40px",  
-            bottom: "0px",
-            left:"0px",
-            right:"0px",
-            scrollIndicator:"vertical"
-        });  
-        //    self.append(yinlian)
-          yinlian.show()
-        },
+            if(window.plus){  
+             var yinlian= plus.webview.create(this.url, "yinlian");  
+               yinlian.setStyle({
+                   width:"100%",
+                   top:"40px",
+                   left:"0px",
+                  right:"0px",
+                    bottom:"10px",
+                  scalable: true,
+                  margin:"auto",
+               })
+                yinlian.show()
+            }else{  
+                document.addEventListener('plusready',function () {  
+                         var yinlian= plus.webview.create(this.url, "yinlian");  
+                            yinlian.setStyle({
+                                width:"100%",
+                                top:"40px",
+                                left:"0px",
+                                right:"0px",
+                                margin:"auto",
+                        })
+                            yinlian.show()
+                },false);  
+            }  
+        }
     },
-     mounted () {
-            //    console.log(222,"mounted")
-               this.getcontent()
-            //   this.getIfram()
+    mounted () {
 
-        },
-
+    },
+    
     created(){
-        this.url=this.$route.query.info;
-        this.title=this.$route.query.title;
-        //    this.getIfram()
-        //    console.log(111,"created")
-        // this.webview();
-        // var u = navigator.userAgent;
+        this.url=this.$route.query.info
+         this.title=this.$route.query.title
+         this.webview();
+        //   var u = navigator.userAgent;
         // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
         // if(isAndroid){
         // 　　this.type = true
@@ -95,40 +73,28 @@ export default {
 </script>
 
 <style lang="less">
-   #my-order {
-       >header {
+   #online{
+       header {
             background-color: #4965AE;
-           width:100%;
-           height: 86px;
-           line-height: 86px;
-           padding-top:10px;
-           color:#fff;
-           z-index:999;
-           font-size:34px;
-           display: flex;
-           position: fixed;
-           justify-content: space-between;
-           >span {
-               &:nth-of-type(1) {
-                   margin-left: 10px;
-               }
-               &:nth-of-type(3) {
-                   margin-right: 10px;
-               }
-           }
        }
-       >.container {
-           padding-top:96px;
-        //    .box {
-        //        overflow-x: hidden;
-        //    }
-           .iframe{
+        .box {
+               overflow-x: hidden;
+           }
+       .iframe{
                width: 100%;
-            //    height:100vh !important;
-            // position: relative;
-            // top:-40px;
-            //    overflow-x:hidden;
+               height:100vh !important;
+               overflow-x:hidden;
            }
-       }
+
+    //    width: 100vw;
+    //    height: calc(100vh - 86px);
+    //    padding-top: 86px;
+        // .iframe{
+        //     width: 100vw;
+        //     height: calc(100vh - 86px);
+        // }
+        // .out {
+            
+        // }
    }
 </style>

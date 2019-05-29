@@ -233,7 +233,7 @@ export default {
     },
     data(){
         return {
-            componentload: true,
+            componentload: false,
             active:2,
             nickname: '',
             headimg: 'http://img2.imgtn.bdimg.com/it/u=1000195578,2796948806&fm=11&gp=0.jpg',

@@ -17,18 +17,6 @@
             <div class="title start-center">银行卡号</div>
             <div class="input start-center"><input type="number" required v-model="bankcardno" placeholder="所持银行卡号"></div>
         </div>
-         
-        <!-- <div class="user-input top row">
-            <div class="title start-center">发卡行</div>
-            <div class="input start-center"><input type="number" placeholder="请填写发卡行"></div>
-        </div>
-        <div class="user-input top row">
-            <div class="title start-center">支行地址</div>
-            <div class="input start-center" @click="handleArea">{{area}}</div>
-        </div> -->
-        <!-- <van-area v-if="show" class="position" :area-list="areaList" @confirm="handleAreas" /> -->
-        
-        <!-- <p class="tips"> 提示：若您绑定的是信用卡，以下信息为必填项</p> -->
          <div class="user-input top row">
             <div class="title year start-center">有效期年份</div>
             <div class="input start-center"><input type="number" v-model="year" placeholder="信用卡有效期年份如 22"></div>
@@ -280,9 +268,8 @@ export default {
     }    
 }
 </script>
-<style lang="less" scoped >
+<style lang="less" >
     #binding-credit-card{
-
         background: #EEEFF1;
         width: 100vw;
         height: 120vh;
@@ -327,22 +314,58 @@ export default {
             .input{
                 width: 70vw;
                 height: 100%;
+                 box-sizing: border-box;
+                // >input{
+                //     width: 100%;
+                //     height: 90%;
+                //     margin-top: 5px;
+                //     border: none;
+                // }
                 >input{
                     width: 100%;
-                    height: 90%;
+                    height: 99%;
                     margin-top: 5px;
                     border: none;
-                }
+                    font-size: 30px;
+                     box-sizing: border-box;
+                     background-color: yellow;
+                  }
+                 ::-webkit-input-placeholder{
+                    font-size:28px;
+                    margin-top:0px;
+                    background-color: red;
+                    position: relative;
+                    bottom:0px;
+                 }
+                 
             }
             .safe-code{
                 width: 40vw;
                 height: 100%;
-                 >input{
+                //  >input{
+                //     width: 100%;
+                //     height: 90%;
+                //     margin-top: 5px;
+                //     border: none;
+                // }
+                >input{
                     width: 100%;
-                    height: 90%;
-                    margin-top: 5px;
+                    height: 99%;
                     border: none;
+                     margin-top:5px;
+                    font-size: 30px;
+                    box-sizing: border-box;
+                       background-color: yellow;
+                  }
+                   ::-webkit-input-placeholder{
+                    font-size:28px;
+                    margin-top:22px;
+                     box-sizing: border-box;
+                     background-color: red;
+                     position: relative;
+                   bottom:0px;
                 }
+                
             }
             .get-code{
                 width: 30vw;
