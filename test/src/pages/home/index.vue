@@ -318,7 +318,7 @@ export default {
               // 获取设备的版本号
               if(window.plus){  
                    that.updateVerson=plus.runtime.version;
-                   if(Number(that.versonAndroid)>Number(that.updateVerson)){
+                   if(Number(that.versonAndroid)<Number(that.updateVerson)){
                        that.showUpdate=true
                    }
                     console.log(that.updateVerson)
