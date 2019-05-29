@@ -201,7 +201,9 @@
                         </span>
                         <div class="detail-item">
                             <h3>违章查询</h3>
-                            <p>违章查询</p>
+                            <p>违章查询
+                                <span>{{updateVerson}}</span>
+                            </p>
                         </div>
                     </router-link>
                 </ul>
@@ -318,7 +320,7 @@ export default {
               // 获取设备的版本号
               if(window.plus){  
                    that.updateVerson=plus.runtime.version;
-                   if(Number(that.versonAndroid)<Number(that.updateVerson)){
+                   if(parseFloat(that.versonAndroid)<parseFloat(that.updateVerson)){
                        that.showUpdate=true
                    }
                     console.log(that.updateVerson)
