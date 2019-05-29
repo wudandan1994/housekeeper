@@ -27,14 +27,14 @@
             <div class="search">
                 <ul>
                     <!-- <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14',title: '征信查询'}}" tag="li"> -->
-                    <router-link :to="{path: '/loan/form/myOrder',query: {info:'https://ipcrs.pbccrc.org.cn/',title: '征信查询'}}" tag="li">
+                    <!-- <router-link :to="{path: '/home/cardCenter/progressQuery',query: {info:'https://ipcrs.pbccrc.org.cn/',title: '征信查询'}}" tag="li">
 
                         <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
                         <span>征信查询</span>
-                    </router-link>
+                    </router-link> -->
                     <router-link to="/vip" tag="li">
                          <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
-                        <span>升级代理</span>
+                        <p>升级代理</p>
                     </router-link>
                     <router-link to="/personalCenter/incomedetail" tag="li">
                          <p> <van-icon name="http://pay.91dianji.com.cn/103.png"  class="zx-search"  /></p>
@@ -397,7 +397,6 @@ export default {
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
-        
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
          this.automatic()
@@ -461,7 +460,7 @@ export default {
                 padding-bottom:20px;
                 padding-top:10px;
                 >li {
-                    width:25%;
+                    width:33%;
                     text-align: center;
                      margin-bottom:20px;
                      >span {
@@ -470,11 +469,11 @@ export default {
                      >p {
                           text-align: center;
                           margin-bottom:10px;
-                          transform: translateX(25%);
+                        //   transform: translateX(25%);
                          >.zx-search {
-                        display:block;
+                        // display:block;
                         font-size:80px;
-                        text-align: center;
+                        // text-align: center;
                     }
                 }
                     

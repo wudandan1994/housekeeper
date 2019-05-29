@@ -35,36 +35,73 @@ export default {
             plus.webview.close( "yinlian")
             this.$router.go(-1);
         },
-        // getIfram(){
-        //     let ifram = document.getElementById('ifram');
-        //         if (navigator.userAgent.match(/iPad|iPhone/i)) {
-        //         let iframe_box = document.getElementById('iframe-box');
-        //         iframe_box.style.width = 100 + '%';
-        //         iframe_box.style.overflowX = 'hidden';
-        //         iframe_box.style.overflowY = 'scroll';
-        //         iframe_box.style.webkitOverflowScrolling = 'touch';
-        //         ifram.setAttribute('scrolling', 'no');
-        //         iframe_box.appendChild(ifram)
-        //         console.log(222)
-        //         }
-        // },
-        webview(){
-            let self= plus.webview.currentWebview(); 
-            var yinlian= plus.webview.create(this.url, "yinlian", {  
-            top: "40px",  
-            bottom: "0px",
-            left:"0px",
-            right:"0px",
-            scrollIndicator:"vertical"
-        });  
-        //    self.append(yinlian)
-          yinlian.show()
-        },
-        mounted () {
-            // this.getIfram()
-        }
-
        
+        webview(){
+            if(window.plus){  
+                //  var yinlian = plus.webview.open(this.url,"yinlian",{
+                //          top: "40px",  
+                //         bottom: '0px',
+                //         left:'0px',
+                //         scrollIndicator:'none'
+                //     });
+                // let self= plus.webview.currentWebview(); 
+                // var yinlian= plus.webview.create(this.url, "yinlian", {  
+                // top: "40px",  
+                // // width:"100%",
+                // bottom: "0px",
+                //  right:"0px",
+                // left:"0px",
+                // scrollIndicator:"vertical"
+                // });  
+                // yinlian.show()
+                //  self.append(yinlian)
+
+
+             var yinlian= plus.webview.create(this.url, "yinlian");  
+               yinlian.setStyle({
+                   width:"100%",
+                   top:"40px",
+                   left:"0px",
+                  right:"0px",
+                  scalable: true,
+                  margin:"auto",
+               })
+                yinlian.show()
+
+
+            }else{  
+                document.addEventListener('plusready',function () {  
+                         var yinlian= plus.webview.create(this.url, "yinlian");  
+                            yinlian.setStyle({
+                                width:"100%",
+                                top:"40px",
+                                left:"0px",
+                                right:"0px",
+                                margin:"auto",
+                        })
+                            yinlian.show()
+                    // var w = plus.webview.open('http://m.weibo.cn/u/3196963860');
+                    // var yinlian = plus.webview.open(this.url,"yinlian",{
+                    //      top: "40px",  
+                    //     bottom: '0px',
+                    //     left:'0px',
+                    //     scrollIndicator:'none'
+                    // });
+                    // let self= plus.webview.currentWebview(); 
+                    //     var yinlian= plus.webview.create(this.url, "yinlian", {  
+                    //     top: "100px",  
+                       
+                    //     bottom: '0px',
+                    //     left:'0px',
+                    //     scrollIndicator:'none'
+                    // });  
+                   
+                    //   yinlian.show()
+                    //    self.append(yinlian)
+                },false);  
+            }  
+        }
+      
     },
     created(){
         this.url=this.$route.query.info;

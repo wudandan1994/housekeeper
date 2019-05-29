@@ -92,6 +92,7 @@
 <script>
 import { axiosPost } from '../../lib/http'
 import { citys } from '../../lib/city.js'
+import storage from '@/lib/storage'
 export default {
     data() {
         return {
@@ -161,6 +162,7 @@ export default {
                          query:{info:this.item}
                      })
                  } else if (res.data.success) {
+                          storage.set('amount',this.amount);
                     let planList=res.data.data
                     // console.log(this.area)
                      this.$router.push({

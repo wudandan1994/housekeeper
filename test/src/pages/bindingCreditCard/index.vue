@@ -205,7 +205,7 @@ export default {
 
             // }
             if(this.name.trim().length===0 || this.phone.trim().length===0 || this.bankcardno.trim().length===0 || this.idCard.trim().length===0 ||
-                this.year.trim().length!=2 || this.month.trim().length!=2 || this.safeCode.trim().length!=3 || this.billdate.trim().length!=2 || this.duedate.trim().length!=2
+                this.year.trim().length!=2 || this.month.trim().length!=2 || this.safeCode.trim().length!=3 || this.billdate.trim().length ===0 || this.duedate.trim().length!=2
             ){
                  this.$toast({
                     message:"请将信息填写完整"

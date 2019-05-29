@@ -349,8 +349,8 @@ export default {
                
            >.popup {
                .pop {
-                    width:600px;
-                  background-color: #fff;
+                    width:800px; 
+                   background-color: #fff;
                     overflow-y: scroll;
                   >p {
                       margin-top:15px;

@@ -18,9 +18,9 @@
                            <p>推荐码：<span>{{promotioncode}}</span></p>
                          </div>
                     </div>
-                     <div  class="operator end-center">
+                     <!-- <div  class="operator end-center">
                          <span>绑卡：<span>{{cardNum}}</span>张</span>
-                     </div>
+                     </div> -->
                  </div>
                
            </div>
@@ -37,7 +37,7 @@
                           </div>
                           <div class="now">
                               <div>
-                                  <p class="botton">未添加</p>
+                                  <p class="botton">{{amount}}</p>
                                    <p>本期账单</p>
                               </div>
                               <div class="pay">
@@ -66,8 +66,7 @@
                                     <p v-if="item.state=='2'">已取消</p>
                                     <p v-if="item.state=='3'">进行中</p>
                                     <p v-if="item.state=='4'">失败</p>
-                                    <p else-if="item.state=='null'">未知</p>
-                                   <p>还款状态</p>
+                                    <p>还款状态</p>
                                </li>
                                 <li>
                                    <p>{{item.repaycount}}</p>
@@ -101,6 +100,7 @@
 import { axiosPost } from '../../lib/http'
 import { bankCardAttribution } from '../../lib/bankName'
 import loading from '@/components/loading'
+import storage from '@/lib/storage'
 export default {
      components:{
       loading
@@ -116,13 +116,14 @@ export default {
             promotioncode:"",
             headimg:"",
             cardList:[],
-            cardNum:'',
+            // cardNum:'',
             // cardname:"",
-            bankname:""
+            bankname:"",
+            amount:""
         }
     },
     mounted () {
-        
+        this.amount=storage.get("amount")
     },
     methods:{
         goBack() {
@@ -152,7 +153,7 @@ export default {
                          arrXun.push(item)
                      });
                      this.cardList=arrXun
-                     this.cardNum=this.cardList.length
+                    //  this.cardNum=this.cardList.length
                  }
              })
              .catch(err=>{

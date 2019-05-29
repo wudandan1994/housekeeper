@@ -22,7 +22,7 @@
                             <p>分享给好友</p>
                         </li>
                         <li @click="wxcir">
-                            <p><van-icon color="white"  size="30px"  name="http://pay.91dianji.com.cn/pyq.png"/></p>
+                            <p><van-icon color="white"  size="40px"  name="http://pay.91dianji.com.cn/pyq.png"/></p>
                             <p>分享到朋友圈</p>
                         </li>
                     </ul>
@@ -235,7 +235,7 @@ export default {
             ctx.fillText(this.$store.state.wechat.promotioncode,80,650);
             setTimeout(()=>{
                 this.componentload = false;
-            },2500);
+            },3000);
         },
         savePoster(){
             this.imgShow = true;
@@ -264,7 +264,7 @@ export default {
                                 this.qrcode = res.data.data;
                                 setTimeout(() =>{
                                     this.componentload = false;
-                                },500);
+                                },1000);
                                 this.handlePoster();
                             }else{
                                 this.$toast('二维码请求失败');
