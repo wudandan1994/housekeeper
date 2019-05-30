@@ -65,19 +65,9 @@
                    <van-button  @click="pay" size="large" round type="info">确认</van-button>
            </div>
            <div class="record">
-                <!-- <van-button to="/home/collect/payment/records"  round size="middle"  type="default">交易查询</van-button> -->
                 <van-button   :to="{path: '/home/collect/payment/records',query: {chMerCode:chMerCode}}" round size="middle"  type="default">交易查询</van-button>
-
-                 <!-- :to="{path: '/loan/form/myOrder',query: {info: 'http://chaxun.weizhang8.cn/guanfangwang.php',title: '违章查询'}}" -->
                 <van-button  @click="change" round size="middle"  type="default">更改收款账户</van-button>
            </div>
-           <!-- <div class="trade" v-show="showrecord">
-               <div>
-                   <p>交易状态：{{record.resMsg}}</p>
-                   <p>交易金额：{{record.tranAmount}}</p>
-                   <p>交易时间：{{record.tranTime}}</p>
-               </div>
-           </div> -->
         </div>
         <loading :componentload="componentload"></loading>
     </div>
@@ -346,7 +336,6 @@ export default {
            padding-bottom: 50px;
            background-color: #EEEFF1;
            font-size:30px;
-               
            >.popup {
                .pop {
                     width:700px; 

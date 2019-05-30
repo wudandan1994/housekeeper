@@ -27,11 +27,11 @@
             <div class="search">
                 <ul>
                     <!-- <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14',title: '征信查询'}}" tag="li"> -->
-                    <!-- <router-link :to="{path: '/home/cardCenter/progressQuery',query: {info:'https://ipcrs.pbccrc.org.cn/',title: '征信查询'}}" tag="li">
+                    <router-link :to="{path: '/home/cardCenter/progressQuery',query: {info:'https://m.youku.com/video/id_XNDE5MjE3MjYzMg==.html?spm=a2h3j.8428770.3416059.1&source=&sharetype=secondtime&from=singlemessage',title: '征信查询'}}" tag="li">
 
                         <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
-                        <span>征信查询</span>
-                    </router-link> -->
+                        <span>在线教程</span>
+                    </router-link>
                     <router-link to="/vip" tag="li">
                          <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
                         <p>升级代理</p>
@@ -201,9 +201,7 @@
                         </span>
                         <div class="detail-item">
                             <h3>违章查询</h3>
-                            <p>违章查询 
-                              <!-- 版本号  <span>{{updateVerson}}</span> -->
-                            </p>
+                            <p>违章查询  </p>
                         </div>
                     </router-link>
                 </ul>
@@ -289,7 +287,7 @@ export default {
             showUpdate:false,
             versionAndroid:"",// 安卓版本号
             versionIos:"", // ios 版本号
-            updateVerson:""  // 设备版本号
+            updateVerson:0  // 设备版本号
         }
   },
    methods:{
@@ -304,11 +302,11 @@ export default {
                 var u = navigator.userAgent;
                 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
                 var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-               if(isAndroid) {
+                 if(isAndroid) {
                   window.location.href=" https://www.pgyer.com/vFbf"
-            } else if(isiOS) {
+               } else if(isiOS) {
                   window.location.href="http://znd.hvv.dnf-w3.cn/KXxv61"
-            } 
+              } 
 
         },
         getUpdate(){ // 获取历史版本号
@@ -317,8 +315,8 @@ export default {
                    console.log(res)
                    if(res.data.success){
                       let version=res.data.data
-                      this.versionAndroid=version[0].version
-                      this.versionIos=version[1].version
+                      this.versionAndroid=parseFloat(version[0].version)
+                      this.versionIos=parseFloat(version[1].version)
                    }
                }) 
                .catch(err=>{
@@ -329,17 +327,16 @@ export default {
             let that=this
               // 获取设备的版本号
               if(window.plus){  
-                   that.updateVerson=plus.runtime.version;
-                   console.log(parseFloat(that.versionAndroid),"and")
-                    console.log(parseFloat(that.versionIos),"and")
-                   if(parseFloat(that.versionAndroid)<parseFloat(that.updateVerson) || parseFloat(that.versionIos)<parseFloat(that.updateVerson) ){
+                   that.updateVerson=parseFloat(plus.runtime.version);
+                   console.log(that.versionAndroid)
+                    console.log(that.versionIos)
+                   if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
                    }
-                    // console.log(that.updateVerson)
             }else{  
                 document.addEventListener('plusready',function () {  
-                        that.updateVerson=plus.runtime.version;
-                         if(parseFloat(that.versionAndroid)<parseFloat(that.updateVerson) || parseFloat(that.versionIos)<parseFloat(that.updateVerson)  ){
+                      that.updateVerson=parseFloat(plus.runtime.version);
+                         if(that.versionAndroid>that.updateVerson|| that.versionIos>that.updateVerson ){
                              that.showUpdate=true
                         }
 
@@ -464,12 +461,12 @@ export default {
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-         this.automatic()
-         this.getUpdate()
+         this.automatic() //自动登录
+         this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        this.update()
+        this.update() 
     }
 }
 </script>
@@ -522,7 +519,7 @@ export default {
                    height: 400px;
                    z-index: 99;
                    position: absolute;
-                   top:50%;
+                   top:30%;
                    left:10%;
                    border-radius: 15px;
                    >.version {

@@ -11,9 +11,9 @@
                    <li >
                        <div class="top">
                           <div class="bankName">
-                              <p >{{item.bankNick}}</p>
+                              <!-- <p >{{item.bankNick}}</p>
                                <p >{{item.payerName}}</p>
-                              <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
+                              <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p> -->
                               <!-- <p>
                                   还款状态
                               </p> -->
@@ -37,14 +37,14 @@
                                    <p>未设置</p>
                                    <p>本期账单</p>
                                </li>
-                               <li>
+                               <!-- <li>
                                    <p>{{item.billdate}}<span>日</span></p>
                                    <p>账单日</p>
                                </li>
                                 <li>
                                    <p>{{item.duedate}}<span>日</span></p>
                                    <p>还款日</p>
-                               </li>
+                               </li> -->
                                 <li>
                                    <!-- <p>3天</p>
                                    <p>还款宽限期</p> -->
@@ -65,10 +65,55 @@
                       <p>请输入还款金额</p>
                       <input class="input" v-model="payment" type="number" placeholder="请输入还款金额">
                   </div>
-                  <div class="eara">
+                   <div class="eara">
                       <p>当前账户可用余额</p>
                       <input class="input" v-model="amount" type="number" placeholder="当前账户可用余额(不能低于还款额的5%)">
                   </div>
+
+
+                  <!-- <div class="eara">
+                      <p>开始还款时间</p>
+                      <input class="input" v-model="startdate" type="text" placeholder="开始还款时间">
+                  </div> -->
+
+                   <div class="eara">
+                      <p>开始还款时间</p>
+                      <div class="last">
+                          <input class="city" v-model="startdate" type="text" >
+                          <p><span @click="showStartpicker"><van-icon size="20px" name="arrow"/></span></p>
+                      </div>
+                       <van-datetime-picker
+                        v-model="currentDate"
+                        type="date"
+                          @confirm="confirmStart"
+                        v-show="showStart"
+                         @cancel="cancelStart"
+                        />
+                  </div>
+
+                     <!-- <div class="eara">
+                       <p>还款结束时间</p>
+                      <input class="input" v-model="enddate" type="text" placeholder="还款结束时间">
+                    </div> -->
+
+                   <div class="eara">
+                      <p>还款结束时间</p>
+                      <div class="last">
+                          <input class="city" v-model="enddate" type="text" >
+                          <p><span @click="showEndpicker"><van-icon size="20px" name="arrow"/></span></p>
+                      </div>
+                       <van-datetime-picker
+                        v-model="currentDate"
+                        type="date"
+                        @confirm="confirmEnd"
+                        v-show="showEnd"
+                        @cancel="cancelEnd"
+                        />
+                  </div>
+
+
+
+
                    <div class="eara">
                       <p>请选择消费城市</p>
                       <div class="last">
@@ -77,7 +122,6 @@
                           <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
                          <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
-                      
                   </div>
                </div>
            </div>
@@ -98,10 +142,15 @@ export default {
         return {
            payment:"",
            amount:"",
+           currentDate: new Date(),
            item:"",
            type:"",
            area:"",
+           startdate:"",
            showFlag:false,
+           showStart:false,
+           showEnd:false,
+           enddate:"",
            columns: [
                 {
                 values: Object.keys(citys),
@@ -122,8 +171,53 @@ export default {
          onChange(picker, values) {
             picker.setColumnValues(1, citys[values[0]]);
          }, 
+         confirmEnd(value){
+              var date=value
+              var year=date.getFullYear();//当前年份
+              var month=date.getMonth();//当前月份
+              var data=date.getDate();//天
+              this.enddate=year+"-"+this.fnW((month+1))+"-"+this.fnW(data);
+              this.showEnd=false
+         },
+         confirmStart(value){
+             console.log(value)
+              var date=value
+              var year=date.getFullYear();//当前年份
+              var month=date.getMonth();//当前月份
+              var data=date.getDate();//天
+              this.startdate=year+"-"+this.fnW((month+1))+"-"+this.fnW(data);
+              this.showStart=false
+         },
+          fnDate(time){
+                var date=time
+                var year=date.getFullYear();//当前年份
+                var month=date.getMonth();//当前月份
+                var data=date.getDate();//天
+                // var hours=date.getHours();//小时
+                // var minute=date.getMinutes();//分
+                // var second=date.getSeconds();//秒
+                this.startdate=year+"-"+this.fnW((month+1))+"-"+this.fnW(data);
+            },
+            //补位 当某个字段不是两位数时补0
+            fnW(str){
+                var num;
+                str>10?num=str:num="0"+str;
+                return num;
+            } ,
           onCancel(){
              this.showFlag=false
+         },
+         cancelEnd(){
+             this.showEnd=false
+         },
+         cancelStart(){
+             this.showStart=false
+         },
+         showStartpicker(){
+             this.showStart=true
+         },
+         showEndpicker(){
+             this.showEnd=true
          },
          onConfirm(value){
             this.area=value.join("-")
@@ -133,7 +227,7 @@ export default {
              this.showFlag=true
          },
         makePlan(){
-            if(this.payment.trim().length===0 || this.amount.trim().length===0 || this.area.trim().length===0){
+            if(this.payment.trim().length===0 || this.amount.trim().length===0 || this.area.trim().length===0 || this.startdate.trim().length===0 || this.enddate.trim().length===0){
                 this.$toast({
                     message:"请将信息填写完整"
                 })
@@ -149,7 +243,9 @@ export default {
                 bindId:this.item.bindId,
                 amount:this.amount,
                 payment:this.payment,
-                type:this.type
+                type:this.type,
+                enddate:this.enddate,
+                startdate:this.startdate
             }
              axiosPost("/creditCard/getPlan",data)
              .then(res=>{
@@ -186,8 +282,8 @@ export default {
         }
     },
     created () {
-         this.item=this.$route.query.info 
-          this.type=this.$route.query.type
+        //  this.item=this.$route.query.info 
+        //   this.type=this.$route.query.type
     }
 }
 </script>

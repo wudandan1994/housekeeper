@@ -187,24 +187,8 @@ export default {
                this.$toast('请阅读并同意服务协议');
            }
            else{
-               let data={
-                   realName:this.form.name,
-                   mobile:this.form.mobile,
-                   certcode:this.form.idcardnumber
-               }
-               axiosPost("/creditCard/getLoanUrl",data)
-              
-               .then(res=>{
-                   if(!res.data.success){
-                       this.$toast({
-                           message:res.data.message
-                       })
-                       return
-                   } else {
-                    //    window.location.href=res.data.data;
-                        let url=res.data.data;
-                        this.componentload=true
-                        setTimeout(()=>{
+                 let url="https://wallet.xiaoying.com/fe/wallet-landing/blueRegPage/index.html?landId=1017&source=100024443"
+                setTimeout(()=>{
                             this.$router.push({
                             path:"/home/online",
                             query:{
@@ -213,12 +197,37 @@ export default {
                               }
                           })
                         },1000)
-                   }
+            //    let data={
+            //        realName:this.form.name,
+            //        mobile:this.form.mobile,
+            //        certcode:this.form.idcardnumber
+            //    }
+            //    axiosPost("/creditCard/getLoanUrl",data)
+            //    .then(res=>{
+            //        if(!res.data.success){
+            //            this.$toast({
+            //                message:res.data.message
+            //            })
+            //            return
+            //        } else {
+            //         //    window.location.href=res.data.data;
+            //             let url=res.data.data;
+            //             this.componentload=true
+            //             setTimeout(()=>{
+            //                 this.$router.push({
+            //                 path:"/home/online",
+            //                 query:{
+            //                     info:url,
+            //                     title:"贷款中心"
+            //                   }
+            //               })
+            //             },1000)
+            //        }
                    
-               })
-               .catch(err=>{
+            //    })
+            //    .catch(err=>{
                    
-               })
+            //    })
            }
         },
          // 获取实名认证信息
