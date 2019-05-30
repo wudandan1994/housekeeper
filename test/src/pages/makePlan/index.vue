@@ -11,25 +11,24 @@
                    <li >
                        <div class="top">
                           <div class="bankName">
-                              <!-- <p >{{item.bankNick}}</p>
+                              <p >{{item.bankNick}}</p>
                                <p >{{item.payerName}}</p>
-                              <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p> -->
+                              <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p> 
                               <!-- <p>
                                   还款状态
                               </p> -->
                           </div>
-                          <div class="now">
+                          <!-- <div class="now">
                               <div>
-                                  <!-- <p class="botton">未添加</p> -->
+                                  <p class="botton">未添加</p>
                               </div>
                               <div class="pay">
-                                  <!-- <p class="days">16</p> -->
+                                <p class="days">16</p> 
                                   <div>
-                                      <!-- <p class="botton">天后还款日</p> -->
+                                    <p class="botton">天后还款日</p> 
                                   </div>
                               </div>
-                             
-                          </div>
+                          </div> -->
                        </div>
                        <div class="bottom">
                            <ul>
@@ -37,14 +36,14 @@
                                    <p>未设置</p>
                                    <p>本期账单</p>
                                </li>
-                               <!-- <li>
+                               <li>
                                    <p>{{item.billdate}}<span>日</span></p>
                                    <p>账单日</p>
                                </li>
                                 <li>
                                    <p>{{item.duedate}}<span>日</span></p>
                                    <p>还款日</p>
-                               </li> -->
+                               </li>
                                 <li>
                                    <!-- <p>3天</p>
                                    <p>还款宽限期</p> -->
@@ -79,6 +78,7 @@
                    <div class="eara">
                       <p>开始还款时间</p>
                       <div class="last">
+                           <p> <van-icon  size="20px" name="todo-list-o"/></p>
                           <input class="city" v-model="startdate" type="text" >
                           <p><span @click="showStartpicker"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
@@ -99,6 +99,7 @@
                    <div class="eara">
                       <p>还款结束时间</p>
                       <div class="last">
+                           <p> <van-icon  size="20px" name="todo-list-o"/></p>
                           <input class="city" v-model="enddate" type="text" >
                           <p><span @click="showEndpicker"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
@@ -282,8 +283,8 @@ export default {
         }
     },
     created () {
-        //  this.item=this.$route.query.info 
-        //   this.type=this.$route.query.type
+         this.item=this.$route.query.info 
+          this.type=this.$route.query.type
     }
 }
 </script>
@@ -422,7 +423,9 @@ export default {
                        }
                    }
                    >.input {
-                       border:none;
+                       background:none;  
+                        outline:none;  
+                        border:0px;
                        width:100%;
                        height:60px;
                        border:2px solid #ccc;

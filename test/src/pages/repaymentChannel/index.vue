@@ -83,7 +83,7 @@
            <div class="tips">
                <h3>温馨提示</h3>
                <div class="channel">
-                   <p>尊敬的用户您好！本支付通道为真实商户消费通道，为了修复完善您信用卡账单就，建议您最好预留<span class="red">11%-12%</span>的资金，
+                   <p>&nbsp;&nbsp;&nbsp;尊敬的用户您好！本支付通道为真实商户消费通道，为了修复完善您信用卡账单就，建议您最好预留<span class="red">11%-12%</span>的资金，
                    要确保在执行消费还款计划期间，卡内有足够的金额（期间尽量避免使用：<span class="bold">微信扫码、支付宝、京东</span>等地方消费使用，并注意卡内临时额、
                    产生分期费用等），否则可能会导致余额不足或扫码消费笔数限制，还款计划执行失败。</p>
                    <div>注：请如实填写账单日、还款日，如填写不实导致未全额还款的，责任由客户自行承担。
@@ -91,11 +91,6 @@
                    </div>
                </div>
            </div>
-
-          <!-- <div class="button">
-              <van-button round size="large" @click="makePlan" type="info">制定计划</van-button>
-          </div> -->
-
         </div>
     </div>
 
@@ -267,6 +262,10 @@ export default {
                   line-height: 38px;
                   border-radius: 10px;
                   border:2px solid #ccc;
+                  .center {
+                      justify-content: space-between;
+                      margin-top:10px;
+                  }
                   .van-checkbox__icon .van-icon{
                       border:1px solid #000;
                   }

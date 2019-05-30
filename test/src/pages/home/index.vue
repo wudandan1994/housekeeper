@@ -27,10 +27,10 @@
             <div class="search">
                 <ul>
                     <!-- <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14',title: '征信查询'}}" tag="li"> -->
-                    <router-link :to="{path: '/home/cardCenter/progressQuery',query: {info:'https://m.youku.com/video/id_XNDE5MjE3MjYzMg==.html?spm=a2h3j.8428770.3416059.1&source=&sharetype=secondtime&from=singlemessage',title: '征信查询'}}" tag="li">
+                    <router-link :to="{path: '/home/cardCenter/progressQuery',query: {info:'https://m.youku.com/video/id_XNDE5MjE3MjYzMg==.html?spm=a2h3j.8428770.3416059.1&source=&sharetype=secondtime&from=singlemessage',title: '新手教程'}}" tag="li">
 
                         <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
-                        <span>在线教程</span>
+                        <span>新人教程</span>
                     </router-link>
                     <router-link to="/vip" tag="li">
                          <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
@@ -204,6 +204,15 @@
                             <p>违章查询  </p>
                         </div>
                     </router-link>
+                     <!-- <li @click="handleExpect">
+                        <span>
+                           <van-icon name="http://pay.91dianji.com.cn/icon_63.png" size="30px" />
+                        </span>
+                        <div class="detail-item">
+                            <h3>卡·测评</h3>
+                            <p>信用卡“体检”报告</p>
+                        </div>
+                    </li> -->
                 </ul>
             </div>
             <!-- 客服 -->
