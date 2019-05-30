@@ -201,8 +201,8 @@
                         </span>
                         <div class="detail-item">
                             <h3>违章查询</h3>
-                            <p>违章查询
-                                <span>{{updateVerson}}</span>
+                            <p>违章查询 
+                              <!-- 版本号  <span>{{updateVerson}}</span> -->
                             </p>
                         </div>
                     </router-link>
@@ -236,14 +236,14 @@
                     </div> 
                 </div>
             </div>
-            <div v-show="showUpdate" class="update">
+            <div @click.self="showUpdate=false" v-show="showUpdate" class="update">
                 <div  class="cover">
-                    <div class="verson">
+                    <div class="version">
                        <h3>版本更新</h3>
                         <p>钱夹宝升级了，快来体验吧！</p>
                         <div class="butt">
-                            <div class="cancle">取消</div>
-                            <div class="upd">更新</div>
+                            <div class="cancle" @click="showUpdate=false">取消</div>
+                            <div class="upd" @click="download">更新</div>
                         </div>
                     </div>
                 </div>
@@ -287,9 +287,9 @@ export default {
             longitude: '',
             latitude: '',
             showUpdate:false,
-            versonAndroid:"",
-            versonIos:"",
-            updateVerson:""
+            versionAndroid:"",// 安卓版本号
+            versionIos:"", // ios 版本号
+            updateVerson:""  // 设备版本号
         }
   },
    methods:{
@@ -299,16 +299,26 @@ export default {
         handleExpect(){
             this.$toast('敬请期待')
         },
-        getUpdate(){
+        download(){  // 更新
+            // 判断android 还是ios
+                var u = navigator.userAgent;
+                var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+                var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+               if(isAndroid) {
+                  window.location.href=" https://www.pgyer.com/vFbf"
+            } else if(isiOS) {
+                  window.location.href="http://znd.hvv.dnf-w3.cn/KXxv61"
+            } 
+
+        },
+        getUpdate(){ // 获取历史版本号
                axiosPost("/customer/getVersion")
                .then(res=>{
-                   console.lgo(res)
-                   if(res.data.cuccess){
-                      let verson=res.data.data
-                    //   this.versonAndroid=verson[0].verson
-                      this.versonAndroid="1.0"
-
-                      this.versonIos=verson[1].verson
+                   console.log(res)
+                   if(res.data.success){
+                      let version=res.data.data
+                      this.versionAndroid=version[0].version
+                      this.versionIos=version[1].version
                    }
                }) 
                .catch(err=>{
@@ -320,16 +330,19 @@ export default {
               // 获取设备的版本号
               if(window.plus){  
                    that.updateVerson=plus.runtime.version;
-                   if(parseFloat(that.versonAndroid)<parseFloat(that.updateVerson)){
+                   console.log(parseFloat(that.versionAndroid),"and")
+                    console.log(parseFloat(that.versionIos),"and")
+                   if(parseFloat(that.versionAndroid)<parseFloat(that.updateVerson) || parseFloat(that.versionIos)<parseFloat(that.updateVerson) ){
                        that.showUpdate=true
                    }
-                    console.log(that.updateVerson)
-                    console.log(555555555555)
+                    // console.log(that.updateVerson)
             }else{  
                 document.addEventListener('plusready',function () {  
                         that.updateVerson=plus.runtime.version;
-                        console.log(that.updateVerson)
-                        console.log(555555555555) 
+                         if(parseFloat(that.versionAndroid)<parseFloat(that.updateVerson) || parseFloat(that.versionIos)<parseFloat(that.updateVerson)  ){
+                             that.showUpdate=true
+                        }
+
                 },false);  
             }  
         } ,
@@ -455,6 +468,7 @@ export default {
          this.getUpdate()
     }  ,
     mounted () {
+        // 更新
         this.update()
     }
 }
@@ -511,7 +525,7 @@ export default {
                    top:50%;
                    left:10%;
                    border-radius: 15px;
-                   >.verson {
+                   >.version {
                        background-color: #fff;
                        padding:10px;
                          height: 400px;
