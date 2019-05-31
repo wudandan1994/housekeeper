@@ -194,9 +194,6 @@ export default {
                 var year=date.getFullYear();//当前年份
                 var month=date.getMonth();//当前月份
                 var data=date.getDate();//天
-                // var hours=date.getHours();//小时
-                // var minute=date.getMinutes();//分
-                // var second=date.getSeconds();//秒
                 this.startdate=year+"-"+this.fnW((month+1))+"-"+this.fnW(data);
             },
             //补位 当某个字段不是两位数时补0

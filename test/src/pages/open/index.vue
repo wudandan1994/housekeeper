@@ -88,7 +88,7 @@ export default {
          onRead(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = '    /upload/uploadImg'
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -119,7 +119,10 @@ export default {
                                             })
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
-                                            this.$router.push("/home/collect/payment")
+                                            this.$router.push({
+                                                path:"/home/collect/payment",
+                                                chMerCode:this.info
+                                            })
                                          }
                                         
                                         })
@@ -143,7 +146,7 @@ export default {
          onReadF(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = ' /upload/uploadImg'
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -174,7 +177,10 @@ export default {
                                             })
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
-                                            this.$router.push("/home/collect/payment")
+                                             this.$router.push({
+                                                path:"/home/collect/payment",
+                                                chMerCode:this.info
+                                            })
                                          }
                                       
                                         })
@@ -196,7 +202,7 @@ export default {
          onReadS(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = '/upload/uploadImg'
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -227,7 +233,10 @@ export default {
                                             })
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
-                                            this.$router.push("/home/collect/payment")
+                                            this.$router.push({
+                                                path:"/home/collect/payment",
+                                                chMerCode:this.info
+                                            })
                                          } 
                                        
                                         })
@@ -250,7 +259,7 @@ export default {
          onReadQ(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = '/upload/uploadImg'
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -281,7 +290,10 @@ export default {
                                             })
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
-                                            this.$router.push("/home/collect/payment")
+                                            this.$router.push({
+                                                path:"/home/collect/payment",
+                                                chMerCode:this.info
+                                            })
                                          } 
                                        
                                         })
@@ -304,7 +316,7 @@ export default {
          onReadH(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = '/upload/uploadImg'
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -335,7 +347,10 @@ export default {
                                         })
                                         return
                                     } else if(res.data.data.uploadStatus==="0"){
-                                        this.$router.push("/home/collect/payment")
+                                        this.$router.push({
+                                                path:"/home/collect/payment",
+                                                chMerCode:this.info
+                                            })
                                         } 
                                     
                                     })
@@ -370,18 +385,30 @@ export default {
                         } else if(item.photoType==="5"){
                             this.bankback=item.photoData
                         }
-                        
                     });
                 })
                 .catch(err=>{
                     // console.log(err,"上传图片的错误");
                     
                 })
-        }
+        },
+         searchInfo(){
+            axiosPost("/creditCard/getMemberReg")
+           .then(res=>{
+            if(res.data.success){
+              this.info=res.data.data.chMerCode
+             }
+        })
+        .catch(err=>{
+            // console.log(err,"error个人信息")
+        })
+     },
         
     },
+    
     created () {
-          this.info=this.$route.query.info
+        this.searchInfo()
+          console.log(this.info,"open")
           this.findphoto()
     }
 }

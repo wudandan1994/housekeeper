@@ -282,7 +282,10 @@ export default {
                      setTimeout(()=>{
                         this.componentload=false
                     },500)
-                     this.$router.push("/home/collect/open")
+                     this.$router.push({
+                         path:"/home/collect/open",
+                         info:this.chMerCode
+                     })
                   } else {
                       this.componentload=false
                   }
@@ -296,6 +299,7 @@ export default {
     },
     created () {
          this.chMerCode=this.$route.query.info
+         console.log(this.chMerCode,"payment")
         //  this.search()
          this.sureSubmit()
     },

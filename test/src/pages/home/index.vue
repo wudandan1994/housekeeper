@@ -5,6 +5,7 @@
             <div>
                 <div class="menu" @click="isShow">
                     <van-icon name="wap-nav" />
+                    菜单
                </div>
                <span class="location">
                     <!-- <van-icon name="location-o" /> -->
@@ -50,7 +51,7 @@
             <div class="pannel-news row">
                 <div class="pannel-title center">钱夹<br/>资讯</div>
                 <div class="pannel-detail center" @click="handleContactUs">
-                    <van-notice-bar text="钱夹宝1.0正式上线啦,若您在使用中有任何问题请联系客服：400-1059-769"/>
+                    <van-notice-bar text="现成为993会员，即可享有19800元代理商的相关权限，名额有限，相关内容，请联系您的专属客户经理，确认活动详情"/>
                 </div>
             </div>
 
@@ -470,12 +471,12 @@ export default {
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-         this.automatic() //自动登录
-         this.getUpdate() //获取版本
+        //  this.automatic() //自动登录
+        //  this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        this.update() 
+        // this.update() 
     }
 }
 </script>

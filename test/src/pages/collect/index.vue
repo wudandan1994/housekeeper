@@ -377,11 +377,9 @@ export default {
         this.handleGetAOuth();
         // 将json对象转换为数组
         for(var item in bankNumber){
-            // console.log('循环',bankNumber[item].bankName);
             this.columns[item] = bankNumber[item].bankName
         }
         // this.columns = bankNumber.bankName;
-        // console.log(bankNumber);
     }
 }
 </script>
@@ -414,7 +412,6 @@ export default {
            padding-bottom: 50px;
            background-color: #EEEFF1;
            font-size: 34px;
-          
            >.phone {
                >ul{
                    padding-left:30px;
