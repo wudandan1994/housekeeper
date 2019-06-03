@@ -471,12 +471,12 @@ export default {
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-        //  this.automatic() //自动登录
-        //  this.getUpdate() //获取版本
+         this.automatic() //自动登录
+         this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        // this.update() 
+        this.update() 
     }
 }
 </script>

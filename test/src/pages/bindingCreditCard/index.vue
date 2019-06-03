@@ -14,7 +14,7 @@
                    </li>
                     <li>
                         <span>身份证号：</span>
-                       <input v-model="idCard"  type="number" placeholder="所持身份证号码">
+                       <input v-model="idCard"  type="text" placeholder="所持身份证号码">
                    </li>
                     <li>
                         <span>银行卡号：</span>
@@ -36,7 +36,7 @@
                        <span>手机号：</span>
                        <input type="number" v-model="phone" placeholder="银行卡预留手机号">
                    </li> 
-                     <li>
+                    <li>
                        <span>账单日：</span>
                        <input type="number" v-model="billdate" placeholder="账单日 如 06">
                    </li> 
@@ -48,49 +48,8 @@
               <div @click="bindingCard" class="btn">
                 <van-button round size="large" type="info">确认绑定</van-button>
              </div>
- 
            </div>
         </div>
-        <!-- <div class="user-input row">
-            <div class="title start-center"></div>
-            <div class="input start-center"><input type="text" required v-model="name" placeholder="姓名"></div>
-        </div> -->
-        <!-- <div class="user-input row">
-            <div class="title start-center">身份证号</div>
-            <div class="input start-center"><input type="text" required v-model="idCard" placeholder="所持身份证号码"></div>
-        </div> -->
-        <!-- <div class="user-input row">
-            <div class="title start-center">银行卡号</div>
-            <div class="input start-center"><input type="number" required v-model="bankcardno" placeholder="所持银行卡号"></div>
-        </div> -->
-         <!-- <div class="user-input top row">
-            <div class="title year start-center">有效期年份</div>
-            <div class="input start-center"><input type="number" v-model="year" placeholder="信用卡有效期年份如 22"></div>
-        </div> -->
-         <!-- <div class="user-input  row">
-            <div class="title year start-center">有效期月份</div>
-            <div class="input start-center"><input type="number" v-model="month" placeholder="信用卡有效期月份 如 05"></div>
-        </div> -->
-         <!-- <div class="user-input  row">
-            <div class="title year start-center">安全码</div>
-            <div class="input start-center"><input type="number"  v-model="safeCode" placeholder="信用卡后三位安全码"></div>
-        </div> -->
-
-        <!-- <div class="user-input top row">
-            <div class="title start-center">手机号</div>
-            <div class="input start-center"><input type="number" v-model="phone" required placeholder="银行卡预留手机号"></div>
-        </div> -->
-         <!-- <div class="user-input  row">
-            <div class="title start-center">账单日</div>
-            <div class="input start-center"><input type="number" v-model="billdate" required placeholder="账单日 如06"></div>
-        </div>
-        <div class="user-input  row">
-            <div class="title start-center">最后还款日</div>
-            <div class="input start-center"><input type="number" v-model="duedate" required placeholder="还款日 如23"></div>
-        </div>
-        <div @click="bindingCard" class="btn">
-            <van-button round size="large" type="info">确认绑定</van-button>
-        </div> -->
     </div>
 </template>
 <script>
@@ -124,99 +83,6 @@ export default {
         handleReturnHome(){
             this.$router.go(-1)
         },
-         // 获取验证码
-        // handleSafeCode(){
-        //     let that=this
-        //     if(this.title == '获取验证码'){
-        //         let num = 60;
-        //         let codetitle = '';
-        //         let timer = setInterval(() => {
-        //             num = num - 1;
-        //             codetitle = '已发送' + '(' + num + ' s)';
-        //             this.title = codetitle
-                   
-        //         }, 1000)
-
-        //     let partern=/^1\d{10}$/
-
-        //     if(that.name.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写姓名"
-        //         })
-        //         return
-        //     }
-        //     if(that.phone.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写手机号"
-        //         })
-        //         return
-        //     }
-        //     if(that.bankcardno.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写持有银行卡号码"
-        //         })
-        //         return
-        //     }
-        //     if(!partern.test(that.phone)){
-        //          that.$toast({
-        //             message:"请输入11位手机号码"
-        //         })
-        //         return
-        //     }
-        //     if(that.idCard.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写身份证号码"
-        //         })
-        //         return
-        //     }
-        //      if(that.year.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写信用卡有效年份"
-        //         })
-        //         return
-        //     }
-        //      if(that.month.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写信用卡有效月份"
-        //         })
-        //         return
-        //     }
-        //      if(that.safeCode.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写信用卡安全码"
-        //         })
-        //         return
-        //     }
-
-        //      let data={
-        //         P10_payerName:that.name,
-        //         P7_phone:that.phone,
-        //         P6_cardNo:that.bankcardno,
-        //         P8_idCardNo:that.idCard,
-        //         P12_year:that.year,
-        //         P13_month:that.month,
-        //         P14_cvv2:that.safeCode
-        //      }
-        //         axiosPost("/creditCard/agreementBindCardValidateCode",data)
-        //         .then(res=>{
-        //             if(!res.data.success){
-        //                 that.$toast({
-        //                     message:res.data.message
-        //                 })
-        //             }
-        //             that.orderId=res.data.data.orderId
-        //         })
-        //         .catch(err=>{
-                    
-        //         })
-        //         setTimeout(() => {
-        //             clearInterval(timer);
-        //             this.title = '获取验证码';
-        //         }, 60000)
-        //     }else{
-        //         this.$toast('验证码已发送，请勿重复操作');
-        //     }
-        // }, :"",
            
         // 绑卡
         bindingCard(){
@@ -228,13 +94,13 @@ export default {
                 return
              }
              
-              let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-               if(!parttenId.test(this.idCard)){
-                 this.$toast({
-                    message:"请填写正确的身份证号"
-                })
-                return
-             }
+            //   let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+            //    if(!parttenId.test(this.idCard)){
+            //      this.$toast({
+            //         message:"请填写正确的身份证号"
+            //     })
+            //     return
+            //  }
 
 
             if(this.name.trim().length===0 || this.phone.trim().length===0 || this.bankcardno.trim().length===0 || this.idCard.trim().length===0 ||
@@ -271,32 +137,6 @@ export default {
                   
               })
 
-            //   let that =this
-            //   if(that.autoCode.trim().length===0){
-            //       that.$toast({
-            //           message:"请输入验证码"
-            //       })
-            //       return
-            //   }
-            //       let validateCode=that.autoCode
-            //         let datas={
-            //             orderId:that.orderId,
-            //             validateCode,
-            //         }
-            //         axiosPost("/creditCard/bindCard",datas)
-            //         .then(function(res){
-            //             if(!res.data.success){
-            //                 that.$toast({
-            //                 message:res.data.message
-            //               })
-            //             } else {
-            //             }
-            //         })
-            //         .catch(function(err){
-            //             that.$toast({
-            //                 message:err.message
-            //             })
-            //         })
         }
 
        

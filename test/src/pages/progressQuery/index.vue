@@ -5,10 +5,10 @@
             <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
-         <div class="box" style="width:100vw;height:100vh;">　
+         <!-- <div class="box" style="width:100vw;height:100vh;">　
             　　<iframe v-if="type" :src="url" scrolling="auto" class="iframe" frameborder="0" width="100vw" height="100vh"></iframe>
             　　<iframe v-else :src="url" frameborder="0" class="iframe" height="100vh" scrolling='auto' style="width: 1px; min-width: 100vw; *width: 100vw;"></iframe>
-            </div>
+         </div> -->
     </div>
 
 </template>
@@ -25,7 +25,7 @@ export default {
     },
     methods:{
         goBack() {
-            // plus.webview.close( "yinlian")
+            plus.webview.close( "yinlian")
             this.$router.push("/home")
         },
        
@@ -101,14 +101,14 @@ export default {
     created(){
         this.url=this.$route.query.info
          this.title=this.$route.query.title
-        //  this.webview();
-          var u = navigator.userAgent;
-        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-        if(isAndroid){
-        　　this.type = true
-        }else{
-        　　this.type = false
-        }
+         this.webview();
+        //   var u = navigator.userAgent;
+        // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        // if(isAndroid){
+        // 　　this.type = true
+        // }else{
+        // 　　this.type = false
+        // }
     }
 }
 </script>
