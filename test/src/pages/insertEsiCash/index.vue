@@ -26,7 +26,7 @@
                    </li>
                    <li>
                         <span>开户地区：</span>
-                       <input class="area" v-model="area" type="text" placeholder="示例：江苏省-苏州市">
+                       <input class="area" readonly v-model="area" type="text" placeholder="示例：江苏省-苏州市">
                         <span @click="showPick"><van-icon name="arrow"/></span>
                    </li>
                    <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
@@ -147,11 +147,11 @@ export default {
         }
     },
     created () {
-        // this.item=this.$route.query.info 
-        // this.name=this.item.payerName
-        // this.accountNo=this.item.cardNo
-        // this.mobileNo=this.item.phone
-        //  this.idcardNo=this.item.idCardNo
+        this.item=this.$route.query.info 
+        this.name=this.item.payerName
+        this.accountNo=this.item.cardNo
+        this.mobileNo=this.item.phone
+         this.idcardNo=this.item.idCardNo
     }
 }
 </script>

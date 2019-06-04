@@ -79,7 +79,7 @@
                       <p>开始还款时间</p>
                       <div class="last">
                            <p> <van-icon  size="20px" name="todo-list-o"/></p>
-                          <input class="city" v-model="startdate" type="text" >
+                          <input class="city" readonly  v-model="startdate" type="text" >
                           <p><span @click="showStartpicker"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
                        <van-datetime-picker
@@ -100,7 +100,7 @@
                       <p>还款结束时间</p>
                       <div class="last">
                            <p> <van-icon  size="20px" name="todo-list-o"/></p>
-                          <input class="city" v-model="enddate" type="text" >
+                          <input class="city" readonly  v-model="enddate" type="text" >
                           <p><span @click="showEndpicker"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
                        <van-datetime-picker
@@ -111,15 +111,11 @@
                         @cancel="cancelEnd"
                         />
                   </div>
-
-
-
-
                    <div class="eara">
                       <p>请选择消费城市</p>
                       <div class="last">
                           <p> <van-icon  size="20px" name="location"/></p>
-                          <input class="city" v-model="area" type="text" placeholder="位置">
+                          <input class="city" readonly  v-model="area" type="text" placeholder="位置">
                           <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
                          <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
