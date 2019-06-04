@@ -70,26 +70,6 @@ export default {
                                 margin:"auto",
                         })
                             yinlian.show()
-
-
-                    // var w = plus.webview.open('http://m.weibo.cn/u/3196963860');
-                    // var yinlian = plus.webview.open(this.url,"yinlian",{
-                    //      top: "40px",  
-                    //     bottom: '0px',
-                    //     left:'0px',
-                    //     scrollIndicator:'none'
-                    // });
-                    // let self= plus.webview.currentWebview(); 
-                    //     var yinlian= plus.webview.create(this.url, "yinlian", {  
-                    //     top: "100px",  
-                       
-                    //     bottom: '0px',
-                    //     left:'0px',
-                    //     scrollIndicator:'none'
-                    // });  
-                   
-                    //   yinlian.show()
-                    //    self.append(yinlian)
                 },false);  
             }  
         }

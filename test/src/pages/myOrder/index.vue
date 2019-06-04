@@ -5,12 +5,12 @@
             <span>{{title}}</span>
             <span></span>
         </header>
-        <!-- <div class="container">
-            <div class="box" style="width:100vw;height:100vh;">　
+        <div class="container">
+            <!-- <div class="box" style="width:100vw;height:100vh;">　
             　　<iframe v-if="type" :src="url" scrolling="auto" class="iframe" frameborder="0" width="100vw" height="100vh"></iframe>
             　　<iframe v-else :src="url" frameborder="0" class="iframe" height="100vh" scrolling='auto' style="width: 1px; min-width: 100vw; *width: 100vw;"></iframe>
-            </div>
-        </div> -->
+            </div> -->
+        </div>
     </div>
 
 
@@ -60,24 +60,6 @@ export default {
                                 margin:"auto",
                         })
                             yinlian.show()
-                    // var w = plus.webview.open('http://m.weibo.cn/u/3196963860');
-                    // var yinlian = plus.webview.open(this.url,"yinlian",{
-                    //      top: "40px",  
-                    //     bottom: '0px',
-                    //     left:'0px',
-                    //     scrollIndicator:'none'
-                    // });
-                    // let self= plus.webview.currentWebview(); 
-                    //     var yinlian= plus.webview.create(this.url, "yinlian", {  
-                    //     top: "100px",  
-                       
-                    //     bottom: '0px',
-                    //     left:'0px',
-                    //     scrollIndicator:'none'
-                    // });  
-                   
-                    //   yinlian.show()
-                    //    self.append(yinlian)
                 },false);  
             }  
         }

@@ -243,16 +243,16 @@ export default {
             }
              axiosPost("/creditCard/getPlan",data)
              .then(res=>{
-                  if( res.data.code=="1001" && res.data.success==false){
+                  if(!res.data.success){
                       this.$toast({
                           message:res.data.message
                         })
-                     this.$router.push({
-                         path:"/home/insertEsiCash",
-                         query:{info:this.item}
-                     })
-                 } else if (res.data.success) {
-                          storage.set('amount',this.amount);
+                    //  this.$router.push({
+                    //      path:"/home/insertEsiCash",
+                    //      query:{info:this.item}
+                    //  })
+                 } else {
+                    storage.set('amount',this.amount);
                     let planList=res.data.data
                     // console.log(this.area)
                      this.$router.push({
@@ -264,11 +264,7 @@ export default {
                          }
                      })
                    }
-                 else {
-                      this.$toast({
-                         message:res.data.message
-                     })
-                 }
+                
              })
              .catch(err=>{
                 //  console.log(err)

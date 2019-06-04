@@ -50,7 +50,7 @@
                                   </div>
                               </div>
                               <p>
-                                  <van-button @click="repayment(item)" round type="info">立即还款</van-button>
+                                  <van-button @click="repayment(index)" round type="info">立即还款</van-button>
                               </p>
                           </div>
                        </div>
@@ -80,6 +80,18 @@
                                 
                                </li>
                            </ul>
+                       </div>
+                       <div  v-show="num==index"  class="pop">
+                           <div class="small" @click="smallPass(item)">
+                               <van-icon name="http://pay.91dianji.com.cn/putong.png" size="40px"/>
+                               <p>小额通道</p>
+                                <p> <van-icon name="arrow" size="30px"/></p>
+                           </div>
+                           <div class="large" @click="largePass(item)">
+                                 <van-icon name="http://pay.91dianji.com.cn/putong.png" size="40px"/>
+                                <p>大额通道</p>
+                                <p> <van-icon name="arrow" size="30px"/></p>
+                           </div>
                        </div>
                    </li>
                </ul>
@@ -119,7 +131,9 @@ export default {
             // cardNum:'',
             // cardname:"",
             bankname:"",
-            amount:""
+            amount:"",
+            // showPass:false,
+            num:null
         }
     },
     mounted () {
@@ -129,14 +143,45 @@ export default {
         goBack() {
             this.$router.push('/home/creditHousekeeper')
         },
+        // 查询小额通道是否签约
+        smallPass(i){
+            let data={
+               bindId:i.bindId 
+            }
+             axiosPost("/creditCard/getEsicashExist",data)
+             .then(res=>{
+                 console.log(res)
+                 
+             })
+             .catch(err=>{
+                 console.log(err)
+                 
+             })
+        },
+         // 查询大额通道是否签约
+        largePass(i){
+             let data={
+               bindId:i.bindId 
+            }
+             axiosPost("/vtdcreditCard/getEnterNet",data)
+             .then(res=>{
+                 console.log(res)
+             })
+             .catch(err=>{
+                 console.log(err)
+             })
+        },
 
-        repayment(item){
-            this.$router.push({
-                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                query:{
-                    info:item
-                }
-            })
+        repayment(index){
+            this.num=index
+            this.showPass=true
+
+            // this.$router.push({
+            //     path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+            //     query:{
+            //         info:item
+            //     }
+            // })
         },
         // 查询绑卡列表
         getCardList(){
@@ -309,7 +354,6 @@ export default {
               }
           }
           .operator {
-
               margin-right:30px;
           }
            }
@@ -321,6 +365,27 @@ export default {
                       position: relative;
                       width:100%;
                       border-radius: 10px;
+                      .pop {
+                          position: absolute;
+                          top:20%;
+                          left:10%;
+                          width: 500px;
+                          padding:10px;
+                          background-color: #fff;
+                          border:1px solid #ccc;
+                          >.small ,
+                           .large {
+                              display: flex;
+                              justify-content: space-between;
+                              padding-bottom: 20px;
+                              align-items: center;
+                              >p {
+                                  font-size: 32px;
+                                  color:#4B66AF;
+                                  font-weight: bold;
+                              }
+                          }
+                      }
                     //   border:2px solid #ccc;
                     //   background-color:#4AA3E2;
                       color:#fff;
