@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="submit">
-                <van-button @click="submit" round size="large" type="info">提交</van-button>
+                <van-button @click="submit" round size="large" type="default">提交</van-button>
             </div>
         </div>
     </div>

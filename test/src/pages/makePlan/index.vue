@@ -401,6 +401,10 @@ export default {
              >.content {
                   margin:15px;
                  >.eara {
+                     .van-picker-column__item--selected{
+                         color:#4B66AF;
+                         font-weight: bold;
+                     }
                      margin-bottom: 15px;
                      >p {
                      margin-bottom: 10px;

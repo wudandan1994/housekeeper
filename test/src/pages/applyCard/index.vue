@@ -100,7 +100,6 @@ export default {
             }
             axiosPost("/creditCard/insertCreditCard",data)
             .then(function(res){
-
                 if(!res.data.success){
                     that.$toast({
                         message:res.data.message

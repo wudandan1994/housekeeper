@@ -39,7 +39,6 @@
             <div>
                
             </div>
-
         </div>
     </div>
 
@@ -148,11 +147,11 @@ export default {
         }
     },
     created () {
-        this.item=this.$route.query.info 
-        this.name=this.item.payerName
-        this.accountNo=this.item.cardNo
-        this.mobileNo=this.item.phone
-         this.idcardNo=this.item.idCardNo
+        // this.item=this.$route.query.info 
+        // this.name=this.item.payerName
+        // this.accountNo=this.item.cardNo
+        // this.mobileNo=this.item.phone
+        //  this.idcardNo=this.item.idCardNo
     }
 }
 </script>
@@ -233,7 +232,12 @@ export default {
                    }
                }
                .van-picker__cancel{
+                   font-size:30px;
                    color:#000;
+               }
+               .van-picker-column__item--selected {
+                   color:#4B66AF;
+                   font-weight: bold;
                }
                .van-picker__toolbar{
                    height: 40px;

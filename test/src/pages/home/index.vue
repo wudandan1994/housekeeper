@@ -51,7 +51,7 @@
             <div class="pannel-news row">
                 <div class="pannel-title center">钱夹<br/>资讯</div>
                 <div class="pannel-detail center" @click="handleContactUs">
-                    <van-notice-bar text="现成为993会员，即可享有19800元代理商的相关权限，名额有限，相关内容，请联系您的专属客户经理，确认活动详情"/>
+                    <van-notice-bar text="现成为993会员，即可享有19800元代理商的相关权限，名额有限，相关内容，请联系您的专属客户经理，确认活动详情。"/>
                 </div>
             </div>
 
