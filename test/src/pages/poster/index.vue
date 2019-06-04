@@ -109,33 +109,24 @@ export default {
         },
         sharewxCirMessage(){
               let that=this
-          that.sharewx.send( 
-                // {
-                //      type:"image",
-                //       pictures: that.imgUrl,
-                //     content:"钱夹宝综合金融服务推广平台，点滴成就未来",
-                //     // href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode,
-                //     extra:{scene:"WXSceneTimeline"}
-                // }
+          that.sharewx.send(
                 { content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝",
                 thumbs:["http://pay.91dianji.com.cn/wxc.jpg"],
                 //  thumbs:"../../assets/images/slt.jpg",
                  href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode, extra: { scene: "WXSceneTimeline" } }
                 , function(){
-                alert("分享成功！");
+                // alert("分享成功！");
             }, function(e){
                 alert("分享失败："+e.message);
             });
         },
          shareWeixinMessage() {
              let that=this
-            //   console.log(JSON.stringify(that.sharewx),"55555555555555555")
-            //   console.log(that.imgUrl)
              that.sharewx.send(
                  { 
                      content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝", 
                      thumbs:["http://pay.91dianji.com.cn/wxc.jpg"],
-                    //  thumbs:"../../assets/images/slt.jpg",
+                    //  thumbs:["../../assets/images/slt.jpg"],
                      href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode,
                      extra: { scene: "WXSceneSession" } 
                  }, function () {

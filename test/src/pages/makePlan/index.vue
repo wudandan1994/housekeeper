@@ -430,6 +430,10 @@ export default {
                        border-radius: 10px;
                        padding-left:20px;
                        box-sizing: border-box;
+                       -webkit-appearance: none;
+                       &:focus {
+                           outline: none;
+                       }
                    }
                     .van-picker__cancel{
                       color:#000;
