@@ -266,15 +266,9 @@ export default {
                     return
                 }
                  this.chMerCode=res.data.data.chMerCode
-            })
-            .catch(err=>{
-                // console.log(err,"error");
-            })
-        },
-        sureSubmit(){
-            let data={
-                chMerCode:this.chMerCode
-            }
+                    let data={
+                        chMerCode:this.chMerCode
+                    }   
             axiosPost("/creditCard/getMemberRegLine",data)
             .then(res=>{
                 let type=res.data.data.uploadStatus
@@ -284,7 +278,7 @@ export default {
                     },500)
                      this.$router.push({
                          path:"/home/collect/open",
-                         info:this.chMerCode
+                        //  info:this.chMerCode
                      })
                   } else {
                       this.componentload=false
@@ -293,15 +287,45 @@ export default {
             .catch(err=>{
 
             })
-            
+
+            })
+            .catch(err=>{
+                // console.log(err,"error");
+            })
         },
+        // sureSubmit(){
+        //     let data={
+        //         chMerCode:this.chMerCode
+        //     }
+        //     axiosPost("/creditCard/getMemberRegLine",data)
+        //     .then(res=>{
+        //         let type=res.data.data.uploadStatus
+        //         if(res.data.data.uploadStatus!="0"){
+        //              setTimeout(()=>{
+        //                 this.componentload=false
+        //             },500)
+        //              this.$router.push({
+        //                  path:"/home/collect/open",
+        //                  info:this.chMerCode
+        //              })
+        //           } else {
+        //               this.componentload=false
+        //           }
+        //     })
+        //     .catch(err=>{
+
+        //     })
+            
+        // },
         
     },
     created () {
-         this.chMerCode=this.$route.query.info
-         console.log(this.chMerCode,"payment")
-        //  this.search()
-         this.sureSubmit()
+
+        //  this.chMerCode=this.$route.query.info
+       
+         this.search()
+           console.log(this.chMerCode,"payment")
+        //  this.sureSubmit()
     },
    
     mounted () {

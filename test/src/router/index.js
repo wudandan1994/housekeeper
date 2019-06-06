@@ -53,7 +53,8 @@ import makePlanComponent from '@/pages/makePlan'
 import planListComponent from '@/pages/planList'
 import changeCardComponent from '@/pages/changeCard'
 import recordsComponent from '@/pages/records'
-
+import largeAmountComponent from '@/pages/largeAmount'  // 大额鉴权
+import largeCardComponent from '@/pages/largeCard'
 
 
 
@@ -156,7 +157,8 @@ export default new Router({
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
     {path:"/home/insertEsiCash",component:insertEsiCashComponent}, //绑定第三方信用卡
     {path:"/home/insertEsiCash/iframe",component:iframeComponent}, //绑定第三方信用卡返回页面
-
+    {path:"/home/largeAmount",component:largeAmountComponent}, // 大额鉴权
+    {path:"/home/largeCard",component:largeCardComponent},
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},
     {path:"/share/promotionMaterial",component:promotionMaterialComponent},

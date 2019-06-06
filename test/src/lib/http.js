@@ -3,7 +3,7 @@ import qs from 'qs'
 // 封装POST请求
 export const axiosPost = (url, params = {}) =>{;
     const _axios = axios.create({
-        baseURL: 'http://test.91dianji.com.cn/api',
+        baseURL: 'http://pay.91dianji.com.cn/api',
         withCredentials: true,
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
     });

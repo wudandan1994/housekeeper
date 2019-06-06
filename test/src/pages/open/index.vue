@@ -408,7 +408,7 @@ export default {
     
     created () {
         this.searchInfo()
-          console.log(this.info,"open")
+        //   console.log(this.info,"open")
           this.findphoto()
     }
 }

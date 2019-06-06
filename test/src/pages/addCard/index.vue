@@ -9,15 +9,15 @@
             <div class="info">
                  <div class="user-input row">
                     <div class="title start-center">真实姓名</div>
-                    <div class="input start-center"><input type="text" required v-model="name" placeholder="请填写姓名"></div>
+                    <div class="input start-center"><input type="text" required v-model="name" placeholder="姓名"></div>
                 </div>
                 <div class="user-input row">
                     <div class="title start-center">身份证号码</div>
-                    <div class="input start-center"><input type="text" required v-model="idCard" placeholder="请填写所持身份证号码"></div>
+                    <div class="input start-center"><input type="text" required v-model="idCard" placeholder="身份证号码"></div>
                 </div>
                 <div class="user-input row">
                     <div class="title start-center">手机号码</div>
-                    <div class="input start-center"><input type="number" required v-model="phone" placeholder="请填写预留手机号码"></div>
+                    <div class="input start-center"><input type="number" required v-model="phone" placeholder="预留手机号码"></div>
                 </div>
             </div>
             <div class="submit">

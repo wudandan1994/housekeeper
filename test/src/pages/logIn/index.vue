@@ -84,6 +84,7 @@ export default {
             axiosPost("/customer/login",data)
             .then(function(res){
                 if(res.data.success){
+                    storage.set('cid',res.data.data.id);
                     that.$store.commit('iscertification',res.data.data.iscertification);
                     that.$store.commit('level',res.data.data.level);
                     that.$store.commit('promotioncode',res.data.data.promotioncode);

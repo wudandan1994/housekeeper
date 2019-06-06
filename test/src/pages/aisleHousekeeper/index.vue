@@ -34,6 +34,7 @@
                               <p>
                                   {{item.payerName.replace(1,"*")}}
                               </p>
+                              <p @click="unbinding(item)">解绑</p>                                                                                
                           </div>
                           <div class="now">
                               <div>
@@ -143,6 +144,39 @@ export default {
         goBack() {
             this.$router.push('/home/creditHousekeeper')
         },
+        unbinding(item){
+            let that =this
+             that.$dialog.confirm({
+                    title: '提示',
+                    message: '确定要解绑？',
+                    confirmButtonText:'是',
+                })
+                .then(() => {
+                    let data={
+                       bindId:item.bindId 
+                    }
+                  axiosPost("/creditCard/getEsicashExist",data) 
+                  .then(function(res){
+                      if(!res.data.success){
+                          that.$toast({
+                              message:res.data.message
+                          })
+                          return
+                      } else {
+                          that.getCardList()
+                      }
+                     
+                  })
+                  .catch(function(err){
+
+                  })
+                }).catch(() => {
+                    // on cancel
+                });     
+
+
+             
+        },
         // 查询小额通道是否签约
         smallPass(i){
             let data={
@@ -151,6 +185,23 @@ export default {
              axiosPost("/creditCard/getEsicashExist",data)
              .then(res=>{
                  console.log(res)
+                 if(!res.data.success){
+                     this.$router.push({
+                         path:"/home/insertEsiCash",
+                         query:{info:i}
+                   
+                     })
+                 } else {
+                      let planList=res.data.data
+                     this.$router.push({
+                         path:"/home/creditHousekeeper/aisleHousekeeper/planList",
+                         query:{
+                             list:planList,
+                             area:this.area,
+                             item:i
+                         }
+                     })
+                 }
                  
              })
              .catch(err=>{
@@ -166,6 +217,12 @@ export default {
              axiosPost("/vtdcreditCard/getEnterNet",data)
              .then(res=>{
                  console.log(res)
+                 if(!res.data.success){
+                     this.$router.push({
+                         path:"/home/largeAmount",
+                         info:i
+                     })
+                 }
              })
              .catch(err=>{
                  console.log(err)
@@ -403,6 +460,23 @@ export default {
                           display: flex;
                           justify-content: space-around;
                           margin-bottom: 15px;
+                           .van-dialog .van-button{
+                                height: 80px;
+                              }
+                            .van-dialog .van-button {
+                                 border: 1px solid #29305C;
+                                }
+                            .van-dialog,
+                            .van-dialog__message,
+                            .van-button {
+                                font-size: 30px;
+                            }
+                             .van-button--default{
+                                    background-color: #29305C;
+                                }
+                             .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
+                                height:70px;
+                            }
                          }
                        }
                       .bottom {
