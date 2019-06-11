@@ -2,41 +2,43 @@
     <div id="page-component-form">
          <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
-            <div class="top-title center">申请贷款</div>
+            <div class="top-title center">卡测评</div>
             <div class="right-icon center"></div>
         </header>
         <!-- 轮播图 -->
-        <div class="swipe">
+        <!-- <div class="swipe">
           <van-swipe :autoplay="3000" indicator-color="white">
             <van-swipe-item v-for="(item,index) in images" :key="index"><img class="imgs" :src="item" alt=""></van-swipe-item>
           </van-swipe>
-        </div>
-        <div class="title center">选择或添加申请人信息</div>
-        <div class="detail">请确保选择或添加的申请人信息与贷款申请表所填信息保持真实一致，以免影响信用贷款进度；本平台对此信息保密，仅作提交金融机构工作人员审核，审核通知将以短信形式发送至该号码</div>
+        </div> -->
+        <div class="title center">选择或添加测评卡信息</div>
+        <!-- <div class="detail">请确保选择或添加的申请人信息与贷款申请表所填信息保持真实一致，以免影响信用贷款进度；本平台对此信息保密，仅作提交金融机构工作人员审核，审核通知将以短信形式发送至该号码</div> -->
+        <div class="detail">“卡·测评”是为信用卡“把脉”并打造健康的个人征信系统。征信系统就是我们常说的信用记录，是全国联网的，不管你在哪个银行产生的信用记录在以后的使用当中都可以提现，且很重要。</div>
+
         <div class="per-input top row">
             <div class="icon end-center"><van-icon name="manager" size="1.5em" /></div>
             <div class="label start-center">姓名</div>
-            <div class="user-input"><input type="text" v-model='form.name' placeholder="请填写申请人姓名"/></div>
+            <div class="user-input"><input type="text" v-model='form.name' placeholder="申请人姓名"/></div>
         </div>
 
         <div class="per-input  row">
             <div class="icon end-center"><van-icon name="card" size="1.5em" /></div>
             <div class="label start-center">证件</div>
-            <div class="user-input"><input type="text" v-model="form.idcardnumber" placeholder="请填写申请人身份证号码"/></div>
+            <div class="user-input"><input type="text" v-model="form.idcardnumber" placeholder="申请人身份证号码"/></div>
         </div>
 
         <div class="per-input  row">
             <div class="icon end-center"><van-icon name="graphic" size="1.5em" /></div>
             <div class="label start-center">电话</div>
-            <div class="user-input"><input type="number" v-model="form.mobile" placeholder="请填写申请人手机号码"/></div>
+            <div class="user-input"><input type="number" v-model="form.mobile" placeholder="申请人手机号码"/></div>
         </div>
 
-        <div class="per-input  row">
+        <!-- <div class="per-input  row">
             <div class="icon end-center"><van-icon name="coupon" size="1.5em" /></div>
             <div class="label start-center">验证码</div>
             <div class="user-code"><input type="text" v-model="form.code" placeholder="请输入验证码"/></div>
             <div class="safe-code center" @click="changeCode">{{realCode}}</div>
-        </div>
+        </div> -->
 
         <div class="btns row">
             <van-button type="default" class="cancel">取消</van-button>
@@ -112,7 +114,7 @@ export default {
     },
     data(){
         return{
-             componentload:false,
+            componentload:false,
             fixed: true,
             images:[
                 'http://pay.91dianji.com.cn/banner01.jpg',
@@ -125,7 +127,7 @@ export default {
                 name: '',
                 idcardnumber: '',
                 mobile: '',
-                code: ''
+                // code: ''
             },
             checked: false,
             show: false,
@@ -138,12 +140,8 @@ export default {
         // 返回首页
         handleReturnHome(){
             this.$router.push({
-                path:'/loan/detail'
+                path:'/home'
             })
-        },
-        // 更多
-        handleMore(){
-            this.$toast('尽请期待');
         },
         // 钱夹宝服务协议
         handleShow(){
@@ -154,20 +152,20 @@ export default {
             this.show = false;
         },
         // 验证码
-        safeCode(){
-            var codeLength = this.codeLength;
-            var ran = new Array(0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z')
-            for(var i = 0; i < codeLength; i++ ){
-                var index = Math.floor(Math.random()*36);
-                this.realCode += ran[index];
-            }
+        // safeCode(){
+        //     var codeLength = this.codeLength;
+        //     var ran = new Array(0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z')
+        //     for(var i = 0; i < codeLength; i++ ){
+        //         var index = Math.floor(Math.random()*36);
+        //         this.realCode += ran[index];
+        //     }
             
-        },
+        // },
         // 切换验证码
-        changeCode(){
-            this.realCode = '';
-            this.safeCode();
-        },
+        // changeCode(){
+        //     this.realCode = '';
+        //     this.safeCode();
+        // },
         // 服务条款
         handleAgree(val){
         },
@@ -180,53 +178,44 @@ export default {
            }else if(this.form.mobile == ''){
                this.$toast('请填写申请人手机号')
            }
-           else if((this.form.code).replace(/\s*/g,"") == '' || (this.form.code).replace(/\s*/g,"") != (this.realCode).replace(/\s*/g,"")){
-               this.$toast('请检查验证码');
-           }
+        //    else if((this.form.code).replace(/\s*/g,"") == '' || (this.form.code).replace(/\s*/g,"") != (this.realCode).replace(/\s*/g,"")){
+        //        this.$toast('请检查验证码');
+        //    }
            else if(this.checked == false){
                this.$toast('请阅读并同意服务协议');
            }
            else{
                 //  let url="https://wallet.xiaoying.com/fe/wallet-landing/blueRegPage/index.html?landId=1017&source=100024443"
-                // setTimeout(()=>{
-                //             this.$router.push({
-                //             path:"/home/online",
-                //             query:{
-                //                 info:url,
-                //                 title:"贷款中心"
-                //               }
-                //           })
-                //         },1000)
-               let data={
+                let data={
                    realName:this.form.name,
                    mobile:this.form.mobile,
                    certcode:this.form.idcardnumber
-               }
-               axiosPost("/creditCard/getLoanUrl",data)
-               .then(res=>{
-                   if(!res.data.success){
-                       this.$toast({
-                           message:res.data.message
-                       })
-                       return
-                   } else {
-                    //    window.location.href=res.data.data;
-                        let url=res.data.data;
-                        this.componentload=true
-                        setTimeout(()=>{
+                }
+                axiosPost("/creditCard/getProductUrl",data)
+                .then(res=>{
+                    this.componentload=true
+                    setTimeout(()=>{
+                    if(!res.data.success){
+                          this.componentload=false
+                        this.$toast({
+                            message:res.data.message
+                        })
+                    } else {
+                        console.log(res)
+                            let url=res.data.data
                             this.$router.push({
                             path:"/home/online",
                             query:{
                                 info:url,
-                                title:"贷款中心"
+                                title:"测评"
                               }
                           })
-                        },1000)
-                   }
-               })
-               .catch(err=>{
-                   
-               })
+                    }
+              },1000)
+
+                })
+                .catch(err=>{
+                })
            }
         },
          // 获取实名认证信息
@@ -246,7 +235,7 @@ export default {
         }
     },
     created(){
-        this.safeCode();
+        // this.safeCode();
         this.handleGetAOuth();
     }
 }

@@ -205,15 +205,15 @@
                             <p>违章查询  </p>
                         </div>
                     </router-link>
-                     <!-- <li @click="handleExpect">
+                     <router-link tag="li" to="/home/evaluation">
                         <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_63.png" size="30px" />
+                           <van-icon name="http://pay.91dianji.com.cn/kacep.png" size="30px" />
                         </span>
                         <div class="detail-item">
                             <h3>卡·测评</h3>
                             <p>信用卡“体检”报告</p>
                         </div>
-                    </li> -->
+                     </router-link>
                 </ul>
             </div>
             <!-- 客服 -->
@@ -471,12 +471,12 @@ export default {
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-         this.automatic() //自动登录
-         this.getUpdate() //获取版本
+        //  this.automatic() //自动登录
+        //  this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        this.update() 
+        // this.update() 
     }
 }
 </script>

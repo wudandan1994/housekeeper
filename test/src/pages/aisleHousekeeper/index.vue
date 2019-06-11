@@ -51,7 +51,7 @@
                                   </div>
                               </div>
                               <p>
-                                  <van-button @click="repayment(index)" round type="info">立即还款</van-button>
+                                  <van-button @click="repayment(index,item)" round type="info">立即还款</van-button>
                               </p>
                           </div>
                        </div>
@@ -189,7 +189,6 @@ export default {
                      this.$router.push({
                          path:"/home/insertEsiCash",
                          query:{info:i}
-                   
                      })
                  } else {
                       let planList=res.data.data
@@ -211,34 +210,34 @@ export default {
         },
          // 查询大额通道是否签约
         largePass(i){
-             let data={
-               bindId:i.bindId 
-            }
-             axiosPost("/vtdcreditCard/getEnterNet",data)
-             .then(res=>{
-                 console.log(res)
-                 if(!res.data.success){
-                     this.$router.push({
-                         path:"/home/largeAmount",
-                         info:i
-                     })
-                 }
-             })
-             .catch(err=>{
-                 console.log(err)
-             })
+            this.$toast("敬请期待")
+            //  let data={
+            //    bindId:i.bindId 
+            // }
+            //  axiosPost("/vtdcreditCard/getEnterNet",data)
+            //  .then(res=>{
+            //      console.log(res)
+            //      if(!res.data.success){
+            //          this.$router.push({
+            //              path:"/home/largeAmount",
+            //              info:i
+            //          })
+            //      }
+            //  })
+            //  .catch(err=>{
+            //      console.log(err)
+            //  })
         },
 
-        repayment(index){
-            this.num=index
-            this.showPass=true
-
-            // this.$router.push({
-            //     path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-            //     query:{
-            //         info:item
-            //     }
-            // })
+        repayment(index,item){
+            // this.num=index
+            // this.showPass=true
+            this.$router.push({
+                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                query:{
+                    info:item
+                }
+            })
         },
         // 查询绑卡列表
         getCardList(){
