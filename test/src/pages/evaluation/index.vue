@@ -202,14 +202,15 @@ export default {
                         })
                     } else {
                         console.log(res)
-                            let url=res.data.data
-                            this.$router.push({
-                            path:"/home/online",
-                            query:{
-                                info:url,
-                                title:"测评"
-                              }
-                          })
+                        window.location.href=res.data.data
+                            // let url=res.data.data
+                        //     this.$router.push({
+                        //     path:"/home/online",
+                        //     query:{
+                        //         info:url,
+                        //         title:"测评"
+                        //       }
+                        //   })
                     }
               },1000)
 

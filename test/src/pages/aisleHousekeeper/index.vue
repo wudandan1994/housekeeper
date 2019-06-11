@@ -172,9 +172,7 @@ export default {
                   })
                 }).catch(() => {
                     // on cancel
-                });     
-
-
+                });   
              
         },
         // 查询小额通道是否签约
