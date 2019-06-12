@@ -93,7 +93,7 @@ export default {
                  return
             } else  {
                 let data={
-                    mobile:this.mobile,
+                    mobile:that.mobile,
                     type:"3"
                 }
                 axiosPost("/customer/sendSms",data)
@@ -169,8 +169,8 @@ export default {
             }
             let data={
                 password:that.suerPassword,
-                mobile:this.mobile,
-                authcode:this.authcode
+                mobile:that.mobile,
+                authcode:that.authcode
             }
              axiosPost("/customer/updatePassWord",data)
              .then(function(res){
