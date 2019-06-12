@@ -13,6 +13,7 @@
                       <p><span>订单编号：</span><span>{{item.orderCode}}</span></p>
                       <p><span>创建时间：</span><span>{{item.tranTime}}</span></p>
                       <p><span>支付卡号：</span><span>{{item.accNo.replace(/^(\d{4})\d+(\d{4})$/,"$1 ****  **** $2")}}</span></p>
+                      <p><span>到账卡号：</span><span>{{item.accountNo.replace(/^(\d{4})\d+(\d{4})$/,"$1 ****  **** $2")}}</span></p>
                       <p><span>付款金额：</span><span>{{item.orderAmount}}</span></p>
                       <p><span>手续金额：</span><span>{{item.handingFee}}</span></p>
                   </li>
