@@ -6,10 +6,10 @@
             <span></span>
         </header>
         <div class="container">
-            <div class="box" style="width:100vw;height:100vh;">　
-            　　<iframe v-if="type" :src="url" scrolling="auto" class="iframe" frameborder="0" width="100vw" height="100vh"></iframe>
-            　　<iframe v-else :src="url" frameborder="0" class="iframe" height="100vh" scrolling='auto' style="width: 1px; min-width: 100vw; *width: 100vw;"></iframe>
-            </div>
+             <div class="box" style="overflow-y: scroll;">　
+            　　<iframe v-if="type" :src="url" scrolling="auto"  class="iframe" frameborder="0" ></iframe>
+            　　<iframe v-else :src="url" frameborder="0"  class="iframe" scrolling="no"  ></iframe>
+         </div>
         </div>
     </div>
 
@@ -106,13 +106,14 @@ export default {
        >.container {
            padding-top:96px;
            .box {
-               overflow-x: hidden;
+               overflow-y: scroll;
            }
            .iframe{
-               width: 100%;
-               height:100vh !important;
-               overflow-x:hidden;
-           }
+                width: 1px;
+                min-width: 100%;
+                *width: 100%;
+                height: 100% !important;
+            }
        }
    }
 </style>

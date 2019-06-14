@@ -201,7 +201,7 @@ export default {
                             message:res.data.message
                         })
                     } else {
-                        console.log(res)
+                        // console.log(res)
                         window.location.href=res.data.data
                             // let url=res.data.data
                         //     this.$router.push({

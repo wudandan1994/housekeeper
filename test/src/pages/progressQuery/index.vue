@@ -5,9 +5,9 @@
             <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
-         <div class="box" style="width:100vw;height:100vh;">　
-            　　<iframe v-if="type" :src="url" scrolling="auto" class="iframe" frameborder="0" width="100vw" height="100vh"></iframe>
-            　　<iframe v-else :src="url" frameborder="0" class="iframe" height="100vh" scrolling='auto' style="width: 1px; min-width: 100vw; *width: 100vw;"></iframe>
+         <div class="box" style="overflow-y: scroll;">　
+            　　<iframe v-if="type" :src="url" scrolling="auto"  class="iframe" frameborder="0" ></iframe>
+            　　<iframe v-else :src="url" frameborder="0"  class="iframe" scrolling="no"  ></iframe>
          </div>
     </div>
 
@@ -99,23 +99,14 @@ export default {
             background-color: #4965AE;
        }
         .box {
-               overflow-x: hidden;
-           }
-       .iframe{
-               width: 100%;
-               height:100vh !important;
-               overflow-x:hidden;
-           }
-
-    //    width: 100vw;
-    //    height: calc(100vh - 86px);
-    //    padding-top: 86px;
-        // .iframe{
-        //     width: 100vw;
-        //     height: calc(100vh - 86px);
-        // }
-        // .out {
-            
-        // }
-   }
+              padding-top:96px;
+            overflow-y: scroll;
+            .iframe{
+                    width: 1px;
+                    min-width: 100%;
+                    *width: 100%;
+                    height: 100% !important;
+            }
+      }
+  }
 </style>
