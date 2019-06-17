@@ -104,7 +104,7 @@
                 </ul>
             </div>
             <!-- 详情模块 -->
-            <div class="details">
+            <!-- <div class="details">
                 <ul>
                     <li @click="handleExpect">
                         <span>
@@ -215,11 +215,87 @@
                         </div>
                      </router-link>
                 </ul>
-            </div>
-            <!-- 客服 -->
-            <!-- <div class="serve">
-               <router-link tag="p" :to="{path: '/home/cardCenter/progressQuery',query: {info: 'https://kefu.easemob.com/webim/im.html?configId=9cb49ac7-e183-4e98-afbd-e5860ff3b6a0',title: '在线客服'}}"> <van-icon  name="friends" />在线客服</router-link>
             </div> -->
+            <!-- 特色服务 -->
+            <div class="server">
+                <p>特色服务</p>
+                <div class="special">
+                    <ul>
+                        <router-link tag="li" to="/home/evaluation" class="secret">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" /></p>
+                            <p>卡·测评</p>
+                        </router-link>
+                        <li  @click="handleExpect" class="secret">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" /></p>
+                            <p>提额秘籍</p>
+                        </li>
+                        <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" /></p>
+                            <p>违章查询</p>
+                        </router-link>
+                         <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
+                            <p><van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" /></p>
+                            <p>汽车保险</p>
+                       </router-link>
+                        <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://baoxian.pingan.com',title: '意外险'}}">
+                            <p><van-icon name="http://pay.91dianji.com.cn/icon_53.png" size="30px" /></p>
+                            <p>意外险</p>
+                       </router-link>
+                        <li @click="handleExpect">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/icon_63.png" size="30px" /></p>
+                            <p>积分兑换</p>
+                        </li>
+                         <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
+                           <p> <van-icon name="http://pay.91dianji.com.cn/icon_64.png" size="30px" /></p>
+                           <p>商城</p>
+                        </router-link>
+                         <li @click="handleExpect">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/icon_63.png" size="30px" /></p>
+                            <p>更多</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 热门推荐 -->
+              <div class=" hotdoor">
+                <p>热门推荐</p>
+                <div class="special">
+                    <ul>
+                        <router-link tag="li" to="/home/evaluation" class="secret">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" /></p>
+                            <p>在线收款</p>
+                        </router-link>
+                        <li @click="handleIsAuth('/home/cardCenter')" class="secret">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" /></p>
+                            <p>信用卡办理</p>
+                        </li>
+                        <router-link tag="li" class="secret" to="/home/creditHousekeeper">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" /></p>
+                            <p>智能还款</p>
+                        </router-link>
+                         <router-link tag="li" class="secret"  to="/vip">
+                            <p><van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" /></p>
+                            <p>升级代理</p>
+                       </router-link>
+                        <router-link tag="li"  to="/home/evaluation">
+                            <p><van-icon name="http://pay.91dianji.com.cn/icon_53.png" size="30px" /></p>
+                            <p>卡·测评</p>
+                       </router-link>
+                        <li @click="handleIsAuth('/loan/detail')">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/icon_63.png" size="30px" /></p>
+                            <p>我要贷款</p>
+                        </li>
+                         <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
+                           <p> <van-icon name="http://pay.91dianji.com.cn/icon_64.png" size="30px" /></p>
+                           <p>商城</p>
+                        </router-link>
+                         <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/icon_63.png"  size="30px" /></p>
+                            <p>违章查询</p>
+                         </router-link>
+                    </ul>
+                </div>
+            </div>
             <!-- 遮盖层 -->
             <div class="aside-left" v-show="showAaside" @click.self="hideAside">
                 <div class="info">
@@ -244,6 +320,7 @@
                     </div> 
                 </div>
             </div>
+            <!-- 更新 -->
             <div @click.self="showUpdate=false" v-show="showUpdate" class="update">
                 <div  class="cover">
                     <div class="version">
@@ -256,28 +333,41 @@
                     </div>
                 </div>
             </div>
+            <div class="address">
+                <p>与多家三方支付公司签约达成战略合作</p>
+                <p>创帮带（上海）网络科技有限公司提供技术支持</p>
+                <p>上海市宝山区泰和路2038号A座303室</p>
+            </div>
         </div>
         <!-- <div v-show="allmap" id="allmap"></div> -->
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
+         <!-- 绑定手机模块 -->
+        <bindMobile></bindMobile>
     </div>
 </template>
 <script>
 import footerMenu from '@/components/footer'
+import bindMobile from '@/components/bindMobile'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
   components:{
-      footerMenu
+      footerMenu,
+      bindMobile
   },
      data() {
         return {
             // 轮播图图片
             images: [
-                'http://pay.91dianji.com.cn/banner01.jpg',
-                'http://pay.91dianji.com.cn/banner02.jpg',
-                'http://pay.91dianji.com.cn/banner03.jpg',
-                'http://pay.91dianji.com.cn/banner04.jpg',
-                'http://pay.91dianji.com.cn/banner05.jpg'
+                // 'http://pay.91dianji.com.cn/banner01.jpg',
+                // 'http://pay.91dianji.com.cn/banner02.jpg',
+                // 'http://pay.91dianji.com.cn/banner03.jpg',
+                // 'http://pay.91dianji.com.cn/banner04.jpg',
+                // 'http://pay.91dianji.com.cn/banner05.jpg'
+                 'http://pay.91dianji.com.cn/qjb01.png',
+                'http://pay.91dianji.com.cn/qjb02.png',
+                'http://pay.91dianji.com.cn/qjb03.png',
+                'http://pay.91dianji.com.cn/qjb04.png'
             ],
             showAaside:false, 
             checked:true,
@@ -517,6 +607,13 @@ export default {
            padding-top:96px;
            overflow-x: hidden;
             position: relative;
+            background-color: #EEEEEE;
+            .address{
+                padding-top:30px;
+                text-align: center;
+                line-height: 50px;
+                padding-bottom: 50px;
+            }
            .update {
                position: absolute;
                top:0;
@@ -611,6 +708,69 @@ export default {
                 }
             }
         }
+        >.server {
+            margin-top:15px;
+            background-color: #fff;
+            padding-top:15px;
+            >p {
+                padding-left:30px;
+                font-size: 34px;
+                font-weight: bold;
+            }
+            >.special {
+                >ul{
+                    padding:15px;
+                    margin-top:20px;
+                    display:flex;
+                    flex-wrap: wrap;
+                    >li {
+                        width:25%;
+                        text-align: center;
+                        &.secret {
+                           margin-bottom:25px;
+                        }
+                        >p {
+                            &:nth-of-type(2){
+                                padding-bottom:10px 0px;
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        >.hotdoor {
+            background-color: #fff;
+            // padding-top:20px;
+            // padding-bottom:30px;
+            padding:20px 15px;
+            margin-top:10px;
+            >p {
+                font-size: 34px;
+                font-weight: bold;
+                padding-bottom: 15px;
+            }
+            ul {
+                // display: flex;
+                width:100%;
+                 height: 164px;
+                overflow-x: scroll;
+                overflow-y: hidden;
+                margin-left: auto;
+                margin-right: auto;
+                 white-space: nowrap;
+
+                >li {
+                   display: inline-block;
+                    width: 200px;
+                    height: 100%;
+                    border-radius: 15px;
+                    box-sizing: border-box;
+                    margin-left:10px;
+                    text-align: center;
+                }
+            }
+        }
         >.business-card {
             display: flex;
             flex-wrap: nowrap;
@@ -634,21 +794,25 @@ export default {
             height: 150px;
             margin-top:50px;
             margin-left: auto;
+            background-color: #fff;
             margin-right: auto;
-            background-image: -webkit-linear-gradient(0deg, #4965AE, #7189C4);
+            // background-image: -webkit-linear-gradient(0deg, #4965AE, #7189C4);
             .pannel-title{
                 width: 20%;
                 height: 100%;
-                color: white;
+                // color: white;
                 font-weight: bold;
                 font-size: 38px;
                 letter-spacing: 5px;
                 line-height: 48px;
             }
+            .van-notice-bar {
+                color:#222;
+          }
             .pannel-detail{
                 width: 80%;
                 height: 100%;
-                color: white;
+                color: #000;
                 font-size: 28px;
                 animation: pannleRoll 1s ease-in-out;
             }
@@ -684,6 +848,14 @@ export default {
                     padding-top:35px;
                     margin-top:10px;
                     background-color:#FAFAFA;
+                    &:nth-of-type(1),
+                    &:nth-of-type(2){
+                      background: linear-gradient(to bottom;#4E64B8,#7186B7);  
+                    }
+                     &:nth-of-type(3),
+                    &:nth-of-type(4){
+                      background: linear-gradient(to bottom;#7186B7,#4E64B8);  
+                    }
                     >.handle {
                         color:#CF9C5D;
                         font-size: 60px;
@@ -697,16 +869,19 @@ export default {
                         >h3 {
                             font-size:30px;
                             font-weight: bolder;
+                             color:#fff;
                         }
                         >p {
                             font-size:28px;
                             margin-top:10px;
                             margin-bottom:10px;
-                            color:#4B66AF;
+                            // color:#4B66AF;
+                            color:#fff;
                         }
                         >span {
-                            color:#4B66AF;
-                            background-color:#E8ECF7;
+                            // color:#4B66AF;
+                              color:#fff;
+                            background-color:#54866A;
                             border-radius:15px;
                             padding:5px 20px;
                             font-size: 28px;

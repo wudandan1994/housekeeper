@@ -4,9 +4,9 @@
         <div class="containt">
             <ul>
                 <li>
-                    <img src="http://bc.91dianji.com.cn/jin.png" alt="">
+                    <img src="http://bc.91dianji.com.cn/vip04.jpg" alt="">
                      <div class="diamonds">
-                         <div class="card">钱夹宝钻石会员</div>
+                         <div class="card">黄金会员</div>
                          <div class="instructions">
                              <span @click="isShowDiamonds">权益说明</span>
                              <van-popup v-model="ShowDiamonds">
@@ -19,7 +19,7 @@
                                     5. 费率说明：垫还为万72+1元/笔，商户收款为万47+1元/笔<br/>
                                 </div>
                             </van-popup>
-                             <span @click="isShowRule">退换规则</span>
+                             <!-- <span @click="isShowRule">退换规则</span> -->
                               <!-- <van-popup v-model="showRule">
                                 <div class="rule">
                                     <p>平台保证金退还说明</p>
@@ -32,20 +32,20 @@
                             </van-popup> -->
                          </div>
                      </div>
-                     <div class="qualifications">
+                     <!-- <div class="qualifications">
                          <span>授权还款额度</span>
                          <span>授权钻石会员资格</span>
                          <span>智能还款分润万38-60</span>
-                    </div>  
+                    </div>   -->
                      <div class="price">
-                        <span class="new-price">￥993.00</span>
-                        <span class="buy" @click="handleVip('993')">立即购买</span>
+                        <span class="new-price">￥393.00</span>
+                        <span class="buy" @click="handleVip('393')">立即购买</span>
                      </div>
                 </li>
                 <li>
-                    <img src="http://bc.91dianji.com.cn/tong.png" alt="">
+                    <img src="http://bc.91dianji.com.cn/vip01.jpg" alt="">
                      <div class="diamonds">
-                         <div class="card">钱夹宝黄金会员</div>
+                         <div class="card">黄金会员</div>
                          <div class="instructions">
                              <span @click="isShowGold">权益说明</span>
                              <van-popup v-model="ShowGold">
@@ -58,7 +58,7 @@
                                     5. 费率说明：垫还为万81+2元/笔，商户收款为万54+2元/笔<br/>
                                 </div>
                             </van-popup>
-                             <span @click="isShowRule">退换规则</span>
+                             <!-- <span @click="isShowRule">退换规则</span> -->
                               <van-popup v-model="showRule">
                                 <div class="rule">
                                     <p>退换说明</p>
@@ -67,14 +67,118 @@
                             </van-popup>
                          </div>
                      </div>
-                     <div class="qualifications">
+                     <!-- <div class="qualifications">
                          <span>授权还款额度</span>
                          <span>授权黄金会员资格</span>
                          <span>智能还款分润万16-45</span>
-                    </div>  
+                    </div>   -->
                      <div class="price">
-                        <span class="new-price">￥393.00</span>
-                        <span class="buy" @click="handleVip('393')">立即购买</span>
+                        <span class="new-price">￥993.00</span>
+                        <span class="buy" @click="handleVip('993')">立即购买</span>
+                     </div>
+                </li>
+
+                 <li>
+                    <img src="http://bc.91dianji.com.cn/vip03.jpg" alt="">
+                     <div class="diamonds">
+                         <div class="card">城市合伙人</div>
+                         <div class="instructions">
+                             <span @click="isShowGold">权益说明</span>
+                             <van-popup v-model="ShowGold">
+                                <div class="cover">
+                                    <p>钱夹宝黄金会员</p>
+                                    1. 黄金会员可继续升级至钻石会员<br/>
+                                    2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
+                                    3. 招商收益<br/>
+                                    4. 信用卡办卡收益<br/>
+                                    5. 费率说明：垫还为万81+2元/笔，商户收款为万54+2元/笔<br/>
+                                </div>
+                            </van-popup>
+                             <!-- <span @click="isShowRule">退换规则</span> -->
+                              <van-popup v-model="showRule">
+                                <div class="rule">
+                                    <p>退换说明</p>
+                                    1.钱夹宝是一家集信用卡、贷款、保险等金融业务的综合性便民服务平台。通过一个APP全程搞定您身边多样化的金融需求，打造了资源整合大平台，真正实现便民服务<br/>2.现平台相当于免费VIP会员制度，缴纳相应会员升级费后即可获取更多后台业务使用权限，自用省钱，推广业务赚取高额佣金<br/>3.用户通过钱夹宝APP升级会员等级后，会员费不可退还，不同会员等级推广分润权限不同，越高等级会员费率越低，分润越多<br/>
+                                </div>
+                            </van-popup>
+                         </div>
+                     </div>
+                     <!-- <div class="qualifications">
+                         <span>授权还款额度</span>
+                         <span>授权黄金会员资格</span>
+                         <span>智能还款分润万16-45</span>
+                    </div>   -->
+                     <div class="price">
+                        <span class="new-price">￥19800.00</span>
+                        <span class="buy" @click="contactUs" >联系我们</span>
+                     </div>
+                </li>
+                 <li>
+                    <img src="http://bc.91dianji.com.cn/vip02.jpg" alt="">
+                     <div class="diamonds">
+                         <div class="card">城市运营商</div>
+                         <div class="instructions">
+                             <span @click="isShowGold">权益说明</span>
+                             <van-popup v-model="ShowGold">
+                                <div class="cover">
+                                    <p>钱夹宝黄金会员</p>
+                                    1. 黄金会员可继续升级至钻石会员<br/>
+                                    2. 每推广一个收益环节都享受最高的利润奖励分配<br/>
+                                    3. 招商收益<br/>
+                                    4. 信用卡办卡收益<br/>
+                                    5. 费率说明：垫还为万81+2元/笔，商户收款为万54+2元/笔<br/>
+                                </div>
+                            </van-popup>
+                             <!-- <span @click="isShowRule">退换规则</span> -->
+                              <van-popup v-model="showRule">
+                                <div class="rule">
+                                    <p>退换说明</p>
+                                    1.钱夹宝是一家集信用卡、贷款、保险等金融业务的综合性便民服务平台。通过一个APP全程搞定您身边多样化的金融需求，打造了资源整合大平台，真正实现便民服务<br/>2.现平台相当于免费VIP会员制度，缴纳相应会员升级费后即可获取更多后台业务使用权限，自用省钱，推广业务赚取高额佣金<br/>3.用户通过钱夹宝APP升级会员等级后，会员费不可退还，不同会员等级推广分润权限不同，越高等级会员费率越低，分润越多<br/>
+                                </div>
+                            </van-popup>
+                         </div>
+                     </div>
+                     <!-- <div class="qualifications">
+                         <span>授权还款额度</span>
+                         <span>授权黄金会员资格</span>
+                         <span>智能还款分润万16-45</span>
+                    </div>   -->
+                     <div class="price">
+                        <span class="new-price">￥58000.00-￥159800.00</span>
+                        <span class="buy" @click="contactUs" >联系我们</span>
+                         <van-popup v-model="showcontantUs">
+                                <div  class="rule">
+                                     <p>联系我们</p>
+                                     <ul>
+                                         <li>
+                                             <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
+                                             <p>服务时间：周一至周日（09：00-22:00）</p>
+                                             <span></span>
+                                         </li>
+                                          <li>
+                                             <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
+                                             <p>加盟热线：18755291160 &nbsp;&nbsp;刘经理</p>
+                                              <p><a href="tel:18755291160">拨打</a></p>
+                                         </li>
+                                          <li>
+                                             <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
+                                             <p>微信号码：18755291160 </p>
+                                              <p @click="handleCopy('18755291160')">复制</p>
+                                         </li>
+                                          <li>
+                                             <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
+                                             <p>客服电话 ：400-6169-609</p>
+                                              <p><a href="tel:400-6169-609">拨打</a></p>
+                                         </li>
+                                          <li>
+                                             <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
+                                             <p>客服微信：18755291160 &nbsp;&nbsp;刘经理</p>
+                                              <p><a href="tel:18755291160">拨打</a></p>
+                                         </li>
+                                     </ul>
+         
+                                </div>
+                            </van-popup>
                      </div>
                 </li>
             </ul>
@@ -161,6 +265,7 @@
 <script>
 import storage from '@/lib/storage'
 import footerMenu from '@/components/footer'
+import ClipboardJS from "clipboard";
 import { axiosPost } from '../../lib/http';
 export default {
     components: {
@@ -184,6 +289,7 @@ export default {
             recomcode: '',
             recomheadimg: '',
             nickname: '',
+            showcontantUs:false
         }
     },
     methods:{
@@ -192,6 +298,31 @@ export default {
             this.$router.push({
                 path:'/ponserCenter/userAccountManage'
             })
+        },
+        contactUs(){
+            this.showcontantUs=true
+        },
+
+        // 复制
+        handleCopy(data){
+             var that = this;
+            var clipboard = new ClipboardJS('.test');
+            //成功回调
+            clipboard.on('success', function(e) {
+                that.$toast('复制成功');
+                // console.info('Action:', e.action);
+                // console.info('Text:', e.text);
+                // console.info('Trigger:', e.trigger);  
+                e.clearSelection();
+            });
+            //失败回调
+            clipboard.on('error', function(e) {
+                // console.error('Action:', e.action);
+                // console.error('Trigger:', e.trigger);
+                that.$toast('复制失败');
+            });
+
+
         },
         // 更多
         handleMore(){
@@ -332,6 +463,8 @@ export default {
              padding:20px 30px;
              margin-bottom: 100px;
              >li {
+                 margin-bottom: 30px;
+            
                  >img {
                      display: block;
                      width:100%;
@@ -348,7 +481,7 @@ export default {
                          margin-top:10px;
                      }
                      >.instructions {
-                         display: flex;
+                        //  display: flex;
                          >span {
                              width:50%;
                              border:2px solid #4B66AF;
@@ -378,7 +511,7 @@ export default {
                             }
                          }
                          .rule {
-                            width:500px;
+                            width:1000px;
                             padding-top:30px;
                             height: 700px;
                             border-radius: 10px;
@@ -420,6 +553,55 @@ export default {
                      margin-top:30px;
                      justify-content: space-between;
                      margin-bottom: 15px;
+                      .rule {
+                            width:600px;
+                            padding-top:30px;
+                            height: 600px;
+                            border-radius: 10px;
+                            font-size: 28px;
+                            text-align: justify;
+                            background-color: #fff;
+                            line-height: 40px;
+                            >ul {
+                                margin-top:15px;
+                                >li {
+                                    display: flex;
+                                    padding:15px;
+                                    justify-content: space-around;
+                                    align-items: center;
+                                    >p {
+                                        &:nth-of-type(1){
+                                           width:50px;
+                                        }
+                                         &:nth-of-type(2){
+                                          flex:1;
+                                        }
+                                          &:nth-of-type(3){
+                                         background-color: #4B66AF;
+                                         padding:10px;
+                                         color:#fff;
+                                         >a {
+                                             color:#fff;
+                                         }
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            >p{
+                                &:nth-of-type(1){
+                                    color:#000;
+                                    text-align: center;
+                                    font-size: bold;
+                                    margin-bottom: 20px;
+                                    font-size: 30px;
+                                }
+                                &:nth-of-type(2){
+                                    color:#000;
+                                    line-height: 38px;
+                                }
+                            }
+                         }
                      >.new-price {
                          color:#E84529;
                          font-weight: bolder;

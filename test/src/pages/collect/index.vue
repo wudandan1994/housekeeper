@@ -264,7 +264,7 @@ export default {
                 return
             }
             if(that.realName!==that.accountName){
-                 that.$toast({
+                 that.$toast({                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
                     message:"姓名与结算户名不一致"
                 })
                 return
