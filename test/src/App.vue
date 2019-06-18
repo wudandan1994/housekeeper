@@ -54,7 +54,7 @@ export default {
                   openid: res.data.openid
                 };
                 // let url = '/customer/getOpenidIsExist'; //开发环境
-                let url = 'http://pay.91dianji.com.cn/api/customer/getOpenidIsExist' // 生产环境
+                let url = '/customer/getOpenidIsExist' // 生产环境
                 axiosPost(url,params).then(res =>{
                   console.log('openid存在',res);
                   if(res.data.data == '0'){
@@ -65,13 +65,13 @@ export default {
                       photo:    this.$store.state.wechat.headimg,
                       recommendedcode: storage.get('recommendedcode')
                     }
-                    let url = 'http://pay.91dianji.com.cn/api/customer/registered';
+                    let url = '/customer/registered';
                     axiosPost(url,params)
                     .then(res =>{
                       if(res.data.success){
                         console.log('注册成功',res);
                         // 登录
-                        let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
+                        let url = '/customer/loginByWechat';
                         let params = {
                             openid: this.$store.state.wechat.openid
                         };
@@ -88,7 +88,7 @@ export default {
                                 this.$store.commit('recommendedcode',res.data.data.recommendedcode);
                                 this.$store.commit('city',res.data.data.city);
                                 this.$toast('登陆成功');
-                                let url = 'http://pay.91dianji.com.cn/api/customer/getCustomer';
+                                let url = '/customer/getCustomer';
                                 let params = {
                                     openid:this.$store.state.wechat.openid,
                                 };
@@ -123,7 +123,7 @@ export default {
                     let params = {
                         openid: this.$store.state.wechat.openid
                     }
-                    let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
+                    let url = '/customer/loginByWechat';
                     axiosPost(url,params).then(res =>{
                         if(res.data.success){
                           console.log('登陆成功',res);
@@ -160,13 +160,14 @@ export default {
     },
   },
   created(){
+    // console.log('VUEX',this.$toast);
     // 首先判断是否存储了openid
     if(storage.get('openid') != '' && storage.get('openid') !== null){
       // 已经注册过，可直接登录，无需再次授权
       let params = {
         openid: storage.get('openid')
       }
-      let url = 'http://pay.91dianji.com.cn/api/customer/loginByWechat';
+      let url = '/customer/loginByWechat';
       axiosPost(url,params).then(res =>{
           if(res.data.success){
             console.log('直接登陆成功',res);
@@ -199,7 +200,6 @@ export default {
         storage.set('recommendedcode',this.$router.currentRoute.query.promotioncode);
       }
       // 判断是否是微信浏览器
-      console.log('VUEX',this.$store.state.wechat);
       var ua = navigator.userAgent.toLowerCase();
       if(ua.match(/MicroMessenger/i)=="micromessenger") {
         // 微信浏览器
@@ -231,7 +231,7 @@ export default {
         var timestamp = (new Date()).getTime();
         var url = window.location.href;
         
-        let posturl = 'http://pay.91dianji.com.cn/api/customer/getSignature';
+        let posturl = '/customer/getSignature';
         let params = {
           jsapi_ticket: jsapi_ticket,
           url: url,

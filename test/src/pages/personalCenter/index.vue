@@ -1,7 +1,70 @@
 <template>
     <div id="personal-center-component">
-        <header class="header">
-            <div class="top row">
+        <div class="header_title">
+            <div>
+                <router-link tag="span" class="center" to="/register"><van-icon :name="url+'setting_personalCenter@2x.png'" color="#ffffff" size="24px" /></router-link>
+                <router-link tag="span" to="/home/verified" class="start-center">{{iscertification}}</router-link>
+                <span class="title center">我的</span>
+                <span class="service center"><van-icon :name="url+'service_personalCenter.png'" color="#ffffff" size="24px"  /></span>
+                <span class="chat center"><van-icon :name="url+'chat_personalCenter@2x.png'" color="#ffffff" size="24px" /></span>
+            </div>
+        </div>
+        <div class="header">
+            <div class="avator_nickname">
+                <div class="avator center" :class="level == '0' ? '' : level == '1' ? 'gold' : 'diomond'">
+                    <img :src="headimg" alt="">
+                    <!-- <span class="isvip end-end"><img :src="url+'diomond@2x.png'" alt=""></span> -->
+                </div>
+                <div class="nickname center">{{nickname}}</div>
+                <div class="promotioncode center">
+                    <van-icon :name="url+'promitioncode_personalCenter.png'" size="28px"/>
+                    <span>推荐码: {{promotioncode}}</span>
+                </div>
+            </div>
+            <div class="account_detail van-hairline--top row">
+                <div class="per-detail van-hairline--right">
+                    <div class="detail_title center">收益</div>
+                    <div class="detail_title center">¥{{amountSum}}</div>
+                </div>
+                <div class="per-detail van-hairline--right">
+                    <div class="detail_title center">余额</div>
+                    <div class="detail_title center">¥{{amount}}</div>
+                </div>
+                <div class="per-detail">
+                     <div class="detail_title center">分佣</div>
+                    <div class="detail_title center">¥{{commission}}</div>
+                </div>
+            </div>
+            <div class="account_manage_upgrade">
+                <div class="account_manage row">
+                    <router-link tag="div" class="per_manage" :to="{path: '/personalCenter/income',query: {amountSum: amountSum}}">
+                        <div class="manage_icon center"><van-icon :name="url+'account_personalCenter@2x.png'" size="28px" /></div>
+                        <div class="manage_title center">账户总览</div>
+                    </router-link>
+                    <router-link tag="div" class="per_manage" :to="{path: '/personalCenter/income',query: {amountSum: amountSum}}">
+                        <div class="manage_icon center"><van-icon :name="url+ 'Budget_personalCenter@2x.png'" size="28px" /></div>
+                        <div class="manage_title center">收支明细</div>
+                    </router-link>
+                    <router-link tag="div" class="per_manage" :to="{path: '/personalCenter/income',query: {amountSum: amountSum}}">
+                        <div class="manage_icon center"><van-icon :name="url+'Extension_personalCenter@2x.png'" size="28px" /></div>
+                        <div class="manage_title center">推广收益</div>
+                    </router-link>
+                    <router-link tag="div" class="per_manage" :to="{path: '/personalCenter/income',query: {amountSum: amountSum}}">
+                        <div class="manage_icon center"><van-icon :name="url+'reward_personalCenter@2x.png'" size="28px" /></div>
+                        <div class="manage_title center">奖励佣金</div>
+                    </router-link>
+                    <router-link tag="div" class="per_manage" to="/personalCenter/incomedetail/addcard">
+                        <div class="manage_icon center"><van-icon :name="url+'bank_personalCenter@2x.png'" size="28px" /></div>
+                        <div class="manage_title center">银行卡</div>
+                    </router-link>
+                </div>
+                <div v-if="isUpgrade" class="upgrade start-center">
+                    <van-icon :name="url+'Upgrade_personalCenter@2x.png'" size="30px"/>
+                    <span>升级钻石会员,享更多会员权益</span>
+                    <span class="center" @click="Upgrade">立即升级</span>
+                </div>
+            </div>
+            <!-- <div class="top">
                 <div class="avator"><img :src="headimg" alt=""></div>
                 <div class="name-code">
                     <div class="name start-center">{{nickname}}</div>
@@ -52,14 +115,22 @@
                     <div class="per-icon center"><van-icon name="http://pay.91dianji.com.cn/305-check.png" size="30px" color="#dab17b"/></div>
                     <router-link tag="div" :to="{path: '/personalCenter/income',query: {amountSum: amountSum}}" class="per-title center">总收益</router-link>
                 </div>
-            </div>
-        </header>
-        <div class="pop" v-show="showCover">
+            </div> -->
+        </div>
+        <div class="menu" :class="isUpgrade ? 'menu_bigtop' : 'menu_top'">
+            <router-link tag="div" class="per_menu row" v-for="(item,index) in menu" :key="index" :to="item.path">
+                <div class="menu_icon center"><van-icon :name="url+item.icon" size="24px"/></div>
+                <div class="menu_name van-hairline--bottom start-center">{{item.name}}</div>
+                <div class="menu_more van-hairline--bottom start-center"><van-icon name="arrow"/></div>
+            </router-link>
+        </div>
+        <transition name="van-fade">
+            <div class="pop" v-show="showCover">
                 <van-popup v-model="show" :overlay="false" >
                    <div class="content">
-                        <h1>温馨提示</h1>
-                        <p>您现在即将升级成<span class="colum">钱夹宝钻石会员</span>升级成功后,您将享受相应收益权限。</p>
-                        <p class="vip">
+                        <p>温馨提示</p>
+                        <p style="margin-top:30px">您现在即将升级成<span class="colum">钱夹宝钻石会员</span>升级成功后,您将享受相应收益权限。</p>
+                        <p>
                             若你成为钻石会员，垫还手续费降到万72+1元/笔，收款手续费降到万47+1元/笔，预计垫还收款每年可省3000元，最关键的一点在于不仅省钱还可以让你的信用卡资金利用率达到90%以上。
                         </p>
                         <p>
@@ -72,7 +143,8 @@
                    </div>
                 </van-popup>
             </div>
-        <div class="menu-title server start-center">特约服务</div>
+        </transition>
+        <!-- <div class="menu-title server start-center">特约服务</div>
         <div class="per-list row">
             <router-link tag="div" class="per-menu-list line" :to="{path: '/ponserCenter/userAccountManage',query: {amount: amount,amountSum: amountSum}}">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/303.png" size="30px" color="#dab17b"/></div>
@@ -115,10 +187,7 @@
                 <div class="per-menu-title center">流程说明</div>
             </div>
 
-            <router-link tag="div" to="/personalCenter/manual" class="per-menu-list">
-                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/311.png" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">平台手册</div>
-            </router-link>
+            
         </div>
         <div class="per-list row">
             <router-link tag="div" to="/personalCenter/questionandanswers" class="per-menu-list line">
@@ -135,22 +204,22 @@
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/314.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">名片夹</div>
             </div>
-        </div>
+        </div> -->
 
          <div class="buy-detail" v-if="pup2">
-            <div class="recom row">
-                <!-- <div class="avator end-center"><img :src="recomheadimg" alt=""></div> -->
-                <!-- <div class="recom-detail">
+            <!-- <div class="recom row">
+                <div class="avator end-center"><img :src="recomheadimg" alt=""></div>
+                <div class="recom-detail">
                     <div class="recom-title start-center">上级推荐人</div>
                     <div class="recom-name start-center">{{recomname}}</div>
                     <div class="recom-code start-center">推荐码:{{recomcode}}</div>
-                </div> -->
-                <!-- <div class="recom-info center">
+                </div>
+                <div class="recom-info center">
                     <div class="mini-info center">
                         Hi!,{{recomname}}邀请您成为创业合伙人，钱夹宝大舞台等你来创造奇迹
                     </div>
-                </div> -->
-            </div>
+                </div>
+            </div> -->
             <div class="price center">¥{{price}}</div>
             <div class="per-title row">
                 <div class="goods-title start-center">商品名称</div>
@@ -177,14 +246,14 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="per-title row">
+            <div class="per-title row">
                 <div class="goods-title start-center">推荐码</div>
                 <div class="goods-detail start-center">{{recomcode}}</div>
             </div>
             <div class="per-title row">
                 <div class="goods-title start-center">上级推荐人</div>
                 <div class="goods-detail start-center">{{recomname}}</div>
-            </div> -->
+            </div>
             <div class="buybtn row">
                 <van-button type="info" class="cancel" @click="handleBuyCancel">取消支付</van-button>
                 <van-button type="info" class="submit" @click="handleBuyNow">立即支付</van-button>
@@ -192,7 +261,7 @@
         </div>
 
 
-        <div  class="update">
+        <!-- <div  class="update">
             <ul>
                 <li @click="uploadAnd">
                     <img src="http://pay.91dianji.com.cn/Android.png" >
@@ -213,9 +282,9 @@
                         <img src="http://pay.91dianji.com.cn/iosem.png" alt="">
                     </dir>
             </div>
-        </div>
+        </div> -->
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
-        <loading :componentload="componentload"></loading>
+        
     </div>
 </template>
 
@@ -231,20 +300,20 @@ export default {
     },
     data(){
         return {
-            componentload: true,
-            active:2,
-            nickname: '',
+            url: 'http://pay.91dianji.com.cn/',
+            active:4,
+            nickname: 'Giovanni',
             headimg: 'http://img2.imgtn.bdimg.com/it/u=1000195578,2796948806&fm=11&gp=0.jpg',
-            promotioncode: '',
-            vip: '',
-            iscertification: '实名认证',
+            promotioncode: '2456432',
+            vip: 'http://pay.91dianji.com.cn/zuanshivip.png',
+            iscertification: '去实名',
             amount: '',
-            amountSum: '',
+            amountSum: '111',
             commission: '',
             // showand:false,
             // showios:false
             showYYS:true,
-            isUpgrade:false,
+            isUpgrade:true,
             show:false,
             showCover:false,
             pup2:false,
@@ -253,7 +322,51 @@ export default {
             recomname:"",
             recomcode:"",
             recomheadimg:"",
-            orderId:""
+            orderId:"",
+            popup: true,
+            level: '0',
+            menu: [
+                {
+                    name: '上级推荐人',
+                    icon: 'previous_personalCenter@2x.png',
+                    path: '/personalCenter/previous'
+                },
+                // {
+                //     name: '微名片',
+                //     icon: 'other-pay',
+                //     path: ''
+                // },
+                // {
+                //     name: '授权证书',
+                //     icon: 'other-pay',
+                //     path: ''
+                // },
+                // {
+                //     name: 'VIP视频',
+                //     icon: 'other-pay',
+                //     path: ''
+                // },
+                // {
+                //     name: '营销课堂',
+                //     icon: 'other-pay',
+                //     path: ''
+                // },
+                // {
+                //     name: '共享佣金池',
+                //     icon: 'other-pay',
+                //     path: ''
+                // },
+                {
+                    name: '商务合作',
+                    icon: 'cooperation_personalCenter@2x.png',
+                    path: '/personalCenter/cooperation'
+                },
+                {
+                    name: '帮助中心',
+                    icon: 'help_personalCenter@2x.png',
+                    path: '/help'
+                },
+            ],
         }
     },
     methods:{
@@ -369,16 +482,14 @@ export default {
             axiosPost(url,params).then(res =>{
                 // console.log('查询个人设置成功',res)
                 if(res.data.success){
-                    setTimeout(()=>{
-                        this.componentload = false;
-                    },500)
                     this.nickname = res.data.data.nickname;
                     this.headimg  = res.data.data.photo;
                     this.promotioncode  = res.data.data.promotioncode; 
                     this.amount = res.data.data.amount;
                     this.amountSum = res.data.data.amountSum;
                     this.commission = res.data.data.commission;
-                    res.data.data.iscertification == '0' ? this.iscertification = '实名认证' : ( res.data.data.iscertification == '1' ? this.iscertification = '审核中' : (res.data.data.iscertification == '2' ? this.iscertification = '认证成功' : this.iscertification = '认证失败，请重试')); 
+                    this.level = res.data.data.level;
+                    res.data.data.iscertification == '0' ? this.iscertification = '去实名' : ( res.data.data.iscertification == '1' ? this.iscertification = '审核中' : (res.data.data.iscertification == '2' ? this.iscertification = '认证成功' : this.iscertification = '认证失败，请重试')); 
                     if(res.data.data.level == '0'){
                         this.vip ='';
                     }
@@ -390,16 +501,10 @@ export default {
                         this.vip = 'http://pay.91dianji.com.cn/zuanshivip.png';
                     }
                 }else{
-                    setTimeout(()=>{
-                        this.componentload = false;
-                        this.$toast('查询失败')
-                    },500)
+                    this.$toast.fail('查询失败')
                 }
             }).catch(res =>{
-                setTimeout(()=>{
-                    this.componentload = false;
-                    this.$toast('查询失败')
-                },500)
+                this.$toast.fail('查询失败')
             })
         }
     },
@@ -412,21 +517,216 @@ export default {
 <style lang="less" scoped>
   #personal-center-component {
       width: 100%;
-      height: 90vh;
+      height: calc(100vh - 180px);
       overflow: scroll;
-      padding-bottom: 5vh;
-      background: #F2F2F2;
+      padding-top: 80px;
+      .header_title{
+          width: 100%;
+          height: 80px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          background: #1d32ff;
+          z-index: 3;
+          div{
+              width: 100%;
+              height: 100%;
+              position: relative;
+              span:nth-child(1){
+                  width: auto;
+                  height: 100%;
+                  position: absolute;
+                  top: 0px;
+                  left: 10px;
+                  z-index: 4;
+              }
+              span:nth-child(2){
+                  width: auto;
+                  height: 100%;
+                  position: absolute;
+                  top: 0px;
+                  left: 80px;
+                  z-index: 4;
+                  color: #f2f2f2;
+              }
+              span:nth-child(3){
+                  width: 100%;
+                  height: 100%;
+                  position: absolute;
+                  top: 0px;
+                  left: 0px;
+                  z-index: 3;
+                  color: #f2f2f2;
+                  font-weight: 700;
+                  font-size: 32px;
+              }
+              span:nth-child(4){
+                  width: auto;
+                  height: 100%;
+                  position: absolute;
+                  top: 0px;
+                  right: 80px;
+                  z-index: 3;
+              }
+              span:nth-child(5){
+                  width: auto;
+                  height: 100%;
+                  position: absolute;
+                  top: 0px;
+                  right: 10px;
+                  z-index: 3;
+              }
+          }
+      }
       .header{
           width: 100vw;
-          height: 450px;
+          height: 470px;
           position: relative;
-          background: linear-gradient(#4B66AF,#6883C1);  
-          padding-top: 60px;  
+          background-image: linear-gradient(180deg, #1d32ff 0%, #73a1ff 100%), linear-gradient(#2942ff, #2942ff);
+          .avator_nickname{
+              width: 100%;
+              height: auto;
+              .diomond{
+                  background: url('http://pay.91dianji.com.cn/diomond@2x.png') center center no-repeat;
+                  background-size: contain;
+              }
+              .gold{
+                  background: url('http://pay.91dianji.com.cn/gold@2x.png') center center no-repeat;
+                  background-size: contain;
+              }
+              .avator{
+                  width: 200px;
+                  height: 200px;
+                  margin: auto;
+                  position: relative;
+                  >img{
+                    width: 70%;
+                    height: 70%;
+                    border-radius: 50%;
+                    position: absolute;
+                    bottom: 14px;
+                    left: 24px;
+                  }
+                  .isvip{
+                      position: absolute;
+                      right: 0px;
+                      bottom: 10px;
+                      >img{
+                          width: 60px;
+                          height: 60px;
+                      }
+                  }
+              }
+              .nickname{
+                  width: auto;
+                  height: 40px;
+                  color: #ffffff;
+                  font-size: 28px;
+                  font-weight: 700;
+              }
+              .promotioncode{
+                  width: auto;
+                  height: 40px;
+                  color: #ffffff;
+                  font-size: 26px;
+                  >span{
+                      background-image: linear-gradient(180deg, #f5e8d3 0%, #f8c45b 87%), linear-gradient(#000000, #000000);
+                      padding: 4px 10px 4px 10px;
+                      margin-left: -12px;
+                      border-top-right-radius: 10px;
+                      border-bottom-right-radius: 10px;
+                  }
+              }
+          }
+          .account_detail{
+              width: 80%;
+              height: 100px;
+              margin: 20px 10% 0px 10%;
+              padding-top: 20px;
+              .per-detail{
+                  width: calc(100% / 3);
+                  height: 100%;
+                  .detail_title{
+                      width: 100%;
+                      height: 50%;
+                      font-size: 28px;
+                      color: #ffffff;
+                  }
+              }
+          }
+          .account_manage_upgrade{
+               width: 85%;
+               height: auto;
+               margin: 10px auto 0px auto;
+               position: relative;
+            .account_manage{
+                width: 100%;
+                height: 130px;
+                background: #ffffff;
+                padding-top: 30px;
+                border-radius: 5px;
+                box-shadow: 0px 8px 16px 0px rgba(51, 51, 51, 0.35);
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 2;
+                .per_manage{
+                    width: 20%;
+                    height: 100%;
+                    .manage_icon{
+                        width: 100%;
+                        height: 40%;
+                    }
+                    .manage_title{
+                        width: 100%;
+                        height: 40%;
+                    }
+                } 
+            }
+            .upgrade{
+                width: 97%;
+                height: 100px;
+                padding-left: 3%;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: -3px;
+                border-radius: 5px;
+                background-image: linear-gradient(90deg, #f5e8d4 0%, #f3cb7c 100%);
+                position: absolute;
+                z-index: 1;
+                left: 0;
+                top: 160px;
+                span:nth-child(2){
+                    font-size: 26px;
+                    color: #333333;
+                    margin-left: 15px;
+                }
+                span:nth-child(3){
+                    width: 148px;
+                    height: 48px;
+                    background-color: #000000;
+                    border-radius: 24px;
+                    font-size: 26px;
+                    color: #f3cb7c;
+                    margin-left: 10px;
+                }
+                span:nth-child(3):hover{
+                    background: #f5e8d4;
+                }
+            }
+          }
+          
           .top{
-              width: 90%;
-              height: 120px;
+              width: 100%;
+              height: 80px;
               margin-left: auto;
               margin-right: auto;
+              position: fixed;
+              .scan{
+                  width: 30%;
+                  height: 100%;
+              }
+
               .avator{
                   width: 18%;
                   height: 100%;
@@ -580,6 +880,35 @@ export default {
               }
           }
       }
+      .menu_top{
+          margin-top: 130px;
+      }
+      .menu_bigtop{
+          margin-top: 230px;
+      }
+      .menu{
+        width: 100%;
+        height: auto;
+        background: #ffffff;
+        .per_menu{
+            width: 100%;
+            height: 100px;
+            .menu_icon{
+            width: 10%;
+            height: 100%;
+            }
+            .menu_name{
+                width: 85%;
+                height: 100%;
+                font-size: 30px;
+                color: #333333;
+            }
+            .menu_more{
+                width: 5%;
+                height: 100%;
+            }
+        }
+      }
       .pop {
             width: 100%;
             height: 100%;
@@ -596,13 +925,20 @@ export default {
               padding:15px;
               box-sizing:border-box;
               line-height: 38px;
-              >h1 {
-                  text-align: center;
-                  margin-top:10px;
-                  font-weight: bold;
+              p:nth-child(1) {
+                text-align: center;
+                margin-top:10px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                font-size: 32px;
+                font-weight: 700;
+                color: #f3cb7c;
               }
-              p{
-                  font-size: 30px;
+              >p{
+                  font-size: 26px;
+                  margin-top: 20px;
+                  padding: 0px 15px 0px 15px;
+                  text-align: justify;
               }
               .colum {
                   color:#DAB17D;

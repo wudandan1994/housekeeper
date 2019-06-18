@@ -76,7 +76,7 @@ export default {
                 mobile:that.phone,
                 password:that.password
             }
-            that.$http.post("/customer/login",qs.stringify(data))
+            axiosPost("/customer/login",data)
             .then(function(res){
                 if(res.data.success){
                     that.$store.commit('iscertification',res.data.data.iscertification);

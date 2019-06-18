@@ -172,7 +172,7 @@ export default {
                                 },500);
                                 this.handlePoster();
                             }else{
-                                this.$toast('二维码请求失败');
+                                this.$toast.fail('二维码请求失败');
                             }
                         })
                     }else{
@@ -212,7 +212,6 @@ export default {
 
     },
     created () {
-       
     },
     mounted(){
         this.handleJundgeQrCode();

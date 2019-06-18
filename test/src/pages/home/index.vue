@@ -237,11 +237,11 @@ export default {
         return {
             // 轮播图图片
             images: [
-                'http://pay.91dianji.com.cn/banner01.jpg',
-                'http://pay.91dianji.com.cn/banner02.jpg',
-                'http://pay.91dianji.com.cn/banner03.jpg',
-                'http://pay.91dianji.com.cn/banner04.jpg',
-                'http://pay.91dianji.com.cn/banner05.jpg'
+                'http://pay.91dianji.com.cn/banner01.png',
+                'http://pay.91dianji.com.cn/banner02.png',
+                'http://pay.91dianji.com.cn/banner03.png',
+                'http://pay.91dianji.com.cn/banner04.png',
+                'http://pay.91dianji.com.cn/banner05.png'
             ],
             showAaside:false, 
             checked:true,
@@ -327,6 +327,7 @@ export default {
                 });
         },
         changeActive(obj){
+            console.log('当前选中',obj);
         } ,
         // 查询实名认证
         handleSearchAuths(){
@@ -359,16 +360,16 @@ export default {
             this.$router.push('/personalCenter/contactus')
         },
         searchInfo(){
-            axiosPost("http://pay.91dianji.com.cn/api/creditCard/getMerchantSettled")
+            axiosPost("/creditCard/getMerchantSettled")
             .then(res=>{
                 if(res.data.code==="1"){
                     this.$router.push("/home/addCard")
                 } else if(res.data.code==="0"){
-                    // window.location.href = res.data.data.url;
-                    storage.set('cardManager',res.data.data.url);
-                    this.$router.push({
-                        path: '/cardManager'
-                    })
+                    window.location.href = res.data.data.url;
+                    // storage.set('cardManager',res.data.data.url);
+                    // this.$router.push({
+                    //     path: '/cardManager'
+                    // })
                 }
             })
             .catch(err=>{

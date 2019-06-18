@@ -1,9 +1,10 @@
 import axios from 'axios'
 import qs from 'qs'
+import { hostUrl } from './config.js'
 // 封装POST请求
 export const axiosPost = (url, params = {}) =>{;
     const _axios = axios.create({
-        baseURL: 'http://pay.91dianji.com.cn/api',
+        baseURL: hostUrl,
         withCredentials: true,
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
     });

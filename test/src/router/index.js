@@ -119,6 +119,8 @@ import myloan from '@/pages/loan/myloan'
 import onlineComponent from '@/pages/online'
 // 信用卡管家
 import cardManager from '@/pages/progressQuery/cardManager'
+// 帮助中心
+import help from '@/pages/help/index'
 
 export default new Router({
   // mode:"hash",
@@ -216,5 +218,6 @@ export default new Router({
     {path: '/loan/myloan',component:myloan},
     {path: '/url',component: url},
     {path: '/cardManager',component: cardManager},
+    {path: '/help',component: help},
   ]
 })

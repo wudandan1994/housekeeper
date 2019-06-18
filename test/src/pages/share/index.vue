@@ -139,7 +139,7 @@ export default {
     data(){
         return{
             showFlag:false,
-            active: 3
+            active: 2
         }
     },
     methods:{

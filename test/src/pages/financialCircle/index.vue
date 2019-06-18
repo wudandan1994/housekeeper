@@ -57,7 +57,7 @@ export default {
             topactive: 0,
             threshold: 6,
             isActive: '1',
-            active: 4,
+            active: 3,
             showShare:false
         }
     },
