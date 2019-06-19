@@ -47,7 +47,6 @@
                                       <p class="botton">还款日</p>
                                       <!-- <p><span>{{String(new Date().getMonth()+1)+-&nbsp;+item.duedate}}</span></p> -->
                                       <p><span>{{new Date().getMonth()+1}}</span>&nbsp;-&nbsp;<span>{{item.duedate}}</span></p>
-                            
                                   </div>
                               </div>
                               <p>
@@ -182,7 +181,6 @@ export default {
             }
              axiosPost("/creditCard/getEsicashExist",data)
              .then(res=>{
-                 console.log(res)
                  if(!res.data.success){
                      this.$router.push({
                          path:"/home/insertEsiCash",
@@ -202,7 +200,6 @@ export default {
                  
              })
              .catch(err=>{
-                 console.log(err)
                  
              })
         },
@@ -214,7 +211,6 @@ export default {
             // }
             //  axiosPost("/vtdcreditCard/getEnterNet",data)
             //  .then(res=>{
-            //      console.log(res)
             //      if(!res.data.success){
             //          this.$router.push({
             //              path:"/home/largeAmount",
@@ -223,7 +219,6 @@ export default {
             //      }
             //  })
             //  .catch(err=>{
-            //      console.log(err)
             //  })
         },
 
@@ -242,13 +237,10 @@ export default {
              axiosPost("/creditCard/getMyCreditCard")
              .then(res=>{
                  if(res.data.success){
-                    //  console.log(res)
                      let arr= res.data.data
                      let arrXun=[]
                      arr.forEach((item,i) => {
-                        //  console.log(item)
                          item.bankNick=bankCardAttribution(item.cardNo).bankName
-                        //  console.log(item)
                          arrXun.push(item)
                      });
                      this.cardList=arrXun
@@ -288,7 +280,6 @@ export default {
         //         that.bankList=list
         //     })
         //     .catch(function(err){
-        //         // console.log(err,"error")
         //     })
         // },
          handleGetAmount(){
@@ -297,7 +288,6 @@ export default {
                 openid:this.$store.state.wechat.openid,
             };
             axiosPost(url,params).then(res =>{
-                // console.log('查询个人设置成功',res)
                 if(res.data.success){
                     setTimeout(()=>{
                         this.componentload = false;

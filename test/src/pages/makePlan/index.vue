@@ -177,7 +177,6 @@ export default {
               this.showEnd=false
          },
          confirmStart(value){
-             console.log(value)
               var date=value
               var year=date.getFullYear();//当前年份
               var month=date.getMonth();//当前月份

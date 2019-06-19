@@ -146,7 +146,6 @@ export default {
     },
   },
   created(){
-    // console.log('VUEX',this.$toast);
     // 首先判断是否存储了openid
     if(storage.get('openid') != '' && storage.get('openid') !== null){
       // 已经注册过，可直接登录，无需再次授权

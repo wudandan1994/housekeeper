@@ -161,11 +161,9 @@ export default {
     },
     methods:{
         onChange(picker, value, index) {
-            // console.log('当前值：',value);
             this.bankName = value;
             // 根据当前关键字查询联行号
             var subBankCode = bankNumber.filter(item =>item.bankName == value);
-            // console.log('联行号',subBankCode[0].bankCode);
             this.subBankCode = subBankCode[0].bankCode;
         },
         // 选择器确定时间
@@ -207,10 +205,8 @@ export default {
         },
         // 搜索关键字
         handleChangeSearchName(obj){
-            // console.log('当前关键字',obj.target.value);
             // 根据关键字过滤json
             var list = bankNumber.filter(item =>(item.bankName).indexOf(obj.target.value) > -1);
-            // console.log('关键字过滤后',list);
             if(list.length == '0'){
                 this.$toast('查询为空');
             }else{
@@ -293,7 +289,6 @@ export default {
             }
             axiosPost("/creditCard/memberReg",data)
             .then(function(res){
-                // console.log(res,"注册之后的第一次信息");
                 if(!res.data.success){
                     that.$toast({
                         message:res.data.message
@@ -302,7 +297,6 @@ export default {
                 } else {
                     axiosPost("/creditCard/getMemberReg")
                     .then(function(res){
-                        // console.log(res,"个人信息查询的结果")
                         if(res.data.success){
                             let info=res.data.data.chMerCode
                             that.componentload=true
@@ -323,13 +317,11 @@ export default {
                        }
                     })
                     .catch(function(err){
-                        // console.log(err,"错误的信息");
 
                     })
                 }
             })
             .catch(function(err){
-                // console.log(err,"error")
             })
         },
         // 查询个人信息
@@ -352,7 +344,6 @@ export default {
             }
         })
         .catch(err=>{
-            // console.log(err,"error个人信息")
         })
      },
      // 获取实名认证信息
@@ -367,7 +358,6 @@ export default {
                     this.mobile = this.$store.state.wechat.mobile;
                 }
             }).catch(res =>{
-                // console.log('获取实名认证状态失败',res);
             })
         }
     },

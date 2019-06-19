@@ -119,7 +119,6 @@ export default {
               }
               axiosPost("/creditCard/cancelMainPlan",data)
               .then(res=>{
-                  console.log(res)
                   if(!res.data.success){
                       this.$toast({
                           message:res.data.message
@@ -129,7 +128,6 @@ export default {
                   }
               })
               .catch(err=>{
-                  console.log(err)
               })
                 })
                 .catch(()=>{
@@ -142,7 +140,6 @@ export default {
              }
              axiosPost("creditCard/getMainPlanAndPlans",data)
              .then(res=>{
-                 console.log(res,"主计划和子计划")
                  if(!res.data.success){
                      this.$toast({
                          message:res.data.message
@@ -178,7 +175,6 @@ export default {
                  }
              })
              .catch(err=>{
-                 console.log(err,"子计划")
              })
         }
     },

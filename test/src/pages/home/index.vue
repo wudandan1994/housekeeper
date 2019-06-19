@@ -296,7 +296,6 @@ export default {
         getUpdate(){ // 获取历史版本号
                axiosPost("/customer/getVersion")
                .then(res=>{
-                   console.log(res)
                    if(res.data.success){
                       let version=res.data.data
                       this.versionAndroid=parseFloat(version[0].version)
@@ -312,8 +311,6 @@ export default {
               // 获取设备的版本号
               if(window.plus){  
                    that.updateVerson=parseFloat(plus.runtime.version);
-                   console.log(that.versionAndroid)
-                    console.log(that.versionIos)
                    if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
                    }
@@ -342,7 +339,6 @@ export default {
                      this.$router.push("/logIn");
                     //  this.$toast('登录失败');
                 }else {
-                    // console.log(res,"自动登录成功")
                     this.$store.commit('iscertification',res.data.data.iscertification);
                     this.$store.commit('level',res.data.data.level);
                     this.$store.commit('promotioncode',res.data.data.promotioncode);
@@ -390,7 +386,7 @@ export default {
                 });
         },
         changeActive(obj){
-            console.log('当前选中',obj);
+            // console.log('当前选中',obj);
         } ,
         // 查询实名认证
         handleSearchAuths(){
@@ -424,7 +420,7 @@ export default {
         },
         // 点击轮播图进入详情
         handleSwipeDetail(item){
-            console.log('详情',item.routes);
+            // console.log('详情',item.routes);
             this.$router.push({
                 path: '/vip',
                 query: {params: item.params}

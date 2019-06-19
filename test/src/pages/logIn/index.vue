@@ -95,7 +95,6 @@ export default {
                     that.$store.commit('openid',res.data.data.openid);
                     that.$store.commit('nickname',res.data.data.nickname);
                     that.$store.commit('headimg',res.data.data.photo);
-                    // console.log('登陆成功',res);
                     that.$toast('登陆成功');
                     if(that.checked){
                         storage.set('rempass',true);
@@ -118,13 +117,11 @@ export default {
                 }
             })
             .catch(function(err){
-                // console.log(err,"error");
                 that.$toast('登录失败')  
             })
         },
         // 登录
             logIn(){
-                // console.log(location.href)
                 window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
           
         //    var auths=null

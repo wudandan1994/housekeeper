@@ -324,7 +324,6 @@ export default {
         //  this.chMerCode=this.$route.query.info
        
          this.search()
-           console.log(this.chMerCode,"payment")
         //  this.sureSubmit()
     },
    

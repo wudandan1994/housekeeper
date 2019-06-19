@@ -108,14 +108,12 @@ export default {
             }
              axiosPost("/customer/updatePassWord",data)
              .then(res =>{
-                //  console.log('绑定成功',res);
                  this.$toast({
                      message:res.data.message
                  })
                  this.show = false;
              })
              .catch(res =>{
-                //  console.log('绑定失败',res);
              })
         },
         handleLate(){
@@ -123,7 +121,6 @@ export default {
         }
     },
     mounted(){
-        console.log('手机号',this.$store.state.wechat);
         setTimeout(() =>{
             if(this.$store.state.wechat.mobile){
                 this.show = false;

@@ -337,7 +337,7 @@ export default {
         
     },
     mounted(){
-        console.log(this.$route.query.params)
+        // console.log(this.$route.query.params)
         if(this.$route.query.params == '1'){
             this.TocontOne();
         }else{

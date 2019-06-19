@@ -143,7 +143,6 @@ export default {
                     this.merMobile = this.$store.state.wechat.mobile;
                 }
             }).catch(res =>{
-                // console.log('获取实名认证状态失败',res);
             })
         }
        

@@ -74,7 +74,6 @@ export default {
                     }
                 })
                 .catch(err=>{
-                    // console.log(err,"error");
                 })
             }
         },
@@ -83,7 +82,6 @@ export default {
             let url = '/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
-                // console.log('获取实名认证状态成功',res);
                 if(res.data.data.status != '0'){
                     this.name = res.data.data.name;
                     this.idCard = res.data.data.idcardnumber;
@@ -91,7 +89,6 @@ export default {
                    
                 }
             }).catch(res =>{
-                // console.log('获取实名认证状态失败',res);
             })
         }
     },

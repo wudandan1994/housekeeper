@@ -201,7 +201,6 @@ export default {
                             message:res.data.message
                         })
                     } else {
-                        // console.log(res)
                         window.location.href=res.data.data
                             // let url=res.data.data
                         //     this.$router.push({
@@ -224,14 +223,12 @@ export default {
             let url = '/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
-                // console.log('获取实名认证状态成功',res);
                 if(res.data.data.status != '0'){
                     this.form.name = res.data.data.name;
                     this.form.idcardnumber = res.data.data.idcardnumber;
                     this.form.mobile = this.$store.state.wechat.mobile;
                 }
             }).catch(res =>{
-                // console.log('获取实名认证状态失败',res);
             })
         }
     },
