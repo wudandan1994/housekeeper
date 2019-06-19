@@ -387,7 +387,6 @@ export default {
                         this.vip ='';
                     }
                     else if(res.data.data.level == '1'){
-                        // this.showYYS=false
                         this.isUpgrade=true
                         this.vip ='http://pay.91dianji.com.cn/huangjinVIP.png';
                     }else{
