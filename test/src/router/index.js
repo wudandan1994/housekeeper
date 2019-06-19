@@ -13,7 +13,9 @@ import loginComponent from '@/pages/login'
 import newsComponent from '@/pages/news'
 import addCardComponent from '@/pages/addCard'
 import logOutComponent from '@/pages/logOut'
-import inviteFriendsComponent from '@/pages/inviteFriends'
+import insertEsiCashComponent from '@/pages/insertEsiCash'
+import iframeComponent from '@/pages/insertEsiCash/iframe.vue'
+
 import creditHousekeeperComponent from '@/pages/creditHousekeeper'
 import aisleHousekeeperComponent from '@/pages/aisleHousekeeper'
 import registerComponent from '@/pages/register'
@@ -49,6 +51,13 @@ import inviteShareComponent from '@/pages/inviteShare'
 import repaymentChannelComponent from '@/pages/repaymentChannel'
 import makePlanComponent from '@/pages/makePlan'
 import planListComponent from '@/pages/planList'
+import changeCardComponent from '@/pages/changeCard'
+import recordsComponent from '@/pages/records'
+import largeAmountComponent from '@/pages/largeAmount'  // 大额鉴权
+import largeCardComponent from '@/pages/largeCard'
+import evaluationComponent from '@/pages/evaluation'
+
+
 
 
 import loan from '@/pages/loan'
@@ -102,7 +111,8 @@ import openComponent from '@/pages/open'
 import paymentComponent from '@/pages/payment'
 // 第三方跳转
 import url from '@/pages/home/url'
-
+// 计划详情
+import planDetailComponent from '@/pages/planDetail'
 
 
 // 百问百答
@@ -121,6 +131,10 @@ import onlineComponent from '@/pages/online'
 import cardManager from '@/pages/progressQuery/cardManager'
 // 帮助中心
 import help from '@/pages/help/index'
+// 推广原则
+import Extension from '@/pages/personalCenter/Extension'
+// 新人教程
+import video from '@/pages/home/video'
 
 export default new Router({
   // mode:"hash",
@@ -133,11 +147,11 @@ export default new Router({
     {path:"/register",component:registerComponent},
     {path:"/home/collect",component:collectComponent},
     {path:"/home/online",component:onlineComponent},
-
     {path:"/home/collect/open",component:openComponent},
     {path:"/home/collect/payment",component:paymentComponent},
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
+    {path:"/home/punch/planDetail",component:planDetailComponent},
     {path:"/home/news",component:newsComponent},
     {path:"/home/addCard",component:addCardComponent},
     {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
@@ -145,11 +159,15 @@ export default new Router({
     {path:"/home/creditHousekeeper/aisleHousekeeper/repayment",component:repaymentComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",component:makePlanComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper/planList",component:planListComponent},
-
-
+    {path:"/home/changeCard",component:changeCardComponent},
+    {path:"/home/collect/payment/records",component:recordsComponent},
     {path:"/home/creditHousekeeper",component:creditHousekeeperComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper",component:aisleHousekeeperComponent},
-    {path:"/share/inviteFriends",component:inviteFriendsComponent},
+    {path:"/home/insertEsiCash",component:insertEsiCashComponent}, //绑定第三方信用卡
+    {path:"/home/insertEsiCash/iframe",component:iframeComponent}, //绑定第三方信用卡返回页面
+    {path:"/home/largeAmount",component:largeAmountComponent}, // 大额鉴权
+    {path:"/home/largeCard",component:largeCardComponent},
+    {path:"/home/evaluation",component:evaluationComponent}, //卡测评
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},
     {path:"/share/promotionMaterial",component:promotionMaterialComponent},
@@ -219,5 +237,7 @@ export default new Router({
     {path: '/url',component: url},
     {path: '/cardManager',component: cardManager},
     {path: '/help',component: help},
+    {path: '/Extension',component: Extension},
+    {path: '/video',component: video},
   ]
 })

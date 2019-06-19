@@ -6,13 +6,13 @@
             <span></span>
         </header>
         <div class="container">
-           <iframe class="iframe" :src="url" frameborder="0"></iframe>
-           <!-- <div style="overflow: auto;-webkit-overflow-scrolling:touch;width:100%;height:100%;">　
-            　　<iframe v-if="type" :src="url" scrolling="auto" frameborder="0" width="100%" height="100%"></iframe>
-            　　<iframe v-else :src="url" frameborder="0" height="100%" scrolling='no' style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
-            </div> -->
+             <div class="box" style="overflow-y: scroll;">　
+            　　<iframe v-if="type" :src="url" scrolling="auto"  class="iframe" frameborder="0" ></iframe>
+            　　<iframe v-else :src="url" frameborder="0"  class="iframe" scrolling="no"  ></iframe>
+         </div>
         </div>
     </div>
+
 
 </template>
 
@@ -23,7 +23,7 @@ export default {
         return {
             url:"",
             title:"",
-            type: true
+            type: null
         }
     },
     methods:{
@@ -31,35 +31,51 @@ export default {
             // plus.webview.close( "yinlian")
             this.$router.go(-1);
         },
+       
         webview(){
-            let self= plus.webview.currentWebview(); 
-            var yinlian= plus.webview.create(this.url, "yinlian", {  
-            top: "80px",  
-            bottom: 0  
-        });  
-           self.append(yinlian)
-        },
-        webview(){
-            let self= plus.webview.currentWebview(); 
-            var yinlian= plus.webview.create(this.url, "yinlian", {  
-            top: "80px",  
-            bottom: 0  
-        });  
-        self.append(yinlian)
-        },
+            if(window.plus){  
+                 var yinlian= plus.webview.create(this.url, "yinlian",{
+                     width:"100%",
+                     top:"40px",
+                     left:"0px",
+                     right:"0px",
+                      bottom:"10px",
+                  });  
+                        //     yinlian.setStyle({
+                        //         width:"100%",
+                        //         top:"40px",
+                        //         left:"0px",
+                        //         right:"0px",
+                        //         margin:"auto",
+                        // })
+                            yinlian.show()
+            }else{  
+                document.addEventListener('plusready',function () {  
+                         var yinlian= plus.webview.create(this.url, "yinlian");  
+                            yinlian.setStyle({
+                                width:"100%",
+                                top:"40px",
+                                left:"0px",
+                                right:"0px",
+                                margin:"auto",
+                        })
+                            yinlian.show()
+                },false);  
+            }  
+        }
+      
     },
     created(){
         this.url=this.$route.query.info;
         this.title=this.$route.query.title;
-        // window.location.href = this.url;
         // this.webview();
-        // var u = navigator.userAgent;
-        // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-        // if(isAndroid){
-        // 　　this.type = true
-        // }else{
-        // 　　this.type = false
-        // }
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        if(isAndroid){
+        　　this.type = true
+        }else{
+        　　this.type = false
+        }
     }
 }
 </script>
@@ -89,10 +105,15 @@ export default {
        }
        >.container {
            padding-top:96px;
-           .iframe{
-               width: 100vw;
-               height: calc(100vh - 86px);
+           .box {
+               overflow-y: scroll;
            }
+           .iframe{
+                width: 1px;
+                min-width: 100%;
+                *width: 100%;
+                height: 100% !important;
+            }
        }
    }
 </style>

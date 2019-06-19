@@ -3,13 +3,33 @@
         <header class="header-top row">
             <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">海报</div>
-            <div @click="showCover" class="right-icon center"><van-icon color="white" size="20px" name="weapp-nav"/></div>
+            <div @click="showCover" class="right-icon center">
+                     <!-- <van-icon color="white" size="20px" name="weapp-nav"/> -->
+                </div>
         </header>
         <div class="poster-canvas center"><canvas id="poster" width="375" height="667"></canvas>  </div>
         <div class="btn row">
             <div @click="handlechangeRandom" class="change center">换一换</div>
             <div @click="handlePrivacySettings" class="rightnow center">隐私设置</div>
             <div @click="savePoster" class="rightnow center">立即合成</div>
+        </div>
+        <div class="share" v-show="Sharewxf">
+             <div class="wx">
+                <!-- <van-button  class="shareBtn" @click="Sharewxf=true" type="default">分享</van-button> -->
+                    <ul>
+                        <li id="wxF"  @click="wxfri">
+                            <p><van-icon name="http://pay.91dianji.com.cn/wx.png" size="40px"/></p>
+                            <p>分享给好友</p>
+                        </li>
+                        <li @click="wxcir">
+                            <p><van-icon color="white"  size="40px"  name="http://pay.91dianji.com.cn/pyq.png"/></p>
+                            <p>分享到朋友圈</p>
+                        </li>
+                    </ul>
+               <div class="button">
+                     <van-button  size="large" @click="Sharewxf=false" type="default">取消</van-button>
+               </div>
+            </div>
         </div>
         <div class="load center" v-if="imgShow">
             <div v-if="showUpload" >
@@ -19,9 +39,10 @@
             <div class="imgs" v-if="!showUpload">
                 <div class="savePoster center"><img :src="imgUrl" ></div>
                 <div class="success center">
-                    <!-- 海报生成成功 -->
                     海报生成成功，长按保存或分享
+                     <!-- 海报生成成功 -->
                 </div>
+                
             </div>
         </div>
         <loading :componentload="componentload"></loading>
@@ -47,19 +68,89 @@ export default {
             url: 'http://pay.91dianji.com.cn',
             qrcode: '',
             random: '01',
+             shares:null,
+            sharewx:null,
+            Sharewxf:false
         }
     },
     methods:{
         goBack() {
             this.$router.go(-1);
         },
+        wxcir(){
+             let that=this
+            plus.share.getServices(function (s) {
+                that.shares = s;
+                for (var i in s) {
+                    if ('weixin' == s[i].id) {
+                        that.sharewx = s[i];
+                    }
+                }
+                // console.log(JSON.stringify(that.sharewx))
+                 that.sharewxCirMessage()
+            }, function (e) {
+                alert("获取分享服务列表失败：" + e.message);
+            });
+        },
+        wxfri(){
+             let that=this
+            plus.share.getServices(function (s) {
+                that.shares = s;
+                for (var i in s) {
+                    if ('weixin' == s[i].id) {
+                        that.sharewx = s[i];
+                    }
+                }
+                    that.shareWeixinMessage()
+
+            }, function (e) {
+                alert("获取分享服务列表失败：" + e.message);
+            });
+        },
+        sharewxCirMessage(){
+              let that=this
+          that.sharewx.send(
+                { content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝",
+                thumbs:["http://pay.91dianji.com.cn/wxc.jpg"],
+                //  thumbs:"../../assets/images/slt.jpg",
+                 href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode, extra: { scene: "WXSceneTimeline" } }
+                , function(){
+                // alert("分享成功！");
+            }, function(e){
+                alert("分享失败："+e.message);
+            });
+        },
+         shareWeixinMessage() {
+             let that=this
+             that.sharewx.send(
+                 { 
+                     content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝", 
+                     thumbs:["http://pay.91dianji.com.cn/wxc.jpg"],
+                    //  thumbs:["../../assets/images/slt.jpg"],
+                     href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode,
+                     extra: { scene: "WXSceneSession" } 
+                 }, function () {
+            // alert("分享成功！");
+        }, function (e) {
+            alert("分享失败：" + e.message);
+        });
+    },
         cancleCover(){
             this.showShare=false
         },
         
         showCover(){
-            this.showShare=true
+           this.Sharewxf=!this.Sharewxf
         },
+        // save(){
+        //     plus.gallery.save( '/wx.png', (result) => {
+        //         console.log(result.file)
+        //         this.$toast("保存成功")
+        //         } ,(e) => {
+        //         console.log(JSON.stringify(e))
+        //          this.$toast("保存失败")
+        //         });
+        // },
         // 随机数
         handlechangeRandom(){
             this.componentload = true;
@@ -67,11 +158,11 @@ export default {
             var random = '';
             if(ran < 10){
                 random = '0' + ran;
-                console.log('随机数',random);
+                // console.log('随机数',random);
                 this.random = random;
             }else{
                 this.random = ran;
-                console.log('随机数',ran);
+                // console.log('随机数',ran);
             }
             this.handlePoster();
         },
@@ -133,14 +224,13 @@ export default {
             headimg.onload = function(){
                 ctx.drawImage(headimg,10,610,50,50);
             };
-
             ctx.fillStyle="#000";
             ctx.font="14px Arial";
             ctx.fillText(this.$store.state.wechat.nickname,80,630);
             ctx.fillText(this.$store.state.wechat.promotioncode,80,650);
             setTimeout(()=>{
                 this.componentload = false;
-            },2500);
+            },3000);
         },
         savePoster(){
             this.imgShow = true;
@@ -169,7 +259,7 @@ export default {
                                 this.qrcode = res.data.data;
                                 setTimeout(() =>{
                                     this.componentload = false;
-                                },500);
+                                },1000);
                                 this.handlePoster();
                             }else{
                                 this.$toast.fail('二维码请求失败');
@@ -193,10 +283,10 @@ export default {
                 cancelButtonText: '关闭',
             })
             .then(() => {
-                console.log('开启');   
+                // console.log('开启');   
                 this.handlePosterWithoutDetail();
             }).catch(() => {
-                console.log('关闭');
+                // console.log('关闭');
                 this.handlePoster();
             });
         },
@@ -257,6 +347,35 @@ export default {
                 border-radius: 20px;
             }
        }
+       .share {
+                .shareBtn {
+                    margin:100px 0px 50px 100px;
+                    width:100px;
+                    text-align: center;
+                }
+                ul{
+                    padding-top:50px;
+                    display: flex;
+                    justify-content: space-between;
+                    box-sizing: border-box;
+                    >li {
+                        width:50%;
+                        box-sizing: border-box;
+                        text-align: center;
+                        >p {
+                            &:nth-of-type(2){
+                                // color:#fff;
+                                padding:20px;
+                            }
+                        }
+                    }
+                }
+                .button {
+                    padding:20px 30px;
+
+                }
+              
+            }
        .load{
            width: 100vw;
            height: 100vh;
@@ -293,6 +412,8 @@ export default {
                    height: 100px;
                    color: #ffffff;
                    font-size: 28px;
+                  
+                     
                }
            }
        }
@@ -341,5 +462,9 @@ export default {
                 }
             }
         }
+         .van-dialog .van-button {
+                /* border: 0; */
+                border: 1px solid #4b66af;
+            }
    }
 </style>

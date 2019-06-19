@@ -1,86 +1,95 @@
 <template>
-    <div id="violation-inquiry">
-        <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>在线查询</span>
-            <span></span>
+    <div id="online">
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">{{title}}</div>
+            <div class="right-icon center"></div>
         </header>
-        <div class="container">
-           <div class="online">
-               <!-- <p class="serch" @click="webview">联行号在线查询</p> -->
-               <!-- <p >点击关闭</p> -->
-               <iframe class="iframe" src="http://www.kaihuhang.cn/" frameborder="0"></iframe>
-           </div>
-        </div>
+          <div class="box" style="overflow-y: scroll;">　
+            　　<iframe v-if="type" :src="url" scrolling="auto"  class="iframe" frameborder="0" ></iframe>
+            　　<iframe v-else :src="url" frameborder="0"  class="iframe" scrolling="no"  ></iframe>
+         </div>
     </div>
-</template>
 
+</template>
+ 
 
 <script>
 export default {
     data() {
         return {
-
+            url:"",
+            title:"",
+             type: null
         }
     },
     methods:{
         goBack() {
-            //  plus.webview.close( "yinlian");
-            this.$router.push('/home/collect')
+            // plus.webview.close( "yinlian")
+            this.$router.push("/home")
         },
-        // webview(){
-        //     let self= plus.webview.currentWebview(); 
-        //     var yinlian= plus.webview.create("http://www.kaihuhang.cn/", "yinlian", {  
-        //     top: "80px",  
-        //     bottom: 0  
-        // });  
-        // self.append(yinlian);
-        // },
-        
+       
+        webview(){
+            if(window.plus){  
+             var yinlian= plus.webview.create(this.url, "yinlian");  
+               yinlian.setStyle({
+                   width:"100%",
+                   top:"40px",
+                   left:"0px",
+                  right:"0px",
+                    bottom:"10px",
+                  scalable: true,
+                  margin:"auto",
+               })
+                yinlian.show()
+            }else{  
+                document.addEventListener('plusready',function () {  
+                         var yinlian= plus.webview.create(this.url, "yinlian");  
+                            yinlian.setStyle({
+                                width:"100%",
+                                top:"40px",
+                                left:"0px",
+                                right:"0px",
+                                margin:"auto",
+                        })
+                            yinlian.show()
+                },false);  
+            }  
+        }
     },
+    mounted () {
+
+    },
+    
     created(){
-        // this.webview()
+        this.url=this.$route.query.info
+         this.title=this.$route.query.title
+        //  this.webview();
+          var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        if(isAndroid){
+        　　this.type = true
+        }else{
+        　　this.type = false
+        }
     }
 }
 </script>
 
 <style lang="less">
-   #violation-inquiry {
-       >header {
-          background-color: #4965AE;
-           width:100%;
-           height: 86px;
-           line-height: 86px;
-           padding-top:10px;
-           color:#fff;
-           display: flex;
-           position: fixed;
-           font-size:28px;
-           z-index:999;
-           justify-content: space-between;
-           >span {
-               &:nth-of-type(1) {
-                   margin-left: 10px;
-               }
-               &:nth-of-type(3) {
-                   margin-right: 10px;
-               }
-           }
+   #online{
+       header {
+            background-color: #4965AE;
        }
-       >.container {
-           padding-top:96px;
-           padding-bottom: 50px;
-             >.online {
-               margin-top:50px;
-               display:flex;
-               justify-content: space-around;
-               color:blue;
-               font-size:30px;
-               .iframe{
-                   width: 100vw;
-                   height: calc(100vh - 86px);
-               }
-           }
-       }
+        .box {
+              padding-top:96px;
+            overflow-y: scroll;
+            .iframe{
+                    width: 1px;
+                    min-width: 100%;
+                    *width: 100%;
+                    height: 100% !important;
+            }
+     }
    }
 </style>

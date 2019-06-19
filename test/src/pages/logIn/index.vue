@@ -21,7 +21,12 @@
                </p>
                <p @click="forgetPassword">忘记密码？</p>
            </div>
-           <van-button @click="logInPass" class="login center" type="default">登录</van-button>
+           <div class="button">
+                <!-- <van-button @click="logInPass" class=" center" size="large" type="default">账号密码登录</van-button> -->
+                <div @click="logInPass" class="log">
+                    <p>登录</p>
+                </div>
+           </div>
             <div class="wx-login row">
                 <div class="logIn start-center" @click="logIn">
                     <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
@@ -79,6 +84,7 @@ export default {
             axiosPost("/customer/login",data)
             .then(function(res){
                 if(res.data.success){
+                    storage.set('cid',res.data.data.id);
                     that.$store.commit('iscertification',res.data.data.iscertification);
                     that.$store.commit('level',res.data.data.level);
                     that.$store.commit('promotioncode',res.data.data.promotioncode);
@@ -89,7 +95,7 @@ export default {
                     that.$store.commit('openid',res.data.data.openid);
                     that.$store.commit('nickname',res.data.data.nickname);
                     that.$store.commit('headimg',res.data.data.photo);
-                    console.log('登陆成功',res);
+                    // console.log('登陆成功',res);
                     that.$toast('登陆成功');
                     if(that.checked){
                         storage.set('rempass',true);
@@ -120,7 +126,7 @@ export default {
             logIn(){
                 // console.log(location.href)
                 window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
-            }
+          
         //    var auths=null
         //    let that=this
         //    plus.oauth.getServices( function(services){
@@ -135,30 +141,30 @@ export default {
         //         break; 
         //     }
         //   }
-
-    //       if(!s.authResult){
-	// 		s.login(function(e){
-	// 			// 获取登录操作结果
-	// 			s.getUserInfo( function(e){
-	// 				console.log( "获取用户信息成功："+JSON.stringify(s.userInfo) );
-    //                 that.$toast('登录成功');
-    //                that.$router.push('/home');
-	// 			}, function(e){
-	// 				console.log( "获取用户信息失败："+e.message+" - "+e.code );
-	// 				that.$toast('获取用户信息失败');
-	// 			});
+        //   if(!s.authResult){
+		// 	s.login(function(e){
+		// 		// 获取登录操作结果
+		// 		s.getUserInfo( function(e){
+		// 			console.log( "获取用户信息成功："+JSON.stringify(s.userInfo) );
+        //             that.$toast('登录成功');
+        //            that.$router.push('/home');
+		// 		}, function(e){
+		// 			console.log( "获取用户信息失败："+e.message+" - "+e.code );
+		// 			that.$toast('获取用户信息失败');
+		// 		});
 				
-	// 		}, function(e){
-	// 			that.$toast('登录认证失败');
-	// 		});
-	// 	}else{
-	// 		//已经登录认证
-	// 		that.$toast('登录成功');
-	// 	}
+		// 	}, function(e){
+		// 		that.$toast('登录认证失败');
+		// 	});
+		// }else{
+		// 	//已经登录认证
+		// 	that.$toast('登录成功');
+		// }
 
         // },function(e){
         //     that.$toast("登录认证失败")
         // })
+          }
     },
 
     created(){
@@ -276,18 +282,28 @@ export default {
                     
                }
            }
-           >.login {
+           .button {
                width:80%;
-               height: 100px;
-               border-radius: 10px;
-               background-color: #4B66AF;
-               margin-left: auto;
-               margin-right: auto;
-               color:#fff;
-               text-align: center;
-               border: none;
-               font-size: 28px;
+                 margin:0 auto;
+               padding:0 30px;
+               >.log {
+                   width:100%;
+                   height: 100px;
+                   background-color: #4B66AF;
+                   >p {
+                       color:#fff;
+                       line-height: 100px;
+                       text-align: center;
+                       font-size: 30px;
+                   }
+               }
+
+            //    >button {
+            //        border-radius: 10px;
+            //        text-align: center;
+            //    }
            }
+           
            >.wx-login {
                 width:80%;
                 height: 80px;
@@ -304,8 +320,11 @@ export default {
                     width: 30%;
                     height: 100%;
                 }
-
            }
        }
    }
 </style>
+
+
+
+

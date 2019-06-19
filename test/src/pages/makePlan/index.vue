@@ -11,26 +11,24 @@
                    <li >
                        <div class="top">
                           <div class="bankName">
-                              <!-- <p >{{bankCardAttribution(item.idCardNo).bankName}}</p> -->
-                              <!-- <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p> -->
+                              <p >{{item.bankNick}}</p>
+                               <p >{{item.payerName}}</p>
+                              <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p> 
                               <!-- <p>
                                   还款状态
                               </p> -->
                           </div>
-                          <div class="now">
+                          <!-- <div class="now">
                               <div>
-                                  <!-- <p class="botton">未添加</p> -->
-                                   <!-- <p>本期账单</p> -->
+                                  <p class="botton">未添加</p>
                               </div>
                               <div class="pay">
-                                  <!-- <p class="days">16</p> -->
+                                <p class="days">16</p> 
                                   <div>
-                                      <!-- <p class="botton">天后还款日</p> -->
-                                      <!-- <p><span>{{item.billdate}}</span>-<span>{{item.duedate}}</span></p> -->
+                                    <p class="botton">天后还款日</p> 
                                   </div>
                               </div>
-                             
-                          </div>
+                          </div> -->
                        </div>
                        <div class="bottom">
                            <ul>
@@ -39,16 +37,16 @@
                                    <p>本期账单</p>
                                </li>
                                <li>
-                                   <!-- <p>{{item.billdate}}<span>日</span></p> -->
+                                   <p>{{item.billdate}}<span>日</span></p>
                                    <p>账单日</p>
                                </li>
                                 <li>
-                                   <!-- <p>{{item.duedate}}<span>日</span></p> -->
+                                   <p>{{item.duedate}}<span>日</span></p>
                                    <p>还款日</p>
                                </li>
                                 <li>
-                                   <p>3天</p>
-                                   <p>还款宽限期</p>
+                                   <!-- <p>3天</p>
+                                   <p>还款宽限期</p> -->
                                </li>
                               
                            </ul>
@@ -66,18 +64,61 @@
                       <p>请输入还款金额</p>
                       <input class="input" v-model="payment" type="number" placeholder="请输入还款金额">
                   </div>
-                  <div class="eara">
+                   <div class="eara">
                       <p>当前账户可用余额</p>
                       <input class="input" v-model="amount" type="number" placeholder="当前账户可用余额(不能低于还款额的5%)">
+                  </div>
+
+
+                  <!-- <div class="eara">
+                      <p>开始还款时间</p>
+                      <input class="input" v-model="startdate" type="text" placeholder="开始还款时间">
+                  </div> -->
+
+                   <div class="eara">
+                      <p>开始还款时间</p>
+                      <div class="last">
+                           <p> <van-icon  size="20px" name="todo-list-o"/></p>
+                          <input class="city" readonly  v-model="startdate" type="text" >
+                          <p><span @click="showStartpicker"><van-icon size="20px" name="arrow"/></span></p>
+                      </div>
+                       <van-datetime-picker
+                        v-model="currentDate"
+                        type="date"
+                          @confirm="confirmStart"
+                        v-show="showStart"
+                         @cancel="cancelStart"
+                        />
+                  </div>
+
+                     <!-- <div class="eara">
+                       <p>还款结束时间</p>
+                      <input class="input" v-model="enddate" type="text" placeholder="还款结束时间">
+                    </div> -->
+
+                   <div class="eara">
+                      <p>还款结束时间</p>
+                      <div class="last">
+                           <p> <van-icon  size="20px" name="todo-list-o"/></p>
+                          <input class="city" readonly  v-model="enddate" type="text" >
+                          <p><span @click="showEndpicker"><van-icon size="20px" name="arrow"/></span></p>
+                      </div>
+                       <van-datetime-picker
+                        v-model="currentDate"
+                        type="date"
+                        @confirm="confirmEnd"
+                        v-show="showEnd"
+                        @cancel="cancelEnd"
+                        />
                   </div>
                    <div class="eara">
                       <p>请选择消费城市</p>
                       <div class="last">
-                          <van-icon name="location"/>
-                          <input class="city" v-model="city" type="number" placeholder="位置">
-                          <van-icon name="arrow-down"/>
+                          <p> <van-icon  size="20px" name="location"/></p>
+                          <input class="city" readonly  v-model="area" type="text" placeholder="位置">
+                          <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
-                      
+                         <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
                   </div>
                </div>
            </div>
@@ -85,31 +126,104 @@
                 <van-button size="large" @click="makePlan" round type="info">制定计划</van-button>
             </div>
         </div>
-        <div class="li">
-
-        </div>
+       
     </div>
 </template>
 
 <script>
 import { axiosPost } from '../../lib/http'
+import { citys } from '../../lib/city.js'
+import storage from '@/lib/storage'
 export default {
     data() {
         return {
            payment:"",
            amount:"",
+           currentDate: new Date(),
            item:"",
-           planList:{}
+           type:"",
+           area:"",
+           startdate:"",
+           showFlag:false,
+           showStart:false,
+           showEnd:false,
+           enddate:"",
+           columns: [
+                {
+                values: Object.keys(citys),
+                className: 'column1'
+                },
+                {
+                values: citys['浙江'],
+                className: 'column2',
+                defaultIndex: 2
+                }
+            ],
         }
     },
     methods:{
         goBack() {
             this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
         },
+         onChange(picker, values) {
+            picker.setColumnValues(1, citys[values[0]]);
+         }, 
+         confirmEnd(value){
+              var date=value
+              var year=date.getFullYear();//当前年份
+              var month=date.getMonth();//当前月份
+              var data=date.getDate();//天
+              this.enddate=year+"-"+this.fnW((month+1))+"-"+this.fnW(data);
+              this.showEnd=false
+         },
+         confirmStart(value){
+             console.log(value)
+              var date=value
+              var year=date.getFullYear();//当前年份
+              var month=date.getMonth();//当前月份
+              var data=date.getDate();//天
+              this.startdate=year+"-"+this.fnW((month+1))+"-"+this.fnW(data);
+              this.showStart=false
+         },
+          fnDate(time){
+                var date=time
+                var year=date.getFullYear();//当前年份
+                var month=date.getMonth();//当前月份
+                var data=date.getDate();//天
+                this.startdate=year+"-"+this.fnW((month+1))+"-"+this.fnW(data);
+            },
+            //补位 当某个字段不是两位数时补0
+            fnW(str){
+                var num;
+                str>10?num=str:num="0"+str;
+                return num;
+            } ,
+          onCancel(){
+             this.showFlag=false
+         },
+         cancelEnd(){
+             this.showEnd=false
+         },
+         cancelStart(){
+             this.showStart=false
+         },
+         showStartpicker(){
+             this.showStart=true
+         },
+         showEndpicker(){
+             this.showEnd=true
+         },
+         onConfirm(value){
+            this.area=value.join("-")
+            this.showFlag=false
+         },
+         showPick(){
+             this.showFlag=true
+         },
         makePlan(){
-            if(this.payment.trim().length===0 || this.amount.trim().length===0){
+            if(this.payment.trim().length===0 || this.amount.trim().length===0 || this.area.trim().length===0 || this.startdate.trim().length===0 || this.enddate.trim().length===0){
                 this.$toast({
-                    message:"请输入金额"
+                    message:"请将信息填写完整"
                 })
                 return
             }
@@ -120,33 +234,46 @@ export default {
                 return
             }
             let data={
-                bindId:item.bindId,
+                bindId:this.item.bindId,
                 amount:this.amount,
-                payment:this.payment
+                payment:this.payment,
+                type:this.type,
+                enddate:this.enddate,
+                startdate:this.startdate
             }
-             axiosPost("/creditCard/getPlan")
+             axiosPost("/creditCard/getPlan",data)
              .then(res=>{
-                 console.log(res);
-                 if(!res.data.success){
-                     this.$toast({
-                         message:res.data.message
-                     })
+                  if(!res.data.success){
+                      this.$toast({
+                          message:res.data.message
+                        })
+                    //  this.$router.push({
+                    //      path:"/home/insertEsiCash",
+                    //      query:{info:this.item}
+                    //  })
                  } else {
-                     this.planList=res.data.data
+                    storage.set('amount',this.amount);
+                    let planList=res.data.data
+                    // console.log(this.area)
                      this.$router.push({
                          path:"/home/creditHousekeeper/aisleHousekeeper/planList",
-                         params:{list:this.planList}
+                         query:{
+                             list:planList,
+                             area:this.area,
+                             item:this.item
+                         }
                      })
-                 }
+                   }
+                
              })
              .catch(err=>{
-                 console.log(err)
+                //  console.log(err)
              })
         }
     },
     created () {
          this.item=this.$route.query.info 
-         console.log(this.item)
+          this.type=this.$route.query.type
     }
 }
 </script>
@@ -185,12 +312,22 @@ export default {
                       position: relative;
                       width:100%;
                       border-radius: 10px;
-                      border:2px solid #ccc;
+                    //   border:2px solid #ccc;
                       color:#000;
+                      padding:10px;
+                      box-sizing: border-box;
+                      margin-bottom: 15px;
+                      background-image:url("http://pay.91dianji.com.cn/big2.png");
+                      background-repeat: no-repeat;
+                      height: 350px;
+                      background-size:100%;
+                      color:#fff;
                       padding:10px;
                        box-sizing: border-box;
                        >.top {
+                           padding-top:13px;
                            padding-bottom: 150px;
+                            height:20px !important;
                            .bankName {
                           display: flex;
                           justify-content: space-around;
@@ -198,10 +335,8 @@ export default {
                          }
                        }
                       .bottom {
-                          position: absolute;
-                          bottom: 0px;
-                          left:0px;
-                          right:0px;
+                           padding-top:13px;
+                            margin-bottom:35px;
                           >ul{
                               display: flex;
                               justify-content: space-around;
@@ -214,7 +349,7 @@ export default {
                                   >p {
                                       &:nth-of-type(1){
                                           margin-top:20px;
-                                          margin-bottom: 20px;
+                                          margin-bottom:10px;
                                       }
                                       &:nth-of-type(2){
                                           margin-bottom: 20px;
@@ -258,6 +393,10 @@ export default {
              >.content {
                   margin:15px;
                  >.eara {
+                     .van-picker-column__item--selected{
+                         color:#4B66AF;
+                         font-weight: bold;
+                     }
                      margin-bottom: 15px;
                      >p {
                      margin-bottom: 10px;
@@ -265,17 +404,21 @@ export default {
                    >.last {
                         width:100%;
                        height:60px;
-                       line-height:55px;
+                       line-height:53px;
                        border:2px solid #ccc;
                        background-color: #eee;
                        border-radius: 10px;
+                       display:flex;
+                       justify-content: space-around;
                         >.city {
                          border:none;
                          background-color: #eee;
                        }
                    }
                    >.input {
-                       border:none;
+                       background:none;  
+                        outline:none;  
+                        border:0px;
                        width:100%;
                        height:60px;
                        border:2px solid #ccc;
@@ -283,7 +426,20 @@ export default {
                        border-radius: 10px;
                        padding-left:20px;
                        box-sizing: border-box;
+                       -webkit-appearance: none;
+                       &:focus {
+                           outline: none;
+                       }
                    }
+                    .van-picker__cancel{
+                      color:#000;
+                      font-size: 30px;
+                    }
+                    .van-picker__toolbar{
+                        height: 40px;
+                        line-height: 40px;
+                        font-size: 30px;
+                    }
                  }
                  
              }

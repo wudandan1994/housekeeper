@@ -5,11 +5,10 @@
             <div>
                 <div class="menu" @click="isShow">
                     <van-icon name="wap-nav" />
+                    菜单
                </div>
                <span class="location">
-                    <van-icon name="location-o" />
                 </span>
-                <!-- <span>{{city}}</span> -->
             </div>  
             <span>首页</span>
             <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
@@ -18,21 +17,21 @@
             <!-- 轮播图模块 -->
             <div class="swipe">
                 <van-swipe :autoplay="3000">
-                    <van-swipe-item v-for="(image, index) in images" :key="index">
-                        <img v-lazy="image" class="per-img" />
+                    <van-swipe-item v-for="(item, index) in images" :key="index" @click="handleSwipeDetail(item)">
+                        <img v-lazy="item.url" class="per-img" />
                     </van-swipe-item>
                 </van-swipe>
             </div>
             <!-- 查询模块 -->
             <div class="search">
                 <ul>
-                    <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14',title: '征信查询'}}" tag="li">
+                    <router-link to="/video" tag="li">
                         <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
-                        <span>征信查询</span>
+                        <span>新人教程</span>
                     </router-link>
                     <router-link to="/vip" tag="li">
                          <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
-                        <span>升级代理</span>
+                        <p>升级代理</p>
                     </router-link>
                     <router-link to="/personalCenter/incomedetail" tag="li">
                          <p> <van-icon name="http://pay.91dianji.com.cn/103.png"  class="zx-search"  /></p>
@@ -46,9 +45,9 @@
             </div>
             <!-- 名片咨询模块 -->
             <div class="pannel-news row">
-                <div class="pannel-title center">钱夹<br/>资讯</div>
+                <div class="pannel-title center">钱&nbsp;夹<br/>资&nbsp;讯</div>
                 <div class="pannel-detail center" @click="handleContactUs">
-                    <van-notice-bar text="钱夹宝1.0正式上线啦,若您在使用中有任何问题请联系客服：400-1059-769"/>
+                    <van-notice-bar text="现成为993会员，即可享有19800元代理商的相关权限，名额有限，相关内容，请联系您的专属客户经理，确认活动详情。"/>
                 </div>
             </div>
 
@@ -68,7 +67,7 @@
                     <li @click="handleIsAuth('/home/collect')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /></span>
                         <div class="channel">
-                            <h3>商户收款</h3>
+                            <h3>在线收款</h3>
                             <p>快捷支付</p>
                             <span>落地商户</span>
                         </div>
@@ -81,119 +80,95 @@
                             <span>GO>></span>
                         </div>  
                     </li>
-                    <li @click="searchInfo">
+                     <router-link tag="li" to="/home/creditHousekeeper">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
                         <div class="channel">
-                            <h3>信用卡管家</h3>
+                            <h3>智能还款</h3>
                             <p>落地商户空卡周转</p>
-                            <span>智能还款</span>
+                            <span>完美账单</span>
                         </div>
-                    </li>
+                     </router-link>
+
                 </ul>
             </div>
-            <!-- 详情模块 -->
-            <div class="details">
-                <ul>
-                    <li @click="handleExpect">
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_49.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>授权分润</h3>
-                            <p>给实习会员设置分润</p>
-                        </div>
-                    </li>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
-                        <span>
-                        <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>汽车保险</h3>
-                            <p>没有中间商差价</p>
-                        </div>
-                    </router-link>
-                    <li>
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_51.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>发圈素材</h3>
-                            <p>发朋友圈获得奖金</p>
-                        </div>
-                    </li>
-                    <li @click="handleExpect">
-                        <span>
-                            <van-icon name="http://pay.91dianji.com.cn/icon_52.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>排行榜</h3>
-                            <p>钱夹宝业务排名</p>
-                        </div>
-                    </li>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://baoxian.pingan.com',title: '意外险'}}">
-                        <span>
-                            <van-icon name="http://pay.91dianji.com.cn/icon_53.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>意外险</h3>
-                            <p>出行安全有保障</p>
-                        </div>
-                    </router-link>
-                    <li>
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_60.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>提额秘籍</h3>
-                            <p>快速提额</p>
-                        </div>
-                    </li>
-                    <li @click="handleExpect">
-                        <span>
-                            <van-icon name="http://pay.91dianji.com.cn/icon_61.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>共享奖金池</h3>
-                            <p>参与奖金池奖励分配</p>
-                        </div>
-                    </li>
-                    <li @click="handleExpect">
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_62.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>给团队绑卡</h3>
-                            <p>TA绑卡开通注册</p>
-                        </div>
-                    </li>
-                    <li @click="handleExpect">
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_63.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>积分兑换</h3>
-                            <p>积分不失/换乐无穷</p>
-                        </div>
-                    </li>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_64.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>商城</h3>
-                            <p>商城</p>
-                        </div>
-                    </router-link>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://chaxun.weizhang8.cn/guanfangwang.php',title: '违章查询'}}">
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_65.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>违章查询</h3>
+            <!-- 特色服务 -->
+            <div class="server">
+                <p>特色服务</p>
+                <div class="special">
+                    <ul>
+                        <router-link tag="li" to="/home/evaluation" class="secret">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></p>
+                            <p>卡·测评</p>
+                        </router-link>
+                        <li  @click="handleExpect" class="secret">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/tie.png" size="30px" /></p>
+                            <p>提额秘籍</p>
+                        </li>
+                        <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/weizhang.png" size="30px" /></p>
                             <p>违章查询</p>
-                        </div>
+                        </router-link>
+                         <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
+                            <p><van-icon name="http://pay.91dianji.com.cn/qichebaoxian.png" size="30px" /></p>
+                            <p>汽车保险</p>
+                       </router-link>
+                        <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://baoxian.pingan.com',title: '意外险'}}">
+                            <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
+                            <p>意外险</p>
+                       </router-link>
+                        <li @click="handleExpect">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
+                            <p>积分兑换</p>
+                        </li>
+                         <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
+                           <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
+                           <p>商城</p>
+                        </router-link>
+                         <li @click="handleExpect">
+                            <p> <van-icon name="http://pay.91dianji.com.cn/gengduo.png" size="30px" /></p>
+                            <p>更多</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 热门推荐 -->
+              <div class=" hotdoor">
+                <div class="title start-center">热门推荐</div>
+                <div class="remen_tuijian">
+                    <div class="more"><van-icon name="arrow" color="#cccccc" size="30px"/></div>
+                    <router-link tag="div" to="/home/collect" class="secret">
+                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan.png" size="34px" /></div>
+                        <div class="center">在线收款</div>
                     </router-link>
-                </ul>
+                    <div @click="handleIsAuth('/home/cardCenter')" class="secret">
+                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kaceping.png" size="30px" /></div>
+                        <div class="center">信用卡办理</div>
+                    </div>
+                    <router-link tag="div" class="secret" to="/home/creditHousekeeper">
+                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan.png" size="30px" /></div>
+                        <div class="center">智能还款</div>
+                    </router-link>
+                        <router-link tag="div" class="secret"  to="/vip">
+                        <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/shengji.png" size="30px" /></div>
+                        <div class="center">升级代理</div>
+                    </router-link>
+                    <router-link tag="div" class="secret"  to="/home/evaluation">
+                        <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></div>
+                        <div class="center">卡·测评</div>
+                    </router-link>
+                    <div @click="handleIsAuth('/loan/detail')" class="secret">
+                        <div class="cente-endr"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
+                        <div class="center">我要贷款</div>
+                    </div>
+                        <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
+                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
+                        <div class="center">商城</div>
+                    </router-link>
+                    <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
+                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/weizhang.png"  size="30px" /></div>
+                        <div class="center">违章查询</div>
+                    </router-link>
+                </div>
             </div>
             <!-- 遮盖层 -->
             <div class="aside-left" v-show="showAaside" @click.self="hideAside">
@@ -208,9 +183,8 @@
                         <router-link to="/home/bindingPhone" tag="li">绑定手机</router-link>
                         <router-link to="/home/customerService" tag="li">联系客服</router-link>
                         <router-link to="/home/aboutUs" tag="li">关于我们</router-link>
-                        <li class="switch">声音开关
-                           
-                        </li>
+                        <!-- <li class="switch">声音开关
+                        </li> -->
                         <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
                         <!-- <router-link to="/home/clearCache" tag="li">清除缓存</router-link> -->
                     </ul>
@@ -220,28 +194,65 @@
                     </div> 
                 </div>
             </div>
+            <!-- 更新 -->
+            <div @click.self="showUpdate=false" v-show="showUpdate" class="update">
+                <div  class="cover">
+                    <div class="version">
+                       <h3>版本更新</h3>
+                        <p>钱夹宝升级了，快来体验吧！</p>
+                        <div class="butt">
+                            <div class="cancle" @click="showUpdate=false">取消</div>
+                            <div class="upd" @click="download">更新</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="address">
+                <p>与多家三方支付公司签约达成战略合作</p>
+                <p>传帮带（上海）网络科技有限公司提供技术支持</p>
+                <p>上海市宝山区泰和路2038号A座303室</p>
+            </div>
         </div>
         <!-- <div v-show="allmap" id="allmap"></div> -->
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
+         <!-- 绑定手机模块 -->
+        <bindMobile></bindMobile>
     </div>
 </template>
 <script>
 import footerMenu from '@/components/footer'
+import bindMobile from '@/components/bindMobile'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
   components:{
-      footerMenu
+      footerMenu,
+      bindMobile
   },
      data() {
         return {
             // 轮播图图片
             images: [
-                'http://pay.91dianji.com.cn/banner01.png',
-                'http://pay.91dianji.com.cn/banner02.png',
-                'http://pay.91dianji.com.cn/banner03.png',
-                'http://pay.91dianji.com.cn/banner04.png',
-                'http://pay.91dianji.com.cn/banner05.png'
+                {
+                    routes: '/vip',
+                    params: '1',
+                    url: 'http://pay.91dianji.com.cn/banner-01.png',
+                },
+                {
+                    routes: '/vip',
+                    params: '1',
+                    url: 'http://pay.91dianji.com.cn/banner-02.png',
+                },
+                {
+                    routes: '/vip',
+                    params: '2',
+                    url: 'http://pay.91dianji.com.cn/banner-03.png',
+                },
+                {
+                    routes: '/vip',
+                    params: '2',
+                    url: 'http://pay.91dianji.com.cn/banner-04.png',
+                }
             ],
             showAaside:false, 
             checked:true,
@@ -257,7 +268,11 @@ export default {
             iscertification: '',
             city: '',
             longitude: '',
-            latitude: ''
+            latitude: '',
+            showUpdate:false,
+            versionAndroid:"",// 安卓版本号
+            versionIos:"", // ios 版本号
+            updateVerson:0  // 设备版本号
         }
   },
    methods:{
@@ -267,6 +282,52 @@ export default {
         handleExpect(){
             this.$toast('敬请期待')
         },
+        download(){  // 更新
+            // 判断android 还是ios
+                var u = navigator.userAgent;
+                var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+                var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+                 if(isAndroid) {
+                  window.location.href=" https://www.pgyer.com/vFbf"
+               } else if(isiOS) {
+                  window.location.href="http://znd.hvv.dnf-w3.cn/KXxv61"
+              } 
+
+        },
+        getUpdate(){ // 获取历史版本号
+               axiosPost("/customer/getVersion")
+               .then(res=>{
+                   console.log(res)
+                   if(res.data.success){
+                      let version=res.data.data
+                      this.versionAndroid=parseFloat(version[0].version)
+                      this.versionIos=parseFloat(version[1].version)
+                   }
+               }) 
+               .catch(err=>{
+                   
+               })
+        },
+        update(){
+            let that=this
+              // 获取设备的版本号
+              if(window.plus){  
+                   that.updateVerson=parseFloat(plus.runtime.version);
+                   console.log(that.versionAndroid)
+                    console.log(that.versionIos)
+                   if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
+                       that.showUpdate=true
+                   }
+            }else{  
+                document.addEventListener('plusready',function () {  
+                      that.updateVerson=parseFloat(plus.runtime.version);
+                         if(that.versionAndroid>that.updateVerson|| that.versionIos>that.updateVerson ){
+                             that.showUpdate=true
+                        }
+
+                },false);  
+            }  
+        } ,
         hideAside() {
             this.showAaside=false
         },
@@ -282,6 +343,7 @@ export default {
                      this.$router.push("/logIn");
                     //  this.$toast('登录失败');
                 }else {
+                    // console.log(res,"自动登录成功")
                     this.$store.commit('iscertification',res.data.data.iscertification);
                     this.$store.commit('level',res.data.data.level);
                     this.$store.commit('promotioncode',res.data.data.promotioncode);
@@ -292,6 +354,8 @@ export default {
                     this.$store.commit('openid',res.data.data.openid);
                     this.$store.commit('nickname',res.data.data.nickname);
                     this.$store.commit('headimg',res.data.data.photo);
+                    this.headimg=res.data.data.photo
+                    this.nickname=res.data.data.nickname
                     this.$store.commit('city',res.data.data.city);
                 }
              })
@@ -359,79 +423,136 @@ export default {
         handleContactUs(){
             this.$router.push('/personalCenter/contactus')
         },
-        searchInfo(){
-            axiosPost("/creditCard/getMerchantSettled")
-            .then(res=>{
-                if(res.data.code==="1"){
-                    this.$router.push("/home/addCard")
-                } else if(res.data.code==="0"){
-                    window.location.href = res.data.data.url;
-                    // storage.set('cardManager',res.data.data.url);
-                    // this.$router.push({
-                    //     path: '/cardManager'
-                    // })
-                }
+        // 点击轮播图进入详情
+        handleSwipeDetail(item){
+            console.log('详情',item.routes);
+            this.$router.push({
+                path: '/vip',
+                query: {params: item.params}
             })
-            .catch(err=>{
-                // console.log(err,"失败");
-                
-            })
-        },
+        }
     },
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-        // this.automatic()
-    }  
+        //  this.automatic() //自动登录
+        //  this.getUpdate() //获取版本
+    }  ,
+    mounted () {
+        // 更新
+        // this.update() 
+    }
 }
 </script>
 
 <style lang="less" >
    #home-component {
-       background-color: #eee;
-       >header {
-        height:86px;
-        font-size:28px;
-        line-height: 86px;
-        background-color: #4B66AF;
-        color:white;
-        display:flex;
-        justify-content: space-between;
-        padding-top:10px;
-        position: fixed;
-        width:100%;
-        z-index:999;
-        align-items: center;
-        >div {
-            margin-left:15px;
-            display: flex;
-            >.menu {
-                margin-left:5px;
-                position: relative;
-           }
-        }
-        .location {
-            margin-left:15px;
-        }
-        >.news {
-            margin-right:15px;
-        }
+       padding-top: 86px;
+       header {
+            width: 100%;
+            height:86px;
+            font-size:28px;
+            line-height: 86px;
+            background-color: #4B66AF;
+            color:white;
+            display:flex;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index:999;
+            align-items: center;
+            >div {
+                margin-left:15px;
+                display: flex;
+                >.menu {
+                    margin-left:5px;
+                    position: relative;
+            }
+            }
+            .location {
+                margin-left:15px;
+            }
+            >.news {
+                margin-right:15px;
+            }
        }
-       >.container {
-           padding-bottom:96px;
-           padding-top:96px;
-           overflow-x: hidden;
+       .container {
+            padding-bottom:96px;
+            overflow-x: hidden;
+            position: relative;
+            background: #eee;
+            .address{
+                padding-top:30px;
+                text-align: center;
+                line-height: 50px;
+                padding-bottom: 50px;
+            }
+            .update {
+                position: absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+                background-color: rgba(0, 0, 0, .2);
+                .cover {
+                   width:600px;
+                   height: 400px;
+                   z-index: 99;
+                   position: absolute;
+                   top:30%;
+                   left:10%;
+                   border-radius: 15px;
+                   >.version {
+                       background-color: #fff;
+                       padding:10px;
+                         height: 400px;
+                       box-sizing: border-box;
+                       border-radius: 15px;
+                       >h3 {
+                           margin-top:20px;
+                           text-align: center;
+                           font-size: 34px;
+                           color:#4B66AF;
+                           padding:20px 0px;
+                           font-weight: bolder;
+                       }
+                       >p {
+                           margin-top:20px;
+                           text-align: center;
+                       }
+                       >.butt {
+                           display: flex;
+                           justify-content: space-between;
+                           height: 80px;
+                           >div {
+                               margin-top:90px;
+                               width:49%;
+                               height: 100%;
+                               border:1px solid #ccc;
+                               line-height: 80px;
+                               text-align: center;
+                               &.upd {
+                                   background-color: #4965AE;
+                                   color:#fff;
+                               }
+                           }
+                       }
+                       
+                   }
+               }
+
+           }
             >.swipe {
-           height: 390px;
+           height: 270px;
            .per-img{
                width: 100vw;
-               height: 390px;
+               height: auto;
            }
        }
-        >.search {
-            margin-top:15px;
+        .search {
             height: 110px;
             >ul{
                 list-style: none;
@@ -442,7 +563,7 @@ export default {
                 padding-bottom:20px;
                 padding-top:10px;
                 >li {
-                    width:25%;
+                    width:33%;
                     text-align: center;
                      margin-bottom:20px;
                      >span {
@@ -451,14 +572,101 @@ export default {
                      >p {
                           text-align: center;
                           margin-bottom:10px;
-                          transform: translateX(25%);
+                        //   transform: translateX(25%);
                          >.zx-search {
-                        display:block;
+                        // display:block;
                         font-size:80px;
-                        text-align: center;
+                        // text-align: center;
                     }
                 }
                     
+                }
+            }
+        }
+        >.server {
+            margin-top:15px;
+            background-color: #fff;
+            padding-top:15px;
+            >p {
+                padding-left:30px;
+                font-size: 34px;
+                font-weight: bold;
+            }
+            >.special {
+                >ul{
+                    padding:15px;
+                    margin-top:20px;
+                    display:flex;
+                    flex-wrap: wrap;
+                    >li {
+                        width:25%;
+                        text-align: center;
+                        &.secret {
+                           margin-bottom:25px;
+                           
+                        }
+                        >p {
+                            &:nth-of-type(2){
+                                padding-bottom:10px 0px;
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .hotdoor {
+            background-color: #fff;
+            padding-bottom: 20px;
+            margin-top:10px;
+            position: relative;
+            .title{
+                width: 98%;
+                height: 50px;
+                padding-left: 2%;
+                font-size: 34px;
+                font-weight: bold;
+            }
+            .remen_tuijian{
+                width: 100%;
+                height: 150px;
+                padding-top: 5px;
+                padding-bottom: 10px;
+                overflow-x: scroll;
+                white-space: nowrap;
+                .more{
+                    position: absolute;
+                    top: 42%;
+                    right: 1px;
+                    z-index: 2;
+                    animation: more 1s linear 0s infinite ;
+                    -webkit-animation: more 1s linear 0s infinite ;
+                }
+                @keyframes more{
+                    0%{
+                        transform: scale(1);
+                        right: 1px;
+                    }
+                    50%{
+                        transform: scale(1.2);
+                        right: 25px;
+                    }
+                    100%{
+                        transform: scale(1);
+                        right: 1px;
+                    }
+                }
+                .secret{
+                    width: 200px;
+                    height: 100%;
+                    display: inline-block;
+                    margin-left: 30px;
+                    box-shadow: 0px 0px 5px 5px #f2f2f2;
+                    border-radius: 10px;
+                    div{
+                        width: 100%;
+                        height: 50%;
+                    } 
                 }
             }
         }
@@ -481,25 +689,29 @@ export default {
             }
         }
         >.pannel-news{
-            width: 98vw;
-            height: 150px;
-            margin-top:50px;
+            width: 100vw;
+            height: 100px;
+            margin-top:45px;
             margin-left: auto;
+            background-color: #fff;
             margin-right: auto;
-            background-image: -webkit-linear-gradient(0deg, #4965AE, #7189C4);
+            // background-image: -webkit-linear-gradient(0deg, #4965AE, #7189C4);
             .pannel-title{
                 width: 20%;
                 height: 100%;
-                color: white;
+                // color: white;
                 font-weight: bold;
-                font-size: 38px;
+                font-size: 34px;
                 letter-spacing: 5px;
                 line-height: 48px;
             }
+            .van-notice-bar {
+                color:#222;
+          }
             .pannel-detail{
                 width: 80%;
                 height: 100%;
-                color: white;
+                color: #000;
                 font-size: 28px;
                 animation: pannleRoll 1s ease-in-out;
             }
@@ -514,6 +726,7 @@ export default {
                 }
             }
         }
+       
         >.credit {
             margin-top:20px;
             background-color: #fff;
@@ -534,6 +747,14 @@ export default {
                     padding-top:35px;
                     margin-top:10px;
                     background-color:#FAFAFA;
+                    &:nth-of-type(1),
+                    &:nth-of-type(2){
+                      background: linear-gradient(to bottom;#4E64B8,#7186B7);  
+                    }
+                     &:nth-of-type(3),
+                    &:nth-of-type(4){
+                      background: linear-gradient(to bottom;#7186B7,#4E64B8);  
+                    }
                     >.handle {
                         color:#CF9C5D;
                         font-size: 60px;
@@ -547,16 +768,19 @@ export default {
                         >h3 {
                             font-size:30px;
                             font-weight: bolder;
+                             color:#fff;
                         }
                         >p {
                             font-size:28px;
                             margin-top:10px;
                             margin-bottom:10px;
-                            color:#4B66AF;
+                            // color:#4B66AF;
+                            color:#fff;
                         }
                         >span {
-                            color:#4B66AF;
-                            background-color:#E8ECF7;
+                            // color:#4B66AF;
+                              color:#fff;
+                            background-color:#54866A;
                             border-radius:15px;
                             padding:5px 20px;
                             font-size: 28px;
@@ -565,13 +789,13 @@ export default {
                     }
                 }
             }
-        }
+        }   
         >.details {
             margin-top:10px;
             border-top:1px solid #ccc;
             background-color: #fff;
             padding-bottom:100px;
-            margin-bottom: 100px;
+            margin-bottom: 50px;
             >ul{
                 display: flex;
                 flex-wrap: wrap;
@@ -605,6 +829,14 @@ export default {
                     }
                 }
             }
+        }
+         >.serve {
+            //  background-color: red;
+             margin-bottom: 50px;
+             padding:20px 20px 50px 30px;
+             font-size:34px;
+             color:#4965AE;
+
         }
         >.aside-left {
                 width: 100%;
@@ -666,6 +898,11 @@ export default {
                            border-radius: 10px;
                          }
                     }
+                    .van-dialog .van-button {
+                        /* border: 0; */
+                        border: 1px solid #4b66af;
+                    }
+
                     .van-dialog,
                     .van-dialog__message,
                     .van-button {

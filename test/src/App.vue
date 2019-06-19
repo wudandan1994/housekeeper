@@ -38,12 +38,10 @@ export default {
     handleAccessToken(){
         let url = 'http://pay.91dianji.com.cn/wxApi/sns/oauth2/access_token?appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0&code='+this.code+'&grant_type=authorization_code';
         axiosGet(url).then(res =>{
-            console.log('access_token获取成功',res);
             storage.set('access_token',res.data.access_token); 
             // 继续请求昵称头像等信息
             let url = 'http://pay.91dianji.com.cn/wxApi/sns/userinfo?access_token='+ storage.get('access_token') +'&openid='+ res.data.openid +'&lang=zh_CN';
             axiosGet(url).then(res =>{
-                console.log('获取用户头像信息成功',res);
                 this.nickname = res.data.nickname;
                 this.photo = res.data.headimgurl;
                 this.$store.commit('openid',res.data.openid);
@@ -56,7 +54,6 @@ export default {
                 // let url = '/customer/getOpenidIsExist'; //开发环境
                 let url = '/customer/getOpenidIsExist' // 生产环境
                 axiosPost(url,params).then(res =>{
-                  console.log('openid存在',res);
                   if(res.data.data == '0'){
                     // 未注册
                     let params = {
@@ -69,7 +66,6 @@ export default {
                     axiosPost(url,params)
                     .then(res =>{
                       if(res.data.success){
-                        console.log('注册成功',res);
                         // 登录
                         let url = '/customer/loginByWechat';
                         let params = {
@@ -77,7 +73,6 @@ export default {
                         };
                         axiosPost(url,params)
                         .then(res =>{
-                            console.log('登陆成功',res);
                             if(res.data.success){
                                 storage.set('cid',res.data.data.id);
                                 this.$store.commit('iscertification',res.data.data.iscertification);
@@ -95,19 +90,16 @@ export default {
                                 axiosPost(url,params)
                                 .then(res =>{
                                     if(res.data.success){
-                                      console.log('查询个人设置成功',res)
                                       this.iscertification = res.data.data.iscertification;
                                     }
                                 })
                                 .catch(res =>{
-                                    console.log('查询个人设置失败',res);
                                 })
                               }else{
                                 this.$toast('登陆失败');
                               }
                         })
                         .catch(res =>{
-                            console.log('登录失败',res);
                             this.$toast('登陆失败');
                         })
                         }else{
@@ -115,7 +107,6 @@ export default {
                         }
                     })
                     .catch(res =>{
-                        console.log('注册失败',res);
                     })
                   }else{
                     // 已注册
@@ -126,7 +117,6 @@ export default {
                     let url = '/customer/loginByWechat';
                     axiosPost(url,params).then(res =>{
                         if(res.data.success){
-                          console.log('登陆成功',res);
                           storage.set('cid',res.data.data.id);
                           storage.set('openid',res.data.data.openid);
                           this.$store.commit('iscertification',res.data.data.iscertification);
@@ -140,11 +130,9 @@ export default {
                           this.$router.push('/home');
                           this.$toast('登陆成功');
                         }else{
-                          console.log('登录失败',res);
                           this.$toast('登陆失败');
                         }
                     }).catch(res =>{
-                        console.log('登录失败',res);
                         this.$toast('登陆失败');
                     })
                   }
@@ -152,10 +140,8 @@ export default {
                 }).catch(res =>{
                 })
             }).catch(res =>{
-                console.log('获取用户头像信息失败',res);
             })
         }).catch(res =>{
-            console.log('获取access_token失败',res.data)
         })
     },
   },
@@ -170,7 +156,6 @@ export default {
       let url = '/customer/loginByWechat';
       axiosPost(url,params).then(res =>{
           if(res.data.success){
-            console.log('直接登陆成功',res);
             storage.set('cid',res.data.data.id);
             storage.set('openid',res.data.data.openid);
             this.$store.commit('iscertification',res.data.data.iscertification);
@@ -187,11 +172,9 @@ export default {
             this.$router.push('/home');
             this.$toast('登陆成功');
           }else{
-            console.log('直接登录失败',res);
             this.$toast('登陆失败');
           }
       }).catch(res =>{
-          console.log('直接登录失败',res);
           this.$toast('登陆失败');
       })
     }else{
@@ -220,10 +203,8 @@ export default {
     // js-sdk的access_token 
     let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
     axiosGet(url).then(res =>{
-      console.log('jsapi请求成功',res);
       let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/ticket/getticket?access_token='+ res.data.access_token +'&type=jsapi';
       axiosGet(url).then(res =>{
-        console.log('jsapi_ticket请求成功',res);
         storage.set('ticket',res.data.ticket);
         // 请求签名信息
         var jsapi_ticket = storage.get('ticket');
@@ -239,7 +220,6 @@ export default {
           timestamp: timestamp
         };
         axiosPost(posturl,params).then(res =>{
-          console.log('签名请求成功',res);
           let that = this;
           wx.config({
               debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -264,7 +244,6 @@ export default {
                   link: 'http://pay.91dianji.com.cn/#/home?promotioncode=' + that.$store.state.wechat.promotioncode, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                   imgUrl: 'http://pay.91dianji.com.cn/logo.png', // 分享图标
                   success: function (res) {
-                    console.log('分享调用成功',res);
                   }
               })
           });
@@ -272,14 +251,11 @@ export default {
     
           });
         }).catch(res =>{
-          console.log('签名请求失败',res);
         })
 
       }).catch(res =>{
-        console.log('jsapi_ticket请求失败',res);
       })
     }).catch(res =>{
-      console.log('jsapi请求失败',res);
     })
   }
 }

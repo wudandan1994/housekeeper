@@ -48,6 +48,7 @@
                        <span>开户行：</span>
                        <!-- <span class="bank" @click="handleBankNumber">{{bankName}}</span> -->
                        <input type="text"  @click="handleBankNumber" :placeholder="bankName">
+                       <span><van-icon name="search" size="20px" /></span>
                        <!-- <span @click="handleBankNumber">测试</span> -->
                    </li>
                    <li>
@@ -89,7 +90,12 @@
          <div class="meng" v-if="bankNumberShow">
              <div class="close" @click="handleClose"></div>
              <div class="picker">
+                 <div class="select">
+                     
                 <input type="text" @input="handleChangeSearchName" v-model="searchName" placeholder="搜索开户行,如忘记请搜索总行">
+                <span><van-icon name="search" size="20px" /></span>
+                 </div>
+                  
                 <van-picker show-toolbar :columns="columns" @change="onChange" @confirm="onConfirm" />
             </div>
          </div>
@@ -155,20 +161,18 @@ export default {
     },
     methods:{
         onChange(picker, value, index) {
-            console.log('当前值：',value);
+            // console.log('当前值：',value);
             this.bankName = value;
             // 根据当前关键字查询联行号
             var subBankCode = bankNumber.filter(item =>item.bankName == value);
-            console.log('联行号',subBankCode[0].bankCode);
+            // console.log('联行号',subBankCode[0].bankCode);
             this.subBankCode = subBankCode[0].bankCode;
         },
         // 选择器确定时间
         onConfirm(value){
-            console.log('当前选择',value);
             this.bankName = value;
             // 根据当前关键字查询联行号
             var subBankCode = bankNumber.filter(item =>item.bankName == value);
-            console.log('联行号',subBankCode[0].bankCode);
             this.subBankCode = subBankCode[0].bankCode;
             this.bankNumberShow = false;
         },
@@ -200,7 +204,6 @@ export default {
         // 选择联行号
         handleBankNumber(){
             this.bankNumberShow = true;
-            
         },
         // 搜索关键字
         handleChangeSearchName(obj){
@@ -215,7 +218,6 @@ export default {
                 for(var item in list){
                     this.columns[item] = list[item].bankName
                 }
-                console.log(this.columns);
             }
         },
         // 关闭联行号选择器
@@ -226,7 +228,7 @@ export default {
         register(){
             let that=this
             let type=""
-            let partten=/^1\d{10}$/
+            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/ 
             if(that.reservedMobile.trim().length===0 || that.mobile.trim().length===0){
                 that.$toast({
                     message:"手机号码不能为空"
@@ -239,6 +241,20 @@ export default {
                 })
                 return
             }
+            let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+            if(!parttenId.test(that.idCard)){
+                that.$toast({
+                    message:"请填正确的身份证号码"
+                })
+                return
+            }
+            // let parttenCard=/^([1-9]{1})(\d{15}|\d{18})$/
+            //  if(!parttenCard.test(that.accountNo)){
+            //     that.$toast({
+            //         message:"请填正确卡号"
+            //     })
+            //     return
+            // }
             if(that.realName.trim().length===0 || that.merName.trim().length===0 || that.merAddress.trim().length===0 || that.idCard.trim().length===0 || that.accountName.trim().length===0
             || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0 || that.settleAccType.trim().length===0 || that.merType.trim().length===0
             ){
@@ -248,7 +264,7 @@ export default {
                 return
             }
             if(that.realName!==that.accountName){
-                 that.$toast({
+                 that.$toast({                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
                     message:"姓名与结算户名不一致"
                 })
                 return
@@ -291,6 +307,7 @@ export default {
                             let info=res.data.data.chMerCode
                             that.componentload=true
                             setTimeout(()=>{
+                                that.componentload=false
                                 that.$router.push({
                                 path:"/home/collect/open",
                                 query:{
@@ -325,12 +342,11 @@ export default {
              },500)
              let info=res.data.data.chMerCode
              this.$router.push({
-                     path:"/home/collect/open",
+                     path:"/home/collect/payment",
                     query:{
                         info,
                      }
                  })
-               
             }else {
                  this.componentload=false
             }
@@ -361,11 +377,9 @@ export default {
         this.handleGetAOuth();
         // 将json对象转换为数组
         for(var item in bankNumber){
-            // console.log('循环',bankNumber[item].bankName);
             this.columns[item] = bankNumber[item].bankName
         }
         // this.columns = bankNumber.bankName;
-        // console.log(bankNumber);
     }
 }
 </script>
@@ -398,7 +412,6 @@ export default {
            padding-bottom: 50px;
            background-color: #EEEFF1;
            font-size: 34px;
-          
            >.phone {
                >ul{
                    padding-left:30px;
@@ -437,11 +450,9 @@ export default {
                            text-align: right;
 
                        }
-                       input::-webkit-input-placeholder {
-                           font-size: 28px;
-                           padding-top: 8px;
-                           height: 30px;
-                           line-height: 30px;
+                       ::-webkit-input-placeholder {
+                           font-size:28px;
+                            margin-top:-22px;
                        }
                    }
                }
@@ -487,19 +498,28 @@ export default {
                 height: 500px;
                 background: white;
                 background: #F2F2F2;
-                >input{
-                    width: 98vw;
+                >.select {
+                     background: #D9D9D9;
+                    display: flex;
                     height: 80px;
-                    padding-left: 2vw;
-                    font-size: 26px;
-                    color: #333;
-                    border: none;
-                    background: #D9D9D9;
-                    font-size: 26px;
+                    line-height: 100px;
+                    padding-right:15px;
+                     input{
+                        width: 98vw;
+                        height: 100px;
+                        padding-left: 2vw;
+                        font-size: 26px;
+                        color: #333;
+                          flex: 1;
+                        border: none;
+                        background: #D9D9D9;
+                        font-size: 26px;
+                        margin-top:-26px;
                 }
-                input::-webkit-input-placeholder{
-                    font-size: 26px;
-                    padding-top: 5px;
+                ::-webkit-input-placeholder{
+                    font-size: .5rem;
+                    margin-top:-30px;
+                  }
                 }
             }
        }

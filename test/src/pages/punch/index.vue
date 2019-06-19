@@ -2,15 +2,12 @@
     <div id="punch">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>排行榜</span>
-            <span><van-icon name="ellipsis"/></span>
+            <span>计划列表</span>
+            <span></span>
         </header>
         <div class="container">
-           <div class="order">
-               <img src="" alt="">
-           </div>
            <div class="ranking">
-               <van-tabs
+               <!-- <van-tabs
                 padding-top="10px"
                 title-active-color="#807957"
                 color="#777237"
@@ -18,39 +15,410 @@
                     <van-tab v-for="index in 8" :title="'标签 ' + index" :key="index">
                         内容 {{ index }}
                     </van-tab>
+                </van-tabs> -->
+                <van-tabs  @click="onClick"  v-model="active"  title-active-color="#4B66AF" color="#4B66AF" >
+                    <van-tab title="全部">
+                         <div class="waiting">
+                            <ul>
+                                <li @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in list" :key="index">
+                                    <div class="top">
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="m-left">
+                                            <p>{{item.bankNick}}</p>
+                                             <div   class="sign-out">
+                                                <van-button v-show="item.state=='0' || item.state=='3'" @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            </div> 
+                                            <p v-show="item.state='4'">{{item.remark}}</p>
+                                        </div>
+                                        <div class="m-right">
+                                            <p>执行状态</p>
+                                            <!-- <p>{{item.state}}</p> -->
+                                            <p v-if="item.state=='0'">待执行</p>
+                                            <p v-if="item.state=='1'">已成功</p>
+                                            <p v-if="item.state=='2'">已取消</p>
+                                            <p v-if="item.state=='3'">进行中</p>
+                                            <p v-if="item.state=='4'">失败</p>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li>
+                                                <p>{{item.poundage}}</p>
+                                                <p>手续费</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.repaycount}}</p>
+                                                <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </van-tab>
+                    <van-tab title="等待执行">
+                         <div class="waiting">
+                            <ul>
+                                <li v-show="item.state=='0'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                    <div class="top">
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="m-left">
+                                            <p>{{item.bankNick}}</p>
+                                            <!-- <p>等待执行：2019/5/17:14:33:37</p> -->
+                                        </div>
+                                        <div class="m-right">
+                                            <p>执行状态</p>
+                                            <p>等待执行</p>
+                                            
+                                            <van-button @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li>
+                                                <p>{{item.poundage}}</p>
+                                                <p>手续费</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.repaycount}}</p>
+                                                <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </van-tab>
+                    <van-tab title="已成功">
+                         <div class="waiting">
+                            <ul>
+                                <li v-show="item.state=='1'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                    <div class="top">
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="m-left">
+                                            <p>{{item.bankNick}}</p>
+                                            <!-- <p>等待执行：2019/5/17:14:33:37</p> -->
+                                        </div>
+                                        <div class="m-right">
+                                            <p>执行状态</p>
+                                            <p>还款成功</p>
+                                            <!-- <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li>
+                                                <p>{{item.poundage}}</p>
+                                                <p>手续费</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.repaycount}}</p>
+                                                <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </van-tab>
+                    <van-tab title="已取消">
+                         <div class="waiting">
+                            <ul>
+                                <li v-show="item.state=='2'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                    <div class="top">
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="m-left">
+                                             <p>{{item.bankNick}}</p>
+                                            <!-- <p>已手动取消</p> -->
+                                        </div>
+                                        <div class="m-right">
+                                            <p>执行状态</p>
+                                            <p>已取消</p>
+                                            <!-- <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li>
+                                              
+                                                <p>{{item.poundage}}</p>
+                                                <p>手续费</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.repaycount}}</p>
+                                                <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </van-tab>
+                     <van-tab title="进行中">
+                          <div class="waiting">
+                            <ul>
+                                <li v-show="item.state=='3'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                    <div class="top">
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="m-left">
+                                            <p>{{item.bankNick}}</p>
+                                            <!-- <p>进行中</p> -->
+                                        </div>
+                                        <div class="m-right">
+                                            <p>执行状态</p>
+                                            <p>进行中</p>
+                                            <van-button @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                              <li>
+                                                <p>{{item.poundage}}</p>
+                                                <p>手续费</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.repaycount}}</p>
+                                                <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                     </van-tab>
+                      <van-tab title="失败">
+                           <div class="waiting">
+                            <ul>
+                                <li v-show="item.state=='4'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
+                                    <div class="top">
+                                        <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p>
+                                        <p>{{item.payerName}}</p>
+                                        <p>本期账单：￥<span>{{item.realamount}}</span></p>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="m-left">
+                                            <p>{{item.bankNick}}</p>
+                                            <!-- <p>失败</p> -->
+                                        </div>
+                                        <div class="m-right">
+                                            <p>执行状态</p>
+                                            <p>失败</p>
+                                            <!-- <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <ul>
+                                            <li>
+                                                <p>{{item.poundage}}</p>
+                                                <p>手续费</p>
+                                            </li>
+                                              <li>
+                                                <p>{{item.repaycount}}</p>
+                                                <p>还款笔数</p>
+                                            </li>
+                                            <li>
+                                                <p></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                      </van-tab>
                 </van-tabs>
            </div>
-           <div class="check-in">
-               <img @click="goCheckIn" src="../../../static/images/flower.jpg.jpg" alt="">
-              
-           </div>
+           
         </div>
     </div>
 
 </template>
 
 <script>
+import { axiosPost } from '../../lib/http'
+import { bankCardAttribution } from '../../lib/bankName'
 export default {
     data() {
         return {
-
+            active:0,
+            bindId:"",
+            list:[],
+            planList:[],
+            i:"",
         }
     },
     methods:{
-        goBack() {
-            this.$router.push('/home')
+        goBack(){
+            this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
         },
-        goCheckIn() {
-             this.$router.push('/home/punch/totalPunch')
+        goPlanDetail(id,bankName,name,nick){
+            this.$router.push({
+                path:"/home/punch/planDetail",
+                query:{
+                    id:id,
+                    bankName:bankName,
+                    name:name,
+                    nick:nick
+                }
+            })
+        },
+        stopPlan(id){
+                 this.$dialog.confirm({
+                    title: '提示',
+                    message: '确定要取消计划？',
+                    confirmButtonText:'是',
+                })
+                .then(()=>{
+                     let data={
+                  id,
+              }
+              axiosPost("/creditCard/cancelMainPlan",data)
+              .then(res=>{
+                //   console.log(res)
+                  if(!res.data.success){
+                      this.$toast({
+                          message:res.data.message
+                      })
+                  } else {
+                       this.getMainPlan()
+                  }
+              })
+              .catch(err=>{
+                //   console.log(err)
+              })
+                })
+                .catch(()=>{
+                    //on cancel
+                })
+
+             
+        },
+        onClick(index, title){
+            //  this.$toast(title);
+            //  console.log(index)
+             let data={
+                  bindId:this.bindId,
+                    page:"1",
+                    pageSize:"100",
+                    state:index-1
+                }
+                if(data.state=="-1"){
+                    this.getMainPlan()
+                } else{
+                     axiosPost("/creditCard/getMainPlan",data)
+                 .then(res=>{
+                // console.log(res)
+                if(!res.data.success){
+                    this.$toast({
+                        message:res.data.message
+                    })
+                } else {
+                     let arr= res.data.data.data
+                     let arrXun=[]
+                     arr.forEach((item,i) => {
+                        //  console.log(item.state)
+                         item.bankNick=bankCardAttribution(item.cardNo).bankName
+                         arrXun.push(item)
+                     });
+                     this.planList=arrXun
+                     if(this.planList.length==0){
+                         this.$toast("暂无数据")
+                     }
+                }
+            })
+            .catch(err=>{
+                // console.log(err)
+            })
+                }
+                
+        },
+        //获取主还款
+        getMainPlan(){
+            //  console.log(this.bandId)
+            this.i="1"
+            let data={
+                bindId:this.bindId,
+                page:"1",
+                pageSize:"100",
+                state:""
+            }
+            axiosPost("/creditCard/getMainPlan",data)
+            .then(res=>{
+                // console.log(res)
+                if(!res.data.success){
+                    this.$toast({
+                        message:res.data.message
+                    })
+                } else {
+                     let arr= res.data.data.data
+                     let arrXun=[]
+                     arr.forEach((item,i) => {
+                         item.bankNick=bankCardAttribution(item.cardNo).bankName
+                         arrXun.push(item)
+                     });
+                     this.list=arrXun
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+            })
         }
+    },
+    created () {
+        this.bindId=  this.$route.query.bindId 
+        this.getMainPlan()
+    },
+    mounted () {
+
     }
+
 }
 </script>
 
 <style lang="less">
    #punch {
        >header {
-           background: #000;
+          background-color: #4B66AF;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -73,21 +441,112 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
-           >.order {
-               width:100%;
-               height: 300px;
-               background-color: pink;
-           }
-           >.check-in {
-               position: relative;
-               >img {
-                   position: absolute;
-                   top:0px;
-                   left:0px;
-                   width:60%;
+            .van-dialog .van-button {
+                /* border: 0; */
+                border: 1px solid #4b66af;
+            }
+           >.ranking {
+               .waiting {
+                   >ul{
+                       padding:15px;
+                       >li {
+                        //   border:2px solid #ccc;
+                        //   background-color:#4AA3E2;
+                          color:#fff;
+                          border-radius: 10px;
+                          box-sizing: border-box;
+                        margin-bottom: 15px;
+                        background-image:url("http://pay.91dianji.com.cn/big2.png");
+                        background-repeat: no-repeat;
+                        height: 350px;
+                        background-size:100%;
+                        padding:10px;
+
+                          >.top {
+                            //   background-color: rgba(0, 0, 0, .5);
+                             padding-top:13px;
+                             height:20px !important;
+                              padding:20px 5px 20px 10px;
+                              display: flex;
+                              justify-content: space-around;
+                              margin:0px !important;
+                          }
+                          >.middle{
+                               display: flex;
+                              justify-content: space-around;
+                              margin-top:20px;
+                              >.m-left {
+                                  >p {
+                                      &:nth-of-type(1){
+                                          margin-bottom: 15px;
+                                      }
+                                      &:nth-of-type(2){
+                                          background-color: rgba(0, 0, 0, .2);
+                                          padding:15px;
+                                          border-radius:20px;
+                                          margin-top:15px;
+                                      }
+                                  }
+                              }
+                              >.m-right{
+                                  >p {
+                                      &:nth-of-type(1){
+                                          padding-bottom: 10px;
+                                      }
+                                      &:nth-of-type(2){
+                                          margin:10px 0px;
+                                      }
+                                  }
+                                  .sign-out {
+                                       margin-top:20px;
+                                        .van-dialog,
+                                        .van-dialog__message,
+                                        .van-button {
+                                            font-size: 30px;
+                                        }
+                                         .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
+                                            height:70px;
+                                        }
+                                         .van-dialog .van-button{
+                                            height: 80px;
+                                        }
+
+                                  }
+
+                                  
+                              }
+                          }
+                          >.bottom {
+                              margin-top:30px;
+                              >ul{
+                                  display: flex;
+                                  padding:20px 5px;
+                                //   background-color: rgba(0, 0, 0, .1);
+                                  >li {
+                                      padding-top:20px;
+                                      width:33%;
+                                      text-align: center;
+                                      >p {
+                                          &:nth-of-type(1){
+                                              padding-bottom: 10px;
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                       }
+                   }
                }
+              
+             .van-tabs .van-tab__pane {
+                  margin-top:40px;
+             }
+
            }
 
+
+
+          
        }
    }
 </style>

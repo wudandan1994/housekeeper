@@ -7,13 +7,6 @@
         </header>
         <div class="container">
            <div class="swipe">
-               <!-- 轮播图部分 -->
-               <!-- <van-swipe :autoplay="3000">
-                    <van-swipe-item v-for="(image, index) in images" :key="index">
-                        <img v-lazy="image" />
-                    </van-swipe-item>
-               </van-swipe> -->
-               <!-- <img src="http://bc.91dianji.com.cn/zhaoshang.png" alt=""> -->
                  <div class="top row">
                     <div class="avator"><img :src="headimg" alt=""></div>
                     <div class="name-code">
@@ -25,100 +18,102 @@
                            <p>推荐码：<span>{{promotioncode}}</span></p>
                          </div>
                     </div>
+                     <!-- <div  class="operator end-center">
+                         <span>绑卡：<span>{{cardNum}}</span>张</span>
+                     </div> -->
                  </div>
-                <div  class="operator end-center">
-                     <span>绑卡：<span>{{cardNum}}</span>张</span>
-                </div>
+               
            </div>
            <div class="bind">
                <ul >
                    <li v-for="(item, index) in cardList" :key="index">
                        <div class="top">
                           <div class="bankName">
-                              <!-- <p >{{bankCardAttribution(item.idCardNo).bankName}}</p> -->
+                              <p>{{item.bankNick}}</p>
                               <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p>
-                              <!-- <p>
-                                  还款状态
-                              </p> -->
+                              <p>
+                                  {{item.payerName.replace(1,"*")}}
+                              </p>
+                              <p @click="unbinding(item)">解绑</p>                                                                                
                           </div>
                           <div class="now">
                               <div>
-                                  <p class="botton">未添加</p>
+                                  <p class="botton">{{amount}}</p>
                                    <p>本期账单</p>
                               </div>
                               <div class="pay">
-                                  <p class="days">16</p>
+                                  <!-- <p class="days">16</p> -->
                                   <div>
-                                      <p class="botton">天后还款日</p>
-                                      <!-- <p><span>{{item.billdate}}</span>-<span>{{item.duedate}}</span></p> -->
+                                      <p class="botton">还款日</p>
+                                      <!-- <p><span>{{String(new Date().getMonth()+1)+-&nbsp;+item.duedate}}</span></p> -->
+                                      <p><span>{{new Date().getMonth()+1}}</span>&nbsp;-&nbsp;<span>{{item.duedate}}</span></p>
+                            
                                   </div>
                               </div>
                               <p>
-                                  <van-button @click="repayment(item)" round type="info">立即还款</van-button>
+                                  <van-button @click="repayment(index,item)" round type="info">立即还款</van-button>
                               </p>
                           </div>
                        </div>
                        <div class="bottom">
                            <ul>
                                <li>
-                                   <p>未知</p>
-                                   <p>还款金额</p>
+                                   <p>{{item.realamount}}</p>
+                                    <p>还款金额</p>
                                </li>
                                <li>
-                                   <p>智能还款</p>
-                                   <p>还款模式</p>
+                                    <p v-if="item.state=='0'">待执行</p>
+                                    <p v-if="item.state=='1'">已成功</p>
+                                    <p v-if="item.state=='2'">已取消</p>
+                                    <p v-if="item.state=='3'">进行中</p>
+                                    <p v-if="item.state=='4'">失败</p>
+                                    <p>还款状态</p>
                                </li>
                                 <li>
-                                   <p>未知</p>
+                                   <p>{{item.repaycount}}</p>
                                    <p>还款笔数</p>
                                </li>
                                 <li>
-                                   <p>未知</p>
+                                   <p>{{item.poundage}}</p>
                                    <p>手续费</p>
                                </li>
                                <li>
-                                   <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" />
+                                
                                </li>
                            </ul>
+                       </div>
+                       <div  v-show="num==index"  class="pop">
+                           <div class="small" @click="smallPass(item)">
+                               <van-icon name="http://pay.91dianji.com.cn/putong.png" size="40px"/>
+                               <p>小额通道</p>
+                                <p> <van-icon name="arrow" size="30px"/></p>
+                           </div>
+                           <div class="large" @click="largePass(item)">
+                                 <van-icon name="http://pay.91dianji.com.cn/putong.png" size="40px"/>
+                                <p>大额通道</p>
+                                <p> <van-icon name="arrow" size="30px"/></p>
+                           </div>
                        </div>
                    </li>
                </ul>
            </div>
-           <!-- <div class="plan">
-               <p>
-                   <span>&nbsp;</span>
-                   <span>已绑定卡示例</span>
-               </p>
-           </div>
-           <div class="example">
-               <img src="http://bc.91dianji.com.cn/ka.png" alt="">
-           </div> -->
+         
            <div class="detail">
-              <!-- <p @click="getBankList">查看已绑定的信用卡 </p>
-              <ul v-show="showCardList" >
-                   <li v-for="(item, index) in bankList" :key="index" >
-                       <div class="info">
-                           <p>{{item.payerName}}</p>
-                            <p>{{item.cardNo}}</p>
-                            <p>{{item.phone}}</p>
-                           
-                       </div>
-                       <div @click="repay(item.bindId)">
-                           <van-button round size="normal" type="info">去还款</van-button>
-                       </div>
-                   </li>
-              </ul> -->
-              <router-link to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" tag="h3">添加信用卡</router-link>
+                <van-button  plain to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
+                <van-button plain to="/home/punch" size="normal" type="default">查看全部计划</van-button>
            </div>
+          
         </div>
     </div>
 </template>
+
 
 
 <script>
 import { axiosPost } from '../../lib/http'
 import { bankCardAttribution } from '../../lib/bankName'
 import loading from '@/components/loading'
+import storage from '@/lib/storage'
 export default {
      components:{
       loading
@@ -126,7 +121,7 @@ export default {
     data() {
         return {
             componentload:true,
-           bankList:{},
+            bankList:{},
             timerId:null,
             showCardList:false,
             nickname:"",
@@ -134,20 +129,109 @@ export default {
             promotioncode:"",
             headimg:"",
             cardList:[],
-            cardNum:'',
-            // cardname:""
+            // cardNum:'',
+            // cardname:"",
+            bankname:"",
+            amount:"",
+            // showPass:false,
+            num:null
         }
+    },
+    mounted () {
+        this.amount=storage.get("amount")
     },
     methods:{
         goBack() {
             this.$router.push('/home/creditHousekeeper')
-            // console.log(bankCardAttribution("6229015220764104").bankName)
-            // let a=bankCardAttribution("6229015220764104").bankName
-            // console.log(a)
         },
-        repayment(item){
+        unbinding(item){
+            let that =this
+             that.$dialog.confirm({
+                    title: '提示',
+                    message: '确定要解绑？',
+                    confirmButtonText:'是',
+                })
+                .then(() => {
+                    let data={
+                       bindId:item.bindId 
+                    }
+                  axiosPost("/creditCard/getEsicashExist",data) 
+                  .then(function(res){
+                      if(!res.data.success){
+                          that.$toast({
+                              message:res.data.message
+                          })
+                          return
+                      } else {
+                          that.getCardList()
+                      }
+                     
+                  })
+                  .catch(function(err){
+
+                  })
+                }).catch(() => {
+                    // on cancel
+                });   
+             
+        },
+        // 查询小额通道是否签约
+        smallPass(i){
+            let data={
+               bindId:i.bindId 
+            }
+             axiosPost("/creditCard/getEsicashExist",data)
+             .then(res=>{
+                 console.log(res)
+                 if(!res.data.success){
+                     this.$router.push({
+                         path:"/home/insertEsiCash",
+                         query:{info:i}
+                     })
+                 } else {
+                      let planList=res.data.data
+                     this.$router.push({
+                         path:"/home/creditHousekeeper/aisleHousekeeper/planList",
+                         query:{
+                             list:planList,
+                             area:this.area,
+                             item:i
+                         }
+                     })
+                 }
+                 
+             })
+             .catch(err=>{
+                 console.log(err)
+                 
+             })
+        },
+         // 查询大额通道是否签约
+        largePass(i){
+            this.$toast("敬请期待")
+            //  let data={
+            //    bindId:i.bindId 
+            // }
+            //  axiosPost("/vtdcreditCard/getEnterNet",data)
+            //  .then(res=>{
+            //      console.log(res)
+            //      if(!res.data.success){
+            //          this.$router.push({
+            //              path:"/home/largeAmount",
+            //              info:i
+            //          })
+            //      }
+            //  })
+            //  .catch(err=>{
+            //      console.log(err)
+            //  })
+        },
+
+        repayment(index,item){
+            // this.num=index
+            // this.showPass=true
             this.$router.push({
-                path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
+                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
                 query:{
                     info:item
                 }
@@ -158,12 +242,17 @@ export default {
              axiosPost("/creditCard/getMyCreditCard")
              .then(res=>{
                  if(res.data.success){
-                     console.log(res)
-                     this.cardList=res.data.data
-                     this.cardNum=this.cardList.length
-                    //  this.cardList.forEach(element => {
-                    //      this.cardname=bankCardAttribution(element.idCardNo).bankName
-                    //  });
+                    //  console.log(res)
+                     let arr= res.data.data
+                     let arrXun=[]
+                     arr.forEach((item,i) => {
+                        //  console.log(item)
+                         item.bankNick=bankCardAttribution(item.cardNo).bankName
+                        //  console.log(item)
+                         arrXun.push(item)
+                     });
+                     this.cardList=arrXun
+                    //  this.cardNum=this.cardList.length
                  }
              })
              .catch(err=>{
@@ -182,7 +271,7 @@ export default {
         // },
         // getBankList(){
         //     let that=this
-        //     axiosPost("http://pay.91dianji.com.cn/api/creditCard/getBankCardbindList")
+        //     axiosPost("/creditCard/getBankCardbindList")
         //     .then(function(res){
         //         that.showCardList=true
         //         if(!res.data.success){
@@ -274,7 +363,6 @@ export default {
            >.swipe {
                width:100%;
                height:200px;
-            //    background-color: red;
                font-size: 28px;
                margin-bottom:15px;
                .top{
@@ -331,17 +419,61 @@ export default {
                       position: relative;
                       width:100%;
                       border-radius: 10px;
-                      border:2px solid #ccc;
-                      background-color:#4AA3E2;
+                      .pop {
+                          position: absolute;
+                          top:20%;
+                          left:10%;
+                          width: 500px;
+                          padding:10px;
+                          background-color: #fff;
+                          border:1px solid #ccc;
+                          >.small ,
+                           .large {
+                              display: flex;
+                              justify-content: space-between;
+                              padding-bottom: 20px;
+                              align-items: center;
+                              >p {
+                                  font-size: 32px;
+                                  color:#4B66AF;
+                                  font-weight: bold;
+                              }
+                          }
+                      }
+                    //   border:2px solid #ccc;
+                    //   background-color:#4AA3E2;
                       color:#fff;
                       padding:10px;
                        box-sizing: border-box;
+                       margin-bottom: 15px;
+                       background-image:url("http://pay.91dianji.com.cn/big2.png");
+                        height: 350px;
+                        background-repeat: no-repeat;
+                       background-size:100%;
                        >.top {
                            padding-bottom: 150px;
+                           padding-top:10px;
                            .bankName {
                           display: flex;
                           justify-content: space-around;
                           margin-bottom: 15px;
+                           .van-dialog .van-button{
+                                height: 80px;
+                              }
+                            .van-dialog .van-button {
+                                 border: 1px solid #29305C;
+                                }
+                            .van-dialog,
+                            .van-dialog__message,
+                            .van-button {
+                                font-size: 30px;
+                            }
+                             .van-button--default{
+                                    background-color: #29305C;
+                                }
+                             .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
+                                height:70px;
+                            }
                          }
                        }
                       .bottom {
@@ -349,32 +481,37 @@ export default {
                           bottom: 0px;
                           left:0px;
                           right:0px;
-                          background-color: rgba(0, 0, 0, .2);
+                        //   background-color: rgba(0, 0, 0, .2);
                           >ul{
                               display: flex;
                               justify-content: space-around;
                               >li {
                                   width:20%;
                                   text-align: center;
+                                  margin-bottom: 15px;
+                                  color:#000;
+                                      padding-bottom: 13px;
                                   .van-icon--image {
                                       font-size: 40px;
                                   }
                                   >p {
+                                      color:#fff;
                                       &:nth-of-type(1){
                                           margin-top:20px;
-                                          margin-bottom: 20px;
+                                          margin-bottom:10px;
                                       }
                                       &:nth-of-type(2){
                                           margin-bottom: 20px;
                                       }
                                   }
-
                               }
                           }
                       }
                       .now {
                           display: flex;
                           justify-content: space-around;
+                          align-items: center;
+                          padding-top:15px;
                           >.pay {
                               display: flex;
                               >.days {
@@ -411,33 +548,23 @@ export default {
                }
            }
            >.detail {
-               padding-left:20px;
-            >ul{
-                padding:20px;
-                >li {
-                    border:2px solid #ccc;
-                    padding:20px;
-                    border-radius: 10px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    .info {
-                         >p {
-                        font-size: 30px;
-                        padding-top:10px;
-                        margin-bottom: 10px;
-                      }
-                    }
-                    .van-button--normal {
-                        padding:4px 16px;
-                    }
-                }
-            }
-            >h3 {
-               margin-top:20px;
-            }
-           }
+               box-sizing: border-box;
+               margin-left: 50px;
+               padding:0 20px;
+               display: flex;
+               justify-content: space-between;
+               >button {
+                   &:nth-of-type(1){
+                       margin-right:20px;
+                   }
+               }
+               .van-button--default {
+                   height:60px;
+                //    width:50%;
+                   font-size: 30px;
+               }
            
+           }
        }
    }
 </style>

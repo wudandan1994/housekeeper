@@ -5,65 +5,50 @@
                
             </van-nav-bar>
         </header>
-        <div class="user-input row">
-            <div class="title start-center">真实姓名</div>
-            <div class="input start-center"><input type="text" required v-model="name" placeholder="姓名"></div>
-        </div>
-        <div class="user-input row">
-            <div class="title start-center">身份证号</div>
-            <div class="input start-center"><input type="text" required v-model="idCard" placeholder="所持身份证号码"></div>
-        </div>
-        <div class="user-input row">
-            <div class="title start-center">银行卡号</div>
-            <div class="input start-center"><input type="number" required v-model="bankcardno" placeholder="所持银行卡号"></div>
-        </div>
-         
-        <!-- <div class="user-input top row">
-            <div class="title start-center">发卡行</div>
-            <div class="input start-center"><input type="number" placeholder="请填写发卡行"></div>
-        </div>
-        <div class="user-input top row">
-            <div class="title start-center">支行地址</div>
-            <div class="input start-center" @click="handleArea">{{area}}</div>
-        </div> -->
-        <!-- <van-area v-if="show" class="position" :area-list="areaList" @confirm="handleAreas" /> -->
-        
-        <!-- <p class="tips"> 提示：若您绑定的是信用卡，以下信息为必填项</p> -->
-         <div class="user-input top row">
-            <div class="title year start-center">有效期年份</div>
-            <div class="input start-center"><input type="number" v-model="year" placeholder="信用卡有效期年份"></div>
-        </div>
-         <div class="user-input  row">
-            <div class="title year start-center">有效期月份</div>
-            <div class="input start-center"><input type="number" v-model="month" placeholder="信用卡有效期月份"></div>
-        </div>
-         <div class="user-input  row">
-            <div class="title year start-center">安全码</div>
-            <div class="input start-center"><input type="number"  v-model="safeCode" placeholder="信用卡后三位安全码"></div>
-        </div>
-
-        <div class="user-input top row">
-            <div class="title start-center">手机号</div>
-            <div class="input start-center"><input type="number" v-model="phone" required placeholder="银行卡预留手机号"></div>
-        </div>
-         <div class="user-input  row">
-            <div class="title start-center">账单日</div>
-            <div class="input start-center"><input type="number" v-model="billdate" required placeholder="账单日"></div>
-        </div>
-        <div class="user-input  row">
-            <div class="title start-center">最后还款日</div>
-            <div class="input start-center"><input type="number" v-model="duedate" required placeholder="还款日"></div>
-        </div>
-        
-        <!-- <div class="user-input row">
-            <div class="title start-center">验证码</div>
-            <div class="safe-code start-center"><input type="number" v-model="autoCode" required placeholder="验证码"></div>
-            <div class="get-code center" @click="handleSafeCode"><div>{{title}}</div></div>
-        </div> -->
-
-        <!-- <div @click="bindingCard" class="next-stop center">确认绑定</div> -->
-        <div @click="bindingCard" class="btn">
-            <van-button round size="large" type="info">确认绑定</van-button>
+        <div class="container">
+             <div class="phone">
+               <ul>
+                    <li>
+                        <span>真实姓名：</span>
+                       <input v-model="name" type="text" placeholder="姓名">
+                   </li>
+                    <li>
+                        <span>身份证号：</span>
+                       <input v-model="idCard"  type="text" placeholder="所持身份证号码">
+                   </li>
+                    <li>
+                        <span>银行卡号：</span>
+                       <input v-model="bankcardno"  type="number" placeholder="所持银行卡号">
+                   </li>
+                    <li>
+                        <span>有效期年份：</span>
+                       <input v-model="year"  type="number" placeholder="信用卡有效期年份如 22">
+                   </li>
+                   <li>
+                       <span>有效期月份：</span>
+                       <input type="number" v-model="month" placeholder="信用卡有效期月份 如 05">
+                   </li> 
+                    <li>
+                       <span>安全码：</span>
+                       <input type="number" v-model="safeCode" placeholder="信用卡后三位安全码">
+                   </li> 
+                     <li>
+                       <span>手机号：</span>
+                       <input type="number" v-model="phone" placeholder="银行卡预留手机号">
+                   </li> 
+                    <li>
+                       <span>账单日：</span>
+                       <input type="number" v-model="billdate" placeholder="账单日 如 06">
+                   </li> 
+                    <li>
+                       <span>最后还款日：</span>
+                       <input type="number" v-model="duedate" placeholder="还款日 如 23">
+                   </li> 
+               </ul>
+              <div @click="bindingCard" class="btn">
+                <van-button round size="large" type="info">确认绑定</van-button>
+             </div>
+           </div>
         </div>
     </div>
 </template>
@@ -96,116 +81,30 @@ export default {
     },
     methods:{
         handleReturnHome(){
-            this.$router.push({
-                path:'/home/creditHousekeeper/aisleHousekeeper'
-            })
+            this.$router.go(-1)
         },
-         // 获取验证码
-        // handleSafeCode(){
-        //     let that=this
-        //     if(this.title == '获取验证码'){
-        //         let num = 60;
-        //         let codetitle = '';
-        //         let timer = setInterval(() => {
-        //             num = num - 1;
-        //             codetitle = '已发送' + '(' + num + ' s)';
-        //             this.title = codetitle
-                   
-        //         }, 1000)
-
-        //     let partern=/^1\d{10}$/
-
-        //     if(that.name.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写姓名"
-        //         })
-        //         return
-        //     }
-        //     if(that.phone.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写手机号"
-        //         })
-        //         return
-        //     }
-        //     if(that.bankcardno.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写持有银行卡号码"
-        //         })
-        //         return
-        //     }
-        //     if(!partern.test(that.phone)){
-        //          that.$toast({
-        //             message:"请输入11位手机号码"
-        //         })
-        //         return
-        //     }
-        //     if(that.idCard.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写身份证号码"
-        //         })
-        //         return
-        //     }
-        //      if(that.year.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写信用卡有效年份"
-        //         })
-        //         return
-        //     }
-        //      if(that.month.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写信用卡有效月份"
-        //         })
-        //         return
-        //     }
-        //      if(that.safeCode.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写信用卡安全码"
-        //         })
-        //         return
-        //     }
-
-        //      let data={
-        //         P10_payerName:that.name,
-        //         P7_phone:that.phone,
-        //         P6_cardNo:that.bankcardno,
-        //         P8_idCardNo:that.idCard,
-        //         P12_year:that.year,
-        //         P13_month:that.month,
-        //         P14_cvv2:that.safeCode
-        //      }
-        //         axiosPost("http://pay.91dianji.com.cn/api/creditCard/agreementBindCardValidateCode",data)
-        //         .then(res=>{
-        //             if(!res.data.success){
-        //                 that.$toast({
-        //                     message:res.data.message
-        //                 })
-        //             }
-        //             that.orderId=res.data.data.orderId
-        //         })
-        //         .catch(err=>{
-        //             // console.log(err,"error");
-                    
-        //         })
-        //         setTimeout(() => {
-        //             clearInterval(timer);
-        //             this.title = '获取验证码';
-        //         }, 60000)
-        //     }else{
-        //         this.$toast('验证码已发送，请勿重复操作');
-        //     }
-        // }, :"",
            
         // 绑卡
         bindingCard(){
-             let partern=/^1\d{10}$/
+             let partern=/0?(13|14|15|17|18|19)[0-9]{9}/
              if(!partern.test(this.phone)){
                  this.$toast({
                     message:"请输入11位手机号码"
                 })
                 return
-            }
+             }
+             
+            //   let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+            //    if(!parttenId.test(this.idCard)){
+            //      this.$toast({
+            //         message:"请填写正确的身份证号"
+            //     })
+            //     return
+            //  }
+
+
             if(this.name.trim().length===0 || this.phone.trim().length===0 || this.bankcardno.trim().length===0 || this.idCard.trim().length===0 ||
-                this.year.trim().length===0 || this.month.trim().length===0 || this.safeCode.trim().length===0 || this.billdate.trim().length===0 || this.duedate.trim().length===0 
+                this.year.trim().length!=2 || this.month.trim().length!=2 || this.safeCode.trim().length!=3 || this.billdate.trim().length ===0 || this.duedate.trim().length!=2
             ){
                  this.$toast({
                     message:"请将信息填写完整"
@@ -226,7 +125,6 @@ export default {
              }
               axiosPost("/creditCard/bindCreditCard",data)
               .then(res=>{
-                  console.log(res)
                   if(!res.data.success){
                       this.$toast({
                           message:res.data.message
@@ -236,58 +134,82 @@ export default {
                   }               
               })
               .catch(err=>{
-
+                  
               })
 
-
-
-
-
-
-
-
-
-
-
-            //   let that =this
-            //   if(that.autoCode.trim().length===0){
-            //       that.$toast({
-            //           message:"请输入验证码"
-            //       })
-            //       return
-            //   }
-            //       let validateCode=that.autoCode
-            //         let datas={
-            //             orderId:that.orderId,
-            //             validateCode,
-            //         }
-            //         axiosPost("http://pay.91dianji.com.cn/api/creditCard/bindCard",datas)
-            //         .then(function(res){
-            //             if(!res.data.success){
-            //                 that.$toast({
-            //                 message:res.data.message
-            //               })
-            //             } else {
-            //             }
-            //         })
-            //         .catch(function(err){
-            //             that.$toast({
-            //                 message:err.message
-            //             })
-            //         })
         }
 
        
     }    
 }
 </script>
-<style lang="less" scoped >
+<style lang="less" >
     #binding-credit-card{
         background: #EEEFF1;
         width: 100vw;
         height: 120vh;
+        .container {
+           padding-bottom: 50px;
+           background-color: #EEEFF1;
+           font-size:30px;
+            >.phone {
+                .btn {
+                        margin-top:30px;
+                        padding-left:20px;
+                        padding-right: 20px;
+                        font-size: 30px;
+                        >button {
+                            height:80px;
+                            background-color: #4B66AF;
+                        }
+                    }
+               >ul{
+                   padding-left:30px;
+                   background-color: #fff;
+                    
+                   >li{
+                       display: flex;
+                       flex-wrap: nowrap;
+                       border-bottom: 1px solid #ccc;
+                       padding-top:40px;
+                       padding-bottom: 40px;
+                       height: 60px;
+                       line-height: 60px;
+                       color:#000;
+                       >span {
+                           font-weight: bold;
+                       }
+                       &:last-child {
+                           border:none;
+                       }
+                       >span {
+                           &:nth-of-type(2){
+                               padding:0 10px;
+                               margin-right:20px;
+                               line-height: 60px;
+                               border-radius: 10px;
+                           }
+                        }
+                       >input {
+                           border:none;
+                           flex: 1;
+                           margin-right:50px;
+                           height: 100px;
+                            margin-top:-26px;
+                            font-size: 30px;
+                       }
+                        ::-webkit-input-placeholder{
+                            font-size:28px;
+                            margin-top:-22px;
+                        }
+                   }
+               }
+           }
+        }
         .loan .van-nav-bar {
           background-color: #4B66AF!important;
+          height: 96px;
+          line-height: 96px;
          }
          .van-nav-bar__title {
              color:#fff;
@@ -325,22 +247,58 @@ export default {
             .input{
                 width: 70vw;
                 height: 100%;
+                 box-sizing: border-box;
+                // >input{
+                //     width: 100%;
+                //     height: 90%;
+                //     margin-top: 5px;
+                //     border: none;
+                // }
                 >input{
                     width: 100%;
                     height: 90%;
                     margin-top: 5px;
                     border: none;
-                }
+                    font-size: 30px;
+                     box-sizing: border-box;
+                     background-color: yellow;
+                  }
+                 ::-webkit-input-placeholder{
+                    font-size:28px;
+                    margin-top:0px;
+                    background-color: red;
+                    position: relative;
+                    bottom:0px;
+                 }
+                 
             }
             .safe-code{
                 width: 40vw;
                 height: 100%;
-                 >input{
+                //  >input{
+                //     width: 100%;
+                //     height: 90%;
+                //     margin-top: 5px;
+                //     border: none;
+                // }
+                >input{
                     width: 100%;
                     height: 90%;
-                    margin-top: 5px;
                     border: none;
+                     margin-top:5px;
+                    font-size: 30px;
+                    box-sizing: border-box;
+                       background-color: yellow;
+                  }
+                   ::-webkit-input-placeholder{
+                    font-size:28px;
+                    margin-top:22px;
+                     box-sizing: border-box;
+                     background-color: red;
+                     position: relative;
+                   bottom:0px;
                 }
+                
             }
             .get-code{
                 width: 30vw;
@@ -364,16 +322,16 @@ export default {
             margin-top: 50px;
             border-radius: 20px;
         }
-        .btn {
-            margin-top:30px;
-            padding-left:20px;
-            padding-right: 20px;
-            font-size: 30px;
-            >button {
-                height:80px;
-                background-color: #4B66AF;
-            }
-        }
+        // .btn {
+        //     margin-top:30px;
+        //     padding-left:20px;
+        //     padding-right: 20px;
+        //     font-size: 30px;
+        //     >button {
+        //         height:80px;
+        //         background-color: #4B66AF;
+        //     }
+        // }
         .position{
             width: 100vw;
             z-index: 2;

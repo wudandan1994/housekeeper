@@ -57,7 +57,6 @@ export default {
                          message:"您还没有提现记录哦！"
                      })
                  } else {
-                     console.log('提现记录',res);
                      that.showRecord=true
                       that.recordList=res.data.data
                  }

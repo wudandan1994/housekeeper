@@ -5,7 +5,10 @@
             <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
-        <iframe class="iframe"  :src="url" frameborder="0"></iframe>
+         <div class="box" style="overflow-y: scroll;">　
+            　　<iframe v-if="type" :src="url" scrolling="auto"  class="iframe" frameborder="0" ></iframe>
+            　　<iframe v-else :src="url" frameborder="0"  class="iframe" scrolling="no"  ></iframe>
+         </div>
     </div>
 
 </template>
@@ -16,7 +19,8 @@ export default {
     data() {
         return {
             url:"",
-            title:""
+            title:"",
+             type: null
         }
     },
     methods:{
@@ -24,50 +28,85 @@ export default {
             // plus.webview.close( "yinlian")
             this.$router.push("/home")
         },
+       
         webview(){
             if(window.plus){  
-                let self= plus.webview.currentWebview(); 
-                var yinlian= plus.webview.create(this.url, "yinlian", {  
-                top: "40px",  
-                bottom: 0 ,
-                left:0,
-                right:0
-                });  
-                self.append(yinlian)
+                //  var yinlian = plus.webview.open(this.url,"yinlian",{
+                //          top: "40px",  
+                //         bottom: '0px',
+                //         left:'0px',
+                //         scrollIndicator:'none'
+                //     });
+                // let self= plus.webview.currentWebview(); 
+                // var yinlian= plus.webview.create(this.url, "yinlian", {  
+                // top: "40px",  
+                // // width:"100%",
+                // bottom: "0px",
+                //  right:"0px",
+                // left:"0px",
+                // scrollIndicator:"vertical"
+                // });  
+                // yinlian.show()
+                //  self.append(yinlian)
+             var yinlian= plus.webview.create(this.url, "yinlian");  
+               yinlian.setStyle({
+                   width:"100%",
+                   top:"40px",
+                   left:"0px",
+                  right:"0px",
+                  bottom:"10px",
+                  scalable: true,
+                  margin:"auto",
+               })
+                yinlian.show()
             }else{  
                 document.addEventListener('plusready',function () {  
-                    let self= plus.webview.currentWebview(); 
-                        var yinlian= plus.webview.create(this.url, "yinlian", {  
-                        top: "80px",  
-                        bottom: 0  
-                    });  
-                    self.append(yinlian)
+                         var yinlian= plus.webview.create(this.url, "yinlian");  
+                            yinlian.setStyle({
+                                width:"100%",
+                                top:"40px",
+                                left:"0px",
+                                right:"0px",
+                                margin:"auto",
+                        })
+                            yinlian.show()
                 },false);  
             }  
         }
+    },
+    mounted () {
+
     },
     
     created(){
         this.url=this.$route.query.info
          this.title=this.$route.query.title
         //  this.webview();
+          var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        if(isAndroid){
+        　　this.type = true
+        }else{
+        　　this.type = false
+        }
     }
 }
 </script>
 
 <style lang="less">
    #progress-query{
-       width: 100vw;
-       height: calc(100vh - 86px);
-       padding-top: 86px;
-        .iframe{
-            width: 100vw;
-            height: calc(100vh - 86px);
-        }
-        .out {
-            overflow: auto;
-            -webkit-overflow-scrolling:touch;
-            width:100%;
-        }
-   }
+       header {
+            background-color: #4965AE;
+       }
+        .box {
+              padding-top:96px;
+            overflow-y: scroll;
+            .iframe{
+                    width: 1px;
+                    min-width: 100%;
+                    *width: 100%;
+                    height: 100% !important;
+            }
+      }
+  }
 </style>

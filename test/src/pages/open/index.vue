@@ -71,7 +71,7 @@ export default {
             cardback:"idcardback.jpg",
             cardWithhand:"imgwiths.jpg",
             bankfront:"01.jpg",
-             componentload:true,
+             componentload:false,
             bankback:"bankb.jpg",
             baseUrl:"",
             show:false,
@@ -84,27 +84,7 @@ export default {
         goBack() {
             this.$router.push('/home')
         },
-        sureSubmit(){
-            let data={
-                chMerCode:this.info
-            }
-            axiosPost("/creditCard/getMemberRegLine",data)
-            .then(res=>{
-                let type=res.data.data.uploadStatus
-                if(res.data.data.uploadStatus==="0"){
-                     setTimeout(()=>{
-                        this.componentload=false
-                    },500)
-                     this.$router.push("/home/collect/payment")
-                  } else {
-                       this.componentload=false
-                  } 
-            })
-            .catch(err=>{
-
-            })
-            
-        },
+        
          onRead(file) {
             var form = new FormData()
             form.append('file',file.file)
@@ -139,7 +119,10 @@ export default {
                                             })
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
-                                            this.$router.push("/home/collect/payment")
+                                            this.$router.push({
+                                                path:"/home/collect/payment",
+                                                chMerCode:this.info
+                                            })
                                          }
                                         
                                         })
@@ -194,7 +177,10 @@ export default {
                                             })
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
-                                            this.$router.push("/home/collect/payment")
+                                             this.$router.push({
+                                                path:"/home/collect/payment",
+                                                chMerCode:this.info
+                                            })
                                          }
                                       
                                         })
@@ -247,7 +233,10 @@ export default {
                                             })
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
-                                            this.$router.push("/home/collect/payment")
+                                            this.$router.push({
+                                                path:"/home/collect/payment",
+                                                chMerCode:this.info
+                                            })
                                          } 
                                        
                                         })
@@ -301,7 +290,10 @@ export default {
                                             })
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
-                                            this.$router.push("/home/collect/payment")
+                                            this.$router.push({
+                                                path:"/home/collect/payment",
+                                                chMerCode:this.info
+                                            })
                                          } 
                                        
                                         })
@@ -324,7 +316,7 @@ export default {
          onReadH(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = '/upload/uploadImg'
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -355,7 +347,10 @@ export default {
                                         })
                                         return
                                     } else if(res.data.data.uploadStatus==="0"){
-                                        this.$router.push("/home/collect/payment")
+                                        this.$router.push({
+                                                path:"/home/collect/payment",
+                                                chMerCode:this.info
+                                            })
                                         } 
                                     
                                     })
@@ -390,19 +385,30 @@ export default {
                         } else if(item.photoType==="5"){
                             this.bankback=item.photoData
                         }
-                        
                     });
                 })
                 .catch(err=>{
                     // console.log(err,"上传图片的错误");
                     
                 })
-        }
+        },
+         searchInfo(){
+            axiosPost("/creditCard/getMemberReg")
+           .then(res=>{
+            if(res.data.success){
+              this.info=res.data.data.chMerCode
+             }
+        })
+        .catch(err=>{
+            // console.log(err,"error个人信息")
+        })
+     },
         
     },
+    
     created () {
-          this.info=this.$route.query.info
-          this.sureSubmit()
+        this.searchInfo()
+        //   console.log(this.info,"open")
           this.findphoto()
     }
 }

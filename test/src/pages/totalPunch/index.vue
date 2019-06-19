@@ -80,7 +80,9 @@ export default {
             days: [],
             isPunch:false,
              signcount:0,//连续签到
-             gold:0  //金币数量
+             gold:0 , //金币数量
+            currentTime:""
+
         }
     },
     methods:{
@@ -91,7 +93,7 @@ export default {
             let that =this
             axiosPost("/customer/insertSign")
            .then(function(res){
-               console.log(res,"每日签到")
+            //    console.log(res,"每日签到")
             if(!res.data.success){
                     that.$toast({
                     message:res.data.message
@@ -103,7 +105,6 @@ export default {
                    })
                 axiosPost("/customer/getSignDetail")
                 .then(function(res){
-                    
                     that.signcount=res.data.data.signcount
                     that.gold=res.data.data.gold
                 })
@@ -114,22 +115,39 @@ export default {
              let that = this
            axiosPost("/customer/getSignDetail")
            .then(function(res){
-               console.log(res,"created中的签到详情") 
+            //    console.log(res,"created中的签到详情") 
                 if(!res.data.success){
-                    that.isPunch=false
+                    that.$toast({
+                        message:res.data.message
+                    })
                     return
+                } else {
+                     that.signcount=res.data.data.signcount
+                     that.gold=res.data.data.gold
+                     that.days=res.data.data.list
+                     that.days.forEach(element => {
+                         if(element.signtime==that.currentTime){
+                             that.isPunch=true
+                         }
+                     })
                 }
-                 that.signcount=res.data.data.signcount
-                 that.gold=res.data.data.gold
-                 axiosPost("/customer/insertSign")
-                 .then(res=>{
-                      console.log(res,"created中的查询每日签到")
-                     if(!res.data.success){
-                         that.isPunch=true
-                     }
-                 })
+                
            })
          },
+        fnDate(){
+                var date=new Date();
+                var year=date.getFullYear();//当前年份
+                var month=date.getMonth();//当前月份
+                var data=date.getDate();//天
+                this.currentTime=year+"-"+this.fnW((month+1))+"-"+this.fnW(data);
+          },
+            //补位 当某个字段不是两位数时补0
+            fnW(str){
+                var num;
+                str>10?num=str:num="0"+str;
+                return num;
+            } 
+
         //  initData: function (cur) {
         //             let that = this;
         //             let leftcount = 0; //存放剩余数量
@@ -203,6 +221,7 @@ export default {
         //  let that = this
         //  that.initData(null)
           this.searchPunch()
+          this.fnDate()
     }
 }
 </script>

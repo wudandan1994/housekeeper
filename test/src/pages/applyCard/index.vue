@@ -2,7 +2,7 @@
     <div id="apply-card">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>办卡中心</span>
+            <span>信用卡申请</span>
             <span></span>
         </header>
         <div class="container">
@@ -100,7 +100,6 @@ export default {
             }
             axiosPost("/creditCard/insertCreditCard",data)
             .then(function(res){
-
                 if(!res.data.success){
                     that.$toast({
                         message:res.data.message
@@ -114,7 +113,7 @@ export default {
                             path:"/loan/form/myOrder",
                             query:{
                                 info:url,
-                                title:"办卡"
+                                title:"办卡中心"
                               }
                         })
                     },1000)

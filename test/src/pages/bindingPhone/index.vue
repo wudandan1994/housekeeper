@@ -55,7 +55,7 @@ export default {
         // 获取验证码
         getCode(){
             let that=this
-            let partten=/^1\d{10}$/
+            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/
             if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
@@ -103,7 +103,7 @@ export default {
         },
         bindingPhone() {
             let that=this
-            let partten = /^1[345789]\d{9}$/
+            let partten = /0?(13|14|15|17|18|19)[0-9]{9}/
             if(this.mobile.trim().length===0){
                  that.$toast({
                     message:"手机号码不能为空"
@@ -138,7 +138,6 @@ export default {
                     }
                 })
                 .catch(function(res){
-                    console.log("绑定手机失败",res);
                     that.$toast({
                         message:res.data.message
                     })

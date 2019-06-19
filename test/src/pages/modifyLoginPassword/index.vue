@@ -85,7 +85,7 @@ export default {
         },
         getCode(){
             let that=this
-            let partten=/^1\d{10}$/
+            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/ 
             if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"
@@ -93,7 +93,7 @@ export default {
                  return
             } else  {
                 let data={
-                    mobile:this.mobile,
+                    mobile:that.mobile,
                     type:"3"
                 }
                 axiosPost("/customer/sendSms",data)
@@ -128,7 +128,7 @@ export default {
         },
         modify(){
              let that=this
-            let partten=/^1\d{10}$/  // 11位手机号的正则
+            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/  // 11位手机号的正则
             //  let code=/[0-9A-Za-z] {6,18} /  //密码的正则
             if(!partten.test(that.mobile)){
                  that.$toast({
@@ -169,8 +169,8 @@ export default {
             }
             let data={
                 password:that.suerPassword,
-                mobile:this.mobile,
-                authcode:this.authcode
+                mobile:that.mobile,
+                authcode:that.authcode
             }
              axiosPost("/customer/updatePassWord",data)
              .then(function(res){
