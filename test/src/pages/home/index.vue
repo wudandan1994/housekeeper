@@ -213,7 +213,6 @@
                 <p>上海市宝山区泰和路2038号A座303室</p>
             </div>
         </div>
-        <!-- <div v-show="allmap" id="allmap"></div> -->
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
          <!-- 绑定手机模块 -->
         <bindMobile></bindMobile>
