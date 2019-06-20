@@ -151,6 +151,7 @@ export default {
         //          this.$toast("保存失败")
         //         });
         // },
+        
         // 随机数
         handlechangeRandom(){
             this.componentload = true;
@@ -236,6 +237,9 @@ export default {
             this.imgShow = true;
             var poster = document.getElementById("poster");
             var dataURL = poster.toDataURL('image/png');
+            console.log(dataURL)
+            console.log(JSON.parse(dataURL))
+            console.log("doeiu")
             this.imgUrl = dataURL;
             if(this.imgUrl != ''){
                 setTimeout(() =>{

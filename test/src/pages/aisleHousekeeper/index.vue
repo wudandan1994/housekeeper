@@ -187,13 +187,10 @@ export default {
                          query:{info:i}
                      })
                  } else {
-                      let planList=res.data.data
                      this.$router.push({
-                         path:"/home/creditHousekeeper/aisleHousekeeper/planList",
+                         path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
                          query:{
-                             list:planList,
-                             area:this.area,
-                             item:i
+                            info:i
                          }
                      })
                  }

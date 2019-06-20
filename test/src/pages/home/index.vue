@@ -187,6 +187,7 @@
                         </li> -->
                         <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
                         <!-- <router-link to="/home/clearCache" tag="li">清除缓存</router-link> -->
+                         <router-link tag="li" class="center" to="/register">个人设置</router-link>
                     </ul>
                    
                       <div  @click="signOut" class="sign-out">
@@ -874,7 +875,7 @@ export default {
                         margin-right:100px;
                         >li {
                             border-top:3px dashed #ccc;
-                            padding:50px 10px;
+                            padding:40px 10px;
                             font-size: 28px;
                              &.switch {
                              >p {
@@ -884,7 +885,7 @@ export default {
                         }
                     }
                     >.sign-out {
-                        margin-top:20px;
+                        margin-top:50px;
                         // margin-bottom:20px;
                          >span{
                             border:2px solid #fff;
