@@ -87,13 +87,8 @@ export default {
             timerId:null,
             amount: '222',
             cardLength: '',
-            bankcardlist: [
-                // {
-                //     abridge: '中国民生银行5323',
-                //     id: '2'
-                // }
-            ],
-            abridge: '中国民生银行5323',
+            bankcardlist: [],
+            abridge: '',
             bank_select: false,
             bankname: '请选择您要提现的银行卡',
             avator: 'http://pay.91dianji.com.cn/logo.png',
@@ -125,6 +120,7 @@ export default {
              }else{
                  this.bank_select = false;
                 this.bankname = value;
+                this.abridge = value;
                 this.cardId = ((this.bankcardlist).filter(item =>item.abridge == value))[0].id
              }
         },

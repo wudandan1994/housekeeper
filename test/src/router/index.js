@@ -135,6 +135,8 @@ import help from '@/pages/help/index'
 import Extension from '@/pages/personalCenter/Extension'
 // 新人教程
 import video from '@/pages/home/video'
+import radar from '@/pages/AIRadar/index'
+import nextLevel from '@/pages/AIRadar/nextdetail'
 
 export default new Router({
   // mode:"hash",
@@ -239,5 +241,7 @@ export default new Router({
     {path: '/help',component: help},
     {path: '/Extension',component: Extension},
     {path: '/video',component: video},
+    {path: '/radar',component: radar},
+    {path: '/nextLevel',component: nextLevel},
   ]
 })

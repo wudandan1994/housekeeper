@@ -535,6 +535,7 @@ export default {
                           height: 50px;
                           padding-left: 10%;
                           font-size: 30px;
+                        //   color: #000000;
                       }
                       .bold{
                           font-weight: bold;
