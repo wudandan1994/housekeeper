@@ -375,6 +375,7 @@ export default {
                           })
                           return
                       } else {
+                          storage.remove('openid');
                           that.$router.push("/logIn")
                       }
                      
