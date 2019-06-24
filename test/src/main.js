@@ -14,6 +14,7 @@ import "../node_modules/babel-polyfill/dist/polyfill.js"
 import '@/assets/css/common.css'
 // 引入分享的css
 // import '@/assets/css/share.css'
+import back from './lib/back'
 import axios from 'axios'
 Vue.prototype.$http = axios
 // axios.defaults.withCredentials = true
@@ -57,6 +58,7 @@ import '@/assets/icon/iconfont.js'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  back,
   router,
   store,
   components: { App },

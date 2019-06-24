@@ -1,19 +1,15 @@
 <template>
     <div id="personal-center-component">
-        <header class="header">
+        <header class="header" id="head">
             <div class="top row">
                 <div class="avator"><img :src="headimg" alt=""></div>
                 <div class="name-code">
                     <div class="name start-center">{{nickname}}</div>
-                    <div class="unset start-center">
+                    <!-- <div class="unset start-center">
                         <router-link tag="div" class="center" to="/register">设置</router-link>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <!-- <div v-show="showYYS" class="operator end-center" @click="handleExpect">
-                <van-icon name="medel" size="20px" color="#dab17b"/>
-                <span>运营商</span>
-            </div> -->
             <div v-show="isUpgrade" class="operator end-center"  @click="Upgrade">
                 <van-icon name="gem" size="20px" color="#dab17b"/>
                 <span>升级为钻石会员</span>
@@ -52,6 +48,7 @@
                     <router-link tag="div" :to="{path: '/personalCenter/income',query: {amountSum: amountSum}}" class="per-title center">总收益</router-link>
                 </div>
             </div>
+            <img class="backgroung" :src="background" alt="">
         </header>
         <div class="pop" v-show="showCover">
                 <van-popup v-model="show" :overlay="false" >
@@ -255,7 +252,10 @@ export default {
             recomname:"",
             recomcode:"",
             recomheadimg:"",
-            orderId:""
+            orderId:"",
+            pic:"",
+            ispartner:"",
+            background:""
         }
     },
     methods:{
@@ -366,7 +366,6 @@ export default {
         // 查询个人设置
         handleGetAmount(){
             let url = '/customer/getCustomer';
-            // let url = '/customer/getCustomer';
             let params = {
                 openid:this.$store.state.wechat.openid,
             };
@@ -382,6 +381,9 @@ export default {
                     this.amount = res.data.data.amount;
                     this.amountSum = res.data.data.amountSum;
                     this.commission = res.data.data.commission;
+                    this.pic=res.data.data.level
+                    // console.log(this.pic)
+                    this.ispartner=res.data.data.ispartner
                     res.data.data.iscertification == '0' ? this.iscertification = '实名认证' : ( res.data.data.iscertification == '1' ? this.iscertification = '审核中' : (res.data.data.iscertification == '2' ? this.iscertification = '认证成功' : this.iscertification = '认证失败，请重试')); 
                     if(res.data.data.level == '0'){
                         this.vip ='';
@@ -392,6 +394,18 @@ export default {
                     }else{
                         this.vip = 'http://pay.91dianji.com.cn/zuanshivip.png';
                     }
+                    let head=document.getElementById("head")
+
+                     if(this.ispartner=='1'){
+                       this.background='http://pay.91dianji.com.cn/vip0003.png'
+                    }else  if(this.pic=='1'){
+                       this.background='http://pay.91dianji.com.cn/vip004.png'
+                    } else if(this.pic=='2'){
+                      this.background='http://pay.91dianji.com.cn/vip001.png'
+                    } else {
+                       this.background=''
+                    }
+
                 }else{
                     setTimeout(()=>{
                         this.componentload = false;
@@ -408,6 +422,9 @@ export default {
     },
     created(){
         this.handleGetAmount();
+    },
+    mounted () {
+      
     }
 }
 </script>
@@ -423,9 +440,17 @@ export default {
           width: 100vw;
           height: 391px;
           position: relative;
-          background: url('http://pay.91dianji.com.cn/hehuoren_bg.png');  
+        //   background: url('http://pay.91dianji.com.cn/hehuoren_bg.png');  
+        //   background-image: url('http://pay.91dianji.com.cn/hehuoren_bg.png');  
+          background-repeat: no-repeat;
           background-size: contain;
           padding-top: 60px;  
+          .backgroung {
+              width:100%;
+              position: absolute;
+              top:0;
+              left:0;
+          }
           .top{
               width: 90%;
               height: 120px;
@@ -434,6 +459,8 @@ export default {
               .avator{
                   width: 18%;
                   height: 100%;
+                  z-index: 9999;
+                  position: relative;
                   >img{
                       width: 120px;
                       height: 120px;
@@ -442,6 +469,8 @@ export default {
               }
               .name-code{
                   width: 72%;
+                   z-index: 9999;
+                   position: relative;
                   margin-left: 15px;
                   height: 100%;
                   .name{
@@ -457,6 +486,8 @@ export default {
                       margin-top: 5px;
                       font-size: 28px;
                       color:#ffffff; 
+                       z-index: 9999;
+                      position: relative;
                       >div{
                         width: auto;
                         border: solid 0.02rem #ccc;
@@ -470,6 +501,7 @@ export default {
               width: auto;
               height: 100px;
               position: absolute;
+              z-index: 9999;
               right: 0px;
               top: 70px;
               background: #798bc5;
@@ -484,6 +516,7 @@ export default {
               height: 350px;
               position: relative;
               margin-top: 100px;
+              z-index: 9999;
               margin-left: auto;
               margin-right: auto;
               background: #ffffff;
@@ -568,6 +601,7 @@ export default {
               height: 180px;
               background: white;
               margin-top: 30px;
+              z-index: 999;
               .per-menu{
                   width: 33%;
                   height: 160px;
@@ -752,6 +786,7 @@ export default {
                      width: 100%;
                      height: 25%;
                      font-size: 20px;
+                     z-index: 9999;
                  }
                  .recom-code{
                      width: 100%;
