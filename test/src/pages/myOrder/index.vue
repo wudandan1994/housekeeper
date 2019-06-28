@@ -6,12 +6,12 @@
             <span></span>
         </header>
         <div class="container">
-             <div class="box" style="overflow-y: scroll;">　
-            　　<iframe v-if="type" :src="url" scrolling="auto"  class="iframe" frameborder="0" ></iframe>
-            　　<iframe v-else :src="url" frameborder="0"  class="iframe" scrolling="no"  ></iframe>
-         </div>
+            <div class="box" >　
+            　　<iframe :src="url"  ref="iframe" id="bdIframe" class="iframe"  scrolling="no"  frameborder="0" ></iframe>
+            </div>
         </div>
     </div>
+
 
 
 </template>
@@ -62,28 +62,32 @@ export default {
                             yinlian.show()
                 },false);  
             }  
-        }
-      
+        },
     },
     created(){
         this.url=this.$route.query.info;
         this.title=this.$route.query.title;
         // this.webview();
-        var u = navigator.userAgent;
-        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-        if(isAndroid){
-        　　this.type = true
-        }else{
-        　　this.type = false
-        }
+        // var u = navigator.userAgent; 
+        // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        // if(isAndroid){
+        // 　　this.type = true
+        // }else{
+        // 　　this.type = false
+        // }
+        // console.log(this.type)
+    },
+    mounted () {
+       
     }
 }
 </script>
 
 <style lang="less">
    #my-order {
+       height: 100%;
        >header {
-            background-color: #4965AE;
+            background-color: #29305C;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -105,15 +109,23 @@ export default {
        }
        >.container {
            padding-top:96px;
+            height: 100%;
+            width:100%;
+             overflow-y: scroll;
            .box {
-               overflow-y: scroll;
+                overflow: auto;
+                -webkit-overflow-scrolling:touch;
+                width:100%;
+                height: 100%;
+                 .iframe{
+                    // width:1px;
+                    // min-width: 100%;
+                    // *width:100%;
+                    width:100vw;
+                    height: 100vh;
+                 }
            }
-           .iframe{
-                width: 1px;
-                min-width: 100%;
-                *width: 100%;
-                height: 100% !important;
-            }
+         
        }
    }
 </style>

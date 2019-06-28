@@ -164,10 +164,10 @@
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
                         <div class="center">商城</div>
                     </router-link>
-                    <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
+                    <div class="secret" @click="handleJundgeMobile">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/weizhang.png"  size="30px" /></div>
                         <div class="center">违章查询</div>
-                    </router-link>
+                    </div>
                 </div>
             </div>
             <!-- 遮盖层 -->
@@ -427,6 +427,21 @@ export default {
                 path: '/vip',
                 query: {params: item.params}
             })
+        },
+        // 判斷手機類型
+        handleJundgeMobile(){
+            if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                this.$router.push({
+                    path:"/loan/form/myOrder",
+                    query:{
+                        info:'https://m2.weizhang8.cn/',
+                        title:"违章查询"
+                    }
+                })
+            } else {
+                this.componentload=false
+                location.href= 'https://m2.weizhang8.cn/'
+            }
         }
     },
     created(){
