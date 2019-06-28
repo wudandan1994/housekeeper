@@ -141,7 +141,7 @@
                         <div class="center">在线收款</div>
                     </router-link>
                     <div @click="handleIsAuth('/home/cardCenter')" class="secret">
-                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kaceping.png" size="30px" /></div>
+                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></div>
                         <div class="center">信用卡办理</div>
                     </div>
                     <router-link tag="div" class="secret" to="/home/creditHousekeeper">
@@ -157,7 +157,7 @@
                         <div class="center">卡·测评</div>
                     </router-link>
                     <div @click="handleIsAuth('/loan/detail')" class="secret">
-                        <div class="cente-endr"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
+                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
                         <div class="center">我要贷款</div>
                     </div>
                         <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
@@ -375,6 +375,7 @@ export default {
                           })
                           return
                       } else {
+                          storage.remove('openid');
                           that.$router.push("/logIn")
                       }
                      

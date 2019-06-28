@@ -225,7 +225,7 @@ export default {
                 div:nth-child(1){
                     width: 40%;
                     height: 90px;
-                    background-color: rgba(0, 0, 0, 0.5);
+                    background-color: rgba(0, 0, 0, 0.35);
                     border-radius: 45px;
                     color: #ffffff;
                     font-size: 30px;
