@@ -91,7 +91,7 @@
 
             <div class="per-menu-list line" @click="handleExpect">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/307.png" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">共享佣金池</div>
+                <div class="per-menu-title center">平台奖励</div>
             </div>
 
             <div class="per-menu-list" @click="handleExpect">
