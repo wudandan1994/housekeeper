@@ -188,7 +188,7 @@ export default {
                     res.data.data.voice == '0' ? this.voice = false : this.voice = true;
                     this.wechat = res.data.data.wechat;
                     this.wechatqr = res.data.data.wechatqr;
-                    res.data.data.ispermit == '0' ? this.isconnect = true : this.isconnect = false;
+                    res.data.data.ispermit == '0' ? this.isconnect = false : this.isconnect = true;
                 }
             })
             .catch(res =>{

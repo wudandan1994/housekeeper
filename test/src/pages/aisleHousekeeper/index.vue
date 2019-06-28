@@ -107,7 +107,6 @@
 </template>
 
 
-
 <script>
 import { axiosPost } from '../../lib/http'
 import { bankCardAttribution } from '../../lib/bankName'
@@ -137,7 +136,7 @@ export default {
         }
     },
     mounted () {
-        this.amount=storage.get("amount")
+       
     },
     methods:{
         goBack() {

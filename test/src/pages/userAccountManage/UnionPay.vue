@@ -19,13 +19,18 @@
         </div>
         
         <div @click="bindingCard" class="next-stop center">确认绑定</div>
+          <loading :componentload="componentload"></loading>
     </div>
 </template>
 <script>
 import area from '@/config/area.js'
+import loading from '@/components/loading'
 import {axiosPost,axiosGet} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
+     components:{
+      loading
+    },
     data(){
         return{
             area: '请选择支行地址',
@@ -34,7 +39,8 @@ export default {
             areaList:{},
             name:"",
             phone:"",
-            bankcardno:""
+            bankcardno:"",
+            componentload:false,
         }
     },
     created(){
@@ -82,26 +88,25 @@ export default {
                 phone:that.phone,
                 bankcardno:that.bankcardno
             }
+             that.componentload=true
             axiosPost("/customer/checkBankCard",data)
             .then(function(res){
-                if(!res.data.success){
-                    that.$toast({
+               
+                setTimeout(()=>{
+                    that.componentload=false
+                      if(res.data.success){
+                        that.$toast({
                         message:res.data.message
                     })
-                    return
-                }
-                if(res.data.success){
-                    that.$toast({
-                    message:res.data.message
-                  })
-                    that.name=""
-                    that.phone=""
-                    that.bankcardno=""
-                } else {
-                     that.$toast({
-                     message:res.data.message
-                  })
-                }
+                        that.name=""
+                        that.phone=""
+                        that.bankcardno=""
+                    } else {
+                        that.$toast({
+                        message:res.data.message
+                    })
+                    }
+                },1000)
             })
             .catch(function(err){
                that.$toast({
