@@ -18,15 +18,13 @@
                       <p v-if="cardInfo.state=='2'">已取消</p>
                       <p v-if="cardInfo.state=='3'">进行中</p>
                       <p v-if="cardInfo.state=='4'">失败</p>
-
-
                   </div>
                   <div class="amount">
                       <ul>
                           <li>总额度：￥<span>{{Number(cardInfo.countamount)+Number(cardInfo.poundage)+Number(cardInfo.realamount)}}</span></li>
                           <li>本期账单：￥<span>{{cardInfo.realamount}}</span></li>
                           <li>预留额度：<span>{{cardInfo.balance}}</span></li>
-                          <li>已还金额：<span>￥0</span></li>
+                          <!-- <li>已还金额：<span>￥0</span></li> -->
                       </ul>
                   </div>
                   <div class="num">
@@ -138,7 +136,7 @@ export default {
              let data={
                  id:this.id
              }
-             axiosPost("creditCard/getMainPlanAndPlans",data)
+             axiosPost("/creditCard/getMainPlanAndPlans",data)
              .then(res=>{
                  if(!res.data.success){
                      this.$toast({
