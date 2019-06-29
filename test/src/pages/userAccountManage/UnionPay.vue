@@ -19,7 +19,7 @@
         </div>
         
         <div @click="bindingCard" class="next-stop center">确认绑定</div>
-          <loading :componentload="componentload"></loading>
+        <loading :componentload="componentload"></loading>
     </div>
 </template>
 <script>

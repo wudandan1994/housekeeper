@@ -1,13 +1,65 @@
 <template>
     <div id="footer-com">
          <footer class="foot">
-            <van-tabbar v-model="nowactive" active-color="#4B66AF" >
-                <van-tabbar-item  to="/home" ><span>首页</span><img slot="icon" slot-scope="props" :src="props.active ? icon.active : icon.normal"></van-tabbar-item>
-                <van-tabbar-item to="/vip" ><span>VIP</span><img slot="icon" slot-scope="props" :src="props.active ? icon.vipActive : icon.vipNomal"></van-tabbar-item>
-                <van-tabbar-item to="/personalCenter"><span>个人中心</span><img slot="icon" slot-scope="props" :src="props.active ? icon.personActive : icon.personNomal"></van-tabbar-item>
-                <van-tabbar-item  to="/share"><span>AI雷达</span><img slot="icon" slot-scope="props" :src="props.active ? icon.shareActive : icon.shareNomal"></van-tabbar-item>
-                <van-tabbar-item  to="/financialCircle"><span>金融圈</span><img slot="icon" slot-scope="props" :src="props.active ? icon.circleActive : icon.circleNomal"> </van-tabbar-item>
+            <!-- <van-tabbar v-model="nowactive" active-color="#4B66AF" >
+                <van-tabbar-item  to="/home" >
+                   <span>首页</span>
+                   <img slot="icon" slot-scope="props" :src="props.active ? icon.active : icon.normal">
+                </van-tabbar-item>
+                <van-tabbar-item to="/vip" >
+                   <span>VIP</span>
+                   <img slot="icon" slot-scope="props" :src="props.active ? icon.vipActive : icon.vipNomal">
+                </van-tabbar-item>
+                <van-tabbar-item to="/personalCenter">
+                   <span>个人中心</span>
+                   <img slot="icon" slot-scope="props" :src="props.active ? icon.personActive : icon.personNomal">
+                </van-tabbar-item>
+                <van-tabbar-item  to="/share">
+                   <span>AI雷达</span>
+                   <img slot="icon" slot-scope="props" :src="props.active ? icon.shareActive : icon.shareNomal">
+                </van-tabbar-item>
+                <van-tabbar-item  to="/financialCircle">
+                   <span>金融圈</span>
+                   <img slot="icon" slot-scope="props" :src="props.active ? icon.circleActive : icon.circleNomal"> 
+                </van-tabbar-item>
+            </van-tabbar> -->
+
+
+
+             <van-tabbar v-model="nowactive"  >
+                <van-tabbar-item  to="/home" >
+                   <svg class="icon"  aria-hidden="true">
+                        <use xlink:href="#iconshouye"></use>
+                   </svg>
+                   <p>首页</p>
+                   <!-- <img slot="icon" slot-scope="props" :src="props.active ? icon.active : icon.normal"> -->
+                </van-tabbar-item>
+                <van-tabbar-item to="/vip" >
+                     <svg class="icon"  aria-hidden="true">
+                        <use xlink:href="#iconvip2"></use>
+                     </svg>
+                   <p>VIP</p>
+                </van-tabbar-item>
+                <van-tabbar-item to="/personalCenter">
+                    <svg class="icon"  aria-hidden="true">
+                        <use xlink:href="#icongerenzhongxin"></use>
+                     </svg>
+                   <p>个人中心</p>
+                </van-tabbar-item>
+                <van-tabbar-item  to="/share">
+                   <svg class="icon"  aria-hidden="true" >
+                        <use xlink:href="#iconiconset0398"></use>
+                    </svg>
+                   <p>AI雷达</p>
+                </van-tabbar-item>
+                <van-tabbar-item  to="/financialCircle">
+                   <svg class="icon"  aria-hidden="true">
+                        <use xlink:href="#iconjinrongquan"></use>
+                    </svg>
+                   <p>金融圈</p>
+                </van-tabbar-item>
             </van-tabbar>
+
 
 
 
@@ -49,8 +101,15 @@ export default {
 </script>
 <style lang="less">
     #footer-com{
+        .icon {
+            width:30%;
+            height:60px;
+            text-align: center;
+        }
         .foot{
             z-index:99;
+            text-align: center;
+
         }
         .van-tabbar {
             height: 100px;

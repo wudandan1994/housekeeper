@@ -1,8 +1,76 @@
 <template>
     <div id="progress-query">
         <div class="container">
-           <div class="logo">
+           <!-- <div class="logo">
                <img src="http://pay.91dianji.com.cn/logo.png" alt="">
+           </div> -->
+          
+           <div class="animation">
+               <!-- <div class="sun">
+                    <div class="logo">
+                        <img src="http://pay.91dianji.com.cn/logo.png" alt="">
+                    </div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+                   <div class="ray"></div>
+               </div> -->
            </div>
            <div class="info">
                 <p>
@@ -55,8 +123,6 @@ export default {
     },
 
     methods:{
-        // password(){
-        // },
         forgetPassword() {
             this.$router.push('/forgetPassword')
         },
@@ -199,9 +265,98 @@ export default {
         //    padding-top:96px;
            padding-bottom: 50px;
            background-color: #fff;
-           >.logo {
+           
+        
+           .animation {
+                 display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                // padding-top:100px;
+               .sun {
+                   position: relative;
+                   width:50vmin;
+                   height:50vmin;
+                   border-radius: 100%;
+                //    background-color:#ebf259; 
+                   box-shadow: inset #f3eeea 0 0 0 4vmin;
+                   animation: shimmer 6s ease alternate infinite;
+                   -webkit-animation:  shimmer 6s ease alternate infinite;
+                   .ray {
+                       position: absolute;
+                       top:0;
+                       left:25vmin;
+                       width:1.25vmin;
+                       height: 6.25vmin;
+                       transform-origin: 0 25vmin;
+                       -webkit-transform-origin: 0.25vmin;
+
+                   }
+                   .ray:nth-child(1){
+                       transform: rotate(6deg);
+                       -webkit-transform:  rotate(6deg);
+                   }
+                   .ray:nth-child(1):before,
+                   .ray:nth-child(1):after{
+                       animation-delay: -0.33s;
+                       -webkit-animation-delay: -0.33s;
+                   }
+                  
+                    .ray:before, .ray:after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        background-color: #e36700;
+                    }
+                    .ray:after {
+                        height: 100%;
+                        -webkit-transform-origin: 50% 100%;
+                        transform-origin: 50% 100%;
+                        -webkit-animation: wave 0.8s linear alternate infinite;
+                        animation: wave 0.8s linear alternate infinite;
+                     }
+                      .ray:before {
+                        height: 20%;
+                        border-radius: 100%;
+                        -webkit-transform-origin: 50% 0;
+                        transform-origin: 50% 0;
+                        -webkit-animation: flare 1.6s linear infinite;
+                        animation: flare 1.6s linear infinite;
+                    }
+
+
+
+
+                   .ray:nth-child(3n + 1):before, .ray:nth-child(3n + 1):after {
+                        background-color: #f2c559;
+                    }
+
+                     @keyframes wave {
+                        from {
+                           height: 0;
+                           width:100%;
+                            }
+                        to {
+                             height: 100%;
+                              width:200%;
+                        }
+                    }
+                    @keyframes flare {
+                        from {
+                           top:0;
+                          
+                            }
+                        to {
+                            top:20%;
+                        }
+                    }
+               }
+           }
+           .logo {
                padding-top:100px;
-               width:40%;
+               width:100%;
                 margin:0 auto;
                >img {
                    display: block;

@@ -10,6 +10,9 @@
                     <img class="bg" src="http://pay.91dianji.com.cn/AI@2x.png" alt="">
                     <img class="scan" src="http://pay.91dianji.com.cn/pay_AI_center@2x.png" alt="">
                     <img class="logo" src="http://pay.91dianji.com.cn/logo@2x.png" alt="">
+                    <div class="white appear "></div>
+                    <div class="two  appear"></div>
+                    <div class="three  appear"></div>
                 </div>
                 
             </router-link>
@@ -165,14 +168,16 @@ export default {
             }
             .circle{
                 width: 100%;
-                height: auto;
+                // height: auto;
+                height: 100%;
                 position: absolute;
                 top: 160px;
                 right: 0px;
                 z-index: 3;
                 .container{
                     width: 90%;
-                    height: auto;
+                    // height: auto;
+                    height: 100%;
                     position: relative;
                     z-index: 1;
                     .bg{
@@ -201,7 +206,60 @@ export default {
                         left: 265px;
                         z-index: 4;
                     }
+                    .white {
+                        width:20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        left:56%;
+                        top:46%;
+                        position: absolute;
+                        background-color: #fff;
+                        z-index: 10;
+                         animation: Movewhite 3s linear 3s normal;
+                        -webkit-animation: Movewhite 3s linear 3s infinite ;
+                    }
+                    .three {
+                        width:20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        left:70%;
+                        top:50%;
+                        position: absolute;
+                        background-color: #fff;
+                        z-index: 10;
+                         animation: Movethree 3s linear 3s normal;
+                        -webkit-animation: Movethree 3s linear 3s infinite ;
+                    }
+                    .two {
+                         width:20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        left:48%;
+                        top:60%;
+                        position: absolute;
+                        background-color: #fff;
+                        z-index: 10;
+                         animation: Movetwo 3s linear 3s normal;
+                        -webkit-animation: Movetwo 3s linear 3s infinite ;
+                    }
                 }
+
+                
+
+                 @keyframes Movetwo {
+                    from {opacity: 1;}
+                    to {opacity: 0;}
+                }
+                 @keyframes Movethree {
+                    from {opacity: 1;}
+                    to {opacity: 0;}
+                }
+                 @keyframes Movewhite {
+                    from {opacity: 1;}
+                    to {opacity: 0;}
+                }
+
+
                 @keyframes myMove1 {
                     from {transform: rotate(360deg);}
                     to {transform: rotate(0deg);}
