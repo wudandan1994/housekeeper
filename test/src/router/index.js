@@ -15,7 +15,6 @@ import addCardComponent from '@/pages/addCard'
 import logOutComponent from '@/pages/logOut'
 import insertEsiCashComponent from '@/pages/insertEsiCash'
 import iframeComponent from '@/pages/insertEsiCash/iframe.vue'
-
 import creditHousekeeperComponent from '@/pages/creditHousekeeper'
 import aisleHousekeeperComponent from '@/pages/aisleHousekeeper'
 import registerComponent from '@/pages/register'
@@ -44,6 +43,8 @@ import systemNewsComponent from '@/pages/systemNews'
 import vipComponent from '@/pages/vip'
 import personalCenterComponent from '@/pages/personalCenter'
 import shareComponent from '@/pages/share'
+import DHbindComponent from '@/pages/DHbind' // 第三条还款通道
+
 import financialCircleComponent from '@/pages/financialCircle'
 import realNameComponent from '@/pages/realName'
 import creditEnquiryComponent from '@/pages/creditEnquiry'
@@ -56,10 +57,7 @@ import recordsComponent from '@/pages/records'
 import largeAmountComponent from '@/pages/largeAmount'  // 大额鉴权
 import largeCardComponent from '@/pages/largeCard'
 import evaluationComponent from '@/pages/evaluation'
-
-
-
-
+import activeComponent from '@/pages/active' // 大额激活
 import loan from '@/pages/loan'
 import loandetail from '@/pages/loan/detail'
 import form from '@/pages/loan/form'
@@ -168,8 +166,10 @@ export default new Router({
     {path:"/home/insertEsiCash",component:insertEsiCashComponent}, //绑定第三方信用卡
     {path:"/home/insertEsiCash/iframe",component:iframeComponent}, //绑定第三方信用卡返回页面
     {path:"/home/largeAmount",component:largeAmountComponent}, // 大额鉴权
+    {path:"/home/active",component:activeComponent}, // 大额激活
     {path:"/home/largeCard",component:largeCardComponent},
     {path:"/home/evaluation",component:evaluationComponent}, //卡测评
+    {path:"/home/DHbind",component:DHbindComponent}, //第三条还款通道
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},
     {path:"/share/promotionMaterial",component:promotionMaterialComponent},

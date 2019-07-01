@@ -28,6 +28,9 @@
                 <van-button @click="submit" round size="large" type="default">提交</van-button>
             </div>
         </div>
+
+      <loading :componentload="componentload"></loading>
+
     </div>
 
 </template>
@@ -35,14 +38,19 @@
 
 <script>
 import {axiosPost} from '@/lib/http'
+import loading from '@/components/loading'
 export default {
+    components:{
+      loading
+    },
     data() {
         return {
            paymer_name:"",
            paymer_idcard:"",
            paymer_bank_no:"",
            paymer_phone:"",
-           info:""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+           info:"",
+            componentload: false,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
         }
     },
     methods:{
@@ -77,47 +85,40 @@ export default {
                     paymer_phone:this.paymer_phone,
                     bindId:this.info.bindId
                    };
+                    this.componentload=true
+
                 axiosPost("/vtdcreditCard/insertAuthent",data)
                 .then(res=>{
-                    if(!res.data.success){
-                        this.$toast({
+                   
+                    setTimeout(()=>{
+                         this.componentload=false
+                         if(!res.data.success && res.data.code=='100'){
+                          this.$router.push({
+                             path:"/home/largeCard",
+                             query:{
+                                 info:this.info
+                             }
+                         })
+                     } else if(!res.data.success){
+                               this.$toast({
                             message:res.data.message
-                        })
-
-                    }  else {
+                         })
+                     }   else  {
                          this.$router.push({
                              path:"/home/largeCard",
                              query:{
-
+                                 info:this.info
                              }
                          })
-                       
-                    }
+                      }
+                    },1000)
                 })
                 .catch(err=>{
-                    // console.log(err,"error");
                 })
             
         },
-        // 获取实名认证信息
-        // handleGetAOuth(){
-        //     let url = '/customer/getIdentification';
-        //     let params = {};
-        //     axiosPost(url,params).then(res =>{
-        //         // console.log('获取实名认证状态成功',res);
-        //         if(res.data.data.status != '0'){
-        //             this.name = res.data.data.name;
-        //             this.idCard = res.data.data.idcardnumber;
-        //             this.phone = this.$store.state.wechat.mobile;
-                   
-        //         }
-        //     }).catch(res =>{
-        //         // console.log('获取实名认证状态失败',res);
-        //     })
-        // }
     },
     created(){
-        // this.handleGetAOuth();
         this.info=this.$route.query.info
         this.paymer_name=this.info.payerName
         this.paymer_idcard=this.info.idCardNo
@@ -130,7 +131,7 @@ export default {
 <style lang="less">
    #large-amount{
        >header {
-            background-color: #4B66AF;
+           background-color: #4965AE;
            width:100%;
            height: 86px;
            line-height: 86px;
@@ -194,7 +195,7 @@ export default {
                 width: 30vw;
                 height: 100%;
                 >div{
-                    background: #4B66AF;
+                    background: #4965AE;
                     color: white;
                     padding: 15px;
                     border-radius: 10px;
@@ -208,6 +209,9 @@ export default {
                >button{
                    height: 90px;
                    font-size: 28px;
+               }
+               .van-button--default {
+                   background-color: #4965AE;
                }
            }
        }

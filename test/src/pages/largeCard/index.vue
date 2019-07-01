@@ -26,27 +26,33 @@
                    </li> 
                     <li>
                         <span>有效期：</span>
-                       <input v-model="validity"  type="number" placeholder="信用卡有效期">
+                       <input v-model="validity"  type="number" placeholder="信用卡有效期如05/22 请填写0522">
                    </li>
                     <li>
                        <span>安全码：</span>
-                       <input type="number" v-model="cvv2" placeholder="信用卡后三位安全码如05/22 请填写0522">
+                       <input type="number" v-model="cvv2" placeholder="信用卡后三位安全码">
                    </li> 
                </ul>
               <div @click="bindingCard" class="btn">
                 <van-button round size="large" type="info">确认绑定</van-button>
-             </div>
+              </div>
            </div>
         </div>
+        <loading :componentload="componentload"></loading>
     </div>
 </template>
 <script>
 import area from '@/config/area.js'
+import loading from '@/components/loading'
 import {axiosPost,axiosGet} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
+     components:{
+      loading
+    },
     data(){
         return{
+            componentload: false,
             area: '请选择支行地址',
             show: false,
             title: '获取验证码',
@@ -56,11 +62,21 @@ export default {
             card_no:"",
             phone:"",
             validity:"",
-            cvv2:""
+            cvv2:"",
+            info:"",
+            //  auth_order_no:""
         }
     },
     created(){
-        
+        this.info=this.$route.query.info
+        // console.log(this.info)
+        // this.auth_order_no=this.$route.query.auth
+        this.user_name=this.info.payerName
+        this.id_no=this.info.idCardNo
+        this.card_no=this.info.cardNo
+        this.phone=this.info.phone
+        this.cvv2=this.info.cvv2
+        this.validity=this.info.year+this.info.month
     },
     methods:{
         handleReturnHome(){
@@ -94,7 +110,7 @@ export default {
             } 
 
              let data={
-                auth_order_no:"",
+                // auth_order_no:this.auth_order_no,
                 user_name:this.user_name,
                 id_no:this.id_no,
                 card_no:this.card_no,
@@ -102,25 +118,39 @@ export default {
                 validity:this.validity,
                 cvv2:this.cvv2,
                 bank_type:"6",
-                bindId:""
+                bindId:this.info.bindId
              }
-              axiosPost("/creditCard/bindCreditCard",data)
+              axiosPost("/vtdcreditCard/insertEnterNet",data)
               .then(res=>{
-                  if(!res.data.success){
+                this.componentload=true
+                setTimeout(()=>{
+                     this.componentload=false
+                      if(!res.data.success){
                       this.$toast({
                           message:res.data.message
                       })
                   } else {
-                      this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
-                  }               
+                      let user_no=res.data.data.user_no
+                      this.$router.push({
+                          path:"/home/active",
+                          query:{
+                              user:user_no,
+                              info:this.info
+                          }
+                      })
+                  }  
+
+                },1000)
+                              
               })
               .catch(err=>{
-                  
+                   if(!err.data.success){
+                       this.$toast({
+                           message:err.data.message
+                       })
+                   }
               })
-
-        }
-
-       
+          }
     }    
 }
 </script>
@@ -141,7 +171,8 @@ export default {
                         font-size: 30px;
                         >button {
                             height:80px;
-                            background-color: #4B66AF;
+                            background-color: #4965AE;
+                            border:1px solid #4965AE;
                         }
                     }
                >ul{
@@ -188,7 +219,7 @@ export default {
            }
         }
         .loan .van-nav-bar {
-          background-color: #4B66AF!important;
+          background-color: #4965AE!important;
           height: 96px;
           line-height: 96px;
          }
@@ -285,7 +316,7 @@ export default {
                 width: 30vw;
                 height: 100%;
                 >div{
-                    background: #4B66AF;
+                    background: #4965AE;
                     color: white;
                     padding: 15px;
                     border-radius: 10px;
@@ -298,7 +329,7 @@ export default {
             padding-bottom: 30px;
             margin-left: auto;
             margin-right: auto;
-            background-color: #4B66AF;
+            background-color: #4965AE;
             color: white;
             margin-top: 50px;
             border-radius: 20px;
