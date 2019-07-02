@@ -10,7 +10,7 @@
                <span class="location">
                 </span>
             </div>  
-            <span>首页</span>
+            <span class="icon"><img src="http://pay.91dianji.com.cn/top_icon.png" alt=""></span>
             <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
         </header>
         <div class="container">
@@ -75,7 +75,7 @@
                     <li @click="handleIsAuth('/loan/detail')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
                         <div class="channel">
-                            <h3>我要贷款</h3>
+                            <h3>信息咨询</h3>
                             <p>实时审批&nbsp;授信额度</p>
                             <span>GO>></span>
                         </div>  
@@ -158,7 +158,7 @@
                     </router-link>
                     <div @click="handleIsAuth('/loan/detail')" class="secret">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
-                        <div class="center">我要贷款</div>
+                        <div class="center">信息咨询</div>
                     </div>
                         <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
@@ -217,6 +217,7 @@
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
          <!-- 绑定手机模块 -->
         <bindMobile></bindMobile>
+        <!-- <loading :componentload="componentload"></loading> -->
     </div>
 </template>
 <script>
@@ -224,14 +225,17 @@ import footerMenu from '@/components/footer'
 import bindMobile from '@/components/bindMobile'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
+// import loading from '@/components/loading'
 export default {
   components:{
       footerMenu,
-      bindMobile
+      bindMobile,
+    //   loading
   },
      data() {
         return {
             // 轮播图图片
+            componentload: true,
             images: [
                 {
                     routes: '/vip',
@@ -439,7 +443,6 @@ export default {
                     }
                 })
             } else {
-                this.componentload=false
                 location.href= 'https://m2.weizhang8.cn/'
             }
         }
@@ -490,7 +493,32 @@ export default {
             >.news {
                 margin-right:15px;
             }
-       }
+            .icon{
+                width: 60px;
+                height: 60px;
+                img{
+                    width: 60px;
+                    height: 60px;
+                    animation: myfirst 5s ease-in-out infinite;
+                    -moz-animation: myfirst 5s ease-in-out infinite;	/* Firefox */
+                    -webkit-animation: myfirst 5s ease-in-out infinite;	/* Safari 和 Chrome */
+                    -o-animation: myfirst 5s ease-in-out infinite;
+                   
+                }
+                @keyframes myfirst
+                {
+                    0%{
+                        transform: rotateY(0deg);
+                    }
+                    50%{
+                        transform: rotateY(360deg);
+                    }
+                    100%{
+                        transform: rotateY(0deg);
+                    }
+                }
+            }
+        }
        .container {
             padding-bottom:96px;
             overflow-x: hidden;

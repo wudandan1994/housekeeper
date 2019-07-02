@@ -1,77 +1,9 @@
 <template>
     <div id="progress-query">
         <div class="container">
-           <!-- <div class="logo">
-               <img src="http://pay.91dianji.com.cn/logo.png" alt="">
-           </div> -->
-          
-           <div class="animation">
-               <!-- <div class="sun">
-                    <div class="logo">
-                        <img src="http://pay.91dianji.com.cn/logo.png" alt="">
-                    </div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-                   <div class="ray"></div>
-               </div> -->
-           </div>
+            <div class="logo center">
+                <img src="http://pay.91dianji.com.cn/top_icon.png" alt="">
+            </div>
            <div class="info">
                 <p>
                     <span><van-icon name="phone" size="28px"/></span>
@@ -95,12 +27,9 @@
                     <p>登录</p>
                 </div>
            </div>
-            <div class="wx-login row">
-                <div class="logIn start-center" @click="logIn">
-                    <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
-                    <span>微信登录</span>
-                </div>
-                <!-- <div class="register end-center" @click="register">注册</div> -->
+            <div class="wx-login" @click="logIn">
+                <div class="center">———————其他登录方式———————</div>
+                <div class="center"><van-icon size="28px" name="http://pay.91dianji.com.cn/wx.png"/></div>
             </div>
         </div>
     </div>
@@ -245,7 +174,6 @@ export default {
            width:100%;
            height: 86px;
            line-height: 86px;
-           padding-top:10px;
            color:#fff;
            display: flex;
            font-size:28px;
@@ -262,134 +190,35 @@ export default {
            }
        }
        >.container {
-        //    padding-top:96px;
-           padding-bottom: 50px;
-           background-color: #fff;
-           
-        
-           .animation {
-                 display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 100%;
-                // padding-top:100px;
-               .sun {
-                   position: relative;
-                   width:50vmin;
-                   height:50vmin;
-                   border-radius: 100%;
-                //    background-color:#ebf259; 
-                   box-shadow: inset #f3eeea 0 0 0 4vmin;
-                   animation: shimmer 6s ease alternate infinite;
-                   -webkit-animation:  shimmer 6s ease alternate infinite;
-                   .ray {
-                       position: absolute;
-                       top:0;
-                       left:25vmin;
-                       width:1.25vmin;
-                       height: 6.25vmin;
-                       transform-origin: 0 25vmin;
-                       -webkit-transform-origin: 0.25vmin;
-
-                   }
-                   .ray:nth-child(1){
-                       transform: rotate(6deg);
-                       -webkit-transform:  rotate(6deg);
-                   }
-                   .ray:nth-child(1):before,
-                   .ray:nth-child(1):after{
-                       animation-delay: -0.33s;
-                       -webkit-animation-delay: -0.33s;
-                   }
-                  
-                    .ray:before, .ray:after {
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        background-color: #e36700;
+            padding-bottom: 50px;
+            background-color: #fff;
+            .logo{
+                width: 100%;
+                height: 200px;
+                margin-top: 50px;
+                img{
+                    width: 200px;
+                    height: 200px;
+                    animation: myfirst 5s ease-in-out infinite;
+                    -moz-animation: myfirst 5s ease-in-out infinite;	/* Firefox */
+                    -webkit-animation: myfirst 5s ease-in-out infinite;	/* Safari 和 Chrome */
+                    -o-animation: myfirst 5s ease-in-out infinite;
+                }
+                @keyframes myfirst {
+                    0%{
+                        transform: rotateY(0deg);
+                        opacity: 1;
                     }
-                    .ray:after {
-                        height: 100%;
-                        -webkit-transform-origin: 50% 100%;
-                        transform-origin: 50% 100%;
-                        -webkit-animation: wave 0.8s linear alternate infinite;
-                        animation: wave 0.8s linear alternate infinite;
-                     }
-                      .ray:before {
-                        height: 20%;
-                        border-radius: 100%;
-                        -webkit-transform-origin: 50% 0;
-                        transform-origin: 50% 0;
-                        -webkit-animation: flare 1.6s linear infinite;
-                        animation: flare 1.6s linear infinite;
+                    50%{
+                        transform: rotateY(360deg);
+                        opacity: 0.8;
                     }
-
-
-
-
-                   .ray:nth-child(3n + 1):before, .ray:nth-child(3n + 1):after {
-                        background-color: #f2c559;
+                    100%{
+                        transform: rotateY(0deg);
+                        opacity: 1;
                     }
-
-                     @keyframes wave {
-                        from {
-                           height: 0;
-                           width:100%;
-                            }
-                        to {
-                             height: 100%;
-                              width:200%;
-                        }
-                    }
-                    @keyframes flare {
-                        from {
-                           top:0;
-                          
-                            }
-                        to {
-                            top:20%;
-                        }
-                    }
-               }
-           }
-           .logo {
-               padding-top:100px;
-               width:100%;
-                margin:0 auto;
-               >img {
-                   display: block;
-                   width:100%;
-                   padding-bottom: 20px;
-                   -webkit-animation: spin 4s linear infinite;
-		           animation: spin 2s linear infinite;
-               }
-            //    @-webkit-keyframes spin {
-            //             0%   {
-            //                 -webkit-transform: rotate(0deg);
-            //                 -ms-transform: rotate(0deg);
-            //                 transform: rotate(0deg);
-            //             }
-            //             100% {
-            //                 -webkit-transform: rotate(360deg);
-            //                 -ms-transform: rotate(360deg);
-            //                 transform: rotate(360deg);
-            //             }
-            //         }
-            //         @keyframes spin {
-            //             0%   {
-            //                 -webkit-transform: rotate(0deg);
-            //                 -ms-transform: rotate(0deg);
-            //                 transform: rotate(0deg);
-            //             }
-            //             100% {
-            //                 -webkit-transform: rotate(360deg);
-            //                 -ms-transform: rotate(360deg);
-            //                 transform: rotate(360deg);
-            //             }
-            //         }
-           }
+                }
+            }
            >.info {
                width:80%;
                margin:80px 10% 0px 10%;
@@ -438,6 +267,7 @@ export default {
                width:80%;
                  margin:0 auto;
                padding:0 30px;
+               
                >.log {
                    width:100%;
                    height: 100px;
@@ -456,23 +286,15 @@ export default {
             //    }
            }
            
-           >.wx-login {
-                width:80%;
-                height: 80px;
-                margin-left: 10%;
-                display: flex;
-                justify-content: space-around;
-                margin-top:20px;
-                font-size: 32px;
-                .logIn{
-                    width: 70%;
-                    height: 100%;
-                }
-                .register{
-                    width: 30%;
-                    height: 100%;
-                }
-           }
+            .wx-login {
+                 width: 100%;
+                 height: 100px;
+                 margin: 50px auto;   
+                 >div{
+                     width: 100%;
+                     height: 50px;
+                 }
+            }
        }
    }
 </style>

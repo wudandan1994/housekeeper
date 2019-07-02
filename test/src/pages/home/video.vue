@@ -5,17 +5,17 @@
             <div class="top-title center">新人教程</div>
             <div class="right-icon center"></div>
         </header>
-        <div class="video center one">
+        <div class="video center one_video">
             <span>钱夹宝介绍</span>
             <span class="center" @click="handleVideo('https://m.youku.com/video/id_XNDE5MjE3MjYzMg==.html?spm=a2h3j.8428770.3416059.1&source=&sharetype=secondtime&from=singlemessage')">去观看<van-icon name="arrow"/></span>
         </div>
-        <div class="video center two">
+        <div class="video center two_video">
             <span>商户收款教程</span>
-            <span class="center" @click="handleVideo('https://v.youku.com/v_show/id_XNDIzMTIzNzY0OA==.html?spm=a2h3j.8428770.3416059.1')">去观看<van-icon name="arrow"/></span>
-        </div>
-        <div class="video center three">
-            <span>智能还款教程</span>
             <span class="center" @click="handleVideo('https://v.youku.com/v_show/id_XNDIzMTIzMzA2MA==.html?spm=a2h3j.8428770.3416059.1')">去观看<van-icon name="arrow"/></span>
+        </div>
+        <div class="video center three_video">
+            <span>智能还款教程</span>
+            <span class="center" @click="handleVideo('https://v.youku.com/v_show/id_XNDIzMTIzNzY0OA==.html?spm=a2h3j.8428770.3416059.1')">去观看<van-icon name="arrow"/></span>
         </div>
     </div>
 </template>
@@ -72,13 +72,13 @@ export default {
             }
         }
     }
-    .one{
+    .one_video{
         background-image: linear-gradient(100deg, #fe7d64 0%, #ff3f2b 100%), linear-gradient(#4f60c8, #4f60c8);
     }
-    .two{
+    .two_video{
         background-image: linear-gradient(100deg, #bb8e6b 0%, #9b6130 100%), linear-gradient(#4f60c8, #4f60c8);
     }
-    .three{
+    .three_video{
         background-image: linear-gradient(100deg, #fcc53d 0%, #ffa800 100%), linear-gradient(#4f60c8, #4f60c8);
     }
 }

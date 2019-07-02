@@ -87,6 +87,13 @@ export default {
         // 查看下级明细
         hanleNextDetail(item){
             console.log('查看下级明细参数',item);
+            this.$router.push({
+                path: '/nextLevel',
+                query: {
+                    title: item.title,
+                    number: item.number
+                }
+            })
         }
     },
     mounted(){
