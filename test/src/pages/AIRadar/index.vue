@@ -1,13 +1,13 @@
 <template>
-    <div id="switch_page">
+    <div id="switch_page" class="fold">
         <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="black" size="20px" name="arrow-left"/></div>
             <div class="top-title center">AI雷达</div>
             <div class="right-icon center"></div>
         </header>
         <div class="top">
-            <div class="avator"><img src="http://pay.91dianji.com.cn/touxiang.jpg" alt=""></div>
-            <div class="nickname">霸王别急</div>
+            <div class="avator"><img :src="headimg" alt=""></div>
+            <div class="nickname">{{nickname}}</div>
             <div class="slogan">我的获客工具——AI雷达</div>
         </div>
         <body class="body">
@@ -32,6 +32,8 @@ import switchTab from '@/components/radar/switch'
 export default {
     data(){
         return{
+            nickname: '',
+            headimg: '',
             options:[
                 {
                     id: '0',
@@ -61,7 +63,7 @@ export default {
                     number: '46467'
                 },
                 {
-                    id: '4',
+                    id: '3',
                     title: '我的团队',
                     number: '245321'
                 }
@@ -91,13 +93,15 @@ export default {
                 path: '/nextLevel',
                 query: {
                     title: item.title,
-                    number: item.number
+                    number: item.number,
+                    id: item.id
                 }
             })
         }
     },
-    mounted(){
-
+    created(){
+        this.nickname = this.$store.state.wechat.nickname;
+        this.headimg = this.$store.state.wechat.headimg;
     }
 }
 </script>
@@ -140,7 +144,7 @@ export default {
                 font-weight: 700;
                 position: absolute;
                 top: 45px;
-                left: 165px;
+                left: 185px;
             }
             .slogan{
                 font-size: 30px;
@@ -148,7 +152,7 @@ export default {
                 font-weight: 700;
                 position: absolute;
                 top: 100px;
-                left: 165px;
+                left: 185px;
             }
         }
         .body{

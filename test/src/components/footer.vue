@@ -29,13 +29,13 @@
                 </div>
                 <div class="foot_title center" :class="now == '3' ? 'now' : ''">AI雷达</div>
             </div>
-            <div class="foot_menus" @click="handlenow('4','/financialCircle')">
+            <!-- <div class="foot_menus" @click="handlenow('4','/financialCircle')">
                 <div class="foot_icon center">
                     <img class="icon_active" v-if="now == '4'" src="http://pay.91dianji.com.cn/footer_05-1.png" alt="">
                     <img class="icon_normal" v-else src="http://pay.91dianji.com.cn/footer_05.png" alt="">
                 </div>
                 <div class="foot_title center" :class="now == '4' ? 'now' : ''">金融圈</div>
-            </div>
+            </div> -->
         </footer>
     </div>
 </template>
@@ -78,7 +78,7 @@ export default {
             width: 100%;
             height: 100%;
             .foot_menus{
-                width: 20%;
+                width: 25%;
                 height: 100%;
                 .now{
                     color: #4b66af;

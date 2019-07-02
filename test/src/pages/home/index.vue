@@ -218,11 +218,13 @@
          <!-- 绑定手机模块 -->
         <bindMobile></bindMobile>
         <!-- <loading :componentload="componentload"></loading> -->
+        <notice></notice>
     </div>
 </template>
 <script>
 import footerMenu from '@/components/footer'
 import bindMobile from '@/components/bindMobile'
+import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 // import loading from '@/components/loading'
@@ -230,6 +232,7 @@ export default {
   components:{
       footerMenu,
       bindMobile,
+      notice
     //   loading
   },
      data() {
