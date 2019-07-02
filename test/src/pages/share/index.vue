@@ -1,25 +1,33 @@
 <template>
     <div id="radar">
         <div class="header">
-            <div class="title center">AI雷达</div>
-            <div class="more center" @click="handleExpect"><van-icon name="weapp-nav" size="28px"/></div>
-            <div class="AI start-center"><van-icon size="20px" name="aim"/>&nbsp;AI雷达</div>
-            <div class="Analysis end-center" @click="handleExpect">数据分析&nbsp; <van-icon size="20px" name="http://fx.91dianji.com.cn/fengxing_jiantou.png"/></div>
+            <div class="big-title row">
+                <div class="top-title center">AI雷达</div>
+                <div class="more center" @click="handleExpect"><van-icon name="weapp-nav" size="28px"/></div>
+            </div>
+            <div class="AI-Analysis">
+                <div class="AI start-center"><van-icon size="20px" name="aim"/>&nbsp;AI雷达</div>
+                <div class="Analysis end-center" @click="handleExpect">数据分析&nbsp; <van-icon size="20px" name="http://fx.91dianji.com.cn/fengxing_jiantou.png"/></div>
+            </div>
+            
             <router-link tag="div" to="/radar" class="circle center">
                 <div class="container">
-                    <img class="bg" src="http://pay.91dianji.com.cn/AI@2x.png" alt="">
-                    <img class="scan" src="http://pay.91dianji.com.cn/pay_AI_center@2x.png" alt="">
-                    <img class="logo" src="http://pay.91dianji.com.cn/logo@2x.png" alt="">
-                    <div class="white appear "></div>
-                    <div class="two  appear"></div>
-                    <div class="three  appear"></div>
+                    <div class="radar"></div>
+                    <img class="logo center" src="http://pay.91dianji.com.cn/logo@2x.png" alt=""> 
                 </div>
-                
             </router-link>
             <div class="btn">
-                <div class="center" @click="handleExpect">AI报表</div>
-                <div class="center" @click="handleExpect">客户表单</div>
+                <div class="column" @click="handleExpect">
+                    <div class="center">下级浏览数</div>
+                    <div class="center">21321321321</div>
+                </div>
+                <div class="column" @click="handleExpect">
+                    <div class="center">我的团队</div>
+                    <div class="center">32323232</div>
+                </div>
             </div>
+            
+
         </div>
         <div class="business">
             <ul>
@@ -85,9 +93,6 @@
                 </li>
             </ul>
         </div>
-        
-
-
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
     </div>
 </template>
@@ -122,186 +127,170 @@ export default {
         overflow-x: hidden;
         .header{
             width: 100%;
-            height: 980px;
+            height: calc(90vw + 330px);
             background: #4b66af;
             position: relative;
-            z-index: 1;
-            .title{
+            .big-title{
                 width: 100%;
                 height: 80px;
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 2;
-                font-size: 34px;
-                color: #ffffff;
-                font-weight: 700;
+                color: #fff;
+                .top-title{
+                    flex-basis: 80%;
+                    margin-left: 10%;
+                    font-size: 32px;
+                    font-weight: 700;
+                }
+                .more{
+                    flex-basis: 10%;
+                }
             }
-            .more{
-                width: 15%;
+            .AI-Analysis{
+                width: 96%;
                 height: 80px;
-                position: absolute;
-                top: 0;
-                right: 0;
-                z-index: 3;
-                color: #ffffff;
-            }
-            .AI{
-                width: auto;
-                height: 80px;
-                position: absolute;
-                top: 80px;
-                left: 20px;
-                z-index: 3;
-                color: #ffffff; 
-                font-size: 26px;
-            }
-            .Analysis{
-                width: auto;
-                height: 80px;
-                position: absolute;
-                top: 80px;
-                right: 20px;
-                z-index: 3;
-                color: #ffffff; 
-                font-size: 26px;
+                margin: 0px 2%;
+                display: flex;
+                display: -webkit-flex;
+                justify-content: space-between;
+                -webkit-justify-content: space-between;
+                color: #fff;
             }
             .circle{
                 width: 100%;
-                // height: auto;
-                height: 100%;
-                position: absolute;
-                top: 160px;
-                right: 0px;
-                z-index: 3;
+                height: 90vw;
                 .container{
-                    width: 90%;
-                    // height: auto;
-                    height: 100%;
+                    width: 90vw;
+                    height: 90vw;
                     position: relative;
                     z-index: 1;
-                    .bg{
-                        width: 100%;
-                        height: auto;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        z-index: 2;
+                    border-radius: 50%;
+                    .radar {
+                        width: 90vw;
+                        height: 90vw;
+                        max-height: 90vh;
+                        max-width: 90vh;
+                        position: relative;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        border-radius: 50%;
+                        overflow: hidden;
+                        background: url('http://pay.91dianji.com.cn/AI@2x.png');
+                        background-size: contain;
                     }
-                    .scan{
+                    .radar:before {
+                        content: ' ';
+                        display: block;
+                        position: absolute;
                         width: 100%;
-                        height: auto;
+                        height: 100%;
+                        border-radius: 50%;
+                        animation: blips 5s infinite;
+                        animation-timing-function: linear;
+                        animation-delay: 1.4s;
+                    }
+                    .radar:after {
+                        content: ' ';
+                        display: block;
+                        background-image: linear-gradient(44deg, rgba(0, 255, 51, 0) 50%, #ffffff 100%);
+                        width: 50%;
+                        height: 50%;
                         position: absolute;
                         top: 0;
                         left: 0;
-                        z-index: 3;
-                        animation: myMove1 4s linear infinite normal;
-                        -webkit-animation: myMove1 4s linear infinite normal;
+                        animation: radar-beam 5s infinite;
+                        animation-timing-function: linear;
+                        transform-origin: bottom right;
+                        border-radius: 100% 0 0 0;
+                    }
+
+                    @keyframes radar-beam {
+                        0% {
+                            transform: rotate(0deg);
+                        }
+                        100% {
+                            transform: rotate(360deg);
+                        }
+                    }
+                    @keyframes blips {
+                        14% {
+                            background: radial-gradient(2vmin circle at 75% 70%, #ffffff 10%, #ffffff  30%, rgba(255, 255, 255, 0) 100%);
+                        }
+                        14.0002% {
+                            background: radial-gradient(2vmin circle at 75% 70%, #ffffff 10%, #ffffff 30%, rgba(255, 255, 255, 0) 100%), radial-gradient(2vmin circle at 63% 72%, #ffffff 10%, #ffffff 30%, rgba(255, 255, 255, 0) 100%);
+                        }
+                        25% {
+                            background: radial-gradient(2vmin circle at 75% 70%, #ffffff 10%, #ffffff 30%, rgba(255, 255, 255, 0) 100%), radial-gradient(2vmin circle at 63% 72%, #ffffff 10%, #ffffff 30%, rgba(255, 255, 255, 0) 100%), radial-gradient(2vmin circle at 56% 86%, #ffffff 10%, #ffffff 30%, rgba(255, 255, 255, 0) 100%);
+                        }
+                        26% {
+                            background: radial-gradient(2vmin circle at 75% 70%, #ffffff 10%, #ffffff 30%, rgba(255, 255, 255, 0) 100%), radial-gradient(2vmin circle at 63% 72%, #ffffff 10%, #ffffff 30%, rgba(255, 255, 255, 0) 100%), radial-gradient(2vmin circle at 56% 86%, #ffffff 10%, #ffffff 30%, rgba(255, 255, 255, 0) 100%);
+                            opacity: 1;
+                        }
+                        100% {
+                            background: radial-gradient(2vmin circle at 75% 70%, #ffffff 10%, #ffffff 30%, rgba(255, 255, 255, 0) 100%), radial-gradient(2vmin circle at 63% 72%, #ffffff 10%, #ffffff 30%, rgba(255, 255, 255, 0) 100%), radial-gradient(2vmin circle at 56% 86%, #ffffff 10%, #ffffff 30%, rgba(255, 255, 255, 0) 100%);
+                            opacity: 0;
+                        }
                     }
                     .logo{
-                        width: 146px;
+                        width: 20vw;
                         height: auto;
                         position: absolute;
-                        top: 265px;
-                        left: 265px;
+                        top: 35vw;
+                        left: 35vw;
                         z-index: 4;
+                        animation:  bling 1s linear infinite;
+                        -webkit-animation:  bling 1s linear infinite;
                     }
-                    .white {
-                        width:20px;
-                        height: 20px;
-                        border-radius: 50%;
-                        left:56%;
-                        top:46%;
-                        position: absolute;
-                        background-color: #fff;
-                        z-index: 10;
-                         animation: Movewhite 3s linear 3s normal;
-                        -webkit-animation: Movewhite 3s linear 3s infinite ;
+                    @keyframes bling {
+                        0%{
+                            transform: scale(0.8);
+                        }
+                        50%{
+                            transform: scale(1);
+                        }
+                        100%{
+                            transform: scale(0.8);
+                        }
                     }
-                    .three {
-                        width:20px;
-                        height: 20px;
-                        border-radius: 50%;
-                        left:70%;
-                        top:50%;
-                        position: absolute;
-                        background-color: #fff;
-                        z-index: 10;
-                         animation: Movethree 3s linear 3s normal;
-                        -webkit-animation: Movethree 3s linear 3s infinite ;
-                    }
-                    .two {
-                         width:20px;
-                        height: 20px;
-                        border-radius: 50%;
-                        left:48%;
-                        top:60%;
-                        position: absolute;
-                        background-color: #fff;
-                        z-index: 10;
-                         animation: Movetwo 3s linear 3s normal;
-                        -webkit-animation: Movetwo 3s linear 3s infinite ;
-                    }
-                }
-
-                
-
-                 @keyframes Movetwo {
-                    from {opacity: 1;}
-                    to {opacity: 0;}
-                }
-                 @keyframes Movethree {
-                    from {opacity: 1;}
-                    to {opacity: 0;}
-                }
-                 @keyframes Movewhite {
-                    from {opacity: 1;}
-                    to {opacity: 0;}
-                }
-
-
-                @keyframes myMove1 {
-                    from {transform: rotate(360deg);}
-                    to {transform: rotate(0deg);}
+                    
                 }
                 
-                @-webkit-keyframes myMove1 {
-                    from {transform: rotate(360deg);}
-                    to {transform: rotate(0deg);}
-                }
             }
             .btn{
                 width: 100%;
                 height: auto;
-                position: absolute;
-                bottom: 20px;
-                right: 0px;
-                z-index: 3;
                 display: flex;
                 display: -webkit-flex;
                 justify-content: space-around;
-                div:nth-child(1){
+                position: absolute;
+                left: 0;
+                bottom: 40px;
+                >div:nth-child(1){
                     width: 40%;
-                    height: 90px;
-                    background-color: rgba(0, 0, 0, 0.35);
-                    border-radius: 45px;
-                    color: #ffffff;
-                    font-size: 30px;
-                    font-weight: 700;
+                    height: 80px;
+                    padding: 10px 0px;
+                    background: rgba(0, 0, 0, 0.5);
+                    border-radius: 50px;
+                    color: #fff;
+                    div{
+                        width: 100%;
+                        height: 40px;
+                    }
                 }
-                div:nth-child(2){
+                >div:nth-child(2){
                     width: 40%;
-                    height: 90px;
-                    background-color: rgba(0, 0, 0, 0.2);
-                    border-radius: 45px;
-                    color: #ffffff;
-                    font-size: 30px;
-                    font-weight: 700;
+                    height: 80px;
+                    padding: 10px 0px;
+                    background: rgba(0, 0, 0, 0.5);
+                    border-radius: 50px;
+                    color: #fff;
+                    div{
+                        width: 100%;
+                        height: 40px;
+                    }
                 }
             }
         }  
         .business {
-            margin-top: 50px;
             ul{
                 display: flex;
                 flex-wrap: wrap;
@@ -410,6 +399,7 @@ export default {
                     }
                 }
             }
-        }                                                                                                                                                      
+        }    
+                                                                                                                                                         
     }
 </style>

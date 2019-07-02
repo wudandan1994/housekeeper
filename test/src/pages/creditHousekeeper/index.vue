@@ -1,5 +1,5 @@
 <template>
-    <div id="credit-housekeeper">
+    <div id="credit-housekeeper" class="flipInX">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>信用卡管家</span>
@@ -119,6 +119,8 @@ export default {
 
 <style lang="less">
    #credit-housekeeper{
+    //    animation: enlarge 0.6s linear;
+    //     -webkit-animation: enlarge 0.6s linear;
        >header {
            background-color: #4B66AF;
            width:100%;

@@ -113,7 +113,7 @@ export default {
 
 <style lang="less" scoped>
 #financial-circle-component{
-        color: white;
+        // color: white;
         .more{
             width: 100%;
             height: 86px;

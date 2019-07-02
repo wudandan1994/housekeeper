@@ -1,5 +1,5 @@
 <template>
-    <div id="page-component-detail">
+    <div id="page-component-detail" class="flipInX">
         <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">贷款详情</div>
@@ -114,7 +114,8 @@ export default {
 <style lang="less" scoped>
     #page-component-detail{
         width: 100vw;
-        height: 95vh;
+        height: calc(100vh - 86px);
+        padding-top: 86px;
         overflow: scroll;
         .loan .van-nav-bar {
             background-color: #4B66AF !important;
