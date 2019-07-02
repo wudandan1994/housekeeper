@@ -61,7 +61,7 @@
                            <ul>
                                <li>
                                    <p>{{item.realamount}}</p>
-                                    <p>还款金额</p>
+                                   <p>还款金额</p>
                                </li>
                                <li>
                                     <p v-if="item.state=='0'">待执行</p>
@@ -97,11 +97,11 @@
                                         <p>大额通道</p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
                                 </div>
-                                 <div class="large" @click.stop="thirdPass(item)">
+                                 <!-- <div class="large" @click.stop="thirdPass(item)">
                                         <van-icon name="http://pay.91dianji.com.cn/dae.png" size="40px"/>
                                         <p>智能通道</p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
-                                </div>
+                                </div> -->
                              </div>
                        </div>
                        
@@ -121,7 +121,7 @@
 
 
 <script>
-import { axiosPost } from '../../lib/http'
+import { axiosPost,axiosGet                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  } from '../../lib/http'
 import { bankCardAttribution } from '../../lib/bankName'
 import loading from '@/components/loading'
 import storage from '@/lib/storage'
@@ -144,7 +144,9 @@ export default {
             amount:"",
             num:null,
             showdis:false,
-            showpass:false
+            showpass:false,
+            bankcode:'',
+            userId:"",
         }
     },
     mounted () {
@@ -269,9 +271,13 @@ export default {
              .then(res=>{
                  console.log(res,"是否绑卡")
                  if(res.data.success) {
-
-
-
+                      storage.set('channel',"3");
+                        this.$router.push({
+                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                            query:{
+                                info:i
+                            }
+                        })
                  } else { 
 
                     // 查询是否签约
@@ -283,19 +289,26 @@ export default {
                                userName: i.payerName,
                                certificateNum:i.idCardNo
                             }
-                             axiosPost("/dhcreditCard/getDHRegisterExist",data)
+                             axiosPost("/dhcreditCard/dhRegister",data)
                              .then(res=>{
-                                //  userid   
-                                 console.log(res)
+                                //  console.log(res,'userId')
                                  if(res.data.success){
+                                     this.userId=res.data.data.userId
+
+                                    this.$http.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+i.cardNo+'&cardBinCheck=true')
+                                        .then(responce=>{
+                                            console.log(res,'bank')
+                                            this.bankcode=responce.data.bank
+                                        })
                                     //  绑卡
-                                    // let userId=
+                                  
                                     let params={
-                                      userId,
+                                      userId:this.userId,
                                       cardNum:i.cardNo,
                                       userName:i.payerName,
                                       certificateNum:i.idCardNo,
-                                      mobile:i.phone
+                                      mobile:i.phone,
+                                      bankAgentId: this.bankcode
                                     }
                                     axiosPost("/dhcreditCard/dhBind",params)
                                     .then(res=>{
@@ -304,6 +317,35 @@ export default {
                                     .catch(err=>{
 
                                     })
+
+
+                                 }   else {
+                                    //  如果已签约直接绑卡
+                                     this.$http.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+i.cardNo+'&cardBinCheck=true')
+                                        .then(responce=>{
+                                            console.log(res,'bank')
+                                            this.bankcode=responce.data.bank
+                                        })
+
+                                     let params={
+                                    //   userId:this.userId,
+                                      userId: '02e13ab1e5f0fa3df80969320b7582a4',
+                                      cardNum:i.cardNo,
+                                      userName:i.payerName,
+                                      certificateNum:i.idCardNo,
+                                      mobile:i.phone,
+                                    //   bankAgentId: this.bankcode
+                                     bankAgentId:'304290042357'
+                                    }
+                                     axiosPost("/dhcreditCard/dhBind",params)
+                                    .then(res=>{
+                                        console.log(res,'注册成功，等待短信')
+                                        
+                                    })
+                                    .catch(err=>{
+
+                                    })
+
 
 
                                  }
@@ -316,6 +358,7 @@ export default {
 
                          } else {
                             //  绑卡
+
 
                          }
                      })
