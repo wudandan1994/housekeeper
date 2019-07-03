@@ -1,5 +1,5 @@
 <template>
-    <div id="page-component-detail" class="flipInX">
+    <div id="page-component-detail" class="animated bounceInLeft">
         <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">贷款详情</div>

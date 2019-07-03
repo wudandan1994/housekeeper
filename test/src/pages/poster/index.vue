@@ -237,9 +237,6 @@ export default {
             this.imgShow = true;
             var poster = document.getElementById("poster");
             var dataURL = poster.toDataURL('image/png');
-            console.log(dataURL)
-            console.log(JSON.parse(dataURL))
-            console.log("doeiu")
             this.imgUrl = dataURL;
             if(this.imgUrl != ''){
                 setTimeout(() =>{

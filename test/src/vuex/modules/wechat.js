@@ -10,6 +10,7 @@ const state = {
     iscertification: '0',
     amount: '0',
     city: '',
+    notice: true,
 }
 const mutations = {
     openid(state,openid){
@@ -44,6 +45,9 @@ const mutations = {
     },
     city(state,city){
         state.city = city;
+    },
+    notice(state,notice){
+        state.notice = notice;
     }
 }
 export default {state,mutations}

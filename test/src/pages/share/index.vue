@@ -191,7 +191,7 @@ export default {
                     .radar:after {
                         content: ' ';
                         display: block;
-                        background-image: linear-gradient(44deg, rgba(0, 255, 51, 0) 50%, #ffffff 100%);
+                        background-image: linear-gradient(44deg, rgba(0, 255, 51, 0) 38%, #ffffff 100%);
                         width: 50%;
                         height: 50%;
                         position: absolute;

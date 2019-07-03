@@ -1,66 +1,45 @@
 <template>
-    <div id="component_scroll">
-        <div class="Odometer2 OdometerBg"></div>
+    <div id="component-scroll">
+        <div class="scroll center">
+           <DigitRoll ref='digitroll':rollDigits='digits'/>
+        </div>
+        <div class="big-title">{{title}}</div>
     </div>
 </template>
 <script>
-import {Odometer} from "@/lib/scroll"
+import DigitRoll from '@huoyu/vue-digitroll'
 export default {
     data(){
         return{
-            
+           digits: 5786786, 
         }
     },
+    components: { DigitRoll },
     methods:{
-        handleRun(){
-            var num = 231365789,num2 = 345
-            var odo1 = new Odometer('.Odometer',{
-                num : num
-            });
-            var odo2 = new Odometer('.Odometer2',{
-                num : num2
-            });
-
-
-            //改变数值
-            setInterval(()=>{
-                num +=117,odo1.update(num);
-
-                num2 +=230,odo2.update(num2);
-            },1300)
-        }
     },
     created(){
-        this.handleRun();
     }
 }
 </script>
 <style lang="less" scoped>
-    #component_scroll{
-        .OdometerBg{
-            margin:40px;
-            .number-animate{
-                .number-animate-dom{
-                     background: #222;
-                     color: yellow;
-                     border-left: 1px solid #fff;
-                    .OdometerBg{
-                        .number-animate{
-                                .number-animate-dot{
-                                    width: 40px;
-                                }
-                        }
-                    }
-                }
-                .number-animate-dot {
-                    span{  
-                        background: #222;
-                        color: yellow;
-                        border-left: 
-                        1px solid #fff;
-                    }
-                }
-            }
-        }
+    #component-scroll{
+       .scroll{
+           width: 85%;
+           height: 100px;
+           background: #4b66af;
+           overflow: hidden;
+           margin: 20px auto auto auto;
+           color: #fff;
+           font-size: 50px;
+           font-weight: 700;
+           border-radius: 10px;
+           box-shadow: 0px 0px 8px 2px #008080;
+       }
+       .big-title{
+            width: 85%;
+            height: 80px;
+            margin: auto;
+            border: solid 1px red;
+       }
     }
 </style>
