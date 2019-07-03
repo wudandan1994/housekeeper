@@ -6,8 +6,9 @@
             <div class="right-icon center"></div>
         </header>
          <div class="box" style="overflow-y: scroll;">　
-            　　<iframe v-if="type" :src="url" scrolling="auto"  class="iframe" frameborder="0" ></iframe>
-            　　<iframe v-else :src="url" frameborder="0"  class="iframe" scrolling="no"  ></iframe>
+            <!-- 　　<iframe v-if="type" :src="url" scrolling="auto"  class="iframe" frameborder="0" ></iframe>
+            　　<iframe v-else :src="url" frameborder="0"  class="iframe" scrolling="no"  ></iframe> -->
+            　<iframe :src="url"  ref="iframe" id="bdIframe" class="iframe"  scrolling="no"  frameborder="0" ></iframe>
          </div>
     </div>
 
@@ -31,23 +32,6 @@ export default {
        
         webview(){
             if(window.plus){  
-                //  var yinlian = plus.webview.open(this.url,"yinlian",{
-                //          top: "40px",  
-                //         bottom: '0px',
-                //         left:'0px',
-                //         scrollIndicator:'none'
-                //     });
-                // let self= plus.webview.currentWebview(); 
-                // var yinlian= plus.webview.create(this.url, "yinlian", {  
-                // top: "40px",  
-                // // width:"100%",
-                // bottom: "0px",
-                //  right:"0px",
-                // left:"0px",
-                // scrollIndicator:"vertical"
-                // });  
-                // yinlian.show()
-                //  self.append(yinlian)
              var yinlian= plus.webview.create(this.url, "yinlian");  
                yinlian.setStyle({
                    width:"100%",
@@ -95,12 +79,13 @@ export default {
         .box {
               padding-top:96px;
             overflow-y: scroll;
-            .iframe{
-                    width: 1px;
-                    min-width: 100%;
-                    *width: 100%;
-                    height: 100% !important;
-            }
+             .iframe{
+                    // width:1px;
+                    // min-width: 100%;
+                    // *width:100%;
+                    width:100vw;
+                    height: 100vh;
+                 }
       }
   }
 </style>

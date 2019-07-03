@@ -97,8 +97,6 @@ export default {
                 if(res.data.code==="1"){
                     this.$router.push("/home/addCard")
                 } else if(res.data.code==="0"){
-                    window.location.href=res.data.data.url   
-                    // let url=res.data.data.url
                     //     this.$router.push({
                     //         path:"/home/online",
                     //         query:{
@@ -106,6 +104,21 @@ export default {
                     //             title:"还款"
                     //           }
                     //     })
+
+                    let url=res.data.data.url
+
+                    if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                                this.$router.push({
+                                    path:"/loan/form/myOrder",
+                                    query:{
+                                        info:url,
+                                        title:"还款"
+                                    }
+                                })
+                                } else {
+                                    this.componentload=false
+                                    location.href=url
+                                }
                 }
             })
             .catch(err=>{

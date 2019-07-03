@@ -100,31 +100,61 @@
                             <p> <van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></p>
                             <p>卡·测评</p>
                         </router-link>
+<<<<<<< HEAD
                         <li  @click="handleGarbage" class="secret">
+=======
+                        
+                        <li  @click="handleExpect" class="secret">
+>>>>>>> f22da218196097409c96364875103a7700ff0b8a
                             <p> <van-icon name="http://pay.91dianji.com.cn/tie.png" size="30px" /></p>
                             <p>垃圾分类</p>
                         </li>
-                        <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
+                        <!-- <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
                             <p> <van-icon name="http://pay.91dianji.com.cn/weizhang.png" size="30px" /></p>
                             <p>违章查询</p>
-                        </router-link>
-                         <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
+                        </router-link> -->
+                        <li class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')" >
+                            <p> <van-icon name="http://pay.91dianji.com.cn/weizhang.png" size="30px" /></p>
+                            <p>违章查询</p>
+                        </li>
+                         <!-- <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
                             <p><van-icon name="http://pay.91dianji.com.cn/qichebaoxian.png" size="30px" /></p>
                             <p>汽车保险</p>
-                       </router-link>
-                        <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://baoxian.pingan.com',title: '意外险'}}">
+                       </router-link> -->
+                        <li class="secret"  @click="changeLink('http://www.epicc.com.cn/','汽车保险')" >
+                            <p><van-icon name="http://pay.91dianji.com.cn/qichebaoxian.png" size="30px" /></p>
+                            <p>汽车保险</p>
+                       </li>
+
+
+                        <!-- <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://baoxian.pingan.com',title: '意外险'}}">
                             <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
                             <p>意外险</p>
-                       </router-link>
+                       </router-link> -->
+
+                        <li  @click="changeLink('http://baoxian.pingan.com','意外险')" >
+                            <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
+                            <p>意外险</p>
+                       </li>
+
                         <li @click="handleExpect">
                             <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
                             <p>积分兑换</p>
                         </li>
-                         <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
+                         <!-- <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
                            <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
                            <p>商城</p>
+<<<<<<< HEAD
                         </router-link>
                          <!-- <li @click="handleExpect">
+=======
+                        </router-link> -->
+                         <li  @click="changeLink('http://www.jd.com','商城')"  >
+                           <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
+                           <p>商城</p>
+                        </li>
+                         <li @click="handleExpect">
+>>>>>>> f22da218196097409c96364875103a7700ff0b8a
                             <p> <van-icon name="http://pay.91dianji.com.cn/gengduo.png" size="30px" /></p>
                             <p>更多</p>
                             <div id="more">
@@ -291,6 +321,27 @@ export default {
         isShow() {
             this.showAaside=true
         },
+        changeLink(url,title){
+            //   this.$router.push({
+            //          path:"/loan/form/myOrder",
+            //          query:{
+            //              info:url,
+            //              title:title
+            //          }
+            //      })
+            
+             if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                 this.$router.push({
+                     path:"/loan/form/myOrder",
+                     query:{
+                         info:url,
+                         title:title
+                     }
+                 })
+             } else {
+                 location.href=url
+             }
+        },
         handleExpect(){
             this.$toast('敬请期待')
         },
@@ -312,7 +363,9 @@ export default {
                    if(res.data.success){
                       let version=res.data.data
                       this.versionAndroid=parseFloat(version[0].version)
+                      console.log(this.versionAndroid,'and')
                       this.versionIos=parseFloat(version[1].version)
+                       console.log(this.versionIos,'ios')
                    }
                }) 
                .catch(err=>{
@@ -323,16 +376,31 @@ export default {
             let that=this
               // 获取设备的版本号
               if(window.plus){  
-                   that.updateVerson=parseFloat(plus.runtime.version);
-                   if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
+                //     that.updateVerson=parseFloat(plus.runtime.version);
+                //    if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
+                //        that.showUpdate=true
+                //    }
+                plus.runtime.getProperty(plus.runtime.appid,function(inf){
+                that.updateVerson=parseFloat(inf.version);
+                console.log(that.updateVerson,'version')
+                    if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
                    }
+               });
             }else{  
                 document.addEventListener('plusready',function () {  
-                      that.updateVerson=parseFloat(plus.runtime.version);
-                         if(that.versionAndroid>that.updateVerson|| that.versionIos>that.updateVerson ){
-                             that.showUpdate=true
-                        }
+                    //   that.updateVerson=parseFloat(plus.runtime.version);
+                    //      if(that.versionAndroid>that.updateVerson|| that.versionIos>that.updateVerson ){
+                    //          that.showUpdate=true
+                    //     }
+
+                 plus.runtime.getProperty(plus.runtime.appid,function(inf){
+                that.updateVerson=parseFloat(inf.version);
+                 console.log(that.updateVerson,'version')
+                    if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
+                       that.showUpdate=true
+                           }
+                        });
 
                 },false);  
             }  
@@ -400,6 +468,7 @@ export default {
                 });
         },
         changeActive(obj){
+
             // console.log('当前选中',obj);
         } ,
         // 查询实名认证
@@ -463,12 +532,12 @@ export default {
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-        //  this.automatic() //自动登录
-        //  this.getUpdate() //获取版本
+         this.automatic() //自动登录
+         this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        // this.update() 
+        this.update() 
     }
 }
 </script>
