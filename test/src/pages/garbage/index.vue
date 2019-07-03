@@ -81,9 +81,7 @@
             <div class="answer" v-if="!show">
                 <div class="top row">
                     <div>
-                        <van-cell-group>
-                            <van-field left-icon="search" clearable class="input center" v-model="value" placeholder="搜索垃圾查看对应分类" @blur="handleKeyWord"/>
-                        </van-cell-group>
+                        <input type="text" class="input" v-model="value" placeholder="搜索垃圾查看对应分类" @blur="handleKeyWord"/>
                     </div>
                     <div class="cancel center" @click="handleCancel">取消</div>
                 </div>
@@ -1303,17 +1301,22 @@ export default {
                 background: #f2f2f2;
                 border-bottom: solid 1px #ccc;
                 >div:nth-child(1){
-                    width: 90%;
+                    width: 80%;
                     height: 100%;
                     .input{
                         width: 100%;
-                        height: 100%;
+                        height: 90%;
                         border: none;
                         background: transparent;
+                        font-size: 26px;
+                    }
+                    input::-webkit-input-placeholder{
+                        padding-top: 10px;
+                        font-size: 28px;
                     }
                 }
                 >div:nth-child(2){
-                    width: 10%;
+                    width: 20%;
                     height: 100%;
                     font-size: 28px;
                 }

@@ -36,16 +36,16 @@
                     <p>推广海报图</p>
                     <p>分享二维码、快速增粉</p>
                 </router-link>
-                <li @click="handleExpect">
+                 <router-link tag="li" to="/share/poster">
                     <p><van-icon name="http://bc.91dianji.com.cn/413.png" /></p>
                     <p>推广素材图</p>
                     <p>各种视频+图片</p>
-                </li>
-                <li @click="handleExpect">
+                </router-link>
+                <router-link tag="li" to="/share/poster">
                     <p><van-icon name="http://bc.91dianji.com.cn/414.png" /></p>
                     <p>信用卡推广图</p>
                     <p>信用卡推广图.一键锁粉</p>
-                </li>
+                </router-link>
                 <li @click="handleExpect">
                     <p><van-icon name="http://bc.91dianji.com.cn/404.png" /></p>
                     <p>新闻资讯</p>
@@ -56,17 +56,17 @@
                     <p>邀请好友</p>
                     <p>邀请新人注册,有红包奖励</p>
                 </li>
-                <li @click="handleExpect">
+                <router-link tag="li" to="/video" >
                     <p><van-icon name="http://bc.91dianji.com.cn/407.png" /></p>
                     <p>钱夹宝视频</p>
                     <p>钱夹宝视频.一键分享</p>
-                </li>
+                </router-link>
                 <li @click="handleExpect">
                     <p><van-icon name="http://bc.91dianji.com.cn/408.png" /></p>
                     <p>名片推广</p>
                     <p>分享名片.快速增粉</p>
                 </li>
-                <li @click="handleExpect">
+                <li @click="handleHref">
                     <p><van-icon name="http://bc.91dianji.com.cn/409.png" /></p>
                     <p>生成短链接</p>
                     <p>快速分享短链接</p>
@@ -76,12 +76,12 @@
                     <p>链接转化二维码</p>
                     <p>快速转粉.一键分享</p>
                 </li>
-                <li @click="handleExpect">
+                <li  @click="handleHref">
                     <p><van-icon name="http://bc.91dianji.com.cn/411.png" /></p>
                     <p>信用卡链接</p>
                     <p>分享带锁粉功能哦!</p>
                 </li>
-                <li @click="handleExpect">
+                <li  @click="handleHref">
                     <p><van-icon name="http://bc.91dianji.com.cn/412.png" /></p>
                     <p>分享链接</p>
                     <p>分享钱夹宝链接</p>
@@ -94,15 +94,28 @@
             </ul>
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
+        <transition name="van-slide-down">
+            <div id="href" v-if="href">
+                <div class="center">您的锁粉链接</div>
+                <div class="center" id="mobile"><span>http://pay.91dianji.com.cn/#/home?promotioncode=</span>{{this.$store.state.wechat.promotioncode}}</div>
+                <div>
+                    <div class="center" @click="href = false">取消</div>
+                    <div class="test center" data-clipboard-action="copy" data-clipboard-target="#mobile" @click="handleCopy('suibianshua3')">复制</div>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
 import footerMenu from '@/components/footer'
+import ClipboardJS from "clipboard";
+import storage from '@/lib/storage'
 export default {
     data(){
         return{
             active: 3,
+            href: false,
         }
     },
     components: {
@@ -114,7 +127,33 @@ export default {
             this.$toast("敬请期待")
         },
         changeActive(obj){
-        }
+        },
+        handleHref(){
+            this.href = true;
+        },
+        // fuzhi
+        handleCopy(data){
+            var that = this;
+            var clipboard = new ClipboardJS('.test');
+            //成功回调
+            clipboard.on('success', function(e) {
+                that.$toast('复制成功');
+                console.info('Action:', e.action);
+                console.info('Text:', e.text);
+                console.info('Trigger:', e.trigger);  
+                e.clearSelection();
+                that.href = false;
+            });
+            //失败回调
+            clipboard.on('error', function(e) {
+                console.error('Action:', e.action);
+                console.error('Trigger:', e.trigger);
+                that.$toast('复制失败');
+            });
+        },
+    },
+    created(){
+        console.log(this.$store.state.wechat.promotioncode)
     }
 }
 </script>
@@ -400,6 +439,50 @@ export default {
                 }
             }
         }    
-                                                                                                                                                         
+         #href{
+             position: fixed;
+             background: #fff;
+             width: 95vw;
+             height: 400px;
+             left: 2.5vw;
+             bottom: 30vh;
+             z-index: 10;
+             border-radius: 15px;
+             >div:nth-child(1){
+                 width: 100%;
+                 height: 80px;
+                 font-weight: 700;
+                 font-size: 40px;
+             }
+             >div:nth-child(2){
+                width: 100%;
+                height: 160px;
+                margin: auto;
+                font-size: 26px;  
+             }
+             >div:nth-child(3){
+                 width: 90%;
+                 height: 80px;
+                 display: flex;
+                 margin: 20px auto;
+                 display:-webkit-flex;
+                 justify-content: space-between;
+                 -webkit-justify-content: space-between;
+                 >div:nth-child(1){
+                     width: 40%;
+                     height: 100%;
+                     background: #ccc;
+                     color: #333;
+                     border-radius: 5px;
+                 }
+                 >div:nth-child(2){
+                     width: 40%;
+                     height: 100%;
+                     background: #4b66af;
+                     color: #fff;
+                     border-radius: 5px;
+                 }
+             }
+         }                                                                                                                                                
     }
 </style>
