@@ -32,7 +32,7 @@
                                              <div   class="sign-out">
                                                 <van-button v-show="item.state=='0' || item.state=='3'" @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             </div> 
-                                            <p v-show="item.state='4'">{{item.remark}}</p>
+                                            <p v-show="item.state=='4'">{{item.remark}}</p>
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>

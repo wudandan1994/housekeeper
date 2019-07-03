@@ -207,9 +207,7 @@ export default {
                                font-weight: bold;
                            }
                        }
-                       &:last-child {
-                        //    border:none;
-                       }
+                      
                        >span {
                            &:nth-of-type(2){
                                padding:0 10px;
