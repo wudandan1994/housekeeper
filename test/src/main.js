@@ -16,8 +16,8 @@ import '@/assets/css/common.css'
 // import '@/assets/css/share.css'
 import back from './lib/back'
 import axios from 'axios'
-import animated from 'animate.css'
-Vue.use(animated)
+// import animated from 'animate.css'
+// Vue.use(animated)
 Vue.prototype.$http = axios
 // axios.defaults.withCredentials = true
 // axios.defaults.baseURL = 'http://pay.91dianji.com.cn/api';

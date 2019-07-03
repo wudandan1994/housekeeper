@@ -112,6 +112,7 @@
            <div class="detail">
                 <van-button  plain to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
                 <van-button plain to="/home/punch" size="normal" type="default">查看全部计划</van-button>
+                <van-button plain to="/cancelCard" size="normal" type="default">管理</van-button>
            </div>
           
         </div>
@@ -674,21 +675,13 @@ export default {
                }
            }
            >.detail {
-               box-sizing: border-box;
-               margin-left: 50px;
-               padding:0 20px;
+               width: 88%;
+               height: auto;
+               margin: auto;
                display: flex;
+               display: -webkit-flex;
                justify-content: space-between;
-               >button {
-                   &:nth-of-type(1){
-                       margin-right:20px;
-                   }
-               }
-               .van-button--default {
-                   height:60px;
-                   font-size: 30px;
-                   background-color: #4965AE;
-               }
+               -webkit-justify-content: space-between;
            }
        }
    }

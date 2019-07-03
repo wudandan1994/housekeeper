@@ -36,12 +36,11 @@
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-                                            <!-- <p>{{item.state}}</p> -->
-                                            <p v-if="item.state=='0'">待执行</p>
-                                            <p v-if="item.state=='1'">已成功</p>
-                                            <p v-if="item.state=='2'">已取消</p>
-                                            <p v-if="item.state=='3'">进行中</p>
-                                            <p v-if="item.state=='4'">失败</p>
+                                            <p v-if="item.state=='0'">待执行</p >
+                                            <p v-else-if="item.state=='1'">已成功</p >
+                                            <p v-else-if="item.state=='2'">已取消</p >
+                                            <p v-else-if="item.state=='3'">进行中</p >
+                                            <p v-else>失败</p >
                                            
                                         </div>
                                     </div>
@@ -356,7 +355,7 @@ export default {
                      let arr= res.data.data.data
                      let arrXun=[]
                      arr.forEach((item,i) => {
-                        //  console.log(item.state)
+                         console.log(item.state)
                          item.bankNick=bankCardAttribution(item.cardNo).bankName
                          arrXun.push(item)
                      });
@@ -376,7 +375,7 @@ export default {
         getMainPlan(){
             //  console.log(this.bandId)
             this.i="1"
-            let data={
+            let data ={
                 bindId:this.bindId,
                 page:"1",
                 pageSize:"100",
@@ -384,7 +383,7 @@ export default {
             }
             axiosPost("/creditCard/getMainPlan",data)
             .then(res=>{
-                // console.log(res)
+                console.log('成功',typeof res.data.data.data);
                 if(!res.data.success){
                     this.$toast({
                         message:res.data.message
@@ -392,10 +391,14 @@ export default {
                 } else {
                      let arr= res.data.data.data
                      let arrXun=[]
-                     arr.forEach((item,i) => {
+                     arr.forEach((item) => {
                          item.bankNick=bankCardAttribution(item.cardNo).bankName
                          arrXun.push(item)
+                         console.log('测试',item.state);
+                         console.log('测试',item.payerName);
+                         
                      });
+                     console.log(arrXun);
                      this.list=arrXun
                 }
             })

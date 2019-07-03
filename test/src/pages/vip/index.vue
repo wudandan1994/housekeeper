@@ -4,7 +4,7 @@
         <div class="containt">
             <ul>
                 <li id="huangjin">
-                    <img src="http://bc.91dianji.com.cn/huangjin_vip.jpg" alt="">
+                    <img src="http://pay.91dianji.com.cn/vip001.png" alt="">
                      <div class="diamonds">
                          <div class="card">黄金会员</div>
                          <div class="instructions">
@@ -17,7 +17,7 @@
                      </div>
                 </li>
                 <li>
-                    <img src="http://bc.91dianji.com.cn/zuanshi_vip.jpg" alt="">
+                    <img src="http://pay.91dianji.com.cn/vip002.png" alt="">
                      <div class="diamonds">
                          <div class="card">钻石会员</div>
                          <div class="instructions">
@@ -31,7 +31,7 @@
                 </li>
 
                  <li id="hehuoren">
-                    <img src="http://bc.91dianji.com.cn/hehuoren_vip.jpg" alt="">
+                    <img src="http://pay.91dianji.com.cn/vip003.png" alt="">
                      <div class="diamonds">
                          <div class="card">城市合伙人</div>
                          <div class="instructions">
@@ -44,7 +44,7 @@
                      </div>
                 </li>
                  <li>
-                    <img src="http://bc.91dianji.com.cn/yunyingshang_vip.jpg" alt="">
+                    <img src="http://pay.91dianji.com.cn/vip004.png" alt="">
                      <div class="diamonds">
                          <div class="card">城市运营商</div>
                          <div class="instructions">
@@ -371,9 +371,8 @@ export default {
                  margin-bottom: 30px;
             
                  >img {
-                     display: block;
                      width:100%;
-                     background-color: #fff;
+                     height: auto;
                  }
                  >.diamonds {
                      margin-top:20px;

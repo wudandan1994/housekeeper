@@ -135,6 +135,9 @@ import Extension from '@/pages/personalCenter/Extension'
 import video from '@/pages/home/video'
 import radar from '@/pages/AIRadar/index'
 import nextLevel from '@/pages/AIRadar/nextdetail'
+import garbage from '@/pages/garbage/index'
+// 解绑卡
+import cancelCard from '@/pages/aisleHousekeeper/cancelCard'
 
 export default new Router({
   // mode:"hash",
@@ -243,5 +246,7 @@ export default new Router({
     {path: '/video',component: video},
     {path: '/radar',component: radar},
     {path: '/nextLevel',component: nextLevel},
+    {path: '/garbage',component: garbage},
+    {path: '/cancelCard',component: cancelCard},
   ]
 })
