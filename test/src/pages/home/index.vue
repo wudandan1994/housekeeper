@@ -101,60 +101,38 @@
                             <p>卡·测评</p>
                         </router-link>
                         
-                        <li  @click="handleExpect" class="secret">
+                        <li  @click="handleGarbage" class="secret">
                             <p> <van-icon name="http://pay.91dianji.com.cn/tie.png" size="30px" /></p>
                             <p>垃圾分类</p>
                         </li>
-                        <!-- <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
-                            <p> <van-icon name="http://pay.91dianji.com.cn/weizhang.png" size="30px" /></p>
-                            <p>违章查询</p>
-                        </router-link> -->
                         <li class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')" >
                             <p> <van-icon name="http://pay.91dianji.com.cn/weizhang.png" size="30px" /></p>
                             <p>违章查询</p>
                         </li>
-                         <!-- <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
-                            <p><van-icon name="http://pay.91dianji.com.cn/qichebaoxian.png" size="30px" /></p>
-                            <p>汽车保险</p>
-                       </router-link> -->
                         <li class="secret"  @click="changeLink('http://www.epicc.com.cn/','汽车保险')" >
                             <p><van-icon name="http://pay.91dianji.com.cn/qichebaoxian.png" size="30px" /></p>
                             <p>汽车保险</p>
                        </li>
 
 
-                        <!-- <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://baoxian.pingan.com',title: '意外险'}}">
-                            <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
-                            <p>意外险</p>
-                       </router-link> -->
 
                         <li  @click="changeLink('http://baoxian.pingan.com','意外险')" >
                             <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
                             <p>意外险</p>
                        </li>
 
-                        <li @click="handleExpect">
+                        <!-- <li @click="handleExpect">
                             <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
                             <p>积分兑换</p>
-                        </li>
-                         <!-- <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
-                           <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
-                           <p>商城</p>
-                        </router-link> -->
+                        </li> -->
                          <li  @click="changeLink('http://www.jd.com','商城')"  >
                            <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
                            <p>商城</p>
                         </li>
-                         <li @click="handleExpect">
+                         <!-- <li @click="handleExpect">
                             <p> <van-icon name="http://pay.91dianji.com.cn/gengduo.png" size="30px" /></p>
                             <p>更多</p>
-                            <div id="more">
-                                <div @click="handleExpect">
-                                    <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
-                                    <p>积分兑换</p>
-                                </div>
-                            </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -523,12 +501,12 @@ export default {
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-         this.automatic() //自动登录
-         this.getUpdate() //获取版本
+        //  this.automatic() //自动登录
+        //  this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        this.update() 
+        // this.update() 
     }
 }
 </script>
