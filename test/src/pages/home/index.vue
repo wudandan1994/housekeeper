@@ -243,21 +243,21 @@
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
          <!-- 绑定手机模块 -->
-        <bindMobile></bindMobile>
+        <!-- <bindMobile></bindMobile> -->
         <!-- <loading :componentload="componentload"></loading> -->
         <notice></notice>
     </div>
 </template>
 <script>
 import footerMenu from '@/components/footer'
-import bindMobile from '@/components/bindMobile'
+// import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-      bindMobile,
+    //   bindMobile,
       notice
     //   loading
   },
@@ -313,25 +313,25 @@ export default {
             this.showAaside=true
         },
         changeLink(url,title){
-            //   this.$router.push({
-            //          path:"/loan/form/myOrder",
-            //          query:{
-            //              info:url,
-            //              title:title
-            //          }
-            //      })
-            
-             if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                 this.$router.push({
+              this.$router.push({
                      path:"/loan/form/myOrder",
                      query:{
                          info:url,
                          title:title
                      }
                  })
-             } else {
-                 location.href=url
-             }
+            
+            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
+            //      this.$router.push({
+            //          path:"/loan/form/myOrder",
+            //          query:{
+            //              info:url,
+            //              title:title
+            //          }
+            //      })
+            //  } else {
+            //      location.href=url
+            //  }
         },
         handleExpect(){
             this.$toast('敬请期待')
@@ -354,9 +354,9 @@ export default {
                    if(res.data.success){
                       let version=res.data.data
                       this.versionAndroid=parseFloat(version[0].version)
-                      console.log(this.versionAndroid,'and')
+                    //   console.log(this.versionAndroid,'and')
                       this.versionIos=parseFloat(version[1].version)
-                       console.log(this.versionIos,'ios')
+                    //    console.log(this.versionIos,'ios')
                    }
                }) 
                .catch(err=>{
@@ -373,7 +373,7 @@ export default {
                 //    }
                 plus.runtime.getProperty(plus.runtime.appid,function(inf){
                 that.updateVerson=parseFloat(inf.version);
-                console.log(that.updateVerson,'version')
+                // console.log(that.updateVerson,'version')
                     if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
                    }
@@ -387,7 +387,7 @@ export default {
 
                  plus.runtime.getProperty(plus.runtime.appid,function(inf){
                 that.updateVerson=parseFloat(inf.version);
-                 console.log(that.updateVerson,'version')
+                //  console.log(that.updateVerson,'version')
                     if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
                            }
