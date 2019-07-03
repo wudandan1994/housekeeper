@@ -253,6 +253,10 @@ export default {
                justify-content: space-between;
                padding-bottom: 20px;
                margin-top:50px;
+               .van-checkbox__icon .van-icon{
+                    border:1px solid #000;
+                    margin-bottom: 8px !important;
+                }
                >p {
                     padding:15px 0px;
                     font-size:28px;

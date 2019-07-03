@@ -103,7 +103,7 @@
                         
                         <li  @click="handleExpect" class="secret">
                             <p> <van-icon name="http://pay.91dianji.com.cn/tie.png" size="30px" /></p>
-                            <p>提额秘籍</p>
+                            <p>垃圾分类</p>
                         </li>
                         <!-- <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
                             <p> <van-icon name="http://pay.91dianji.com.cn/weizhang.png" size="30px" /></p>
@@ -148,6 +148,12 @@
                          <li @click="handleExpect">
                             <p> <van-icon name="http://pay.91dianji.com.cn/gengduo.png" size="30px" /></p>
                             <p>更多</p>
+                            <div id="more">
+                                <div @click="handleExpect">
+                                    <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
+                                    <p>积分兑换</p>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -201,7 +207,7 @@
                     <ul>
                         <router-link tag="li" to="/home/systemNews">系统消息</router-link>
                         <router-link tag="li" to="/home/verified">实名认证</router-link>
-                        <router-link to="/home/bindingPhone" tag="li">绑定手机</router-link>
+                        <router-link to="/home/bindingPhone" tag="li">修改手机</router-link>
                         <router-link to="/home/customerService" tag="li">联系客服</router-link>
                         <router-link to="/home/aboutUs" tag="li">关于我们</router-link>
                         <!-- <li class="switch">声音开关
@@ -248,7 +254,6 @@ import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
-// import loading from '@/components/loading'
 export default {
   components:{
       footerMenu,
@@ -508,6 +513,9 @@ export default {
             } else {
                 location.href= 'https://m2.weizhang8.cn/'
             }
+        },
+        handleGarbage(){
+            this.$router.push('/garbage');
         }
     },
     created(){
@@ -527,134 +535,134 @@ export default {
 
 <style lang="less" >
    #home-component {
-       padding-top: 86px;
-       header {
-            width: 100%;
-            height:86px;
-            font-size:28px;
-            line-height: 86px;
-            background-color: #4B66AF;
-            color:white;
-            display:flex;
-            justify-content: space-between;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index:999;
-            align-items: center;
-            >div {
-                margin-left:15px;
-                display: flex;
-                >.menu {
-                    margin-left:5px;
-                    position: relative;
-            }
-            }
-            .location {
-                margin-left:15px;
-            }
-            >.news {
-                margin-right:15px;
-            }
-            .icon{
-                width: 60px;
-                height: 60px;
-                img{
+        padding-top: 86px;
+        header {
+                width: 100%;
+                height:86px;
+                font-size:28px;
+                line-height: 86px;
+                background-color: #4B66AF;
+                color:white;
+                display:flex;
+                justify-content: space-between;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index:999;
+                align-items: center;
+                >div {
+                    margin-left:15px;
+                    display: flex;
+                    >.menu {
+                        margin-left:5px;
+                        position: relative;
+                }
+                }
+                .location {
+                    margin-left:15px;
+                }
+                >.news {
+                    margin-right:15px;
+                }
+                .icon{
                     width: 60px;
                     height: 60px;
-                    animation: myfirst 5s ease-in-out infinite;
-                    -moz-animation: myfirst 5s ease-in-out infinite;	/* Firefox */
-                    -webkit-animation: myfirst 5s ease-in-out infinite;	/* Safari 和 Chrome */
-                    -o-animation: myfirst 5s ease-in-out infinite;
-                   
+                    img{
+                        width: 60px;
+                        height: 60px;
+                        animation: myfirst 5s ease-in-out infinite;
+                        -moz-animation: myfirst 5s ease-in-out infinite;	/* Firefox */
+                        -webkit-animation: myfirst 5s ease-in-out infinite;	/* Safari 和 Chrome */
+                        -o-animation: myfirst 5s ease-in-out infinite;
+                    
+                    }
+                    @keyframes myfirst
+                    {
+                        0%{
+                            transform: rotateY(0deg);
+                        }
+                        50%{
+                            transform: rotateY(360deg);
+                        }
+                        100%{
+                            transform: rotateY(0deg);
+                        }
+                    }
                 }
-                @keyframes myfirst
-                {
-                    0%{
-                        transform: rotateY(0deg);
-                    }
-                    50%{
-                        transform: rotateY(360deg);
-                    }
-                    100%{
-                        transform: rotateY(0deg);
+            }
+        .container {
+                padding-bottom:96px;
+                overflow-x: hidden;
+                position: relative;
+                background: #eee;
+                .address{
+                    padding-top:30px;
+                    text-align: center;
+                    line-height: 50px;
+                    padding-bottom: 50px;
+                }
+                .update {
+                    position: absolute;
+                    top:0;
+                    bottom:0;
+                    left:0;
+                    right:0;
+                    background-color: rgba(0, 0, 0, .2);
+                    .cover {
+                    width:600px;
+                    height: 400px;
+                    z-index: 99;
+                    position: absolute;
+                    top:30%;
+                    left:10%;
+                    border-radius: 15px;
+                    >.version {
+                        background-color: #fff;
+                        padding:10px;
+                            height: 400px;
+                        box-sizing: border-box;
+                        border-radius: 15px;
+                        >h3 {
+                            margin-top:20px;
+                            text-align: center;
+                            font-size: 34px;
+                            color:#4B66AF;
+                            padding:20px 0px;
+                            font-weight: bolder;
+                        }
+                        >p {
+                            margin-top:20px;
+                            text-align: center;
+                        }
+                        >.butt {
+                            display: flex;
+                            justify-content: space-between;
+                            height: 80px;
+                            >div {
+                                margin-top:90px;
+                                width:49%;
+                                height: 100%;
+                                border:1px solid #ccc;
+                                line-height: 80px;
+                                text-align: center;
+                                &.upd {
+                                    background-color: #4965AE;
+                                    color:#fff;
+                                }
+                            }
+                        }
+                        
                     }
                 }
+
+            }
+                >.swipe {
+            height: 270px;
+            .per-img{
+                width: 100vw;
+                height: auto;
             }
         }
-       .container {
-            padding-bottom:96px;
-            overflow-x: hidden;
-            position: relative;
-            background: #eee;
-            .address{
-                padding-top:30px;
-                text-align: center;
-                line-height: 50px;
-                padding-bottom: 50px;
-            }
-            .update {
-                position: absolute;
-                top:0;
-                bottom:0;
-                left:0;
-                right:0;
-                background-color: rgba(0, 0, 0, .2);
-                .cover {
-                   width:600px;
-                   height: 400px;
-                   z-index: 99;
-                   position: absolute;
-                   top:30%;
-                   left:10%;
-                   border-radius: 15px;
-                   >.version {
-                       background-color: #fff;
-                       padding:10px;
-                         height: 400px;
-                       box-sizing: border-box;
-                       border-radius: 15px;
-                       >h3 {
-                           margin-top:20px;
-                           text-align: center;
-                           font-size: 34px;
-                           color:#4B66AF;
-                           padding:20px 0px;
-                           font-weight: bolder;
-                       }
-                       >p {
-                           margin-top:20px;
-                           text-align: center;
-                       }
-                       >.butt {
-                           display: flex;
-                           justify-content: space-between;
-                           height: 80px;
-                           >div {
-                               margin-top:90px;
-                               width:49%;
-                               height: 100%;
-                               border:1px solid #ccc;
-                               line-height: 80px;
-                               text-align: center;
-                               &.upd {
-                                   background-color: #4965AE;
-                                   color:#fff;
-                               }
-                           }
-                       }
-                       
-                   }
-               }
-
-           }
-            >.swipe {
-           height: 270px;
-           .per-img{
-               width: 100vw;
-               height: auto;
-           }
-       }
         .search {
             height: 110px;
             >ul{
@@ -713,6 +721,20 @@ export default {
                                 padding-bottom:10px 0px;
                                 
                             }
+                        }
+                    }
+                    >li:last-child{
+                        position: relative;
+                         #more{
+                            width: 80vw;
+                            height: 400px;
+                            position: absolute;
+                            right: 80px;
+                            bottom: 80px;
+                            z-index: 1000;
+                            background: #ffff;
+                            border-radius: 15px;
+                            color: #fff;
                         }
                     }
                 }
@@ -1020,7 +1042,7 @@ export default {
              height: 80px;
          }
         
-     }
+        }
    }
 </style>
 

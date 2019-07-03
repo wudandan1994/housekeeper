@@ -2,15 +2,21 @@
     <div id="binding-phone">
         <header class="header-top row">
             <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
-            <div class="top-title center">绑定手机</div>
+            <div class="top-title center">修改手机</div>
             <div class="right-icon center"></div>
         </header>
         <div class="phone-numer">
             <div class="per-input row">
                 <div class="input-title center">手机号</div>
-                <div class="user-input"><input type="number" v-model="mobile"  placeholder="请输入手机号"></div>
+                <div class="safecode"><input type="number" v-model="mobile"  placeholder="请输入手机号"></div>
+                <div class="getcode center">
+                    <span>
+                        <span class="codebtn" @click="change = !change">修改手机</span>
+                    </span>
+                </div>
+                
             </div>
-            <div class="per-input row">
+            <div class="per-input row" v-if="change">
                 <div class="input-title center">验证码</div>
                 <div class="safecode"><input type="number" v-model="authcode" placeholder="请输入验证码"></div>
                 <div class="getcode center">
@@ -24,7 +30,7 @@
         </div>
         <div id="tips" class="start-center">*验证码有效期为半小时,请勿重复发送</div>
         <div class="at-once">
-                <van-button size="large"  @click="bindingPhone" round>立即绑定</van-button>
+                <van-button size="large"  @click="bindingPhone" round>立即修改</van-button>
         </div>
         <van-popup >
             <div class="cover">绑定成功</div>
@@ -46,6 +52,7 @@ export default {
             showCount:false,
             showCode:true,
             timerId:null,
+            change: false,
         }
     },
     created(){
@@ -142,9 +149,20 @@ export default {
                         message:res.data.message
                     })
                 })
-            }
-           
+            } 
+        },
+        // 查询是否绑定手机号
+        handleCheckMobile(){
+            axiosPost('/customer/getCustomer').then(res =>{
+                console.log('修改手机号',res);
+                this.mobile = res.data.data.mobile;
+            }).catch(res =>{
+                console.log('修改手机号失败',res);
+            })
         }
+    },
+    created(){
+        this.handleCheckMobile();
     }
 }
 </script>
@@ -211,7 +229,7 @@ export default {
             }
         }
         >.at-once {
-            margin-top:200px;
+            margin-top:100px;
             padding-left:30px;
             padding-right: 30px;
             >button {

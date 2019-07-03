@@ -356,7 +356,7 @@ export default {
                      let arr= res.data.data.data
                      let arrXun=[]
                      arr.forEach((item,i) => {
-                        //  console.log(item.state)
+                         console.log(item.state)
                          item.bankNick=bankCardAttribution(item.cardNo).bankName
                          arrXun.push(item)
                      });
@@ -376,15 +376,14 @@ export default {
         getMainPlan(){
             //  console.log(this.bandId)
             this.i="1"
-            let datas={
-                // bindId:this.bindId,
+            let data ={
                 page:"1",
                 pageSize:"100",
                 state:""
             }
-            axiosPost("/creditCard/getMainPlan",datas)
+            axiosPost("/creditCard/getMainPlan",data)
             .then(res=>{
-                console.log(res,'result')
+                // console.log(res.data.data.data,'result')
                 if(!res.data.success){
                     this.$toast({
                         message:res.data.message
@@ -392,10 +391,14 @@ export default {
                 } else {
                      let arr= res.data.data.data
                      let arrXun=[]
-                     arr.forEach((item,i) => {
+                     arr.forEach((item,index) => {
                          item.bankNick=bankCardAttribution(item.cardNo).bankName
                          arrXun.push(item)
+                         console.log('测试',item.state);
+                         console.log('测试2',item);
+                         
                      });
+                     console.log(arrXun);
                      this.list=arrXun
                 }
             })

@@ -58,11 +58,11 @@
                       <div class="select" >
                           <p>请选择还款模式</p>
                       <ul>
-                          <li @click="searchInfo">
+                          <!-- <li @click="searchInfo">
                               <div><van-icon name="http://pay.91dianji.com.cn/putong.png" size="40px"/></div>
                               <p>普通代还</p>
                                <p> <van-icon name="arrow" size="30px"/></p>
-                          </li>
+                          </li> -->
                           <router-link tag="li" to="/home/creditHousekeeper/aisleHousekeeper">
                               <div><van-icon name="http://pay.91dianji.com.cn/wanmei.png" size="40px"/></div>
                               <p>完美账单</p>
