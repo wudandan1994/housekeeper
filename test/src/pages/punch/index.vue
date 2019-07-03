@@ -36,20 +36,12 @@
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-<<<<<<< HEAD
-                                            <p v-if="item.state=='0'">待执行</p >
-                                            <p v-else-if="item.state=='1'">已成功</p >
-                                            <p v-else-if="item.state=='2'">已取消</p >
-                                            <p v-else-if="item.state=='3'">进行中</p >
-                                            <p v-else>失败</p >
-=======
                                             <!-- <p>{{item.state}}</p> -->
                                             <p v-if="item.state=='0'">待执行</p>
                                             <p v-else-if="item.state=='1'">已成功</p>
                                             <p v-else-if="item.state=='2'">已取消</p>
                                             <p v-else-if="item.state=='3'">进行中</p>
                                             <p v-else>失败</p>
->>>>>>> f22da218196097409c96364875103a7700ff0b8a
                                            
                                         </div>
                                     </div>
@@ -390,9 +382,9 @@ export default {
                 pageSize:"100",
                 state:""
             }
-            axiosPost("/creditCard/getMainPlan",datas)
+            axiosPost("/creditCard/getMainPlan",data)
             .then(res=>{
-                console.log(res,'result')
+                // console.log(res.data.data.data,'result')
                 if(!res.data.success){
                     this.$toast({
                         message:res.data.message

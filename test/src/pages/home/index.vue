@@ -100,12 +100,8 @@
                             <p> <van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></p>
                             <p>卡·测评</p>
                         </router-link>
-<<<<<<< HEAD
-                        <li  @click="handleGarbage" class="secret">
-=======
                         
                         <li  @click="handleExpect" class="secret">
->>>>>>> f22da218196097409c96364875103a7700ff0b8a
                             <p> <van-icon name="http://pay.91dianji.com.cn/tie.png" size="30px" /></p>
                             <p>垃圾分类</p>
                         </li>
@@ -144,17 +140,12 @@
                          <!-- <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
                            <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
                            <p>商城</p>
-<<<<<<< HEAD
-                        </router-link>
-                         <!-- <li @click="handleExpect">
-=======
                         </router-link> -->
                          <li  @click="changeLink('http://www.jd.com','商城')"  >
                            <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
                            <p>商城</p>
                         </li>
                          <li @click="handleExpect">
->>>>>>> f22da218196097409c96364875103a7700ff0b8a
                             <p> <van-icon name="http://pay.91dianji.com.cn/gengduo.png" size="30px" /></p>
                             <p>更多</p>
                             <div id="more">
@@ -163,7 +154,7 @@
                                     <p>积分兑换</p>
                                 </div>
                             </div>
-                        </li> -->
+                        </li>
                     </ul>
                 </div>
             </div>
