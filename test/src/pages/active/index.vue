@@ -21,6 +21,7 @@
 
 <script>
 import {axiosPost} from '@/lib/http'
+import storage from '@/lib/storage'
 export default {
     data() {
         return {

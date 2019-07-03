@@ -41,14 +41,7 @@ export default {
                      right:"0px",
                       bottom:"10px",
                   });  
-                        //     yinlian.setStyle({
-                        //         width:"100%",
-                        //         top:"40px",
-                        //         left:"0px",
-                        //         right:"0px",
-                        //         margin:"auto",
-                        // })
-                            yinlian.show()
+                    yinlian.show()
             }else{  
                 document.addEventListener('plusready',function () {  
                          var yinlian= plus.webview.create(this.url, "yinlian");  
@@ -68,14 +61,7 @@ export default {
         this.url=this.$route.query.info;
         this.title=this.$route.query.title;
         // this.webview();
-        // var u = navigator.userAgent; 
-        // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-        // if(isAndroid){
-        // 　　this.type = true
-        // }else{
-        // 　　this.type = false
-        // }
-        // console.log(this.type)
+       
     },
     mounted () {
        

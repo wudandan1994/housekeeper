@@ -100,30 +100,51 @@
                             <p> <van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></p>
                             <p>卡·测评</p>
                         </router-link>
+                        
                         <li  @click="handleExpect" class="secret">
                             <p> <van-icon name="http://pay.91dianji.com.cn/tie.png" size="30px" /></p>
                             <p>提额秘籍</p>
                         </li>
-                        <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
+                        <!-- <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
                             <p> <van-icon name="http://pay.91dianji.com.cn/weizhang.png" size="30px" /></p>
                             <p>违章查询</p>
-                        </router-link>
-                         <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
+                        </router-link> -->
+                        <li class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')" >
+                            <p> <van-icon name="http://pay.91dianji.com.cn/weizhang.png" size="30px" /></p>
+                            <p>违章查询</p>
+                        </li>
+                         <!-- <router-link tag="li" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
                             <p><van-icon name="http://pay.91dianji.com.cn/qichebaoxian.png" size="30px" /></p>
                             <p>汽车保险</p>
-                       </router-link>
-                        <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://baoxian.pingan.com',title: '意外险'}}">
+                       </router-link> -->
+                        <li class="secret"  @click="changeLink('http://www.epicc.com.cn/','汽车保险')" >
+                            <p><van-icon name="http://pay.91dianji.com.cn/qichebaoxian.png" size="30px" /></p>
+                            <p>汽车保险</p>
+                       </li>
+
+
+                        <!-- <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://baoxian.pingan.com',title: '意外险'}}">
                             <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
                             <p>意外险</p>
-                       </router-link>
+                       </router-link> -->
+
+                        <li  @click="changeLink('http://baoxian.pingan.com','意外险')" >
+                            <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
+                            <p>意外险</p>
+                       </li>
+
                         <li @click="handleExpect">
                             <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
                             <p>积分兑换</p>
                         </li>
-                         <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
+                         <!-- <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
                            <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
                            <p>商城</p>
-                        </router-link>
+                        </router-link> -->
+                         <li  @click="changeLink('http://www.jd.com','商城')"  >
+                           <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
+                           <p>商城</p>
+                        </li>
                          <li @click="handleExpect">
                             <p> <van-icon name="http://pay.91dianji.com.cn/gengduo.png" size="30px" /></p>
                             <p>更多</p>
@@ -283,6 +304,27 @@ export default {
         isShow() {
             this.showAaside=true
         },
+        changeLink(url,title){
+            //   this.$router.push({
+            //          path:"/loan/form/myOrder",
+            //          query:{
+            //              info:url,
+            //              title:title
+            //          }
+            //      })
+            
+             if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                 this.$router.push({
+                     path:"/loan/form/myOrder",
+                     query:{
+                         info:url,
+                         title:title
+                     }
+                 })
+             } else {
+                 location.href=url
+             }
+        },
         handleExpect(){
             this.$toast('敬请期待')
         },
@@ -315,7 +357,6 @@ export default {
             let that=this
               // 获取设备的版本号
               if(window.plus){  
-                   that.updateVerson=parseFloat(plus.runtime.version);
                    if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
                    }

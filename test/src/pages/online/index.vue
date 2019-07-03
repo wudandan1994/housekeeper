@@ -6,8 +6,10 @@
             <div class="right-icon center"></div>
         </header>
           <div class="box" style="overflow-y: scroll;">　
-            　　<iframe v-if="type" :src="url" scrolling="auto"  class="iframe" frameborder="0" ></iframe>
-            　　<iframe v-else :src="url" frameborder="0"  class="iframe" scrolling="no"  ></iframe>
+            <!-- 　　<iframe v-if="type" :src="url" scrolling="auto"  class="iframe" frameborder="0" ></iframe>
+            　　<iframe v-else :src="url" frameborder="0"  class="iframe" scrolling="no"  ></iframe> -->
+            　　<iframe :src="url"  ref="iframe" id="bdIframe" class="iframe"  scrolling="no"  frameborder="0" ></iframe>
+
          </div>
     </div>
 
@@ -82,14 +84,17 @@ export default {
             background-color: #4965AE;
        }
         .box {
-              padding-top:96px;
-            overflow-y: scroll;
-            .iframe{
-                    width: 1px;
-                    min-width: 100%;
-                    *width: 100%;
-                    height: 100% !important;
-            }
-     }
+                overflow: auto;
+                -webkit-overflow-scrolling:touch;
+                width:100%;
+                height: 100%;
+                 .iframe{
+                    // width:1px;
+                    // min-width: 100%;
+                    // *width:100%;
+                    width:100vw;
+                    height: 100vh;
+                 }
+           }
    }
 </style>
