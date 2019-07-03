@@ -81,6 +81,9 @@ export default {
          }, 
          onConfirm(value){
             this.area=value.join("-")
+              if(this.area=='北京市-'){
+                this.area='北京市-北京市'
+            }
             this.showFlag=false
          },
          showPick(){

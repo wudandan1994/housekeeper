@@ -38,10 +38,10 @@
                                             <p>执行状态</p>
                                             <!-- <p>{{item.state}}</p> -->
                                             <p v-if="item.state=='0'">待执行</p>
-                                            <p v-if="item.state=='1'">已成功</p>
-                                            <p v-if="item.state=='2'">已取消</p>
-                                            <p v-if="item.state=='3'">进行中</p>
-                                            <p v-if="item.state=='4'">失败</p>
+                                            <p v-else-if="item.state=='1'">已成功</p>
+                                            <p v-else-if="item.state=='2'">已取消</p>
+                                            <p v-else-if="item.state=='3'">进行中</p>
+                                            <p v-else>失败</p>
                                            
                                         </div>
                                     </div>
@@ -376,15 +376,15 @@ export default {
         getMainPlan(){
             //  console.log(this.bandId)
             this.i="1"
-            let data={
-                bindId:this.bindId,
+            let datas={
+                // bindId:this.bindId,
                 page:"1",
                 pageSize:"100",
                 state:""
             }
-            axiosPost("/creditCard/getMainPlan",data)
+            axiosPost("/creditCard/getMainPlan",datas)
             .then(res=>{
-                // console.log(res)
+                console.log(res,'result')
                 if(!res.data.success){
                     this.$toast({
                         message:res.data.message
@@ -400,7 +400,7 @@ export default {
                 }
             })
             .catch(err=>{
-                console.log(err)
+                // console.log(err)
             })
         }
     },

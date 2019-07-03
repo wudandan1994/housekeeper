@@ -349,7 +349,9 @@ export default {
                    if(res.data.success){
                       let version=res.data.data
                       this.versionAndroid=parseFloat(version[0].version)
+                      console.log(this.versionAndroid,'and')
                       this.versionIos=parseFloat(version[1].version)
+                       console.log(this.versionIos,'ios')
                    }
                }) 
                .catch(err=>{
@@ -360,15 +362,31 @@ export default {
             let that=this
               // 获取设备的版本号
               if(window.plus){  
-                   if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
+                //     that.updateVerson=parseFloat(plus.runtime.version);
+                //    if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
+                //        that.showUpdate=true
+                //    }
+                plus.runtime.getProperty(plus.runtime.appid,function(inf){
+                that.updateVerson=parseFloat(inf.version);
+                console.log(that.updateVerson,'version')
+                    if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
                    }
+               });
             }else{  
                 document.addEventListener('plusready',function () {  
-                      that.updateVerson=parseFloat(plus.runtime.version);
-                         if(that.versionAndroid>that.updateVerson|| that.versionIos>that.updateVerson ){
-                             that.showUpdate=true
-                        }
+                    //   that.updateVerson=parseFloat(plus.runtime.version);
+                    //      if(that.versionAndroid>that.updateVerson|| that.versionIos>that.updateVerson ){
+                    //          that.showUpdate=true
+                    //     }
+
+                 plus.runtime.getProperty(plus.runtime.appid,function(inf){
+                that.updateVerson=parseFloat(inf.version);
+                 console.log(that.updateVerson,'version')
+                    if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
+                       that.showUpdate=true
+                           }
+                        });
 
                 },false);  
             }  
@@ -436,6 +454,7 @@ export default {
                 });
         },
         changeActive(obj){
+
             // console.log('当前选中',obj);
         } ,
         // 查询实名认证
@@ -496,12 +515,12 @@ export default {
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-        //  this.automatic() //自动登录
-        //  this.getUpdate() //获取版本
+         this.automatic() //自动登录
+         this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        // this.update() 
+        this.update() 
     }
 }
 </script>
