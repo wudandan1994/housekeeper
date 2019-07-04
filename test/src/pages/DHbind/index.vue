@@ -9,7 +9,7 @@
             <div class="phone">
                <ul>
                    <li>
-                        <span>开户姓名：</span>
+                        <span>用户名：</span>
                        <input  v-model="name" type="text" placeholder="开户姓名">
                    </li>
                     <li>
@@ -21,15 +21,14 @@
                        <input type="number" v-model="mobileNo" placeholder="手机号码">
                    </li>
                    <li>
-                       <span>开户证件号：</span>
+                       <span>身份证号：</span>
                        <input type="text"  v-model="idcardNo" placeholder="身份证号码" >
                    </li>
-                   <li>
-                        <span>开户地区：</span>
-                       <input class="area" readonly v-model="area" type="text" placeholder="示例：江苏省-苏州市">
-                        <span @click="showPick"><van-icon name="arrow"/></span>
+                    <li>
+                       <span>验证码：</span>
+                       <input type="text"  v-model="code" placeholder="短信验证码" >
                    </li>
-                   <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
+                 
                    
                </ul>
            </div>
@@ -48,7 +47,6 @@
 
 <script>
 import { axiosPost } from '../../lib/http'
-// import { citys } from '../../lib/city.js'
 export default {
     data() {
         return {
@@ -57,94 +55,77 @@ export default {
             mobileNo:"",
             idcardNo:"",
             area:"",
-            showFlag:false,
             item:"",
-            columns: [
-                {
-                values: Object.keys(citys),
-                className: 'column1'
-                },
-                {
-                values: citys['浙江'],
-                className: 'column2',
-                defaultIndex: 2
-                }
-            ],
+            userId:"",
+            code:"",
+            tranSerialNum:""
         }
     },
     methods:{
         goBack() {
-            this.$router.push('/home')
+            this.$router.go(-1)
         },
-         onChange(picker, values) {
-            picker.setColumnValues(1, citys[values[0]]);
-         }, 
-         onConfirm(value){
-            this.area=value.join("-")
-            this.showFlag=false
-         },
-         showPick(){
-             this.showFlag=true
-         },
-         onCancel(){
-             this.showFlag=false
-         },
+        getCode(){
+             this.$http.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+this.accountNo+'&cardBinCheck=true')
+             .then(res=>{
+                    let bankcode=res.data.bank
+                    let data={
+                        userId:this.userId,
+                        cardNum:this.accountNo,
+                        bankAgentId:bankcode,
+                        userName:this.name,
+                        certificateNum:this.idcardNo,
+                        mobile:this.mobileNo
+                    }
+                    axiosPost("/dhcreditCard/dhBind",data)
+                    .then(res=>{
+                        console.log(res,'result')
+                        this.tranSerialNum=res.data.data.tranSerialNum
+                        console.log(this.tranSerialNum)
+                    })
+             })
+            
+
+
+
+        },
 
         binding(){
-            if(this.name.trim().length===0 || this.accountNo.trim().length===0 || this.mobileNo.trim().length===0 || 
-                this.idcardNo.trim().length===0 || this.area.trim().length===0  ){
-                    this.$toast({
-                        message:"请将信息填写完整"
-                    })
-                    return
-              }
-               let partten = /0?(13|14|15|17|18|19)[0-9]{9}/ 
-               if(!partten.test(this.mobileNo)){
-                 this.$toast({
-                    message:"请填写11位手机号码"
-                })
-                return
-              }
-              
-              let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-                if(!parttenId.test(this.idcardNo)){
-                    this.$toast({
-                        message:"请填正确的身份号"
-                    })
-                    return
-                } 
-                let data={
-                    accountNo:this.accountNo,
-                    mobileNo:this.mobileNo,
-                    idcardNo:this.idcardNo,
-                    name:this.name,
-                    area:this.area
-                }
-                 axiosPost("/creditCard/insertEsiCash",data)
-                 .then(res=>{
-                    //  console.log(res)
-                     if(!res.data.success){
-                         this.$toast({
-                             message:res.data.message
-                         })
-                         return
-                     } else {
-                         let url=res.data.data
-                        document.write(url)
-                     }
-                 })
-                 .catch(err=>{
-                     
-                 })
+            let data={
+                // userId:this.userId,
+                // cvn2:this.item.cvv2,
+                // valid:this.item.month+this.item.year,
+                // phoneCode:this.code
+
+                 userId:'e677f85fee57649f810315145cd5ab95',
+                cvn2:'123',
+                valid:'1123',
+                 phoneCode:this.code,
+                 tranSerialNum:this.tranSerialNum
+            }
+            axiosPost("dhcreditCard/dhBackVerifyBind",data)
+            .then(res=>{
+                console.log(res,"短信")
+            })
+
+            
           
         }
     },
     created () {
         this.item=this.$route.query.info 
-        this.name=this.item.payerName
-        this.accountNo=this.item.cardNo
-        this.mobileNo=this.item.phone
-         this.idcardNo=this.item.idCardNo
+        // this.name=this.item.payerName
+        // this.accountNo=this.item.cardNo
+        // this.mobileNo=this.item.phone
+        //  this.idcardNo=this.item.idCardNo
+        //  this.userId=this.$route.query.userId
+
+         this.name="互联网"
+        this.accountNo="6221558812340000"
+        this.mobileNo='13552535506'
+         this.idcardNo="341126197709218366"
+          this.userId='e677f85fee57649f810315145cd5ab95'
+         this.getCode()
     }
 }
 </script>
@@ -197,9 +178,7 @@ export default {
                                font-weight: bold;
                            }
                        }
-                       &:last-child {
-                        //    border:none;
-                       }
+                       
                        >span {
                            &:nth-of-type(2){
                                padding:0 10px;

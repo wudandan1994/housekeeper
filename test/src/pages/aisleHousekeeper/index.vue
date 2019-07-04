@@ -94,14 +94,14 @@
                                 </div>
                                 <div class="large" @click.stop="largePass(item)">
                                         <van-icon name="http://pay.91dianji.com.cn/dae.png" size="40px"/>
-                                        <p>大额通道</p>
+                                        <p>大额通道&nbsp;&nbsp;<span>(还款金额500000左右)</span></p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
                                 </div>
-                                 <!-- <div class="large" @click.stop="thirdPass(item)">
+                                 <div class="large" @click.stop="thirdPass(item)">
                                         <van-icon name="http://pay.91dianji.com.cn/dae.png" size="40px"/>
                                         <p>智能通道</p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
-                                </div> -->
+                                </div>
                              </div>
                        </div>
                        
@@ -285,80 +285,24 @@ export default {
                      axiosPost("/dhcreditCard/getDHRegisterExist")
                      .then(res=>{
                          if(res.data.success){
-                            //  注册
-                            let  data={
-                               userName: i.payerName,
-                               certificateNum:i.idCardNo
-                            }
-                             axiosPost("/dhcreditCard/dhRegister",data)
-                             .then(res=>{
-                                //  console.log(res,'userId')
-                                 if(res.data.success){
-                                     this.userId=res.data.data.userId
-
-                                    this.$http.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+i.cardNo+'&cardBinCheck=true')
-                                        .then(responce=>{
-                                            console.log(res,'bank')
-                                            this.bankcode=responce.data.bank
-                                        })
-                                    //  绑卡
-                                  
-                                    let params={
-                                      userId:this.userId,
-                                      cardNum:i.cardNo,
-                                      userName:i.payerName,
-                                      certificateNum:i.idCardNo,
-                                      mobile:i.phone,
-                                      bankAgentId: this.bankcode
-                                    }
-                                    axiosPost("/dhcreditCard/dhBind",params)
-                                    .then(res=>{
-                                        
-                                    })
-                                    .catch(err=>{
-
-                                    })
-
-
-                                 }   else {
-                                    //  如果已签约直接绑卡
-                                     this.$http.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+i.cardNo+'&cardBinCheck=true')
-                                        .then(responce=>{
-                                            console.log(res,'bank')
-                                            this.bankcode=responce.data.bank
-                                        })
-
-                                     let params={
-                                    //   userId:this.userId,
-                                      userId: '02e13ab1e5f0fa3df80969320b7582a4',
-                                      cardNum:i.cardNo,
-                                      userName:i.payerName,
-                                      certificateNum:i.idCardNo,
-                                      mobile:i.phone,
-                                    //   bankAgentId: this.bankcode
-                                     bankAgentId:'304290042357'
-                                    }
-                                     axiosPost("/dhcreditCard/dhBind",params)
-                                    .then(res=>{
-                                        console.log(res,'注册成功，等待短信')
-                                        
-                                    })
-                                    .catch(err=>{
-
-                                    })
-
-
-
-                                 }
-
-                             })
-                             .catch(err=>{
-
-                             })
-
-
+                             console.log(res,'是否签约')
+                             this.userId=res.data.data.userId       //   然后去绑卡
+                            this.$router.push({
+                                path:"/home/DHbind",
+                                query:{
+                                    info:i,
+                                    userId:this.userId
+                                }
+                            })
                          } else {
-                            //  绑卡
+                            // 去 注册
+                             this.$router.push({
+                                path:"/home/DHregister",
+                                query:{
+                                    info:i,
+                                }
+                            })
+                            
 
 
                          }

@@ -43,7 +43,8 @@ import systemNewsComponent from '@/pages/systemNews'
 import vipComponent from '@/pages/vip'
 import personalCenterComponent from '@/pages/personalCenter'
 import shareComponent from '@/pages/share'
-import DHbindComponent from '@/pages/DHbind' // 第三条还款通道
+import DHbindComponent from '@/pages/DHbind' // 第三条还款通道绑卡
+import DHregisterComponent from '@/pages/DHregister' // 第三条还款通道注册
 
 import financialCircleComponent from '@/pages/financialCircle'
 import realNameComponent from '@/pages/realName'
@@ -173,6 +174,8 @@ export default new Router({
     {path:"/home/largeCard",component:largeCardComponent},
     {path:"/home/evaluation",component:evaluationComponent}, //卡测评
     {path:"/home/DHbind",component:DHbindComponent}, //第三条还款通道
+    {path:"/home/DHregister",component:DHregisterComponent}, //第三条还款通道
+
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},
     {path:"/share/promotionMaterial",component:promotionMaterialComponent},
