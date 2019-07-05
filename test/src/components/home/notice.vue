@@ -3,9 +3,12 @@
         <div class="notice">
             <div class="notice-title center">重要通知</div>
             <p>钱夹宝1.2版本即将上线,本次更新内容如下:</p>
+
             <p>(1):全新页面升级</p>
-            <p>(2):普通代还通道即将下架，更新后若在普通代还通道仍有任务的请联系客服查询任务进度</p>
-            <p>(3):1.2新版本需卸载后重新下载</p>
+            <p>(2):升级VIP后个人中心背景对应VIP图</p>
+            <p>(3):增加VIP“权益明细”，包含具体优惠费率，分润比例，奖励等内容</p>
+            <p>(4):增加“垃圾分类”便民功能</p>
+            <p>(5):取消普通代还，保留完美还款——小额还款20000以下，大额还款50万左右</p>
         </div>
     </div>
 </template>
@@ -13,23 +16,27 @@
 export default {
     data(){
         return{
-            notice: false,
+            notice: null,
             type: true,
         }
     },
     methods:{
         handleCloseNotice(){
             this.notice = false;
-            this.$store.commit('notice',false);
+            localStorage.setItem("notice",'false')
         }
     },
+    created () {
+         this.notice =  localStorage.getItem("notice")
+         if(this.notice===null){
+             this.notice=true
+         } else if(this.notice=="false"){
+             this.notice=false
+         }
+        
+    },
     mounted(){
-        setTimeout(() =>{
-            if(this.type){
-                this.notice = true;
-            } 
-        },1000);
-        this.type = this.$store.state.wechat.notice;
+       
     }
 
 }

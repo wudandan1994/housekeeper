@@ -254,14 +254,17 @@ export default {
                                     this.componentload=false
                                     location.href=url
                                 }
+
+                            //  this.$router.push({
+                            // path:"/loan/form/myOrder",
+                            //     query:{
+                            //         info:url,
+                            //         title:"支付"
+                            //     }
+                            // })
+                            
                         },2000)
-                        // this.$router.push({
-                        //     path:"/loan/form/myOrder",
-                        //     query:{
-                        //         info:url,
-                        //         title:"支付"
-                        //       }
-                        // })
+                       
 
                         
                    }

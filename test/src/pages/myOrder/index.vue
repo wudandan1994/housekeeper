@@ -6,9 +6,6 @@
             <span></span>
         </header>
         <div class="container">
-            <!-- <div class="box" style="width:100vw;height:100vh;">　
-            　　<iframe v-if="type" :src="url" scrolling="auto" class="iframe" frameborder="0" width="100vw" height="100vh"></iframe>
-            </div> -->
              <iframe class="iframe"  :src="url" frameborder="0" target="_self"></iframe>
         </div>
     </div>
@@ -104,22 +101,12 @@ export default {
                }
            }
        }
-       .iframe{
+       .container {
+           width:100%;
+           .iframe{
                width: 100%;
                height:100vh !important;
-            //    overflow-x:hidden;
            }
-    //    >.container {
-    //        padding-top:96px;
-    //        .box {
-    //            overflow-x: hidden;
-    //        }
-    //        .iframe{
-    //            width: 100%;
-    //            height:100vh !important;
-    //            overflow-x:hidden;
-    //        }
-    //    }
-
+       }
    }
 </style>

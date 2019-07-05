@@ -118,8 +118,6 @@ export default {
                         // })
 
 
-
-
                          if (!navigator.userAgent.match(/iPad|iPhone/i)){
                                 that.$router.push({
                                     path:"/loan/form/myOrder",
@@ -133,8 +131,6 @@ export default {
                                     location.href=url
                                 }
                     },1000)
-                   
-                       
                     //  location.href=res.data.data.data
                 }
                

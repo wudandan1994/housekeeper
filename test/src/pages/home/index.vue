@@ -54,7 +54,7 @@
             <!-- 信用卡模块 -->
             <div class="credit">
                 <ul>
-                    <li @click.native="handleIsAuth('/home/cardCenter')">
+                    <li @click="handleIsAuth('/home/cardCenter')">
                         <span class="handle">
                             <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                         </span>
@@ -165,7 +165,7 @@
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
                         <div class="center">信息咨询</div>
                     </div>
-                        <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
+                    <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
                         <div class="center">商城</div>
                     </router-link>
@@ -333,9 +333,9 @@ export default {
                    if(res.data.success){
                       let version=res.data.data
                       this.versionAndroid=parseFloat(version[0].version)
-                      console.log(this.versionAndroid,'and')
+                    //   console.log(this.versionAndroid,'and')
                       this.versionIos=parseFloat(version[1].version)
-                       console.log(this.versionIos,'ios')
+                    //    console.log(this.versionIos,'ios')
                    }
                }) 
                .catch(err=>{
@@ -352,7 +352,7 @@ export default {
                 //    }
                 plus.runtime.getProperty(plus.runtime.appid,function(inf){
                 that.updateVerson=parseFloat(inf.version);
-                console.log(that.updateVerson,'version')
+                // console.log(that.updateVerson,'version')
                     if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
                    }
@@ -366,7 +366,7 @@ export default {
 
                  plus.runtime.getProperty(plus.runtime.appid,function(inf){
                 that.updateVerson=parseFloat(inf.version);
-                 console.log(that.updateVerson,'version')
+                //  console.log(that.updateVerson,'version')
                     if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
                            }
