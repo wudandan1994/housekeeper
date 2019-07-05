@@ -17,21 +17,21 @@
                 <div class="icon center"><van-icon name="http://fx.91dianji.com.cn/fengxing_dianhua.png"/></div>
                 <div class="contact_title">加盟热线:</div>
                 <div class="jiameng_rexian">
-                    <span>18017459488</span>
+                    <span>021-60592500</span>
                     <span>朱经理</span>
                 </div>
                 <div class="btn center">
-                    <span><a href="tel:18017459488">拨打</a></span>
+                    <span><a href="tel:021-60592500">拨打</a></span>
                 </div>
             </div>
-            <div class="contact_us row">
+            <!-- <div class="contact_us row">
                 <div class="icon center"><van-icon name="http://fx.91dianji.com.cn/fengxing_weixin.png"/></div>
                 <div class="contact_title">微信号码:</div>
                 <div class="contact_detail start-center" id="mobile">18017459488</div>
                 <div class="btn center">
                     <span class="test" data-clipboard-action="copy" data-clipboard-target="#mobile" @click="handleCopy('18017459488')">复制</span>
                 </div>
-            </div>
+            </div> -->
             <div class="contact_us row">
                 <div class="icon center"><van-icon name="http://fx.91dianji.com.cn/fengxing_zuoji.png"/></div>
                 <div class="contact_title">客服电话:</div>
@@ -40,7 +40,7 @@
                     <span><a href="tel:400-1059-769">拨打</a></span>
                 </div>
             </div>
-            <div class="contact_us row">
+            <!-- <div class="contact_us row">
                 <div class="icon center"><van-icon name="http://fx.91dianji.com.cn/fengxing_weixin.png"/></div>
                 <div class="contact_title">客服微信:</div>
                 <div class="jiameng_rexian">
@@ -50,7 +50,7 @@
                 <div class="btn center">
                    <span><a href="tel:18017459488">拨打</a></span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -108,7 +108,7 @@ export default {
        .container {
             width: 87%;
             margin: auto;
-            height: 551px;
+            height: 400px;
             background-image: linear-gradient(180deg, #1a98ff 0%, #4b66af 100%), linear-gradient(#ffffff, #ffffff);
             background-blend-mode: normal, normal;
             border-radius: 10px;

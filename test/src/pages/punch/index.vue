@@ -538,10 +538,6 @@ export default {
              }
 
            }
-
-
-
-          
        }
    }
 </style>

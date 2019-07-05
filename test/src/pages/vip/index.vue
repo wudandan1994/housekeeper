@@ -66,14 +66,14 @@
                                          </li>
                                           <li>
                                              <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
-                                             <p>加盟热线：18017459488 &nbsp;&nbsp;朱经理</p>
-                                              <p><a href="tel:18017459488">拨打</a></p>
+                                             <p>加盟热线：021-60592500 &nbsp;&nbsp;朱经理</p>
+                                              <p><a href="tel:021-60592500">拨打</a></p>
                                          </li>
-                                          <li>
+                                          <!-- <li>
                                                 <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
                                                 <p id="mobile">微信号码：18017459488 </p>
                                                 <p data-clipboard-action="copy" data-clipboard-target="#mobile" class="test" @click="handleCopy('18017459488')">复制</p>
-                                         </li>
+                                         </li> -->
                                           <li>
                                              <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
                                              <p>客服电话 ：400-1059-769</p>

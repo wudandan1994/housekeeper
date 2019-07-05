@@ -1,9 +1,9 @@
 <template>
     <div id="register">
-        <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>个人设置</span>
-            <span></span>
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">个人设置</div>
+            <div class="right-icon center"></div>
         </header>
         <div class="container">
             <div class="info">
@@ -75,13 +75,13 @@
                        </div>
                        <div class="icon-left end-center"><van-icon name="arrow" /></div>
                    </div>
-                   <div class="per-userinfo row">
+                   <!-- <div class="per-userinfo row">
                        <div class="avator start-center"><van-icon name="stop-circle" size="22px"/>声音开关</div>
                        <div class="detail end-center">
                            <van-switch v-model="voice" active-color="#1989fa" inactive-color="#f44" />
                        </div>
                        <div class="icon-left end-center"><van-icon name="arrow" /></div>
-                   </div>
+                   </div> -->
                </div>
             </div>
             <!-- <van-loading type="spinner" color="#4B66AF" size="40px"/> -->
@@ -124,6 +124,9 @@ export default {
             voice: '0',
             isconnect:true
         }
+    },
+    components:{
+        loading
     },
     methods:{
         goBack() {
@@ -179,6 +182,7 @@ export default {
             axiosPost("/customer/getCustomer",data)
             .then(res =>{
                 if(res.data.success){
+                    console.log('查询成功',res.data.data);
                     this.photo = res.data.data.photo;
                     this.nickname = res.data.data.nickname;
                     this.mobile = res.data.data.mobile;
@@ -193,17 +197,20 @@ export default {
             })
             .catch(res =>{
                 this.$toast('查询失败');
+                console.log('查询失败',res.data.data);
             })
         },
         // 更新个人设置
         updateSet(){
+            this.componentload = true;
             let url = '/customer/updateCustomer';
             var iscreditcard = false;
-            var voice = false;
-            var iscar = false;
-            var isconnect=null
+            var voice = '';
+            var iscar = '';
+            var isconnect = '';
 
-            this.isconnect==true? isconnect="1":"0"
+            this.isconnect == true ? isconnect = "1" :  isconnect = "0";
+            console.log('允许',isconnect);
             this.iscar == true ? iscar = '1' : iscar = '0';
             this.voice == true ? voice = '1' : voice = '0';
             this.iscreditcard == true ? iscreditcard = '1' : iscreditcard = '0';
@@ -224,9 +231,15 @@ export default {
             axiosPost(url,params).then(res =>{
                 
                 if(res.data.success){
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },1000);
                     this.$toast('更新成功');
                 }else{
                     this.$toast(res.data.message);
+                    setTimeout(() =>{
+                        this.componentload = false;
+                    },1000);
                 }
             }).catch(res =>{
             })

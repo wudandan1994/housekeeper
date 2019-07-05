@@ -1308,7 +1308,7 @@ export default {
                         height: 90%;
                         border: none;
                         background: transparent;
-                        font-size: 26px;
+                        font-size: 26px; 
                     }
                     input::-webkit-input-placeholder{
                         padding-top: 10px;
