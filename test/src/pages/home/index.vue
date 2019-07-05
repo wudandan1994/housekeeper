@@ -16,7 +16,7 @@
         <div class="container">
             <!-- 轮播图模块 -->
             <div class="swipe">
-                <van-swipe :autoplay="3000">
+                <van-swipe :autoplay="3000" :height="height">
                     <van-swipe-item v-for="(item, index) in images" :key="index" @click="handleSwipeDetail(item)">
                         <img v-lazy="item.url" class="per-img" />
                     </van-swipe-item>
@@ -47,14 +47,14 @@
             <div class="pannel-news row">
                 <div class="pannel-title center">钱&nbsp;夹<br/>资&nbsp;讯</div>
                 <div class="pannel-detail center" @click="handleContactUs">
-                    <van-notice-bar text="现成为993会员，即可享有19800元代理商的相关权限，名额有限，相关内容，请联系您的专属客户经理，确认活动详情。"/>
+                    <van-notice-bar text="好消息：从7月8日至7月14日，连续在朋友圈推广钱夹宝相关海报，连续时间7天，可免费成为993会员一个月！费率低至0.47！相关活动内容请联系客服"/>
                 </div>
             </div>
 
             <!-- 信用卡模块 -->
             <div class="credit">
                 <ul>
-                    <li @click="handleIsAuth('/home/cardCenter')">
+                    <li @click.native="handleIsAuth('/home/cardCenter')">
                         <span class="handle">
                             <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                         </span>
@@ -283,7 +283,8 @@ export default {
             showUpdate:false,
             versionAndroid:"",// 安卓版本号
             versionIos:"", // ios 版本号
-            updateVerson:0  // 设备版本号
+            updateVerson:0,  // 设备版本号
+            height: 148.5
         }
   },
    methods:{
@@ -634,13 +635,13 @@ export default {
                 }
 
             }
-                >.swipe {
-            height: 270px;
-            .per-img{
-                width: 100vw;
-                height: auto;
+            >.swipe {
+                height: 270px;
+                .per-img{
+                    width: 100vw;
+                    height: auto;
+                }
             }
-        }
         .search {
             height: 110px;
             >ul{

@@ -127,10 +127,10 @@
                 <div class="per-menu-title center">联系我们</div>
             </router-link>
 
-            <div class="per-menu-list" @click="handleExpect">
+            <router-link tag="div" class="per-menu-list" to="/apply">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/314.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">名片夹</div>
-            </div>
+            </router-link>
         </div>
 
          <div class="buy-detail" v-if="pup2">
@@ -399,9 +399,9 @@ export default {
                      if(this.ispartner=='1'){
                        this.background='http://pay.91dianji.com.cn/vip0003.png'
                     }else  if(this.pic=='1'){
-                       this.background='http://pay.91dianji.com.cn/vip004.png'
+                       this.background='http://pay.91dianji.com.cn/vip001.png'
                     } else if(this.pic=='2'){
-                      this.background='http://pay.91dianji.com.cn/vip001.png'
+                      this.background='http://pay.91dianji.com.cn/vip002.png'
                     } else {
                        this.background=''
                     }
@@ -440,8 +440,6 @@ export default {
           width: 100vw;
           height: 391px;
           position: relative;
-        //   background: url('http://pay.91dianji.com.cn/hehuoren_bg.png');  
-        //   background-image: url('http://pay.91dianji.com.cn/hehuoren_bg.png');  
           background-repeat: no-repeat;
           background-size: contain;
           padding-top: 60px;  
@@ -501,7 +499,7 @@ export default {
               width: auto;
               height: 100px;
               position: absolute;
-              z-index: 9999;
+              z-index: 99;
               right: 0px;
               top: 70px;
               background: #798bc5;
@@ -516,7 +514,7 @@ export default {
               height: 350px;
               position: relative;
               margin-top: 100px;
-              z-index: 9999;
+              z-index: 99;
               margin-left: auto;
               margin-right: auto;
               background: #ffffff;
@@ -601,7 +599,7 @@ export default {
               height: 180px;
               background: white;
               margin-top: 30px;
-              z-index: 999;
+              z-index: 99;
               .per-menu{
                   width: 33%;
                   height: 160px;
@@ -622,34 +620,36 @@ export default {
             width: 100%;
             height: 100%;
             position: fixed;
-            z-index: 2;
+            z-index: 100;
             top: 0;
             left: 0;
             background: rgba(0, 0, 0, 0.4);
           .content {
               width:600px;
-              height:800px;
+              height:auto;
               margin:0 auto;
-              padding:15px;
+              padding: 30px;
               box-sizing:border-box;
               line-height: 38px;
               >h1 {
                   text-align: center;
                   margin-top:10px;
                   font-weight: bold;
+                  padding-bottom: 20px;
+                  font-size: 34px;
               }
               p{
-                  font-size: 30px;
+                  font-size: 26px;
               }
               .colum {
                   color:#DAB17D;
                   font-weight: bold;
-                  font-size: 30px;
+                  font-size: 26px;
               }
               .vip {
                   margin-top:20px;
                   margin-bottom:20px;
-                  font-size: 30px;
+                  font-size: 26px;
               }
                .button{
                  width: 80%;
@@ -683,7 +683,7 @@ export default {
             background: white;
             font-size: 30px;
             color: #000;
-            margin-top: 360px;
+            margin-top: 400px;
             &.server {
                 font-size: 36px;
                 font-weight: bold;
@@ -750,144 +750,144 @@ export default {
             }
         }
          .buy-detail{
-         width: 100%;
-         height: 100%;
-         position: fixed;
-         z-index: 10000;
-         top: 0;
-         left: 0;
-         background: #ffffff;
-         color: black;
-         .recom{
-             width: 100%;
-             height: 150px;
-            //  border-bottom: solid 1px #ccc;
-             .avator{
-                 width: 15%;
-                 height: 100%;
-                 >img{
-                     width: 80px;
-                     height: 80px;
-                     border-radius: 50%;
-                 }
-             }
-             .recom-detail{
-                 width: 33%;
-                 height: 100%;
-                 padding-left: 2%;
-                 .recom-title{
-                     width: 100%;
-                     height: 25%;
-                     margin-top: 8%;
-                     color: #333;
-                     font-size: 24px;
-                 }
-                 .recom-name{
-                     width: 100%;
-                     height: 25%;
-                     font-size: 20px;
-                     z-index: 9999;
-                 }
-                 .recom-code{
-                     width: 100%;
-                     height: 25%;
-                     color: #333;
-                     font-size: 24px;
-                 }
-             }
-             .recom-info{
-                 width: 50%;
-                 height: 100%;
-                 .mini-info{
-                     width: 80%;
-                     height: 70%;
-                     background: #CAF788;
-                     padding: 5%;
-                     text-align: justify; 
-                     font-size: 22px;
-                 }
-             }
-         }
-        .price{
             width: 100%;
-            height: 150px;
-            font-weight: bold;
-            font-size: 50px;
-        }
-        .per-title{
-            width: 100%;
-            height: 100px;
-            border-bottom: solid 1px #ddd;
-            .goods-title{
-                width: 25%;
-                height: 100%;
-                margin-left: 5%;
-                font-size: 32px;
-                color: #333;
-            }
-            .goods-detail{
-                width: 75%;
-                height: 100%;
-                font-size: 28px;
-                .alipay{
-                    border: solid 1.2px #0498E2;
-                }
-                .wechatpay{
-                    border: solid 1.2px #09BB07;
-                }
-                .paytype{
-                    width: 40%;
-                    height: 70%;
-                    padding-left: 15px;
-                    padding-right: 15px;
-                    margin-top: 15px;
-                    border-radius: 50px;
-                    .payicon{
-                        font-size: 40px;
-                        padding-right: 10px;
+            height: 100%;
+            position: fixed;
+            // z-index: 999;
+            top: 0;
+            left: 0;
+            background: #ffffff;
+            color: black;
+            .recom{
+                width: 100%;
+                height: 150px;
+                //  border-bottom: solid 1px #ccc;
+                .avator{
+                    width: 15%;
+                    height: 100%;
+                    >img{
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 50%;
                     }
                 }
-                .paytypes{
-                    width: 40%;
-                    height: 70%;
-                    margin-left: 5%;
-                    padding-left: 15px;
-                    padding-right: 15px;
-                    margin-top: 15px;
-                    border-radius: 50px;
-                    .payicon{
-                        font-size: 40px;
-                        padding-right: 10px;
+                .recom-detail{
+                    width: 33%;
+                    height: 100%;
+                    padding-left: 2%;
+                    .recom-title{
+                        width: 100%;
+                        height: 25%;
+                        margin-top: 8%;
+                        color: #333;
+                        font-size: 24px;
+                    }
+                    .recom-name{
+                        width: 100%;
+                        height: 25%;
+                        font-size: 20px;
+                        z-index: 9999;
+                    }
+                    .recom-code{
+                        width: 100%;
+                        height: 25%;
+                        color: #333;
+                        font-size: 24px;
+                    }
+                }
+                .recom-info{
+                    width: 50%;
+                    height: 100%;
+                    .mini-info{
+                        width: 80%;
+                        height: 70%;
+                        background: #CAF788;
+                        padding: 5%;
+                        text-align: justify; 
+                        font-size: 22px;
                     }
                 }
             }
-        }
-        .buybtn{
-            width: 80%;
-            height: 100px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 100px;
-            .cancel{
-                width: 40%;
-                height: 100%;
-                background: #ddd;
-                border: none;
-                font-size: 30px;
-            }
-            .submit{
-                width: 40%;
-                height: 100%;
-                background: #4b66af;
-                color:#ffffff;
-                font-size: 36px;
+            .price{
+                width: 100%;
+                height: 150px;
                 font-weight: bold;
-                margin-left: 20%;
-                border: none;
-                font-size: 30px;
+                font-size: 50px;
+            }
+            .per-title{
+                width: 100%;
+                height: 100px;
+                border-bottom: solid 1px #ddd;
+                .goods-title{
+                    width: 25%;
+                    height: 100%;
+                    margin-left: 5%;
+                    font-size: 32px;
+                    color: #333;
+                }
+                .goods-detail{
+                    width: 75%;
+                    height: 100%;
+                    font-size: 28px;
+                    .alipay{
+                        border: solid 1.2px #0498E2;
+                    }
+                    .wechatpay{
+                        border: solid 1.2px #09BB07;
+                    }
+                    .paytype{
+                        width: 40%;
+                        height: 70%;
+                        padding-left: 15px;
+                        padding-right: 15px;
+                        margin-top: 15px;
+                        border-radius: 50px;
+                        .payicon{
+                            font-size: 40px;
+                            padding-right: 10px;
+                        }
+                    }
+                    .paytypes{
+                        width: 40%;
+                        height: 70%;
+                        margin-left: 5%;
+                        padding-left: 15px;
+                        padding-right: 15px;
+                        margin-top: 15px;
+                        border-radius: 50px;
+                        .payicon{
+                            font-size: 40px;
+                            padding-right: 10px;
+                        }
+                    }
+                }
+            }
+            .buybtn{
+                width: 80%;
+                height: 100px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 100px;
+                .cancel{
+                    width: 40%;
+                    height: 100%;
+                    background: #ddd;
+                    border: none;
+                    font-size: 30px;
+                }
+                .submit{
+                    width: 40%;
+                    height: 100%;
+                    background: #4b66af;
+                    color:#ffffff;
+                    font-size: 36px;
+                    font-weight: bold;
+                    margin-left: 20%;
+                    border: none;
+                    font-size: 30px;
+                }
             }
         }
-     }
         
 }
 </style>

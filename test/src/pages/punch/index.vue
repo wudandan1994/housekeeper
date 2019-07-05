@@ -347,7 +347,6 @@ export default {
                 } else{
                      axiosPost("/creditCard/getMainPlan",data)
                  .then(res=>{
-                // console.log(res)
                 if(!res.data.success){
                     this.$toast({
                         message:res.data.message
@@ -356,7 +355,6 @@ export default {
                      let arr= res.data.data.data
                      let arrXun=[]
                      arr.forEach((item,i) => {
-                         console.log(item.state)
                          item.bankNick=bankCardAttribution(item.cardNo).bankName
                          arrXun.push(item)
                      });
@@ -374,7 +372,6 @@ export default {
         },
         //获取主还款
         getMainPlan(){
-            //  console.log(this.bandId)
             this.i="1"
             let data ={
                 page:"1",
@@ -383,7 +380,6 @@ export default {
             }
             axiosPost("/creditCard/getMainPlan",data)
             .then(res=>{
-                // console.log(res.data.data.data,'result')
                 if(!res.data.success){
                     this.$toast({
                         message:res.data.message
@@ -394,11 +390,7 @@ export default {
                      arr.forEach((item,index) => {
                          item.bankNick=bankCardAttribution(item.cardNo).bankName
                          arrXun.push(item)
-                         console.log('测试',item.state);
-                         console.log('测试2',item);
-                         
                      });
-                     console.log(arrXun);
                      this.list=arrXun
                 }
             })
@@ -546,10 +538,6 @@ export default {
              }
 
            }
-
-
-
-          
        }
    }
 </style>
