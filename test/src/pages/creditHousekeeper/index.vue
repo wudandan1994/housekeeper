@@ -7,7 +7,7 @@
         </header>
        <div class="container">
            <h3>钱夹宝智能还款</h3>
-           <p class="mode">智能,极速2种模式</p>
+           <p class="mode">小额,大额2种通道</p>
            <div class="light">
                <ul>
                    <!-- <li>
@@ -34,7 +34,7 @@
                    <li>
                        <p><van-icon name="http://pay.91dianji.com.cn/114.png"/></p>
                        <div>
-                           <p>极速还款，全新模式</p>
+                           <p>完美账单，全新模式</p>
                            <p>距还款日只剩1-3天又想账单尽量完美，极速模式，照样可以还</p>
                        </div>
                    </li>
