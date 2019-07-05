@@ -223,21 +223,21 @@
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
          <!-- 绑定手机模块 -->
-        <!-- <bindMobile></bindMobile> -->
+        <bindMobile></bindMobile>
         <!-- <loading :componentload="componentload"></loading> -->
         <notice></notice>
     </div>
 </template>
 <script>
 import footerMenu from '@/components/footer'
-// import bindMobile from '@/components/bindMobile'
+import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-    //   bindMobile,
+      bindMobile,
       notice
     //   loading
   },
@@ -293,25 +293,25 @@ export default {
             this.showAaside=true
         },
         changeLink(url,title){
-              this.$router.push({
-                     path:"/loan/form/myOrder",
-                     query:{
-                         info:url,
-                         title:title
-                     }
-                 })
-            
-            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
-            //      this.$router.push({
+            //   this.$router.push({
             //          path:"/loan/form/myOrder",
             //          query:{
             //              info:url,
             //              title:title
             //          }
             //      })
-            //  } else {
-            //      location.href=url
-            //  }
+            
+             if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                 this.$router.push({
+                     path:"/loan/form/myOrder",
+                     query:{
+                         info:url,
+                         title:title
+                     }
+                 })
+             } else {
+                 location.href=url
+             }
         },
         handleExpect(){
             this.$toast('敬请期待')

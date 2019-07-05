@@ -79,9 +79,9 @@ export default {
                     }
                     axiosPost("/dhcreditCard/dhBind",data)
                     .then(res=>{
-                        console.log(res,'result')
+                        // console.log(res,'result')
                         this.tranSerialNum=res.data.data.tranSerialNum
-                        console.log(this.tranSerialNum)
+                        // console.log(this.tranSerialNum)
                     })
              })
             

@@ -97,11 +97,11 @@
                                         <p>大额通道&nbsp;&nbsp;<span>(还款金额500000左右)</span></p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
                                 </div>
-                                 <div class="large" @click.stop="thirdPass(item)">
+                                 <!-- <div class="large" @click.stop="thirdPass(item)">
                                         <van-icon name="http://pay.91dianji.com.cn/dae.png" size="40px"/>
                                         <p>智能通道</p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
-                                </div>
+                                </div> -->
                              </div>
                        </div>
                        
@@ -268,9 +268,12 @@ export default {
         // 智能通道是否签约
         thirdPass(i){
             // 查询是否绑卡
-             axiosPost("/dhcreditCard/getDHBindExist")
+            let num={
+                cardNum:i.cardNo
+            }
+             axiosPost("/dhcreditCard/getDHBindExist",num)
              .then(res=>{
-                 console.log(res,"是否绑卡")
+                //  console.log(res,"是否绑卡")
                  if(res.data.success) {
                       storage.set('channel',"3");
                         this.$router.push({

@@ -6,9 +6,7 @@
             <span></span>
         </header>
         <div class="container">
-            <div class="box" >　
-            <!-- 　　<iframe :src="url"  ref="iframe" id="bdIframe" class="iframe"  scrolling="no"  frameborder="0" ></iframe> -->
-            </div>
+             <iframe class="iframe"  :src="url" frameborder="0" target="_self"></iframe>
         </div>
     </div>
 
@@ -28,7 +26,7 @@ export default {
     },
     methods:{
         goBack() {
-            plus.webview.close( "yinlian")
+            // plus.webview.close( "yinlian")
             this.$router.go(-1);
         },
        
@@ -60,7 +58,7 @@ export default {
     created(){
         this.url=this.$route.query.info;
         this.title=this.$route.query.title;
-        this.webview();
+        // this.webview();
        
     },
     mounted () {
@@ -93,25 +91,12 @@ export default {
                }
            }
        }
-       >.container {
-           padding-top:96px;
-            height: 100%;
-            width:100%;
-             overflow-y: scroll;
-           .box {
-                overflow: auto;
-                -webkit-overflow-scrolling:touch;
-                width:100%;
-                height: 100%;
-                 .iframe{
-                    // width:1px;
-                    // min-width: 100%;
-                    // *width:100%;
-                    width:100vw;
-                    height: 100vh;
-                 }
+       .container {
+           width:100%;
+           .iframe{
+               width: 100%;
+               height:100vh !important;
            }
-         
        }
    }
 </style>

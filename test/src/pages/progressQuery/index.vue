@@ -5,9 +5,9 @@
             <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
-         <div class="box" style="overflow-y: scroll;">　
-            <!-- 　<iframe :src="url"  ref="iframe" id="bdIframe" class="iframe"  scrolling="no"  frameborder="0" ></iframe> -->
-         </div>
+        <div class="container">
+             <iframe class="iframe"  :src="url" frameborder="0" target="_self"></iframe>
+        </div>
     </div>
 
 </template>
@@ -24,7 +24,7 @@ export default {
     },
     methods:{
         goBack() {
-            plus.webview.close( "yinlian")
+            // plus.webview.close( "yinlian")
             this.$router.push("/home")
         },
        
@@ -63,8 +63,7 @@ export default {
     created(){
         this.url=this.$route.query.info
          this.title=this.$route.query.title
-         this.webview();
-        
+        //  this.webview();
     }
 }
 </script>
@@ -74,16 +73,12 @@ export default {
        header {
             background-color: #4965AE;
        }
-        .box {
-              padding-top:96px;
-            overflow-y: scroll;
-             .iframe{
-                    // width:1px;
-                    // min-width: 100%;
-                    // *width:100%;
-                    width:100vw;
-                    height: 100vh;
-                 }
-      }
+         .container {
+           width:100%;
+           .iframe{
+               width: 100%;
+               height:100vh !important;
+           }
+       }
   }
 </style>

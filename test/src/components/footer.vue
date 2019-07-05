@@ -58,7 +58,7 @@ export default {
         },
         // 切换
         handlenow(obj,router){
-            console.log('obj',obj,router);
+            // console.log('obj',obj,router);
             this.now = obj;
             this.$router.push(router);
         }
