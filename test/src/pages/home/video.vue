@@ -15,7 +15,7 @@
         </div>
         <div class="video center three_video">
             <span>智能还款教程</span>
-            <span class="center" @click="handleVideo('https://v.youku.com/v_show/id_XNDIzMTIzNzY0OA==.html?spm=a2h3j.8428770.3416059.1')">去观看<van-icon name="arrow"/></span>
+            <span class="center" @click="handleVideo('https://v.youku.com/v_show/id_XNDI1OTg4MjM3Ng==.html?spm=a2h3j.8428770.3416059.1')">去观看<van-icon name="arrow"/></span>
         </div>
     </div>
 </template>
