@@ -199,7 +199,7 @@ export default {
                 margin-right: auto;
                 border-radius: 20px;
                 position: relative;
-                background: url('../../assets/images/bankcard/ka01@2x.png') center center no-repeat;
+                background: url('http://pay.91dianji.com.cn/ka01@2x.png') center center no-repeat;
                 background-size: 100% 100%;
                 .name{
                     position: absolute;
