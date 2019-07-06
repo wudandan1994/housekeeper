@@ -97,11 +97,11 @@
                                         <p>大额通道&nbsp;&nbsp;<span>(还款金额500000左右)</span></p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
                                 </div>
-                                 <!-- <div class="large" @click.stop="thirdPass(item)">
+                                 <div class="large" @click.stop="thirdPass(item)">
                                         <van-icon name="http://pay.91dianji.com.cn/dae.png" size="40px"/>
                                         <p>智能通道</p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
-                                </div> -->
+                                </div>
                              </div>
                        </div>
                        
@@ -268,23 +268,25 @@ export default {
         // 智能通道是否签约
         thirdPass(i){
             // 查询是否绑卡
+            console.log(i,'i')
             let num={
                 cardNum:i.cardNo
             }
              axiosPost("/dhcreditCard/getDHBindExist",num)
              .then(res=>{
-                //  console.log(res,"是否绑卡")
-                 if(res.data.success) {
-                      storage.set('channel',"3");
+                 console.log(res,"是否绑卡")
+                 if(res.data.success ) {                                    
+                     if( res.data.data !=null){
+                         storage.set('channel',"3");
                         this.$router.push({
                             path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
                             query:{
                                 info:i
                             }
                         })
-                 } else { 
 
-                    // 查询是否签约
+                     } else {
+                          // 查询是否签约
                      axiosPost("/dhcreditCard/getDHRegisterExist")
                      .then(res=>{
                          if(res.data.success){
@@ -305,14 +307,12 @@ export default {
                                     info:i,
                                 }
                             })
-                            
-
-
                          }
                      })
-
-
-                     
+                     }
+                 } 
+                 else { 
+                     this.$toast(res.data.message)
                  }
                  
              })

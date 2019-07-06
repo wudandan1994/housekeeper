@@ -66,6 +66,7 @@ export default {
                         this.$toast({
                             message:res.data.message
                         })
+                          this.componentload=false
                     }  else {
                           this.userId=res.data.data.userId   //  去绑卡   
 

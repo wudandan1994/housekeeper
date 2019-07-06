@@ -28,8 +28,6 @@
                        <span>验证码：</span>
                        <input type="text"  v-model="code" placeholder="短信验证码" >
                    </li>
-                 
-                   
                </ul>
            </div>
            <div class="submit">
@@ -47,6 +45,7 @@
 
 <script>
 import { axiosPost } from '../../lib/http'
+import storage from '@/lib/storage'
 export default {
     data() {
         return {
@@ -79,9 +78,9 @@ export default {
                     }
                     axiosPost("/dhcreditCard/dhBind",data)
                     .then(res=>{
-                        // console.log(res,'result')
-                        this.tranSerialNum=res.data.data.tranSerialNum
-                        // console.log(this.tranSerialNum)
+                        if(res.data.success){
+                           this.tranSerialNum=res.data.data.tranSerialNum
+                        }
                     })
              })
             
@@ -92,20 +91,32 @@ export default {
 
         binding(){
             let data={
-                // userId:this.userId,
-                // cvn2:this.item.cvv2,
-                // valid:this.item.month+this.item.year,
-                // phoneCode:this.code
+                userId:this.userId,
+                cvn2:this.item.cvv2,
+                valid:this.item.month+this.item.year,
+                phoneCode:this.code,
 
-                 userId:'e677f85fee57649f810315145cd5ab95',
-                cvn2:'123',
-                valid:'1123',
-                 phoneCode:this.code,
-                 tranSerialNum:this.tranSerialNum
+                // userId:'e677f85fee57649f810315145cd5ab95',
+                // cvn2:'123',
+                // valid:'1123',
+                // phoneCode:this.code,
+                tranSerialNum:this.tranSerialNum
             }
             axiosPost("dhcreditCard/dhBackVerifyBind",data)
             .then(res=>{
                 console.log(res,"短信")
+                if(res.data.success){
+                     storage.set('channel',"3");
+                        this.$router.push({
+                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                            query:{
+                                info:i
+                            }
+                        })
+                    
+                } else {
+                    this.$toast(res.data.message) 
+                }
             })
 
             
@@ -114,17 +125,17 @@ export default {
     },
     created () {
         this.item=this.$route.query.info 
-        // this.name=this.item.payerName
-        // this.accountNo=this.item.cardNo
-        // this.mobileNo=this.item.phone
-        //  this.idcardNo=this.item.idCardNo
-        //  this.userId=this.$route.query.userId
+        this.name=this.item.payerName
+        this.accountNo=this.item.cardNo
+        this.mobileNo=this.item.phone
+         this.idcardNo=this.item.idCardNo
+         this.userId=this.$route.query.userId
 
-         this.name="互联网"
-        this.accountNo="6221558812340000"
-        this.mobileNo='13552535506'
-         this.idcardNo="341126197709218366"
-          this.userId='e677f85fee57649f810315145cd5ab95'
+        //  this.name="互联网"
+        // this.accountNo="6221558812340000"
+        // this.mobileNo='13552535506'
+        //  this.idcardNo="341126197709218366"
+        //   this.userId='e677f85fee57649f810315145cd5ab95'
          this.getCode()
     }
 }
