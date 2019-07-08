@@ -5,7 +5,7 @@ import { hostUrl } from './config.js'
 export const axiosPost = (url, params = {}) =>{;
     const _axios = axios.create({
         baseURL:hostUrl,
-        // baseURL: 'http://test.91dianji.com.cn/api',
+        // baseURL: 'http://pay.91dianji.com.cn/api',
         withCredentials: true,
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
     });

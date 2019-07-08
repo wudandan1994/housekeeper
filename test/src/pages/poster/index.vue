@@ -332,20 +332,24 @@ export default {
            margin-right: auto;
            font-size: 28px;
            margin-top: -50px;
+           display: flex;
+           justify-content: space-between;
            .change{
-               width: 30%;
+            //    width: 30%;
                height: 100%;
                background: #4b66af;
                color: #ffffff;
                border-radius: 20px;
+               padding:0px 30px;
            }
            .rightnow{
-               width: 30%;
+            //    width: 30%;
                height: 100%;
                margin-left: 5%;
                 background: #4b66af;
                 color: #ffffff;
                 border-radius: 20px;
+                 padding:0px 30px;
             }
        }
        .share {
