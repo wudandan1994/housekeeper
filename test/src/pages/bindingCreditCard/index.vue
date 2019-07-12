@@ -86,7 +86,7 @@ export default {
            
         // 绑卡
         bindingCard(){
-             let partern=/0?(13|14|15|17|18|19)[0-9]{9}/
+             let partern=/0?(13|14|15|16|17|18|19)[0-9]{9}/
              if(!partern.test(this.phone)){
                  this.$toast({
                     message:"请输入11位手机号码"

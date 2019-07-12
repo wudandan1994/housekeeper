@@ -26,7 +26,9 @@
                    </li>
                     <li>
                        <span>验证码：</span>
-                       <input type="text"  v-model="code" placeholder="短信验证码" >
+                       <input type="text"  v-model="code" placeholder="验证码" >
+                       <span class="code" v-show="showone" @click="getCode">获取验证码</span>
+                       <span class="code" v-show="showtwo" @click="more">{{count}}秒</span>
                    </li>
                </ul>
            </div>
@@ -57,14 +59,36 @@ export default {
             item:"",
             userId:"",
             code:"",
-            tranSerialNum:""
+            tranSerialNum:"",
+            send:"",
+            count:60,
+            showone:true,
+            showtwo:false,
+            timerId:null,
         }
     },
     methods:{
         goBack() {
             this.$router.go(-1)
         },
+        more(){
+            this.$toast("请勿重复操作")
+
+        },
         getCode(){
+            this.showone=false
+            this.showtwo=true
+            this.timerId=setInterval(()=>{
+                 if(this.count>0){
+                    this.count--
+                } else {
+                  this.showone=true
+                  this.showtwo=false
+                  this.count=60
+                  clearInterval(this.timerId)
+                }
+            },1000)
+
              this.$http.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+this.accountNo+'&cardBinCheck=true')
              .then(res=>{
                     let bankcode=res.data.bank
@@ -83,10 +107,6 @@ export default {
                         }
                     })
              })
-            
-
-
-
         },
 
         binding(){
@@ -95,16 +115,10 @@ export default {
                 cvn2:this.item.cvv2,
                 valid:this.item.month+this.item.year,
                 phoneCode:this.code,
-
-                // userId:'e677f85fee57649f810315145cd5ab95',
-                // cvn2:'123',
-                // valid:'1123',
-                // phoneCode:this.code,
                 tranSerialNum:this.tranSerialNum
             }
             axiosPost("dhcreditCard/dhBackVerifyBind",data)
             .then(res=>{
-                console.log(res,"短信")
                 if(res.data.success){
                      storage.set('channel',"3");
                         this.$router.push({
@@ -130,13 +144,6 @@ export default {
         this.mobileNo=this.item.phone
          this.idcardNo=this.item.idCardNo
          this.userId=this.$route.query.userId
-
-        //  this.name="互联网"
-        // this.accountNo="6221558812340000"
-        // this.mobileNo='13552535506'
-        //  this.idcardNo="341126197709218366"
-        //   this.userId='e677f85fee57649f810315145cd5ab95'
-         this.getCode()
     }
 }
 </script>
@@ -181,6 +188,13 @@ export default {
                        height: 60px;
                        line-height: 60px;
                        color:#000;
+                       .code {
+                           background-color: #4B66AF;
+                           color:#fff;
+                           width:150px;
+                           text-align: center;
+                           margin-left:20px;
+                       }
                        .area {
                            margin-right: 20px;
                        }
@@ -189,16 +203,15 @@ export default {
                                font-weight: bold;
                            }
                        }
-                       
-                       >span {
-                           &:nth-of-type(2){
-                               padding:0 10px;
-                               margin-right:20px;
-                               margin-top:8px;
-                               line-height: 60px;
-                               border-radius: 10px;
-                           }
-                        }
+                    //    >span {
+                    //        &:nth-of-type(2){
+                    //            padding:0 10px;
+                    //            margin-right:20px;
+                    //            margin-top:8px;
+                    //            line-height: 60px;
+                    //            border-radius: 10px;
+                    //        }
+                    //     }
                        input {
                            border:none;
                            flex: 1;

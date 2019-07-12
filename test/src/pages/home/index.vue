@@ -125,10 +125,10 @@
                             <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
                             <p>积分兑换</p>
                         </li> -->
-                         <li  @click="changeLink('http://www.jd.com','商城')"  >
+                         <!-- <li  @click="changeLink('http://www.jd.com','商城')"  >
                            <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
                            <p>商城</p>
-                        </li>
+                        </li> -->
                          <!-- <li @click="handleExpect">
                             <p> <van-icon name="http://pay.91dianji.com.cn/gengduo.png" size="30px" /></p>
                             <p>更多</p>
@@ -165,11 +165,11 @@
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
                         <div class="center">信息咨询</div>
                     </div>
-                    <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
+                    <!-- <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
                         <div class="center">商城</div>
-                    </router-link>
-                    <div class="secret" @click="handleJundgeMobile">
+                    </router-link> -->
+                    <div class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/weizhang.png"  size="30px" /></div>
                         <div class="center">违章查询</div>
                     </div>
@@ -221,21 +221,21 @@
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
          <!-- 绑定手机模块 -->
-        <!-- <bindMobile></bindMobile> -->
+        <bindMobile></bindMobile>
         <!-- <loading :componentload="componentload"></loading> -->
         <notice></notice>
     </div>
 </template>
 <script>
 import footerMenu from '@/components/footer'
-// import bindMobile from '@/components/bindMobile'
+import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-    //   bindMobile,
+      bindMobile,
       notice
     //   loading
   },
@@ -292,25 +292,25 @@ export default {
             this.showAaside=true
         },
         changeLink(url,title){
-              this.$router.push({
-                     path:"/loan/form/myOrder",
-                     query:{
-                         info:url,
-                         title:title
-                     }
-                 })
-            
-            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
-            //      this.$router.push({
+            //   this.$router.push({
             //          path:"/loan/form/myOrder",
             //          query:{
             //              info:url,
             //              title:title
             //          }
             //      })
-            //  } else {
-            //      location.href=url
-            //  }
+            
+             if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                 this.$router.push({
+                     path:"/loan/form/myOrder",
+                     query:{
+                         info:url,
+                         title:title
+                     }
+                 })
+             } else {
+                 location.href=url
+             }
         },
         handleExpect(){
             this.$toast('敬请期待')
@@ -479,20 +479,7 @@ export default {
                 query: {params: item.params}
             })
         },
-        // 判斷手機類型
-        handleJundgeMobile(){
-            if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                this.$router.push({
-                    path:"/loan/form/myOrder",
-                    query:{
-                        info:'https://m2.weizhang8.cn/',
-                        title:"违章查询"
-                    }
-                })
-            } else {
-                location.href= 'https://m2.weizhang8.cn/'
-            }
-        },
+       
         handleGarbage(){
             this.$router.push('/garbage');
         }
@@ -502,12 +489,12 @@ export default {
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.handleSearchAuths()
-         this.automatic() //自动登录
-         this.getUpdate() //获取版本
+        //  this.automatic() //自动登录
+        //  this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        this.update() 
+        // this.update() 
     }
 }
 </script>
@@ -662,11 +649,8 @@ export default {
                      >p {
                           text-align: center;
                           margin-bottom:10px;
-                        //   transform: translateX(25%);
                          >.zx-search {
-                        // display:block;
                         font-size:80px;
-                        // text-align: center;
                     }
                 }
                     

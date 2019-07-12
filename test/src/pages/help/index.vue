@@ -100,7 +100,7 @@
             <div class="title">联系我们</div>
             <div class="contact_us row">
                 <div class="contact_title">电话:</div>
-                <div class="contact_detail"><a href="tel:400-1059-769">400-1059-769</a></div>
+                <div class="contact_detail" @click="contact"><a href="tel:400-1059-769">400-1059-769</a></div>
             </div>
             <div class="contact_us row">
                 <div class="contact_title">邮箱:</div>
@@ -116,6 +116,7 @@
 </template>
 <script>
 import loading from'@/components/loading'
+import { axiosPost } from '../../lib/http';
 export default {
     components: {
         loading
@@ -128,6 +129,15 @@ export default {
     methods:{
         handleReturnHome(){
             this.$router.go(-1);
+        },
+        contact(){
+            let data={
+                type:'11'
+            }
+             axiosPost("/behavior/insertBehavior",data)
+            .then(res=>{
+                
+            })
         }
     },
     created(){

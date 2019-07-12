@@ -321,19 +321,19 @@ export default {
         }
     }
     .huangjin{
-        background-image: url('http://pay.91dianji.com.cn/huangjin_vip.jpg');
+        background-image: url('http://pay.91dianji.com.cn/vip001.png');
         background-size: 100% 100%;
     }
     .zuanshi{
-        background-image: url('http://pay.91dianji.com.cn/zuanshi_vip.jpg');
+        background-image: url('http://pay.91dianji.com.cn/vip002.png');
         background-size: 100% 100%;
     }
     .hehuoren{
-        background-image: url('http://pay.91dianji.com.cn/hehuoren_vip.jpg');
+        background-image: url('http://pay.91dianji.com.cn/vip003.png');
         background-size: 100% 100%;
     }
     .yunyingshang{
-        background-image: url('http://pay.91dianji.com.cn/yunyingshang_vip.jpg');
+        background-image: url('http://pay.91dianji.com.cn/vip004.png');
         background-size: 100% 100%;
     }
     .level{

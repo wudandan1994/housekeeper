@@ -67,7 +67,7 @@
                                           <li>
                                              <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
                                              <p>加盟热线：021-60592500 &nbsp;&nbsp;朱经理</p>
-                                              <p><a href="tel:021-60592500">拨打</a></p>
+                                              <p @click="contact('11')"><a href="tel:021-60592500">拨打</a></p>
                                          </li>
                                           <!-- <li>
                                                 <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
@@ -77,7 +77,7 @@
                                           <li>
                                              <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
                                              <p>客服电话 ：400-1059-769</p>
-                                              <p><a href="tel:400-1059-769">拨打</a></p>
+                                              <p  @click="contact('12')"><a href="tel:400-1059-769">拨打</a></p>
                                          </li>
                                      </ul>
          
@@ -136,12 +136,12 @@
             <div class="per-title row">
                 <div class="goods-title start-center">付款方式</div>
                 <div class="goods-detail row">
-                    <!-- <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
+                    <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-wechatpay"></use>
                         </svg>
                         微信支付
-                    </div> -->
+                    </div>
                     <div class="paytypes center" :class="{'alipay': paytype == 'alipay'}" @click="handlePayType('alipay')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-alipay"></use>
@@ -193,7 +193,8 @@ export default {
             recomcode: '',
             recomheadimg: '',
             nickname: '',
-            showcontantUs:false
+            showcontantUs:false,
+            type:"",
         }
     },
     methods:{
@@ -205,6 +206,22 @@ export default {
         },
         contactUs(){
             this.showcontantUs=true
+            let data={
+                type:'11'
+            }
+             axiosPost("/behavior/insertBehavior",data)
+            .then(res=>{
+                
+            })
+        },
+        contact(i){
+            let data={
+                type:i
+            }
+             axiosPost("/behavior/insertBehavior",data)
+            .then(res=>{
+                
+            })
         },
 
         // 复制
@@ -238,6 +255,20 @@ export default {
             this.price = obj;
             obj == '993' ? this.level = '钱夹宝钻石会员' : this.level = '钱夹宝黄金会员';
             this.pup1 = true;
+            if(obj=='393') {
+                this.type='5'
+            } else if(obj=='993') {
+                this.type='6'
+            }
+            let data={
+                type:this.type
+            }
+            axiosPost("/behavior/insertBehavior",data)
+            .then(res=>{
+
+            })
+
+            
             
         },
         // 取消订单

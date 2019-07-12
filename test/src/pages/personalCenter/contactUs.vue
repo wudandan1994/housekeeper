@@ -21,36 +21,17 @@
                     <span>朱经理</span>
                 </div>
                 <div class="btn center">
-                    <span><a href="tel:021-60592500">拨打</a></span>
+                    <p @click="contact('11')"><a href="tel:021-60592500">拨打</a></p>
                 </div>
             </div>
-            <!-- <div class="contact_us row">
-                <div class="icon center"><van-icon name="http://fx.91dianji.com.cn/fengxing_weixin.png"/></div>
-                <div class="contact_title">微信号码:</div>
-                <div class="contact_detail start-center" id="mobile">18017459488</div>
-                <div class="btn center">
-                    <span class="test" data-clipboard-action="copy" data-clipboard-target="#mobile" @click="handleCopy('18017459488')">复制</span>
-                </div>
-            </div> -->
             <div class="contact_us row">
                 <div class="icon center"><van-icon name="http://fx.91dianji.com.cn/fengxing_zuoji.png"/></div>
                 <div class="contact_title">客服电话:</div>
                 <div class="contact_detail start-center">400-1059-769</div>
                 <div class="btn center">
-                    <span><a href="tel:400-1059-769">拨打</a></span>
+                    <p @click="contact('12')"><a href="tel:400-1059-769">拨打</a></p>
                 </div>
             </div>
-            <!-- <div class="contact_us row">
-                <div class="icon center"><van-icon name="http://fx.91dianji.com.cn/fengxing_weixin.png"/></div>
-                <div class="contact_title">客服微信:</div>
-                <div class="jiameng_rexian">
-                    <span>18017459488</span>
-                    <span>朱经理</span>
-                </div>
-                <div class="btn center">
-                   <span><a href="tel:18017459488">拨打</a></span>
-                </div>
-            </div> -->
         </div>
     </div>
 
@@ -59,6 +40,7 @@
 
 <script>
 import ClipboardJS from "clipboard";
+import { axiosPost } from '../../lib/http';
 export default {
     data() {
         return {
@@ -69,6 +51,16 @@ export default {
         goBack() {
             this.$router.go(-1);
         },
+        contact(i){
+            let data={
+                type:i
+            }
+             axiosPost("/behavior/insertBehavior",data)
+            .then(res=>{
+                
+            })
+
+        },
         // fuzhi
         handleCopy(data){
             var that = this;
@@ -76,15 +68,10 @@ export default {
             //成功回调
             clipboard.on('success', function(e) {
                 that.$toast('复制成功');
-                console.info('Action:', e.action);
-                console.info('Text:', e.text);
-                console.info('Trigger:', e.trigger);  
                 e.clearSelection();
             });
             //失败回调
             clipboard.on('error', function(e) {
-                console.error('Action:', e.action);
-                console.error('Trigger:', e.trigger);
                 that.$toast('复制失败');
             });
         }
@@ -162,7 +149,7 @@ export default {
                     width: 25%;
                     height: 100%;
                     line-height: 80px;
-                    span{
+                    p{
                         display: inline-block;
                         width: 80px;
                         height: 36px;

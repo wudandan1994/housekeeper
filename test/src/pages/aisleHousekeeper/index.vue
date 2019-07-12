@@ -52,7 +52,6 @@
                                   <!-- <p class="days">16</p> -->
                                   <div>
                                       <p class="botton">还款日</p>
-                                      <!-- <p><span>{{String(new Date().getMonth()+1)+-&nbsp;+item.duedate}}</span></p> -->
                                       <p><span>{{new Date().getMonth()+1}}</span>&nbsp;-&nbsp;<span>{{item.duedate}}</span></p>
                                   </div>
                               </div>

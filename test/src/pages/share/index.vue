@@ -138,22 +138,17 @@ export default {
             //成功回调
             clipboard.on('success', function(e) {
                 that.$toast('复制成功');
-                console.info('Action:', e.action);
-                console.info('Text:', e.text);
-                console.info('Trigger:', e.trigger);  
                 e.clearSelection();
                 that.href = false;
             });
             //失败回调
             clipboard.on('error', function(e) {
-                console.error('Action:', e.action);
-                console.error('Trigger:', e.trigger);
                 that.$toast('复制失败');
             });
         },
     },
     created(){
-        console.log(this.$store.state.wechat.promotioncode)
+        // console.log(this.$store.state.wechat.promotioncode)
     }
 }
 </script>

@@ -58,7 +58,7 @@ export default {
             this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
         },
         submit(){
-            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/ 
+            let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/ 
              if(!partten.test(this.paymer_phone)){
                  this.$toast("请填写正确的手机号")
                  return

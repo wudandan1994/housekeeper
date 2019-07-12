@@ -177,7 +177,7 @@ export default {
         //    })
     //    },
        pay(){
-           let partten=/0?(13|14|15|17|18|19)[0-9]{9}/ 
+           let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/ 
            if(this.orderAmount.trim().length===0 || this.realName.trim().length===0 || this.idCard.trim().length===0
            || this.accNo.trim().length===0 || this.mobile.trim().length===0){
                 this.$toast({
@@ -242,26 +242,26 @@ export default {
                 let url=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
                         setTimeout(() =>{
                             this.componentload = false;
-                            //    if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                            //     this.$router.push({
-                            //         path:"/loan/form/myOrder",
-                            //         query:{
-                            //             info:url,
-                            //             title:"支付"
-                            //         }
-                            //     })
-                            //     } else {
-                            //         this.componentload=false
-                            //         location.href=url
-                            //     }
-
-                             this.$router.push({
-                            path:"/loan/form/myOrder",
-                                query:{
-                                    info:url,
-                                    title:"支付"
+                               if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                                this.$router.push({
+                                    path:"/loan/form/myOrder",
+                                    query:{
+                                        info:url,
+                                        title:"支付"
+                                    }
+                                })
+                                } else {
+                                    this.componentload=false
+                                    location.href=url
                                 }
-                            })
+
+                            //  this.$router.push({
+                            // path:"/loan/form/myOrder",
+                            //     query:{
+                            //         info:url,
+                            //         title:"支付"
+                            //     }
+                            // })
                             
                         },2000)
                        
