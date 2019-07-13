@@ -7,9 +7,11 @@
             <div class="date" @click="handleCheckDate"><van-icon name="calender-o" size="22px" color="#666"/></div>
         </div>
         <transition name="van-fade">
-            <div class="datePicker" v-if="showDate">
-                <div class="title start-center">请选择统计时间：{{starttime}}-{{endtime}}</div>
-                <Calendar @choseDay="clickDay" @changeMonth="changeDate" @isToday="clickToday"></Calendar>
+            <div class="datePicker_container center" v-if="showDate" v-on:click.self="showDate = false">
+                <div class="datePicker">
+                    <div class="title start-center">请选择统计时间：{{start}}-{{end}}</div>
+                    <Calendar @choseDay="clickDay" @changeMonth="changeDate" @isToday="clickToday"></Calendar>
+                </div>
             </div>
         </transition>
     </div>    
@@ -20,8 +22,8 @@ export default {
     data(){
         return{
             showDate: false,
-            starttime: '',
-            endtime: '',
+            start: '',
+            end: '',
             watch: '0',
         }
     },
@@ -41,12 +43,20 @@ export default {
         },
         clickDay(data) {
             if((this.watch)%2 == '0'){
-                this.starttime = data
+                this.start = data
             }else{
-                this.endtime = data;
-                this.showDate = false;
+                this.end = data;
+                setTimeout(() =>{
+                    this.showDate = false;
+                },800);
             }
             this.watch = parseInt(this.watch + 1);
+            if(this.end != ""){
+                this.$emit('changeTime',{
+                    starttime: this.start,
+                    endtime: this.end,
+                })
+            }
         },
         changeDate(data) {
             console.log(data); //左右点击切换月份
@@ -103,20 +113,26 @@ export default {
                 z-index: 2;
             }
         }
-        .datePicker{
-            width: 80%;
-            height: auto;
-            margin-left: auto;
-            margin-right: auto;
-            position: absolute;
-            left: 10%;
+        .datePicker_container{
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            position: fixed;
+            left: 0%;
+            top: 0%;
             z-index: 4;
-            .title{
-                width: calc(100% - 2px);
-                height: 60px;
-                padding-left: 2px;
-                font-size: 28px;
-                background: #f2f2f2;
+            .datePicker{
+                width: 80%;
+                height: auto;
+                margin-left: auto;
+                margin-right: auto;
+                .title{
+                    width: calc(100% - 2px);
+                    height: 60px;
+                    padding-left: 2px;
+                    font-size: 28px;
+                    background: #f2f2f2;
+                }
             }
         }
     }

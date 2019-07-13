@@ -11,7 +11,7 @@
             <div class="slogan">我的获客工具——AI雷达</div>
         </div>
         <body class="body">
-            <div class="switch"><switchTab :options="options" @changeChecked="handleChangeChecked"></switchTab></div>
+            <div class="switch"><switchTab :options="options" @changeTime="handleChildChangeTime" @changeChecked="handleChangeChecked"></switchTab></div>
             <div class="contain">
                 <div class="title start-end">下级关键数据</div>
                 <div class="menus">
@@ -29,6 +29,7 @@
 </template>
 <script>
 import switchTab from '@/components/radar/switch'
+import {axiosPost} from '@/lib/http'
 export default {
     data(){
         return{
@@ -38,36 +39,38 @@ export default {
                 {
                     id: '0',
                     title: '今天',
-                    checked: true
+                    checked: false
                 },
                 {
                     id: '1',
                     title: '全部',
-                    checked: false
+                    checked: true
                 },
             ],
             details:[
                 {
                     id: '0',
                     title: '下级浏览数',
-                    number: '234234'
+                    number: '10'
                 },
                 {
                     id: '1',
                     title: '新增客户',
-                    number: '76867'
+                    number: '11'
                 },
                 {
                     id: '2',
                     title: '点击联系方式',
-                    number: '46467'
+                    number: '12'
                 },
                 {
                     id: '3',
                     title: '我的团队',
-                    number: '245321'
+                    number: '13'
                 }
             ],
+            starttime: '',
+            endtime: '',
         }
     },
     components: {
@@ -82,9 +85,23 @@ export default {
         },
         // 更换选择
         handleChangeChecked(obj){
+            console.log('更换选择',obj);
             var other = this.reverse(obj.id);
             this.options[obj.id].checked = true;
             this.options[other].checked = false;
+            if(obj.id == '0'){
+                // 选中日期为今天
+                var now = new Date();
+                var arr = now.toLocaleDateString().split('/');
+                this.starttime =  this.handleTransferTime(arr);
+                this.endtime =  this.handleTransferTime(arr);
+                this.handleAIRadarTotal();
+            }else{
+                // 选中时间为全部
+                this.starttime = '';
+                this.endtime = '';
+                this.handleAIRadarTotal();
+            }
         },
         // 查看下级明细
         hanleNextDetail(item){
@@ -97,11 +114,59 @@ export default {
                     id: item.id
                 }
             })
+        },
+        // 获取统计数据
+        handleAIRadarTotal(){
+            let params = {
+                starttime: this.starttime,
+                endtime: this.endtime
+            };
+            let url = '/behavior/getTotalRecord';
+            axiosPost(url,params).then(res =>{
+                if(res.data.success){
+                    console.log('统计数据请求成功',res);
+                    this.details[0].number = res.data.data.browseCount;
+                    this.details[1].number = res.data.data.newRegister;
+                    this.details[2].number = res.data.data.clickContact;
+                    this.details[3].number = res.data.data.teamCount;
+                }else{
+                    console.log('统计数据请求失败',res);
+                }
+            }).catch(res =>{
+                console.log('统计数据请求失败',res);
+            })
+        },
+        // 选择时间查询
+        handleChildChangeTime(item){
+            console.log('时间参数',item);
+            var start = (item.starttime).split('/');
+            var end = (item.endtime).split('/');
+            
+            console.log('开始时间',this.handleTransferTime(start));
+            console.log('结束时间',this.handleTransferTime(end));
+            this.starttime = this.handleTransferTime(start);
+            this.endtime = this.handleTransferTime(end);
+            this.handleAIRadarTotal();
+        },
+        // 时间格式转换函数
+        handleTransferTime(obj){
+            var origin = [];
+            obj.forEach((item,index) =>{
+                if(item.length == '1'){
+                    item = '0' + item;
+                    origin.push(item);
+                }else{
+                    origin.push(item);
+                }
+            })
+            return origin.join('-');
         }
     },
     created(){
         this.nickname = this.$store.state.wechat.nickname;
         this.headimg = this.$store.state.wechat.headimg;
+        this.handleAIRadarTotal();
+        
     }
 }
 </script>

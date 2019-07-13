@@ -19,11 +19,11 @@
             <div class="btn">
                 <div class="column" @click="handleExpect">
                     <div class="center">下级浏览数</div>
-                    <div class="center">21321321321</div>
+                    <div class="center">{{browseCount}}</div>
                 </div>
                 <div class="column" @click="handleExpect">
                     <div class="center">我的团队</div>
-                    <div class="center">32323232</div>
+                    <div class="center">{{teamCount}}</div>
                 </div>
             </div>
             
@@ -109,13 +109,16 @@
 
 <script>
 import footerMenu from '@/components/footer'
-import ClipboardJS from "clipboard";
+import ClipboardJS from "clipboard"
 import storage from '@/lib/storage'
+import {axiosPost} from '@/lib/http'
 export default {
     data(){
         return{
             active: 3,
             href: false,
+            teamCount: '0',
+            browseCount: '0'
         }
     },
     components: {
@@ -151,9 +154,24 @@ export default {
                 that.$toast('复制失败');
             });
         },
+        // 获取AI雷达统计数据
+        handleAIRadar(){
+            axiosPost('/behavior/getIndexRecord').then(res =>{
+                if(res.data.success){
+                    console.log('AI请求成功',res);
+                    this.browseCount = res.data.data.browseCount;
+                    this.teamCount = res.data.data.teamCount;
+                }else{
+                   console.log('AI请求失败',res); 
+                }
+            }).catch(res =>{
+                console.log('AI请求失败',res); 
+            })
+        }
     },
     created(){
-        console.log(this.$store.state.wechat.promotioncode)
+        console.log(this.$store.state.wechat.promotioncode);
+        this.handleAIRadar();
     }
 }
 </script>

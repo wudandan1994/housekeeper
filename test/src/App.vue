@@ -60,7 +60,7 @@ export default {
                       nickname: this.$store.state.wechat.nickname,
                       openid:   this.$store.state.wechat.openid,
                       photo:    this.$store.state.wechat.headimg,
-                      recommendedcode: storage.get('recommendedcode')
+                      recommendedcode: storage.get('promotioncode')
                     }
                     let url = '/customer/registered';
                     axiosPost(url,params)
@@ -146,6 +146,10 @@ export default {
     },
   },
   created(){
+    if(this.$utils.getUrlKey('promotioncode') != "" && this.$utils.getUrlKey('code') === null){
+      storage.set('promotioncode',this.$utils.getUrlKey('promotioncode'));
+      console.log('链接进入推荐码',this.$utils.getUrlKey('promotioncode'));
+    }
     // 首先判断是否存储了openid
     if(storage.get('openid') != '' && storage.get('openid') !== null){
       // 已经注册过，可直接登录，无需再次授权
@@ -178,9 +182,6 @@ export default {
       })
     }else{
       // 拿不到openid，需要授权登录
-      if(this.$router.currentRoute.query.promotioncode != '' && typeof(this.$router.currentRoute.query.promotioncode) != 'undefined'){
-        storage.set('recommendedcode',this.$router.currentRoute.query.promotioncode);
-      }
       // 判断是否是微信浏览器
       var ua = navigator.userAgent.toLowerCase();
       if(ua.match(/MicroMessenger/i)=="micromessenger") {

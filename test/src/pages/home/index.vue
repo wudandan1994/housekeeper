@@ -125,10 +125,10 @@
                             <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
                             <p>积分兑换</p>
                         </li> -->
-                         <li  @click="changeLink('http://www.jd.com','商城')"  >
+                         <!-- <li  @click="changeLink('http://www.jd.com','商城')"  >
                            <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
                            <p>商城</p>
-                        </li>
+                        </li> -->
                          <!-- <li @click="handleExpect">
                             <p> <van-icon name="http://pay.91dianji.com.cn/gengduo.png" size="30px" /></p>
                             <p>更多</p>
@@ -165,10 +165,10 @@
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
                         <div class="center">信息咨询</div>
                     </div>
-                    <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
+                    <!-- <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
                         <div class="center">商城</div>
-                    </router-link>
+                    </router-link> -->
                     <div class="secret" @click="handleJundgeMobile">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/weizhang.png"  size="30px" /></div>
                         <div class="center">违章查询</div>
@@ -191,7 +191,7 @@
                         <!-- <li class="switch">声音开关
                         </li> -->
                         <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
-                        <!-- <router-link to="/home/clearCache" tag="li">清除缓存</router-link> -->
+                        <li @click="handleClear">清除缓存</li>
                          <router-link tag="li" class="center" to="/register">个人设置</router-link>
                     </ul>
                    
@@ -288,6 +288,11 @@ export default {
         }
   },
    methods:{
+       handleClear(){
+        //    清除缓存
+        storage.remove('promotioncode');
+        this.$toast('清除成功');
+       },
         isShow() {
             this.showAaside=true
         },
