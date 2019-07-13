@@ -40,7 +40,7 @@
                      </div>
                      <div class="price">
                         <span class="new-price">￥19800.00</span>
-                        <span class="buy" @click="contactUs" >联系我们</span>
+                        <span class="buy" @click="contactUs('7')" >联系我们</span>
                      </div>
                 </li>
                  <li>
@@ -53,7 +53,7 @@
                      </div>
                      <div class="price">
                         <span class="new-price">￥58000.00-￥159800.00</span>
-                        <span class="buy" @click="contactUs" >联系我们</span>
+                        <span class="buy" @click="contactUs('8')" >联系我们</span>
                          <van-popup v-model="showcontantUs">
                                 <div  class="rule">
                                      <p>联系我们</p>
@@ -203,10 +203,10 @@ export default {
                 path:'/ponserCenter/userAccountManage'
             })
         },
-        contactUs(){
+        contactUs(i){
             this.showcontantUs=true
             let data={
-                type:'11'
+                type:i
             }
              axiosPost("/behavior/insertBehavior",data)
             .then(res=>{

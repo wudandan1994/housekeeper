@@ -54,7 +54,7 @@
             <!-- 信用卡模块 -->
             <div class="credit">
                 <ul>
-                    <li @click="handleIsAuth('/home/cardCenter')">
+                    <li @click="handleIsAuth('/home/cardCenter',false,'')">
                         <span class="handle">
                             <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                         </span>
@@ -64,7 +64,7 @@
                             <span>官方渠道</span>
                         </div>
                     </li>
-                    <li @click="handleIsAuth('/home/collect')">
+                    <li @click="handleIsAuth('/home/collect',false,'')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /></span>
                         <div class="channel">
                             <h3>在线收款</h3>
@@ -72,7 +72,7 @@
                             <span>落地商户</span>
                         </div>
                     </li>
-                    <li @click="handleIsAuth('/loan/detail')">
+                    <li @click="handleIsAuth('/loan/detail',true,'4')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
                         <div class="channel">
                             <h3>信息咨询</h3>
@@ -80,14 +80,23 @@
                             <span>GO>></span>
                         </div>  
                     </li>
-                     <router-link tag="li" to="/home/creditHousekeeper">
+                     <!-- <router-link tag="li" to="/home/creditHousekeeper">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
                         <div class="channel">
                             <h3>智能还款</h3>
                             <p>落地商户空卡周转</p>
                             <span>完美账单</span>
                         </div>
-                     </router-link>
+                     </router-link> -->
+
+                      <li  @click="handleIsAuth('/home/creditHousekeeper',true,'3')" >
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
+                        <div class="channel">
+                            <h3>智能还款</h3>
+                            <p>落地商户空卡周转</p>
+                            <span>完美账单</span>
+                        </div>
+                     </li>
 
                 </ul>
             </div>
@@ -145,7 +154,7 @@
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan.png" size="34px" /></div>
                         <div class="center">在线收款</div>
                     </router-link>
-                    <div @click="handleIsAuth('/home/cardCenter')" class="secret">
+                    <div @click="handleIsAuth('/home/cardCenter',false,'')" class="secret">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></div>
                         <div class="center">信用卡办理</div>
                     </div>
@@ -161,7 +170,7 @@
                         <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></div>
                         <div class="center">卡·测评</div>
                     </router-link>
-                    <div @click="handleIsAuth('/loan/detail')" class="secret">
+                    <div @click="handleIsAuth('/loan/detail',true,'4')" class="secret">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
                         <div class="center">信息咨询</div>
                     </div>
@@ -459,12 +468,33 @@ export default {
             })
         },
         // 判断是否实名认证
-        handleIsAuth(obj){ 
-            if(this.iscertification == '0'){
+        handleIsAuth(obj,boo,i){ 
+            if(this.iscertification == '0' ){
                 //未认证
                 this.$toast('请先实名认证');
+                if(boo){
+                     let data ={
+                        type:i
+                    }
+                     axiosPost("/behavior/insertBehavior",data)
+                    .then(res=>{
+                      })
+                }
+
             }else{
-                this.$router.push(obj);
+                if(boo){
+                    let data ={
+                        type:i
+                    }
+                     axiosPost("/behavior/insertBehavior",data)
+                    .then(res=>{
+                         this.$router.push(obj);
+                        
+                    })
+                } else {
+                     this.$router.push(obj);
+                }
+               
             }
         },
         // 联系客服
