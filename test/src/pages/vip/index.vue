@@ -49,7 +49,6 @@
                          <div class="card">城市运营商</div>
                          <div class="instructions">
                              <span @click="handleSeeDetail('4')">权益说明</span>
-                             
                          </div>
                      </div>
                      <div class="price">
