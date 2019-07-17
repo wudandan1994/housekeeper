@@ -7,6 +7,7 @@
         </header>
         <div class="phone-numer">
             <div class="per-input row">
+                <div class="input-icon"><van-icon color="#4b66af" size="20px" name="phone"/></div>
                 <div class="input-title center">手机号</div>
                 <div class="safecode"><input type="number" v-model="mobile"  placeholder="请输入手机号"></div>
                 <div class="getcode center">
@@ -17,6 +18,7 @@
                 
             </div>
             <div class="per-input row" v-if="change">
+                 <div class="input-icon"><van-icon color="#4b66af" size="20px" name="graphic"/></div>
                 <div class="input-title center">验证码</div>
                 <div class="safecode"><input type="number" v-model="authcode" placeholder="请输入验证码"></div>
                 <div class="getcode center">
@@ -154,10 +156,8 @@ export default {
         // 查询是否绑定手机号
         handleCheckMobile(){
             axiosPost('/customer/getCustomer').then(res =>{
-                console.log('修改手机号',res);
                 this.mobile = res.data.data.mobile;
             }).catch(res =>{
-                console.log('修改手机号失败',res);
             })
         }
     },
@@ -176,9 +176,15 @@ export default {
             .per-input{
                 width: 95vw;
                 height: 100px;
+                line-height: 100px;
                 margin-left: auto;
                 margin-right: auto;
                 border-bottom: solid 1px #ccc;
+                .input-icon {
+                    height: 100%;
+                    line-height: 130px;
+                    margin:0 5px;
+                }
                 .input-title{
                     width: 15%;
                     height: 100%;

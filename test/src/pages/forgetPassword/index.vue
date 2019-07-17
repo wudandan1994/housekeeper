@@ -10,22 +10,27 @@
            <div class="phone">
                <ul>
                    <li>
+                       <span><van-icon color="#4b66af" size="20px" name="phone"/></span>
                        <span>+86</span>
                        <input type="number" v-model="mobile" placeholder="输入11位手机号码">
                        <div>
-                             <van-button size="middle"  class="second" v-show="showCount"  round type="info">{{count}}秒后</van-button>
-                            <van-button size="middle" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
+                             <!-- <van-button size="normal"  class="second" v-show="showCount"  round type="info">{{count}}秒后</van-button> -->
+                             <van-button size="normal"  v-show="showCount"  round type="info">{{count}}秒后</van-button>
+                            <van-button size="normal" @click="getCode" v-show="showCode"  round type="info">获取验证码</van-button>
                        </div>
                    </li>
                     <li>
+                         <span><van-icon color="#4b66af" size="20px" name="graphic"/></span>
                         <span>验证码:</span>
                        <input v-model="authcode" type="number" placeholder="输入验证码">
                    </li>
                     <li>
+                       <span> <van-icon color="#4b66af" size="20px" name="lock"/></span>
                         <span>密码:</span>
                        <input v-model="newPassword" type="password" placeholder="输入6-18位字母加数字密码">
                    </li>
                     <li>
+                         <span> <van-icon color="#4b66af" size="20px" name="lock"/></span>
                         <span>确认密码:</span>
                        <input v-model="suerPassword" type="password" placeholder="确认密码">
                    </li>
@@ -92,16 +97,18 @@ export default {
                 })
                  return
             } else  {
+                console.log('else')
+                // that.showCode=false
+                // that.showCount=true
                 let data={
                     mobile:this.mobile,
                     type:"3"
                 }
                 axiosPost("/customer/sendSms",data)
                 .then(function(res){
+                    console.log(res,'res')
                     if(!res.data.success){
-                        that.$toast({
-                            message:res.data.message
-                        })
+                        that.$toast(res.data.message)
                     } else {
                         that.showCount=true
                         that.showCode=false
@@ -197,7 +204,7 @@ export default {
         }
     },
     created(){
-        this.handleJundeMobile();
+        // this.handleJundeMobile();
     }
 }
 </script>
@@ -250,9 +257,9 @@ export default {
                        height: 60px;
                        line-height: 60px;
                        color:#000;
-                       &:nth-of-type(1){
-                           padding-left:15px;
-                       }
+                    //    &:nth-of-type(1){
+                    //        padding-left:15px;
+                    //    }
                        >div {
                            >.van-button--info {
                                 background-color: #4965AE;
@@ -278,9 +285,10 @@ export default {
                            border:none;
                        }
                        >span {
-                           &:nth-of-type(1){
+                           &:nth-of-type(2){
                                font-weight: bold;
-                               padding-left:10px;
+                               padding-left:15px;
+
                            }
                           >button {
                               height: 60px;

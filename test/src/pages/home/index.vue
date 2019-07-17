@@ -1,6 +1,6 @@
 
 <template>
-    <div id="home-component">
+    <div :class="showAaside == true ? 'menuanimate' : ''" id="home-component">
         <header>
             <div>
                 <div class="menu" @click="isShow">
@@ -38,7 +38,7 @@
                         <span>收益明细</span>
                     </router-link>
                     <router-link tag="li" to="/home/totalPunch">
-                        <p> <van-icon name="http://pay.91dianji.com.cn/104.png"  class="zx-search"  /></p>
+                        <p> <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search  rotateZ"  /></p>
                         <span>签到打卡</span>
                     </router-link>
                 </ul>
@@ -47,7 +47,9 @@
             <div class="pannel-news row">
                 <div class="pannel-title center">钱&nbsp;夹<br/>资&nbsp;讯</div>
                 <div class="pannel-detail center" @click="handleContactUs">
-                    <van-notice-bar text="好消息：从7月8日至7月14日，连续在朋友圈推广钱夹宝相关海报，连续时间7天，可免费成为993会员一个月！费率低至0.47！相关活动内容请联系客服"/>
+                    <!-- <van-notice-bar text="好消息：从7月8日至7月14日，连续在朋友圈推广钱夹宝相关海报，连续时间7天，可免费成为993会员一个月！费率低至0.47！相关活动内容请联系客服"/>  -->
+                    <van-notice-bar text="最新推广活动：7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.47，并领取1000元现金奖励！活动详情，请联系您的专属客服！"/> 
+
                 </div>
             </div>
 
@@ -65,7 +67,7 @@
                         </div>
                     </li>
                     <li @click="handleIsAuth('/home/collect',false,'')">
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /></span>
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /><van-icon name="new" color="red" class="hot new"  size="26px" /></span>
                         <div class="channel">
                             <h3>在线收款</h3>
                             <p>快捷支付</p>
@@ -90,12 +92,13 @@
                      </router-link> -->
 
                       <li  @click="handleIsAuth('/home/creditHousekeeper',true,'3')" >
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /> <van-icon name="hot" color="red" class="hot pay"  size="20px" /></span>
                         <div class="channel">
                             <h3>智能还款</h3>
                             <p>落地商户空卡周转</p>
                             <span>完美账单</span>
                         </div>
+                         
                      </li>
 
                 </ul>
@@ -150,19 +153,21 @@
                 <div class="title start-center">热门推荐</div>
                 <div class="remen_tuijian">
                     <div class="more"><van-icon name="arrow" color="#cccccc" size="30px"/></div>
-                    <router-link tag="div" to="/home/collect" class="secret">
+                    <div  @click="handleIsAuth('/home/collect',false,'')" class="secret">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan.png" size="34px" /></div>
                         <div class="center">在线收款</div>
-                    </router-link>
+                    </div>
+
                     <div @click="handleIsAuth('/home/cardCenter',false,'')" class="secret">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></div>
                         <div class="center">信用卡办理</div>
                     </div>
-                    <router-link tag="div" class="secret" to="/home/creditHousekeeper">
+                    <div class="secret"  @click="handleIsAuth('/home/creditHousekeeper',true,'3')" >
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan.png" size="30px" /></div>
                         <div class="center">智能还款</div>
-                    </router-link>
-                        <router-link tag="div" class="secret"  to="/vip">
+                    </div>
+
+                     <router-link tag="div" class="secret"  to="/vip">
                         <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/shengji.png" size="30px" /></div>
                         <div class="center">升级代理</div>
                     </router-link>
@@ -188,12 +193,16 @@
             <div class="aside-left" v-show="showAaside" @click.self="hideAside">
                 <div class="info">
                     <div class="avatar">
-                         <span><van-icon :name="headimg" /></span>
-                         <p>{{nickname}}</p>
+                         <!-- <span><van-icon :name="headimg" /></span> -->
+                         <div class="himg">
+                             <img :src="headimg" alt="">
+                         </div>
+                         <p><span>{{nickname}}</span> &nbsp;&nbsp; <span>{{lev}}</span></p>
                     </div>
                     <ul>
                         <router-link tag="li" to="/home/systemNews">系统消息</router-link>
-                        <router-link tag="li" to="/home/verified">实名认证</router-link>
+                        <!-- <router-link tag="li" to="/home/verified">实名认证</router-link> -->
+                         <li @click="handleAuth">实名认证</li>
                         <router-link to="/home/bindingPhone" tag="li">修改手机</router-link>
                         <router-link to="/home/customerService" tag="li">联系客服</router-link>
                         <router-link to="/home/aboutUs" tag="li">关于我们</router-link>
@@ -284,6 +293,7 @@ export default {
             // newaccess_token: '',
             nickname: '',
             photo: '',
+            lev:"",
             headimg:'',
             iscertification: '',
             city: '',
@@ -320,6 +330,13 @@ export default {
              } else {
                  location.href=url
              }
+        },
+        handleAuth(){
+             if(this.iscertification == '2'){
+                this.$router.push('/home/verified/verifiedName');
+            }else{
+                this.$router.push('/home/verified');
+            }
         },
         handleExpect(){
             this.$toast('敬请期待')
@@ -412,6 +429,14 @@ export default {
                     this.headimg=res.data.data.photo
                     this.nickname=res.data.data.nickname
                     this.$store.commit('city',res.data.data.city);
+                    this.lev=res.data.data.level
+                    if(this.lev=='0'){
+                        this.lev="免费粉丝"
+                    } else if(this.lev=='1'){
+                        this.lev="黄金会员"
+                    } else {
+                        this.lev='钻石会员'
+                    }
                 }
              })
              .catch(err=>{
@@ -518,6 +543,15 @@ export default {
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
+        this.lev=this.$store.state.wechat.level;
+         if(this.lev=='0'){
+                        this.lev="免费粉丝"
+                    } else if(this.lev=='1'){
+                        this.lev="黄金会员"
+                    } else {
+                        this.lev='钻石会员'
+                    }
+
         this.handleSearchAuths()
         //  this.automatic() //自动登录
         //  this.getUpdate() //获取版本
@@ -531,6 +565,7 @@ export default {
 
 <style lang="less" >
    #home-component {
+        width: 100vw;
         padding-top: 86px;
         header {
                 width: 100%;
@@ -653,7 +688,7 @@ export default {
 
             }
             >.swipe {
-                height: 270px;
+                // height: 270px;
                 .per-img{
                     width: 100vw;
                     height: auto;
@@ -679,6 +714,38 @@ export default {
                      >p {
                           text-align: center;
                           margin-bottom:10px;
+                       
+                          .rotateZ {
+                            //   animation: icon 2s 1s linear infinite;
+                            //  -webkit-animation: icon 2s 1s linear  infinite;
+                              -webkit-animation: Tada 3s both infinite;
+                              -moz-animation: Tada 3s both infinite;
+                              -ms-animation: Tada 3s both infinite;
+                              animation: Tada 3s both infinite;
+                          }
+
+                          @keyframes Tada {
+                            0% {
+                                transform: scale(1);
+                                transform: scale(1)
+                            }
+                            70%,73%{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                                transform: scale(0.9) rotate(-10deg);
+                                transform: scale(0.9) rotate(-10deg)
+                            }
+                            77%,83%,90%,97%  {
+                                transform: scale(1.2) rotate(10deg);
+                                transform: scale(1.2) rotate(10deg)
+                            }
+                            80%,87%,93%{
+                                transform: scale(1.2) rotate(-10deg);
+                                transform: scale(1.2) rotate(-10deg)
+                            }
+                            100% {
+                                transform: scale(1) rotate(0);
+                                transform: scale(1) rotate(0)
+                            }
+                        }
                          >.zx-search {
                         font-size:80px;
                     }
@@ -878,6 +945,39 @@ export default {
                         font-size: 60px;
                         margin-left: 10px;
                         margin-top:30px;
+                        position: relative;
+                        >.hot {
+                            position: absolute;
+                            top:-60px;
+                            right:-210px;
+                        }
+                        .new {
+                               animation: icon  1s linear infinite;
+                             -webkit-animation: icon  1s linear  infinite;
+                        }
+                        @keyframes icon{
+                            0%{
+                                    transform: rotateZ(0deg);
+                            }
+                            25%{
+                                    transform: rotateZ(45deg);
+                            }
+                            50%{
+                                    transform: rotateZ(0deg);
+                            }
+                            75%{
+                                    transform: rotateZ(-45deg);
+                            }
+                            100%{
+                                    transform: rotateZ(0deg);
+                            }
+                        }
+                        .pay {
+                             -webkit-animation: Tada 3s both infinite;
+                              -moz-animation: Tada 3s both infinite;
+                              -ms-animation: Tada 3s both infinite;
+                              animation: Tada 3s both infinite;
+                        }
                     }
                     >.channel {
                         text-align: left;
@@ -984,8 +1084,15 @@ export default {
                    
                     >.avatar {
                         padding-top:50px;
-                        >span {
-                            font-size:100px;
+                        .himg {
+                            width:150px;
+                            height:150px;
+                            // border-radius: 50%;
+                            margin:0 auto;
+                            img {
+                                width:100%;
+                                 border-radius: 50%;
+                            }
                         }
                         >p {
                             margin-top:20px;
@@ -1011,9 +1118,11 @@ export default {
                         // margin-bottom:20px;
                          >span{
                             border:2px solid #fff;
-                           background-color:#8E9CCE;
-                           padding:30px 60px;
-                           border-radius: 10px;
+                            background: linear-gradient(to right,#B1C4F1 , #29305C);
+                            // background-color: #CF9C5D;
+                            padding:30px 60px;
+                            border-radius: 10px;
+
                          }
                     }
                     .van-dialog .van-button {
@@ -1036,6 +1145,20 @@ export default {
          }
         
         }
+   }
+    .menuanimate{
+        margin-left: 50%;
+        animation: animates 0.3s linear;
+        -webkit-animation: animates 0.3s linear;
+   }
+
+   @keyframes animates{
+       from{
+            margin-left: 0px; 
+       }
+       to{
+            margin-left: 250px;
+       }
    }
 </style>
 
