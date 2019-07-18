@@ -97,7 +97,6 @@ export default {
                 })
                  return
             } else  {
-                console.log('else')
                 // that.showCode=false
                 // that.showCount=true
                 let data={
@@ -106,7 +105,6 @@ export default {
                 }
                 axiosPost("/customer/sendSms",data)
                 .then(function(res){
-                    console.log(res,'res')
                     if(!res.data.success){
                         that.$toast(res.data.message)
                     } else {

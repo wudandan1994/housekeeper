@@ -15,6 +15,8 @@ import '@/assets/css/common.css'
 // 引入分享的css
 // import '@/assets/css/share.css'
 import back from './lib/back'
+// import touch from './lib/touch.js'
+
 import axios from 'axios'
 // import animated from 'animate.css'
 // Vue.use(animated)
@@ -61,6 +63,7 @@ import '@/assets/icon/iconfont.js'
 new Vue({
   el: '#app',
   back,
+  // touch,
   router,
   store,
   components: { App },

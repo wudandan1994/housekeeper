@@ -1,6 +1,6 @@
 
 <template>
-    <div :class="showAaside == true ? 'menuanimate' : ''" id="home-component">
+    <div :class="showAaside == true ? 'menuanimate' : ''" id="home-component" @swipedown="swipe(x)" >
         <header>
             <div>
                 <div class="menu" @click="isShow">
@@ -237,6 +237,7 @@
                 <p>上海市宝山区泰和路2038号A座303室</p>
             </div>
         </div>
+        
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
          <!-- 绑定手机模块 -->
         <bindMobile></bindMobile>
@@ -244,12 +245,14 @@
         <notice></notice>
     </div>
 </template>
+
 <script>
 import footerMenu from '@/components/footer'
 import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
+
 export default {
   components:{
       footerMenu,
@@ -293,6 +296,7 @@ export default {
             // newaccess_token: '',
             nickname: '',
             photo: '',
+          
             lev:"",
             headimg:'',
             iscertification: '',
@@ -559,6 +563,7 @@ export default {
     mounted () {
         // 更新
         // this.update() 
+       
     }
 }
 </script>
@@ -567,6 +572,8 @@ export default {
    #home-component {
         width: 100vw;
         padding-top: 86px;
+        
+       
         header {
                 width: 100%;
                 height:86px;
@@ -1113,20 +1120,26 @@ export default {
                           }
                         }
                     }
+
                     >.sign-out {
                         margin-top:50px;
-                        // margin-bottom:20px;
+                       
+                        .van-button--large {
+                            height:48px!important;
+                        }
+                        .van-dialog__message--has-title {
+                            height:70px!important;
+                        }
                          >span{
-                            border:2px solid #fff;
-                            background: linear-gradient(to right,#B1C4F1 , #29305C);
-                            // background-color: #CF9C5D;
+                              box-shadow: #32406E -10px -10px 15px 4px inset;
+                            border:2px solid #556BB7;
+                            // background: linear-gradient(to right,#B1C4F1 , #29305C);
+                            background-color: #2A54B3;
                             padding:30px 60px;
-                            border-radius: 10px;
-
+                            border-radius:30px;
                          }
                     }
                     .van-dialog .van-button {
-                        /* border: 0; */
                         border: 1px solid #4b66af;
                     }
 
@@ -1136,13 +1149,13 @@ export default {
                         font-size: 30px;
                     }
                 }
-                .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
-                    height:70px;
-                }
+                // .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
+                //     height:70px;
+                // }
          }
-          .van-dialog .van-button{
-             height: 80px;
-         }
+        //   .van-dialog .van-button{
+        //      height: 80px;
+        //  }
         
         }
    }

@@ -1,7 +1,7 @@
 <template>
     <div id="component-scroll">
         <div class="scroll center">
-           <DigitRoll ref='digitroll':rollDigits='digits'/>
+           <DigitRoll ref='digitroll' :rollDigits='digits'/>
         </div>
         <div class="big-title">{{title}}</div>
     </div>

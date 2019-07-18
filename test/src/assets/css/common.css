@@ -126,6 +126,9 @@ table {
 	.van-toast--default .van-toast__icon{
 		font-size: 100px;
 	}
+	.van-dialog {
+		width:70%;
+	}
 	.van-toast--default .van-toast__text{
 		font-size: 30px;
 	}
@@ -188,16 +191,19 @@ table {
 	}
 	.van-dialog__header{
 		font-size: 30px;
+		padding-top:30px;
+		margin-top:30px;
 	}
 	.van-dialog__message--has-title{
-		font-size: 28px;
-		height: 120px;
+		font-size:30px;
+		margin-top:30px;
+		height: 100px;
 		line-height: 60px;
 	}
 	.van-button--large{
-		height: 80px;
-		line-height: 80px;
-		font-size: 28px;
+		height: 100px;
+		line-height:100px;
+		font-size: 32px;
 	}
 	.van-notice-bar{
 		width: 100%;
