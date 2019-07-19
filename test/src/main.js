@@ -15,6 +15,8 @@ import '@/assets/css/common.css'
 // 引入分享的css
 // import '@/assets/css/share.css'
 import back from './lib/back'
+// import touch from './lib/touch.js'
+
 import axios from 'axios'
 import utils from '@/lib/params'
 Vue.prototype.$http = axios
@@ -58,6 +60,7 @@ Vue.use(Picker)
 new Vue({
   el: '#app',
   back,
+  // touch,
   router,
   store,
   components: { App },

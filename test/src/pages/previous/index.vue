@@ -7,11 +7,11 @@
         </header>
         <div class="container">
              <div class="image">
-                  <img src="http://pay.91dianji.com.cn/Superior.jpg" alt="">
+                  <img src="http://pay.91dianji.com.cn/previous.jpg" alt="">
                   <div class="info">
                       <div>
                             <div class="picture">
-                                <img src="http://pay.91dianji.com.cn/icon_62.png" alt="">
+                                <img src="http://pay.91dianji.com.cn/tj.png" alt="">
                             </div>
                             <div>
                                 <p class="recommend gray">推荐人</p>
@@ -27,21 +27,20 @@
               <div class="phone">
                   <ul>
                       <li>
-                          <p><van-icon name="phone"/></p>
+                          <p><van-icon size="34px" name="http://pay.91dianji.com.cn/dh.png"/></p>
                           <div v-show="showConnect"> 
                               <p class="gray">打电话</p>
-                              <p @click="contact"><a :href="'tel:' + mobile" >和上级电话联系</a></p>
-                              
+                              <p @click="contact" class="size"><a :href="'tel:' + mobile" class="pre" >和上级电话联系</a></p>
                           </div>
                           <div v-show="showConnect?false:true">
                               <p>暂无更多</p>
                           </div>
                       </li>
                        <li @click="handleMorePreviousDetail">
-                          <p><van-icon name="manager"/></p>
+                          <p><van-icon size="34px"  name="http://pay.91dianji.com.cn/ys.png"/></p>
                           <div> 
                               <p class="gray">我的上级</p>
-                              <p>直属上级信息</p>
+                              <p class="size">直属上级信息</p>
                           </div>
                       </li>
                   </ul>
@@ -159,16 +158,19 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
            background-color: #EFEDEF;
+            .gray{
+                color:#000;
+                font-weight: bold;
+            }
            >.image {
                width:100%;
                position: relative;
-                background-color: gray;
                >img {
                    width:100%;
                }
                >.info{
                    position: absolute;
-                   bottom: 0px;
+                   bottom: -40px;
                    left:0px;
                    right:0px;
                    margin-left:30px;
@@ -184,7 +186,8 @@ export default {
                    .recommend {
                        margin-bottom: 20px;
                    }
-                   .gray{
+                  
+                   .pre {
                        color:#000;
                    }
                    >div {
@@ -206,19 +209,26 @@ export default {
                }
            }
            >.phone{
-               margin-top: 20%;
+               margin-top:23%;
                 >ul{
                    display: flex;
                    justify-content: space-between;
                    background-color: #fff;
                    >li {
-                       padding:60px;
+                       padding:30px;
                        display: flex;
                        align-items: center;
                        border-top:1px solid #ccc;
                        border-bottom:1px solid #ccc;
                        width:50%;
                        color:#000;
+                       .size {
+                           font-size: 22px;
+                           color:#999;
+                       }
+                       .pre{
+                           color:#999;
+                       }
                        >p {
                            margin-right:10px;
                            font-size: 40px;
