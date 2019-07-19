@@ -18,11 +18,9 @@ import back from './lib/back'
 // import touch from './lib/touch.js'
 
 import axios from 'axios'
-// import animated from 'animate.css'
-// Vue.use(animated)
+import utils from '@/lib/params'
 Vue.prototype.$http = axios
-// axios.defaults.withCredentials = true
-// axios.defaults.baseURL = 'http://pay.91dianji.com.cn/api';
+Vue.prototype.$utils = utils
 // 引入适配
 import 'lib-flexible/flexible'
 import { Actionsheet,Button,Switch,Dialog,RadioGroup,Pagination , DatetimePicker ,Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker    } from 'vant'
@@ -51,11 +49,10 @@ Vue.use(Lazyload)
 Vue.use(Loading)
 Vue.use(Rate)
 Vue.use(Picker)
-// Vue.use(Step).use(Steps);
 
 // 引入图标库
-import '@/assets/icon/iconfont.css'
-import '@/assets/icon/iconfont.js'
+// import '@/assets/icon/iconfont.css'
+// import '@/assets/icon/iconfont.js'
 
 
 

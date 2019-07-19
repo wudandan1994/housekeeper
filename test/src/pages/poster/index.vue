@@ -67,10 +67,12 @@ export default {
             imgShow: false,
             url: 'http://pay.91dianji.com.cn',
             qrcode: '',
-            random: '01',
-             shares:null,
+            random: '1',
+            shares:null,
             sharewx:null,
-            Sharewxf:false
+            Sharewxf:false,
+            max: 1,
+            min: 0,
         }
     },
     methods:{
@@ -152,19 +154,10 @@ export default {
         //         });
         // },
         
-        // 随机数
+        // 区间随机数
         handlechangeRandom(){
             this.componentload = true;
-            var ran = Math.ceil((Math.random())*26);
-            var random = '';
-            if(ran < 10){
-                random = '0' + ran;
-                // console.log('随机数',random);
-                this.random = random;
-            }else{
-                this.random = ran;
-                // console.log('随机数',ran);
-            }
+            this.random = Math.floor(Math.random()*(this.max - this.min + 1) + this.min);
             this.handlePoster();
         },
         handlePosterWithoutDetail(){
@@ -176,7 +169,7 @@ export default {
 
             var bigPoster = new Image();
             
-            bigPoster.src = 'http://pay.91dianji.com.cn/pop'+ this.random +'.jpg';
+            bigPoster.src = 'http://pay.91dianji.com.cn/POP'+ this.random +'.jpg';
             bigPoster.onload = function(){
                 ctx.drawImage(bigPoster,0,0,375,600);
                 setTimeout(()=>{
@@ -205,7 +198,7 @@ export default {
 
             var bigPoster = new Image();
             
-            bigPoster.src = 'http://pay.91dianji.com.cn/pop'+ this.random +'.jpg';
+            bigPoster.src = 'http://pay.91dianji.com.cn/POP'+ this.random +'.jpg';
             bigPoster.onload = function(){
                 ctx.drawImage(bigPoster,0,0,375,600);
                 setTimeout(()=>{
@@ -303,6 +296,9 @@ export default {
 
     },
     created () {
+        this.max = this.$route.query.max;
+        this.min = this.$route.query.min;
+        this.random = this.$route.query.min;
     },
     mounted(){
         this.handleJundgeQrCode();

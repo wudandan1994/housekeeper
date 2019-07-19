@@ -4,7 +4,7 @@
             <div class="bind">
                 <div class="title center">绑定手机号</div>
                 <div class="mobile"><input type="text" v-model="mobile" placeholder="请输入手机号"/></div>
-                <div class="mobile"><input type="password" v-model="newPassword" placeholder="输入6-18位数字加字母密码" /></div>
+                <div class="mobile"><input type="password" v-model="newPassword" placeholder="请输入6到18位数字与字母组合密码" /></div>
                 <div class="mobile"><input type="password" v-model="suerPassword" placeholder="请确认密码" /></div>
                 <div class="mobile row">
                     <input type="number" v-model="authcode" placeholder="请输入验证码" />

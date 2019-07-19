@@ -100,11 +100,11 @@
                                         <p>大额通道&nbsp;&nbsp;<span>(还款金额500000左右)</span></p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
                                 </div>
-                                 <div class="large" @click.stop="thirdPass(item)">
+                                 <!-- <div class="large" @click.stop="thirdPass(item)">
                                         <van-icon name="http://pay.91dianji.com.cn/dae.png" size="40px"/>
                                         <p>智能通道</p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
-                                </div>
+                                </div> -->
                              </div>
                        </div>
                        

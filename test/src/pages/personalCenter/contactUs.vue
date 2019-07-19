@@ -5,7 +5,21 @@
             <div class="top-title center">关于我们</div>
             <div class="right-icon varify center"></div>
         </header>
-        <div class="logo center"><img src="http://pay.91dianji.com.cn/logo.png"/></div>
+        <div class="banner"><img src="http://pay.91dianji.com.cn/aboutUs_banner.jpg" alt=""></div>
+        <div class="circle center">
+            <div>
+                <span class="center">产品介绍</span>
+                <span class="center">业务沟通</span>
+                <span class="center">商业互动</span>
+                <span class="center">合作交流</span>
+            </div>
+        </div>
+        <div class="desc-detail">
+            <div class="per-detail" v-for="(item,index) in options" :key="index">
+                <div class="title start-center">{{item.title}}</div>
+                <div class="content">{{item.content}}</div>
+            </div>
+        </div>
         <div class="container">
             <div class="title start-center">联系我们</div>
             <div class="contact_us row">
@@ -21,30 +35,44 @@
                     <span>朱经理</span>
                 </div>
                 <div class="btn center">
-                    <p @click="contact('11')"><a href="tel:021-60592500">拨打</a></p>
+                    <span @click="contact('11')"><a href="tel:021-60592500">拨打</a></span>
                 </div>
             </div>
             <div class="contact_us row">
                 <div class="icon center"><van-icon name="http://fx.91dianji.com.cn/fengxing_zuoji.png"/></div>
                 <div class="contact_title">客服电话:</div>
                 <div class="contact_detail start-center">400-1059-769</div>
-                <div class="btn center">
-                    <p @click="contact('12')"><a href="tel:400-1059-769">拨打</a></p>
+                <div class="btn center" @click="contact('12')">
+                    <span @click="contact('12')"><a href="tel:400-1059-769">拨打</a></span>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
-
-
 <script>
 import ClipboardJS from "clipboard";
 import { axiosPost } from '../../lib/http';
 export default {
     data() {
         return {
-
+            options: [
+                {
+                    title: '产品介绍',
+                    content: '钱夹宝是传帮带（上海）网络科技有限公司自主研发的一款信用卡智能管理APP，是集在线办卡、在线贷款、在线收款、智能还款各种功能为一体的信用卡神器，其中更包含卡测评、垃圾分类、油卡充值等便民服务功能。真正做到让用户体验舒心、使用放心。'
+                },
+                {
+                    title: '商业互动',
+                    content: '品牌推广营销需要创新，而创新思维意味着无限可能！提升创新营销理念，是企业核心竞争力的典型提现，也是企业睿智的选择，钱夹宝欢迎每一位有资源、有创意的企业或个人与之进行商业交互。'
+                },
+                {
+                    title: '合作交流',
+                    content: '钱夹宝为亿万信用卡用户所信任依赖，如果你希望加入我们或者寻求合作可直接到访公司，或者电话联系我们。自古合作共赢就是真理，我们欢迎您的到来。'
+                },
+                {
+                    title: '业务沟通',
+                    content: '公司一直致力于创新和发展，如果你有好的资源、好的项目或者想对接我们的资源和项目请直接联系我们。'
+                }
+            ]
         }
     },
     methods:{
@@ -58,7 +86,7 @@ export default {
              axiosPost("/behavior/insertBehavior",data)
             .then(res=>{
                 
-            })
+            }).catch((res) =>{})
 
         },
         // fuzhi
@@ -78,23 +106,92 @@ export default {
     }
 }
 </script>
-
 <style lang="less">
    #customerService {
-       .logo{
-            width: 100%;
+        .banner{
+            width: 100vw;
             height: auto;
-            margin-top: 100px;
-            margin-bottom:50px;
-            img{
-                margin: auto;
-                width: 60%;
-                height: auto;
+            >img{
+                    width: 100%;
+                    height: auto;
             }
         }
+        .circle{
+            width: 100vw;
+            height: auto;
+            box-sizing: border-box;
+            padding: 80px 40px;
+            font-size: 26px;
+            line-height: 45px;
+            >div{
+                width: 320px;
+                height: 320px;
+                border: solid 2px #ccc;
+                border-radius: 50%;
+                position: relative;
+                z-index: 1;
+                >span{
+                    width: 120px;
+                    height: 60px;
+                    box-shadow: 0px 0px 1px 1px rgb(177, 142, 96);
+                    background: #fff;
+                    border-radius: 10px;
+                    color: rgb(177, 142, 96);
+                }
+                >span:nth-child(1){
+                    position: absolute;
+                    top: -30px;
+                    left: 100px;
+                }
+                >span:nth-child(2){
+                    position: absolute;
+                    top: 120px;
+                    left: -60px;
+                }
+                >span:nth-child(3){
+                    position: absolute;
+                    top: 120px;
+                    left: 260px;
+                }
+                >span:nth-child(4){
+                    position: absolute;
+                    bottom: -30px;
+                    left: 100px;
+                }
+            }
+        }
+        .desc-detail{
+            width: 100vw;
+            height: auto;
+            background: #000;
+            .title{
+                width: 92%;
+                height: 80px;
+                margin: auto;
+                color: rgb(244, 197, 128);
+                font-size: 32px;
+                font-weight: 700;
+                border-bottom: solid 2px rgb(244, 197, 128);
+            }
+            .content{
+                width: 92%;
+                height: auto;
+                margin: auto;
+                color: white;
+                font-size: 28px;
+                box-sizing: border-box;
+                line-height: 45px;
+                padding-top: 40px;
+                padding-bottom: 40px;
+                text-align: justify;
+                text-indent: 2em;
+            }
+        }
+
+
        .container {
-            width: 87%;
-            margin: auto;
+            width: 92%;
+            margin: 50px auto;
             height: 400px;
             background-image: linear-gradient(180deg, #1a98ff 0%, #4b66af 100%), linear-gradient(#ffffff, #ffffff);
             background-blend-mode: normal, normal;
@@ -149,7 +246,7 @@ export default {
                     width: 25%;
                     height: 100%;
                     line-height: 80px;
-                    p{
+                    span{
                         display: inline-block;
                         width: 80px;
                         height: 36px;

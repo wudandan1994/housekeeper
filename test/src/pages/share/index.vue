@@ -13,35 +13,34 @@
             <router-link tag="div" to="/radar" class="circle center">
                 <div class="container">
                     <div class="radar"></div>
-                    <img class="logo center" src="http://pay.91dianji.com.cn/logo@2x.png" alt=""> 
+                    <img class="logo center" src="http://pay.91dianji.com.cn/logo@2x.png" alt="">
+                    <img class="click" src="http://pay.91dianji.com.cn/click.png" alt=""> 
                 </div>
             </router-link>
             <div class="btn">
-                <div class="column" @click="handleExpect">
+                <div class="column" @click="handleRouter('1')">
                     <div class="center">下级浏览数</div>
-                    <div class="center">21321321321</div>
+                    <div class="center">{{browseCount}}</div>
                 </div>
-                <div class="column" @click="handleExpect">
+                <div class="column" @click="handleRouter('3')">
                     <div class="center">我的团队</div>
-                    <div class="center">32323232</div>
+                    <div class="center">{{teamCount}}</div>
                 </div>
             </div>
-            
-
         </div>
         <div class="business">
             <ul>
-                <router-link tag="li" to="/share/poster">
+                <router-link tag="li" :to="{path: '/share/poster',query:{max: '54',min: '1'}}">
                     <p><van-icon name="http://bc.91dianji.com.cn/405.png" /></p>
                     <p>推广海报图</p>
                     <p>分享二维码、快速增粉</p>
                 </router-link>
-                 <router-link tag="li" to="/share/poster">
+                 <router-link tag="li" :to="{path: '/share/poster',query:{max: '140',min: '100'}}">
                     <p><van-icon name="http://bc.91dianji.com.cn/413.png" /></p>
                     <p>推广素材图</p>
                     <p>各种视频+图片</p>
                 </router-link>
-                <router-link tag="li" to="/share/poster">
+                <router-link tag="li" :to="{path: '/share/poster',query:{max: '208',min: '200'}}">
                     <p><van-icon name="http://bc.91dianji.com.cn/414.png" /></p>
                     <p>信用卡推广图</p>
                     <p>信用卡推广图.一键锁粉</p>
@@ -109,13 +108,16 @@
 
 <script>
 import footerMenu from '@/components/footer'
-import ClipboardJS from "clipboard";
+import ClipboardJS from "clipboard"
 import storage from '@/lib/storage'
+import {axiosPost} from '@/lib/http'
 export default {
     data(){
         return{
             active: 3,
             href: false,
+            teamCount: '0',
+            browseCount: '0'
         }
     },
     components: {
@@ -146,8 +148,46 @@ export default {
                 that.$toast('复制失败');
             });
         },
+        // 获取AI雷达统计数据
+        handleAIRadar(){
+            axiosPost('/behavior/getIndexRecord').then(res =>{
+                if(res.data.success){
+                    console.log('AI请求成功',res);
+                    this.browseCount = res.data.data.browseCount;
+                    this.teamCount = res.data.data.teamCount;
+                }else{
+                   console.log('AI请求失败',res); 
+                }
+            }).catch(res =>{
+                console.log('AI请求失败',res); 
+            })
+        },
+        // 路由
+        handleRouter(item){
+            if(item == '1'){
+                this.$router.push({
+                    path: '/nextLevel',
+                    query:{
+                        title: '下级浏览数',
+                        number: this.browseCount,
+                        id: '0',
+                    }
+                })
+            }else{
+              this.$router.push({
+                    path: '/nextLevel',
+                    query:{
+                        title: '我的团队',
+                        number: this.teamCount,
+                        id: '3',
+                    }
+                })  
+            }
+        }
     },
     created(){
+        console.log(this.$store.state.wechat.promotioncode);
+        this.handleAIRadar();
         // console.log(this.$store.state.wechat.promotioncode)
     }
 }
@@ -236,7 +276,6 @@ export default {
                         transform-origin: bottom right;
                         border-radius: 100% 0 0 0;
                     }
-
                     @keyframes radar-beam {
                         0% {
                             transform: rotate(0deg);
@@ -270,7 +309,7 @@ export default {
                         position: absolute;
                         top: 35vw;
                         left: 35vw;
-                        z-index: 4;
+                        z-index: 14;
                         animation:  bling 1s linear infinite;
                         -webkit-animation:  bling 1s linear infinite;
                     }
@@ -285,7 +324,30 @@ export default {
                             transform: scale(0.8);
                         }
                     }
-                    
+                    .click{
+                        width: 70px;
+                        height: 70px;
+                        position: absolute;
+                        bottom: 26%;
+                        left: calc(50% - 35px);
+                        z-index: 10;
+                        animation: blings 1s linear infinite;
+                        -webkit-animation: blings 1s linear infinite;
+                    }
+                    @keyframes blings{
+                        0%{
+                            bottom: 24%;
+                            opacity: 0.5;
+                        }
+                        50%{
+                            bottom: 26%;
+                            opacity: 1;
+                        }
+                        100%{
+                            bottom: 24%;
+                            opacity: 0.5;
+                        }
+                    }
                 }
                 
             }
@@ -308,6 +370,10 @@ export default {
                     div{
                         width: 100%;
                         height: 40px;
+                        font-size: 28px;
+                    }
+                    >div:nth-child(1){
+                        font-weight: 700;
                     }
                 }
                 >div:nth-child(2){
@@ -320,6 +386,10 @@ export default {
                     div{
                         width: 100%;
                         height: 40px;
+                        font-size: 28px;
+                    }
+                    >div:nth-child(1){
+                        font-weight: 700;
                     }
                 }
             }

@@ -223,11 +223,11 @@
                          <li @click="handleAuth">实名认证</li>
                         <router-link to="/home/bindingPhone" tag="li">修改手机</router-link>
                         <router-link to="/home/customerService" tag="li">联系客服</router-link>
-                        <router-link to="/home/aboutUs" tag="li">关于我们</router-link>
+                        <router-link to="/personalCenter/contactus" tag="li">关于我们</router-link>
                         <!-- <li class="switch">声音开关
                         </li> -->
                         <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
-                        <!-- <router-link to="/home/clearCache" tag="li">清除缓存</router-link> -->
+                        <li @click="handleClear">清除缓存</li>
                          <router-link tag="li" class="center" to="/register">个人设置</router-link>
                     </ul>
                    
@@ -276,7 +276,6 @@ export default {
       footerMenu,
       bindMobile,
       notice
-    //   loading
   },
      data() {
         return {
@@ -329,6 +328,11 @@ export default {
         }
   },
    methods:{
+       handleClear(){
+        //    清除缓存
+        storage.remove('promotioncode');
+        this.$toast('清除成功');
+       },
         isShow() {
             this.showAaside=true
         },

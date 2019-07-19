@@ -2,13 +2,9 @@
     <div id="component-notice" v-if="notice" @click="handleCloseNotice">
         <div class="notice">
             <div class="notice-title center">重要通知</div>
-            <p>钱夹宝1.2版本即将上线,本次更新内容如下:</p>
+            <p>最新推广活动:</p>
 
-            <p>(1):全新页面升级</p>
-            <p>(2):升级VIP后个人中心背景对应VIP图</p>
-            <p>(3):增加VIP“权益明细”，包含具体优惠费率，分润比例，奖励等内容</p>
-            <p>(4):增加“垃圾分类”便民功能</p>
-            <p>(5):取消普通代还，保留完美还款——小额还款20000以下，大额还款50万左右</p>
+            <p>7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.47，并领取1000元现金奖励！活动详情，请联系您的专属客服！</p>
         </div>
     </div>
 </template>
@@ -67,8 +63,6 @@ export default {
                 font-size: 26px;
                 text-align: justify;
                 line-height: 50px;
-                text-indent: -40px;
-                padding-left: 35px;
             }
         }
     }

@@ -265,7 +265,13 @@ export default {
         },
         Upgrade(){
             this.show=true
-            this.showCover=true
+            this.showCover=true;
+            let data = {
+                type: '9'
+            };
+            axiosPost("/behavior/insertBehavior",data).then(res =>{
+
+            }).catch(res =>{})
         },
         handleCancelOrder(){
             this.showCover=false
@@ -466,7 +472,7 @@ export default {
               .avator{
                   width: 18%;
                   height: 100%;
-                  z-index: 9999;
+                  z-index: 998;
                   position: relative;
                   >img{
                       width: 120px;
@@ -763,7 +769,7 @@ export default {
             width: 100%;
             height: 100%;
             position: fixed;
-            // z-index: 999;
+            z-index: 999;
             top: 0;
             left: 0;
             background: #ffffff;
