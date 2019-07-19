@@ -10,13 +10,17 @@
                  <div class="top row">
                     <div class="avator"><img :src="headimg" alt=""></div>
                     <div class="name-code">
-                        <div class="name start-center">
+                        <!-- <div class="name start-center">
                             <span>{{nickname}}</span>&nbsp;&nbsp;&nbsp;
                             <span>{{vip}}</span>
                         </div>
                         <div class="unset start-center">
                            <p>推荐码：<span>{{promotioncode}}</span></p>
-                         </div>
+                         </div> -->
+                          <p>{{vip}}</p>
+                         <p>{{nickname}}</p>
+                         <p>推荐码：<span>{{promotioncode}}</span></p>
+                        
                     </div>
                      <!-- <div  class="operator end-center">
                          <span>绑卡：<span>{{cardNum}}</span>张</span>
@@ -48,7 +52,6 @@
                                   <!-- <p class="days">16</p> -->
                                   <div>
                                       <p class="botton">还款日</p>
-                                      <!-- <p><span>{{String(new Date().getMonth()+1)+-&nbsp;+item.duedate}}</span></p> -->
                                       <p><span>{{new Date().getMonth()+1}}</span>&nbsp;-&nbsp;<span>{{item.duedate}}</span></p>
                                   </div>
                               </div>
@@ -122,7 +125,7 @@
 
 
 <script>
-import { axiosPost,axiosGet                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  } from '../../lib/http'
+import { axiosPost,axiosGet }  from '../../lib/http'   
 import { bankCardAttribution } from '../../lib/bankName'
 import loading from '@/components/loading'
 import storage from '@/lib/storage'
@@ -268,26 +271,28 @@ export default {
         // 智能通道是否签约
         thirdPass(i){
             // 查询是否绑卡
+            // console.log(i,'i')
             let num={
                 cardNum:i.cardNo
             }
              axiosPost("/dhcreditCard/getDHBindExist",num)
              .then(res=>{
-                //  console.log(res,"是否绑卡")
-                 if(res.data.success) {
-                      storage.set('channel',"3");
+                 console.log(res,"是否绑卡")
+                 if(res.data.success && res.data.data !=null ) {     
+                        storage.set('channel',"3");
                         this.$router.push({
                             path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
                             query:{
                                 info:i
                             }
                         })
-                 } else { 
-
-                    // 查询是否签约
+                 } 
+                 else { 
+                    //  this.$toast(res.data.message)
+                     // 查询是否签约
                      axiosPost("/dhcreditCard/getDHRegisterExist")
                      .then(res=>{
-                         if(res.data.success){
+                         if(res.data.success && res.data.data.userId){
                              console.log(res,'是否签约')
                              this.userId=res.data.data.userId       //   然后去绑卡
                             this.$router.push({
@@ -305,14 +310,8 @@ export default {
                                     info:i,
                                 }
                             })
-                            
-
-
                          }
                      })
-
-
-                     
                  }
                  
              })
@@ -412,34 +411,49 @@ export default {
        }
        >.container {
            padding-top:96px;
+           width:100%;
+           overflow-x: hidden;
+           box-sizing: border-box;
+        // margin-top:96px;
            padding-bottom: 50px;
            .van-button--normal {
                font-size: 34px;
            }
            >.swipe {
                width:100%;
-               height:200px;
+            //    height:200px;
                font-size: 28px;
                margin-bottom:15px;
+               box-sizing: border-box;
                .top{
-                   padding-top:15px;
-                    width: 90%;
                     height: 120px;
-                    margin-left: auto;
-                    margin-right: auto;
+                    padding:15px 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    // box-sizing: border-box;
               .avator{
-                  width: 18%;
-                  height: 100%;
+                  height: 120px;
+                  width:  120px;
+                  box-sizing: border-box;
                   >img{
-                      width: 120px;
-                      height: 120px;
+                      width: 100%;
                       border-radius: 50%;
                   }
               }
+            
               .name-code{
-                  width: 72%;
-                  margin-left: 15px;
+                 flex:1;
                   height: 100%;
+                  margin-top:10px;
+                  margin-left:15px;
+                  >p {
+                      font-weight: bold;
+                      &:nth-of-type(2){
+                        padding:10px 0px;
+                      }
+                  }
+                 
                   .name{
                       height: 50px;
                       margin-top: 10px;
@@ -469,8 +483,10 @@ export default {
            }
             .bind {
                 box-sizing: border-box;
+                 justify-content: space-between;
               >ul{
                   padding:30px;
+                   justify-content: space-between;
                   >li {
                       position: relative;
                       width:100%;

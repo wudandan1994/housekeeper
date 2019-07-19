@@ -10,9 +10,9 @@
                     </div> -->
                 </div>
             </div>
-            <div v-show="isUpgrade" class="operator end-center"  @click="Upgrade">
+            <div v-show="isUpgrade" class="operator end-center"  @click="Upgrade" >
                 <van-icon name="gem" size="20px" color="#dab17b"/>
-                <span>升级为钻石会员</span>
+                <span >升级为钻石会员</span>
             </div>
             <div class="position">
                 <div class="recomcode center">推荐码:{{promotioncode}}</div>
@@ -159,12 +159,12 @@
             <div class="per-title row">
                 <div class="goods-title start-center">付款方式</div>
                 <div class="goods-detail row">
-                    <!-- <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayTypeWX">
+                    <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayTypeWX">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-wechatpay"></use>
                         </svg>
                         微信支付
-                    </div> -->
+                    </div>
                     <div class="paytypes center" :class="{'alipay': paytype == 'alipay'}" @click="handlePayTypeZFB">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-alipay"></use>
@@ -265,7 +265,13 @@ export default {
         },
         Upgrade(){
             this.show=true
-            this.showCover=true
+            this.showCover=true;
+            let data = {
+                type: '9'
+            };
+            axiosPost("/behavior/insertBehavior",data).then(res =>{
+
+            }).catch(res =>{})
         },
         handleCancelOrder(){
             this.showCover=false
@@ -466,7 +472,7 @@ export default {
               .avator{
                   width: 18%;
                   height: 100%;
-                  z-index: 9999;
+                  z-index: 998;
                   position: relative;
                   >img{
                       width: 120px;
@@ -476,10 +482,10 @@ export default {
               }
               .name-code{
                   width: 72%;
-                   z-index: 9999;
+                   z-index: 99;
                    position: relative;
                   margin-left: 15px;
-                  height: 100%;
+                //   height: 80%;
                   .name{
                       height: 50px;
                       margin-top: 10px;
@@ -506,11 +512,12 @@ export default {
           }
           .operator{
               width: auto;
-              height: 100px;
+              height: 70px;
               position: absolute;
-              z-index: 99;
+              z-index: 999;
               right: 0px;
-              top: 70px;
+              top: 140px;
+              z-index: 99;
               background: #798bc5;
               padding-left: 20px;
               padding-right: 20px;
@@ -762,7 +769,7 @@ export default {
             width: 100%;
             height: 100%;
             position: fixed;
-            // z-index: 999;
+            z-index: 999;
             top: 0;
             left: 0;
             background: #ffffff;

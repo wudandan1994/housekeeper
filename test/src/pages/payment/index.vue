@@ -177,7 +177,7 @@ export default {
         //    })
     //    },
        pay(){
-           let partten=/0?(13|14|15|17|18|19)[0-9]{9}/ 
+           let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/ 
            if(this.orderAmount.trim().length===0 || this.realName.trim().length===0 || this.idCard.trim().length===0
            || this.accNo.trim().length===0 || this.mobile.trim().length===0){
                 this.$toast({

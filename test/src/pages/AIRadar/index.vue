@@ -5,7 +5,7 @@
             <div class="top-title center">AI雷达</div>
             <div class="right-icon center"></div>
         </header>
-        <div class="top">
+        <div class="tops">
             <div class="avator"><img :src="headimg" alt=""></div>
             <div class="nickname">{{nickname}}</div>
             <div class="slogan">我的获客工具——AI雷达</div>
@@ -16,7 +16,7 @@
                 <div class="title start-end">下级关键数据</div>
                 <div class="menus">
                     <div class="per_menus row" v-for="(item,index) in details" :key="index" @click="hanleNextDetail(item)">
-                        <div class="icon center"><van-icon size="40px" name="chart-trending-o"/></div>
+                        <div class="icon center"><van-icon size="40px" :name="item.icon"/></div>
                         <div class="title_number">
                             <div class="desc center">{{item.title}}</div>
                             <div class="number center">{{item.number}}</div>
@@ -25,6 +25,46 @@
                 </div>
             </div>
         </body>
+        <div class="list-container" id="list">
+            <div class="per-list" v-for="(item,index) in list" :key="index">
+                <div class="top">
+                    <div class="avator start-center"><img :src="item.photo" alt=""></div>
+                    <div class="nickname-type">
+                        <div class="start-center">{{( item.nickname).substr(0,7)}}</div>
+                        <div class="start-center">来自扫码</div>
+                    </div>
+                    <div class="type end-start">
+                        <span v-if="item.type == '1'">信用卡办理</span>
+                        <span v-if="item.type == '2'">在线收款</span>
+                        <span v-if="item.type == '3'">智能管家</span>
+                        <span v-if="item.type == '4'">我要贷款</span>
+                        <span v-if="item.type == '5'">黄金会员</span>
+                        <span v-if="item.type == '6'">钻石会员</span>
+                        <span v-if="item.type == '7'">合伙人</span>
+                        <span v-if="item.type == '8'">OEM</span>
+                        <span v-if="item.type == '9'">升级</span>
+                        <span v-if="item.type == '10'">拨打上级</span>
+                        <span v-if="item.type == '11'">联系我们</span>
+                        <span v-if="item.type == '12'">400电话</span>
+                        <span v-if="item.type == '13'">复制微信</span>
+                        
+                    </div>
+                </div>
+                <div class="middle">
+                    <div>访问次数&nbsp;({{item.count}})</div>
+                    <div>
+                        <div class="center" v-if="item.level == '0'">免费粉丝</div>
+                        <div class="center" v-if="item.level == '1'">黄金会员</div>
+                        <div class="center" v-if="item.level == '2'">钻石会员</div>
+                    </div>
+                </div>
+                <div class="bottom">
+                    <div>最近访问 {{item.date}}</div>
+                    <div v-if="item.mobile !== null"><a :href="'tel:' + item.mobile">打电话</a></div>
+                    <div v-else>未绑定手机号</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -51,26 +91,31 @@ export default {
                 {
                     id: '0',
                     title: '下级浏览数',
-                    number: '10'
+                    number: '10',
+                    icon: 'http://pay.91dianji.com.cn/liulan.png'
                 },
                 {
                     id: '1',
                     title: '新增客户',
-                    number: '11'
+                    number: '11',
+                    icon: 'http://pay.91dianji.com.cn/xinzeng.png'
                 },
                 {
                     id: '2',
                     title: '点击联系方式',
-                    number: '12'
+                    number: '12',
+                    icon: 'http://pay.91dianji.com.cn/dianji.png'
                 },
                 {
                     id: '3',
                     title: '我的团队',
-                    number: '13'
+                    number: '13',
+                    icon: 'http://pay.91dianji.com.cn/tuandui.png'
                 }
             ],
-            starttime: '',
-            endtime: '',
+            startdate: '',
+            enddate: '',
+            list: [],
         }
     },
     components: {
@@ -93,13 +138,13 @@ export default {
                 // 选中日期为今天
                 var now = new Date();
                 var arr = now.toLocaleDateString().split('/');
-                this.starttime =  this.handleTransferTime(arr);
-                this.endtime =  this.handleTransferTime(arr);
+                this.startdate =  this.handleTransferTime(arr);
+                this.enddate =  this.handleTransferTime(arr);
                 this.handleAIRadarTotal();
             }else{
                 // 选中时间为全部
-                this.starttime = '';
-                this.endtime = '';
+                this.startdate = '';
+                this.enddate = '';
                 this.handleAIRadarTotal();
             }
         },
@@ -111,15 +156,17 @@ export default {
                 query: {
                     title: item.title,
                     number: item.number,
-                    id: item.id
+                    id: item.id,
+                    startdate: this.startdate,
+                    enddate: this.enddate
                 }
             })
         },
         // 获取统计数据
         handleAIRadarTotal(){
             let params = {
-                starttime: this.starttime,
-                endtime: this.endtime
+                startdate: this.startdate,
+                enddate: this.enddate
             };
             let url = '/behavior/getTotalRecord';
             axiosPost(url,params).then(res =>{
@@ -129,6 +176,7 @@ export default {
                     this.details[1].number = res.data.data.newRegister;
                     this.details[2].number = res.data.data.clickContact;
                     this.details[3].number = res.data.data.teamCount;
+                    this.list = res.data.data.list;
                 }else{
                     console.log('统计数据请求失败',res);
                 }
@@ -139,13 +187,13 @@ export default {
         // 选择时间查询
         handleChildChangeTime(item){
             console.log('时间参数',item);
-            var start = (item.starttime).split('/');
-            var end = (item.endtime).split('/');
+            var start = (item.startdate).split('/');
+            var end = (item.enddate).split('/');
             
             console.log('开始时间',this.handleTransferTime(start));
             console.log('结束时间',this.handleTransferTime(end));
-            this.starttime = this.handleTransferTime(start);
-            this.endtime = this.handleTransferTime(end);
+            this.startdate = this.handleTransferTime(start);
+            this.enddate = this.handleTransferTime(end);
             this.handleAIRadarTotal();
         },
         // 时间格式转换函数
@@ -173,7 +221,7 @@ export default {
 <style lang="less" scoped>
     #switch_page{
         width: 100vw;
-        height: calc(100vh - 86px);
+        height: auto;
         padding-top: 86px;
         background: rgb(241, 245, 246);
         .header-top{
@@ -184,7 +232,7 @@ export default {
             }
             
         }
-        .top{
+        .tops{
             width: 95%;
             height: 172px;
             background-color: rgb(93, 115, 184);
@@ -275,6 +323,102 @@ export default {
                                 font-size: 28px;
                             }
                         }
+                    }
+                }
+            }
+        }
+        .list-container{
+            width: 100vw;
+            height: auto;
+            .per-list{
+                width: 90vw;
+                height: 320px;
+                background: #fff;
+                margin: 30px auto;
+                box-shadow: 0px 0px 2px 1px #ccc;
+                box-sizing: border-box;
+                padding-top: 20px;
+                .top{
+                    width: 95%;
+                    height: 40%;
+                    margin: auto;
+                    display: flex;
+                    display: -webkit-flex;
+                    justify-content: space-between;
+                    -webkit-justify-content: space-between;
+                    .avator{
+                        width: 20%;
+                        height: 100%;
+                        img{
+                            width: 100px;
+                            height: 100px;
+                            border-radius: 50%;
+                        }
+                    }
+                    .nickname-type{
+                        width: 50%;
+                        height: 100%;
+                        box-sizing: border-box;
+                        padding-top: 25px;
+                        font-size: 28px;
+                        >div{
+                            width: 100%;
+                            height: 40%;
+                        }
+                        >div:nth-child(2){
+                            color: #666;
+                            font-size: 26px;
+                        }
+                    }
+                    .type{
+                        width: 30%;
+                        height: 100%;
+                        box-sizing: border-box;
+                        padding-top: 20px;
+                        span{
+                            padding: 15px 20px;
+                            background: #4367B5;
+                            color: #fff;
+                            font-size: 28px;
+                            border-radius: 10px;
+                        }
+                    }
+                }
+                .middle{
+                    width: 95%;
+                    height: 35%;
+                    margin: auto;
+                    display: flex;
+                    display: -webkit-flex;
+                    justify-content: space-between;
+                    -webkit-justify-content: space-between;
+                    align-items: center;
+                    border-bottom: solid 1px #DFDFDF;
+                    >div:nth-child(1){
+                        font-size: 26px;
+                    }
+                    >div:nth-child(2){
+                        div{
+                            width: 80px;
+                            height: 80px;
+                            border: solid 1px #ccc;
+                            font-size: 28px;
+                            text-align: center;
+                            color: #4367B5;
+                        }
+                    }
+                }
+                .bottom{
+                    width: 95%;
+                    height: 25%;
+                    margin: auto;
+                    display: flex;
+                    display: -webkit-flex;
+                    justify-content: space-between;
+                    -webkit-justify-content: space-between;
+                    align-items: center;
+                    >div{
+                        font-size: 26px;
                     }
                 }
             }

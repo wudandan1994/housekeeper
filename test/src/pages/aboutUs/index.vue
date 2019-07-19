@@ -5,7 +5,7 @@
             <div class="top-title center">关于我们</div>
             <div class="right-icon varify center"></div>
         </header>
-        <div class="container">
+        <div class="contain">
             <div class="logo center"><van-icon name="http://pay.91dianji.com.cn/logo.png" size="250px"/></div>
             <div class="per-detail row">
                 <div class="per-icon center"><van-icon clase="center" name="phone" size="18px" color="rgb(75, 102, 175)"/></div>
@@ -63,7 +63,7 @@ export default {
                }
            }
        }
-       >.container {
+       >.contain {
            padding-top:96px;
            .logo{
                width: 100%;

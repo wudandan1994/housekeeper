@@ -30,7 +30,8 @@
                           <p><van-icon name="phone"/></p>
                           <div v-show="showConnect"> 
                               <p class="gray">打电话</p>
-                              <a :href="'tel:' + mobile">和上级电话联系</a>
+                              <p @click="contact"><a :href="'tel:' + mobile" >和上级电话联系</a></p>
+                              
                           </div>
                           <div v-show="showConnect?false:true">
                               <p>暂无更多</p>
@@ -79,6 +80,16 @@ export default {
     methods:{
         goBack() {
             this.$router.push('/personalCenter')
+        },
+        contact(){
+            // console.log("联系")
+            let data={
+                type:'10'
+            }
+             axiosPost("/behavior/insertBehavior",data)
+            .then(res=>{
+                
+            })
         },
         // 上级详细信息
         handleMorePreviousDetail(){

@@ -215,12 +215,12 @@ export default {
                         this.componentload=true
                         setTimeout(()=>{
                             // this.$router.push({
-                                //     path:"/home/online",
-                                //     query:{
-                                //         info:url,
-                                //         title:"贷款中心"
-                                //     }
-                                // })
+                            //         path:"/home/online",
+                            //         query:{
+                            //             info:url,
+                            //             title:"贷款中心"
+                            //         }
+                            //     })
 
 
                          if (!navigator.userAgent.match(/iPad|iPhone/i)){

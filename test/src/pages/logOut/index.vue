@@ -117,7 +117,7 @@ export default {
         // 注册
         modify(){
              let that=this
-            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/  // 11位手机号的正则
+            let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/  // 11位手机号的正则
             if(!partten.test(that.mobile)){
                  that.$toast({
                     message:"请填写11位手机号码"

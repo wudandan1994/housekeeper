@@ -158,7 +158,7 @@ export default {
         register(){
             let that=this
             let type=""
-            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/
+            let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/
             if(that.mobile.trim().length===0){
                 that.$toast({
                     message:"手机号码不能为空"

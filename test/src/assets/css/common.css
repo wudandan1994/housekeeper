@@ -221,3 +221,28 @@ table {
 		font-size: 30px;
 		font-weight: bold;
 	}
+	.wh_content_item .wh_isToday{
+		background: transparent !important;
+	}
+	.van-radio{
+		height: 30px !important;
+		line-height: 30px !important;
+		display: flex;
+		/* justify-content: center; */
+		align-items: flex-start;
+	}
+	.van-radio__label{
+		height: 30px !important;
+		line-height: 30px !important;
+		display: flex;
+		/* justify-content: center; */
+		align-items: flex-start;
+	}
+	.van-radio__icon .van-icon{
+		width: 30px;
+		height: 30px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 26px;
+	}

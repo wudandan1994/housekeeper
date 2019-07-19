@@ -368,7 +368,8 @@ const RechargeAllList = () =>import('@/pages/Oilcard/RechargeAllList')
 const nextList = () =>import('@/pages/AIRadar/nextList')
 // 下级数据列表，新增客户，我的团队
 const nextOtherList = () =>import('@/pages/AIRadar/nextOtherList')
-
+// 测试页，测试完请删除
+const testpage = () =>import('@/pages/AIRadar/test')
 export default new Router({
   // mode:"hash",
   routes: [
@@ -494,5 +495,6 @@ export default new Router({
     {path: '/RechargeDetail',component: RechargeDetail},
     {path: '/activation',component: activation},
     {path: '/RechargeAllList',component: RechargeAllList},
+    {path: '/testpage',component: testpage},
   ]
 })

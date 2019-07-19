@@ -47,7 +47,7 @@
             <div class="pannel-news row">
                 <div class="pannel-title center">钱&nbsp;夹<br/>资&nbsp;讯</div>
                 <div class="pannel-detail center" @click="handleContactUs">
-                    <van-notice-bar text="好消息：从7月8日至7月14日，连续在朋友圈推广钱夹宝相关海报，连续时间7天，可免费成为993会员一个月！费率低至0.47！相关活动内容请联系客服"/>
+                    <van-notice-bar text="最新推广活动：7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.47，并领取1000元现金奖励！活动详情，请联系您的专属客服！"/>
                 </div>
             </div>
 
@@ -64,7 +64,7 @@
                             <span>官方渠道</span>
                         </div>
                     </li>
-                    <li @click="handleIsAuth('/home/collect')">
+                    <li @click="handleIsAuth('/home/collect',false,'')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /></span>
                         <div class="channel">
                             <h3>在线收款</h3>
@@ -72,7 +72,7 @@
                             <span>落地商户</span>
                         </div>
                     </li>
-                    <li @click="handleIsAuth('/loan/detail')">
+                    <li @click="handleIsAuth('/loan/detail',true,'4')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
                         <div class="channel">
                             <h3>信息咨询</h3>
@@ -80,14 +80,14 @@
                             <span>GO>></span>
                         </div>  
                     </li>
-                     <router-link tag="li" to="/home/creditHousekeeper">
+                    <li  @click="handleIsAuth('/home/creditHousekeeper',true,'3')" >
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
                         <div class="channel">
                             <h3>智能还款</h3>
                             <p>落地商户空卡周转</p>
                             <span>完美账单</span>
                         </div>
-                     </router-link>
+                    </li>
 
                 </ul>
             </div>
@@ -141,18 +141,18 @@
                 <div class="title start-center">热门推荐</div>
                 <div class="remen_tuijian">
                     <div class="more"><van-icon name="arrow" color="#cccccc" size="30px"/></div>
-                    <router-link tag="div" to="/home/collect" class="secret">
+                    <div class="secret" @click="handleIsAuth('/home/collect',false,'')">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan.png" size="34px" /></div>
                         <div class="center">在线收款</div>
-                    </router-link>
-                    <div @click="handleIsAuth('/home/cardCenter')" class="secret">
+                    </div>
+                   <div @click="handleIsAuth('/home/cardCenter',false,'')" class="secret">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></div>
                         <div class="center">信用卡办理</div>
                     </div>
-                    <router-link tag="div" class="secret" to="/home/creditHousekeeper">
+                    <div class="secret" @click="handleIsAuth('/home/creditHousekeeper',true,'3')">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan.png" size="30px" /></div>
                         <div class="center">智能还款</div>
-                    </router-link>
+                    </div>
                         <router-link tag="div" class="secret"  to="/vip">
                         <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/shengji.png" size="30px" /></div>
                         <div class="center">升级代理</div>
@@ -161,7 +161,7 @@
                         <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></div>
                         <div class="center">卡·测评</div>
                     </router-link>
-                    <div @click="handleIsAuth('/loan/detail')" class="secret">
+                    <div @click="handleIsAuth('/loan/detail',true,'4')" class="secret">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
                         <div class="center">信息咨询</div>
                     </div>
@@ -169,7 +169,7 @@
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
                         <div class="center">商城</div>
                     </router-link> -->
-                    <div class="secret" @click="handleJundgeMobile">
+                    <div class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/weizhang.png"  size="30px" /></div>
                         <div class="center">违章查询</div>
                     </div>
@@ -187,7 +187,7 @@
                         <router-link tag="li" to="/home/verified">实名认证</router-link>
                         <router-link to="/home/bindingPhone" tag="li">修改手机</router-link>
                         <router-link to="/home/customerService" tag="li">联系客服</router-link>
-                        <router-link to="/home/aboutUs" tag="li">关于我们</router-link>
+                        <router-link to="/personalCenter/contactus" tag="li">关于我们</router-link>
                         <!-- <li class="switch">声音开关
                         </li> -->
                         <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
@@ -237,7 +237,6 @@ export default {
       footerMenu,
       bindMobile,
       notice
-    //   loading
   },
      data() {
         return {
@@ -464,12 +463,33 @@ export default {
             })
         },
         // 判断是否实名认证
-        handleIsAuth(obj){ 
-            if(this.iscertification == '0'){
+        handleIsAuth(obj,boo,i){ 
+            if(this.iscertification == '0' ){
                 //未认证
                 this.$toast('请先实名认证');
+                if(boo){
+                     let data ={
+                        type:i
+                    }
+                     axiosPost("/behavior/insertBehavior",data)
+                    .then(res=>{
+                      })
+                }
+
             }else{
-                this.$router.push(obj);
+                if(boo){
+                    let data ={
+                        type:i
+                    }
+                     axiosPost("/behavior/insertBehavior",data)
+                    .then(res=>{
+                         this.$router.push(obj);
+                        
+                    })
+                } else {
+                     this.$router.push(obj);
+                }
+               
             }
         },
         // 联系客服
@@ -484,20 +504,7 @@ export default {
                 query: {params: item.params}
             })
         },
-        // 判斷手機類型
-        handleJundgeMobile(){
-            if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                this.$router.push({
-                    path:"/loan/form/myOrder",
-                    query:{
-                        info:'https://m2.weizhang8.cn/',
-                        title:"违章查询"
-                    }
-                })
-            } else {
-                location.href= 'https://m2.weizhang8.cn/'
-            }
-        },
+       
         handleGarbage(){
             this.$router.push('/garbage');
         }
@@ -667,11 +674,8 @@ export default {
                      >p {
                           text-align: center;
                           margin-bottom:10px;
-                        //   transform: translateX(25%);
                          >.zx-search {
-                        // display:block;
                         font-size:80px;
-                        // text-align: center;
                     }
                 }
                     

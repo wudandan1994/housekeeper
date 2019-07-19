@@ -111,15 +111,27 @@
                         @cancel="cancelEnd"
                         />
                   </div>
-                   <div class="eara">
+                   <!-- <div class="eara">
+                      <p>请选择消费城市</p>
+                      <div class="last">
+                          
+                          <p> <van-icon  size="20px" name="location"/></p>
+                          <input class="city" readonly  v-model="area" type="text" placeholder="位置">
+                          <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
+                      </div>
+                         <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
+                  </div> -->
+
+                  <div class="eara">
                       <p>请选择消费城市</p>
                       <div class="last">
                           <p> <van-icon  size="20px" name="location"/></p>
                           <input class="city" readonly  v-model="area" type="text" placeholder="位置">
                           <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
-                         <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
+                        <van-area :area-list="areaList" v-show="showFlag" :columns-num="2"   @cancel="onCancel"  @confirm="onConfirm" />
                   </div>
+
                </div>
            </div>
             <div class="make">
@@ -133,6 +145,8 @@
 <script>
 import { axiosPost } from '../../lib/http'
 import { citys } from '../../lib/city.js'
+import { arealist } from '../../lib/arealist.js'
+
 import storage from '@/lib/storage'
 export default {
     data() {
@@ -143,11 +157,13 @@ export default {
            item:"",
            type:"",
            area:"",
+           areaList:arealist,
            startdate:"",
            showFlag:false,
            showStart:false,
            showEnd:false,
            enddate:"",
+         
            columns: [
                 {
                 values: Object.keys(citys),
@@ -194,7 +210,7 @@ export default {
             //补位 当某个字段不是两位数时补0
             fnW(str){
                 var num;
-                str>10?num=str:num="0"+str;
+                str>9?num=str:num="0"+str;
                 return num;
             } ,
           onCancel(){
@@ -212,11 +228,12 @@ export default {
          showEndpicker(){
              this.showEnd=true
          },
-         onConfirm(value){
-            this.area=value.join("-")
-            if(this.area=='北京市-'){
-                this.area='北京市-北京市'
-            }
+         onConfirm(e){
+             if(e[0].name=="北京市"){
+                 this.area="北京市-北京市"
+             } else {
+                 this.area=e[0].name+'-'+e[1].name
+             }
             this.showFlag=false
          },
          showPick(){

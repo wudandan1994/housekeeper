@@ -4,13 +4,13 @@
             <div v-for="(item,index) in options" :key="index" class="title" :class="item.id == '0' ? 'end-center' : 'start-center'">
                 <div class="check" :class="item.checked ? 'checked' : ''" @click="changeChecked(item)">{{item.title}}</div>
             </div>
-            <div class="date" @click="handleCheckDate"><van-icon name="calender-o" size="22px" color="#666"/></div>
+            <div class="date" @click="handleCheckDate"><van-icon name="calender-o" size="32px" color="#666"/></div>
         </div>
         <transition name="van-fade">
             <div class="datePicker_container center" v-if="showDate" v-on:click.self="showDate = false">
                 <div class="datePicker">
-                    <div class="title start-center">请选择统计时间：{{start}}-{{end}}</div>
-                    <Calendar @choseDay="clickDay" @changeMonth="changeDate" @isToday="clickToday"></Calendar>
+                    <div class="title start-center">请选择统计时间：{{date[0]}}-{{date[1]}}</div>
+                    <Calendar @choseDay="clickDay" @changeMonth="changeDate"></Calendar>
                 </div>
             </div>
         </transition>
@@ -25,6 +25,7 @@ export default {
             start: '',
             end: '',
             watch: '0',
+            date: [],
         }
     },
     components: {
@@ -41,20 +42,26 @@ export default {
             // console.log('传递参数',obj);
             this.$emit('changeChecked',obj);
         },
-        clickDay(data) {
-            if((this.watch)%2 == '0'){
-                this.start = data
-            }else{
-                this.end = data;
+        clickDay(date) {
+            (this.date).push(date);
+            this.date = (this.date).slice(-2);
+            console.log('所选择的时间',this.date);
+            if((this.watch)%2 != '0'){
                 setTimeout(() =>{
                     this.showDate = false;
+                    this.date = [];
                 },800);
             }
             this.watch = parseInt(this.watch + 1);
-            if(this.end != ""){
+            // 时间排序
+            var newArray = (this.date).sort((a,b) =>{
+                return Date.parse(a) - Date.parse(b);
+            });
+            this.date = newArray;
+            if(newArray.length == '2'){
                 this.$emit('changeTime',{
-                    starttime: this.start,
-                    endtime: this.end,
+                    startdate: newArray[0],
+                    enddate: newArray[1],
                 })
             }
         },
@@ -109,7 +116,7 @@ export default {
             }
             .date{
                 position: absolute;
-                right: 20px;
+                right: 40px;
                 z-index: 2;
             }
         }
