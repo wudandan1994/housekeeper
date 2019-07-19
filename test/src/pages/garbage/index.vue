@@ -1234,12 +1234,12 @@ export default {
             this.$router.go(-1);
         },
         handleChecked(obj){
-            console.log(obj);
+            // console.log(obj);
             this.active = obj;
         },
         handleSearch(){
             this.show = false;
-            console.log('搜索结果',garbage.filter(item => (item.name).indexOf(this.value) > -1));
+            // console.log('搜索结果',garbage.filter(item => (item.name).indexOf(this.value) > -1));
         },
         handleShow(){
             this.show = false;

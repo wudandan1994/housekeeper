@@ -1,6 +1,21 @@
 
 <template>
     <div :class="showAaside == true ? 'menuanimate' : ''" id="home-component" @swipedown="swipe(x)" >
+        <div class="ads">
+           <div class="tipsone">
+              <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
+              <div class="cres">
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/yong.png" /> </span>
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/fu.png" /> </span>
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/wu.png" /> </span>
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/ping.png" /> </span>
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/tai.png" /> </span>
+
+              </div>
+           </div>
+           <div class="tiptwo"></div>
+        </div>
         <header>
             <div>
                 <div class="menu" @click="isShow">
@@ -13,6 +28,7 @@
             <span class="icon"><img src="http://pay.91dianji.com.cn/top_icon.png" alt=""></span>
             <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
         </header>
+        
         <div class="container">
             <!-- 轮播图模块 -->
             <div class="swipe">
@@ -67,7 +83,9 @@
                         </div>
                     </li>
                     <li @click="handleIsAuth('/home/collect',false,'')">
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /><van-icon name="new" color="red" class="hot new"  size="26px" /></span>
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
+                        <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
+                        </span>
                         <div class="channel">
                             <h3>在线收款</h3>
                             <p>快捷支付</p>
@@ -572,8 +590,35 @@ export default {
    #home-component {
         width: 100vw;
         padding-top: 86px;
-        
-       
+         overflow-y: scroll;
+         position: relative;
+         top:400px;
+         left:0;
+         .ads {
+             position: fixed;
+             top:10px;
+             left:0;
+             box-sizing: border-box;
+             .tipsone {
+                //  text-align: center;
+                 .title {
+                     display: flex;
+                     align-items: center;
+                      box-sizing: border-box;
+                     margin-left:260px;
+                     >span {
+                         font-size: 34px;
+                         font-weight: bold;
+                     }
+                 }
+                 .cres {
+                     margin-left:50px;
+                     border-bottom: 1px dotted #000 !important;
+                     padding-bottom: 10px;
+                      box-sizing: border-box;
+                 }
+             }
+         }
         header {
                 width: 100%;
                 height:86px;
@@ -583,8 +628,8 @@ export default {
                 color:white;
                 display:flex;
                 justify-content: space-between;
-                position: fixed;
-                top: 0;
+                position: absolute;
+                top: 0px;
                 left: 0;
                 z-index:999;
                 align-items: center;
