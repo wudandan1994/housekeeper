@@ -198,7 +198,7 @@
                                     </div>
                                     <div class="middle">
                                         <div class="m-left">
-                                            <p>{{item.bankNick}}</p>
+                                            <p>{{item.bankname}}</p>
                                             <!-- <p>进行中</p> -->
                                         </div>
                                         <div class="m-right">

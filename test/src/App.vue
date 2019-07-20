@@ -2,14 +2,14 @@
   <div id="app">
     
     <router-view/>
-   <coverads name="fade"></coverads>
+   <!-- <coverads name="fade"></coverads> -->
   </div>
 </template>
 
 <script>
 import {axiosPost,axiosGet} from '@/lib/http'
 import storage from '@/lib/storage'
-import coverads from '@/components/coverads.vue'
+// import coverads from '@/components/coverads.vue'
 
 
 export default {
@@ -26,9 +26,9 @@ export default {
       photo: '',
     }
   },
-  components: {
-    coverads,
-  },
+  // components: {
+  //   coverads,
+  // },
   methods:{
      // 微信授权
     handleOauth(){
@@ -155,7 +155,7 @@ export default {
   created(){
     if(this.$utils.getUrlKey('promotioncode') != "" && this.$utils.getUrlKey('code') === null){
       storage.set('promotioncode',this.$utils.getUrlKey('promotioncode'));
-      console.log('链接进入推荐码',this.$utils.getUrlKey('promotioncode'));
+      // console.log('链接进入推荐码',this.$utils.getUrlKey('promotioncode'));
     }
     // 首先判断是否存储了openid
     if(storage.get('openid') != '' && storage.get('openid') !== null){

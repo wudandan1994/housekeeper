@@ -1,7 +1,7 @@
 
 <template>
     <div :class="showAaside == true ? 'menuanimate' : ''" id="home-component" @swipedown="swipe(x)" >
-        <div class="ads">
+        <!-- <div class="ads">
            <div class="tipsone">
               <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
               <div class="cres">
@@ -15,7 +15,7 @@
               </div>
            </div>
            <div class="tiptwo"></div>
-        </div>
+        </div> -->
         <header>
             <div>
                 <div class="menu" @click="isShow">
@@ -596,7 +596,8 @@ export default {
         padding-top: 86px;
          overflow-y: scroll;
          position: relative;
-         top:400px;
+        //  top:400px;
+        top:0px;
          left:0;
          .ads {
              position: fixed;
@@ -744,7 +745,7 @@ export default {
 
             }
             >.swipe {
-                // height: 270px;
+                height: 270px;
                 .per-img{
                     width: 100vw;
                     height: auto;

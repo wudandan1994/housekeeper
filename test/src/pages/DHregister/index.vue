@@ -2,7 +2,7 @@
     <div id="DHregister">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>绑定信用卡</span>
+            <span>认证</span>
             <span></span>
         </header>
         <div class="container">

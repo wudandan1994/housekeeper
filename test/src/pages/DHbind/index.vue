@@ -2,7 +2,7 @@
     <div id="dhbind">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>绑定信用卡</span>
+            <span>激活</span>
             <span></span>
         </header>
         <div class="container">
@@ -119,18 +119,19 @@ export default {
             }
             axiosPost("dhcreditCard/dhBackVerifyBind",data)
             .then(res=>{
-                if(res.data.success){
-                     storage.set('channel',"3");
-                        this.$router.push({
-                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                            query:{
-                                info:i
-                            }
-                        })
+                // if(res.data.success){
+                //      storage.set('channel',"3");
+                //         this.$router.push({
+                //             path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                //             query:{
+                //                 info:i
+                //             }
+                //         })
                     
-                } else {
-                    this.$toast(res.data.message) 
-                }
+                // } else {
+                //     this.$toast(res.data.message) 
+                // }
+                this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
             })
 
             
@@ -191,9 +192,10 @@ export default {
                        .code {
                            background-color: #4B66AF;
                            color:#fff;
-                           width:150px;
+                           width:160px;
                            text-align: center;
                            margin-left:20px;
+                           border-radius: 26px;
                        }
                        .area {
                            margin-right: 20px;
@@ -203,15 +205,6 @@ export default {
                                font-weight: bold;
                            }
                        }
-                    //    >span {
-                    //        &:nth-of-type(2){
-                    //            padding:0 10px;
-                    //            margin-right:20px;
-                    //            margin-top:8px;
-                    //            line-height: 60px;
-                    //            border-radius: 10px;
-                    //        }
-                    //     }
                        input {
                            border:none;
                            flex: 1;

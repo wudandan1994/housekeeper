@@ -120,8 +120,8 @@ const personalCenterComponent = () =>import('@/pages/personalCenter')
 // import shareComponent from '@/pages/share'
 const shareComponent = () =>import('@/pages/share')
 
-// import DHbindComponent from '@/pages/DHbind' // 第三条还款通道绑卡
-const DHbindComponent = () =>import('@/pages/DHbind')
+// import DHbindComponent from '@/pages/DHbind' // 第三条还款通道绑卡 
+const DHbindComponent = () =>import('@/pages/DHbind')   
 
 // import DHregisterComponent from '@/pages/DHregister' // 第三条还款通道注册
 const DHregisterComponent = () =>import('@/pages/DHregister')
@@ -403,8 +403,8 @@ export default new Router({
     {path:"/home/active",component:activeComponent}, // 大额激活
     {path:"/home/largeCard",component:largeCardComponent},
     {path:"/home/evaluation",component:evaluationComponent}, //卡测评
-    {path:"/home/DHbind",component:DHbindComponent}, //第三条还款通道
-    {path:"/home/DHregister",component:DHregisterComponent}, //第三条还款通道
+    {path:"/home/DHbind",component:DHbindComponent}, //第三条还款通道  
+    {path:"/home/DHregister",component:DHregisterComponent}, //第三条还款通道 注册
 
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},

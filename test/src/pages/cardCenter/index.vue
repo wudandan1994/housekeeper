@@ -168,6 +168,8 @@ export default {
             }
         }
         >.container {
+            width:100%;
+            overflow-x: hidden;
             background-color: #ECF0F3;
             padding-top:96px;
             padding-bottom: 50px;
