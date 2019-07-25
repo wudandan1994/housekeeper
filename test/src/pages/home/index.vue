@@ -72,7 +72,18 @@
             <!-- 信用卡模块 -->
             <div class="credit">
                 <ul>
-                    <li @click="handleIsAuth('/home/cardCenter',false,'')">
+                    <!-- <li @click="handleIsAuth('/home/cardCenter',false,'')">
+                        <span class="handle">
+                            <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
+                        </span>
+                        <div class="channel">
+                            <h3>信用卡办理</h3>
+                            <p>佣金当天结算</p>
+                            <span>官方渠道</span>
+                        </div>
+                    </li> -->
+
+                     <li @click="applycard('https://creditcard.feierlaiedu.com/?token=5b842e25964f78313326b53f9e331c54','办卡中心')">
                         <span class="handle">
                             <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                         </span>
@@ -82,6 +93,9 @@
                             <span>官方渠道</span>
                         </div>
                     </li>
+
+
+
                     <li @click="handleIsAuth('/home/collect',false,'')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
                         <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
@@ -176,7 +190,7 @@
                         <div class="center">在线收款</div>
                     </div>
 
-                    <div @click="handleIsAuth('/home/cardCenter',false,'')" class="secret">
+                    <div @click="applycard('https://creditcard.feierlaiedu.com/?token=5b842e25964f78313326b53f9e331c54','办卡中心')" class="secret">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></div>
                         <div class="center">信用卡办理</div>
                     </div>
@@ -258,15 +272,14 @@
         
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
          <!-- 绑定手机模块 -->
-        <bindMobile></bindMobile>
-        <!-- <loading :componentload="componentload"></loading> -->
+        <!-- <bindMobile></bindMobile> -->
         <notice></notice>
     </div>
 </template>
 
 <script>
 import footerMenu from '@/components/footer'
-import bindMobile from '@/components/bindMobile'
+// import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -274,7 +287,7 @@ import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-      bindMobile,
+    //   bindMobile,
       notice
   },
      data() {
@@ -336,26 +349,46 @@ export default {
         isShow() {
             this.showAaside=true
         },
-        changeLink(url,title){
-            //   this.$router.push({
-            //          path:"/loan/form/myOrder",
-            //          query:{
-            //              info:url,
-            //              title:title
-            //          }
-            //      })
+        applycard(url,title){
+
+            let data ={
+                type:'1'
+            }
+            // ai雷达
+             axiosPost("/behavior/insertBehavior",data)
+            .then(res=>{
+                })
+
+             if(this.iscertification == '0' ){
+                //未认证
+                this.$toast('请先实名认证');
+                    
+            }else{
+               
+               this.changeLink(url,title)
+            }
             
-             if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                 this.$router.push({
+        },
+        changeLink(url,title){
+              this.$router.push({
                      path:"/loan/form/myOrder",
                      query:{
                          info:url,
                          title:title
                      }
                  })
-             } else {
-                 location.href=url
-             }
+            
+            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
+            //      this.$router.push({
+            //          path:"/loan/form/myOrder",
+            //          query:{
+            //              info:url,
+            //              title:title
+            //          }
+            //      })
+            //  } else {
+            //      location.href=url
+            //  }
         },
         handleAuth(){
              if(this.iscertification == '2'){
@@ -579,12 +612,12 @@ export default {
                     }
 
         this.handleSearchAuths()
-        //  this.automatic() //自动登录
-        //  this.getUpdate() //获取版本
+         this.automatic() //自动登录
+         this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        // this.update() 
+        this.update() 
        
     }
 }

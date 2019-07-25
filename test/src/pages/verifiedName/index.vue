@@ -40,7 +40,7 @@
                     </van-uploader>
                 </div>
             </div> -->
-           <div class="submit center" @click="submit" v-if="status == '未认证'"><van-button class="van-button" type="default">提交</van-button></div>
+           <div class="submit center" @click="submit" v-if="status  != '已认证'"><van-button class="van-button" type="default">提交</van-button></div>
            <div class="submit center" v-else><van-button class="van-button" disabled   type="info">已提交</van-button></div>
            <!-- <div class="submit center" @click="submit" ><van-button class="van-button" type="default">提交认证</van-button></div> -->
 
@@ -181,10 +181,8 @@ export default {
 
                     this.idcardnumber=this.hidden(this.idcardnumber,4,4)
 
-
-
-                    this.cardback = 'thum_' + res.data.data.idcardback;
-                    this.cardfront = 'thum_' + res.data.data.idcardfront;
+                    // this.cardback = 'thum_' + res.data.data.idcardback;
+                    // this.cardfront = 'thum_' + res.data.data.idcardfront;
                    if(res.data.data.status == '1'){
                         this.status = '审核中'
                     }else{

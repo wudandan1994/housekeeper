@@ -135,12 +135,12 @@
             <div class="per-title row">
                 <div class="goods-title start-center">付款方式</div>
                 <div class="goods-detail row">
-                    <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
+                    <!-- <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-wechatpay"></use>
                         </svg>
                         微信支付
-                    </div>
+                    </div> -->
                     <div class="paytypes center" :class="{'alipay': paytype == 'alipay'}" @click="handlePayType('alipay')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-alipay"></use>
@@ -243,7 +243,7 @@ export default {
         // 查看明细
         handleSeeDetail(obj){
             this.$router.push({
-                path: '/middle',
+                path: '/vipRate',
                 query: {
                     level: obj
                 }
@@ -292,6 +292,7 @@ export default {
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
                     this.orderid = res.data.data.orderid;
+                    console.log(this.orderid,'orderid')
                     // 请求上级推荐人
                     let url = '/customer/getCustomerUP';
                     let params = {
@@ -321,15 +322,23 @@ export default {
         // 立即购买
         handleBuyNow(){
             // 首先判断选择哪一种支付方式
+
+                console.log(this.orderid,'orderid')
+                console.log(this.$store.state.wechat.openid,'openid')
+                console.log('33333')
+
+
+
             if(this.paytype == 'alipay'){
                 // 支付宝支付
                 var ua = navigator.userAgent.toLowerCase();
                 if(ua.match(/MicroMessenger/i)=="micromessenger") {
-                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
+
+                    window.location.href="http://test.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
                          
                 } else {
                     // 非微信浏览器
-                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
+                    window.location.href="http://test.91dianji.com.cn/pay.htm?orderid="+ this.orderid
                 } 
             }else{
                 var  params = {

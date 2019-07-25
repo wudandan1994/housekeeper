@@ -30,7 +30,10 @@
         </div>
         <div class="business">
             <ul>
-                <router-link tag="li" :to="{path: '/share/poster',query:{max: '54',min: '1'}}">
+                <!-- 加载图片太多，完整海报分布 -->
+
+                
+                <!-- <router-link tag="li" :to="{path: '/share/poster',query:{max: '54',min: '1'}}">
                     <p><van-icon name="http://bc.91dianji.com.cn/405.png" /></p>
                     <p>推广海报图</p>
                     <p>分享二维码、快速增粉</p>
@@ -44,7 +47,27 @@
                     <p><van-icon name="http://bc.91dianji.com.cn/414.png" /></p>
                     <p>信用卡推广图</p>
                     <p>信用卡推广图.一键锁粉</p>
+                </router-link> -->
+
+
+
+
+                 <router-link tag="li" :to="{path: '/share/poster',query:{max: '10',min: '1'}}">
+                    <p><van-icon name="http://bc.91dianji.com.cn/405.png" /></p>
+                    <p>推广海报图</p>
+                    <p>分享二维码、快速增粉</p>
                 </router-link>
+                 <router-link tag="li" :to="{path: '/share/poster',query:{max: '112',min: '100'}}">
+                    <p><van-icon name="http://bc.91dianji.com.cn/413.png" /></p>
+                    <p>推广素材图</p>
+                    <p>各种视频+图片</p>
+                </router-link>
+                <router-link tag="li" :to="{path: '/share/poster',query:{max: '208',min: '200'}}">
+                    <p><van-icon name="http://bc.91dianji.com.cn/414.png" /></p>
+                    <p>信用卡推广图</p>
+                    <p>信用卡推广图.一键锁粉</p>
+                </router-link>
+
                 <li @click="handleExpect">
                     <p><van-icon name="http://bc.91dianji.com.cn/404.png" /></p>
                     <p>新闻资讯</p>
@@ -152,14 +175,14 @@ export default {
         handleAIRadar(){
             axiosPost('/behavior/getIndexRecord').then(res =>{
                 if(res.data.success){
-                    console.log('AI请求成功',res);
+                    // console.log('AI请求成功',res);
                     this.browseCount = res.data.data.browseCount;
                     this.teamCount = res.data.data.teamCount;
                 }else{
-                   console.log('AI请求失败',res); 
+                //    console.log('AI请求失败',res); 
                 }
             }).catch(res =>{
-                console.log('AI请求失败',res); 
+                // console.log('AI请求失败',res); 
             })
         },
         // 路由

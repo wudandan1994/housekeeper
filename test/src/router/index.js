@@ -319,6 +319,9 @@ const video = () =>import('@/pages/home/video')
 // import radar from '@/pages/AIRadar/index'
 const radar = () =>import('@/pages/AIRadar/index')
 
+const vipRate = () =>import('@/pages/vip/vipRate')
+
+
 // import nextLevel from '@/pages/AIRadar/nextdetail'
 const nextLevel = () =>import('@/pages/AIRadar/nextdetail')
 
@@ -475,6 +478,8 @@ export default new Router({
     {path: '/url',component: url},
     {path: '/cardManager',component: cardManager},
     {path: '/help',component: help},
+    {path: '/vipRate',component: vipRate},
+
     {path: '/Extension',component: Extension},
     {path: '/video',component: video},
     {path: '/radar',component: radar},
