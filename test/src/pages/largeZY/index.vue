@@ -102,14 +102,13 @@ export default {
 
                 axiosPost("/zypay/sendSms",data)
                 .then(res=>{
-                    // console.log(res,'result') 
                     setTimeout(()=>{
                         if(!res.data.success){
                               this.componentload=false
                             this.$toast(res.data.message)
                             
                         } else {
-                            let responce=res.data.data
+                             let responce=res.data.data
                            responce=JSON.parse(responce)
 
                             this.$router.push({
@@ -117,10 +116,13 @@ export default {
                             query:{
                                 info: this.info,
                                 bizOrderNumber:responce.data.bizOrderNumber,
-                            }
-                         })
-
+                             }
+                          })
                         }
+                      
+                           
+
+                       
                     },1500)
                   
                 })
@@ -136,7 +138,7 @@ export default {
         this.accountNumber=this.info.cardNo
         this.tel=this.info.phone
         this.cvv2=this.info.cvv2
-        this.expired=this.info.month+this.info.year
+        this.expired=this.info.year+this.info.month
 
     }
 }

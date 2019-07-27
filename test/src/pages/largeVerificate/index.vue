@@ -111,35 +111,24 @@ export default {
                  this.componentload=true
                 axiosPost("/zypay/checkSms",data)
                 .then(res=>{
-                    console.log(res,'result') 
-                     
                       let responce=res.data.data
-                     responce=JSON.parse(responce)
-                    console.log(responce,'responce')
-                    console.log(responce.data.isSign,'isSign')
-
-                    setTimeout(()=>{
+                      responce=JSON.parse(responce)
+                     setTimeout(()=>{
                         if(responce.data.isSign=='t'){
-                        this.$toast(responce.data.message)
+                        this.$toast(responce.message)
                          storage.set('channel',"2");
                         this.$router.push({
                             path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
                                         query:{
                                             info:this.info
                                         }
-                        })
-                      } else {
-                          this.componentload=false
-                          this.$toast(responce.data.message)
-                      }
+                                })
+                            } else {
+                                this.componentload=false
+                                this.$toast(responce.message)
+                            }
 
-                    },1000)
-
-                    
-
-
-
-
+                      },1000)
                 })
                 .catch(err=>{
                 })
@@ -153,7 +142,7 @@ export default {
         this.accountNumber=this.info.cardNo
         this.tel=this.info.phone
         this.cvv2=this.info.cvv2
-        this.expired=this.info.month+this.info.year
+        this.expired=this.info.year+this.info.month
         this.bizOrderNumber=this.$route.query.bizOrderNumber
     }
 }
