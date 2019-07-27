@@ -98,12 +98,17 @@ export default {
                     if(res.data.code === "1001"){
                         storage.set('channel',"2");
                         setTimeout(()=>{
-                            this.$router.push({
-                                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                                query:{
-                                    info:this.info
-                                 }
+                            // this.$router.push({
+                            //     path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                            //     query:{
+                            //         info:this.info
+                            //      }
+                            //  })
+
+                         this.$router.push({
+                                path:"/home/creditHousekeeper/aisleHousekeeper",
                              })
+
                          },1000)
                     }else{
                         this.$toast({

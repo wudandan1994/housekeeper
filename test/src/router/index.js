@@ -370,9 +370,15 @@ const RechargeAllList = () =>import('@/pages/Oilcard/RechargeAllList')
 // 下级数据列表，下级浏览数，点击联系方式
 const nextList = () =>import('@/pages/AIRadar/nextList')
 // 下级数据列表，新增客户，我的团队
-const nextOtherList = () =>import('@/pages/AIRadar/nextOtherList')
+const nextOtherList = () =>import('@/pages/AIRadar/nextOtherList')  
 // 测试页，测试完请删除
-const testpage = () =>import('@/pages/AIRadar/test')
+const testpage = () =>import('@/pages/AIRadar/test')  
+
+
+import largeZYComponent from '@/pages/largeZY'  //哲杨大额
+import largeVerificateComponent from '@/pages/largeVerificate'  // 哲杨大额短信验证
+
+
 export default new Router({
   // mode:"hash",
   routes: [
@@ -408,6 +414,8 @@ export default new Router({
     {path:"/home/evaluation",component:evaluationComponent}, //卡测评
     {path:"/home/DHbind",component:DHbindComponent}, //第三条还款通道  
     {path:"/home/DHregister",component:DHregisterComponent}, //第三条还款通道 注册
+    {path:"/home/largeZY",component:largeZYComponent}, //哲杨发送短信  
+    {path:"/home/largeVerificate",component:largeVerificateComponent}, //哲杨短信验证
 
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},

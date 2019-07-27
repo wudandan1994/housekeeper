@@ -135,7 +135,7 @@
 import { axiosPost,axiosGet }  from '../../lib/http'   
 import { bankCardAttribution } from '../../lib/bankName'
 import loading from '@/components/loading'
-import storage from '@/lib/storage'
+import storage from '@/lib/storage' 
 export default {
      components:{
       loading
@@ -261,15 +261,44 @@ export default {
                         })
 
                     }  else {
-                        storage.set('channel',"2");
-                        this.$router.push({
-                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                            query:{
-                                info:i
+
+                            // 查询是否签约
+                            let data={
+                                accountNumber:i.cardNo
                             }
-                        })
+                             axiosPost("/zypay/getZYPayExist",data)
+                             .then(res=>{
+                                 if(!res.data.success && res.data.code=='100'){
+                                     this.$router.push({
+                                         path:"/home/largeZY",
+                                         query:{
+                                             info:i
+                                         }
+                                     })
+                                 } else {
+                                    storage.set('channel',"2");
+                                    this.$router.push({
+                                        path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                        query:{
+                                            info:i
+                                        }
+                                     })
+                                     
+                                 }
+                             })
+
+
+
+
+
+
+
+
+
+
+                       
                     }
-                    } 
+                 } 
              })
              .catch(err=>{
                
