@@ -1,6 +1,21 @@
 
 <template>
     <div :class="showAaside == true ? 'menuanimate' : ''" id="home-component" @swipedown="swipe(x)" >
+        <!-- <div class="ads">
+           <div class="tipsone">
+              <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
+              <div class="cres">
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/yong.png" /> </span>
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/fu.png" /> </span>
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/wu.png" /> </span>
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/ping.png" /> </span>
+                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/tai.png" /> </span>
+
+              </div>
+           </div>
+           <div class="tiptwo"></div>
+        </div> -->
         <header>
             <div>
                 <div class="menu" @click="isShow">
@@ -13,6 +28,7 @@
             <span class="icon"><img src="http://pay.91dianji.com.cn/top_icon.png" alt=""></span>
             <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
         </header>
+        
         <div class="container">
             <!-- 轮播图模块 -->
             <div class="swipe">
@@ -56,7 +72,18 @@
             <!-- 信用卡模块 -->
             <div class="credit">
                 <ul>
-                    <li @click="handleIsAuth('/home/cardCenter',false,'')">
+                    <!-- <li @click="handleIsAuth('/home/cardCenter',false,'')">
+                        <span class="handle">
+                            <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
+                        </span>
+                        <div class="channel">
+                            <h3>信用卡办理</h3>
+                            <p>佣金当天结算</p>
+                            <span>官方渠道</span>
+                        </div>
+                    </li> -->
+
+                     <li @click="applycard('https://creditcard.feierlaiedu.com/?token=5b842e25964f78313326b53f9e331c54','办卡中心')">
                         <span class="handle">
                             <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                         </span>
@@ -66,8 +93,13 @@
                             <span>官方渠道</span>
                         </div>
                     </li>
+
+
+
                     <li @click="handleIsAuth('/home/collect',false,'')">
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /><van-icon name="new" color="red" class="hot new"  size="26px" /></span>
+                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
+                        <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
+                        </span>
                         <div class="channel">
                             <h3>在线收款</h3>
                             <p>快捷支付</p>
@@ -158,7 +190,7 @@
                         <div class="center">在线收款</div>
                     </div>
 
-                    <div @click="handleIsAuth('/home/cardCenter',false,'')" class="secret">
+                    <div @click="applycard('https://creditcard.feierlaiedu.com/?token=5b842e25964f78313326b53f9e331c54','办卡中心')" class="secret">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></div>
                         <div class="center">信用卡办理</div>
                     </div>
@@ -240,15 +272,14 @@
         
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
          <!-- 绑定手机模块 -->
-        <bindMobile></bindMobile>
-        <!-- <loading :componentload="componentload"></loading> -->
+        <!-- <bindMobile></bindMobile> -->
         <notice></notice>
     </div>
 </template>
 
 <script>
 import footerMenu from '@/components/footer'
-import bindMobile from '@/components/bindMobile'
+// import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -256,7 +287,7 @@ import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-      bindMobile,
+    //   bindMobile,
       notice
   },
      data() {
@@ -318,26 +349,46 @@ export default {
         isShow() {
             this.showAaside=true
         },
-        changeLink(url,title){
-            //   this.$router.push({
-            //          path:"/loan/form/myOrder",
-            //          query:{
-            //              info:url,
-            //              title:title
-            //          }
-            //      })
+        applycard(url,title){
+
+            let data ={
+                type:'1'
+            }
+            // ai雷达
+             axiosPost("/behavior/insertBehavior",data)
+            .then(res=>{
+                })
+
+             if(this.iscertification == '0' ){
+                //未认证
+                this.$toast('请先实名认证');
+                    
+            }else{
+               
+               this.changeLink(url,title)
+            }
             
-             if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                 this.$router.push({
+        },
+        changeLink(url,title){
+              this.$router.push({
                      path:"/loan/form/myOrder",
                      query:{
                          info:url,
                          title:title
                      }
                  })
-             } else {
-                 location.href=url
-             }
+            
+            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
+            //      this.$router.push({
+            //          path:"/loan/form/myOrder",
+            //          query:{
+            //              info:url,
+            //              title:title
+            //          }
+            //      })
+            //  } else {
+            //      location.href=url
+            //  }
         },
         handleAuth(){
              if(this.iscertification == '2'){
@@ -561,12 +612,12 @@ export default {
                     }
 
         this.handleSearchAuths()
-        //  this.automatic() //自动登录
-        //  this.getUpdate() //获取版本
+         this.automatic() //自动登录
+         this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        // this.update() 
+        this.update() 
        
     }
 }
@@ -576,8 +627,36 @@ export default {
    #home-component {
         width: 100vw;
         padding-top: 86px;
-        
-       
+         overflow-y: scroll;
+         position: relative;
+        //  top:400px;
+        top:0px;
+         left:0;
+         .ads {
+             position: fixed;
+             top:10px;
+             left:0;
+             box-sizing: border-box;
+             .tipsone {
+                //  text-align: center;
+                 .title {
+                     display: flex;
+                     align-items: center;
+                      box-sizing: border-box;
+                     margin-left:260px;
+                     >span {
+                         font-size: 34px;
+                         font-weight: bold;
+                     }
+                 }
+                 .cres {
+                     margin-left:50px;
+                     border-bottom: 1px dotted #000 !important;
+                     padding-bottom: 10px;
+                      box-sizing: border-box;
+                 }
+             }
+         }
         header {
                 width: 100%;
                 height:86px;
@@ -587,8 +666,8 @@ export default {
                 color:white;
                 display:flex;
                 justify-content: space-between;
-                position: fixed;
-                top: 0;
+                position: absolute;
+                top: 0px;
                 left: 0;
                 z-index:999;
                 align-items: center;
@@ -699,7 +778,7 @@ export default {
 
             }
             >.swipe {
-                // height: 270px;
+                height: 270px;
                 .per-img{
                     width: 100vw;
                     height: auto;

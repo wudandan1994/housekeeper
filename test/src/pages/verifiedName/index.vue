@@ -40,7 +40,7 @@
                     </van-uploader>
                 </div>
             </div> -->
-           <div class="submit center" @click="submit" v-if="status == '未认证'"><van-button class="van-button" type="default">提交</van-button></div>
+           <div class="submit center" @click="submit" v-if="status  != '已认证'"><van-button class="van-button" type="default">提交</van-button></div>
            <div class="submit center" v-else><van-button class="van-button" disabled   type="info">已提交</van-button></div>
            <!-- <div class="submit center" @click="submit" ><van-button class="van-button" type="default">提交认证</van-button></div> -->
 
@@ -68,8 +68,8 @@ export default {
             idcardnumber:"",
             picshowList: [],
             front: '',
-            cardfront: 'idcardfront.jpg',
-            cardback: 'idcardback.jpg',
+            // cardfront: 'idcardfront.jpg',
+            // cardback: 'idcardback.jpg',
             cardfrontup: '',
             cardbackup: '',
             back: '',
@@ -80,47 +80,83 @@ export default {
     },
     methods:{
        
+        // submit(){
+        //     this.componentload = true;
+        //     let url = '/customer/identification';
+        //     let params = {
+        //         // openid: this.$store.state.wechat.openid,
+        //         // idcardnumber: this.idcardnumber,
+        //         // name: this.name,
+        //         // idcardfront: this.cardfrontup,
+        //         // idcardback: this.cardbackup,
+        //         // cid: storage.get('cid')
+        //     };
+        //     axiosPost(url,params).then(res =>{
+        //         if(res.data.success){
+        //             this.loading = false;
+        //             this.$toast('提交成功');
+        //             this.$store.commit('iscertification',res.data.data.status);
+        //             this.name = res.data.data.name;
+        //              if(this.name.length==2){
+        //                 this.name=this.hidden(this.name,1,0)
+        //             } else {
+        //                 this.name=this.hidden(this.name,1,1)
+        //             }
+        //             this.idcardnumber = res.data.data.idcardnumber;
+        //              this.idcardnumber=this.hidden(this.idcardnumber,4,4)
+        //             this.$router.push({path:'/home'})
+        //              setTimeout(()=>{
+        //                 this.componentload = false;
+        //             },500)
+        //         }else{
+        //             this.loading = false;
+        //             this.$toast(res.data.message);
+        //             setTimeout(()=>{
+        //                 this.componentload = false;
+        //             },500)
+        //         }
+        //     }).catch(res =>{
+        //          setTimeout(()=>{
+        //             this.componentload = false;
+        //         },500)
+        //         this.$toast('认证失败');
+        //     })
+        // },
         submit(){
-            this.componentload = true;
-            let url = '/customer/identification';
-            let params = {
-                // openid: this.$store.state.wechat.openid,
-                // idcardnumber: this.idcardnumber,
-                // name: this.name,
-                // idcardfront: this.cardfrontup,
-                // idcardback: this.cardbackup,
-                // cid: storage.get('cid')
-            };
-            axiosPost(url,params).then(res =>{
-                if(res.data.success){
-                    this.loading = false;
+            if(this.name.trim().length==0 || this.idcardnumber.trim().length==0){
+                this.$toast("请将信息填写完整")
+                return
+            }
+            let data={
+                idcardnumber:this.idcardnumber,
+                name:this.name
+            }
+             axiosPost("/customer/insertIdentification",data)
+             .then(res=>{
+                 if(res.data.success){
+                     this.loading = false;
                     this.$toast('提交成功');
-                    this.$store.commit('iscertification',res.data.data.status);
-                    this.name = res.data.data.name;
-                     if(this.name.length==2){
-                        this.name=this.hidden(this.name,1,0)
-                    } else {
-                        this.name=this.hidden(this.name,1,1)
-                    }
-                    this.idcardnumber = res.data.data.idcardnumber;
-                     this.idcardnumber=this.hidden(this.idcardnumber,4,4)
-                    this.$router.push({path:'/home'})
+                    this.$store.commit('iscertification','2');
+                    this.$router.push({path:'/personalCenter'})
                      setTimeout(()=>{
                         this.componentload = false;
                     },500)
-                }else{
-                    this.loading = false;
+                 } else {
+                     this.loading = false;
                     this.$toast(res.data.message);
                     setTimeout(()=>{
                         this.componentload = false;
-                    },500)
-                }
-            }).catch(res =>{
+                    },500) 
+                 }
+             })
+             .catch(res=>{
                  setTimeout(()=>{
                     this.componentload = false;
                 },500)
                 this.$toast('认证失败');
-            })
+                this.status = '信息不符,请重新认证';
+             })
+
         },
         handleReturnHome() {
             this.$router.go(-1);
@@ -145,10 +181,8 @@ export default {
 
                     this.idcardnumber=this.hidden(this.idcardnumber,4,4)
 
-
-
-                    this.cardback = 'thum_' + res.data.data.idcardback;
-                    this.cardfront = 'thum_' + res.data.data.idcardfront;
+                    // this.cardback = 'thum_' + res.data.data.idcardback;
+                    // this.cardfront = 'thum_' + res.data.data.idcardfront;
                    if(res.data.data.status == '1'){
                         this.status = '审核中'
                     }else{

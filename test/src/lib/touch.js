@@ -1,3 +1,5 @@
+import Vue from 'vue'
+   
    function vueTouch(el,binding,type){
     var _this=this;
     this.obj=el;

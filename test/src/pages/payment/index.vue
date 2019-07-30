@@ -242,26 +242,26 @@ export default {
                 let url=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
                         setTimeout(() =>{
                             this.componentload = false;
-                               if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                                this.$router.push({
-                                    path:"/loan/form/myOrder",
-                                    query:{
-                                        info:url,
-                                        title:"支付"
-                                    }
-                                })
-                                } else {
-                                    this.componentload=false
-                                    location.href=url
-                                }
-
-                            //  this.$router.push({
-                            // path:"/loan/form/myOrder",
-                            //     query:{
-                            //         info:url,
-                            //         title:"支付"
+                            //    if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                            //     this.$router.push({
+                            //         path:"/loan/form/myOrder",
+                            //         query:{
+                            //             info:url,
+                            //             title:"支付"
+                            //         }
+                            //     })
+                            //     } else {
+                            //         this.componentload=false
+                            //         location.href=url
                             //     }
-                            // })
+
+                             this.$router.push({
+                              path:"/loan/form/myOrder",
+                                query:{
+                                    info:url,
+                                    title:"支付"
+                                }
+                            })
                             
                         },2000)
                        

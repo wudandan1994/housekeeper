@@ -21,6 +21,7 @@
                                 <span v-if="item.type == 4">商户收款收益</span>
                                 <span>+{{item.amount}}</span>
                             </div>
+                           
                         </div>
                     </div> 
                 </van-tab>

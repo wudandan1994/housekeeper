@@ -120,8 +120,8 @@ const personalCenterComponent = () =>import('@/pages/personalCenter')
 // import shareComponent from '@/pages/share'
 const shareComponent = () =>import('@/pages/share')
 
-// import DHbindComponent from '@/pages/DHbind' // 第三条还款通道绑卡
-const DHbindComponent = () =>import('@/pages/DHbind')
+// import DHbindComponent from '@/pages/DHbind' // 第三条还款通道绑卡 
+const DHbindComponent = () =>import('@/pages/DHbind')   
 
 // import DHregisterComponent from '@/pages/DHregister' // 第三条还款通道注册
 const DHregisterComponent = () =>import('@/pages/DHregister')
@@ -319,6 +319,9 @@ const video = () =>import('@/pages/home/video')
 // import radar from '@/pages/AIRadar/index'
 const radar = () =>import('@/pages/AIRadar/index')
 
+const vipRate = () =>import('@/pages/vip/vipRate')
+
+
 // import nextLevel from '@/pages/AIRadar/nextdetail'
 const nextLevel = () =>import('@/pages/AIRadar/nextdetail')
 
@@ -367,9 +370,15 @@ const RechargeAllList = () =>import('@/pages/Oilcard/RechargeAllList')
 // 下级数据列表，下级浏览数，点击联系方式
 const nextList = () =>import('@/pages/AIRadar/nextList')
 // 下级数据列表，新增客户，我的团队
-const nextOtherList = () =>import('@/pages/AIRadar/nextOtherList')
+const nextOtherList = () =>import('@/pages/AIRadar/nextOtherList')  
 // 测试页，测试完请删除
-const testpage = () =>import('@/pages/AIRadar/test')
+const testpage = () =>import('@/pages/AIRadar/test')  
+
+
+import largeZYComponent from '@/pages/largeZY'  //哲杨大额
+import largeVerificateComponent from '@/pages/largeVerificate'  // 哲杨大额短信验证
+
+
 export default new Router({
   // mode:"hash",
   routes: [
@@ -403,8 +412,10 @@ export default new Router({
     {path:"/home/active",component:activeComponent}, // 大额激活
     {path:"/home/largeCard",component:largeCardComponent},
     {path:"/home/evaluation",component:evaluationComponent}, //卡测评
-    {path:"/home/DHbind",component:DHbindComponent}, //第三条还款通道
-    {path:"/home/DHregister",component:DHregisterComponent}, //第三条还款通道
+    {path:"/home/DHbind",component:DHbindComponent}, //第三条还款通道  
+    {path:"/home/DHregister",component:DHregisterComponent}, //第三条还款通道 注册
+    {path:"/home/largeZY",component:largeZYComponent}, //哲杨发送短信  
+    {path:"/home/largeVerificate",component:largeVerificateComponent}, //哲杨短信验证
 
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},
@@ -475,6 +486,8 @@ export default new Router({
     {path: '/url',component: url},
     {path: '/cardManager',component: cardManager},
     {path: '/help',component: help},
+    {path: '/vipRate',component: vipRate},
+
     {path: '/Extension',component: Extension},
     {path: '/video',component: video},
     {path: '/radar',component: radar},

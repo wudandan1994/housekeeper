@@ -14,21 +14,8 @@
                               <p >{{item.bankNick}}</p>
                                <p >{{item.payerName}}</p>
                               <p>*<span>{{item.cardNo.substr(item.cardNo.length-4)}}</span></p> 
-                              <!-- <p>
-                                  还款状态
-                              </p> -->
+                         
                           </div>
-                          <!-- <div class="now">
-                              <div>
-                                  <p class="botton">未添加</p>
-                              </div>
-                              <div class="pay">
-                                <p class="days">16</p> 
-                                  <div>
-                                    <p class="botton">天后还款日</p> 
-                                  </div>
-                              </div>
-                          </div> -->
                        </div>
                        <div class="bottom">
                            <ul>
@@ -45,8 +32,6 @@
                                    <p>还款日</p>
                                </li>
                                 <li>
-                                   <!-- <p>3天</p>
-                                   <p>还款宽限期</p> -->
                                </li>
                               
                            </ul>
@@ -68,6 +53,31 @@
                       <p>预留金额</p>
                       <input class="input" v-model="amount" type="number" placeholder="预留5%-2000">
                   </div>
+
+
+
+                   <div class="eara">
+                      <p>请选择消费城市</p>
+                      <div class="last">
+                          
+                          <p> <van-icon  size="20px" name="location"/></p>
+                          <input class="city" readonly  v-model="area" type="text" placeholder="位置">
+                          <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
+                      </div>
+                         <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
+                  </div>
+
+
+                   <!-- <p>范围广泛的地区</p>
+                   <div class="eara">
+                      <p>请选择消费城市</p>
+                      <div class="last">
+                          <p> <van-icon  size="20px" name="location"/></p>
+                          <input class="city" readonly  v-model="area" type="text" placeholder="位置">
+                          <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
+                      </div>
+                        <van-area :area-list="areaList" v-show="showFlag" :columns-num="2"   @cancel="onCancel"  @confirm="onConfirm" />
+                  </div> -->
 
 
                   <!-- <div class="eara">
@@ -111,26 +121,9 @@
                         @cancel="cancelEnd"
                         />
                   </div>
-                   <!-- <div class="eara">
-                      <p>请选择消费城市</p>
-                      <div class="last">
-                          
-                          <p> <van-icon  size="20px" name="location"/></p>
-                          <input class="city" readonly  v-model="area" type="text" placeholder="位置">
-                          <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
-                      </div>
-                         <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
-                  </div> -->
+                  
 
-                  <div class="eara">
-                      <p>请选择消费城市</p>
-                      <div class="last">
-                          <p> <van-icon  size="20px" name="location"/></p>
-                          <input class="city" readonly  v-model="area" type="text" placeholder="位置">
-                          <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
-                      </div>
-                        <van-area :area-list="areaList" v-show="showFlag" :columns-num="2"   @cancel="onCancel"  @confirm="onConfirm" />
-                  </div>
+                 
 
                </div>
            </div>
@@ -145,9 +138,9 @@
 <script>
 import { axiosPost } from '../../lib/http'
 import { citys } from '../../lib/city.js'
-import { arealist } from '../../lib/arealist.js'
-
+// import { arealist } from '../../lib/arealist.js'
 import storage from '@/lib/storage'
+
 export default {
     data() {
         return {
@@ -157,7 +150,7 @@ export default {
            item:"",
            type:"",
            area:"",
-           areaList:arealist,
+        //    areaList:arealist,
            startdate:"",
            showFlag:false,
            showStart:false,
@@ -228,12 +221,11 @@ export default {
          showEndpicker(){
              this.showEnd=true
          },
-         onConfirm(e){
-             if(e[0].name=="北京市"){
-                 this.area="北京市-北京市"
-             } else {
-                 this.area=e[0].name+'-'+e[1].name
-             }
+         onConfirm(value){
+             this.area=value.join("-")
+             if(this.area=='北京市-'){
+                this.area='北京市-北京市'
+            }
             this.showFlag=false
          },
          showPick(){

@@ -90,6 +90,10 @@
                        </div>
                        <div v-show="showpass" @click.capture="showcover" :class="num==index?'cover':''">
                            <div  v-show="num==index"  class="pop">
+
+
+                                
+
                                 <div class="small" @click.stop="smallPass(item)">
                                     <van-icon name="http://pay.91dianji.com.cn/putong.png" size="40px"/>
                                     <p>小额通道&nbsp;&nbsp;<span>(还款金额低于20000)</span></p>
@@ -100,11 +104,14 @@
                                         <p>大额通道&nbsp;&nbsp;<span>(还款金额500000左右)</span></p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
                                 </div>
-                                 <!-- <div class="large" @click.stop="thirdPass(item)">
+
+
+                                 <!-- <div class="small" @click.stop="thirdPass(item)">
                                         <van-icon name="http://pay.91dianji.com.cn/dae.png" size="40px"/>
-                                        <p>智能通道</p>
+                                        <p>小额通道&nbsp;&nbsp;<span>(还款金额低于20000)</span></p>
                                         <p> <van-icon name="arrow" size="30px"/></p>
                                 </div> -->
+                                
                              </div>
                        </div>
                        
@@ -128,7 +135,7 @@
 import { axiosPost,axiosGet }  from '../../lib/http'   
 import { bankCardAttribution } from '../../lib/bankName'
 import loading from '@/components/loading'
-import storage from '@/lib/storage'
+import storage from '@/lib/storage' 
 export default {
      components:{
       loading
@@ -254,15 +261,44 @@ export default {
                         })
 
                     }  else {
-                        storage.set('channel',"2");
-                        this.$router.push({
-                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                            query:{
-                                info:i
+
+                            // 查询是否签约
+                            let data={
+                                accountNumber:i.cardNo
                             }
-                        })
+                             axiosPost("/zypay/getZYPayExist",data)
+                             .then(res=>{
+                                 if(!res.data.success && res.data.code=='100'){
+                                     this.$router.push({
+                                         path:"/home/largeZY",
+                                         query:{
+                                             info:i
+                                         }
+                                     })
+                                 } else {
+                                    storage.set('channel',"2");
+                                    this.$router.push({
+                                        path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                        query:{
+                                            info:i
+                                        }
+                                     })
+                                     
+                                 }
+                             })
+
+
+
+
+
+
+
+
+
+
+                       
                     }
-                    } 
+                 } 
              })
              .catch(err=>{
                
@@ -271,13 +307,11 @@ export default {
         // 智能通道是否签约
         thirdPass(i){
             // 查询是否绑卡
-            // console.log(i,'i')
             let num={
                 cardNum:i.cardNo
             }
              axiosPost("/dhcreditCard/getDHBindExist",num)
              .then(res=>{
-                 console.log(res,"是否绑卡")
                  if(res.data.success && res.data.data !=null ) {     
                         storage.set('channel',"3");
                         this.$router.push({
@@ -288,12 +322,10 @@ export default {
                         })
                  } 
                  else { 
-                    //  this.$toast(res.data.message)
                      // 查询是否签约
                      axiosPost("/dhcreditCard/getDHRegisterExist")
                      .then(res=>{
                          if(res.data.success && res.data.data.userId){
-                             console.log(res,'是否签约')
                              this.userId=res.data.data.userId       //   然后去绑卡
                             this.$router.push({
                                 path:"/home/DHbind",
@@ -313,9 +345,7 @@ export default {
                          }
                      })
                  }
-                 
              })
-
         },
 
         repayment(i){

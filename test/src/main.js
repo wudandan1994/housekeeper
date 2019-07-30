@@ -60,7 +60,6 @@ Vue.use(Picker)
 new Vue({
   el: '#app',
   back,
-  // touch,
   router,
   store,
   components: { App },
