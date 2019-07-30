@@ -65,8 +65,8 @@
                       <input class="input" v-model="payment" type="number" placeholder="请输入还款金额">
                   </div>
                    <div class="eara">
-                      <p>当前账户可用余额</p>
-                      <input class="input" v-model="amount" type="number" placeholder="当前账户可用余额(不能低于还款额的5%)">
+                      <p>预留金额</p>
+                      <input class="input" v-model="amount" type="number" placeholder="预留5%-2000">
                   </div>
 
 
