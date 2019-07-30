@@ -51,7 +51,7 @@
                   </div>
                    <div class="eara">
                       <p>预留金额</p>
-                      <input class="input" v-model="amount" type="number" placeholder="预留5%-2000">
+                      <input class="input" v-model="amount" type="number" placeholder="预留5%-2000元">
                   </div>
 
 
