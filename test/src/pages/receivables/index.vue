@@ -1,26 +1,28 @@
 <template>
     <div id="receivables">
         <header>
-            <p @click="goBack"><span><van-icon name="arrow-left" /></span></p>
+            <p @click="goBack"><span><van-icon size="20px" name="arrow-left" /></span></p>
             <p>商户收款</p>
-            <p><span><van-icon name="ellipsis" /></span> </p>
+           <span></span> 
         </header>
         <div class="container">
             <div class="portrait">
-                <p><span><van-icon name="manager" /></span></p>
+                <div class="head">
+                    <img :src="headimg" alt="">
+                </div>
                 <div class="recommend">
                     <p>
-                        <span>可乐—5-2</span>
-                        <span><van-icon name="info-o" />实习</span>
+                        <span>{{nickname}}</span>
+                        <span><van-icon name="info-o" />{{level}}</span>
                     </p>
-                    <p>推荐码：10472992</p>
+                    <p>{{recommendedcode}}</p>
                 </div>
-                <p>(&nbsp;推荐人&nbsp;)</p>
             </div>
+           
             <div class="merchant">
                 <div class="pay">
                     <p>
-                        <span><van-icon name="photo" /></span>
+                        <span><van-icon name="gold-coin" /></span>
                         <span>设置金额</span>
                     </p>
                     <p>
@@ -45,13 +47,13 @@
                             <p>通道费率详细说明</p>
                         </div>
                     </router-link>
-                    <router-link tag="li" to="/home/receivables/transactionQuery">
+                    <li @click="goRecords">
                         <p><span><van-icon name="gold-coin"/></span></p>
                         <div>
                             <p>交易查询</p>
                             <p>交易查询详细记录</p>
                         </div>
-                    </router-link>
+                    </li>
                     <router-link tag="li" to="/home/receivables/passageway">
                         <p><span><van-icon name="gold-coin"/></span></p>
                         <div>
@@ -59,16 +61,16 @@
                             <p>单笔交易限额明细</p>
                         </div>
                     </router-link>
-                    <li @click="changeTips">
+                    <router-link tag="li" to="/home/changeCard">
                         <p><span><van-icon name="gold-coin"/></span></p>
                         <div>
                             <p>储蓄卡管理</p>
-                            <p>添加回款账户储蓄</p>
+                            <p>修改储蓄卡信息</p>
                         </div>
-                    </li>
+                    </router-link>
                     
                 </ul>
-                <div class="tips" v-show="showTips">
+                <!-- <div class="tips" v-show="showTips">
                     <p>温馨提示</p>
                     <div>
                         <p>尊敬的用户，为了确保用户信息的唯一性和安全性，确保账户资金安全，请您先进行银行储蓄卡实名认证，
@@ -80,31 +82,30 @@
                             <router-link tag="span" to="/home/receivables/storage">实名认证</router-link>
                         </p>
                     </div>
-                </div>
+                </div> -->
             </div>
              <div class="statistics">
                  <ul>
-                     <li>
+                     <router-link tag="li" to="/home/news">
                          <span><van-icon name="underway" /></span>
-                         <p><span>操作流程说明</span>&nbsp;&nbsp;<span>(新手必看)</span><span><van-icon name="arrow" /></span> </p>    
-                                     
-                     </li>
-                     <li>
+                         <p><span>操作流程说明</span><span><van-icon name="arrow" /></span></p>   
+                     </router-link>
+                     <!-- <li>
                          <span><van-icon name="underway" /></span>
                          <p><span>实名认证</span> <span><van-icon name="arrow" /></span> </p>                                       
-                     </li>
-                      <li>
+                     </li> -->
+                      <!-- <li>
                          <span><van-icon name="underway" /></span>
                          <p><span>我的分润</span> <span><van-icon name="arrow" /></span> </p>                                       
-                     </li>
-                      <li>
+                     </li> -->
+                      <li @click="goRecords">
                          <span><van-icon name="underway" /></span>
                          <p><span>商户收款明细</span> <span><van-icon name="arrow" /></span> </p>                                       
                      </li>
-                      <li>
+                      <!-- <li>
                          <span><van-icon name="underway" /></span>
                          <p><span>收款统计</span> <span><van-icon name="arrow" /></span> </p>                                       
-                     </li>
+                     </li> -->
                  </ul>
              </div>
             <footer>
@@ -120,36 +121,73 @@ export default {
     data() {
         return {
             showTips:false,
-            personInfo:{}
+            headimg:"",
+            nickname:"",
+            level:"",
+            recommendedcode:"",
+            info:"",
+            chMerCode:""
         }
     },
     methods:{
         goBack () {
             this.$router.push('/home')
         },
-        changeTips() {
-            this.showTips=true
-        },
-        cancle(){
-             this.showTips=false
-        },
+        // changeTips() {
+        //     this.showTips=true
+        // },
+        // cancle(){
+        //      this.showTips=false
+        // },
         showPay(){
              this.showTips=true
         },
         searchInfo(){
-            let that=this
-            axiosPost("/creditCard/getMemberReg")
-        .then(function(res){
-            that.personInfo=res.data.data
-        })
-        .catch(function(err){
+            axiosPost("/customer/getCustomer")
+           .then(function(res){
+               console.log(res,'data')
+                if(res.data.success){
+                    console.log(res.data.data.nickname)
+                }
+              })
+           .catch(function(err){
             
         })
+     },
+     goRecords(){
+          axiosPost("/creditCard/getMemberReg")
+            .then(res=>{
+                if(!res.data.success){
+                    this.$toast({
+                        message:res.data.message
+                    })
+                } else {
+                    this.chMerCode=res.data.data.chMerCode
+                    this.$router.push({
+                        path:"/home/collect/payment/records",
+                        query:{
+                            chMerCode:this.chMerCode
+                        }
+                    })
+                }
+                 
+                   
+
+            })
+            .catch(err=>{
+                // console.log(err,"error");
+            })
      }
 
     },
     created () {
-        this.searchInfo()
+        // this.searchInfo()
+        this.nickname=this.$store.state.wechat.nickname;
+        this.headimg=this.$store.state.wechat.headimg;
+        this.lev=this.$store.state.wechat.level;
+    },
+    mounted () {
+        // this.searchInfo()
     }
 }
 </script>
@@ -167,6 +205,8 @@ export default {
            justify-content: space-between;
            color:#fff;
            z-index:999;
+           padding:0 10px;
+           box-sizing: border-box;
        }
        >.container {
            background-color:#ECF0F3; 
@@ -178,14 +218,17 @@ export default {
                 justify-content: space-between;
                 padding-top:20px;
                 height: 400px;
-                >p {
-                    &:nth-of-type(1){
-                        font-size:100px;
-                        color:pink;
+                .head {
+                    width:120px;
+                    height: 100px;
+                    >img {
+                        width:100%;
+                        border-radius: 50%;
                     }
                 }
                 >.recommend {
-                    margin-left:-150px;
+                    margin-left:20px;
+                    flex:1;
                     >p {
                         &:nth-of-type(1) {
                             font-size: 36px;
@@ -361,6 +404,7 @@ export default {
                background-color: #fff;
                margin-bottom: 100px;
                >ul{
+                   padding:0 20px;
                    >li {
                        display: flex;
                        justify-content: space-between;

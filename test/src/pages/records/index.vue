@@ -36,7 +36,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home')
+            this.$router.go(-1)
         },
         getRecord(){
             let data={
@@ -64,8 +64,7 @@ export default {
         }
     },
     created () {
-          this.chMerCode=this.$route.query.chMerCode
-        //   console.log(this.chMerCode)
+        this.chMerCode=this.$route.query.chMerCode
         this.getRecord()
         
     }

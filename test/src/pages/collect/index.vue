@@ -8,42 +8,39 @@
         <div class="container">
            <div class="phone">
                <ul>
-                   <li>
-                       <span>手机号：</span>
-                       <input type="number" v-model="reservedMobile" placeholder="输入银行预留手机号码">
-                       <!-- <span>
-                            <span v-show="showCount">{{count}}秒后再次获取</span>
-                            <span @click="getCode" v-show="showCode">获取验证码</span>
-                       </span> -->
-                   </li>
-                    <li>
+                  
+                    <!-- <li>
                         <span>商户名称：</span>
                        <input v-model="merName" type="text" placeholder="商户名称">
-                   </li>
+                   </li> -->
                     <li>
                         <span>真实姓名：</span>
                        <input v-model="realName"  type="text" placeholder="真实姓名">
                    </li>
                     <li>
+                       <span>手机号：</span>
+                       <input type="number" v-model="reservedMobile" placeholder="输入银行预留手机号码">
+                   </li>
+                    <!-- <li>
                         <span>地址：</span>
                        <input  v-model="merAddress"   type="text" placeholder="地址信息">
-                   </li>
+                   </li> -->
                     <li>
                         <span>证件号：</span>
                        <input v-model="idCard"  type="text" placeholder="身份证号码">
                    </li>
-                   <li>
+                   <!-- <li>
                         <span>结算户名：</span>
                        <input  v-model="accountName" type="text" placeholder="真实姓名与结算户名必须一致">
-                   </li>
+                   </li> -->
                     <li>
                         <span>卡号：</span>
                        <input v-model="accountNo"  type="number" placeholder="储蓄卡卡号">
                    </li>
-                   <li>
+                   <!-- <li>
                        <span>手机号：</span>
                        <input type="number" v-model="mobile" placeholder="手机号码">
-                   </li>
+                   </li> -->
                    <li>
                        <span>开户行：</span>
                        <!-- <span class="bank" @click="handleBankNumber">{{bankName}}</span> -->
@@ -55,7 +52,7 @@
                         <span>联行号：</span>
                        <input v-model="subBankCode" type="number" placeholder="输入该支开户行行号或者联行号">
                    </li>
-                    <li>
+                    <!-- <li>
                         <span>结算户类型：</span>
                        <input v-model="settleAccType"  type="text" placeholder="选择结算户类型">
                        <span @click="showAcc"><van-icon name="arrow"/></span>
@@ -66,8 +63,8 @@
                             @select="onSelect"
                             @cancel="onCancel"
                             />
-                   </li>
-                   <li>
+                   </li> -->
+                   <!-- <li>
                         <span>商户类型：</span>
                        <input  v-model="merType" type="text" placeholder="选择商户类型">
                         <span @click="showMer"><van-icon name="arrow"/></span>
@@ -78,7 +75,7 @@
                             @select="onSelectTwo"
                             @cancel="onCancelTwo"
                             />
-                   </li>
+                   </li> -->
                </ul>
            </div>
            <!-- <router-link to="/home/online" tag="p">联行号在线查询</router-link> -->
@@ -119,14 +116,14 @@ export default {
             value: '',
             reservedMobile:"",
             mobile:"",
-            merName:"",
+            // merName:"",
             realName:"",
             merAddress:"",
             idCard:"",
-            accountName:"",
+            // accountName:"",
             accountNo:"",
             subBankCode:"",
-            settleAccType:"",
+            // settleAccType:"",
             merType:"",
             show:false,
             showTwo:false,
@@ -249,43 +246,42 @@ export default {
             //     that.$toast({
             //         message:"请填正确卡号"
             //     })
-            //     return
+            //     return 
             // }
-            if(that.realName.trim().length===0 || that.merName.trim().length===0 || that.merAddress.trim().length===0 || that.idCard.trim().length===0 || that.accountName.trim().length===0
-            || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0 || that.settleAccType.trim().length===0 || that.merType.trim().length===0
+            if(that.realName.trim().length===0  || that.merAddress.trim().length===0 || that.idCard.trim().length===0 || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0  
             ){
                 that.$toast({
                     message:"请将信息填写完整"
                 })
                 return
             }
-            if(that.realName!==that.accountName){
-                 that.$toast({                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-                    message:"姓名与结算户名不一致"
-                })
-                return
-            }
-            if(that.merType==="个人户"){
-                type="1"
-            } else if(that.merType==="小微户"){
-                type="2"
-            } else if(that.merType==="个体户"){
-                type="3"
-            } else {
-                type="4"
-            }
+            // if(that.realName!==that.accountName){
+            //      that.$toast({                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            //         message:"姓名与结算户名不一致"
+            //     })
+            //     return
+            // }
+            // if(that.merType==="个人户"){
+            //     type="1"
+            // } else if(that.merType==="小微户"){
+            //     type="2"
+            // } else if(that.merType==="个体户"){
+            //     type="3"
+            // } else {
+            //     type="4"
+            // }
             let data={
-                merName:that.merName,
+                merName:that.realName,
                 realName:that.realName,
-                merAddress:that.merAddress,
+                merAddress:that.realName,
                 idCard:that.idCard,
-                mobile:that.mobile,
-                accountName:that.accountName,
+                mobile:that.reservedMobile,
+                accountName:that.realName,
                 accountNo:that.accountNo,
                 reservedMobile:that.reservedMobile,
                 subBankCode:that.subBankCode,
-                settleAccType:that.settleAccType==="公户"? "1":"2",
-                merType:type
+                settleAccType:"2",
+                merType:"1"
             }
             axiosPost("/creditCard/memberReg",data)
             .then(function(res){

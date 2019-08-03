@@ -19,7 +19,7 @@ export const axiosPost = (url, params = {}) =>{;
         }
          return res; 
     }).catch(res =>{
-        return res;
+        return res;                                                                                                                                                                          
     })
     
 
@@ -36,6 +36,7 @@ export const axiosPost = (url, params = {}) =>{;
     //         reject(res);
     //     })
     // })
+
      
 }
 // 封装GET请求

@@ -378,6 +378,16 @@ const testpage = () =>import('@/pages/AIRadar/test')
 import largeZYComponent from '@/pages/largeZY'  //哲杨大额
 import largeVerificateComponent from '@/pages/largeVerificate'  // 哲杨大额短信验证
 
+import largeWFcardComponent from '@/pages/largeWFcard'  //WF大额绑卡
+import largeWFverifyComponent from '@/pages/largeWFcard/verify'  //WF大额短信验证
+import largeWFxeComponent from '@/pages/largeWFxe'  //WF小额绑卡
+import largeWFxeverifyComponent from '@/pages/largeWFxe/verify'  //WF小额短信验证
+
+
+
+
+
+
 
 export default new Router({
   // mode:"hash",
@@ -414,8 +424,17 @@ export default new Router({
     {path:"/home/evaluation",component:evaluationComponent}, //卡测评
     {path:"/home/DHbind",component:DHbindComponent}, //第三条还款通道  
     {path:"/home/DHregister",component:DHregisterComponent}, //第三条还款通道 注册
+    
     {path:"/home/largeZY",component:largeZYComponent}, //哲杨发送短信  
     {path:"/home/largeVerificate",component:largeVerificateComponent}, //哲杨短信验证
+
+    {path:"/home/largeWFcard",component:largeWFcardComponent}, //WF大额通道绑卡
+    {path:"/home/largeWFcard/verify",component:largeWFverifyComponent}, //WF大额通道验证
+    {path:"/home/largeWFxe",component:largeWFxeComponent}, //WF小额通道绑卡
+    {path:"/home/largeWFxe/verify",component:largeWFxeverifyComponent}, //WF小额通道绑卡
+
+
+
 
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},

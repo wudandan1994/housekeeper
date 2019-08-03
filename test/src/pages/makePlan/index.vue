@@ -51,7 +51,7 @@
                   </div>
                    <div class="eara">
                       <p>当前账户可用余额</p>
-                      <input class="input" v-model="amount" type="number" placeholder="当前账户可用余额(不能低于还款额的5%)">
+                      <input class="input" v-model="amount" type="number" :placeholder="place">
                   </div>
 
 
@@ -156,7 +156,7 @@ export default {
            showStart:false,
            showEnd:false,
            enddate:"",
-         
+           
            columns: [
                 {
                 values: Object.keys(citys),
@@ -168,6 +168,8 @@ export default {
                 defaultIndex: 2
                 }
             ],
+            place:"",
+            limit:""
         }
     },
     methods:{
@@ -286,6 +288,12 @@ export default {
     created () {
          this.item=this.$route.query.info 
           this.type=this.$route.query.type
+           this.limit=localStorage.getItem("channel")
+         if(this.limit=='1'){
+             this.place="预留5%-2000"
+         } else {
+             this.place="预留金额5%起"
+         }
     }
 }
 </script>

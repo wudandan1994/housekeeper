@@ -12,18 +12,9 @@
                     <div class="input start-center"><input type="text" required v-model="holderName" placeholder="姓名"></div>
                 </div>
                 <div class="user-input row">
-                    <div class="title start-center">身份证号码</div>
-                    <div class="input start-center"><input type="text" required v-model="idcard" placeholder="身份证号码"></div>
-                </div>
-                  <div class="user-input row">
-                    <div class="title start-center">手机号码</div>
-                    <div class="input start-center"><input type="number" required v-model="tel" placeholder="预留手机号码"></div>
-                </div>
-                <div class="user-input row">
                     <div class="title start-center">卡号</div>
                     <div class="input start-center"><input type="number" required v-model="accountNumber" placeholder="信用卡卡号"></div>
                 </div>
-               
                  <div class="user-input row">
                     <div class="title start-center">安全码</div>
                     <div class="input start-center"><input type="number" required v-model="cvv2" placeholder="信用卡安全码"></div>
@@ -52,7 +43,7 @@
 <script>
 import {axiosPost} from '@/lib/http'
 import loading from '@/components/loading'
-// import storage from '@/lib/storage' 
+import storage from '@/lib/storage' 
 
 export default {
     components:{
@@ -62,35 +53,22 @@ export default {
         return {
           expired:"",
            cvv2:"",
-           idcard:"",
            holderName:"",
            accountNumber:"",
-           tel:"",
            info:"",
            componentload: false,    
            bizOrderNumber:"" ,
-           smsCode:""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+           smsCode:""   ,
+           orderNo:"",
+           smsSeq:""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         }
     },
     methods:{
         goBack() {
-            this.$router.go(-1)
+            this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
         },
         submit(){
-            let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/ 
-             if(!partten.test(this.tel)){
-                 this.$toast("请填写正确的手机号")
-                 return
-             }
-
-             let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-            if(!parttenId.test(this.idcard)){
-                this.$toast({
-                    message:"请填正确的身份证号码"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                })
-                return
-            }
-            if(this.expired.trim().length===0 || this.cvv2.trim().length===0 || this.smsCode.trim().length===0 || this.idcard.trim().length===0 || this.holderName.trim().length===0 || this.accountNumber.trim().length===0 || this.tel.trim().length===0){
+            if(this.expired.trim().length===0 || this.cvv2.trim().length===0 || this.smsCode.trim().length===0  || this.holderName.trim().length===0 || this.accountNumber.trim().length===0 ){
                 this.$toast({
                     message:"请将信息填写完整"
                 })
@@ -98,52 +76,50 @@ export default {
             }
 
                 let data={
-                    expired:this.expired,
-                    cvv2:this.cvv2,
-                    idcard:this.idcard,
+                    custCardValidDate:this.expired,
+                    custCardCvv2:this.cvv2,
                     holderName:this.holderName,
-                    accountNumber:this.accountNumber,
-                    tel:this.tel,
-                    bizOrderNumber:this.bizOrderNumber,
-                    smsCode:this.smsCode
+                    bankCardNo:this.accountNumber,
+                    authCode:this.smsCode,
+                    orderNo:this.orderNo,
+                    smsSeq:this.smsSeq,
+                     channel:"2",
                    };
 
                  this.componentload=true
-                axiosPost("/zypay/checkSms",data)
+                axiosPost("/wfpay/bindCardVerify",data)
                 .then(res=>{
-                      let responce=res.data.data
-                      responce=JSON.parse(responce)
+                    //  console.log(res,'result 短信验证码')
                      setTimeout(()=>{
-                        if(responce.data.isSign=='t'){
-                        this.$toast(responce.message)
-                        //  storage.set('channel',"2");
-                        this.$router.push({
-                            path:"/home/creditHousekeeper/aisleHousekeeper/",
-                                        // query:{
-                                        //     info:this.info
-                                        // }
-                                })
-                            } else {
-                                this.componentload=false
-                                this.$toast(responce.message)
-                            }
-
-                      },1000)
+                         if(res.data.success){
+                             this.$toast(res.data.message)
+                             storage.set('channel',"2"); 
+                              this.$router.push({
+                                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                query:{
+                                    info:this.info
+                                }
+                            })  
+                         } else {
+                             this.$toast(res.data.message)
+                         }
+                         this.componentload=false
+                     },1500)
                 })
                 .catch(err=>{
+                    this.$toast("登录超时，请重新登录")
                 })
             
         },
     },
     created(){
         this.info=this.$route.query.info
+        this.orderNo=this.$route.query.orderNo
+        this.smsSeq=this.$route.query.smsSeq
         this.holderName=this.info.payerName
-        this.idcard=this.info.idCardNo
         this.accountNumber=this.info.cardNo
-        this.tel=this.info.phone
         this.cvv2=this.info.cvv2
-        this.expired=this.info.year+this.info.month
-        this.bizOrderNumber=this.$route.query.bizOrderNumber
+        this.expired=this.info.month+this.info.year
     }
 }
 </script>

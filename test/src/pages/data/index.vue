@@ -183,8 +183,7 @@ export default {
                        margin-right:3%;
                        margin-bottom:4%;
                        &:nth-of-type(4),
-                       &:nth-of-type(8),
-                       {
+                       &:nth-of-type(8) {
                            margin-right: 0px;
                        }
                        >p{

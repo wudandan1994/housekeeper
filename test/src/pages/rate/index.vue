@@ -3,7 +3,7 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left" /></span>
             <span>我的费率</span>
-            <span><van-icon name="ellipsis" /></span>
+            <span></span>
         </header>
         <div class="container">
             <div class="partner">
@@ -37,7 +37,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home/receivables')
+            this.$router.go(-1)
         }
     },
      created(){
@@ -84,6 +84,9 @@ export default {
                   > p {
                       font-size: 100px;
                       margin-top:20px;
+                      .van-icon--image img {
+                          border-radius: 50%;
+                      }
                   }
                   >.internship {
                       margin-left:30px;

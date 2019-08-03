@@ -6,7 +6,7 @@
             <span></span>
         </header>
         <div class="container">
-           <img src="http://pay.91dianji.com.cn/collect.jpg" alt="">
+           <img src="http://pay.91dianji.com.cn/collet.jpg" alt="">
         </div>
     </div>
 
@@ -21,7 +21,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home/collect')
+            this.$router.go(-1)
         }
     }
 }
