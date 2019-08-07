@@ -334,11 +334,11 @@ export default {
                 var ua = navigator.userAgent.toLowerCase();
                 if(ua.match(/MicroMessenger/i)=="micromessenger") {
 
-                    window.location.href="http://test.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
+                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
                          
                 } else {
                     // 非微信浏览器
-                    window.location.href="http://test.91dianji.com.cn/pay.htm?orderid="+ this.orderid
+                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
                 } 
             }else{
                 var  params = {
