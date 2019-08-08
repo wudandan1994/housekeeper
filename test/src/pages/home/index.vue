@@ -65,7 +65,6 @@
                 <div class="pannel-detail center" @click="handleContactUs">
                     <!-- <van-notice-bar text="好消息：从7月8日至7月14日，连续在朋友圈推广钱夹宝相关海报，连续时间7天，可免费成为993会员一个月！费率低至0.47！相关活动内容请联系客服"/>  -->
                     <van-notice-bar text="最新推广活动：7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.47，并领取1000元现金奖励！活动详情，请联系您的专属客服！"/> 
-
                 </div>
             </div>
 
@@ -96,6 +95,7 @@
 
 
 
+                    <!-- <li @click="handleIsAuth('/home/receivables',false,'')"> -->
                     <li @click="handleIsAuth('/home/collect',false,'')">
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
                         <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
@@ -185,6 +185,7 @@
                 <div class="title start-center">热门推荐</div>
                 <div class="remen_tuijian">
                     <div class="more"><van-icon name="arrow" color="#cccccc" size="30px"/></div>
+                    <!-- <div  @click="handleIsAuth('/home/receivables',false,'')" class="secret"> -->
                     <div  @click="handleIsAuth('/home/collect',false,'')" class="secret">
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan.png" size="34px" /></div>
                         <div class="center">在线收款</div>
@@ -272,14 +273,14 @@
         
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
          <!-- 绑定手机模块 -->
-        <!-- <bindMobile></bindMobile> -->
+        <bindMobile></bindMobile>
         <notice></notice>
     </div>
 </template>
 
 <script>
 import footerMenu from '@/components/footer'
-// import bindMobile from '@/components/bindMobile'
+import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -287,7 +288,7 @@ import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-    //   bindMobile,
+      bindMobile,
       notice
   },
      data() {
@@ -370,25 +371,25 @@ export default {
             
         },
         changeLink(url,title){
-              this.$router.push({
-                     path:"/loan/form/myOrder",
-                     query:{
-                         info:url,
-                         title:title
-                     }
-                 })
-            
-            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
-            //      this.$router.push({
+            //   this.$router.push({
             //          path:"/loan/form/myOrder",
             //          query:{
             //              info:url,
             //              title:title
             //          }
             //      })
-            //  } else {
-            //      location.href=url
-            //  }
+            
+             if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                 this.$router.push({
+                     path:"/loan/form/myOrder",
+                     query:{
+                         info:url,
+                         title:title
+                     }
+                 })
+             } else {
+                 location.href=url
+             }
         },
         handleAuth(){
              if(this.iscertification == '2'){
@@ -532,7 +533,6 @@ export default {
         },
         changeActive(obj){
 
-            // console.log('当前选中',obj);
         } ,
         // 查询实名认证
         handleSearchAuths(){
@@ -612,12 +612,12 @@ export default {
                     }
 
         this.handleSearchAuths()
-         this.automatic() //自动登录
-         this.getUpdate() //获取版本
+        //  this.automatic() //自动登录
+        //  this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        this.update() 
+        // this.update() 
        
     }
 }

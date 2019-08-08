@@ -135,12 +135,12 @@
             <div class="per-title row">
                 <div class="goods-title start-center">付款方式</div>
                 <div class="goods-detail row">
-                    <!-- <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
+                    <div class="paytype center" :class="{'wechatpay': paytype == 'wechat'}" @click="handlePayType('wechat')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-wechatpay"></use>
                         </svg>
                         微信支付
-                    </div> -->
+                    </div>
                     <div class="paytypes center" :class="{'alipay': paytype == 'alipay'}" @click="handlePayType('alipay')">
                         <svg class="icon payicon" aria-hidden="true">
                             <use xlink:href="#icon-alipay"></use>
@@ -323,45 +323,50 @@ export default {
         handleBuyNow(){
             // 首先判断选择哪一种支付方式
 
-                console.log(this.orderid,'orderid')
-                console.log(this.$store.state.wechat.openid,'openid')
-                console.log('33333')
-
-
 
             if(this.paytype == 'alipay'){
-                // 支付宝支付
-                var ua = navigator.userAgent.toLowerCase();
-                if(ua.match(/MicroMessenger/i)=="micromessenger") {
-
-                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
-                         
-                } else {
-                    // 非微信浏览器
-                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
-                } 
-            }else{
-                var  params = {
+                let params = {
                     orderid: this.orderid,
-                    trade_type: 'JSAPI',
-                    openid: storage.get('openid')
+                    channel: 'aliwap'
                 };
-                var url = '/order/wxPayH5';
-                axiosPost(url,params).then(res =>{
-                        var radom = Math.random().toString(36).substr(2);
-                        var tmp = Date.parse( new Date() ).toString();
-                        tmp = tmp.substr(0,10);
-                        wx.chooseWXPay({
-                            timestamp: res.data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                            nonceStr: res.data.nonceStr, // 支付签名随机串，不长于 32 位
-                            package: res.data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
-                            signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                            paySign: res.data.paySign, // 支付签名
-                            success: function (res) {
-                            }
-                        });
-                    }).catch(res =>{
-                    })
+                this.handlePay(params);
+                // 支付宝支付
+                // var ua = navigator.userAgent.toLowerCase();
+                // if(ua.match(/MicroMessenger/i)=="micromessenger") {
+
+                //     window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
+                         
+                // } else {
+                //     // 非微信浏览器
+                //     window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
+                // } 
+            }else{
+                let params = {
+                    orderid: this.orderid,
+                    channel: 'wx'
+                };
+                this.handlePay(params);
+                // var  params = {
+                //     orderid: this.orderid,
+                //     trade_type: 'JSAPI',
+                //     openid: storage.get('openid')
+                // };
+                // var url = '/order/wxPayH5';
+                // axiosPost(url,params).then(res =>{
+                //         var radom = Math.random().toString(36).substr(2);
+                //         var tmp = Date.parse( new Date() ).toString();
+                //         tmp = tmp.substr(0,10);
+                //         wx.chooseWXPay({
+                //             timestamp: res.data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                //             nonceStr: res.data.nonceStr, // 支付签名随机串，不长于 32 位
+                //             package: res.data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                //             signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                //             paySign: res.data.paySign, // 支付签名
+                //             success: function (res) {
+                //             }
+                //         });
+                //     }).catch(res =>{
+                //     })
             }
         },
         TocontOne(){
@@ -369,6 +374,41 @@ export default {
         },
         TocontTwo(){
             document.querySelector("#hehuoren").scrollIntoView(true);
+        },
+        // 发起支付
+        handlePay(obj){
+            let params = obj;
+            let url = '/order/xhPay';
+            axiosPost(url,params).then(res =>{
+                if(res.data.success){
+                    console.log('支付成功',res);
+                    let ua = navigator.userAgent.toLowerCase();
+                    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                        // 微信浏览器中打开
+                        window.location.href = res.data.data.url
+                        
+                    }else{
+                        // 非微信中打开
+                        if(this.paytype == 'wechat'){
+                            // 此时无法在非微信中调用微信支付
+                            this.$router.push({
+                                path: '/middle',
+                                query:{
+                                    qrcode: res.data.data.codeUrl
+                                }
+                            })
+                        }else{
+                           window.location.href = res.data.data.url 
+                        }
+                    }
+                }else{
+                    console.log('支付失败',res);
+                    this.$toast('支付失败');
+                }
+            }).catch(res =>{
+                console.log('支付失败',res);
+                this.$toast('支付失败');
+            })
         }
     },
     created(){
@@ -666,7 +706,7 @@ export default {
          width: 100%;
          height: 100%;
          position: fixed;
-         z-index: 10000;
+         z-index: 1000;
          top: 0;
          left: 0;
          background: #ffffff;

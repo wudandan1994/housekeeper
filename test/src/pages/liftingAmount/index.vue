@@ -166,7 +166,7 @@ export default {
                        &:nth-of-type(3),
                        &:nth-of-type(6),
                        &:nth-of-type(9),
-                       &:nth-of-type(12),{
+                       &:nth-of-type(12){
                            border-right: none;
                        }
 
@@ -212,7 +212,7 @@ export default {
                        border-bottom: 1px solid #ccc;
                        border-right: 1px solid #ccc;
                        &:nth-of-type(3),
-                       &:nth-of-type(6),{
+                       &:nth-of-type(6){
                            border-right: none;
                        }
 

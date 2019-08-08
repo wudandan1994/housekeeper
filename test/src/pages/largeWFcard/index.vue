@@ -1,12 +1,49 @@
 <template>
-    <div id="large-ZY">
+    <div id="largewfcard">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>发送短信</span>
+            <span>协议申请</span>
             <span></span>
         </header>
         <div class="container">
             <div class="info">
+                 <!-- <div class="user-input row">
+                    <div class="title start-center">生效日期</div>
+                    <div class="input start-center"><input type="text" required v-model="startDate" placeholder="生效日期"></div>
+                    <span @click="startSelect" class="arrow"><van-icon size="20px" name="arrow"/></span>
+                </div> -->
+
+                <!-- 生效日期选择    开始日期-->
+                <!-- <van-popup v-model="show" position="bottom" :overlay="true">
+                     <van-datetime-picker
+                        v-model="start"
+                        v-show="showStart"
+                        @confirm="confirmStart"
+                        @cancel="cancelStart"
+                        type="date"
+                        :min-date="minDate"
+                        />
+                </van-popup> -->
+
+
+                 <!-- <div class="user-input row">
+                    <div class="title start-center">失效日期</div>
+                    <div class="input start-center"><input type="text" required v-model="endDate" placeholder="失效日期"></div>
+                     <span @click="endSelect" class="arrow"><van-icon size="20px" name="arrow"/></span>
+                </div> -->
+                 <!-- 失效日期选择   结束日期  -->
+
+                 <!-- <van-popup v-model="showend" position="bottom" :overlay="true">
+                      <van-datetime-picker
+                        v-model="end"
+                        v-show="showEnd"
+                        @confirm="confirmEnd"
+                        @cancel="cancelEnd"
+                        type="date"
+                        :min-date="minDate"
+                        />
+                 </van-popup> -->
+
                  <div class="user-input row">
                     <div class="title start-center">真实姓名</div>
                     <div class="input start-center"><input type="text" required v-model="holderName" placeholder="姓名"></div>
@@ -26,11 +63,11 @@
                
                  <div class="user-input row">
                     <div class="title start-center">安全码</div>
-                    <div class="input start-center"><input type="number" required v-model="cvv2" placeholder="信用卡安全码"></div>
+                    <div class="input start-center"><input type="number" required v-model="cvv2" placeholder="信用卡安全码 "></div>
                 </div>
                  <div class="user-input row">
                     <div class="title start-center">有效期</div>
-                    <div class="input start-center"><input type="number" required v-model="expired" placeholder="信用卡有效期"></div>
+                    <div class="input start-center"><input type="number" required v-model="expired" placeholder="如03/22 请填写0322"></div>
                 </div>
             </div>
             <div class="submit">
@@ -61,12 +98,56 @@ export default {
            accountNumber:"",
            tel:"",
            info:"",
-           componentload: false,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+           componentload: false, 
+           startDate:"",
+           endDate:"" ,
+           minDate: new Date(),
+           start:"",
+           end:"",
+           showStart:false,
+           showEnd:false,
+           show:false,
+           showend:false,
+
         }
     },
     methods:{
         goBack() {
             this.$router.go(-1)
+        },
+        startSelect(){
+            this.show=!this.show
+            this.showStart=true
+        },
+        endSelect(){
+            this.showend=!this.showend
+            this.showEnd=true
+        },
+        cancelStart(){
+            this.show=false
+        },
+        cancelEnd(){
+            this.showend=false
+        },
+         fnW(str){
+                var num;
+                str>9?num=str:num="0"+str;
+                return num;
+            } ,
+          fnDate(time){
+                let date=time
+                let year=date.getFullYear();//当前年份
+                let month=date.getMonth();//当前月份
+                let data=date.getDate();//天
+              return   year+''+this.fnW((month+1))+''+this.fnW(data);
+            },
+        confirmStart(value){
+            this.startDate= this.fnDate(value)
+            this.show=false
+        },
+        confirmEnd(value){
+            this.endDate= this.fnDate(value)
+            this.showend=false
         },
         submit(){
             let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/ 
@@ -82,7 +163,8 @@ export default {
                 })
                 return
             }
-            if(this.expired.trim().length===0 || this.cvv2.trim().length===0 || this.idcard.trim().length===0 || this.holderName.trim().length===0 || this.accountNumber.trim().length===0 || this.tel.trim().length===0){
+            if(this.expired.trim().length===0 || this.cvv2.trim().length===0 || this.idcard.trim().length===0 || this.holderName.trim().length===0 ||
+             this.accountNumber.trim().length===0 || this.tel.trim().length===0 ){
                 this.$toast({
                     message:"请将信息填写完整"
                 })
@@ -90,43 +172,46 @@ export default {
             }
 
                 let data={
-                    expired:this.expired,
-                    cvv2:this.cvv2,
-                    idcard:this.idcard,
+                    custCardValidDate:this.expired,
+                    custCardCvv2:this.cvv2,
+                    certificateNo:this.idcard,
                     holderName:this.holderName,
-                    accountNumber:this.accountNumber,
-                    tel:this.tel
+                    bankCardNo:this.accountNumber,
+                    mobileNo:this.tel,
+                    startDate:this.fnDate(new Date()),
+                    endDate:'20'+this.info.year+this.info.month+"01",
+                    channel:"2",
                    };
+
+                    // console.log(data,'data')
 
                  this.componentload=true
 
-                axiosPost("/zypay/sendSms",data)
+                axiosPost("/wfpay/bindCardInit",data)
                 .then(res=>{
-                    setTimeout(()=>{
-                        if(!res.data.success){
-                              this.componentload=false
-                            this.$toast(res.data.message)
-                            
-                        } else {
-                             let responce=res.data.data
-                           responce=JSON.parse(responce)
+                //    console.log(res,"第一次签约")
+                   setTimeout(()=>{
+                       if(res.data.success){
+                           let orderNo=res.data.data.orderNo
+                           let smsSeq=res.data.data.smsSeq
+                           this.$router.push({
+                               path:"/home/largeWFcard/verify",
+                               query:{
+                                   orderNo,
+                                   smsSeq,
+                                   info:this.info
+                               }
+                           })
+                       } else {
+                           this.$toast(res.data.message)
+                       }
+                       this.componentload=false
+                   },2000)
 
-                            this.$router.push({
-                            path:"/home/largeVerificate",
-                            query:{
-                                info: this.info,
-                                bizOrderNumber:responce.data.bizOrderNumber,
-                             }
-                          })
-                        }
-                      
-                           
-
-                       
-                    },1500)
                   
                 })
                 .catch(err=>{
+                    this.$toast("登录超时，请重新登录")
                 })
             
         },
@@ -138,14 +223,14 @@ export default {
         this.accountNumber=this.info.cardNo
         this.tel=this.info.phone
         this.cvv2=this.info.cvv2
-        this.expired=this.info.year+this.info.month
+        this.expired=this.info.month+this.info.year
 
     }
 }
 </script>
 
 <style lang="less">
-   #large-ZY{
+   #largewfcard{
        >header {
            background-color: #4965AE;
            width:100%;
@@ -171,13 +256,32 @@ export default {
            padding-top:96px;
            padding-bottom: 50px;
            font-size: 34px;
+           .van-picker__cancel {
+               color:#000;
+           }
+           .van-picker__cancel {
+               height:80px ;
+               line-height: 80px;
+           }
+           .van-picker__confirm {
+               line-height: 80px;
+           }
+           .van-picker-column__item--selected{
+                color:#4B66AF;
+                font-weight: bold;
+            }
            >.info {
                 .user-input{
             width: 100%;
             height: 100px;
             background: white;
+            .arrow {
+                display: inline-block;
+                line-height: 100px;
+                padding-right: 20px;
+            }
             >.title{
-                width: 25vw;
+                width: 26vw;
                 height: 90%;
                 margin-top: 10px;
                 margin-left: 5vw;
@@ -188,7 +292,7 @@ export default {
                 }
             }
             .input{
-                width: 70vw;
+                width: 62vw;
                 height: 100%;
                 >input{
                     width: 100%;

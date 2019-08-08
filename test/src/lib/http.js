@@ -4,8 +4,8 @@ import { hostUrl } from './config.js'
 // 封装POST请求
 export const axiosPost = (url, params = {}) =>{;
     const _axios = axios.create({
-        // baseURL:hostUrl,
-        baseURL: 'http://pay.91dianji.com.cn/api',
+        baseURL:hostUrl,
+        // baseURL: 'http://pay.91dianji.com.cn/api',
         withCredentials: true,
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
     });
@@ -19,7 +19,7 @@ export const axiosPost = (url, params = {}) =>{;
         }
          return res; 
     }).catch(res =>{
-        return res;
+        return res;                                                                                                                                                                          
     })
     
 
@@ -36,6 +36,7 @@ export const axiosPost = (url, params = {}) =>{;
     //         reject(res);
     //     })
     // })
+
      
 }
 // 封装GET请求

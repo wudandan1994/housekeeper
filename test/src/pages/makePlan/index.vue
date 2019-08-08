@@ -50,8 +50,13 @@
                       <input class="input" v-model="payment" type="number" placeholder="请输入还款金额">
                   </div>
                    <div class="eara">
+<<<<<<< HEAD
+                      <p>当前账户可用余额</p>
+                      <input class="input" v-model="amount" type="number" :placeholder="place">
+=======
                       <p>预留金额</p>
                       <input class="input" v-model="amount" type="number" placeholder="预留5%-2000元">
+>>>>>>> 129878480e4293a5d2e0a882e048ad64fee77f4a
                   </div>
 
 
@@ -156,7 +161,7 @@ export default {
            showStart:false,
            showEnd:false,
            enddate:"",
-         
+           
            columns: [
                 {
                 values: Object.keys(citys),
@@ -168,6 +173,8 @@ export default {
                 defaultIndex: 2
                 }
             ],
+            place:"",
+            limit:""
         }
     },
     methods:{
@@ -286,6 +293,12 @@ export default {
     created () {
          this.item=this.$route.query.info 
           this.type=this.$route.query.type
+           this.limit=localStorage.getItem("channel")
+         if(this.limit=='1'){
+             this.place="预留5%-2000"
+         } else {
+             this.place="预留金额5%起"
+         }
     }
 }
 </script>

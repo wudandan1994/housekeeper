@@ -116,7 +116,7 @@ export default {
             this.bankNumberShow = false;
         },
         goBack() {
-            this.$router.push('/home')
+            this.$router.go(-1);
         },
         
         onSelect(item){
