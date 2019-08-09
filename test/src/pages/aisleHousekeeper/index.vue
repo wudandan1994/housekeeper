@@ -96,7 +96,7 @@
                                     <van-icon name="http://pay.91dianji.com.cn/smalle.png" size="26px"/>
                                     <div class="middle">
                                           <p>小额通道 <span>预留额度5%-2000</span></p>
-                                          <span>还款金额为2000-20000</span>
+                                          <span class="edu">还款金额为2000-20000</span>
                                     </div>
                                     <p> <van-icon name="checked" :color="colors" size="20px"/></p>
                                 </div>
@@ -104,7 +104,7 @@
                                     <van-icon name="http://pay.91dianji.com.cn/bige.png" size="26px"/>
                                    <div class="middle">
                                         <p>大额通道&nbsp;&nbsp;<span>预留额度5%起</span></p>
-                                        <span>还款金额为2000-500000</span>
+                                        <span class="edu">还款金额为2000-500000</span>
                                    </div>
                                     <p> <van-icon name="checked" :color="colorl" size="20px"/></p>
                                 </div>
@@ -132,7 +132,7 @@
                    <!-- <van-button  plain to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
                    <van-button plain to="/home/punch" size="normal" type="default">查看全部计划</van-button> -->
                    <router-link tag="div" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard"  class="addcard"><van-icon name="plus" />添加信用卡</router-link>
-                   <router-link tag="div" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" class="allplans">查看全部计划</router-link>
+                   <router-link tag="div" to="/home/punch" class="allplans"><van-icon name="send-gift-o" />查看全部计划</router-link>                 
                </div>
                 
                 <!-- <van-button plain to="/cancelCard" size="normal" type="default">管理</van-button> -->
@@ -536,16 +536,22 @@ export default {
            >.swipe {
                width:100%;
             //    height:200px;
-               font-size: 28px;
+               font-size: 22px;
                margin-bottom:15px;
                box-sizing: border-box;
                .top{
                     height: 120px;
-                    padding:15px 20px;
+                    padding:15px 40px;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                     background: linear-gradient(to bottom ,rgb(228, 200, 137), #8C6E2A );
+                    // background-color: #A89749;
                     // box-sizing: border-box;
+                    color:#fff;
+                    margin:20px;
+                    border-radius: 15px;
+                    box-shadow:1px 12px 3px #ccc ;
               .avator{
                   height: 120px;
                   width:  120px;
@@ -560,11 +566,12 @@ export default {
                  flex:1;
                   height: 100%;
                   margin-top:10px;
-                  margin-left:15px;
+                //   margin-left:15px;
+                padding-left:30px;
                   >p {
                       font-weight: bold;
                       &:nth-of-type(2){
-                        padding:10px 0px;
+                        padding:15px 0px;
                       }
                   }
                  
@@ -619,7 +626,7 @@ export default {
                           .pop {
                           position: absolute;
                           top:40%;
-                          left:6%;
+                          left:9%;
                           width: 600px;
                           padding:10px;
                           background-color: #fff;
@@ -631,7 +638,7 @@ export default {
                               text-align: center;
                               font-weight: bold;
                               font-size: 34px;
-                              padding:15px 0;
+                              padding:30px 0px 15px 0px;
                           }
                           >p {
                               text-align: center;
@@ -655,9 +662,18 @@ export default {
                               align-items: center;
                               z-index: 999;
                               background-color: #fff;
+                              padding:15px;
                               .middle {
                                   flex:1;
                                   padding-left:20px;
+                                  padding-bottom: 10px;
+                                  span {
+                                      font-size: 24px;
+                                  }
+                                  .edu {
+                                      color:#BCB291;
+                                      background-color: rgba(223, 219, 191, .2);
+                                  }
                               }
                               p {
                                   font-size: 32px;
@@ -684,31 +700,31 @@ export default {
                        margin-bottom: 15px;
                     //    background-image:url("http://pay.91dianji.com.cn/gd.jpg");
                      &:nth-of-type(10n+1){
-                         background-image: url("http://pay.91dianji.com.cn/bgc1.jpg")
+                         background-image: url("http://pay.91dianji.com.cn/bgc5.jpg")
                      }
                       &:nth-of-type(10n+2){
-                         background-image: url("http://pay.91dianji.com.cn/bgc2.jpg")
+                         background-image: url("http://pay.91dianji.com.cn/bgc6.jpg")
                      }
                      &:nth-of-type(10n+3){
                          background-image: url("http://pay.91dianji.com.cn/bgc3.jpg")
                      }
                       &:nth-of-type(10n+4){
-                         background-image: url("http://pay.91dianji.com.cn/bgc4.jpg")
-                     }
-                      &:nth-of-type(10n+5){
-                         background-image: url("http://pay.91dianji.com.cn/bgc5.jpg")
-                     }
-                      &:nth-of-type(10n+6){
-                         background-image: url("http://pay.91dianji.com.cn/bgc6.jpg")
-                     }
-                      &:nth-of-type(10n+7){
                          background-image: url("http://pay.91dianji.com.cn/bgc7.jpg")
                      }
-                      &:nth-of-type(10n+8){
+                      &:nth-of-type(10n+5){
                          background-image: url("http://pay.91dianji.com.cn/bgc8.jpg")
                      }
-                      &:nth-of-type(10n+9){
+                      &:nth-of-type(10n+6){
                          background-image: url("http://pay.91dianji.com.cn/bgc9.jpg")
+                     }
+                      &:nth-of-type(10n+7){
+                         background-image: url("http://pay.91dianji.com.cn/bgc2.jpg")
+                     }
+                      &:nth-of-type(10n+8){
+                         background-image: url("http://pay.91dianji.com.cn/bgc1.jpg")
+                     }
+                      &:nth-of-type(10n+9){
+                         background-image: url("http://pay.91dianji.com.cn/bgc4.jpg")
                      }
                       &:nth-of-type(10n+10){
                          background-image: url("http://pay.91dianji.com.cn/bgc10.jpg")
@@ -791,7 +807,9 @@ export default {
                           .repayment {
                             //   padding:5px 10px;
                             height: 60px;
-                              background: linear-gradient(to right,rgb(169, 203, 241), rgb(135, 162, 231) );
+                            background: linear-gradient(to right,#D9B36C,#876A26  );
+                            color:#593303;
+                            font-size: 24px;
                           }
                           .botton {
                               margin-bottom: 10px;
@@ -837,9 +855,13 @@ export default {
                 div {
                     width:49%;
                     text-align: center;
-                    background-color: #D2D2D2;
+                    background-color: #ddd;
                     padding:16px 0px;
                     border-right: 1% dotted #fff;
+                    background-color: #eee;
+                    color:#D2AD66;
+                    border-radius: 20px;
+
                 }
                 .addcard {
                      border-right: 1px dotted #fff;
@@ -848,10 +870,12 @@ export default {
             }
             .manage {
                 width:100%;
-                margin-top:5px;
+                margin-top:15px;
                 padding:15px 0px;
                 text-align: center;
-                background-color: #D2D2D2;
+                background-color: #eee;
+                color:#D2AD66;
+                 border-radius: 20px;
 
             }
            }

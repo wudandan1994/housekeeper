@@ -1,7 +1,16 @@
 
 <template>
-    <div :class="showAaside == true ? 'menuanimate' : 'moveleft'" id="home-component" @swipedown="swipe(x)" >
-        <!-- <div class="ads">
+   
+        
+   
+
+   
+    
+   
+     
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh" :loading-text="loadtext" :loosing-text="loostext" :head-height="lineheight">
+
+         <div  class="ads" slot="loading">
            <div class="tipsone">
               <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
               <div class="cres">
@@ -11,11 +20,15 @@
                   <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/wu.png" /> </span>
                   <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/ping.png" /> </span>
                   <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/tai.png" /> </span>
-
               </div>
            </div>
            <div class="tiptwo"></div>
-        </div> -->
+        </div> 
+
+
+
+         <div :class="showAaside == true ? 'menuanimate' : 'moveleft'" id="home-component" @swipedown="swipe(x)" >
+      
         <header>
             <div>
                 <div class="menu" @click="isShow">
@@ -271,11 +284,15 @@
             </div>
         </div>
         
-        <footerMenu :active="active" @getChange="changeActive"></footerMenu>
+        <footerMenu :active="active" @getChange="changeActive" ></footerMenu>
          <!-- 绑定手机模块 -->
         <!-- <bindMobile></bindMobile> -->
         <notice></notice>
     </div>
+    </van-pull-refresh>
+
+   
+
 </template>
 
 <script>
@@ -295,6 +312,11 @@ export default {
         return {
             // 轮播图图片
             componentload: true,
+            loadtext:"    ",
+            loostext:"   ",
+            ads:false,
+
+            lineheight:100,
             images: [
                 {
                     routes: '/vip',
@@ -338,7 +360,8 @@ export default {
             versionAndroid:"",// 安卓版本号
             versionIos:"", // ios 版本号
             updateVerson:0,  // 设备版本号
-            height: 148.5
+            height: 148.5,
+            isLoading:false
         }
   },
    methods:{
@@ -346,6 +369,14 @@ export default {
         //    清除缓存
         storage.remove('promotioncode');
         this.$toast('清除成功');
+       },
+       onRefresh(){
+           this.ads=true
+           console.log(this.ads,'ads')
+           setTimeout(()=>{
+              this.ads=false
+              this.isLoading=false
+           },1500)
        },
         isShow() {
             this.showAaside=true
@@ -634,7 +665,7 @@ export default {
          left:0;
          .ads {
              position: fixed;
-             top:10px;
+             top:-130px;
              left:0;
              box-sizing: border-box;
              .tipsone {
@@ -1242,11 +1273,11 @@ export default {
         
         }
    }
-    .moveleft{
-          margin-left:0;
-          animation: animate 0.2s linear;
-         -webkit-animation: animate 0.2s linear;
-    }
+    // .moveleft{
+    //       margin-left:0;
+    //       animation: animate 0.2s linear;
+    //      -webkit-animation: animate 0.2s linear;
+    // }
      @keyframes animate{
        from{
             margin-left: 250px; 

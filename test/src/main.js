@@ -23,11 +23,12 @@ Vue.prototype.$http = axios
 Vue.prototype.$utils = utils
 // 引入适配
 import 'lib-flexible/flexible'
-import { Actionsheet,Button,Switch,Dialog,RadioGroup,Pagination , DatetimePicker ,Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker    } from 'vant'
+import { Actionsheet,Button,Switch,Dialog,RadioGroup,Pagination , PullRefresh ,DatetimePicker ,Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker    } from 'vant'
 Vue.use(Actionsheet)
 Vue.use(Button)
 Vue.use(Switch)
 Vue.use(Dialog)
+Vue.use(PullRefresh)
 Vue.use(RadioGroup)
 Vue.use(DatetimePicker)
 Vue.use(Uploader)

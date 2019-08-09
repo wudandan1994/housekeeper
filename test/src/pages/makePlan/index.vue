@@ -337,9 +337,9 @@ export default {
                       padding:10px;
                       box-sizing: border-box;
                       margin-bottom: 15px;
-                      background-image:url("http://pay.91dianji.com.cn/big2.png");
+                      background-image:url("http://pay.91dianji.com.cn/bgc5.jpg");
                       background-repeat: no-repeat;
-                      height: 350px;
+                      height: 410px;
                       background-size:100%;
                       color:#fff;
                       padding:10px;
@@ -347,6 +347,7 @@ export default {
                        >.top {
                            padding-top:13px;
                            padding-bottom: 150px;
+
                             height:20px !important;
                            .bankName {
                           display: flex;
@@ -357,6 +358,7 @@ export default {
                       .bottom {
                            padding-top:13px;
                             margin-bottom:35px;
+                            margin-top:40px;
                           >ul{
                               display: flex;
                               justify-content: space-around;
@@ -369,7 +371,7 @@ export default {
                                   >p {
                                       &:nth-of-type(1){
                                           margin-top:20px;
-                                          margin-bottom:10px;
+                                          margin-bottom:26px;
                                       }
                                       &:nth-of-type(2){
                                           margin-bottom: 20px;

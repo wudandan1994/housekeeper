@@ -100,7 +100,7 @@ export default {
             right: 20px;
             font-size: 26px;
             text-decoration: underline;
-            color: red;
+            color: #fff;
         }
     }
 }

@@ -23,12 +23,13 @@
                                 <li @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in list" :key="index">
                                     <div class="top">
                                         <!-- <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p> -->
+                                          <p>{{item.bankNick}}</p>
                                         <p>{{item.payerName}}</p>
                                         <p>本期账单：￥<span>{{item.realamount}}</span></p>
                                     </div>
                                     <div class="middle">
                                         <div class="m-left">
-                                            <p>{{item.bankNick}}</p>
+                                          
                                              <div   class="sign-out">
                                                 <van-button v-show="item.state=='0' || item.state=='3'" @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             </div> 
@@ -71,12 +72,13 @@
                                 <li v-show="item.state=='0'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
                                     <div class="top">
                                         <!-- <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p> -->
+                                          <p>{{item.bankNick}}</p>
                                         <p>{{item.payerName}}</p>
                                         <p>本期账单：￥<span>{{item.realamount}}</span></p>
                                     </div>
                                     <div class="middle">
                                         <div class="m-left">
-                                            <p>{{item.bankNick}}</p>
+                                          
                                             <!-- <p>等待执行：2019/5/17:14:33:37</p> -->
                                         </div>
                                         <div class="m-right">
@@ -112,12 +114,13 @@
                                 <li v-show="item.state=='1'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
                                     <div class="top">
                                         <!-- <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p> -->
+                                         <p>{{item.bankNick}}</p>
                                         <p>{{item.payerName}}</p>
                                         <p>本期账单：￥<span>{{item.realamount}}</span></p>
                                     </div>
                                     <div class="middle">
                                         <div class="m-left">
-                                            <p>{{item.bankNick}}</p>
+                                           
                                             <!-- <p>等待执行：2019/5/17:14:33:37</p> -->
                                         </div>
                                         <div class="m-right">
@@ -152,12 +155,13 @@
                                 <li v-show="item.state=='2'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
                                     <div class="top">
                                         <!-- <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p> -->
+                                         <p>{{item.bankNick}}</p>
                                         <p>{{item.payerName}}</p>
                                         <p>本期账单：￥<span>{{item.realamount}}</span></p>
                                     </div>
                                     <div class="middle">
                                         <div class="m-left">
-                                             <p>{{item.bankNick}}</p>
+                                            
                                             <!-- <p>已手动取消</p> -->
                                         </div>
                                         <div class="m-right">
@@ -193,12 +197,13 @@
                                 <li v-show="item.state=='3'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
                                     <div class="top">
                                         <!-- <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p> -->
+                                           <p>{{item.bankNick}}</p>
                                         <p>{{item.payerName}}</p>
                                         <p>本期账单：￥<span>{{item.realamount}}</span></p>
                                     </div>
                                     <div class="middle">
                                         <div class="m-left">
-                                            <p>{{item.bankname}}</p>
+                                           
                                             <!-- <p>进行中</p> -->
                                         </div>
                                         <div class="m-right">
@@ -233,12 +238,13 @@
                                 <li v-show="item.state=='4'" @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in planList" :key="index">
                                     <div class="top">
                                         <!-- <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p> -->
+                                           <p>{{item.bankNick}}</p>
                                         <p>{{item.payerName}}</p>
                                         <p>本期账单：￥<span>{{item.realamount}}</span></p>
                                     </div>
                                     <div class="middle">
                                         <div class="m-left">
-                                            <p>{{item.bankNick}}</p>
+                                          
                                             <!-- <p>失败</p> -->
                                         </div>
                                         <div class="m-right">
@@ -453,19 +459,48 @@ export default {
                           border-radius: 10px;
                           box-sizing: border-box;
                         margin-bottom: 15px;
-                        background-image:url("http://pay.91dianji.com.cn/big2.png");
                         background-repeat: no-repeat;
-                        height: 350px;
+                        height: 410px;
                         background-size:100%;
-                        padding:10px;
+                        // padding:10px;
+                         &:nth-of-type(10n+1){
+                         background-image: url("http://pay.91dianji.com.cn/bgc5.jpg")
+                        }
+                        &:nth-of-type(10n+2){
+                            background-image: url("http://pay.91dianji.com.cn/bgc6.jpg")
+                        }
+                        &:nth-of-type(10n+3){
+                            background-image: url("http://pay.91dianji.com.cn/bgc3.jpg")
+                        }
+                        &:nth-of-type(10n+4){
+                            background-image: url("http://pay.91dianji.com.cn/bgc7.jpg")
+                        }
+                        &:nth-of-type(10n+5){
+                            background-image: url("http://pay.91dianji.com.cn/bgc8.jpg")
+                        }
+                        &:nth-of-type(10n+6){
+                            background-image: url("http://pay.91dianji.com.cn/bgc9.jpg")
+                        }
+                        &:nth-of-type(10n+7){
+                            background-image: url("http://pay.91dianji.com.cn/bgc2.jpg")
+                        }
+                        &:nth-of-type(10n+8){
+                            background-image: url("http://pay.91dianji.com.cn/bgc1.jpg")
+                        }
+                        &:nth-of-type(10n+9){
+                            background-image: url("http://pay.91dianji.com.cn/bgc4.jpg")
+                        }
+                        &:nth-of-type(10n+10){
+                            background-image: url("http://pay.91dianji.com.cn/bgc10.jpg")
+                        }
 
                           >.top {
                             //   background-color: rgba(0, 0, 0, .5);
                              padding-top:13px;
                              height:20px !important;
-                              padding:20px 5px 20px 10px;
+                              padding:20px 10px;
                               display: flex;
-                              justify-content: space-around;
+                              justify-content: space-between;
                               margin:0px !important;
                           }
                           >.middle{
@@ -516,8 +551,8 @@ export default {
                               margin-top:30px;
                               >ul{
                                   display: flex;
-                                  padding:20px 5px;
-                                //   background-color: rgba(0, 0, 0, .1);
+                                  padding:10px 5px;
+                                  margin-top:70px;
                                   >li {
                                       padding-top:20px;
                                       width:33%;
@@ -525,7 +560,7 @@ export default {
                                       >p {
                                           &:nth-of-type(1){
                                               margin-top:20px;
-                                              padding-bottom: 10px;
+                                              padding-bottom: 30px;
                                           }
                                       }
                                   }

@@ -173,9 +173,9 @@ export default {
                       border-radius: 10px;
                       box-sizing: border-box;
                       margin-bottom: 15px;
-                      background-image:url("http://pay.91dianji.com.cn/big2.png");
+                      background-image:url("http://pay.91dianji.com.cn/bgc5.jpg");
                       background-repeat: no-repeat;
-                      height: 350px;
+                      height: 410px;
                       background-size:100%;
                       padding:10px;
                        >.top {
@@ -189,6 +189,7 @@ export default {
                        }
                       .bottom {
                          margin-bottom:35px;
+                         margin-top:50px;
                           >ul{
                               display: flex;
                               justify-content: space-around;
