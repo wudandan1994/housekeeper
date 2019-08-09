@@ -18,8 +18,12 @@
             <div class="rate-explain"> 
                 <p> <span ><van-icon name="label" /></span> &nbsp;&nbsp;<span>费率说明</span></p>
                 <div class="reduce">
-                    <p>自己刷卡可省：</p>
-                    <p>升到钻石LV3最高可省：<span>0.14%+0.4/每笔</span></p>
+                    <!-- <p>自己刷卡可省：</p> -->
+                    <!-- <p>升到钻石LV3最高可省：<span>0.14%+0.4/每笔</span></p> -->
+                    <p v-if="level=='0'">当前收款费率：万60+3元/笔</p>
+                    <p v-if="level=='1'">当前收款费率：万54+2元/笔</p>
+                    <p v-if="level=='2'">当前收款费率：万47+1元/笔</p>
+
                 </div>
             </div>
         </div>
@@ -32,7 +36,8 @@ export default {
         return {
             nickname:"",
             recommendedcode:"",
-            headimg:""
+            headimg:"",
+            level:""
         }
     },
     methods:{
@@ -43,7 +48,8 @@ export default {
      created(){
         this.nickname=this.$store.state.wechat.nickname
         this.headimg=this.$store.state.wechat.headimg
-         this.recommendedcode=this.$store.state.wechat.recommendedcode
+        this.recommendedcode=this.$store.state.wechat.recommendedcode
+        this.level=this.$store.state.wechat.level
     }
 }
 </script>
@@ -120,7 +126,7 @@ export default {
                   border:3px solid #ccc;
                   margin-right: 30px;
                   padding:30px 20px;
-                  color:#C8C8C8;
+                //   color:#C8C8C8;
                   border-radius:12px;
                   >p {
                       &:nth-of-type(2) {

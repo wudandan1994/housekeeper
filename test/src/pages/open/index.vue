@@ -89,6 +89,7 @@ export default {
             var form = new FormData()
             form.append('file',file.file)
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            // let url = 'api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -120,8 +121,7 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                             this.$router.push({
-                                                path:"/home/collect/payment",
-                                                chMerCode:this.info
+                                                path:"/home/receivables",
                                             })
                                          }
                                         
@@ -146,7 +146,8 @@ export default {
          onReadF(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+           let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            // let url = 'api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -178,8 +179,7 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                              this.$router.push({
-                                                path:"/home/collect/payment",
-                                                chMerCode:this.info
+                                                path:"/home/receivables",
                                             })
                                          }
                                       
@@ -203,6 +203,7 @@ export default {
             var form = new FormData()
             form.append('file',file.file)
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            // let url = 'api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -234,8 +235,7 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                             this.$router.push({
-                                                path:"/home/collect/payment",
-                                                chMerCode:this.info
+                                               path:"/home/receivables",
                                             })
                                          } 
                                        
@@ -259,7 +259,8 @@ export default {
          onReadQ(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+          let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            // let url = 'api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -291,8 +292,7 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                             this.$router.push({
-                                                path:"/home/collect/payment",
-                                                chMerCode:this.info
+                                                path:"/home/receivables",
                                             })
                                          } 
                                        
@@ -317,6 +317,7 @@ export default {
             var form = new FormData()
             form.append('file',file.file)
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            // let url = 'api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -348,8 +349,7 @@ export default {
                                         return
                                     } else if(res.data.data.uploadStatus==="0"){
                                         this.$router.push({
-                                                path:"/home/collect/payment",
-                                                chMerCode:this.info
+                                                path:"/home/receivables"
                                             })
                                         } 
                                     

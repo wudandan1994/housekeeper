@@ -61,8 +61,16 @@
                        <li>我的任务</li>
                    </ul>
             </div>
-            
+             <!-- <div class="games">
+                 <ul>
+                     <router-link tag="li" to="/home/games/gameElsb">2048游戏<span><van-icon color="#4B66AF" size="16px" name="column"/></span></router-link>
+                     <router-link tag="li" to="/home/games/gameCat">cat游戏<span><van-icon color="#4B66AF" size="16px" name="column"/></span></router-link> 
+                     <router-link tag="li" to="/home/games/gameClock">clock游戏<span><van-icon color="#4B66AF" size="16px" name="column"/></span></router-link>
+
+                 </ul>
+             </div> -->
         </div>
+        <games></games>
     </div>
 
 </template>
@@ -70,7 +78,11 @@
 
 <script>
 import {axiosPost} from '@/lib/http'
+import games from '@/components/games'
 export default {
+    components: {
+        games,
+    },
     data() {
         return {
             currentDay: 1,
@@ -117,9 +129,9 @@ export default {
            .then(function(res){
             //    console.log(res,"created中的签到详情") 
                 if(!res.data.success){
-                    that.$toast({
-                        message:res.data.message
-                    })
+                    // that.$toast({
+                    //     message:res.data.message
+                    // })
                     return
                 } else {
                      that.signcount=res.data.data.signcount
@@ -456,6 +468,17 @@ export default {
                         }
                     }
                 }
+           }
+           .games {
+               ul{
+                   padding:20px;
+
+                   li {
+                       font-size: 34px;
+                       font-weight: bold;
+                       padding:15px;
+                   }
+               }
            }
        }
    }

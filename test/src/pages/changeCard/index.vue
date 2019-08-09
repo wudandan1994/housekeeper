@@ -9,26 +9,29 @@
            <div class="phone">
                <ul>
                    <li>
-                        <span>结算户名：</span>
+                        <span>结算户名</span>
                        <input  v-model="accountName" type="text" placeholder="结算户名">
                    </li>
+                     <div class="shadow"></div>
                     <li>
-                        <span>结算卡号：</span>
+                        <span>结算卡号</span>
                        <input v-model="accountNo"  type="number" placeholder="储蓄卡卡号">
                    </li>
                    <li>
-                       <span>手机号：</span>
+                       <span>手机号</span>
                        <input type="number" v-model="mobile" placeholder="手机号码">
                    </li>
+                     <div class="shadow"></div>
                    <li>
-                       <span>开户行：</span>
+                       <span>开户行</span>
                        <input type="text"  @click="handleBankNumber" :placeholder="bankName">
                    </li>
                    <li>
-                        <span>联行号：</span>
+                        <span>联行号</span>
                        <input v-model="subBankCode" type="number" placeholder="输入该支开户行行号或者联行号">
                    </li>
-                    <li>
+                     <div class="shadow"></div>
+                    <!-- <li>
                         <span>结算户类型：</span>
                        <input v-model="settleAccType"  type="text" placeholder="选择结算户类型">
                        <span @click="showAcc"><van-icon name="arrow"/></span>
@@ -39,7 +42,7 @@
                             @select="onSelect"
                             @cancel="onCancel"
                             />
-                   </li>
+                   </li> -->
                    
                </ul>
            </div>
@@ -77,7 +80,7 @@ export default {
             accountName:"",
             accountNo:"",
             subBankCode:"",
-            settleAccType:"",
+            // settleAccType:"",
             merType:"",
             show:false,
             bankName: '请选择开户行',
@@ -181,8 +184,7 @@ export default {
 
 
             if( that.accountName.trim().length===0 || that.mobile.trim().length===0
-            || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0 || that.settleAccType.trim().length===0 
-            ){
+            || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0){
                 that.$toast({
                     message:"请将信息填写完整"
                 })
@@ -195,7 +197,7 @@ export default {
                 accountNo:that.accountNo,
                 reservedMobile:that.mobile,
                 subBankCode:that.subBankCode,
-                settleAccType:that.settleAccType==="公户"? "1":"2"
+                settleAccType:"2"
               }
             axiosPost("/creditCard/bankCardModify",data)
             .then(function(res){
@@ -283,12 +285,17 @@ export default {
            padding-bottom: 50px;
            background-color: #EEEFF1;
            font-size: 34px;
-          
            >.phone {
                >ul{
-                   padding-left:30px;
+                 
                    background-color: #fff;
+                    .shadow {
+                       height:20px;
+                       width:100%;
+                       background-color: rgb(243, 239, 239);
+                   }
                    >li{
+                       padding-left:30px;
                        display: flex;
                        flex-wrap: nowrap;
                        border-bottom: 1px solid #ccc;
@@ -339,7 +346,7 @@ export default {
           }
            
            >.at-once {
-               margin-top:150px;
+               margin-top:60px;
                padding:0 20px;
                .van-button--info {
                    background-color: #4965AE;

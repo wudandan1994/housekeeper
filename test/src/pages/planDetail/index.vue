@@ -8,7 +8,7 @@
         <div class="container">
                <div class="card">
                   <p class="top">
-                      <span>信用卡</span> &nbsp;&nbsp;<span>落地通道</span>
+                      <!-- <span>信用卡</span> &nbsp;&nbsp;<span>落地通道</span> -->
                   </p>
                   <div class="waiting">
                       <p>{{bankName}}</p>
@@ -50,21 +50,30 @@
                            <div class="list">
                               <ul>
                                   <li v-for="(info,i) in item" :key="i">
+                                      <div class="add">
+                                          <p v-if="info.type=='9'"><van-icon size="30px" name="http://pay.91dianji.com.cn/haikuan.png"/></p>
+
+                                          <p v-else><van-icon size="30px" name="http://pay.91dianji.com.cn/xiaofei.png"/></p>
+
+                                      </div>
                                       <div class="left">
-                                          <p><span>消费账单&nbsp;</span><span class="gray">{{info.date}}</span></p>
+                                          <p v-if="info.type=='9'"><span>还款账单&nbsp;</span><span class="gray">{{info.date}}</span></p>
+                                          <p v-else><span>消费账单&nbsp;</span><span class="gray">{{info.date}}</span></p>
                                           <p><span class="gray">订单号：</span><span>{{info.parentNo}}</span></p>
                                           <p class="gray">智还&nbsp;落地通道&nbsp;持卡者：{{nick}}</p>
                                       </div>
                                       <div class="right">
-                                          <p class="bold">{{info.amount}}</p>
+                                          <p class="bold" v-if="info.type=='9'" >+￥{{info.amount}}</p>
+                                          <p class="bold" v-if="info.type=='1' || info.type=='2' || info.type=='3'" >-￥{{info.amount}}</p>
+
                                           <!-- <p class="gray">{{info.type==type[i]?type[i]:info.type}}</p> -->
                                           <p class="gray" v-if="info.type=='1'">消费</p>
                                           <p class="gray" v-if="info.type=='2'">消费</p>
                                           <p class="gray" v-if="info.type=='3'">消费</p>
-                                          <p class="gray" v-if="info.type=='9'">还款</p>
-                                          <p  class="default" v-if="info.state=='0'">待执行</p>
-                                          <p  class="success" v-if="info.state=='1'">成功</p>
-                                          <p  class="error" v-if="info.state=='2'">失败</p>
+                                          <p class="gray" v-if="info.type=='9'">还款</p>  
+                                          <p  class="default" v-if="info.state=='0'"><van-icon  color="#D38C01" name="clock"/> 待执行</p>
+                                          <p  class="success" v-if="info.state=='1'"><van-icon  color="#00D33D" name="checked"/>成功</p>
+                                          <p  class="error" v-if="info.state=='2'"><van-icon  color="red" name="clear"/>失败</p>
                                       </div>
                                   </li>
                                  
@@ -255,6 +264,7 @@ export default {
                           >li {
                               width:48%;
                               padding:5px 0px 10px 10px;
+                              text-align: center;
                               >span {
                                   color:red;
                               }
@@ -266,10 +276,11 @@ export default {
                           display: flex;
                           justify-content: space-between;
                           flex-wrap: wrap;
+                          padding-top:10px;
                           >li {
-                              width:48%;
-                              padding:10px 0px;
-                              text-align: center;
+                              width:40%;
+                              padding:10px 20px;
+                            //   text-align: center;
                           }
                       }
                   }
@@ -304,12 +315,14 @@ export default {
                       box-sizing: border-box;
                       margin:30px 15px;
                       >li {
-                          margin-bottom: 15px;
+                          margin-bottom: 30px;
                            background-color: #fff;
                           >.top {
                               display: flex;
                               justify-content: space-between;
-                              background-color: #7B94DA;
+                            //   background-color: #7B94DA;
+                             background: linear-gradient(to bottom,#9DAFE0, #4965AE );
+                             color:#fff;
                               padding:15px 10px;
                               border-radius: 8px 8px 0px 0px;
                           }
@@ -323,6 +336,10 @@ export default {
                                       align-items: center;
                                       justify-content: space-between;
                                       padding:20px 10px;
+                                      .left {
+                                          flex:1;
+                                          padding-left:20px;
+                                      }
                                       p {
                                           padding-bottom: 15px;
                                       }
@@ -333,13 +350,17 @@ export default {
                                           font-weight: bold;
                                       }
                                       .success {
-                                          color:green;
+                                          color:#00D33D;
                                       }
                                       .error {
                                           color:red;
                                       }
                                       .default {
                                           color:#4B66AF;
+                                      }
+                                      .right{
+                                          padding-right:30px;
+                                          text-align: center;
                                       }
                                   }
                               }

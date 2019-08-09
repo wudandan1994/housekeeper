@@ -50,13 +50,8 @@
                       <input class="input" v-model="payment" type="number" placeholder="请输入还款金额">
                   </div>
                    <div class="eara">
-<<<<<<< HEAD
                       <p>当前账户可用余额</p>
                       <input class="input" v-model="amount" type="number" :placeholder="place">
-=======
-                      <p>预留金额</p>
-                      <input class="input" v-model="amount" type="number" placeholder="预留5%-2000元">
->>>>>>> 129878480e4293a5d2e0a882e048ad64fee77f4a
                   </div>
 
 

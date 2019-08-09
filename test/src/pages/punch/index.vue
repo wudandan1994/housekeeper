@@ -507,7 +507,6 @@ export default {
                                          .van-dialog .van-button{
                                             height: 80px;
                                         }
-
                                   }
 
                                   
@@ -525,6 +524,7 @@ export default {
                                       text-align: center;
                                       >p {
                                           &:nth-of-type(1){
+                                              margin-top:20px;
                                               padding-bottom: 10px;
                                           }
                                       }

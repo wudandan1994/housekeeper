@@ -10,7 +10,6 @@
 
          </div>
     </div>
-
 </template>
  
 
@@ -80,11 +79,10 @@ export default {
                 width:100%;
                 height: 100%;
                  .iframe{
-                    // width:1px;
-                    // min-width: 100%;
-                    // *width:100%;
                     width:100vw;
                     height: 100vh;
+                    margin-top:70px;
+                    padding-top:10px;
                  }
            }
    }

@@ -171,6 +171,15 @@ export default {
                  return
             }
 
+            // 截取有效期年月进行拼接
+            if(this.expired.trim().length!=4){
+                return this.$toast("请输入正确格式的有效期")
+            }
+
+             let date=this.expired
+            let endmonth=date.substr(0,2)
+            let endyear=date.substr(2,2)
+
                 let data={
                     custCardValidDate:this.expired,
                     custCardCvv2:this.cvv2,
@@ -179,7 +188,8 @@ export default {
                     bankCardNo:this.accountNumber,
                     mobileNo:this.tel,
                     startDate:this.fnDate(new Date()),
-                    endDate:'20'+this.info.year+this.info.month+"01",
+                    // endDate:'20'+this.info.year+this.info.month+"01",
+                    endDate:'20'+endyear+endmonth+'01',
                     channel:"2",
                    };
 

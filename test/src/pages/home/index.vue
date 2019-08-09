@@ -1,6 +1,6 @@
 
 <template>
-    <div :class="showAaside == true ? 'menuanimate' : ''" id="home-component" @swipedown="swipe(x)" >
+    <div :class="showAaside == true ? 'menuanimate' : 'moveleft'" id="home-component" @swipedown="swipe(x)" >
         <!-- <div class="ads">
            <div class="tipsone">
               <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
@@ -95,8 +95,8 @@
 
 
 
-                    <!-- <li @click="handleIsAuth('/home/receivables',false,'')"> -->
-                    <li @click="handleIsAuth('/home/collect',false,'')">
+                    <li @click="handleIsAuth('/home/receivables',false,'')">
+                    <!-- <li @click="handleIsAuth('/home/collect',false,'')"> -->
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
                         <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
                         </span>
@@ -123,7 +123,7 @@
                         </div>
                      </router-link> -->
 
-                      <li  @click="handleIsAuth('/home/creditHousekeeper',true,'3')" >
+                      <li  @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')" >
                         <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /> <van-icon name="hot" color="red" class="hot pay"  size="20px" /></span>
                         <div class="channel">
                             <h3>智能还款</h3>
@@ -195,7 +195,7 @@
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></div>
                         <div class="center">信用卡办理</div>
                     </div>
-                    <div class="secret"  @click="handleIsAuth('/home/creditHousekeeper',true,'3')" >
+                    <div class="secret"  @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')" >
                         <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan.png" size="30px" /></div>
                         <div class="center">智能还款</div>
                     </div>
@@ -273,14 +273,14 @@
         
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
          <!-- 绑定手机模块 -->
-        <bindMobile></bindMobile>
+        <!-- <bindMobile></bindMobile> -->
         <notice></notice>
     </div>
 </template>
 
 <script>
 import footerMenu from '@/components/footer'
-import bindMobile from '@/components/bindMobile'
+// import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -288,7 +288,7 @@ import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-      bindMobile,
+    //   bindMobile,
       notice
   },
      data() {
@@ -371,25 +371,25 @@ export default {
             
         },
         changeLink(url,title){
-            //   this.$router.push({
-            //          path:"/loan/form/myOrder",
-            //          query:{
-            //              info:url,
-            //              title:title
-            //          }
-            //      })
-            
-             if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                 this.$router.push({
+              this.$router.push({
                      path:"/loan/form/myOrder",
                      query:{
                          info:url,
                          title:title
                      }
                  })
-             } else {
-                 location.href=url
-             }
+            
+            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
+            //      this.$router.push({
+            //          path:"/loan/form/myOrder",
+            //          query:{
+            //              info:url,
+            //              title:title
+            //          }
+            //      })
+            //  } else {
+            //      location.href=url
+            //  }
         },
         handleAuth(){
              if(this.iscertification == '2'){
@@ -612,12 +612,12 @@ export default {
                     }
 
         this.handleSearchAuths()
-        //  this.automatic() //自动登录
-        //  this.getUpdate() //获取版本
+         this.automatic() //自动登录
+         this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        // this.update() 
+        this.update() 
        
     }
 }
@@ -1242,11 +1242,24 @@ export default {
         
         }
    }
+    .moveleft{
+          margin-left:0;
+          animation: animate 0.2s linear;
+         -webkit-animation: animate 0.2s linear;
+    }
+     @keyframes animate{
+       from{
+            margin-left: 250px; 
+       }
+       to{
+            margin-left: 0px;
+       }
+   }
     .menuanimate{
         margin-left: 50%;
         animation: animates 0.3s linear;
         -webkit-animation: animates 0.3s linear;
-   }
+      }
 
    @keyframes animates{
        from{

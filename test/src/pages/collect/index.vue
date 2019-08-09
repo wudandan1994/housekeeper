@@ -3,7 +3,8 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>商户申请</span>
-            <router-link to="/home/news" tag="span">操作说明</router-link>
+            <!-- <router-link to="/home/news" tag="span">操作说明</router-link> -->
+            <span></span>
         </header>
         <div class="container">
            <div class="phone">
@@ -14,19 +15,20 @@
                        <input v-model="merName" type="text" placeholder="商户名称">
                    </li> -->
                     <li>
-                        <span>真实姓名：</span>
+                        <span>真实姓名</span>
                        <input v-model="realName"  type="text" placeholder="真实姓名">
                    </li>
                     <li>
-                       <span>手机号：</span>
+                       <span>手机号</span>
                        <input type="number" v-model="reservedMobile" placeholder="输入银行预留手机号码">
                    </li>
+                   <div class="shadow"></div>
                     <!-- <li>
                         <span>地址：</span>
                        <input  v-model="merAddress"   type="text" placeholder="地址信息">
                    </li> -->
                     <li>
-                        <span>证件号：</span>
+                        <span>证件号</span>
                        <input v-model="idCard"  type="text" placeholder="身份证号码">
                    </li>
                    <!-- <li>
@@ -34,24 +36,26 @@
                        <input  v-model="accountName" type="text" placeholder="真实姓名与结算户名必须一致">
                    </li> -->
                     <li>
-                        <span>卡号：</span>
+                        <span>卡号</span>
                        <input v-model="accountNo"  type="number" placeholder="储蓄卡卡号">
                    </li>
+                     <div class="shadow"></div>
                    <!-- <li>
                        <span>手机号：</span>
                        <input type="number" v-model="mobile" placeholder="手机号码">
                    </li> -->
                    <li>
-                       <span>开户行：</span>
+                       <span>开户行</span>
                        <!-- <span class="bank" @click="handleBankNumber">{{bankName}}</span> -->
                        <input type="text"  @click="handleBankNumber" :placeholder="bankName">
                        <span><van-icon name="search" size="20px" /></span>
                        <!-- <span @click="handleBankNumber">测试</span> -->
                    </li>
                    <li>
-                        <span>联行号：</span>
+                        <span>联行号</span>
                        <input v-model="subBankCode" type="number" placeholder="输入该支开户行行号或者联行号">
                    </li>
+                     <div class="shadow"></div>
                     <!-- <li>
                         <span>结算户类型：</span>
                        <input v-model="settleAccType"  type="text" placeholder="选择结算户类型">
@@ -96,6 +100,7 @@
                 <van-picker show-toolbar :columns="columns" @change="onChange" @confirm="onConfirm" />
             </div>
          </div>
+          <loading :componentload="componentload"></loading>
     </div>
 </template>
 
@@ -112,7 +117,9 @@ export default {
     },
     data() {
         return {
-            componentload:true,
+            // componentload:true,
+            componentload:false,
+
             value: '',
             reservedMobile:"",
             mobile:"",
@@ -248,7 +255,7 @@ export default {
             //     })
             //     return 
             // }
-            if(that.realName.trim().length===0  || that.merAddress.trim().length===0 || that.idCard.trim().length===0 || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0  
+            if(that.realName.trim().length===0  ||  that.idCard.trim().length===0 || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0  
             ){
                 that.$toast({
                     message:"请将信息填写完整"
@@ -283,6 +290,7 @@ export default {
                 settleAccType:"2",
                 merType:"1"
             }
+            this.componentload=true
             axiosPost("/creditCard/memberReg",data)
             .then(function(res){
                 if(!res.data.success){
@@ -330,10 +338,7 @@ export default {
              },500)
              let info=res.data.data.chMerCode
              this.$router.push({
-                     path:"/home/collect/payment",
-                    query:{
-                        info,
-                     }
+                     path:"/home/collect/open",
                  })
             }else {
                  this.componentload=false
@@ -359,7 +364,7 @@ export default {
     },
    
     created () {
-        this.searchInfo();
+        // this.searchInfo();
         this.handleGetAOuth();
         // 将json对象转换为数组
         for(var item in bankNumber){
@@ -398,11 +403,20 @@ export default {
            padding-bottom: 50px;
            background-color: #EEEFF1;
            font-size: 34px;
+           .van-button--info {
+               background-color: #4965AE;
+               border-color: #4965AE;
+           }
            >.phone {
                >ul{
-                   padding-left:30px;
                    background-color: #fff;
+                   .shadow {
+                       height:20px;
+                       width:100%;
+                       background-color: rgb(243, 239, 239);
+                   }
                    >li{
+                       padding-left:20px;
                        display: flex;
                        flex-wrap: nowrap;
                        border-bottom: 1px solid #ccc;
@@ -452,7 +466,7 @@ export default {
           }
            
            >.at-once {
-               margin-top:150px;
+               margin-top:60px;
                padding:0 20px;
                >button {
                    height: 90px;

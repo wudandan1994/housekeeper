@@ -8,15 +8,30 @@
 </template>
 
 <script>
+import {axiosPost} from '@/lib/http'
 export default {
     data () {
         return {
             showads :true,
-            count:3,
+            count:4,
             timeId:null
         }
     },
+    methods: {
+        getImg(){
+              axiosPost("/admin/showAdvertisement")
+              .then(res=>{
+                  console.log(res,'result')
+
+              })
+              .catch(err=>{
+                  console.log(err,'error')
+              })
+        }
+
+    },
     created () {
+        this.getImg()
         
     },
     mounted () {
@@ -58,6 +73,9 @@ export default {
                 position: absolute;
                 right:0;
                 top:20px;
+                .van-button--normal {
+                    font-size: 34px;
+                }
                 .van-button--default {
                     // background-color: #ddd;
                     background-color: rgba(221, 221, 221, .3);

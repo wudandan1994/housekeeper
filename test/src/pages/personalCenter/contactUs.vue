@@ -6,7 +6,7 @@
             <div class="right-icon varify center"></div>
         </header>
         <div class="banner"><img src="http://pay.91dianji.com.cn/aboutUs_banner.jpg" alt=""></div>
-        <div class="circle center">
+        <div class="circle center" @click="changeLink('https://r.xiumi.us/stage/v5/48UPP/156187349','钱夹宝简介')">
             <div>
                 <span class="center">产品介绍</span>
                 <span class="center">业务沟通</span>
@@ -78,6 +78,27 @@ export default {
     methods:{
         goBack() {
             this.$router.go(-1);
+        },
+          changeLink(url,title){
+            //   this.$router.push({
+            //          path:"/loan/form/myOrder",
+            //          query:{
+            //              info:url,
+            //              title:title
+            //          }
+            //      })
+            
+             if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                 this.$router.push({
+                     path:"/home/online",
+                     query:{
+                         info:url,
+                         title:title
+                     }
+                 })
+             } else {
+                 location.href=url
+             }
         },
         contact(i){
             let data={

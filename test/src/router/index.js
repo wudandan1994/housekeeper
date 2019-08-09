@@ -373,9 +373,11 @@ const nextList = () =>import('@/pages/AIRadar/nextList')
 const nextOtherList = () =>import('@/pages/AIRadar/nextOtherList')  
 // 测试页，测试完请删除
 const testpage = () =>import('@/pages/AIRadar/test')  
+import cardsComponent from '@/pages/receivables/cards'  //收款信用卡列表
 
 
-import largeZYComponent from '@/pages/largeZY'  //哲杨大额
+
+import largeZYComponent from '@/pages/largeZY'  //哲杨大额  
 import largeVerificateComponent from '@/pages/largeVerificate'  // 哲杨大额短信验证
 
 import largeWFcardComponent from '@/pages/largeWFcard'  //WF大额绑卡
@@ -383,6 +385,9 @@ import largeWFverifyComponent from '@/pages/largeWFcard/verify'  //WF大额短�
 import largeWFxeComponent from '@/pages/largeWFxe'  //WF小额绑卡
 import largeWFxeverifyComponent from '@/pages/largeWFxe/verify'  //WF小额短信验证
 
+import gameElsbComponent from '@/pages/games/gameElsb.vue'  // 2048游戏
+import gameCatComponent from '@/pages/games/gameCat.vue'  // 2048游戏
+import gameClockComponent from '@/pages/games/gameClock.vue'  // clock游戏
 
 
 
@@ -407,6 +412,13 @@ export default new Router({
     {path:"/home/punch/planDetail",component:planDetailComponent},
     {path:"/home/news",component:newsComponent},
     {path:"/home/addCard",component:addCardComponent},
+    {path:"/home/receivables/cards",component:cardsComponent},  //收款信用卡列表
+    {path:"/home/games/gameElsb",component:gameElsbComponent},  //2048游戏 
+    {path:"/home/games/gameCat",component:gameCatComponent},  //cat游戏  
+    {path:"/home/games/gameClock",component:gameClockComponent},  //clock游戏  
+
+
+
     {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
     {path:"/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard",component:bindingCreditCardComponent,},
     {path:"/home/creditHousekeeper/aisleHousekeeper/repayment",component:repaymentComponent},

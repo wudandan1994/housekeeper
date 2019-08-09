@@ -9,43 +9,45 @@
              <div class="phone">
                <ul>
                     <li>
-                        <span>真实姓名：</span>
+                        <span>真实姓名</span>
                        <input v-model="name" type="text" placeholder="姓名">
                    </li>
                     <li>
-                        <span>身份证号：</span>
+                        <span>身份证号</span>
                        <input v-model="idCard"  type="text" placeholder="所持身份证号码">
                    </li>
                     <li>
-                        <span>银行卡号：</span>
+                        <span>银行卡号</span>
                        <input v-model="bankcardno"  type="number" placeholder="所持银行卡号">
                    </li>
+                    <div class="shadow"></div>
                     <li>
-                        <span>有效期年份：</span>
+                        <span>有效期年份</span>
                        <input v-model="year"  type="number" placeholder="信用卡有效期年份如 22">
                    </li>
                    <li>
-                       <span>有效期月份：</span>
+                       <span>有效期月份</span>
                        <input type="number" v-model="month" placeholder="信用卡有效期月份 如 05">
                    </li> 
                     <li>
-                       <span>安全码：</span>
+                       <span>安全码</span>
                        <input type="number" v-model="safeCode" placeholder="信用卡后三位安全码">
                    </li> 
+                    <div class="shadow"></div>
                      <li>
-                       <span>手机号：</span>
+                       <span>手机号</span>
                        <input type="number" v-model="phone" placeholder="银行卡预留手机号">
                    </li> 
                     <li>
-                       <span>账单日：</span>
+                       <span>账单日</span>
                        <input type="number" v-model="billdate" placeholder="账单日 如 06">
                    </li> 
                     <li>
-                       <span>最后还款日：</span>
+                       <span>最后还款日</span>
                        <input type="number" v-model="duedate" placeholder="还款日 如 23">
                    </li> 
                </ul>
-              <div @click="bindingCard" class="btn">
+              <div @click="bindingCard" class="button">
                 <van-button round size="large" type="info">确认绑定</van-button>
              </div>
            </div>
@@ -130,7 +132,7 @@ export default {
                           message:res.data.message
                       })
                   } else {
-                      this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
+                      this.$router.go(-1)
                   }               
               })
               .catch(err=>{
@@ -164,18 +166,23 @@ export default {
                         }
                     }
                >ul{
-                   padding-left:30px;
                    background-color: #fff;
-                    
+                   .shadow {
+                        height:20px;
+                        width:100%;
+                        background-color: rgb(243, 239, 239);
+                        }
                    >li{
                        display: flex;
                        flex-wrap: nowrap;
+                        padding-left:30px;
                        border-bottom: 1px solid #ccc;
                        padding-top:40px;
                        padding-bottom: 40px;
                        height: 60px;
                        line-height: 60px;
                        color:#000;
+                        
                        >span {
                            font-weight: bold;
                        }
@@ -197,6 +204,7 @@ export default {
                            height: 100px;
                             margin-top:-26px;
                             font-size: 30px;
+                            text-align:right;
                        }
                         ::-webkit-input-placeholder{
                             font-size:28px;
@@ -313,7 +321,7 @@ export default {
         }
         .next-stop{
             width: 90vw;
-            padding-top:30px;
+            padding-top:60px;
             padding-bottom: 30px;
             margin-left: auto;
             margin-right: auto;
@@ -322,16 +330,16 @@ export default {
             margin-top: 50px;
             border-radius: 20px;
         }
-        // .btn {
-        //     margin-top:30px;
-        //     padding-left:20px;
-        //     padding-right: 20px;
-        //     font-size: 30px;
-        //     >button {
-        //         height:80px;
-        //         background-color: #4B66AF;
-        //     }
-        // }
+        .button {
+            margin-top:70px;
+            padding-left:20px;
+            padding-right: 20px;
+            font-size: 30px;
+            >button {
+                height:80px;
+                background-color: #4B66AF;
+            }
+        }
         .position{
             width: 100vw;
             z-index: 2;

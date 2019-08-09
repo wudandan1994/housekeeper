@@ -56,7 +56,7 @@
                                   </div>
                               </div>
                               <p>
-                                  <van-button @click="repayment(index)" round type="info">立即还款</van-button>
+                                  <van-button @click="repayment(index)" class="repayment" round type="info">立即还款</van-button>
                               </p>
                           </div>
                        </div>
@@ -66,14 +66,14 @@
                                    <p>{{item.realamount}}</p>
                                    <p>还款金额</p>
                                </li>
-                               <li>
+                               <!-- <li>
                                     <p v-if="item.state=='0'">待执行</p>
                                     <p v-if="item.state=='1'">已成功</p>
                                     <p v-if="item.state=='2'">已取消</p>
                                     <p v-if="item.state=='3'">进行中</p>
                                     <p v-if="item.state=='4'">失败</p>
                                     <p>还款状态</p>
-                               </li>
+                               </li> -->
 
                                 <li>
                                    <p>{{item.repaycount}}</p>
@@ -90,19 +90,27 @@
                        </div>
                        <div v-show="showpass" @click.capture="showcover" :class="num==index?'cover':''">
                            <div  v-show="num==index"  class="pop">
-
-
-                                
-
-                                <div class="small" @click.stop="smallPass(item)">
-                                    <van-icon name="http://pay.91dianji.com.cn/putong.png" size="40px"/>
-                                    <p>小额通道&nbsp;&nbsp;<span>(还款金额低于20000)</span></p>
-                                    <p> <van-icon name="arrow" size="30px"/></p>
+                               <h3>还款方式</h3>
+                                <p>请选择还款方式</p>
+                                <div class="small" @click.stop="smallPass(item,'1')">
+                                    <van-icon name="http://pay.91dianji.com.cn/smalle.png" size="26px"/>
+                                    <div class="middle">
+                                          <p>小额通道 <span>预留额度5%-2000</span></p>
+                                          <span>还款金额为2000-20000</span>
+                                    </div>
+                                    <p> <van-icon name="checked" :color="colors" size="20px"/></p>
                                 </div>
-                                <div class="large" @click.stop="largePass(item)">
-                                        <van-icon name="http://pay.91dianji.com.cn/dae.png" size="40px"/>
-                                        <p>大额通道&nbsp;&nbsp;<span>(还款金额500000左右)</span></p>
-                                        <p> <van-icon name="arrow" size="30px"/></p>
+                                <div class="large" @click.stop="largePass(item,'2')">
+                                    <van-icon name="http://pay.91dianji.com.cn/bige.png" size="26px"/>
+                                   <div class="middle">
+                                        <p>大额通道&nbsp;&nbsp;<span>预留额度5%起</span></p>
+                                        <span>还款金额为2000-500000</span>
+                                   </div>
+                                    <p> <van-icon name="checked" :color="colorl" size="20px"/></p>
+                                </div>
+
+                                <div class="sure">
+                                    <van-button size="large" @click="selectPass" type="info">确定</van-button>
                                 </div>
 
 
@@ -120,9 +128,15 @@
            </div>
          
            <div class="detail">
-                <van-button  plain to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
-                <van-button plain to="/home/punch" size="normal" type="default">查看全部计划</van-button>
-                <van-button plain to="/cancelCard" size="normal" type="default">管理</van-button>
+               <div class="plans">
+                   <!-- <van-button  plain to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
+                   <van-button plain to="/home/punch" size="normal" type="default">查看全部计划</van-button> -->
+                   <router-link tag="div" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard"  class="addcard"><van-icon name="plus" />添加信用卡</router-link>
+                   <router-link tag="div" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" class="allplans">查看全部计划</router-link>
+               </div>
+                
+                <!-- <van-button plain to="/cancelCard" size="normal" type="default">管理</van-button> -->
+                <router-link tag="div" class="manage" to="/cancelCard"><van-icon name="card" /> 信用卡管理</router-link>
            </div>
           
         </div>
@@ -158,6 +172,10 @@ export default {
             showpass:false,
             bankcode:'',
             userId:"",
+            colors:"",
+            colorl:"",
+            cardinfo:"",
+            number:""
         }
     },
     mounted () {
@@ -165,12 +183,13 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home/creditHousekeeper')
+            this.$router.go(-1)
         },
         // 点击遮盖层，通道隐藏
         showcover(){
             this.showdis=!this.showdis
             this.showpass=false
+
         },
         // 解绑信用卡
         unbinding(item){
@@ -203,8 +222,34 @@ export default {
                     // on cancel
                 });
         },
+        smallPass(info,num){
+            this.colors="#007130"
+            this.colorl=""
+            this.showpass=true
+            this.cardinfo=info
+            this.number=num
+        },
+        largePass(info,num){
+            this.colorl="#00479D"   
+            this.colors=""  
+            this.showpass=true
+            this.cardinfo=info
+            this.number=num
+        },
+         // 确定按钮
+        selectPass(){
+           if(this.number=="1"){
+               this.small(this.cardinfo)
+           } else if(this.number=="2"){
+               this.large(this.cardinfo)
+           } else {
+               this.$toast("请先选择还款通道")
+           }
+
+        },
+
         // 查询小额通道是否签约
-        smallPass(i){
+        small(i){
             let data={
                bindId:i.bindId 
             }
@@ -256,7 +301,7 @@ export default {
              })
         },
          // 查询大额通道是否签约
-        largePass(i){
+        large(i){
 
             let data={
                 accountNumber:i.cardNo
@@ -304,8 +349,8 @@ export default {
                          .catch(err=>{
                             this.$toast("登录超时，请重新登录")
                          })
-                         }
-                      })
+                     }
+                })
 
 
 
@@ -345,48 +390,48 @@ export default {
          } ,
        
         // 智能通道是否签约
-        thirdPass(i){
-            // 查询是否绑卡
-            let num={
-                cardNum:i.cardNo
-            }
-             axiosPost("/dhcreditCard/getDHBindExist",num)
-             .then(res=>{
-                 if(res.data.success && res.data.data !=null ) {     
-                        storage.set('channel',"3");
-                        this.$router.push({
-                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                            query:{
-                                info:i
-                            }
-                        })
-                 } 
-                 else { 
-                     // 查询是否签约
-                     axiosPost("/dhcreditCard/getDHRegisterExist")
-                     .then(res=>{
-                         if(res.data.success && res.data.data.userId){
-                             this.userId=res.data.data.userId       //   然后去绑卡
-                            this.$router.push({
-                                path:"/home/DHbind",
-                                query:{
-                                    info:i,
-                                    userId:this.userId
-                                }
-                            })
-                         } else {
-                            // 去 注册
-                             this.$router.push({
-                                path:"/home/DHregister",
-                                query:{
-                                    info:i,
-                                }
-                            })
-                         }
-                     })
-                 }
-             })
-        },
+        // thirdPass(i){
+        //     // 查询是否绑卡
+        //     let num={
+        //         cardNum:i.cardNo
+        //     }
+        //      axiosPost("/dhcreditCard/getDHBindExist",num)
+        //      .then(res=>{
+        //          if(res.data.success && res.data.data !=null ) {     
+        //                 storage.set('channel',"3");
+        //                 this.$router.push({
+        //                     path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+        //                     query:{
+        //                         info:i
+        //                     }
+        //                 })
+        //          } 
+        //          else { 
+        //              // 查询是否签约
+        //              axiosPost("/dhcreditCard/getDHRegisterExist")
+        //              .then(res=>{
+        //                  if(res.data.success && res.data.data.userId){
+        //                      this.userId=res.data.data.userId       //   然后去绑卡
+        //                     this.$router.push({
+        //                         path:"/home/DHbind",
+        //                         query:{
+        //                             info:i,
+        //                             userId:this.userId
+        //                         }
+        //                     })
+        //                  } else {
+        //                     // 去 注册
+        //                      this.$router.push({
+        //                         path:"/home/DHregister",
+        //                         query:{
+        //                             info:i,
+        //                         }
+        //                     })
+        //                  }
+        //              })
+        //          }
+        //      })
+        // },
         repayment(i){
             this.num=i
             this.showdis=true
@@ -553,9 +598,12 @@ export default {
             .bind {
                 box-sizing: border-box;
                  justify-content: space-between;
+                 height: 850px;
+                  overflow-y: scroll;
               >ul{
                   padding:30px;
                    justify-content: space-between;
+                //    overflow-y: scroll;
                   >li {
                       position: relative;
                       width:100%;
@@ -576,7 +624,29 @@ export default {
                           padding:10px;
                           background-color: #fff;
                           border:1px solid #ccc;
-                            z-index: 999;
+                          color:#000;
+                          z-index: 999;
+                          border-radius: 15px;
+                          h3 {
+                              text-align: center;
+                              font-weight: bold;
+                              font-size: 34px;
+                              padding:15px 0;
+                          }
+                          >p {
+                              text-align: center;
+                              padding:18px 0px;
+                              border-bottom: 1px solid #ccc;
+                              color:#808080;
+                          }
+                          .sure {
+                              padding:30px;
+                          }
+                          .van-button--info {
+                                background: linear-gradient(to right,#D8B56D, #886929 );
+                                height: 80px;
+                                line-height: 80px;
+                          }
                           >.small ,
                            .large {
                               display: flex;
@@ -585,10 +655,19 @@ export default {
                               align-items: center;
                               z-index: 999;
                               background-color: #fff;
-                              >p {
+                              .middle {
+                                  flex:1;
+                                  padding-left:20px;
+                              }
+                              p {
                                   font-size: 32px;
-                                  color:#4965AE;
                                   font-weight: bold;
+                                  padding: 25px 0;
+                                  span{
+                                      font-weight: normal;
+                                      font-size: 26px;
+                                      color:#808080;
+                                  }
                               }
                           }
                           .small {
@@ -603,8 +682,38 @@ export default {
                       padding:10px;
                        box-sizing: border-box;
                        margin-bottom: 15px;
-                       background-image:url("http://pay.91dianji.com.cn/big2.png");
-                        height: 350px;
+                    //    background-image:url("http://pay.91dianji.com.cn/gd.jpg");
+                     &:nth-of-type(10n+1){
+                         background-image: url("http://pay.91dianji.com.cn/bgc1.jpg")
+                     }
+                      &:nth-of-type(10n+2){
+                         background-image: url("http://pay.91dianji.com.cn/bgc2.jpg")
+                     }
+                     &:nth-of-type(10n+3){
+                         background-image: url("http://pay.91dianji.com.cn/bgc3.jpg")
+                     }
+                      &:nth-of-type(10n+4){
+                         background-image: url("http://pay.91dianji.com.cn/bgc4.jpg")
+                     }
+                      &:nth-of-type(10n+5){
+                         background-image: url("http://pay.91dianji.com.cn/bgc5.jpg")
+                     }
+                      &:nth-of-type(10n+6){
+                         background-image: url("http://pay.91dianji.com.cn/bgc6.jpg")
+                     }
+                      &:nth-of-type(10n+7){
+                         background-image: url("http://pay.91dianji.com.cn/bgc7.jpg")
+                     }
+                      &:nth-of-type(10n+8){
+                         background-image: url("http://pay.91dianji.com.cn/bgc8.jpg")
+                     }
+                      &:nth-of-type(10n+9){
+                         background-image: url("http://pay.91dianji.com.cn/bgc9.jpg")
+                     }
+                      &:nth-of-type(10n+10){
+                         background-image: url("http://pay.91dianji.com.cn/bgc10.jpg")
+                     }
+                        height: 410px;
                         background-repeat: no-repeat;
                        background-size:100%;
                        >.top {
@@ -645,22 +754,21 @@ export default {
                               display: flex;
                               justify-content: space-around;
                               >li {
-                                  width:20%;
+                                  width:25%;
                                   text-align: center;
                                   margin-bottom: 15px;
                                   color:#000;
-                                      padding-bottom: 13px;
+                                  padding-bottom: 30px;
                                   .van-icon--image {
                                       font-size: 40px;
                                   }
                                   >p {
                                       color:#fff;
                                       &:nth-of-type(1){
-                                          margin-top:20px;
-                                          margin-bottom:10px;
+                                          margin-bottom:30px;
                                       }
                                       &:nth-of-type(2){
-                                          margin-bottom: 20px;
+                                          margin-top:10px;
                                       }
                                   }
                               }
@@ -680,9 +788,13 @@ export default {
                                   margin-top:10px;
                               }
                           }
+                          .repayment {
+                            //   padding:5px 10px;
+                            height: 60px;
+                              background: linear-gradient(to right,rgb(169, 203, 241), rgb(135, 162, 231) );
+                          }
                           .botton {
                               margin-bottom: 10px;
-
                           }
                       }
                   }
@@ -707,13 +819,41 @@ export default {
                }
            }
            >.detail {
-               width: 88%;
-               height: auto;
-               margin: auto;
-               display: flex;
-               display: -webkit-flex;
-               justify-content: space-between;
-               -webkit-justify-content: space-between;
+            //    width: 88%;
+            //    height: auto;
+            //    margin: auto;
+            //    display: flex;
+            //    display: -webkit-flex;
+            //    justify-content: space-between;
+            //    -webkit-justify-content: space-between;
+            position: fixed;
+            bottom:0;
+            right:30px;
+            left:30px;
+            .plans {
+                width:100%;
+                display: flex;
+                justify-content: space-between;
+                div {
+                    width:49%;
+                    text-align: center;
+                    background-color: #D2D2D2;
+                    padding:16px 0px;
+                    border-right: 1% dotted #fff;
+                }
+                .addcard {
+                     border-right: 1px dotted #fff;
+                }
+              
+            }
+            .manage {
+                width:100%;
+                margin-top:5px;
+                padding:15px 0px;
+                text-align: center;
+                background-color: #D2D2D2;
+
+            }
            }
        }
    }
