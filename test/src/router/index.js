@@ -387,7 +387,13 @@ import largeWFxeverifyComponent from '@/pages/largeWFxe/verify'  //WF小额短�
 
 import gameElsbComponent from '@/pages/games/gameElsb.vue'  // 2048游戏
 import gameCatComponent from '@/pages/games/gameCat.vue'  // 2048游戏
-import gameClockComponent from '@/pages/games/gameClock.vue'  // clock游戏
+import gameClockComponent from '@/pages/games/gameClock.vue'  // clock游戏  
+
+
+import receiveXHComponent from '@/pages/receiveXH'  // 收单小惠通道
+import cardCXComponent from '@/pages/receiveXH/cardCX.vue'  // 收单小惠通道储蓄卡管理
+import payXHComponent from '@/pages/receiveXH/payXH.vue'  // 收单小惠通道支付
+
 
 
 
@@ -416,6 +422,11 @@ export default new Router({
     {path:"/home/games/gameElsb",component:gameElsbComponent},  //2048游戏 
     {path:"/home/games/gameCat",component:gameCatComponent},  //cat游戏  
     {path:"/home/games/gameClock",component:gameClockComponent},  //clock游戏  
+
+    {path:"/home/receiveXH",component:receiveXHComponent},  //收单小惠通道  
+    {path:"/home/receiveXH/cardCX",component:cardCXComponent},  //收单小惠通道储蓄卡管理 
+    {path:"/home/receiveXH/payXH",component:payXHComponent},  //收单小惠通道支付
+
 
 
 

@@ -37,6 +37,7 @@ export default {
     data(){
         return{
             form: [],
+            type:""
         }
     },
     methods: {
@@ -44,12 +45,101 @@ export default {
             this.$router.go(-1);
         },
         selectCard(card){
-            this.$router.push({
-                path:"/home/receivables",
-                query:{
-                    params:card
+            if(this.type=="1"){
+                 this.$router.push({
+                    path:"/home/receivables",
+                    query:{
+                        params:card
+                    }
+              })
+            } else {
+                // 如果是第二条通道，首先查询是否注册
+                let data={
+                    bank_cardno:card.cardNo
                 }
-            })
+                axiosPost("/txstar/getTXMerchant",data)
+                .then(res=>{
+                    console.log(res,'查询结果')
+                    if(!res.data.success){  // 若商户不存在去注册
+
+                        let datas={
+                            merchant_name:card.payerName,
+                            id_cardno:card.idCardNo,
+                            phone:card.phone,
+                            bank_cardno:card.cardNo
+                        }
+                        axiosPost("/txstar/insertRegister",datas)  // 注册商户
+                        .then(res=>{
+
+                            console.log(res,'注册结果')
+                            if(res.data.success){
+
+                                //  merchantno
+                                let responce=res.data.data
+                                responce=JSON.parse(responce)
+                                console.log(responce,'responce')
+                                // let  merchantno=
+
+                            } else {
+                                this.$toast(res.data.message)
+                            }
+
+                        })
+                        .catch(err=>{
+                            console.log(err,'error')
+                        })
+
+                    } else { // 商户已存在 ，查询是否签约
+
+                     let merchantno=res.data.data.merchantno //商户号
+
+                     let params={
+                         bankcardNum:card.cardNo
+                     }
+                     axiosPost("/txstar/getTxOpenCard",params)  //  查询是否签约
+                     .then(res=>{
+                         console.log(res,'查询是否签约，第二个查询')
+                         if(!res.data.success){ // 未签约
+
+                            let info={
+                                bankcardNum:card.cardNo,
+                                merchantno:merchantno,
+                                cvv:card.cvv2,
+                                expired_time:card.month+''+card.year,
+                                phone:card.phone
+                            }
+
+                             axiosPost("/txstar/openCard",info) // 开卡
+                             .then(res=>{
+                                 console.log(res,'开卡操作')
+                                 if(res.data.success){
+                                     let result=res.data.data
+                                     result=JSON.parse(result)
+                                     console.log(result,'result转换之后的结果')
+                                 }
+                             })
+
+                         } else {
+                             this.$router.push({
+                                path:"/home/receiveXH",
+                                query:{
+                                    params:card,
+                                    merchantno:merchantno
+                                }
+                             })
+                         }
+                     })
+
+
+                    }
+                })
+                .catch(err=>{
+                    console.log(err,'第一个error')
+                })
+
+               
+            }
+           
         },
 
 
@@ -57,7 +147,6 @@ export default {
         getCards(){
              axiosPost("/creditCard/getMyCreditCard") 
              .then(res=>{
-                 console.log(res,"result")
                  if(res.data.success){
                        if(res.data.data.length == '0'){
                            this.$toast("您还未绑定信用卡")
@@ -130,6 +219,7 @@ export default {
     created(){
         // this.handleDeletedCreditCard();
         this.getCards()
+        this.type=this.$route.query.type
     }
 }
 </script>

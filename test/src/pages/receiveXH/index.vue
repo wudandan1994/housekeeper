@@ -27,19 +27,19 @@
                     </p>
                     <p>
                         <span>￥</span>
-                        <input type="number" v-model="number" @input="change" placeholder="请输入金额最低500元">
+                        <input type="number" v-model="number" @input="change" placeholder="金额为1000-20000">
                     </p>
                     <div class="card" v-show="showCard">
                         <ul>
-                            <!-- <li>
+                            <li>
                                 <p>到账储蓄卡：</p>
-                                <p><span>民生银行</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>5323</span></p>
-                                <p class="change">更换<van-icon  name="arrow"  color="#4B66AF" /></p>
-                            </li> -->
+                                <p><span>{{nickCX}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{cardCX.substr(cardCX.length-4,4)}}</span></p>
+                                <router-link tag="p" to="/home/receiveXH/cardCX" class="change">更换<van-icon  name="arrow"  color="#4B66AF" /></router-link>
+                            </li>
                              <li>
                                 <p>支付信用卡：</p>
                                 <p><span>{{nick}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{cardnumber}}</span></p>
-                                <router-link tag="p" :to="{query:{type:'1'},path:'/home/receivables/cards'}"  class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></router-link>
+                                <router-link tag="p" :to="{query:{type:'2'},path:'/home/receivables/cards'}"  class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></router-link>
                             </li>
                         </ul>
                     </div>
@@ -75,7 +75,7 @@
                             <p>单笔交易限额明细</p>
                         </div>
                     </router-link>
-                    <router-link tag="li" to="/home/changeCard">
+                    <router-link tag="li" to="/home/receiveXH/cardCX">
                         <p><span><van-icon color="#4B66AF" size="20px" name="card"/></span></p>
                         <div>
                             <p>储蓄卡管理</p>
@@ -134,6 +134,7 @@
 import {axiosPost} from '@/lib/http'
 import Bank from '@/lib/bank'
 import loading from '@/components/loading'
+import storage from '@/lib/storage' 
 export default {
     components:{
       loading
@@ -152,10 +153,13 @@ export default {
             info:"",
             flag:false,
             nick:"请选择支付信用卡",
+            nickCX:"请选择到账储蓄卡",
+            cardCX:"",
             cardnumber:"",
             cardInfo:"",
             ordernumber:"",
-            componentload:false
+            componentload:false,
+            merchantno:""
         }
     },
     methods:{
@@ -170,167 +174,47 @@ export default {
               }
         },
 
-        // changeTips() {
-        //     this.showTips=true
-        // },
-        // cancle(){
-        //      this.showTips=false
-        // },
+      
         showPay(){
              this.showTips=true
             //  查询商户号，若没有 商户申请，上传图片 ，若有在查询是否有绑定信用卡
             if(this.number.trim().length=="0"){
                 return this.$toast("请输入金额")
             } 
-            if(this.nick=="请选择支付信用卡"){
-                this.$toast("请先选择支付信用卡")
+            if(Number(this.number)<1000 || Number(this.number)>20000){
+                return this.$toast("请输入正确的金额")
             }
-         
-            axiosPost("/creditCard/getMemberReg")
-           .then(res=>{
-            if(res.data.success){  //已申请商户
-                 let info=res.data.data.chMerCode
-                
-                 var rand = "";
-                for(var i = 0; i < 2; i++){
-                    var r = Math.floor(Math.random() * 10);
-                    rand += r
-                }
-             this.ordernumber= new Date().getTime()+rand
-    
-            function generateTimeReqestNumber() {
-                    var date = new Date();
-                    return date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) 
-                    + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds())
-                }
-                    
-             function pad2(n) { return n < 10 ? '0' + n : n }
+            if(this.nick=="请选择支付信用卡" || this.nick=="" || this.nick==undefined){
+               return  this.$toast("请先选择支付信用卡")
+            }
+             if(this.nickCX=="请选择到账储蓄卡" || this.nickCX==""){
+               return  this.$toast("请选择到账储蓄卡")
+            }
+           
 
-            let data={
-                busCode:"2001",
-                orderAmount:this.number, //金额
-                realName:this.cardInfo.payerName,  //姓名
-                idCard:this.cardInfo.idCardNo, //身份证
-                accNo:this.cardInfo.cardNo, // 卡号
-                mobile:this.cardInfo.phone, // 手机号
-                orderCode:this.ordernumber, // 订单号
-                chMerCode:info, // 商户编号
-                orderTime:generateTimeReqestNumber()
-            }  
-            this.componentload=true
-            axiosPost("/creditCard/quickPay",data)
-             .then(res=>{
-                if(!res.data.success){
-                    setTimeout(() =>{
-                        this.componentload = false;
-                         this.$toast({
-                          message:res.data.message
-                        })
-                    },1000)
-                } else {
-                let url=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
-                        setTimeout(() =>{
-                            this.componentload = false;
-                            
-                        //      this.$router.push({
-                        //     path:"/loan/form/myOrder",
-                        //     query:{
-                        //         info:url,
-                        //         title:"支付"
-                        //       }
-                        // })
-                        
-                          if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                            this.$router.push({
-                            path:"/loan/form/myOrder",
-                            query:{
-                                info:url,
-                                title:"支付"
-                              }
-                             })
-                            } else {
-                                 this.componentload=false
-                                 location.href=url
-                            }
+            
 
-                        },1000)
-                       
-                   }
-               })
-            .catch(err=>{
+
+            this.$router.push({
+                path:"/home/receiveXH/payXH",
+                query:{
+                     info:this.cardInfo,
+                    number:this.number,
+                    merchantno:this.merchantno
+                }
             })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                //   axiosPost("/creditCard/getMyCreditCard")  // 查询是否有绑信用卡
-                //   .then(res=>{
-                //       console.log(res,"查询绑卡列表")
-                //       if(res.data.success){
-                //           if(res.data.data.length==0){
-                //               console.log("if")
-                //               this.$toast("请先绑定信用卡")
-                //               setTimeout(()=>{
-                //                   this.$router.push("/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard")
-                //               },1000)
-                //           } else {
-                //               console.log('else')
-                //              this.info=res.data.data[0]
-                //               console.log(info,'iiiiiiiIiiiiiiiiii')
-                //               if(info.bankname==null || info.bankname==""){
-                //                   console.log("bankname")
-                //                    this.$http.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+info.cardNo+'&cardBinCheck=true')
-                //                    .then(responce=>{
-                //                        let bankcode=responce.data.bank
-                //                         Bank.forEach(item => {
-                //                         if(item.bankCode==bankcode){
-                //                             info.bankname=item.bankName
-                //                         }
-                //                     });
-                //                     console.log(this.info,'info信息')
-                //                    })
-
-                //               }
-
-                //           }
-                //       }
-                //   })    
+         
             
-            }else {   
-                
-                 this.$router.push({
-                     path:"/home/collect"
-                 })
-            }
-
-            // 查询是否有绑定信用卡，
-            
-        })
-        .catch(err=>{
-            // console.log(err,"error个人信息")
-        })
-
-
+          
+           
 
             
         },
         searchInfo(){
             axiosPost("/customer/getCustomer")
            .then(function(res){
-               console.log(res,'data')
                 if(res.data.success){
-                    console.log(res.data.data.nickname)
+
                 }
               })
            .catch(function(err){
@@ -353,8 +237,6 @@ export default {
                         }
                     })
                 }
-                 
-                   
 
             })
             .catch(err=>{
@@ -369,12 +251,18 @@ export default {
         this.headimg=this.$store.state.wechat.headimg;
         this.lev=this.$store.state.wechat.level;
         this.cardInfo=this.$route.query.params
+        this.merchantno=this.$route.query.merchantno
+        this.nickCX=storage.get('cxcard')
+        this.cardCX=storage.get('cxcardnumber')
+        
+        if(this.cardCX){
+            this.showCard=true
+        }
         if(this.cardInfo) {
             this.showCard=true
             this.nick=this.cardInfo.bankname
             this.cardnumber=this.cardInfo.cardNo.substr(this.cardInfo.cardNo.length-4,4)
         }
-        console.log(this.cardInfo,'cardinfo')
 
         if(this.lev=='1') {
             this.lev="黄金会员"
