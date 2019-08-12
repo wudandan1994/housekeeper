@@ -28,6 +28,10 @@
                 </li>
             </ul>
         </div>
+      
+        <div class="sure">
+              <van-button type="info" @click="sure" size="large">确定</van-button>
+        </div>
     </div>    
 </template>
 <script>
@@ -38,6 +42,9 @@ export default {
     data(){
         return{
             form: [],
+            info:{},
+            idcard:"",
+            merchantno:""
         }
     },
     methods: {
@@ -45,12 +52,89 @@ export default {
             this.$router.go(-1);
         },
         selectCard(card){
-            storage.set("cxcard",card.bankname)
-            storage.set("cxcardnumber",card.bankcardno)
+            this.info=card
+            console.log(this.info,'info')
+            // storage.set("cxcard",card.bankname)
+            // storage.set("cxcardnumber",card.bankcardno)
 
 
-            this.$router.push({
-                path:"/home/receiveXH",
+            // this.$router.push({
+            //     path:"/home/receiveXH",
+            // })
+        },
+        sure(){
+
+            if(this.info=={}){
+                return this.$toast("请选择储蓄卡")
+            }
+
+             storage.set("cxcard",this.info.bankname)
+            storage.set("cxcardnumber",this.info.bankcardno)
+            let data={
+                bank_cardno:this.info.bankcardno
+            }
+            axiosPost("/txstar/getTXMerchant",data)
+            .then(res=>{
+                console.log(res,'注册的商户信息')
+                if(!res.data.success){  // 注册商户
+                   let datas={
+                       merchant_name:this.info.name,
+                       id_cardno:this.idcard,
+                       phone:this.info.phone,
+                       bank_cardno:this.info.bankcardno,
+                   }
+                   axiosPost("/txstar/insertRegister",datas)
+                   .then(res=>{
+                    //    console.log(res,'注册成功')
+                       let responce=res.data.data
+                       responce=JSON.parse(responce)
+                    //    console.log(responce,'responce')
+
+                       if(res.data.success){
+                           this.merchantno=res.data.data.merchantno
+                           this.$router.push({
+                               path:"/home/receiveXH",
+                               query:{
+                                 merchantno:responce.merchantno
+                               }
+                           })
+                       } else {
+                           this.$toast(res.data.message)
+                       }
+
+                   })
+
+                } else {
+
+                    this.merchantno=res.data.data.merchantno
+                     this.$router.push({
+                        path:"/home/receiveXH",
+                        query:{
+                            merchantno:this.merchantno
+                        }
+                    })
+
+                }
+            })
+            .catch(err=>{
+                console.log(err,'error')
+            })
+
+         
+
+        },
+
+       
+        // 获取身份证号码
+        getIdent(){
+            axiosPost("/customer/getIdentification")
+            .then(res=>{
+                if(res.data.success){
+                    this.idcard=res.data.data.idcardnumber
+                }
+            })
+            .catch(err=>{
+                console.log(err)
             })
         },
 
@@ -77,6 +161,7 @@ export default {
     created(){
         // this.handleDeletedCreditCard();
         this.getCards()
+        this.getIdent()
     }
 }
 </script>
@@ -135,6 +220,13 @@ export default {
                 }
             }
         }
+    }
+    .sure {
+        padding:30px;
+    .van-button--info{
+        background-color: #4B66AF;
+        font-size: 30px;
+    }    
     }
     .per_card{
         width: 95%;

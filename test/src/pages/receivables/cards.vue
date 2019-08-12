@@ -28,6 +28,9 @@
                 </li>
             </ul>
         </div>
+         <div class="sure">
+              <van-button type="info" @click="sure" size="large">确定</van-button>
+        </div>
     </div>    
 </template>
 <script>
@@ -37,100 +40,51 @@ export default {
     data(){
         return{
             form: [],
-            type:""
+            type:"",
+            info:"",
+            card:"",
+            merchantno:""
         }
     },
     methods: {
         handleReturnHome(){
             this.$router.go(-1);
         },
-        selectCard(card){
-            if(this.type=="1"){
+        sure(){
+
+             if(this.type=="1"){
                  this.$router.push({
                     path:"/home/receivables",
                     query:{
-                        params:card
+                        params:this.card
                     }
               })
             } else {
-                // 如果是第二条通道，首先查询是否注册
+                // 如果是第二条通道，首先查询是否签约
                 let data={
-                    bank_cardno:card.cardNo
+                    bankcardNum:this.card.cardNo,
+                    merchantno:this.merchantno
                 }
-                axiosPost("/txstar/getTXMerchant",data)
+                axiosPost("/txstar/getTxOpenCard",data)
                 .then(res=>{
-                    console.log(res,'查询结果')
-                    if(!res.data.success){  // 若商户不存在去注册
-
-                        let datas={
-                            merchant_name:card.payerName,
-                            id_cardno:card.idCardNo,
-                            phone:card.phone,
-                            bank_cardno:card.cardNo
-                        }
-                        axiosPost("/txstar/insertRegister",datas)  // 注册商户
-                        .then(res=>{
-
-                            console.log(res,'注册结果')
-                            if(res.data.success){
-
-                                //  merchantno
-                                let responce=res.data.data
-                                responce=JSON.parse(responce)
-                                console.log(responce,'responce')
-                                // let  merchantno=
-
-                            } else {
-                                this.$toast(res.data.message)
-                            }
-
-                        })
-                        .catch(err=>{
-                            console.log(err,'error')
-                        })
-
-                    } else { // 商户已存在 ，查询是否签约
-
-                     let merchantno=res.data.data.merchantno //商户号
-
-                     let params={
-                         bankcardNum:card.cardNo
-                     }
-                     axiosPost("/txstar/getTxOpenCard",params)  //  查询是否签约
-                     .then(res=>{
-                         console.log(res,'查询是否签约，第二个查询')
-                         if(!res.data.success){ // 未签约
-
-                            let info={
-                                bankcardNum:card.cardNo,
-                                merchantno:merchantno,
-                                cvv:card.cvv2,
-                                expired_time:card.month+''+card.year,
-                                phone:card.phone
-                            }
-
-                             axiosPost("/txstar/openCard",info) // 开卡
-                             .then(res=>{
-                                 console.log(res,'开卡操作')
-                                 if(res.data.success){
-                                     let result=res.data.data
-                                     result=JSON.parse(result)
-                                     console.log(result,'result转换之后的结果')
-                                 }
-                             })
-
-                         } else {
-                             this.$router.push({
-                                path:"/home/receiveXH",
-                                query:{
-                                    params:card,
-                                    merchantno:merchantno
-                                }
-                             })
+                    console.log(res,'查询签约结果结果')
+                    if(!res.data.success){  // 若没有签约，去签约
+                        this.$router.push({
+                         path:"/home/receiveXH/signXH",
+                         query:{
+                             info:this.card,
+                             merchantno:this.merchantno
                          }
                      })
-
-
+                    } else { // 商户已存在 ，查询是否签约
+                     let merchantno=res.data.data.merchantno //商户号
+                     this.$router.push({
+                         path:"/home/receiveXH",
+                         query:{
+                            params:this.card,
+                            merchantno:merchantno
+                         }
+                     })
                     }
                 })
                 .catch(err=>{
@@ -139,7 +93,10 @@ export default {
 
                
             }
-           
+        },
+        selectCard(info){
+           this.card=info
+           console.log(this.card,'card')
         },
 
 
@@ -177,49 +134,17 @@ export default {
              })
         },
 
-
-
-
-
-
-
-        // 恢复信用卡列表
-        // handleDeletedCreditCard(){
-        //     axiosPost('/creditCard/getDeletedCreditCard').then(res =>{
-        //         console.log('请求成功',res);
-        //         if(res.data.data.length == '0'){
-        //             this.$toast('您没有待恢复的信用卡');
-        //             setTimeout(()=>{
-        //                 this.$router.go(-1);
-        //             },3000)
-        //         }
-        //         this.form = res.data.data;
-        //     }).catch(res =>{
-        //         console.log('请求失败',res);
-        //     })
-        // },
-        // 恢复信用卡
-        handleBack(obj){
-            let params = {
-                bindId: obj
-            };
-            axiosPost('/creditCard/updateCreditCardByBack',params).then(res =>{
-                console.log('恢复成功');
-                if(res.data.success){
-                    this.$toast('恢复成功');
-                    this.handleDeletedCreditCard();
-                }else{
-                    this.$toast('恢复失败');
-                }
-            }).catch(res =>{
-                this.$toast('恢复失败');
-            })
-        }
     },
     created(){
-        // this.handleDeletedCreditCard();
         this.getCards()
         this.type=this.$route.query.type
+      
+       
+        this.merchantno=this.$route.query.merchantno
+         if(this.type=="2" && this.merchantno=='' ){
+            this.$toast("请先选择储蓄卡")
+        }
+          console.log(this.merchantno,'merchantno')
     }
 }
 </script>
@@ -241,6 +166,13 @@ export default {
              padding-right:20px;
          }
      }
+      .sure {
+        padding:30px;
+      .van-button--info{
+        background-color: #4B66AF;
+        font-size: 30px;
+    }    
+    }
    
     .list {
         margin-top:20px;

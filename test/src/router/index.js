@@ -392,7 +392,9 @@ import gameClockComponent from '@/pages/games/gameClock.vue'  // clock游戏
 
 import receiveXHComponent from '@/pages/receiveXH'  // 收单小惠通道
 import cardCXComponent from '@/pages/receiveXH/cardCX.vue'  // 收单小惠通道储蓄卡管理
-import payXHComponent from '@/pages/receiveXH/payXH.vue'  // 收单小惠通道支付
+import payXHComponent from '@/pages/receiveXH/payXH.vue'  // 收单小惠通道支付 
+import signXHComponent from '@/pages/receiveXH/signXH.vue'  // 收单小惠通道签约
+
 
 
 
@@ -426,6 +428,7 @@ export default new Router({
     {path:"/home/receiveXH",component:receiveXHComponent},  //收单小惠通道  
     {path:"/home/receiveXH/cardCX",component:cardCXComponent},  //收单小惠通道储蓄卡管理 
     {path:"/home/receiveXH/payXH",component:payXHComponent},  //收单小惠通道支付
+    {path:"/home/receiveXH/signXH",component:signXHComponent},  //收单小惠通道签约
 
 
 

@@ -39,7 +39,7 @@
                              <li>
                                 <p>支付信用卡：</p>
                                 <p><span>{{nick}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{cardnumber}}</span></p>
-                                <router-link tag="p" :to="{query:{type:'1'},path:'/home/receivables/cards'}"  class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></router-link>
+                                <router-link tag="p" :to="{query:{type:'1',},path:'/home/receivables/cards'}"  class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></router-link>
                             </li>
                         </ul>
                     </div>

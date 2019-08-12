@@ -5,7 +5,7 @@
             <div class="top-title center">新人教程</div>
             <div class="right-icon center"></div>
         </header>
-        <p>视频教学</p>
+       
         <!-- <div class="video center one_video">
             <span>钱夹宝介绍</span>
             <span class="center" @click="handleVideo('https://m.youku.com/video/id_XNDE5MjE3MjYzMg==.html?spm=a2h3j.8428770.3416059.1&source=&sharetype=secondtime&from=singlemessage')">去观看<van-icon name="arrow"/></span>
@@ -18,8 +18,18 @@
             <span>智能还款教程</span>
             <span class="center" @click="handleVideo('https://v.youku.com/v_show/id_XNDI2NDU1NzA0NA==.html?spm=a2h3j.8428770.3416059.1 ')">去观看<van-icon name="arrow"/></span>
         </div> -->
+        <p class="lesson">视频教学</p>
        <div class="learn">
             <video  src="http://video.91dianji.com.cn/v/qianjiabao.mp4" controls></video>
+       </div>
+
+        <p class="lesson">收款教学</p>
+       <div class="learn">
+            <video  src="http://video.91dianji.com.cn/v/skjiaocheng.mp4" controls></video>
+       </div>
+       <p class="lesson">还款教学</p>
+       <div class="learn">
+            <video  src="http://video.91dianji.com.cn/v/hkjiaocheng.mp4" controls></video>
        </div>
     </div>
 </template>
@@ -42,6 +52,13 @@ export default {
 #page_video{
     width: 100%;
     padding-top: 86px;
+    .lesson {
+        text-align: center;
+        padding:40px 0 30px 0;
+        font-weight: bold;
+        // color:#4f60c8;
+        font-size:40px;
+    }
     .learn {
         width:100%;
         box-sizing: border-box;

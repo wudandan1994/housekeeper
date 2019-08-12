@@ -6,7 +6,6 @@
             <span></span>
         </header>
         <div class="container">
-           
            <div class="phone">
                <ul>
                     <li>
@@ -39,7 +38,6 @@
                    <van-popup v-model="show" position="bottom"  >
                        <van-picker  show-toolbar   @cancel="onCancel"  title="选择地区" :columns="columns" @change="onChange"  @confirm="onConfirm" />
                    </van-popup>
-
                </ul>
            </div>
            <div class="at-once">
@@ -69,6 +67,7 @@ export default {
            cardNum:"",
            merchantno:"",
            accountNum:"",
+           area:"",
            show:false,
              columns: [
         {
@@ -89,15 +88,18 @@ export default {
     },
     methods:{
        goBack(){
-           this.$router.go(-1)          
+           this.$router.push({
+               path:"/home/receiveXH",
+               query:{
+                   params:this.info
+               }
+           })       
        },
        selectArea(){
         this.show=!this.show
        },
        onConfirm(value){
-           console.log(value)
           this.area=value.join("-")
-          console.log(this.area,'area')
           if(this.area=='北京市-'){
                 this.area='北京市-北京市'
             }
@@ -121,18 +123,16 @@ export default {
                area:this.area
            }
 
-           console.log(data,'data')
            this.componentload=true
            axiosPost("/txstar/repaymentConsume",data)
            .then(res=>{
+               console.log(res,'支付结果')
                setTimeout(()=>{
-
                     if(res.data.success){
                         this.$toast(res.data.message)
                     } else {
                         this.$toast(res.data.message)
                     }
-
                  this.componentload=false
 
                },1500)
@@ -148,6 +148,7 @@ export default {
         this.info=this.$route.query.info
         this.amount=this.$route.query.number
         this.merchantno=this.$route.query.merchantno
+        console.log(this.merchantno,'merchantno')
         this.accountNum=storage.get("cxcardnumber")
         this.bankcardNum=this.info.cardNo
         this.phone=this.info.phone

@@ -57,7 +57,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home/receivables')
+            this.$router.go(-1)
         }
     },
     created () {

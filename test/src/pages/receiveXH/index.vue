@@ -33,13 +33,13 @@
                         <ul>
                             <li>
                                 <p>到账储蓄卡：</p>
-                                <p><span>{{nickCX}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{cardCX.substr(cardCX.length-4,4)}}</span></p>
+                                <p><span>{{nickCX}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{cardCX}}</span></p>
                                 <router-link tag="p" to="/home/receiveXH/cardCX" class="change">更换<van-icon  name="arrow"  color="#4B66AF" /></router-link>
                             </li>
                              <li>
                                 <p>支付信用卡：</p>
                                 <p><span>{{nick}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{cardnumber}}</span></p>
-                                <router-link tag="p" :to="{query:{type:'2'},path:'/home/receivables/cards'}"  class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></router-link>
+                                <router-link tag="p" :to="{query:{type:'2',merchantno:merchantno},path:'/home/receivables/cards'}"  class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></router-link>
                             </li>
                         </ul>
                     </div>
@@ -254,11 +254,15 @@ export default {
         this.merchantno=this.$route.query.merchantno
         this.nickCX=storage.get('cxcard')
         this.cardCX=storage.get('cxcardnumber')
+        if(this.cardCX){
+            this.cardCX=this.cardCX.substr(this.cardCX.length-4,4)
+        }
         
         if(this.cardCX){
             this.showCard=true
         }
-        if(this.cardInfo) {
+        console.log(this.cardInfo,"cardInfo")
+        if(this.cardInfo ) {
             this.showCard=true
             this.nick=this.cardInfo.bankname
             this.cardnumber=this.cardInfo.cardNo.substr(this.cardInfo.cardNo.length-4,4)
