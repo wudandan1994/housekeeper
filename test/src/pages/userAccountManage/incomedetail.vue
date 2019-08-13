@@ -9,7 +9,7 @@
              
 
             <van-tabs v-model="active" @click="handleChangeTabs">
-                <van-tab title="所得佣金">
+                <van-tab title="所得佣金" >
                    <div class="income-tab">
                         <div class="per-list" v-for="(item,index) in list" :key="index">
                             <div class="avator center"><img :src="item.photo" alt=""></div>
@@ -90,9 +90,9 @@
                         </div>
                     </div>
                 </van-tab>
-                <van-tab title="招商收益">
+                <!-- <van-tab title="招商收益">
                     
-                </van-tab>
+                </van-tab> -->
             </van-tabs>
         </div>
         <loading :componentload='componentload'></loading>
@@ -334,7 +334,6 @@ export default {
         height: auto;
         padding-top: 86px;
         .income-tab{
-           
             .top-tab{
                 width: 100%;
                 height: 100px;

@@ -1,298 +1,311 @@
 
 <template>
    
-        
-   
-
-   
-    
-   
-     
-    <van-pull-refresh v-model="isLoading" @refresh="onRefresh" :loading-text="loadtext" :loosing-text="loostext" :head-height="lineheight">
-
-         <div  class="ads" slot="loading">
-           <div class="tipsone">
-              <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
-              <div class="cres">
-                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
-                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/yong.png" /> </span>
-                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/fu.png" /> </span>
-                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/wu.png" /> </span>
-                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/ping.png" /> </span>
-                  <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/tai.png" /> </span>
-              </div>
-           </div>
-           <div class="tiptwo"></div>
-        </div> 
-
-
-
-         <div :class="showAaside == true ? 'menuanimate' : 'moveleft'" id="home-component" @swipedown="swipe(x)" >
+         <div :class="showAaside == true ? 'menuanimate' : ''" id="home-component" @swipedown="swipe(x)" >
+              <div  class="ads"  v-show="ads" slot="pulling">
+                <div class="tipsone">
+                    <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
+                        <div class="cres animated  zoomIn ">
+                            <span class="animated "> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
+                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/yong.png" /> </span>
+                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/fu.png" /> </span>
+                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/wu.png" /> </span>
+                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/ping.png" /> </span>
+                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/tai.png" /> </span>
+                       </div>
+                </div>
+                <div class="tiptwo"></div>
+                </div> 
+              <van-pull-refresh v-model="isLoading" @refresh="onRefresh" :loading-text="loadtext" :loosing-text="loostext" :head-height="lineheight">
       
-        <header>
-            <div>
-                <div class="menu" @click="isShow">
-                    <van-icon name="wap-nav" />
-                    菜单
-               </div>
-               <span class="location">
-                </span>
-            </div>  
-            <span class="icon"><img src="http://pay.91dianji.com.cn/top_icon.png" alt=""></span>
-            <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
-        </header>
-        
-        <div class="container">
-            <!-- 轮播图模块 -->
-            <div class="swipe">
-                <van-swipe :autoplay="3000" :height="height">
-                    <van-swipe-item v-for="(item, index) in images" :key="index" @click="handleSwipeDetail(item)">
-                        <img v-lazy="item.url" class="per-img" />
-                    </van-swipe-item>
-                </van-swipe>
-            </div>
-            <!-- 查询模块 -->
-            <div class="search">
-                <ul>
-                    <router-link to="/video" tag="li">
-                        <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
-                        <span>新人教程</span>
-                    </router-link>
-                    <router-link to="/vip" tag="li">
-                         <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
-                        <p>升级代理</p>
-                    </router-link>
-                    <router-link to="/personalCenter/incomedetail" tag="li">
-                         <p> <van-icon name="http://pay.91dianji.com.cn/103.png"  class="zx-search"  /></p>
-                        <span>收益明细</span>
-                    </router-link>
-                    <router-link tag="li" to="/home/totalPunch">
-                        <p> <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search  rotateZ"  /></p>
-                        <span>签到打卡</span>
-                    </router-link>
-                </ul>
-            </div>
-            <!-- 名片咨询模块 -->
-            <div class="pannel-news row">
-                <div class="pannel-title center">钱&nbsp;夹<br/>资&nbsp;讯</div>
-                <div class="pannel-detail center" @click="handleContactUs">
-                    <!-- <van-notice-bar text="好消息：从7月8日至7月14日，连续在朋友圈推广钱夹宝相关海报，连续时间7天，可免费成为993会员一个月！费率低至0.47！相关活动内容请联系客服"/>  -->
-                    <van-notice-bar text="最新推广活动：7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.47，并领取1000元现金奖励！活动详情，请联系您的专属客服！"/> 
-                </div>
-            </div>
-
-            <!-- 信用卡模块 -->
-            <div class="credit">
-                <ul>
-                    <!-- <li @click="handleIsAuth('/home/cardCenter',false,'')">
-                        <span class="handle">
-                            <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
-                        </span>
-                        <div class="channel">
-                            <h3>信用卡办理</h3>
-                            <p>佣金当天结算</p>
-                            <span>官方渠道</span>
+                    <header>
+                        <div>
+                            <div class="menu" @click="isShow">
+                                <van-icon name="wap-nav" />
+                                菜单
                         </div>
-                    </li> -->
-
-                     <li @click="applycard('https://creditcard.feierlaiedu.com/?token=5b842e25964f78313326b53f9e331c54','办卡中心')">
-                        <span class="handle">
-                            <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
-                        </span>
-                        <div class="channel">
-                            <h3>信用卡办理</h3>
-                            <p>佣金当天结算</p>
-                            <span>官方渠道</span>
-                        </div>
-                    </li>
-
-
-
-                    <li @click="handleIsAuth('/home/receivables',false,'')">
-                    <!-- <li @click="handleIsAuth('/home/collect',false,'')"> -->
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
-                        <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
-                        </span>
-                        <div class="channel">
-                            <h3>在线收款</h3>
-                            <p>快捷支付</p>
-                            <span>落地商户</span>
-                        </div>
-                    </li>
-                    <li @click="handleIsAuth('/loan/detail',true,'4')">
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
-                        <div class="channel">
-                            <h3>信息咨询</h3>
-                            <p>实时审批&nbsp;授信额度</p>
-                            <span>GO>></span>
+                        <span class="location">
+                            </span>
                         </div>  
-                    </li>
-                     <!-- <router-link tag="li" to="/home/creditHousekeeper">
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
-                        <div class="channel">
-                            <h3>智能还款</h3>
-                            <p>落地商户空卡周转</p>
-                            <span>完美账单</span>
+                        <span class="icon"><img src="http://pay.91dianji.com.cn/top_icon.png" alt=""></span>
+                        <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
+                    </header>
+                    
+                    <div class="container">
+                        <!-- 轮播图模块 -->
+                        <div class="swipe">
+                            <van-swipe :autoplay="3000" :height="height">
+                                <van-swipe-item v-for="(item, index) in images" :key="index" @click="handleSwipeDetail(item)">
+                                    <img v-lazy="item.url" class="per-img" />
+                                </van-swipe-item>
+                            </van-swipe>
                         </div>
-                     </router-link> -->
-
-                      <li  @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')" >
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /> <van-icon name="hot" color="red" class="hot pay"  size="20px" /></span>
-                        <div class="channel">
-                            <h3>智能还款</h3>
-                            <p>落地商户空卡周转</p>
-                            <span>完美账单</span>
+                        <!-- 查询模块 -->
+                        <div class="search">
+                            <ul>
+                                <router-link to="/video" tag="li">
+                                    <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
+                                    <span>新人教程</span>
+                                </router-link>
+                                <router-link to="/vip" tag="li">
+                                    <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
+                                    <p>升级代理</p>
+                                </router-link>
+                                <router-link to="/personalCenter/incomedetail" tag="li">
+                                    <p> <van-icon name="http://pay.91dianji.com.cn/103.png"  class="zx-search"  /></p>
+                                    <span>收益明细</span>
+                                </router-link>
+                                <router-link tag="li" to="/home/totalPunch">
+                                    <p> <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search  rotateZ"  /></p>
+                                    <span>签到打卡</span>
+                                </router-link>
+                            </ul>
                         </div>
-                         
-                     </li>
-
-                </ul>
-            </div>
-            <!-- 特色服务 -->
-            <div class="server">
-                <p>特色服务</p>
-                <div class="special">
-                    <ul>
-                        <router-link tag="li" to="/home/evaluation" class="secret">
-                            <p> <van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></p>
-                            <p>卡·测评</p>
-                        </router-link>
-                        
-                        <li  @click="handleGarbage" class="secret">
-                            <p> <van-icon name="http://pay.91dianji.com.cn/tie.png" size="30px" /></p>
-                            <p>垃圾分类</p>
-                        </li>
-                        <li class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')" >
-                            <p> <van-icon name="http://pay.91dianji.com.cn/weizhang.png" size="30px" /></p>
-                            <p>违章查询</p>
-                        </li>
-                        <li class="secret"  @click="changeLink('http://www.epicc.com.cn/','汽车保险')" >
-                            <p><van-icon name="http://pay.91dianji.com.cn/qichebaoxian.png" size="30px" /></p>
-                            <p>汽车保险</p>
-                       </li>
-
-
-
-                        <li  @click="changeLink('http://baoxian.pingan.com','意外险')" >
-                            <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
-                            <p>意外险</p>
-                       </li>
-
-                        <!-- <li @click="handleExpect">
-                            <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
-                            <p>积分兑换</p>
-                        </li> -->
-                         <!-- <li  @click="changeLink('http://www.jd.com','商城')"  >
-                           <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
-                           <p>商城</p>
-                        </li> -->
-                         <!-- <li @click="handleExpect">
-                            <p> <van-icon name="http://pay.91dianji.com.cn/gengduo.png" size="30px" /></p>
-                            <p>更多</p>
-                        </li> -->
-                    </ul>
-                </div>
-            </div>
-            <!-- 热门推荐 -->
-              <div class=" hotdoor">
-                <div class="title start-center">热门推荐</div>
-                <div class="remen_tuijian">
-                    <div class="more"><van-icon name="arrow" color="#cccccc" size="30px"/></div>
-                    <!-- <div  @click="handleIsAuth('/home/receivables',false,'')" class="secret"> -->
-                    <div  @click="handleIsAuth('/home/collect',false,'')" class="secret">
-                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan.png" size="34px" /></div>
-                        <div class="center">在线收款</div>
-                    </div>
-
-                    <div @click="applycard('https://creditcard.feierlaiedu.com/?token=5b842e25964f78313326b53f9e331c54','办卡中心')" class="secret">
-                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></div>
-                        <div class="center">信用卡办理</div>
-                    </div>
-                    <div class="secret"  @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')" >
-                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan.png" size="30px" /></div>
-                        <div class="center">智能还款</div>
-                    </div>
-
-                     <router-link tag="div" class="secret"  to="/vip">
-                        <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/shengji.png" size="30px" /></div>
-                        <div class="center">升级代理</div>
-                    </router-link>
-                    <router-link tag="div" class="secret"  to="/home/evaluation">
-                        <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></div>
-                        <div class="center">卡·测评</div>
-                    </router-link>
-                    <div @click="handleIsAuth('/loan/detail',true,'4')" class="secret">
-                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
-                        <div class="center">信息咨询</div>
-                    </div>
-                    <!-- <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
-                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
-                        <div class="center">商城</div>
-                    </router-link> -->
-                    <div class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')">
-                        <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/weizhang.png"  size="30px" /></div>
-                        <div class="center">违章查询</div>
-                    </div>
-                </div>
-            </div>
-            <!-- 遮盖层 -->
-            <div class="aside-left" v-show="showAaside" @click.self="hideAside">
-                <div class="info">
-                    <div class="avatar">
-                         <!-- <span><van-icon :name="headimg" /></span> -->
-                         <div class="himg">
-                             <img :src="headimg" alt="">
-                         </div>
-                         <p><span>{{nickname}}</span> &nbsp;&nbsp; <span>{{lev}}</span></p>
-                    </div>
-                    <ul>
-                        <router-link tag="li" to="/home/systemNews">系统消息</router-link>
-                        <!-- <router-link tag="li" to="/home/verified">实名认证</router-link> -->
-                         <li @click="handleAuth">实名认证</li>
-                        <router-link to="/home/bindingPhone" tag="li">修改手机</router-link>
-                        <router-link to="/home/customerService" tag="li">联系客服</router-link>
-                        <router-link to="/personalCenter/contactus" tag="li">关于我们</router-link>
-                        <!-- <li class="switch">声音开关
-                        </li> -->
-                        <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
-                        <li @click="handleClear">清除缓存</li>
-                         <router-link tag="li" class="center" to="/register">个人设置</router-link>
-                    </ul>
-                   
-                      <div  @click="signOut" class="sign-out">
-                        <span>退出登录</span>
-                    </div> 
-                </div>
-            </div>
-            <!-- 更新 -->
-            <div @click.self="showUpdate=false" v-show="showUpdate" class="update">
-                <div  class="cover">
-                    <div class="version">
-                       <h3>版本更新</h3>
-                        <p>钱夹宝升级了，快来体验吧！</p>
-                        <div class="butt">
-                            <div class="cancle" @click="showUpdate=false">取消</div>
-                            <div class="upd" @click="download">更新</div>
+                        <!-- 名片咨询模块 -->
+                        <div class="pannel-news row">
+                            <div class="pannel-title center">钱&nbsp;夹<br/>资&nbsp;讯</div>
+                            <div class="pannel-detail center" @click="handleContactUs">
+                                <!-- <van-notice-bar text="好消息：从7月8日至7月14日，连续在朋友圈推广钱夹宝相关海报，连续时间7天，可免费成为993会员一个月！费率低至0.47！相关活动内容请联系客服"/>  -->
+                                <van-notice-bar text="最新推广活动：7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.47，并领取1000元现金奖励！活动详情，请联系您的专属客服！"/> 
+                            </div>
                         </div>
+
+                        <!-- 信用卡模块 -->
+                        <div class="credit">
+                            <ul>
+                                <!-- <li @click="handleIsAuth('/home/cardCenter',false,'')">
+                                    <span class="handle">
+                                        <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
+                                    </span>
+                                    <div class="channel">
+                                        <h3>信用卡办理</h3>
+                                        <p>佣金当天结算</p>
+                                        <span>官方渠道</span>
+                                    </div>
+                                </li> -->
+
+                                <li @click="applycard('https://creditcard.feierlaiedu.com/?token=5b842e25964f78313326b53f9e331c54','办卡中心')">
+                                    <span class="handle">
+                                        <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
+                                    </span>
+                                    <div class="channel">
+                                        <h3>信用卡办理</h3>
+                                        <p>佣金当天结算</p>
+                                         <div class="cardmodule">
+                                              <van-swipe :autoplay="2000" vertical :height="60" indicator-color="#54866A">
+                                                <van-swipe-item>官方渠道</van-swipe-item>
+                                                <van-swipe-item>免费办卡</van-swipe-item>
+                                              </van-swipe>
+                                         </div>
+                                       
+                                        <!-- <span>官方渠道</span> -->
+                                    </div>
+                                </li>
+                                <!-- <li @click="handleIsAuth('/home/receivables',false,'')"> -->
+                                <li @click="handleIsAuth('/home/collect',false,'')">
+                                    <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
+                                    <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
+                                    </span>
+                                    <div class="channel">
+                                        <h3>在线收款</h3>
+                                        <p>快捷支付</p>
+                                         <div class="cardmodule">
+                                              <van-swipe :autoplay="2000" vertical :height="60" indicator-color="#54866A">
+                                                <van-swipe-item>落地商户</van-swipe-item>
+                                                <van-swipe-item>多个选择</van-swipe-item>
+                                              </van-swipe>
+                                         </div>
+                                        <!-- <span>落地商户</span> -->
+                                    </div>
+                                </li>
+                                <li @click="handleIsAuth('/loan/detail',true,'4')">
+                                    <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
+                                    <div class="channel">
+                                        <h3>信息咨询</h3>
+                                        <p>实时审批&nbsp;授信额度</p>
+                                        <span>GO>></span>
+                                    </div>  
+                                </li>
+                                <!-- <router-link tag="li" to="/home/creditHousekeeper">
+                                    <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
+                                    <div class="channel">
+                                        <h3>智能还款</h3>
+                                        <p>落地商户空卡周转</p>
+                                        <span>完美账单</span>
+                                    </div>
+                                </router-link> -->
+
+                                <li  @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')" >
+                                    <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /> <van-icon name="hot" color="red" class="hot pay"  size="20px" /></span>
+                                    <div class="channel">
+                                        <h3>智能还款</h3>
+                                        <p>落地商户空卡周转</p>
+                                        <div class="cardmodule">
+                                              <van-swipe :autoplay="2000" vertical :height="60" indicator-color="#54866A">
+                                                <van-swipe-item>完美账单</van-swipe-item>
+                                                <van-swipe-item>余额还款</van-swipe-item>
+                                              </van-swipe>
+                                         </div>
+                                        <!-- <span>完美账单</span> -->
+                                    </div>
+                                    
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- 特色服务 -->
+                        <div class="server">
+                            <p>特色服务</p>
+                            <div class="special">
+                                <ul>
+                                    <router-link tag="li" to="/home/evaluation" class="secret">
+                                        <p> <van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></p>
+                                        <p>卡·测评</p>
+                                    </router-link>
+                                    
+                                    <li  @click="handleGarbage" class="secret">
+                                        <p> <van-icon name="http://pay.91dianji.com.cn/tie.png" size="30px" /></p>
+                                        <p>垃圾分类</p>
+                                    </li>
+                                    <li class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')" >
+                                        <p> <van-icon name="http://pay.91dianji.com.cn/weizhang.png" size="30px" /></p>
+                                        <p>违章查询</p>
+                                    </li>
+                                    <li class="secret"  @click="changeLink('http://www.epicc.com.cn/','汽车保险')" >
+                                        <p><van-icon name="http://pay.91dianji.com.cn/qichebaoxian.png" size="30px" /></p>
+                                        <p>汽车保险</p>
+                                </li>
+
+
+
+                                    <li  @click="changeLink('http://baoxian.pingan.com','意外险')" >
+                                        <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
+                                        <p>意外险</p>
+                                </li>
+
+                                    <!-- <li @click="handleExpect">
+                                        <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
+                                        <p>积分兑换</p>
+                                    </li> -->
+                                    <!-- <li  @click="changeLink('http://www.jd.com','商城')"  >
+                                    <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
+                                    <p>商城</p>
+                                    </li> -->
+                                    <!-- <li @click="handleExpect">
+                                        <p> <van-icon name="http://pay.91dianji.com.cn/gengduo.png" size="30px" /></p>
+                                        <p>更多</p>
+                                    </li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 热门推荐 -->
+                        <div class=" hotdoor">
+                            <div class="title start-center">热门推荐</div>
+                            <div class="remen_tuijian">
+                                <div class="more"><van-icon name="arrow" color="#cccccc" size="30px"/></div>
+                                <!-- <div  @click="handleIsAuth('/home/receivables',false,'')" class="secret"> -->
+                                <div  @click="handleIsAuth('/home/collect',false,'')" class="secret">
+                                    <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan.png" size="34px" /></div>
+                                    <div class="center">在线收款</div>
+                                </div>
+
+                                <div @click="applycard('https://creditcard.feierlaiedu.com/?token=5b842e25964f78313326b53f9e331c54','办卡中心')" class="secret">
+                                    <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></div>
+                                    <div class="center">信用卡办理</div>
+                                </div>
+                                <div class="secret"  @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')" >
+                                    <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan.png" size="30px" /></div>
+                                    <div class="center">智能还款</div>
+                                </div>
+
+                                <router-link tag="div" class="secret"  to="/vip">
+                                    <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/shengji.png" size="30px" /></div>
+                                    <div class="center">升级代理</div>
+                                </router-link>
+                                <router-link tag="div" class="secret"  to="/home/evaluation">
+                                    <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></div>
+                                    <div class="center">卡·测评</div>
+                                </router-link>
+                                <div @click="handleIsAuth('/loan/detail',true,'4')" class="secret">
+                                    <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
+                                    <div class="center">信息咨询</div>
+                                </div>
+                                <!-- <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
+                                    <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
+                                    <div class="center">商城</div>
+                                </router-link> -->
+                                <div class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')">
+                                    <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/weizhang.png"  size="30px" /></div>
+                                    <div class="center">违章查询</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 遮盖层 -->
+                        <div class="aside-left" v-show="showAaside" @click.self="hideAside">
+                            <div class="info">
+                                <div class="avatar">
+                                    <!-- <span><van-icon :name="headimg" /></span> -->
+                                    <div class="himg">
+                                        <img :src="headimg" alt="">
+                                    </div>
+                                    <p><span>{{nickname}}</span> &nbsp;&nbsp; <span>{{lev}}</span></p>
+                                </div>
+                                <ul>
+                                    <router-link tag="li" to="/home/systemNews">系统消息</router-link>
+                                    <!-- <router-link tag="li" to="/home/verified">实名认证</router-link> -->
+                                    <li @click="handleAuth">实名认证</li>
+                                    <router-link to="/home/bindingPhone" tag="li">修改手机</router-link>
+                                    <router-link to="/home/customerService" tag="li">联系客服</router-link>
+                                    <router-link to="/personalCenter/contactus" tag="li">关于我们</router-link>
+                                    <!-- <li class="switch">声音开关
+                                    </li> -->
+                                    <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
+                                    <li @click="handleClear">清除缓存</li>
+                                    <router-link tag="li" class="center" to="/register">个人设置</router-link>
+                                </ul>
+                            
+                                <div  @click="signOut" class="sign-out">
+                                    <span>退出登录</span>
+                                </div> 
+                            </div>
+                        </div>
+                        <!-- 更新 -->
+                        <div @click.self="showUpdate=false" v-show="showUpdate" class="update">
+                            <div  class="cover">
+                                <div class="version">
+                                <h3>版本更新</h3>
+                                    <p>钱夹宝升级了，快来体验吧！</p>
+                                    <div class="butt">
+                                        <div class="cancle" @click="showUpdate=false">取消</div>
+                                        <div class="upd" @click="download">更新</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="address">
+                            <p>与多家三方支付公司签约达成战略合作</p>
+                            <p>传帮带（上海）网络科技有限公司提供技术支持</p>
+                            <p>上海市宝山区泰和路2038号A座303室</p>
+                        </div>
+                       
                     </div>
-                </div>
-            </div>
-            <div class="address">
-                <p>与多家三方支付公司签约达成战略合作</p>
-                <p>传帮带（上海）网络科技有限公司提供技术支持</p>
-                <p>上海市宝山区泰和路2038号A座303室</p>
-            </div>
+                    
+                  
+                    <!-- 绑定手机模块 -->
+                    <!-- <bindMobile></bindMobile> -->
+                    <notice></notice>
+                   </van-pull-refresh>
+                   <footerMenu :active="active" @getChange="changeActive" ></footerMenu>
+                    <div class="guide" v-show="showguide">
+                        <div class="arr">
+                            <p><van-icon size="140px" color="#fff" @click="cancelguide"  name="http://pay.91dianji.com.cn/cancel.png" /></p>
+                        </div>
+                        <div class="guide-first">
+
+                        </div>
+                   </div>
         </div>
-        
-        <footerMenu :active="active" @getChange="changeActive" ></footerMenu>
-         <!-- 绑定手机模块 -->
-        <!-- <bindMobile></bindMobile> -->
-        <notice></notice>
-    </div>
-    </van-pull-refresh>
-
    
-
 </template>
 
 <script>
@@ -315,7 +328,7 @@ export default {
             loadtext:"    ",
             loostext:"   ",
             ads:false,
-
+            showguide:true,
             lineheight:100,
             images: [
                 {
@@ -361,7 +374,7 @@ export default {
             versionIos:"", // ios 版本号
             updateVerson:0,  // 设备版本号
             height: 148.5,
-            isLoading:false
+            isLoading:false,
         }
   },
    methods:{
@@ -370,13 +383,15 @@ export default {
         storage.remove('promotioncode');
         this.$toast('清除成功');
        },
+       cancelguide(){
+           this.showguide=false
+       },
        onRefresh(){
            this.ads=true
-           console.log(this.ads,'ads')
            setTimeout(()=>{
               this.ads=false
               this.isLoading=false
-           },1500)
+           },2000)
        },
         isShow() {
             this.showAaside=true
@@ -659,32 +674,46 @@ export default {
 <style lang="less" >
    #home-component {
         width: 100vw;
-        padding-top: 86px;
-         overflow-y: scroll;
+        // padding-top: 86px;
          position: relative;
-        //  top:400px;
-        top:0px;
+         overflow-y: scroll;
+         top:0px;
          left:0;
+        .guide {
+            position: fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            background-color: rgba(0, 0, 0, .4);
+            z-index:8888;
+            .arr {
+                p {
+                    text-align: right;
+                }
+            }
+         }
          .ads {
              position: fixed;
-             top:-130px;
+             top:0px;
              left:0;
              box-sizing: border-box;
              .tipsone {
-                //  text-align: center;
+                
                  .title {
-                     display: flex;
-                     align-items: center;
-                      box-sizing: border-box;
-                     margin-left:260px;
+                    // text-align: center;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  
                      >span {
                          font-size: 34px;
                          font-weight: bold;
                      }
                  }
                  .cres {
-                     margin-left:50px;
-                     border-bottom: 1px dotted #000 !important;
+                     margin-left:100px;
+                     margin-top:30px;
                      padding-bottom: 10px;
                       box-sizing: border-box;
                  }
@@ -745,71 +774,92 @@ export default {
                 }
             }
         .container {
-                padding-bottom:96px;
-                overflow-x: hidden;
-                position: relative;
-                background: #eee;
-                .address{
-                    padding-top:30px;
-                    text-align: center;
-                    line-height: 50px;
-                    padding-bottom: 50px;
-                }
-                .update {
-                    position: absolute;
-                    top:0;
-                    bottom:0;
-                    left:0;
-                    right:0;
-                    background-color: rgba(0, 0, 0, .2);
-                    .cover {
-                    width:600px;
-                    height: 400px;
-                    z-index: 99;
-                    position: absolute;
-                    top:30%;
-                    left:10%;
+            padding-top:86px;
+            overflow-x: hidden;
+            
+            position: relative;
+            background: #eee;
+            .cardmodule {
+                    .van-swipe {
+                    height: 40px;
+                    background-color: #54866A;
+                    color:#fff;
+                    box-sizing: border-box;
+                    width:140px;
                     border-radius: 15px;
-                    >.version {
-                        background-color: #fff;
-                        padding:10px;
-                            height: 400px;
-                        box-sizing: border-box;
-                        border-radius: 15px;
-                        >h3 {
-                            margin-top:20px;
+                    // text-align: center;
+                    padding-left:15px;
+                    padding-top:8px;
+                }
+                .van-swipe__track {
+                        height: 100%;
+                    }
+                .van-swipe-item {
+                        height: 100%;
+                    }
+            }
+               
+            .address{
+                padding-top:30px;
+                text-align: center;
+                line-height: 50px;
+                padding-bottom: 50px;
+            }
+            .update {
+                position: absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+                background-color: rgba(0, 0, 0, .2);
+                .cover {
+                width:600px;
+                height: 400px;
+                z-index: 99;
+                position: absolute;
+                top:30%;
+                left:10%;
+                border-radius: 15px;
+                >.version {
+                    background-color: #fff;
+                    padding:10px;
+                        height: 400px;
+                    box-sizing: border-box;
+                    border-radius: 15px;
+                    >h3 {
+                        margin-top:20px;
+                        text-align: center;
+                        font-size: 34px;
+                        color:#4B66AF;
+                        padding:20px 0px;
+                        font-weight: bolder;
+                    }
+                    >p {
+                        margin-top:20px;
+                        text-align: center;
+                    }
+                    >.butt {
+                        display: flex;
+                        justify-content: space-between;
+                        height: 80px;
+                        >div {
+                            margin-top:90px;
+                            width:49%;
+                            height: 100%;
+                            border:1px solid #ccc;
+                            line-height: 80px;
                             text-align: center;
-                            font-size: 34px;
-                            color:#4B66AF;
-                            padding:20px 0px;
-                            font-weight: bolder;
-                        }
-                        >p {
-                            margin-top:20px;
-                            text-align: center;
-                        }
-                        >.butt {
-                            display: flex;
-                            justify-content: space-between;
-                            height: 80px;
-                            >div {
-                                margin-top:90px;
-                                width:49%;
-                                height: 100%;
-                                border:1px solid #ccc;
-                                line-height: 80px;
-                                text-align: center;
-                                &.upd {
-                                    background-color: #4965AE;
-                                    color:#fff;
-                                }
+                            &.upd {
+                                background-color: #4965AE;
+                                color:#fff;
                             }
                         }
-                        
                     }
+                    
                 }
-
             }
+
+        }
             >.swipe {
                 height: 270px;
                 .per-img{
@@ -1179,99 +1229,95 @@ export default {
              color:#4965AE;
 
         }
-        >.aside-left {
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, .4);
-                position: fixed;
-                overflow: visible;
-                top:0px;
-                right:0px;
-                bottom: 0px;
-                left:0px;
-                z-index: 999;
-                color:#fff;
-                text-align: center;
-                >.info {
-                    width:50%;
-                    height: 100%;
-                    overflow-y: scroll;
-                    background-color: #4965AE;
-                    position: fixed;
-                    top:0px;
-                    right: 0px;
-                    left:0px;
-                    bottom: 0px;
-                    padding-bottom: 20px;
-                    z-index: 999;
-                   
-                    >.avatar {
-                        padding-top:50px;
-                        .himg {
-                            width:150px;
-                            height:150px;
-                            // border-radius: 50%;
-                            margin:0 auto;
-                            img {
-                                width:100%;
-                                 border-radius: 50%;
-                            }
-                        }
-                        >p {
-                            margin-top:20px;
-                            margin-bottom:80px;
-                        }
-                    }
-                    >ul{
-                        margin-left:100px;
-                        margin-right:100px;
-                        >li {
-                            border-top:3px dashed #ccc;
-                            padding:40px 10px;
-                            font-size: 28px;
-                             &.switch {
-                             >p {
-                                 margin-top:-5px;
-                             }
-                          }
-                        }
-                    }
-
-                    >.sign-out {
-                        margin-top:50px;
-                       
-                        .van-button--large {
-                            height:48px!important;
-                        }
-                        .van-dialog__message--has-title {
-                            height:70px!important;
-                        }
-                         >span{
-                              box-shadow: #32406E -10px -10px 15px 4px inset;
-                            border:2px solid #556BB7;
-                            // background: linear-gradient(to right,#B1C4F1 , #29305C);
-                            background-color: #2A54B3;
-                            padding:30px 60px;
-                            border-radius:30px;
-                         }
-                    }
-                    .van-dialog .van-button {
-                        border: 1px solid #4b66af;
-                    }
-
-                    .van-dialog,
-                    .van-dialog__message,
-                    .van-button {
-                        font-size: 30px;
+     >.aside-left {
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, .4);
+         position: fixed;
+         overflow: visible;
+         top:0px;
+         right:0px;
+         bottom: 0px;
+         left:0px;
+         z-index: 999;
+         color:#fff;
+         text-align: center;
+         >.info {
+            width:50%;
+            height: 100%;
+            overflow-y: scroll;
+            background-color: #4965AE;
+            position: fixed;
+            top:0px;
+            right: 0px;
+            left:0px;
+            bottom: 0px;
+            padding-bottom: 20px;
+            z-index: 999;
+            
+            >.avatar {
+                padding-top:50px;
+                .himg {
+                    width:150px;
+                    height:150px;
+                    // border-radius: 50%;
+                    margin:0 auto;
+                    img {
+                        width:100%;
+                            border-radius: 50%;
                     }
                 }
-                // .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
-                //     height:70px;
-                // }
+                >p {
+                    margin-top:20px;
+                    margin-bottom:80px;
+                }
+            }
+            >ul{
+                margin-left:100px;
+                margin-right:100px;
+                >li {
+                    border-top:3px dashed #ccc;
+                    padding:40px 10px;
+                    font-size: 28px;
+                        &.switch {
+                        >p {
+                            margin-top:-5px;
+                        }
+                    }
+                }
+            }
+
+            >.sign-out {
+                margin-top:50px;
+                
+                .van-button--large {
+                    height:48px!important;
+                }
+                .van-dialog__message--has-title {
+                    height:70px!important;
+                }
+                    >span{
+                        box-shadow: #32406E -10px -10px 15px 4px inset;
+                    border:2px solid #556BB7;
+                    // background: linear-gradient(to right,#B1C4F1 , #29305C);
+                    background-color: #2A54B3;
+                    padding:30px 60px;
+                    border-radius:30px;
+                    }
+            }
+            .van-dialog .van-button {
+                border: 1px solid #4b66af;
+            }
+
+            .van-dialog,
+            .van-dialog__message,
+            .van-button {
+                font-size: 30px;
+            }
+        }
+              
          }
-        //   .van-dialog .van-button{
-        //      height: 80px;
-        //  }
+        
         
         }
    }
@@ -1280,14 +1326,14 @@ export default {
     //       animation: animate 0.2s linear;
     //      -webkit-animation: animate 0.2s linear;
     // }
-     @keyframes animate{
-       from{
-            margin-left: 250px; 
-       }
-       to{
-            margin-left: 0px;
-       }
-   }
+//      @keyframes animate{
+//        from{
+//             margin-left: 250px; 
+//        }
+//        to{
+//             margin-left: 0px;
+//        }
+//    }
     .menuanimate{
         margin-left: 50%;
         animation: animates 0.3s linear;

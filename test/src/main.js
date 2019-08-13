@@ -12,10 +12,16 @@ import 'babel-polyfill'
 import "../node_modules/babel-polyfill/dist/polyfill.js"
 // 引入公共css
 import '@/assets/css/common.css'
-// 引入分享的css
-// import '@/assets/css/share.css'
 import back from './lib/back'
 // import touch from './lib/touch.js'
+
+// 引入animate.css
+// import animate from 'animate.css'
+
+import animated from 'animate.css'
+
+Vue.use(animated)
+
 
 import axios from 'axios'
 import utils from '@/lib/params'
@@ -23,7 +29,11 @@ Vue.prototype.$http = axios
 Vue.prototype.$utils = utils
 // 引入适配
 import 'lib-flexible/flexible'
-import { Actionsheet,Button,Switch,Dialog,RadioGroup,Pagination , PullRefresh ,DatetimePicker ,Uploader ,Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker    } from 'vant'
+import {
+        Actionsheet,Button,Switch,Dialog,RadioGroup,Pagination , PullRefresh ,DatetimePicker ,Uploader ,
+        Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,
+        Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker   
+       } from 'vant'
 Vue.use(Actionsheet)
 Vue.use(Button)
 Vue.use(Switch)

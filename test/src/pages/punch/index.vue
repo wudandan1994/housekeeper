@@ -296,7 +296,7 @@ export default {
     },
     methods:{
         goBack(){
-            this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
+            this.$router.go(-1)
         },
         goPlanDetail(id,bankName,name,nick){
             this.$router.push({
@@ -444,6 +444,7 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
+           overflow-y: scroll;
             .van-dialog .van-button {
                 /* border: 0; */
                 border: 1px solid #4b66af;

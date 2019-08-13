@@ -112,7 +112,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home/punch')
+            this.$router.go(-1)
         },
         stopPlan(id){
              this.$dialog.confirm({
