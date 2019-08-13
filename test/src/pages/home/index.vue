@@ -1,13 +1,12 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-06-28 10:58:28
+ * @LastEditTime: 2019-08-13 13:53:51
+ * @LastEditors: Please set LastEditors
+ -->
 
 <template>
-   
-        
-   
-
-   
-    
-   
-     
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh" :loading-text="loadtext" :loosing-text="loostext" :head-height="lineheight">
 
          <div  class="ads" slot="loading">
@@ -316,7 +315,7 @@ export default {
             loostext:"   ",
             ads:false,
 
-            lineheight:100,
+            lineheight: 200,
             images: [
                 {
                     routes: '/vip',
@@ -645,7 +644,7 @@ export default {
                     }
 
         this.handleSearchAuths()
-         this.automatic() //自动登录
+        //  this.automatic() //自动登录
          this.getUpdate() //获取版本
     }  ,
     mounted () {
