@@ -1,21 +1,36 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-06-28 10:58:28
+ * @LastEditTime: 2019-08-13 13:53:51
+ * @LastEditors: Please set LastEditors
+ -->
 
 <template>
    
-         <div :class="showAaside == true ? 'menuanimate' : ''" id="home-component" @swipedown="swipe(x)" >
-              <div  class="ads"  v-show="ads" slot="pulling">
-                <div class="tipsone">
+
+       
+
+
+
+         <div :class="showAaside == true ? 'menuanimate' : 'moveleft'" id="home-component" @swipedown="swipe(x)" >
+            
+               <div  v-show="ads" class="ads" slot="loading">
+                 <div class="tipsone">
                     <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
-                        <div class="cres animated  zoomIn ">
-                            <span class="animated "> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
-                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/yong.png" /> </span>
-                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/fu.png" /> </span>
-                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/wu.png" /> </span>
-                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/ping.png" /> </span>
-                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/tai.png" /> </span>
-                       </div>
+                    <div class="cres animated zoomIn">
+                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
+                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/yong.png" /> </span>
+                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/fu.png" /> </span>
+                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/wu.png" /> </span>
+                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/ping.png" /> </span>
+                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/tai.png" /> </span>
+                    </div>
                 </div>
                 <div class="tiptwo"></div>
-                </div> 
+          </div> 
+
+
               <van-pull-refresh v-model="isLoading" @refresh="onRefresh" :loading-text="loadtext" :loosing-text="loostext" :head-height="lineheight">
       
                     <header>
@@ -304,7 +319,9 @@
 
                         </div>
                    </div>
-        </div>
+     
+
+         </div>
    
 </template>
 
@@ -660,7 +677,7 @@ export default {
                     }
 
         this.handleSearchAuths()
-         this.automatic() //自动登录
+        //  this.automatic() //自动登录
          this.getUpdate() //获取版本
     }  ,
     mounted () {

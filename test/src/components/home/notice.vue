@@ -1,34 +1,71 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-02 18:39:54
+ * @LastEditTime: 2019-08-13 15:30:44
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
-    <div id="component-notice" v-if="notice" @click="handleCloseNotice">
+    <div id="component-notice" v-if="notice" @click="handleCloseNotice(data.id)">
         <div class="notice">
-            <div class="notice-title center">重要通知</div>
-            <p>最新推广活动:</p>
-
-            <p>7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.47，并领取1000元现金奖励！活动详情，请联系您的专属客服！</p>
+            <div class="notice-title center">{{data.title}}</div>
+            <div class="notice-content">{{data.content}}</div>
         </div>
     </div>
 </template>
 <script>
+import { axiosPost } from '@/lib/http'
 export default {
     data(){
         return{
-            notice: null,
+            notice: false,
             type: true,
+            data: [],
         }
     },
     methods:{
-        handleCloseNotice(){
+        handleCloseNotice(obj){
             this.notice = false;
-            localStorage.setItem("notice",'false')
+            let params = {
+                id: obj
+            };
+            axiosPost('/customer/insertRead',params).then(res =>{
+                if(res.data.success){
+                    console.log('已读成功',res);
+                }else{
+                    console.log('已读失败',res);
+                }
+            }).catch(res =>{
+                console.log('已读失败',res);
+            })
+        },
+        // 请求通告详情
+        handleObtainNotice(){
+            axiosPost('/customer/getNotice').then(res =>{
+                if(res.data.success){
+                    console.log('success',res);
+                    if(res.data.data === null){
+                        this.notice = false;
+                    }else{
+                        this.notice = true;
+                        this.data = res.data.data;
+                    }
+                }else{
+                    console.log('failed',res);
+                }
+            }).catch(res =>{
+                console.log('请求失败',res);
+            })
         }
     },
     created () {
-         this.notice =  localStorage.getItem("notice")
-         if(this.notice===null){
-             this.notice=true
-         } else if(this.notice=="false"){
-             this.notice=false
-         }
+        //  this.notice =  localStorage.getItem("notice")
+        //  if(this.notice===null){
+        //      this.notice=true
+        //  } else if(this.notice=="false"){
+        //      this.notice=false
+        //  }
+        this.handleObtainNotice();
         
     },
     mounted(){
@@ -56,13 +93,15 @@ export default {
             .notice-title{
                 width: 100%;
                 height: 20%;
-                font-size: 36px;
+                font-size: 32px;
                 font-weight: 700;
             }
-            p{
+            .notice-content{
                 font-size: 26px;
-                text-align: justify;
                 line-height: 50px;
+                text-indent: 2em;
+                text-align: justify;
+                letter-spacing: 1px;
             }
         }
     }

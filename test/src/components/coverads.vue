@@ -1,10 +1,20 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-19 11:17:47
+ * @LastEditTime: 2019-08-13 14:19:33
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
-      <div class="covertop" v-show="showads">
-            <img src="http://pay.91dianji.com.cn/ads.jpg" alt="">
+    <transition name="van-fade">
+        <div class="covertop" v-show="showads">
+            <img :src="poster" alt="" v-on:click.self="handleUrl">
             <div class="enter">
                 <van-button round size="normal" type="default">{{count}}秒</van-button>
             </div>
-      </div>
+            <div class="skip center" @click="showads = false">跳过</div>
+        </div>
+    </transition>
 </template>
 
 <script>
@@ -14,21 +24,30 @@ export default {
         return {
             showads :true,
             count:4,
-            timeId:null
+            timeId:null,
+            poster: '',
+            path: '',
         }
     },
     methods: {
         getImg(){
-              axiosPost("/admin/showAdvertisement")
+              axiosPost("/customer/showAdvertisement")
               .then(res=>{
-                  console.log(res,'result')
-
+                  if(res.data.success){
+                      console.log(res,'result')
+                      this.poster = res.data.data.img;
+                      this.path = res.data.data.url;
+                  }else{
+                      console.log(err,'error')
+                  }
               })
               .catch(err=>{
                   console.log(err,'error')
               })
+        },
+        handleUrl(){
+            window.location.href= this.path;
         }
-
     },
     created () {
         this.getImg()
@@ -37,9 +56,9 @@ export default {
     mounted () {
         this.timeId=setInterval(()=>{
             this.count--
-            if(this.count<1){
+            if(this.count == 0){
                  this.showads=false
-                 this.count=3
+                //  this.count=3
                  clearInterval(this.timeId)
              }
         },1000)
@@ -71,10 +90,10 @@ export default {
             }
             .enter{
                 position: absolute;
-                right:0;
+                right:10px;
                 top:20px;
                 .van-button--normal {
-                    font-size: 34px;
+                    font-size: 30px;
                 }
                 .van-button--default {
                     // background-color: #ddd;
@@ -85,6 +104,17 @@ export default {
                     height: 60px;
                     border:1px solide #fff;
                 }
+            }
+            .skip{
+                padding: 15px 20px;
+                background-color: rgba(221, 221, 221, 0.8);
+                position: absolute;
+                z-index: 2;
+                color: #fff;
+                bottom: 20%;
+                right: 5%;
+                font-size: 30px;
+                border-radius: 50px;
             }
         }
 
