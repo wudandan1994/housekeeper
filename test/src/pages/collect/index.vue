@@ -9,7 +9,6 @@
         <div class="container">
            <div class="phone">
                <ul>
-                  
                     <!-- <li>
                         <span>商户名称：</span>
                        <input v-model="merName" type="text" placeholder="商户名称">
@@ -290,6 +289,7 @@ export default {
                 settleAccType:"2",
                 merType:"1"
             }
+            console.log(data,'data')
             this.componentload=true
             axiosPost("/creditCard/memberReg",data)
             .then(function(res){
@@ -315,6 +315,7 @@ export default {
                             },500)
                             
                        } else {
+                             that.componentload=false
                            that.$toast({
                                message:res.data.message
                            })

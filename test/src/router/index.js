@@ -373,7 +373,7 @@ const nextList = () =>import('@/pages/AIRadar/nextList')
 const nextOtherList = () =>import('@/pages/AIRadar/nextOtherList')  
 // 测试页，测试完请删除
 const testpage = () =>import('@/pages/AIRadar/test')  
-import cardsComponent from '@/pages/receivables/cards'  //收款信用卡列表
+import cardsComponent from '@/pages/receivables/cards'  //收款信用卡列表  
 
 
 

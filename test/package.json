@@ -12,7 +12,7 @@
   "dependencies": {
     "@huoyu/vue-digitroll": "^1.0.4",
     "animate.css": "^3.7.2",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "clipboard": "^2.0.4",
     "cssnano": "^4.1.10",
     "lib-flexible": "^0.3.2",
@@ -64,10 +64,10 @@
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
-    "webpack": "^3.8.0",
-    "webpack-bundle-analyzer": "^2.9.0",
+    "webpack": "^3.12.0",
+    "webpack-bundle-analyzer": "^3.4.1",
     "webpack-dev-middleware-hard-disk": "^1.12.1",
-    "webpack-dev-server": "^2.9.7",
+    "webpack-dev-server": "^2.11.5",
     "webpack-merge": "^4.1.0"
   },
   "engines": {
