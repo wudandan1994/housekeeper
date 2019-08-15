@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: Giovanni
  * @Date: 2019-08-14
- * @LastEditTime: 2019-08-15 13:51:58
+ * @LastEditTime: 2019-08-15 18:57:38
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -330,8 +330,8 @@ export default {
             }
         }
     }
-    .sign-rule{
+    // .sign-rule{
         
-    }
+    // }
 }
 </style>
