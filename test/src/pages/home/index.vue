@@ -1,19 +1,7 @@
-<!--
- * @Description: In User Settings Edit
- * @Author: your name
- * @Date: 2019-06-28 10:58:28
- * @LastEditTime: 2019-08-13 13:53:51
- * @LastEditors: Please set LastEditors
- -->
 
-<template>
+     <template>
    
-
-       
-
-
-
-         <div :class="showAaside == true ? 'menuanimate' : 'moveleft'" id="home-component" @swipedown="swipe(x)" >
+         <div :class="showAaside == true ? 'menuanimate' : ''" id="home-component"  >
             
                <div  v-show="ads" class="ads" slot="loading">
                  <div class="tipsone">
@@ -30,7 +18,7 @@
                 <div class="tiptwo"></div>
           </div> 
 
-
+    
               <van-pull-refresh v-model="isLoading" @refresh="onRefresh" :loading-text="loadtext" :loosing-text="loostext" :head-height="lineheight">
       
                     <header>
@@ -116,8 +104,8 @@
                                         <!-- <span>官方渠道</span> -->
                                     </div>
                                 </li>
-                                <!-- <li @click="handleIsAuth('/home/receivables',false,'')"> -->
-                                <li @click="handleIsAuth('/home/collect',false,'')">
+                                <li @click="handleIsAuth('/home/receivables',false,'')">
+                                <!-- <li @click="handleIsAuth('/home/collect',false,'')"> -->
                                     <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
                                     <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
                                     </span>
@@ -218,8 +206,8 @@
                             <div class="title start-center">热门推荐</div>
                             <div class="remen_tuijian">
                                 <div class="more"><van-icon name="arrow" color="#cccccc" size="30px"/></div>
-                                <!-- <div  @click="handleIsAuth('/home/receivables',false,'')" class="secret"> -->
-                                <div  @click="handleIsAuth('/home/collect',false,'')" class="secret">
+                                <div  @click="handleIsAuth('/home/receivables',false,'')" class="secret">
+                                <!-- <div  @click="handleIsAuth('/home/collect',false,'')" class="secret"> -->
                                     <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan.png" size="34px" /></div>
                                     <div class="center">在线收款</div>
                                 </div>
@@ -345,7 +333,7 @@ export default {
             loadtext:"    ",
             loostext:"   ",
             ads:false,
-            showguide:true,
+            showguide:false,
             lineheight:100,
             images: [
                 {
@@ -793,7 +781,6 @@ export default {
         .container {
             padding-top:86px;
             overflow-x: hidden;
-            
             position: relative;
             background: #eee;
             .cardmodule {
@@ -1338,26 +1325,8 @@ export default {
         
         }
    }
-    // .moveleft{
-    //       margin-left:0;
-    //       animation: animate 0.2s linear;
-    //      -webkit-animation: animate 0.2s linear;
-    // }
-//      @keyframes animate{
-//        from{
-//             margin-left: 250px; 
-//        }
-//        to{
-//             margin-left: 0px;
-//        }
-//    }
-    .menuanimate{
-        margin-left: 50%;
-        animation: animates 0.3s linear;
-        -webkit-animation: animates 0.3s linear;
-      }
 
-   @keyframes animates{
+     @keyframes animates{
        from{
             margin-left: 0px; 
        }
@@ -1365,5 +1334,12 @@ export default {
             margin-left: 250px;
        }
    }
+   
+    .menuanimate{
+        margin-left: 50%;
+        animation: animates 0.3s linear;
+        -webkit-animation: animates 0.3s linear;
+   }
+ 
 </style>
 

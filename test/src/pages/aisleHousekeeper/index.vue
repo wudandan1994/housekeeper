@@ -10,21 +10,10 @@
                  <div class="top row">
                     <div class="avator"><img :src="headimg" alt=""></div>
                     <div class="name-code">
-                        <!-- <div class="name start-center">
-                            <span>{{nickname}}</span>&nbsp;&nbsp;&nbsp;
-                            <span>{{vip}}</span>
-                        </div>
-                        <div class="unset start-center">
-                           <p>推荐码：<span>{{promotioncode}}</span></p>
-                         </div> -->
                           <p>{{vip}}</p>
                          <p>{{nickname}}</p>
                          <p>推荐码：<span>{{promotioncode}}</span></p>
-                        
                     </div>
-                     <!-- <div  class="operator end-center">
-                         <span>绑卡：<span>{{cardNum}}</span>张</span>
-                     </div> -->
                  </div>
                
            </div>
@@ -60,7 +49,7 @@
                               </p>
                           </div>
                        </div>
-                       <div class="bottom">
+                       <div class="bottom"  v-if="item.repaycount !== null">
                            <ul>
                                <li>
                                    <p>{{item.realamount}}</p>
@@ -76,8 +65,9 @@
                                </li> -->
 
                                 <li>
-                                   <p>{{item.repaycount}}</p>
-                                   <p>还款笔数</p>
+                                   <!-- <p>{{item.repaycount}}</p> -->
+                                  <p>{{item.already}}/{{item.repaycount}}</p>
+                                   <p>还款进度</p>
                                </li>
                                 <li>
                                    <p>{{item.poundage}}</p>
@@ -127,15 +117,11 @@
                </ul>
            </div>
          
-           <div class="detail">
+           <div class="detailplans">
                <div class="plans">
-                   <!-- <van-button  plain to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" size="normal" type="default">添加信用卡</van-button>
-                   <van-button plain to="/home/punch" size="normal" type="default">查看全部计划</van-button> -->
                    <router-link tag="div" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard"  class="addcard"><van-icon name="plus" />添加信用卡</router-link>
                    <router-link tag="div" to="/home/punch" class="allplans"><van-icon name="send-gift-o" />查看全部计划</router-link>                 
                </div>
-                
-                <!-- <van-button plain to="/cancelCard" size="normal" type="default">管理</van-button> -->
                 <router-link tag="div" class="manage" to="/cancelCard"><van-icon name="card" /> 信用卡管理</router-link>
            </div>
           
@@ -546,8 +532,6 @@ export default {
                     align-items: center;
                     justify-content: space-between;
                      background: linear-gradient(to bottom ,rgb(228, 200, 137), #8C6E2A );
-                    // background-color: #A89749;
-                    // box-sizing: border-box;
                     color:#fff;
                     margin:20px;
                     border-radius: 15px;
@@ -563,11 +547,10 @@ export default {
               }
             
               .name-code{
-                 flex:1;
+                  flex:1;
                   height: 100%;
                   margin-top:10px;
-                //   margin-left:15px;
-                padding-left:30px;
+                  padding-left:30px;
                   >p {
                       font-weight: bold;
                       &:nth-of-type(2){
@@ -606,7 +589,7 @@ export default {
                 box-sizing: border-box;
                  justify-content: space-between;
                  height: 850px;
-                  overflow-y: scroll;
+                 overflow-y: scroll;
               >ul{
                   padding:30px;
                    justify-content: space-between;
@@ -787,6 +770,14 @@ export default {
                                           margin-top:10px;
                                       }
                                   }
+                                  &:nth-of-type(2){
+                                       >p:nth-child(1){
+                                        background: -webkit-gradient(linear, left top, right top, from(#D3B773), color-stop(170%, #553400));
+                                        background: linear-gradient(to right, #D3B773 0%, #553400 170%);
+                                        padding: 8px 0px;
+                                        border-radius: 15px;
+                                  }
+                                  }
                               }
                           }
                       }
@@ -836,7 +827,7 @@ export default {
                    width:100%;
                }
            }
-           >.detail {
+           >.detailplans {
             //    width: 88%;
             //    height: auto;
             //    margin: auto;

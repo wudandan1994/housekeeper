@@ -32,11 +32,13 @@ import 'lib-flexible/flexible'
 import {
         Actionsheet,Button,Switch,Dialog,RadioGroup,Pagination , PullRefresh ,DatetimePicker ,Uploader ,
         Radio,Tabbar,TabbarItem,Popup,Icon, Field ,NavBar,Swipe,Collapse,CollapseItem, SwipeItem,NoticeBar ,
-        Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker   
+        Tab, Tabs,Toast,Checkbox, CheckboxGroup ,Area,Lazyload,Loading,Rate,Picker,
+        // DropdownMenu,DropdownItem    
        } from 'vant'
 Vue.use(Actionsheet)
 Vue.use(Button)
 Vue.use(Switch)
+// Vue.use(DropdownMenu).use(DropdownItem)
 Vue.use(Dialog)
 Vue.use(PullRefresh)
 Vue.use(RadioGroup)
