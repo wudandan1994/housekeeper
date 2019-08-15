@@ -326,7 +326,7 @@ export default {
                            border:none;
                            flex: 1;
                            font-size: 30px;
-                        //    text-align: right;
+                           text-align: right;
                            height: 100px;
                            margin-top:-26px;
                        }

@@ -6,7 +6,7 @@
             <div class="right-icon center"></div>
         </header>
         <div class="container">
-             <!-- <iframe class="iframe"  :src="url" frameborder="0" target="_self"></iframe> -->
+             <iframe class="iframe"  :src="url" frameborder="0" target="_self"></iframe>
         </div>
     </div>
 
@@ -24,7 +24,7 @@ export default {
     },
     methods:{
         goBack() {
-            plus.webview.close( "yinlian")
+            // plus.webview.close( "yinlian")
             this.$router.push("/home")
         },
        
@@ -63,7 +63,7 @@ export default {
     created(){
         this.url=this.$route.query.info
          this.title=this.$route.query.title
-         this.webview();
+        //  this.webview();
     }
 }
 </script>

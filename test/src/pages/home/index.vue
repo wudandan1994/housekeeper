@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-06-28 10:58:28
- * @LastEditTime: 2019-08-15 20:45:52
+ * @LastEditTime: 2019-08-15 20:50:42
  * @LastEditors: Please set LastEditors
  -->
 
@@ -71,7 +71,7 @@
                         <div class="pannel-title center">钱&nbsp;夹<br/>资&nbsp;讯</div>
                         <div class="pannel-detail center" @click="handleContactUs">
                             <!-- <van-notice-bar text="好消息：从7月8日至7月14日，连续在朋友圈推广钱夹宝相关海报，连续时间7天，可免费成为993会员一个月！费率低至0.47！相关活动内容请联系客服"/>  -->
-                            <van-notice-bar text="最新推广活动：7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.47，并领取1000元现金奖励！活动详情，请联系您的专属客服！"/> 
+                            <van-notice-bar text="最新推广活动：7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.50，并领取1000元现金奖励！活动详情，请联系您的专属客服！"/> 
                         </div>
                     </div>
 
@@ -317,7 +317,7 @@
 
 <script>
 import footerMenu from '@/components/footer'
-// import bindMobile from '@/components/bindMobile'
+import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -325,7 +325,7 @@ import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-    //   bindMobile,
+      bindMobile,
       notice
   },
      data() {
@@ -335,7 +335,7 @@ export default {
             loadtext:"    ",
             loostext:"   ",
             ads:false,
-            showguide:true,
+            showguide:false,
             lineheight:100,
             images: [
                 {
@@ -424,25 +424,25 @@ export default {
             
         },
         changeLink(url,title){
-              this.$router.push({
-                     path:"/loan/form/myOrder",
-                     query:{
-                         info:url,
-                         title:title
-                     }
-                 })
-            
-            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
-            //      this.$router.push({
+            //   this.$router.push({
             //          path:"/loan/form/myOrder",
             //          query:{
             //              info:url,
             //              title:title
             //          }
             //      })
-            //  } else {
-            //      location.href=url
-            //  }
+            
+             if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                 this.$router.push({
+                     path:"/loan/form/myOrder",
+                     query:{
+                         info:url,
+                         title:title
+                     }
+                 })
+             } else {
+                 location.href=url
+             }
         },
         handleAuth(){
              if(this.iscertification == '2'){
@@ -574,8 +574,8 @@ export default {
                           return
                       } else {
                           storage.remove('openid');
-                          storage.remove("cxcard")
-                          storage.remove("cxcardnumber")
+                        //   storage.remove("cxcard")
+                        //   storage.remove("cxcardnumber")
                           that.$router.push("/logIn")
                       }
                      
@@ -669,11 +669,11 @@ export default {
 
         this.handleSearchAuths()
         //  this.automatic() //自动登录
-         this.getUpdate() //获取版本
+        //  this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        this.update() 
+        // this.update() 
        
     }
 }

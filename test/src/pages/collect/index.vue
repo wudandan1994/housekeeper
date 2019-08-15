@@ -228,13 +228,13 @@ export default {
             let that=this
             let type=""
             let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/ 
-            if(that.reservedMobile.trim().length===0 || that.mobile.trim().length===0){
+            if(that.reservedMobile.trim().length===0 ){
                 that.$toast({
                     message:"手机号码不能为空"
                 })
                 return
             }
-            if(!partten.test(that.reservedMobile) || !partten.test(that.mobile)){
+            if(!partten.test(that.reservedMobile) ){
                 that.$toast({
                     message:"请填写11位手机号码"
                 })
@@ -247,35 +247,14 @@ export default {
                 })
                 return
             }
-            // let parttenCard=/^([1-9]{1})(\d{15}|\d{18})$/
-            //  if(!parttenCard.test(that.accountNo)){
-            //     that.$toast({
-            //         message:"请填正确卡号"
-            //     })
-            //     return 
-            // }
-            if(that.realName.trim().length===0  ||  that.idCard.trim().length===0 || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0  
-            ){
+          
+            if(that.realName.trim().length===0  ||  that.idCard.trim().length===0 || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0    ){
                 that.$toast({
                     message:"请将信息填写完整"
                 })
                 return
             }
-            // if(that.realName!==that.accountName){
-            //      that.$toast({                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-            //         message:"姓名与结算户名不一致"
-            //     })
-            //     return
-            // }
-            // if(that.merType==="个人户"){
-            //     type="1"
-            // } else if(that.merType==="小微户"){
-            //     type="2"
-            // } else if(that.merType==="个体户"){
-            //     type="3"
-            // } else {
-            //     type="4"
-            // }
+          
             let data={
                 merName:that.realName,
                 realName:that.realName,
@@ -289,41 +268,85 @@ export default {
                 settleAccType:"2",
                 merType:"1"
             }
-            console.log(data,'data')
-            this.componentload=true
+            // console.log(data,'data')
+            that.componentload=true
             axiosPost("/creditCard/memberReg",data)
             .then(function(res){
+                // console.log(res,'注册商户')
                 if(!res.data.success){
+                    that.componentload=false
                     that.$toast({
                         message:res.data.message
                     })
-                    return
+                   
                 } else {
-                    axiosPost("/creditCard/getMemberReg")
-                    .then(function(res){
-                        if(res.data.success){
-                            let info=res.data.data.chMerCode
-                            that.componentload=true
-                            setTimeout(()=>{
-                                that.componentload=false
-                                that.$router.push({
-                                path:"/home/collect/open",
-                                query:{
-                                   info,
-                                }
-                             })
-                            },500)
-                            
-                       } else {
-                             that.componentload=false
-                           that.$toast({
-                               message:res.data.message
-                           })
-                       }
-                    })
-                    .catch(function(err){
 
+                    //   setTimeout(()=>{
+                    //     that.componentload=false
+                    //     that.$router.push({
+                    //     path:"/home/receivables",
+                    //     })
+                    // },500)
+                   
+                    // 查询通道二是否有注册
+                    let params={
+                        bank_cardno:that.accountNo
+                    }
+                    axiosPost("/jxpay/getJxMerchant",params)
+                    .then(res=>{
+                        console.log(res,'通道二的查询')
+                        if(res.data.success){
+                            console.log(res.data.data,'通道二已经签约,要去支付')
+                            that.$router.push("/home/receivables")
+                        }else {
+                            console.log('通道二没有签约，去签约')
+                            let  datas={
+                                merchant_name:that.realName,
+                                id_cardno:that.idCard,
+                                phone:that.reservedMobile,
+                                bank_cardno:that.accountNo,
+                            }
+                            axiosPost("/jxpay/insertRegister",datas)
+                            .then(res=>{
+                                console.log(res,'第二条通道注册')
+                                if(!res.data.success) {
+                                    that.$toast(res.data.message)
+                                } else {
+                                    console.log("第二条通道注册成功，获取商户号")
+                                     that.$router.push("/home/receivables")
+                                }
+                            })
+                        }
                     })
+
+
+
+
+                    // axiosPost("/creditCard/getMemberReg")
+                    // .then(function(res){
+                    //     if(res.data.success){
+                    //         let info=res.data.data.chMerCode
+                    //         that.componentload=true
+                    //         setTimeout(()=>{
+                    //             that.componentload=false
+                    //             that.$router.push({
+                    //             path:"/home/receivables",
+                    //             query:{
+                    //                info,
+                    //             }
+                    //          })
+                    //         },500)
+                            
+                    //    } else {
+                    //          that.componentload=false
+                    //        that.$toast({
+                    //            message:res.data.message
+                    //        })
+                    //    }
+                    // })
+                    // .catch(function(err){
+
+                    // })
                 }
             })
             .catch(function(err){

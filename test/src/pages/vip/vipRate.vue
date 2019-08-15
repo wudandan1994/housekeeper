@@ -60,11 +60,15 @@
                 </div>
                 <div class="rows row">
                     <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>收款费率</div>
-                    <div class="end-center">0.54%+2元/笔</div>
+                    <div class="end-center">0.55%+2元/笔</div>
                 </div>
                 <div class="rows row">
-                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>还款费率</div>
-                    <div class="end-center">0.81%+2元/笔</div>
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>大额还款费率</div>
+                    <div class="end-center">0.70%+2元/笔</div>
+                </div>
+                 <div class="rows row">
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>小额还款费率</div>
+                    <div class="end-center">0.65%+2元/笔</div>
                 </div>
             </div>
             <div class="big_title center">推广充值奖励</div>
@@ -124,11 +128,15 @@
                 </div>
                 <div class="rows row">
                     <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>收款费率</div>
-                    <div class="end-center">0.47%+1元/笔</div>
+                    <div class="end-center">0.50%+2元/笔</div>
                 </div>
                 <div class="rows row">
-                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>还款费率</div>
-                    <div class="end-center">0.72%+1元/笔</div>
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>大额还款费率</div>
+                    <div class="end-center">0.60%+2元/笔</div>
+                </div>
+                 <div class="rows row">
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>小额还款费率</div>
+                    <div class="end-center">0.55%+2元/笔</div>
                 </div>
             </div>
             <div class="big_title center">推广充值奖励</div>
