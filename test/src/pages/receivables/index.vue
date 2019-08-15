@@ -13,7 +13,7 @@
                 <div class="recommend">
                     <p>
                         <span>{{nickname}}</span>
-                        <span><van-icon name="info-o" />{{lev}}</span>
+                        <span>{{lev}}</span>
                     </p>
                     <p>{{recommendedcode}}</p>
                 </div>
@@ -324,7 +324,7 @@ export default {
             // 查询通道二有没有商户，如果没有去注册商户，如果有，根据金额查询用那个通道支付
             // 根据返回的‘1’或者‘2’去支付
 
-            console.log(this.cardnumber,"cardnumber信用卡卡号")
+            // console.log(this.cardnumber,"cardnumber信用卡卡号")
 
             axiosPost("/creditCard/getMemberReg")
            .then(res=>{
@@ -334,7 +334,7 @@ export default {
                  this.chMerCode=res.data.data.chMerCode
 
 
-                // 通道一注册商户使用的储蓄卡,名字，卡号，身份证号
+                // // 通道一注册商户使用的储蓄卡,名字，卡号，身份证号
                 let  accountNo=res.data.data.accountNo
                 let  mobile=res.data.data.reservedMobile
                 let  idcard=res.data.data.idCard
@@ -516,7 +516,7 @@ export default {
 
 
 
-            //通道一的支付
+            // 通道一的支付
 
             //      var rand = "";
             //     for(var i = 0; i < 2; i++){
@@ -586,9 +586,6 @@ export default {
             //    })
             // .catch(err=>{
             // })
-
-
-
 
             
             }else {    // 通道一没有注册

@@ -4,7 +4,7 @@
          <div :class="showAaside == true ? 'menuanimate' : ''" id="home-component"  >
             
                <div  v-show="ads" class="ads" slot="loading">
-                 <div class="tipsone">
+                  <div class="tipsone">
                     <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
                     <div class="cres animated zoomIn">
                         <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="tiptwo"></div>
-          </div> 
+              </div> 
 
     
               <van-pull-refresh v-model="isLoading" @refresh="onRefresh" :loading-text="loadtext" :loosing-text="loostext" :head-height="lineheight">
@@ -68,8 +68,7 @@
                         <div class="pannel-news row">
                             <div class="pannel-title center">钱&nbsp;夹<br/>资&nbsp;讯</div>
                             <div class="pannel-detail center" @click="handleContactUs">
-                                <!-- <van-notice-bar text="好消息：从7月8日至7月14日，连续在朋友圈推广钱夹宝相关海报，连续时间7天，可免费成为993会员一个月！费率低至0.47！相关活动内容请联系客服"/>  -->
-                                <van-notice-bar text="最新推广活动：7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.47，并领取1000元现金奖励！活动详情，请联系您的专属客服！"/> 
+                                <van-notice-bar text="最新推广活动：7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.50，并领取1000元现金奖励！活动详情，请联系您的专属客服！"/> 
                             </div>
                         </div>
 
@@ -244,34 +243,36 @@
                             </div>
                         </div>
                         <!-- 遮盖层 -->
-                        <div class="aside-left" v-show="showAaside" @click.self="hideAside">
-                            <div class="info">
-                                <div class="avatar">
-                                    <!-- <span><van-icon :name="headimg" /></span> -->
-                                    <div class="himg">
-                                        <img :src="headimg" alt="">
+                        <transition name="van-slide-left">
+                            <div class="aside-left" v-show="showAaside" @click.self="hideAside">
+                                <div class="info">
+                                    <div class="avatar">
+                                        <!-- <span><van-icon :name="headimg" /></span> -->
+                                        <div class="himg">
+                                            <img :src="headimg" alt="">
+                                        </div>
+                                        <p><span>{{nickname}}</span> &nbsp;&nbsp; <span>{{lev}}</span></p>
                                     </div>
-                                    <p><span>{{nickname}}</span> &nbsp;&nbsp; <span>{{lev}}</span></p>
+                                    <ul>
+                                        <router-link tag="li" to="/home/systemNews">系统消息</router-link>
+                                        <!-- <router-link tag="li" to="/home/verified">实名认证</router-link> -->
+                                        <li @click="handleAuth">实名认证</li>
+                                        <router-link to="/home/bindingPhone" tag="li">修改手机</router-link>
+                                        <router-link to="/home/customerService" tag="li">联系客服</router-link>
+                                        <router-link to="/personalCenter/contactus" tag="li">关于我们</router-link>
+                                        <!-- <li class="switch">声音开关
+                                        </li> -->
+                                        <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
+                                        <li @click="handleClear">清除缓存</li>
+                                        <router-link tag="li" class="center" to="/register">个人设置</router-link>
+                                    </ul>
+                                
+                                    <div  @click="signOut" class="sign-out">
+                                        <span>退出登录</span>
+                                    </div> 
                                 </div>
-                                <ul>
-                                    <router-link tag="li" to="/home/systemNews">系统消息</router-link>
-                                    <!-- <router-link tag="li" to="/home/verified">实名认证</router-link> -->
-                                    <li @click="handleAuth">实名认证</li>
-                                    <router-link to="/home/bindingPhone" tag="li">修改手机</router-link>
-                                    <router-link to="/home/customerService" tag="li">联系客服</router-link>
-                                    <router-link to="/personalCenter/contactus" tag="li">关于我们</router-link>
-                                    <!-- <li class="switch">声音开关
-                                    </li> -->
-                                    <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
-                                    <li @click="handleClear">清除缓存</li>
-                                    <router-link tag="li" class="center" to="/register">个人设置</router-link>
-                                </ul>
-                            
-                                <div  @click="signOut" class="sign-out">
-                                    <span>退出登录</span>
-                                </div> 
                             </div>
-                        </div>
+                        </transition>
                         <!-- 更新 -->
                         <div @click.self="showUpdate=false" v-show="showUpdate" class="update">
                             <div  class="cover">
@@ -291,11 +292,10 @@
                             <p>上海市宝山区泰和路2038号A座303室</p>
                         </div>
                        
-                    </div>
-                    
-                  
+                    </div>                    
+                 
                     <!-- 绑定手机模块 -->
-                    <!-- <bindMobile></bindMobile> -->
+                    <bindMobile></bindMobile>
                     <notice></notice>
                    </van-pull-refresh>
                    <footerMenu :active="active" @getChange="changeActive" ></footerMenu>
@@ -315,7 +315,7 @@
 
 <script>
 import footerMenu from '@/components/footer'
-// import bindMobile from '@/components/bindMobile'
+import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -323,7 +323,7 @@ import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-    //   bindMobile,
+      bindMobile,
       notice
   },
      data() {
@@ -422,25 +422,25 @@ export default {
             
         },
         changeLink(url,title){
-              this.$router.push({
-                     path:"/loan/form/myOrder",
-                     query:{
-                         info:url,
-                         title:title
-                     }
-                 })
-            
-            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
-            //      this.$router.push({
+            //   this.$router.push({
             //          path:"/loan/form/myOrder",
             //          query:{
             //              info:url,
             //              title:title
             //          }
             //      })
-            //  } else {
-            //      location.href=url
-            //  }
+            
+             if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                 this.$router.push({
+                     path:"/loan/form/myOrder",
+                     query:{
+                         info:url,
+                         title:title
+                     }
+                 })
+             } else {
+                 location.href=url
+             }
         },
         handleAuth(){
              if(this.iscertification == '2'){
@@ -571,8 +571,8 @@ export default {
                           return
                       } else {
                           storage.remove('openid');
-                          storage.remove("cxcard")
-                          storage.remove("cxcardnumber")
+                        //   storage.remove("cxcard")
+                        //   storage.remove("cxcardnumber")
                           that.$router.push("/logIn")
                       }
                      
@@ -666,11 +666,11 @@ export default {
 
         this.handleSearchAuths()
         //  this.automatic() //自动登录
-         this.getUpdate() //获取版本
+        //  this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        this.update() 
+        // this.update() 
        
     }
 }
@@ -783,6 +783,7 @@ export default {
             overflow-x: hidden;
             position: relative;
             background: #eee;
+             overflow-y: scroll;
             .cardmodule {
                     .van-swipe {
                     height: 40px;
@@ -864,13 +865,13 @@ export default {
             }
 
         }
-            >.swipe {
-                height: 270px;
-                .per-img{
-                    width: 100vw;
-                    height: auto;
-                }
+        >.swipe {
+            height: 270px;
+            .per-img{
+                width: 100vw;
+                height: auto;
             }
+        }
         .search {
             height: 110px;
             >ul{
@@ -1323,23 +1324,24 @@ export default {
          }
         
         
-        }
-   }
+    }
 
-     @keyframes animates{
-       from{
-            margin-left: 0px; 
-       }
-       to{
-            margin-left: 250px;
-       }
-   }
+}
+
+//     @keyframes animates{
+//        from{
+//             margin-left: 0px; 
+//        }
+//        to{
+//             margin-left: 50%;
+//        }
+//    }
    
-    .menuanimate{
-        margin-left: 50%;
-        animation: animates 0.3s linear;
-        -webkit-animation: animates 0.3s linear;
-   }
+//     .menuanimate{
+//         // margin-left: 50%;
+//         animation: animates 0.3s linear;
+//         -webkit-animation: animates 0.3s linear;
+//    }
  
 </style>
 

@@ -1,9 +1,9 @@
 <template>
-    <div id="page_cancelCard">
+    <div id="cards-list">
         <header class=" head">
-            <div class="center"  @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div  @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div>信用卡</div>
-            <router-link tag="div" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" class="add">添加信用卡</router-link>
+            <router-link tag="div" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" >添加信用卡</router-link>
         </header>
         <!-- <div class="per_card" v-for="(item,index) in form" :key="index">
             <div class="bank">
@@ -253,7 +253,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-#page_cancelCard{
+#cards-list{
     .head {
          background: #4B66AF;
          width:100%;
@@ -266,8 +266,10 @@ export default {
          font-size:28px;
          z-index:999;
          justify-content: space-between;
-         .add {
-             padding-right:20px;
+         >div {
+             &:nth-of-type(3){
+                 padding-right:15px;
+             }
          }
      }
       .sure {

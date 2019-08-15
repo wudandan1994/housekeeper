@@ -11,7 +11,7 @@
             <van-tabs v-model="active" @click="handleChangeTabs">
                 <van-tab title="所得佣金" >
 
-                    <p class="select" @click="selected" >筛选<van-icon   name="arrow-down"/></p>
+                    <!-- <p class="select" @click="selected" >筛选<van-icon   name="arrow-down"/></p>
                     <div class="cover">
                          <van-popup v-model="show" position="top" :overlay="false">
                             <ul>
@@ -20,7 +20,7 @@
                                 <li>商户收款收益</li>
                             </ul>
                        </van-popup>
-                    </div>
+                    </div> -->
                    
 
                    

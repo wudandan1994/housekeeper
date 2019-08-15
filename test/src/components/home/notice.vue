@@ -2,14 +2,14 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-02 18:39:54
- * @LastEditTime: 2019-08-13 15:30:44
+ * @LastEditTime: 2019-08-15 16:54:01
  * @LastEditors: Please set LastEditors
  -->
 <template>
     <div id="component-notice" v-if="notice" @click="handleCloseNotice(data.id)">
         <div class="notice">
             <div class="notice-title center">{{data.title}}</div>
-            <div class="notice-content">{{data.content}}</div>
+            <div class="notice-content" v-html="data.content"></div>
         </div>
     </div>
 </template>
@@ -99,7 +99,6 @@ export default {
             .notice-content{
                 font-size: 26px;
                 line-height: 50px;
-                text-indent: 2em;
                 text-align: justify;
                 letter-spacing: 1px;
             }
