@@ -152,18 +152,18 @@ table {
 		background: #4b66af;
 	}
 	.left-icon{
-		width: 14%;
+		width: 24%;
 		height: 100%;
 		margin-left: 1%;
 	}
 	.top-title{
-		width: 70%;
+		width: 50%;
 		height: 100%;
 		color: white;
 		font-size: 30px;
 	}
 	.right-icon{
-		width: 15%;
+		width: 25%;
 		height: 100%;
 	}
 	.van-tabs--line .van-tabs__wrap{
