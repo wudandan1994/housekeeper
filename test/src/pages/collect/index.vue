@@ -281,48 +281,14 @@ export default {
                    
                 } else {
 
-                    //   setTimeout(()=>{
-                    //     that.componentload=false
-                    //     that.$router.push({
-                    //     path:"/home/receivables",
-                    //     })
-                    // },500)
-                   
-                    // 查询通道二是否有注册
-                    let params={
-                        bank_cardno:that.accountNo
-                    }
-                    axiosPost("/jxpay/getJxMerchant",params)
-                    .then(res=>{
-                        console.log(res,'通道二的查询')
-                        if(res.data.success){
-                            console.log(res.data.data,'通道二已经签约,要去支付')
-                            that.$router.push("/home/receivables")
-                        }else {
-                            console.log('通道二没有签约，去签约')
-                            let  datas={
-                                merchant_name:that.realName,
-                                id_cardno:that.idCard,
-                                phone:that.reservedMobile,
-                                bank_cardno:that.accountNo,
-                            }
-                            axiosPost("/jxpay/insertRegister",datas)
-                            .then(res=>{
-                                console.log(res,'第二条通道注册')
-                                if(!res.data.success) {
-                                    that.$toast(res.data.message)
-                                } else {
-                                    console.log("第二条通道注册成功，获取商户号")
-                                     that.$router.push("/home/receivables")
-                                }
-                            })
-                        }
-                    })
+                  setTimeout(()=>{
+                        that.componentload=false
+                        that.$router.push({
+                           path:"/home/receivables",
+                        })
+                    },500)
 
-
-
-
-                    // axiosPost("/creditCard/getMemberReg")
+                          // axiosPost("/creditCard/getMemberReg")
                     // .then(function(res){
                     //     if(res.data.success){
                     //         let info=res.data.data.chMerCode
@@ -347,6 +313,45 @@ export default {
                     // .catch(function(err){
 
                     // })
+
+
+
+                   
+                    // 查询通道二是否有注册
+                    // let params={
+                    //     bank_cardno:that.accountNo
+                    // }
+                    // axiosPost("/jxpay/getJxMerchant",params)
+                    // .then(res=>{
+                    //     console.log(res,'通道二的查询')
+                    //     if(res.data.success){
+                    //         console.log(res.data.data,'通道二已经签约,要去支付')
+                    //         that.$router.push("/home/receivables")
+                    //     }else {
+                    //         console.log('通道二没有签约，去签约')
+                    //         let  datas={
+                    //             merchant_name:that.realName,
+                    //             id_cardno:that.idCard,
+                    //             phone:that.reservedMobile,
+                    //             bank_cardno:that.accountNo,
+                    //         }
+                    //         axiosPost("/jxpay/insertRegister",datas)
+                    //         .then(res=>{
+                    //             console.log(res,'第二条通道注册')
+                    //             if(!res.data.success) {
+                    //                 that.$toast(res.data.message)
+                    //             } else {
+                    //                 console.log("第二条通道注册成功，获取商户号")
+                    //                  that.$router.push("/home/receivables")
+                    //             }
+                    //         })
+                    //     }
+                    // })
+
+
+
+
+                  
                 }
             })
             .catch(function(err){

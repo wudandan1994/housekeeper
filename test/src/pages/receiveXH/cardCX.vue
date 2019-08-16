@@ -23,14 +23,14 @@
                     </div>
                     <div class="cardnum">
                          <div class="color">{{item.bankname}}</div>
-                         <div class="select" @click="selectCard(item)">选择</div>
+                         <!-- <div class="select" @click="selectCard(item)">选择</div> -->
                     </div>
                 </li>
             </ul>
         </div>
       
         <div class="sure">
-              <van-button type="info" @click="sure" size="large">确定</van-button>
+              <!-- <van-button type="info" @click="sure" size="large">确定</van-button> -->
         </div>
     </div>    
 </template>

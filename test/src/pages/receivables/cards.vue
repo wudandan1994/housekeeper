@@ -54,126 +54,136 @@ export default {
 
         sure(){
 
-             axiosPost("/creditCard/getMemberReg")
-            .then(res=>{
-            if(res.data.success){  //已申请商户
+             this.$router.push({
+                path:"/home/receivables",
+                query:{
+                    params:this.card
+                }
+                // 储存商户号
+            })
+        
 
-                // 通道一的商户号
-                 this.chMerCode=res.data.data.chMerCode
 
-                // 通道一注册商户使用的储蓄卡,名字，卡号，身份证号
-                let  accountNo=res.data.data.accountNo
-                let  mobile=res.data.data.reservedMobile
-                let  idcard=res.data.data.idCard
-                let  name=res.data.data.accountName
+        //      axiosPost("/creditCard/getMemberReg")
+        //     .then(res=>{
+        //     if(res.data.success){  //已申请商户
 
-                // 查询第二条通道是否注册
-                 let params={
-                        bank_cardno:accountNo
-                    }
-                    axiosPost("/jxpay/getJxMerchant",params)
-                    .then(res=>{
-                        console.log(res,'查询第二个道')
-                        if(!res.data.success) {
-                            // 如果第二个通道没有注册，隐式注册
-                            let datas={
-                                merchant_name:name,
-                                id_cardno:idcard,
-                                phone:mobile,
-                                bank_cardno:accountNo,
-                            }
-                            axiosPost("/jxpay/insertRegister",datas)
-                            .then(res=>{
-                                console.log(res,"第二个通道注册")
-                                if(!res.data.success) {
-                                    this.$toast(res.data.message)
-                                } else {
-                                    // 第二个通道生成的商户号
-                                    let responce=res.data.data
-                                    responce=JSON.parse(responce)
-                                    console.log(responce,'商户号')
-                                    this.merchantno=responce.merchantno
+        //         // 通道一的商户号
+        //          this.chMerCode=res.data.data.chMerCode
 
-                                    // 签约
-                                     let data={
-                                        bankcardNum:this.card.cardNo
-                                    }
-                                    axiosPost("/jxpay/getJxOpenCard",data)
-                                    .then(res=>{
-                                        console.log(res,"查询信用卡是否签约")
-                                        if(!res.data.success) { // 此信用卡未签约
-                                            this.$router.push({
-                                                path:"/home/receivables/sign",
-                                                query:{
-                                                    info:this.card,
-                                                    merchantno:this.merchantno
-                                                }
-                                            })
-                                        } else {
-                                            // 已签约，去支付
-                                            this.$router.push({
-                                                path:"/home/receivables",
-                                                query:{
-                                                    params:this.card
-                                                }
-                                                // 储存商户号
-                                            })
-                                        }
-                                    })
-                                }
-                            })
+        //         // 通道一注册商户使用的储蓄卡,名字，卡号，身份证号
+        //         let  accountNo=res.data.data.accountNo
+        //         let  mobile=res.data.data.reservedMobile
+        //         let  idcard=res.data.data.idCard
+        //         let  name=res.data.data.accountName
 
-                        } else {
+        //         // 查询第二条通道是否注册
+        //          let params={
+        //                 bank_cardno:accountNo
+        //             }
+        //             axiosPost("/jxpay/getJxMerchant",params)
+        //             .then(res=>{
+        //                 console.log(res,'查询第二个道')
+        //                 if(!res.data.success) {
+        //                     // 如果第二个通道没有注册，隐式注册
+        //                     let datas={
+        //                         merchant_name:name,
+        //                         id_cardno:idcard,
+        //                         phone:mobile,
+        //                         bank_cardno:accountNo,
+        //                     }
+        //                     axiosPost("/jxpay/insertRegister",datas)
+        //                     .then(res=>{
+        //                         console.log(res,"第二个通道注册")
+        //                         if(!res.data.success) {
+        //                             this.$toast(res.data.message)
+        //                         } else {
+        //                             // 第二个通道生成的商户号
+        //                             let responce=res.data.data
+        //                             responce=JSON.parse(responce)
+        //                             console.log(responce,'商户号')
+        //                             this.merchantno=responce.merchantno
 
-                              // 第二个通道生成的商户号
-                              console.log(res.data.data,'生成的商户号')
-                              this.merchantno=res.data.data.merchantno
+        //                             // 签约
+        //                              let data={
+        //                                 bankcardNum:this.card.cardNo
+        //                             }
+        //                             axiosPost("/jxpay/getJxOpenCard",data)
+        //                             .then(res=>{
+        //                                 console.log(res,"查询信用卡是否签约")
+        //                                 if(!res.data.success) { // 此信用卡未签约
+        //                                     this.$router.push({
+        //                                         path:"/home/receivables/sign",
+        //                                         query:{
+        //                                             info:this.card,
+        //                                             merchantno:this.merchantno
+        //                                         }
+        //                                     })
+        //                                 } else {
+        //                                     // 已签约，去支付
+        //                                     this.$router.push({
+        //                                         path:"/home/receivables",
+        //                                         query:{
+        //                                             params:this.card
+        //                                         }
+        //                                         // 储存商户号
+        //                                     })
+        //                                 }
+        //                             })
+        //                         }
+        //                     })
 
-                               let data={
-                                    bankcardNum:this.card.cardNo
-                                }
-                                axiosPost("/jxpay/getJxOpenCard",data)
-                                .then(res=>{
-                                    console.log(res,"查询信用卡是否签约")
-                                    if(!res.data.success) { // 此信用卡未签约
-                                        this.$router.push({
-                                            path:"/home/receivables/sign",
-                                            query:{
-                                                info:this.card,
-                                                merchantno:this.merchantno
-                                            }
-                                        })
-                                    } else {
-                                        // 已签约，去支付
-                                        this.$router.push({
-                                            path:"/home/receivables",
-                                            query:{
-                                                params:this.card
-                                            }
-                                            // 储存商户号
-                                        })
+        //                 } else {
 
-                                    }
-                                })
+        //                       // 第二个通道生成的商户号
+        //                       console.log(res.data.data,'生成的商户号')
+        //                       this.merchantno=res.data.data.merchantno
 
-                        }
+        //                        let data={
+        //                             bankcardNum:this.card.cardNo
+        //                         }
+        //                         axiosPost("/jxpay/getJxOpenCard",data)
+        //                         .then(res=>{
+        //                             console.log(res,"查询信用卡是否签约")
+        //                             if(!res.data.success) { // 此信用卡未签约
+        //                                 this.$router.push({
+        //                                     path:"/home/receivables/sign",
+        //                                     query:{
+        //                                         info:this.card,
+        //                                         merchantno:this.merchantno
+        //                                     }
+        //                                 })
+        //                             } else {
+        //                                 // 已签约，去支付
+        //                                 this.$router.push({
+        //                                     path:"/home/receivables",
+        //                                     query:{
+        //                                         params:this.card
+        //                                     }
+        //                                     // 储存商户号
+        //                                 })
 
-                        // 查询改信用卡是否签约
+        //                             }
+        //                         })
+
+        //                 }
+
+        //                 // 查询改信用卡是否签约
                        
-                    })
-            }else {    // 通道一没有注册
+        //             })
+        //     }else {    // 通道一没有注册
                 
-                 this.$router.push({
-                     path:"/home/collect"
-                 })
-            }
+        //          this.$router.push({
+        //              path:"/home/collect"
+        //          })
+        //     }
 
-            // 查询是否有绑定信用卡，
+        //     // 查询是否有绑定信用卡，
             
-        })
-        .catch(err=>{
-            // console.log(err,"error个人信息")
-        })
+        // })
+        // .catch(err=>{
+        //     // console.log(err,"error个人信息")
+        // })
 
 
 

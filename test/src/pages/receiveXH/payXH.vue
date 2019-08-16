@@ -9,35 +9,61 @@
            <div class="phone">
                <ul>
                     <li>
-                        <span>订单金额</span>
-                       <input v-model="amount" type="number" placeholder="付款金额">
+                        <span>姓名</span>
+                       <input v-model="realName" type="text" placeholder="姓名">
                    </li>
                     <li>
-                        <span>证件号</span>
-                       <input v-model="id_cardno"  type="text" placeholder="身份证号码">
+                        <span>身份证</span>
+                       <input v-model="idCardNo"  type="text" placeholder="身份证号码">
                    </li>
-                   <div class="shadow"></div>
+                    <div class="shadow"></div>
                     <li>
-                        <span>到账卡号</span>
-                       <input v-model="accountNum"  type="number" placeholder="到账卡号">  
+                        <span>有效期</span>
+                       <input v-model="valiateDate"  type="number" placeholder="信用卡有效期 如 03/21 填写 0321">
                    </li>
                     <li>
-                        <span>支付卡号</span>
-                       <input v-model="bankcardNum"  type="number" placeholder="支付信用卡卡号">
+                        <span>安全码</span>
+                       <input v-model="cvv2"  type="number" placeholder="安全码">
                    </li>
                     <div class="shadow"></div>
                    <li>
-                       <span>手机号</span>
-                       <input type="number" v-model="phone" placeholder="手机号码">
+                        <span>信用卡卡号</span>
+                       <input v-model="payBankCard"  type="number" placeholder="支付信用卡卡号">
+                   </li>
+                    <li>
+                       <span>信用卡预留手机号</span>
+                       <input type="number" v-model="payPhoneNum" placeholder="信用卡预留手机">
                    </li> 
+                    <div class="shadow"></div>
                    <li>
+                        <span>储蓄卡卡号</span>
+                       <input v-model="intoBankCard"  type="number" placeholder="储蓄卡卡号">
+                   </li>
+                    <li>
+                       <span>储蓄卡预留手机号</span>
+                       <input type="number" v-model="intoPhoneNum" placeholder="储蓄卡预留手机号">
+                   </li> 
+                    <li>
+                        <span>订单金额</span>
+                       <input v-model="payMoney" type="number" placeholder="付款金额">
+                   </li>
+                   
+                  
+                    <!-- <li>
+                        <span>到账卡号</span>
+                       <input v-model="accountNum"  type="number" placeholder="到账卡号">  
+                   </li> -->
+                   
+                    <div class="shadow"></div>
+                  
+                   <!-- <li>
                        <span>地区</span>
                        <input   v-model="area" placeholder="选择消费地区">
                        <span @click="selectArea"> <van-icon size="24px" name="arrow"/></span>
                    </li> 
                    <van-popup v-model="show" position="bottom"  >
                        <van-picker  show-toolbar   @cancel="onCancel"  title="选择地区" :columns="columns" @change="onChange"  @confirm="onConfirm" />
-                   </van-popup>
+                   </van-popup> -->
                </ul>
            </div>
            <div class="at-once">
@@ -59,17 +85,18 @@ export default {
         return {
            componentload: false,
            amount:"",
-           account_name:"",
-           id_cardno:"",
-           bankcardNum:"",
-           phone:"",
-           info:"",
-           cardNum:"",
-           merchantno:"",
-           accountNum:"",
+           realName:"",
+           idCardNo:"",
+           payBankCard:"",
+           payPhoneNum:"",
            area:"",
+           cvv2:"",
+           intoBankCard:"",
+           valiateDate:"",
+           intoPhoneNum:"",
+           payMoney:"",
            show:false,
-             columns: [
+           columns: [
         {
           values: Object.keys(citys),
           className: 'column1'
@@ -79,7 +106,9 @@ export default {
           className: 'column2',
           defaultIndex: 2
         }
-      ]
+      ],
+        cxinfo:{},
+        xyinfo:{}
 
         }
     },
@@ -90,52 +119,85 @@ export default {
        goBack(){
            this.$router.push({
                path:"/home/receiveXH",
-               query:{
-                   params:this.info
-               }
            })       
        },
        selectArea(){
         this.show=!this.show
        },
-       onConfirm(value){
-          this.area=value.join("-")
-          if(this.area=='北京市-'){
-                this.area='北京市-北京市'
-            }
-          this.show=false
-       },
-       onCancel(){
-           this.show=false
-       },
-       onChange(picker,values){
-            picker.setColumnValues(1, citys[values[0]])
-       },
+    //    onConfirm(value){
+    //       this.area=value.join("-")
+    //       if(this.area=='北京市-'){
+    //             this.area='北京市-北京市'
+    //         }
+    //       this.show=false
+    //    },
+    //    onCancel(){
+    //        this.show=false
+    //    },
+    //    onChange(picker,values){
+    //         picker.setColumnValues(1, citys[values[0]])
+    //    },
        pay(){
+
+           if(this.realName.trim().length==0 ||this.idCardNo.trim().length==0 ||this.payBankCard.trim().length==0 ||this.payPhoneNum.trim().length==0 ||this.intoBankCard.trim().length==0 ||
+           this.intoPhoneNum.trim().length==0 ||this.payMoney.trim().length==0 ||this.valiateDate.trim().length==0 ||this.cvv2.trim().length==0  ) {
+               return this.$toast("请将信息填写完整")
+           }
+
            let data={
-               bankcardNum:this.bankcardNum,
-               merchantno:this.merchantno,
-               account_name:this.info.payerName,
-               amount:this.amount,
-               phone:this.phone,
-               id_cardno:this.id_cardno,
-               accountNum:this.accountNum,
-               area:this.area
+              realName:this.realName,
+              idCardNo:this.idCardNo,
+              payBankCard:this.payBankCard,
+              payPhoneNum:this.payPhoneNum,
+              intoBankCard:this.intoBankCard,
+              intoPhoneNum:this.intoPhoneNum,
+              payMoney:this.payMoney,
+              valiateDate:this.valiateDate,
+              cvv2:this.cvv2
            }
 
            this.componentload=true
-           axiosPost("/txstar/repaymentConsume",data)
+           axiosPost("/creditCard/zlpayment",data)
            .then(res=>{
                console.log(res,'支付结果')
-               setTimeout(()=>{
-                    if(res.data.success){
-                        this.$toast(res.data.message)
-                    } else {
-                        this.$toast(res.data.message)
-                    }
-                 this.componentload=false
+               console.log(res.data.data,"data数据")
+               if(res.data.success) {
+                   let responce=res.data.data
+                   responce=JSON.parse(responce)
+                   let url=responce.payUrl
 
-               },1500)
+                    // this.$router.push({
+                            //         path:"/home/online",
+                            //         query:{
+                            //             info:url,
+                            //             title:"贷款中心"
+                            //         }
+                            //     })
+
+
+                    if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                        this.$router.push({
+                            path:"/loan/form/myOrder",
+                            query:{
+                                info:url,
+                                title:"支付"
+                            }
+                        })
+                         this.componentload=false
+                        } else {
+                            this.componentload=false
+                            location.href=url
+                        }
+               }
+            //    setTimeout(()=>{
+            //         if(res.data.success){
+            //             this.$toast(res.data.message)
+            //         } else {
+            //             this.$toast(res.data.message)
+            //         }
+            //     //  this.componentload=false
+
+            //    },1500)
              
            })
        }
@@ -145,14 +207,20 @@ export default {
     
     },
     created () {
-        this.info=this.$route.query.info
-        this.amount=this.$route.query.number
-        this.merchantno=this.$route.query.merchantno
-        console.log(this.merchantno,'merchantno')
-        this.accountNum=storage.get("cxcardnumber")
-        this.bankcardNum=this.info.cardNo
-        this.phone=this.info.phone
-        this.id_cardno=this.info.idCardNo
+        this.payMoney=this.$route.query.number
+        this.xyinfo=this.$route.query.xyinfo
+        this.cxinfo=this.$route.query.cxinfo
+        this.realName=this.xyinfo.payerName
+        this.idCardNo=this.xyinfo.idCardNo
+        this.valiateDate=this.xyinfo.month+this.xyinfo.year
+        this.cvv2=this.xyinfo.cvv2
+        this.payBankCard=this.xyinfo.cardNo
+        this.payPhoneNum=this.xyinfo.phone
+        this.intoBankCard=this.cxinfo.bankcardno
+        this.intoPhoneNum=this.cxinfo.phone
+
+
+
 
 
     },
