@@ -13,7 +13,7 @@
                 <div class="tipsone">
                     <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
                     <div class="cres animated zoomIn">
-                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
+                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
                         <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/yong.png" /> </span>
                         <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/fu.png" /> </span>
                         <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/wu.png" /> </span>
@@ -64,6 +64,10 @@
                                 <p> <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search  rotateZ"  /></p>
                                 <span>签到打卡</span>
                             </router-link>
+                            <!-- <li @click="sign">
+                                <p> <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search  rotateZ"  /></p>
+                                <span>签到打卡</span>
+                            </li> -->
                         </ul>
                     </div>
                     <!-- 名片咨询模块 -->
@@ -106,8 +110,8 @@
                                     <!-- <span>官方渠道</span> -->
                                 </div>
                             </li>
-                            <!-- <li @click="handleIsAuth('/home/receivables',false,'')"> -->
-                            <li @click="handleIsAuth('/home/collect',false,'')">
+                            <li @click="handleIsAuth('/home/receivables',false,'')">
+                            <!-- <li @click="handleIsAuth('/home/collect',false,'')"> -->
                                 <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
                                 <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
                                 </span>
@@ -152,11 +156,34 @@
                                             </van-swipe>
                                         </div>
                                     <!-- <span>完美账单</span> -->
-                                </div>
-                                
+                                </div>                              
                             </li>
 
                         </ul>
+                        <!-- <div class="selectchannel">
+                            <div class="pay">
+                                <p>请先选择通道</p>
+                                <div class="channelfirst">
+                                    <p>通道一</p>
+                                    <p>优质通道</p>
+
+                                </div>
+                                <div class="channelsecond">
+                                    <p>通道二</p>
+                                    <p>低质通道</p>
+                                </div>
+
+                                <van-radio-group v-model="radio">
+                                    <van-radio name="1">通道一</van-radio>
+                                    <van-radio name="2">通道二</van-radio>
+                                </van-radio-group>
+                                <div class="surechannel">
+                                    <van-button type="default">确认</van-button>
+                                    <van-button type="default">取消</van-button>
+
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                     <!-- 特色服务 -->
                     <div class="server">
@@ -266,8 +293,9 @@
                     
                 </div>
                 <!-- 绑定手机模块 -->
-                <!-- <bindMobile></bindMobile> -->
+                <bindMobile></bindMobile>
                 <notice></notice>
+                  <!-- <coverads name="fade"></coverads> -->
             </van-pull-refresh>
             <footerMenu :active="active" @getChange="changeActive" ></footerMenu>
             <div class="guide" v-show="showguide">
@@ -317,6 +345,7 @@
 
 <script>
 import footerMenu from '@/components/footer'
+import coverads from '@/components/coverads.vue'
 import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
@@ -326,7 +355,8 @@ export default {
   components:{
       footerMenu,
       bindMobile,
-      notice
+      notice,
+    //   coverads,
   },
      data() {
         return {
@@ -334,6 +364,7 @@ export default {
             componentload: true,
             loadtext:"    ",
             loostext:"   ",
+            radio:"1",
             ads:false,
             showguide:false,
             lineheight:100,
@@ -389,6 +420,9 @@ export default {
         //    清除缓存
         storage.remove('promotioncode');
         this.$toast('清除成功');
+       },
+       sign(){
+           this.$toast("敬请期待")
        },
        cancelguide(){
            this.showguide=false
@@ -620,7 +654,6 @@ export default {
                     .then(res=>{
                       })
                 }
-
             }else{
                 if(boo){
                     let data ={
@@ -683,7 +716,9 @@ export default {
    #home-component {
         width: 100vw;
         overflow-y: scroll;
-        .home-container{
+       
+        .home-container{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+              overflow-y: scroll;
             .guide {
                 position: fixed;
                 top:0;
@@ -1099,6 +1134,7 @@ export default {
                 >.credit {
                     margin-top:20px;
                     background-color: #fff;
+                    position: relative;
                     >ul {
                         display: flex;
                         flex-wrap: wrap;
@@ -1149,7 +1185,7 @@ export default {
                                     50%{
                                             transform: rotateZ(0deg);
                                     }
-                                    75%{
+                                     75%{
                                             transform: rotateZ(-45deg);
                                     }
                                     100%{
@@ -1188,6 +1224,24 @@ export default {
                                     font-size: 28px;
                                     margin-bottom: 10px;
                                 }
+                            }
+                        }
+                    }
+                    .selectchannel {
+                        position: absolute;
+                        top:15px;
+                        left:15%;
+                        right:15%;
+                        bottom:10px;
+                        background-color: #fff;
+                        border:1px solid #ccc;
+                        border-radius: 10px;
+                        .pay {
+                            padding:10px;
+                            >p {
+                                text-align: center;
+                                font-weight: bold;
+                                padding:15px;
                             }
                         }
                     }
@@ -1233,15 +1287,11 @@ export default {
                     }
                 }
                 >.serve {
-                    //  background-color: red;
                     margin-bottom: 50px;
                     padding:20px 20px 50px 30px;
                     font-size:34px;
                     color:#4965AE;
-
                 }
-                
-                
             }
         }
         .home-normal{
@@ -1264,23 +1314,16 @@ export default {
                 height: 100%;
                 overflow-y: scroll;
                 background-color: #4965AE;
-                // position: fixed;
-                // top:0px;
-                // right: 0px;
-                // left:0px;
-                // bottom: 0px;
                 padding-bottom: 20px;
-                // z-index: 999;
                 >.avatar {
                     padding-top:50px;
                     .himg {
                         width:150px;
                         height:150px;
-                        // border-radius: 50%;
                         margin:0 auto;
                         img {
                             width:100%;
-                                border-radius: 50%;
+                            border-radius: 50%;
                         }
                     }
                     >p {
@@ -1302,7 +1345,6 @@ export default {
                         }
                     }
                 }
-
                 >.sign-out {
                     margin-top:50px;
                     
@@ -1315,7 +1357,6 @@ export default {
                         >span{
                             box-shadow: #32406E -10px -10px 15px 4px inset;
                         border:2px solid #556BB7;
-                        // background: linear-gradient(to right,#B1C4F1 , #29305C);
                         background-color: #2A54B3;
                         padding:30px 60px;
                         border-radius:30px;
@@ -1329,7 +1370,6 @@ export default {
                     font-size: 30px;
                 }
             }
-                
         }
         .menu-normal{
             width: calc(50% + 1px);

@@ -236,7 +236,7 @@ export default {
         paycx(info){
             this.cxinfo=info
             this.showcx=false
-            console.log(this.cxinfo,"储蓄卡信息")
+            // console.log(this.cxinfo,"储蓄卡信息")
             this.nickCX=this.cxinfo.bankname
             this.cardCX=this.cxinfo.bankcardno.substr(this.cxinfo.bankcardno.length-4,4)
         },

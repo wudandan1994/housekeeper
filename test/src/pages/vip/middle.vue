@@ -27,7 +27,6 @@ export default {
         }
     },
     created(){
-        console.log('参数',this.$route.query.qrcode);
         this.src = this.$route.query.qrcode;
     }
 }

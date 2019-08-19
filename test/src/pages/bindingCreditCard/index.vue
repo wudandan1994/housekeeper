@@ -20,7 +20,7 @@
                         <span>银行卡号</span>
                        <input v-model="bankcardno"  type="number" placeholder="所持银行卡号">
                    </li>
-                    <div class="shadow"></div>
+                   <div class="shadow"></div>
                     <li>
                         <span>有效期年份</span>
                        <input v-model="year"  type="number" placeholder="信用卡有效期年份如 22">
@@ -33,7 +33,7 @@
                        <span>安全码</span>
                        <input type="number" v-model="safeCode" placeholder="信用卡后三位安全码">
                    </li> 
-                    <div class="shadow"></div>
+                     <div class="shadow"></div>
                      <li>
                        <span>手机号</span>
                        <input type="number" v-model="phone" placeholder="银行卡预留手机号">
@@ -46,28 +46,37 @@
                        <span>最后还款日</span>
                        <input type="number" v-model="duedate" placeholder="还款日 如 23">
                    </li> 
+                     <div class="shadow"></div>
                </ul>
-              <div @click="bindingCard" class="button">
+              <div @click="bindingCard" class="btn">
                 <van-button round size="large" type="info">确认绑定</van-button>
              </div>
            </div>
         </div>
+         <loading :componentload="componentload"></loading>
     </div>
 </template>
 <script>
-import area from '@/config/area.js'
+// import area from '@/config/area.js'
+import loading from '@/components/loading'
 import {axiosPost,axiosGet} from '@/lib/http'
+// import { bankCardAttribution } from '../../lib/bankName'
+import Bank from '@/lib/bank'
 import storage from '@/lib/storage'
 export default {
+     components:{
+      loading
+    },
     data(){
         return{
-            area: '请选择支行地址',
+            // area: '请选择支行地址',
             show: false,
             title: '获取验证码',
             areaList:{},
             name:"",
             phone:"",
             bankcardno:"",
+             componentload:false,
             idCard:"",
             year:"",
             month:"",
@@ -75,7 +84,8 @@ export default {
             // autoCode:"",
             // orderId:"",
             billdate:"",
-            duedate:""
+            duedate:"",
+            bankcode:""
         }
     },
     created(){
@@ -95,15 +105,6 @@ export default {
                 })
                 return
              }
-             
-            //   let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-            //    if(!parttenId.test(this.idCard)){
-            //      this.$toast({
-            //         message:"请填写正确的身份证号"
-            //     })
-            //     return
-            //  }
-
 
             if(this.name.trim().length===0 || this.phone.trim().length===0 || this.bankcardno.trim().length===0 || this.idCard.trim().length===0 ||
                 this.year.trim().length!=2 || this.month.trim().length!=2 || this.safeCode.trim().length!=3 || this.billdate.trim().length ===0 || this.duedate.trim().length!=2
@@ -113,31 +114,64 @@ export default {
                 })
                 return
             }
-             let data={
-                 cardNo:this.bankcardno,
-                 phone:this.phone,
-                 idCardNo:this.idCard,
-                 idCardType:"身份证",
-                 payerName:this.name,
-                 year:this.year,
-                 month:this.month,
-                 cvv2:this.safeCode,
-                 billdate:this.billdate,
-                 duedate:this.duedate
-             }
-              axiosPost("/creditCard/bindCreditCard",data)
-              .then(res=>{
-                  if(!res.data.success){
-                      this.$toast({
-                          message:res.data.message
-                      })
-                  } else {
-                      this.$router.go(-1)
-                  }               
-              })
-              .catch(err=>{
-                  
-              })
+            this.componentload=true
+             this.$http.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+this.bankcardno+'&cardBinCheck=true')
+             .then(responce=>{
+                 this.bankcode=responce.data.bank
+                 Bank.forEach(info => {
+                        if(this.bankcode==info.bankCode){
+                            this.bankcode=info.bankName
+                        }
+                    });
+             })
+             .catch(err=>{
+                 console.log(err,"error")
+             })
+
+
+             setTimeout(()=>{
+                              let data={
+                                cardNo:this.bankcardno,
+                                phone:this.phone,
+                                idCardNo:this.idCard,
+                                idCardType:"身份证",
+                                payerName:this.name,
+                                year:this.year,
+                                month:this.month,
+                                cvv2:this.safeCode,
+                                billdate:this.billdate,
+                                duedate:this.duedate,
+                                bankname:this.bankcode
+                          }
+                        
+                        axiosPost("/creditCard/bindCreditCard",data)
+                            .then(res=>{
+                                    if(!res.data.success){
+                                    this.$toast({
+                                        message:res.data.message
+                                    })
+                                    this.componentload=false
+                                } else {
+                                    this.$router.go(-1)
+                                }  
+                            })
+                            .catch(err=>{
+                                
+                            })
+
+                        },100)
+            // this.$http.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+this.bankcardno+'&cardBinCheck=true')
+            //         .then(responce=>{
+            //             let bank=responce.data.bank
+            //              Bank.forEach(item => {
+            //                 if(item.bankCode==bank){
+            //                     this.bankcode=item.bankName
+            //                 }
+            //             });
+
+            //         })
+             
+              
 
         }
 
@@ -163,11 +197,13 @@ export default {
                         >button {
                             height:80px;
                             background-color: #4B66AF;
+                            border-color: #4B66AF;
                         }
                     }
                >ul{
+                  
                    background-color: #fff;
-                   .shadow {
+                    .shadow {
                         height:20px;
                         width:100%;
                         background-color: rgb(243, 239, 239);
@@ -182,7 +218,6 @@ export default {
                        height: 60px;
                        line-height: 60px;
                        color:#000;
-                        
                        >span {
                            font-weight: bold;
                        }
@@ -204,7 +239,7 @@ export default {
                            height: 100px;
                             margin-top:-26px;
                             font-size: 30px;
-                            text-align:right;
+                            text-align: right;
                        }
                         ::-webkit-input-placeholder{
                             font-size:28px;
@@ -215,7 +250,7 @@ export default {
            }
         }
         .loan .van-nav-bar {
-          background-color: #4B66AF!important;
+          background-color: #4B66AF !important;
           height: 96px;
           line-height: 96px;
          }
@@ -283,12 +318,6 @@ export default {
             .safe-code{
                 width: 40vw;
                 height: 100%;
-                //  >input{
-                //     width: 100%;
-                //     height: 90%;
-                //     margin-top: 5px;
-                //     border: none;
-                // }
                 >input{
                     width: 100%;
                     height: 90%;
@@ -321,7 +350,7 @@ export default {
         }
         .next-stop{
             width: 90vw;
-            padding-top:60px;
+            padding-top:30px;
             padding-bottom: 30px;
             margin-left: auto;
             margin-right: auto;
@@ -329,16 +358,6 @@ export default {
             color: white;
             margin-top: 50px;
             border-radius: 20px;
-        }
-        .button {
-            margin-top:70px;
-            padding-left:20px;
-            padding-right: 20px;
-            font-size: 30px;
-            >button {
-                height:80px;
-                background-color: #4B66AF;
-            }
         }
         .position{
             width: 100vw;

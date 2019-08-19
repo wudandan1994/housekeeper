@@ -31,19 +31,19 @@ export default {
             };
             axiosPost('/customer/insertRead',params).then(res =>{
                 if(res.data.success){
-                    console.log('已读成功',res);
+                    // console.log('已读成功',res);
                 }else{
-                    console.log('已读失败',res);
+                    // console.log('已读失败',res);
                 }
             }).catch(res =>{
-                console.log('已读失败',res);
+                // console.log('已读失败',res);
             })
         },
         // 请求通告详情
         handleObtainNotice(){
             axiosPost('/customer/getNotice').then(res =>{
                 if(res.data.success){
-                    console.log('success',res);
+                    // console.log('success',res);
                     if(res.data.data === null){
                         this.notice = false;
                     }else{
@@ -51,10 +51,10 @@ export default {
                         this.data = res.data.data;
                     }
                 }else{
-                    console.log('failed',res);
+                    // console.log('failed',res);
                 }
             }).catch(res =>{
-                console.log('请求失败',res);
+                // console.log('请求失败',res);
             })
         }
     },

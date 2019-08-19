@@ -292,7 +292,7 @@ export default {
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
                     this.orderid = res.data.data.orderid;
-                    console.log(this.orderid,'orderid')
+                    // console.log(this.orderid,'orderid')
                     // 请求上级推荐人
                     let url = '/customer/getCustomerUP';
                     let params = {
@@ -381,7 +381,7 @@ export default {
             let url = '/order/xhPay';
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                    console.log('支付成功',res);
+                    // console.log('支付成功',res);
                     let ua = navigator.userAgent.toLowerCase();
                     if(ua.match(/MicroMessenger/i)=="micromessenger") {
                         // 微信浏览器中打开
@@ -402,11 +402,11 @@ export default {
                         }
                     }
                 }else{
-                    console.log('支付失败',res);
+                    // console.log('支付失败',res);
                     this.$toast('支付失败');
                 }
             }).catch(res =>{
-                console.log('支付失败',res);
+                // console.log('支付失败',res);
                 this.$toast('支付失败');
             })
         }

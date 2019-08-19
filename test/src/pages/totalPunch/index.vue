@@ -10,16 +10,64 @@
         <header class="header-top row">
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="#ffffff" size="20px" name="arrow-left"/></div>
             <div class="top-title center">任务中心</div>
-            <div class="right-icon center"><van-icon name="gold-coin" size="24px" color="#FCDD6D"/>245300</div>
+            <!-- <div class="right-icon center"><van-icon name="gold-coin" size="24px" color="#FCDD6D"/>245300</div> -->
         </header>
         <div class="container">
-            <div class="avator-signin">
+             <div class="task">
+               <div class="punch">
+                   <div class="left">
+                       <p>我的金币</p>
+                       <p>
+                           <span></span>
+                           <span>{{gold}}</span>
+                       </p>
+                   </div>
+                   <div @click="sign" class="middle">
+                      <p>{{isPunch?"已签到":"未签到"}}</p>
+                   </div>
+                   <div class="right">
+                       <p>当月累计签到</p>
+                           <span>{{signcount}}</span>
+                           天
+                   </div>
+               </div>
+               <p>每月累计签到5天即可获得金币</p>
+               <div class="gold">
+                   <ul>
+                       <li>
+                           <p>5天</p>
+                           <span></span>
+                       </li>
+                        <li>
+                           <p>10天</p>
+                           <span></span>
+                       </li>
+                        <li>
+                           <p>15天</p>
+                           <span></span>
+                       </li>
+                        <li>
+                           <p>20天</p>
+                           <span></span>
+                       </li>
+                        <li>
+                           <p>25天</p>
+                           <span></span>
+                       </li>
+                        <li>
+                           <p>全</p>
+                           <span></span>
+                       </li>
+                   </ul>
+               </div>
+           </div>
+            <!-- <div class="avator-signin">
                 <div class="avator"><img src="http://pay.91dianji.com.cn/wx.png" alt=""></div>
                 <div class="signin">
                     <div class="normal center">签到</div>
                 </div>
-            </div>
-            <div class="desc">
+            </div> -->
+            <!-- <div class="desc">
                 <div class="desc-title">每月累计签到5天即可获得金币</div>
                 <div class="desc-list">
                     <div class="coin">
@@ -48,8 +96,8 @@
                 <div class="center">签到规则</div>
                 <div class="center">兑换奖品库</div>
                 <div class="center">我的任务</div>
-            </div>
-            <div class="calendar">
+            </div> -->
+            <!-- <div class="calendar">
                 <div class="year-month center">{{year}}年{{month}}月</div>
                 <div class="days-content">
                     <div class="center" v-for="(item,index) in DateArray" :key="index">{{item}}</div>
@@ -59,9 +107,9 @@
                     <div class="task-share center"></div>
                 </div>
                 <div class="bottom"></div>
-            </div>
+            </div> -->
         </div>
-        <div class="task-list">
+        <!-- <div class="task-list">
             <div class="start-center">
                 <van-icon name="card" color="#ECC648" size="28px"/>
                 <span>任务记录</span>
@@ -97,7 +145,7 @@
                 </div>
                 <div>+30</div>
             </div>
-        </div>
+        </div> -->
         <!-- 签到规则 -->
         <div class="sign-rule">
             <div></div>
@@ -112,19 +160,72 @@ export default {
             year: '',
             month: '',
             DateArray: [],
+             days: [],
+            isPunch:false,
+             signcount:0,//连续签到
+             gold:0 , //金币数量
+            currentTime:""
         }
     },
     methods:{
         handleReturnHome() {
             this.$router.go(-1);
         },
+         sign(){
+            //  console.log("签到打卡")
+            let that =this
+            axiosPost("/customer/insertSign")
+           .then(function(res){
+            //    console.log(res,"每日签到")
+            if(!res.data.success){
+                    that.$toast({
+                    message:res.data.message
+             })
+        } else {
+                that.isPunch=true
+                that.$toast({
+                    message:res.data.message
+                   })
+                axiosPost("/customer/getSignDetail")
+                .then(function(res){
+                    that.signcount=res.data.data.signcount
+                    that.gold=res.data.data.gold
+                })
+            }
+          })   
+        },
+         searchPunch(){
+             let that = this
+           axiosPost("/customer/getSignDetail")
+           .then(function(res){
+            //    console.log(res,"created中的签到详情") 
+                if(!res.data.success){
+                    that.$toast({
+                        message:res.data.message
+                    })
+                    return
+                } else {
+                     that.signcount=res.data.data.signcount
+                     that.gold=res.data.data.gold
+                     that.days=res.data.data.list
+                     that.days.forEach(element => {
+                         if(element.signtime==that.currentTime){
+                             that.isPunch=true
+                         }
+                     })
+                }
+           })
+         },
+
+
+
         // 获取当前月份天数
         handleCurrentTime(){
             let date = new Date();
             this.year = date.getFullYear();
             this.month = date.getMonth() + 1;
             let days = new Date(this.year,this.month,0).getDate();
-            console.log('天数',days);
+            // console.log('天数',days);
             let arr = [];
             for(var i = 1; i <= days; i++){
                 if(i < 10){
@@ -139,6 +240,7 @@ export default {
     },
     created () {
           this.handleCurrentTime();
+           this.searchPunch()
     }
 }
 </script>
@@ -149,6 +251,98 @@ export default {
         color: #fff;
     }
     .container {
+        >.task{
+               background-color: #4b66af;
+               color:#FFF1F6;
+               padding:20px 30px;
+               >.punch {
+                   display: flex;
+                   justify-content: space-between;
+                   >.middle {
+                       width:200px;
+                       height: 200px;
+                       background-color: #fff;
+                       border:10px solid #fff;
+                       border-radius: 50%;
+                       color:#000;
+                       >p {
+                           text-align: center;
+                           line-height: 200px;
+                           font-size: 40px;
+                       }
+                   }
+                   >.left,
+                   .right {
+                       padding-top:50px;
+                   }
+                   >.left {
+                       >p {
+                           &:nth-of-type(1){
+                               padding-bottom:20px;
+                           }
+                           &:nth-of-type(2){
+                               text-align: center;
+                               >span {
+                                   &:nth-of-type(1){
+                                       display: inline-block;
+                                       width:40px;
+                                       height:40px;
+                                       background-color:#FCDD6D; 
+                                       border-radius: 50%;
+                                       margin-right:10px;
+                                   }
+                               }
+                           }
+                       }
+                       
+                   }
+                   >.right {
+                       text-align: center;
+                      >p{
+                           padding-bottom:10px;
+                      }
+                      >span {
+                          display:inline-block;
+                          width:40px;
+                          height: 40px;
+                          line-height: 40px;
+                          color:#7E1113;
+                          background-color: #fff;
+                          margin-top:10px;
+                      }
+                   }
+               }
+               >p {
+                   padding:30px 0px;
+               }
+               >.gold{
+                   >ul{
+                       display: flex;
+                       >li{
+                           width:15%;
+                           background-color: #fff;
+                           color:#8E3E3F;
+                           border-radius:30px;
+                           text-align: center;
+                           margin-right:5%;
+                           >p {
+                               margin-top:20px;
+                               margin-bottom:10px;
+                           }
+                           >span {
+                               display: inline-block;
+                               width:30px;
+                               height: 30px;
+                               border-radius: 50%;
+                               background-color: #FFDC6D;
+                               margin-top:10px;
+                               margin-bottom:10px;
+                           }
+                       }
+                   }
+               }
+               
+           }
         background: #4b66af;
         .avator-signin{
             width: 85%;

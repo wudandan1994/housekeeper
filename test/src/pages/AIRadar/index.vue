@@ -130,7 +130,7 @@ export default {
         },
         // 更换选择
         handleChangeChecked(obj){
-            console.log('更换选择',obj);
+            // console.log('更换选择',obj);
             var other = this.reverse(obj.id);
             this.options[obj.id].checked = true;
             this.options[other].checked = false;
@@ -150,7 +150,7 @@ export default {
         },
         // 查看下级明细
         hanleNextDetail(item){
-            console.log('查看下级明细参数',item);
+            // console.log('查看下级明细参数',item);
             this.$router.push({
                 path: '/nextLevel',
                 query: {
@@ -171,27 +171,27 @@ export default {
             let url = '/behavior/getTotalRecord';
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                    console.log('统计数据请求成功',res);
+                    // console.log('统计数据请求成功',res);
                     this.details[0].number = res.data.data.browseCount;
                     this.details[1].number = res.data.data.newRegister;
                     this.details[2].number = res.data.data.clickContact;
                     this.details[3].number = res.data.data.teamCount;
                     this.list = res.data.data.list;
                 }else{
-                    console.log('统计数据请求失败',res);
+                    // console.log('统计数据请求失败',res);
                 }
             }).catch(res =>{
-                console.log('统计数据请求失败',res);
+                // console.log('统计数据请求失败',res);
             })
         },
         // 选择时间查询
         handleChildChangeTime(item){
-            console.log('时间参数',item);
+            // console.log('时间参数',item);
             var start = (item.startdate).split('/');
             var end = (item.enddate).split('/');
             
-            console.log('开始时间',this.handleTransferTime(start));
-            console.log('结束时间',this.handleTransferTime(end));
+            // console.log('开始时间',this.handleTransferTime(start));
+            // console.log('结束时间',this.handleTransferTime(end));
             this.startdate = this.handleTransferTime(start);
             this.enddate = this.handleTransferTime(end);
             this.handleAIRadarTotal();

@@ -7,7 +7,7 @@
         </header>
         <div class="container">
             <div class="portrait">
-                <div class="head">
+                <div class="userimg">
                     <img :src="headimg" alt="">
                 </div>
                 <div class="recommend">
@@ -27,7 +27,7 @@
                     </p>
                     <p>
                         <span>￥</span>
-                        <input type="number" v-model="number" @input="change" placeholder="请输入金额最低500元">
+                        <input type="number" v-model="number" @input="change" placeholder="请输入金额最低200元">
                     </p>
                     <div class="card" v-show="showCard">
                         <ul>
@@ -118,26 +118,26 @@
              <div class="covercx" >
                     <van-popup v-model="showxy" position="right" :overlay="true">
                          <div class="action">
-                           
-                            <van-button  to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" round type="primary">添加信用卡</van-button>
-                             <van-button @click="closexy" round type="default">关闭</van-button>
+                            <!-- <van-button  to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" round type="primary">添加信用卡</van-button>
+                             <van-button @click="closexy" round type="default">关闭</van-button> -->
+                            <van-icon name="add" @click="addcard"  size="26px" color="#4B66AF" />
+                            <van-icon name="clear" @click="closexy" size="26px" color="#4B66AF" />
                         </div>
                          <div class="cards">
                              <ul>
-                                 <li v-for="(item,index) in xylist" :key="index">
+                                 <li @click.stop="payxy(item)" v-for="(item,index) in xylist" :key="index">
                                      <div class="bank">
                                          <p>{{item.payerName}}</p>
                                          <p>{{item.bankNick}}</p>
                                      </div>
                                      <!-- <p>{{item.name}}</p> bankname -->
-                                     <div class="pay">
-                                         <p class="cardnum">{{item.cardNo}}</p>
+                                     <!-- <div class="pay">
                                          <van-button @click="payxy(item)" round type="default">去支付</van-button>
-                                     </div>
+                                     </div> -->
+                                      <p class="cardnum">{{item.cardNo}}</p>
                                  </li>
                              </ul>
                          </div>
-
                     </van-popup>
              </div>
         </div>
@@ -186,9 +186,12 @@ export default {
         closexy(){
             this.showxy=false
         },
+        addcard(){
+            this.$router.push("/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard")
+        },
         payxy(info){
             this.xyinfo=info
-            console.log(this.xyinfo,'xyinfo')
+            // console.log(this.xyinfo,'xyinfo')
             this.showxy=false
             this.nick=this.xyinfo.bankNick
             this.cardnumber=this.xyinfo.cardNo.substr(this.xyinfo.cardNo.length-4,4)
@@ -838,18 +841,19 @@ export default {
                    .van-button--primary {
                        background-color: #4B66AF;
                        border:1px solid #4B66AF;
+                        font-size: 34px;
                    }
                    .van-button--default {
                        background-color: #ccc;
                        border:1px solid #ccc;
-                    //    padding:5px 20px;
                        width:120px;
+                       font-size: 34px;
                    }
 
                }
             .van-popup--right {
                 padding:15px;
-                top:80%;
+                top:51%;
                 right:0;
                 left:0;
                 bottom:-100%;
@@ -857,36 +861,28 @@ export default {
             .cards {
                 margin-top:15px;
                 ul {
-                    // padding:30px;
                     overflow-y: scroll;
                     li {
-                        //  padding:20px;
-                        //   border:2px solid #4B66AF;
-                        //   border-radius: 10px;
-                        //  width: 95%;
+                        overflow-y: scroll;
                         height: 320px;
                         margin-bottom: 20px;
                         margin-left: auto;
                         margin-right: auto;
                         border-radius: 20px;
-                        position: relative;
                         background: url('http://pay.91dianji.com.cn/bgc5.jpg') center center no-repeat;
                         background-size: 100% 100%;
                         color:#fff;
                         font-weight: bold;
                         padding:30px;
-                        .bank ,
-                        .pay{
+                        .cardnum {
+                            margin-top:100px;
+                        }
+                        .bank  {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
                         }
-                        .pay {
-                            padding-top:120px;
-                            .van-button--default{
-                                 background: linear-gradient(to bottom ,rgb(228, 200, 137), #8C6E2A );
-                            }
-                        }
+                       
                     }
                 }
             }
@@ -899,9 +895,9 @@ export default {
                 justify-content: space-between;
                 padding-top:20px;
                 height: 400px;
-                .head {
+                .userimg {
                     width:120px;
-                    height: 100px;
+                    height:120px;
                     >img {
                         width:100%;
                         border-radius: 50%;
@@ -943,7 +939,6 @@ export default {
                    box-shadow: 0px 1px 2px 3px  #ccc;
                    .card {
                       ul{
-                        //   padding:15px;
                           li{
                               display: flex;
                               padding:10px 15px;
@@ -961,12 +956,6 @@ export default {
                               .change {
                                   color:#4B66AF;
                               }
-                            //   p {
-                            //       &:nth-of-type(2){
-                            //           flex:1;
-                            //           padding-left:30px;
-                            //       }
-                            //   }
                           }
                       }  
                    }

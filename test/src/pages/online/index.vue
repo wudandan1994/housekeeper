@@ -7,7 +7,6 @@
         </header>
           <div class="box" style="overflow-y: scroll;">　
             　　<iframe :src="url"  ref="iframe" id="bdIframe" class="iframe"  scrolling="no"  frameborder="0" ></iframe>
-
          </div>
     </div>
 </template>

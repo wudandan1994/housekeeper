@@ -159,8 +159,8 @@ export default {
            this.componentload=true
            axiosPost("/creditCard/zlpayment",data)
            .then(res=>{
-               console.log(res,'支付结果')
-               console.log(res.data.data,"data数据")
+            //    console.log(res,'支付结果')
+            //    console.log(res.data.data,"data数据")
                if(res.data.success) {
                    let responce=res.data.data
                    responce=JSON.parse(responce)
@@ -208,16 +208,22 @@ export default {
     },
     created () {
         this.payMoney=this.$route.query.number
-        this.xyinfo=this.$route.query.xyinfo
-        this.cxinfo=this.$route.query.cxinfo
-        this.realName=this.xyinfo.payerName
-        this.idCardNo=this.xyinfo.idCardNo
-        this.valiateDate=this.xyinfo.month+this.xyinfo.year
-        this.cvv2=this.xyinfo.cvv2
-        this.payBankCard=this.xyinfo.cardNo
-        this.payPhoneNum=this.xyinfo.phone
-        this.intoBankCard=this.cxinfo.bankcardno
-        this.intoPhoneNum=this.cxinfo.phone
+        if(this.xyinfo){
+             this.xyinfo=this.$route.query.xyinfo
+            this.cxinfo=this.$route.query.cxinfo
+            this.realName=this.xyinfo.payerName
+            this.idCardNo=this.xyinfo.idCardNo
+            this.valiateDate=this.xyinfo.month+this.xyinfo.year
+            this.cvv2=this.xyinfo.cvv2
+            this.payBankCard=this.xyinfo.cardNo
+            this.payPhoneNum=this.xyinfo.phone
+        }  
+        if(this.cxinfo){
+            this.intoBankCard=this.cxinfo.bankcardno
+            this.intoPhoneNum=this.cxinfo.phone
+        } 
+       
+        
 
 
 

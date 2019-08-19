@@ -73,7 +73,7 @@ export default {
         }  
     },
     created(){
-        console.log('VUEX',this.$store.state);
+        // console.log('VUEX',this.$store.state);
         this.$store.state.wechat.nickname == "" ? this.nickname = '姓名' : this.nickname = this.$store.state.wechat.nickname;
         this.$store.state.wechat.headimg == '' ? this.headimg = 'http://pay.91dianji.com.cn/avators.png' : this.headimg  = this.$store.state.wechat.headimg;
         this.$store.state.wechat.recommendedcode == "" ? this.recomcode = '11111111' : this.recomcode  = this.$store.state.wechat.recommendedcode; 

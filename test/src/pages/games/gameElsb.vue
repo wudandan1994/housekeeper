@@ -54,9 +54,6 @@
 </template>
 
 <script>
-// import $ from '@pengliheng/jquery'
-// import VConsole from "Vconsole";
-// var vConsole = new VConsole();
 const by = name => (o, p) => {
   const a = o[name];
   const b = p[name];
@@ -90,7 +87,7 @@ export default {
     window.app = this;
     this.init();
     document.addEventListener("keydown", e => {
-      console.log(e,'事件对象')
+      // console.log(e,'事件对象')
       if (e.key === "ArrowRight") {
         this.turn('right');
       }else if(e.key === "ArrowLeft"){
@@ -186,7 +183,7 @@ export default {
           e.num === (nextY&&nextY.num)
           
         })
-        console.log(result,'result结果')
+        // console.log(result,'result结果')
       if(result === undefined){
         return true;
       }else{
@@ -200,7 +197,7 @@ export default {
     // 随机生成1个点
     add(callback) {
       if (this.isFull()) {
-        console.log("满了不能再加了，但是游戏还没结束啊");
+        // console.log("满了不能再加了，但是游戏还没结束啊");
         return false;
       }
       const a = this.num();
@@ -275,7 +272,7 @@ export default {
           this.add(); // 随机生成一个点
           this.add();
         } else {
-          console.log("没有移动，不用添加");
+          // console.log("没有移动，不用添加");
         }
         setTimeout(() => {
         }, 10);
@@ -299,7 +296,7 @@ export default {
        
           await dely(200);
           this.rocks.splice(this.getIndex(e.id), 1, null);
-          console.log('123');
+          // console.log('123');
           await dely(0);
           if(this.isGameOver()){
             alert('游戏结束！')

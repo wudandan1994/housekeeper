@@ -45,7 +45,7 @@ export default {
             }
              axiosPost("/customer/getWithdrawalList",data)
              .then(function(res){
-                 console.log(res.data);
+                //  console.log(res.data);
                  if(!res.data.success){
                      that.$toast({
                          message:res.data.message

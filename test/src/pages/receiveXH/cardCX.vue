@@ -53,7 +53,7 @@ export default {
         },
         selectCard(card){
             this.info=card
-            console.log(this.info,'info')
+            // console.log(this.info,'info')
             // storage.set("cxcard",card.bankname)
             // storage.set("cxcardnumber",card.bankcardno)
 
@@ -75,7 +75,7 @@ export default {
             }
             axiosPost("/txstar/getTXMerchant",data)
             .then(res=>{
-                console.log(res,'注册的商户信息')
+                // console.log(res,'注册的商户信息')
                 if(!res.data.success){  // 注册商户
                    let datas={
                        merchant_name:this.info.name,
@@ -117,7 +117,7 @@ export default {
                 }
             })
             .catch(err=>{
-                console.log(err,'error')
+                // console.log(err,'error')
             })
 
          
@@ -134,7 +134,7 @@ export default {
                 }
             })
             .catch(err=>{
-                console.log(err)
+                // console.log(err)
             })
         },
 
