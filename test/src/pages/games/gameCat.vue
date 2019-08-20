@@ -181,7 +181,7 @@ export default {
         }
         return
       }else if( pool.length === 0){
-        console.log('crazy')
+        // console.log('crazy')
         this.cat = nextStep[0];
         // 没路了。神经猫要发神经了
       }else{

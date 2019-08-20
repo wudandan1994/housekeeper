@@ -182,7 +182,7 @@ export default {
             axiosPost("/customer/getCustomer",data)
             .then(res =>{
                 if(res.data.success){
-                    console.log('查询成功',res.data.data);
+                    // console.log('查询成功',res.data.data);
                     this.photo = res.data.data.photo;
                     this.nickname = res.data.data.nickname;
                     this.mobile = res.data.data.mobile;
@@ -197,7 +197,7 @@ export default {
             })
             .catch(res =>{
                 this.$toast('查询失败');
-                console.log('查询失败',res.data.data);
+                // console.log('查询失败',res.data.data);
             })
         },
         // 更新个人设置
@@ -210,7 +210,7 @@ export default {
             var isconnect = '';
 
             this.isconnect == true ? isconnect = "1" :  isconnect = "0";
-            console.log('允许',isconnect);
+            // console.log('允许',isconnect);
             this.iscar == true ? iscar = '1' : iscar = '0';
             this.voice == true ? voice = '1' : voice = '0';
             this.iscreditcard == true ? iscreditcard = '1' : iscreditcard = '0';

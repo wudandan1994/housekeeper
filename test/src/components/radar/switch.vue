@@ -45,7 +45,7 @@ export default {
         clickDay(date) {
             (this.date).push(date);
             this.date = (this.date).slice(-2);
-            console.log('所选择的时间',this.date);
+            // console.log('所选择的时间',this.date);
             if((this.watch)%2 != '0'){
                 setTimeout(() =>{
                     this.showDate = false;
@@ -66,10 +66,10 @@ export default {
             }
         },
         changeDate(data) {
-            console.log(data); //左右点击切换月份
+            // console.log(data); //左右点击切换月份
         },
         clickToday(data) {
-            console.log(data); //跳到了本月
+            // console.log(data); //跳到了本月
         },
         handleCheckDate(){
             this.showDate = true;

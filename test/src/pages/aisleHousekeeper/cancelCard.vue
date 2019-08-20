@@ -27,7 +27,7 @@ export default {
         // 恢复信用卡列表
         handleDeletedCreditCard(){
             axiosPost('/creditCard/getDeletedCreditCard').then(res =>{
-                console.log('请求成功',res);
+                // console.log('请求成功',res);
                 if(res.data.data.length == '0'){
                     this.$toast('您没有待恢复的信用卡');
                     setTimeout(()=>{
@@ -36,7 +36,7 @@ export default {
                 }
                 this.form = res.data.data;
             }).catch(res =>{
-                console.log('请求失败',res);
+                // console.log('请求失败',res);
             })
         },
         // 恢复信用卡
@@ -45,7 +45,7 @@ export default {
                 bindId: obj
             };
             axiosPost('/creditCard/updateCreditCardByBack',params).then(res =>{
-                console.log('恢复成功');
+                // console.log('恢复成功');
                 if(res.data.success){
                     this.$toast('恢复成功');
                     this.handleDeletedCreditCard();

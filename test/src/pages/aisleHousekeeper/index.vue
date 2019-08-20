@@ -85,7 +85,7 @@
                                 <div class="small" @click.stop="smallPass(item,'1')">
                                     <van-icon name="http://pay.91dianji.com.cn/smalle.png" size="26px"/>
                                     <div class="middle">
-                                          <p>小额通道 <span>预留额度5%-2000</span></p>
+                                          <p>小额通道</p>
                                           <span class="edu">还款金额为2000-20000</span>
                                     </div>
                                     <p> <van-icon name="checked" :color="colors" size="20px"/></p>
@@ -117,7 +117,7 @@
                </ul>
            </div>
          
-           <div class="detailplans">
+           <div class="plansdetail">
                <div class="plans">
                    <router-link tag="div" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard"  class="addcard"><van-icon name="plus" />添加信用卡</router-link>
                    <router-link tag="div" to="/home/punch" class="allplans"><van-icon name="send-gift-o" />查看全部计划</router-link>                 
@@ -169,7 +169,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.go(-1)
+            this.$router.push("/home")
         },
         // 点击遮盖层，通道隐藏
         showcover(){
@@ -577,7 +577,6 @@ export default {
                         border-radius: 20px; 
                         padding: 5px 20px;
                       }
-
                   }
               }
           }
@@ -597,7 +596,6 @@ export default {
                   >li {
                       position: relative;
                       width:100%;
-                      border-radius: 10px;
                       .cover {
                           position: fixed;
                           top:0px;
@@ -827,7 +825,7 @@ export default {
                    width:100%;
                }
            }
-           >.detailplans {
+           >.plansdetail {
             //    width: 88%;
             //    height: auto;
             //    margin: auto;
@@ -835,39 +833,47 @@ export default {
             //    display: -webkit-flex;
             //    justify-content: space-between;
             //    -webkit-justify-content: space-between;
-            position: fixed;
-            bottom:0;
-            right:30px;
-            left:30px;
+            // position: fixed;
+            // bottom:0;
+            // right:30px;
+            // left:30px;
+            width:100%;
+            box-sizing: border-box;
+            padding:0 20px;
+            margin-top:30px;
             .plans {
                 width:100%;
                 display: flex;
                 justify-content: space-between;
+                .allplans,
+                .addcard {
+                    font-size: 32px;
+                }
                 div {
                     width:49%;
                     text-align: center;
-                    background-color: #ddd;
+                    background-color: #ccc;
                     padding:16px 0px;
                     border-right: 1% dotted #fff;
-                    background-color: #eee;
+                    background-color: #ccc;
                     color:#D2AD66;
                     border-radius: 20px;
-
+                    padding:25px 0px;
                 }
                 .addcard {
                      border-right: 1px dotted #fff;
                 }
-              
             }
             .manage {
                 width:100%;
-                margin-top:15px;
+                margin-top:25px;
                 padding:15px 0px;
                 text-align: center;
-                background-color: #eee;
+                background-color: #ccc;
                 color:#D2AD66;
                  border-radius: 20px;
-
+                 font-size: 32px;
+                 padding:25px 0px;
             }
            }
        }

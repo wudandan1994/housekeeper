@@ -34,15 +34,15 @@ export default {
               axiosPost("/customer/showAdvertisement")
               .then(res=>{
                   if(res.data.success){
-                      console.log(res,'result')
+                    //   console.log(res,'result')
                       this.poster = res.data.data.img;
                       this.path = res.data.data.url;
                   }else{
-                      console.log(err,'error')
+                    //   console.log(err,'error')
                   }
               })
               .catch(err=>{
-                  console.log(err,'error')
+                //   console.log(err,'error')
               })
         },
         handleUrl(){

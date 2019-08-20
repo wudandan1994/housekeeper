@@ -27,26 +27,36 @@
                     </p>
                     <p>
                         <span>￥</span>
-                        <input type="number" v-model="number" @input="change" placeholder="金额为1000-20000">
+                        <input type="number" v-model="number" @input="change"  placeholder="金额为200-20000">
                     </p>
                     <div class="card" v-show="showCard">
                         <ul>
                             <li>
                                 <p>到账储蓄卡：</p>
                                 <p><span>{{nickCX}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{cardCX}}</span></p>
-                                <router-link tag="p" to="/home/receiveXH/cardCX" class="change">更换<van-icon  name="arrow"  color="#4B66AF" /></router-link>
+                                <!-- <router-link tag="p" to="/home/receiveXH/cardCX" class="change">更换<van-icon  name="arrow"  color="#4B66AF" /></router-link> -->
+                                <p  @click="getcxcard" class="change">更换<van-icon  name="arrow"  color="#4B66AF" /></p>
                             </li>
+                           
+                            
                              <li>
                                 <p>支付信用卡：</p>
                                 <p><span>{{nick}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{cardnumber}}</span></p>
-                                <router-link tag="p" :to="{query:{type:'2',merchantno:merchantno},path:'/home/receivables/cards'}"  class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></router-link>
+                                <!-- <router-link tag="p" :to="{query:{type:'2',merchantno:merchantno},path:'/home/receivables/cards'}"  class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></router-link> -->
+                                <p  @click="getxycard" class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></p>
                             </li>
+                           
+                           
+
                         </ul>
                     </div>
                      <p @click="showPay">
                          <span>立即支付</span>
                      </p>
                 </div>
+                
+                <!-- <p><van-icon size="46px" name="http://pay.91dianji.com.cn/paytype.png" /></p> -->
+                <img src="http://pay.91dianji.com.cn/paytype.png" alt="" srcset="">
                 <p>
                     <span><van-icon name="label"/></span>&nbsp;&nbsp;<b class="bold">商户收款</b>，支付通道新开户需要实名注册，信用卡应与绑定的结算卡户名要一致，<span>如出现没到账请及时更换收款储蓄卡后</span>
                      ，及时联系客服登记核查，感谢您的理解 。
@@ -68,13 +78,15 @@
                             <p>交易查询详细记录</p>
                         </div>
                     </li>
-                    <router-link tag="li" to="/home/receivables/passageway">
-                        <p><span><van-icon color="#4B66AF" size="20px" name="expand"/></span></p>
+                    
+                      <router-link tag="li" :to="{path:'/home/receivables/passageway',query:{type:'1'}}" >
+                        <p><span><van-icon color="#4B66AF" size="20px" name="gold-coin"/></span></p>
                         <div>
                             <p>通道说明</p>
                             <p>单笔交易限额明细</p>
                         </div>
                     </router-link>
+
                     <router-link tag="li" to="/home/receiveXH/cardCX">
                         <p><span><van-icon color="#4B66AF" size="20px" name="card"/></span></p>
                         <div>
@@ -84,19 +96,7 @@
                     </router-link>
                     
                 </ul>
-                <!-- <div class="tips" v-show="showTips">
-                    <p>温馨提示</p>
-                    <div>
-                        <p>尊敬的用户，为了确保用户信息的唯一性和安全性，确保账户资金安全，请您先进行银行储蓄卡实名认证，
-                            方可免费办理次业务！
-                        </p>
-                        <p>自家账户不能给他人信用卡支付使用</p>
-                        <p>
-                            <span @click="cancle">取消</span>
-                            <router-link tag="span" to="/home/receivables/storage">实名认证</router-link>
-                        </p>
-                    </div>
-                </div> -->
+               
             </div>
              <div class="statistics">
                  <ul>
@@ -122,6 +122,60 @@
                      </li> -->
                  </ul>
              </div>
+              <div class="covercx" >
+                    <van-popup v-model="showxy" position="right" >
+                         <div class="action">
+                             <van-icon name="add" @click="addcard"  size="26px" color="#4B66AF" />
+                             <van-icon name="clear" @click="closexy" size="26px" color="#4B66AF" />
+                            <!-- <van-button  to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" round type="primary">添加信用卡</van-button>
+                             <van-button @click="closexy" round type="default">关闭</van-button> -->
+                        </div>
+                         <div class="cards">
+                             <ul>
+                                 <li @click="payxy(item)" v-for="(item,index) in xylist" :key="index">
+                                     <div class="bank">
+                                         <p>{{item.payerName}}</p>
+                                         <p>{{item.bankNick}}</p>
+                                     </div>
+                                     <p>{{item.cardNo}}</p> 
+                                     <!-- <div class="pay">
+                                         <p class="cardnum">{{item.cardNo}}</p>
+                                         <van-button @click="payxy(item)" round type="default">去支付</van-button>
+                                     </div> -->
+                                 </li>
+                             </ul>
+                         </div>
+
+                    </van-popup>
+             </div>
+
+              <div class="covercx" >
+                    <van-popup v-model="showcx" position="right" >
+                        <div class="action">
+                             <van-icon name="add" @click="addcardcx"  size="26px" color="#4B66AF" />
+                             <van-icon name="clear" @click="closecx" size="26px" color="#4B66AF" />
+                           
+                            <!-- <van-button  to="/personalCenter/addcard/UnionPay" round  type="primary">添加储蓄卡</van-button>
+                             <van-button @click="closecx" round type="default">关闭</van-button> -->
+                        </div>
+                         
+                         <div class="cards">
+                             <ul>
+                                 <li @click="paycx(item)" v-for="(item,index) in cxlist" :key="index">
+                                     <div class="bank">
+                                         <p>{{item.name}}</p>
+                                         <p>{{item.bankname}}</p>
+                                     </div>
+                                     <p>{{item.bankcardno}}</p> 
+                                     <!-- <div class="pay">
+                                         <p class="cardnum">{{item.bankcardno}}</p>
+                                         <van-button @click="paycx(item)" round type="default">到账卡</van-button>
+                                     </div> -->
+                                 </li>
+                             </ul>
+                         </div>
+                   </van-popup>
+             </div>
             <footer>
                 
             </footer>
@@ -135,6 +189,7 @@ import {axiosPost} from '@/lib/http'
 import Bank from '@/lib/bank'
 import loading from '@/components/loading'
 import storage from '@/lib/storage' 
+import { bankCardAttribution } from '../../lib/bankName'
 export default {
     components:{
       loading
@@ -147,24 +202,97 @@ export default {
             level:"",
             recommendedcode:"",
             info:"",
-            chMerCode:"",
             number:"",
+            chMerCode:"",
+            componentload:false,
             showCard:false,
-            info:"",
-            flag:false,
-            nick:"请选择支付信用卡",
             nickCX:"请选择到账储蓄卡",
             cardCX:"",
+            nick:"请选择支付信用卡",
             cardnumber:"",
-            cardInfo:"",
-            ordernumber:"",
-            componentload:false,
-            merchantno:""
+            showcx:false,
+            showxy:false,
+            cxlist:[],
+            xylist:[],
+            cxinfo:{},
+            xyinfo:{}
         }
     },
     methods:{
         goBack () {
             this.$router.push('/home')
+        },
+        addcard(){
+            this.$router.push("/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard")
+        },
+        addcardcx(){
+            this.$router.push("/personalCenter/addcard/UnionPay")
+        },
+        chanel(){
+            this.$toast("敬请期待")
+        },
+        closecx(){
+            this.showcx=false
+        },
+        payxy(info){
+            this.xyinfo=info
+            this.showxy=false
+            this.nick=this.xyinfo.bankNick
+            this.cardnumber=this.xyinfo.cardNo.substr(this.xyinfo.cardNo.length-4,4)
+        },
+        paycx(info){
+            this.cxinfo=info
+            this.showcx=false
+            // console.log(this.cxinfo,"储蓄卡信息")
+            this.nickCX=this.cxinfo.bankname
+            this.cardCX=this.cxinfo.bankcardno.substr(this.cxinfo.bankcardno.length-4,4)
+        },
+        closexy(){
+            this.showxy=false
+        },
+        getcxcard(){
+            this.showcx=true
+            this.showxy=false
+            this.getcardscx()
+        },
+        getxycard(){
+            this.showxy=true
+            this.showcx=false
+            this.getcardsxy()
+
+        },
+
+        // 信用卡列表
+        getcardsxy(){
+             axiosPost("/creditCard/getMyCreditCard")
+             .then(res=>{
+                 if(res.data.success){
+                    //  this.xylist=res.data.
+                   
+                     let arr= res.data.data
+                     let arrXun=[]
+                     arr.forEach((item,i) => {
+                         item.bankNick=bankCardAttribution(item.cardNo).bankName
+                         arrXun.push(item)
+                     });
+                     this.xylist=arrXun
+                 }
+             })
+        },
+
+        // 储蓄卡列表
+        getcardscx(){
+            axiosPost("/customer/getBankCardByOpenid")
+            .then(res=>{
+                if(res.data.success){
+                    this.cxlist=res.data.data
+                } else {
+                    this.$toast(res.data.message)
+                }
+            })
+            .catch(err=>{
+                this.$toast("登录超时，请重新登录")
+            })
         },
         change(){
               if(this.number.trim().length==0){
@@ -174,40 +302,33 @@ export default {
               }
         },
 
+
       
         showPay(){
-             this.showTips=true
-            //  查询商户号，若没有 商户申请，上传图片 ，若有在查询是否有绑定信用卡
             if(this.number.trim().length=="0"){
                 return this.$toast("请输入金额")
             } 
-            if(Number(this.number)<1000 || Number(this.number)>20000){
-                return this.$toast("请输入正确的金额")
+            if(Number(this.number)<200){
+                return this.$toast("单笔金额200元起")
             }
-            if(this.nick=="请选择支付信用卡" || this.nick=="" || this.nick==undefined){
-               return  this.$toast("请先选择支付信用卡")
-            }
-             if(this.nickCX=="请选择到账储蓄卡" || this.nickCX==""){
-               return  this.$toast("请选择到账储蓄卡")
-            }
-           
-
-            
-
+            // if(Number(this.number)<1000 || Number(this.number)>20000){
+            //     return this.$toast("请输入正确的金额")
+            // }
+            // if(this.nick=="请选择支付信用卡"){
+            //     return this.$toast("请选择支付信用卡")
+            // }
+            //  if(this.nickCX=="请选择到账储蓄卡"){
+            //     return this.$toast("请选择到账储蓄卡")
+            // }
 
             this.$router.push({
                 path:"/home/receiveXH/payXH",
                 query:{
-                     info:this.cardInfo,
                     number:this.number,
-                    merchantno:this.merchantno
+                    cxinfo:this.cxinfo,
+                    xyinfo:this.xyinfo
                 }
             })
-         
-            
-          
-           
-
             
         },
         searchInfo(){
@@ -250,23 +371,6 @@ export default {
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
         this.lev=this.$store.state.wechat.level;
-        this.cardInfo=this.$route.query.params
-        this.merchantno=this.$route.query.merchantno
-        this.nickCX=storage.get('cxcard')
-        this.cardCX=storage.get('cxcardnumber')
-        if(this.cardCX){
-            this.cardCX=this.cardCX.substr(this.cardCX.length-4,4)
-        }
-        
-        if(this.cardCX){
-            this.showCard=true
-        }
-        console.log(this.cardInfo,"cardInfo")
-        if(this.cardInfo ) {
-            this.showCard=true
-            this.nick=this.cardInfo.bankname
-            this.cardnumber=this.cardInfo.cardNo.substr(this.cardInfo.cardNo.length-4,4)
-        }
 
         if(this.lev=='1') {
             this.lev="黄金会员"
@@ -300,6 +404,69 @@ export default {
        }
        >.container {
            background-color:#ECF0F3; 
+           .covercx {
+               .action {
+                   display: flex;
+                   justify-content: space-between;
+                   .van-button--primary {
+                       background-color: #4B66AF;
+                       border:1px solid #4B66AF;
+                   }
+                   .van-button--default {
+                       background-color: #ccc;
+                       border:1px solid #ccc;
+                    //    padding:5px 20px;
+                       width:120px;
+                   }
+
+               }
+            .van-popup--right {
+                padding:15px;
+                top:51%;
+                right:0;
+                left:0;
+                bottom:-100%;
+            }
+            .cards {
+                margin-top:15px;
+                ul {
+                    // padding:30px;
+                    overflow-y: scroll;
+                    li {
+                        //  padding:20px;
+                        //   border:2px solid #4B66AF;
+                        //   border-radius: 10px;
+                        //  width: 95%;
+                        height: 320px;
+                        margin-bottom: 20px;
+                        margin-left: auto;
+                        margin-right: auto;
+                        border-radius: 20px;
+                        position: relative;
+                        background: url('http://pay.91dianji.com.cn/bgc5.jpg') center center no-repeat;
+                        background-size: 100% 100%;
+                        color:#fff;
+                        font-weight: bold;
+                        padding:30px;
+                        >p {
+                            margin-top:100px;
+                        }
+                        .bank ,
+                        .pay{
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                        .pay {
+                            padding-top:120px;
+                            .van-button--default{
+                                 background: linear-gradient(to bottom ,rgb(228, 200, 137), #8C6E2A );
+                            }
+                        }
+                    }
+                }
+            }
+        }
            >.portrait {
                background-color:#4B66AF; 
                color:#eee;
@@ -310,7 +477,7 @@ export default {
                 height: 400px;
                 .head {
                     width:120px;
-                    height: 100px;
+                    height: 120px;
                     >img {
                         width:100%;
                         border-radius: 50%;
@@ -339,7 +506,7 @@ export default {
            }
            >.merchant {
                background-color: #ECF0F3;
-               padding-top:160px;
+            //    padding-top:10px;
                position: relative;
                >.pay {
                    width:92%;
@@ -352,7 +519,8 @@ export default {
                    box-shadow: 0px 1px 2px 3px  #ccc;
                    .card {
                       ul{
-                        //   padding:15px;
+                        padding-bottom: 20px;
+                        
                           li{
                               display: flex;
                               padding:10px 15px;
@@ -460,52 +628,52 @@ export default {
                        }
                    }
                }
-               >.tips {
-                   width:96%;
-                   margin-left:20px;
-                    position: absolute;
-                    top:0px;
-                    left:0px;
-                    z-index:99;
-                    border:1px solid #ccc;
-                    >p {
-                        background-color: #E1E1E1;
-                        text-align: center;
-                        padding-top:20px;
-                        padding-bottom: 20px;
-                        font-size: 30px;
-                        font-weight: bold;
-                        border-bottom: 1px solid #ccc;
-                        border-top:2px solid #544628;
-                    }
-                    >div {
-                        background-color:#fff; 
-                        padding: 30px 20px;
-                        border-bottom: 1px solid #ccc;
-                        border-left: 1px solid #ccc;
-                        >p {
-                            line-height: 40px;
-                            &:nth-of-type(2) {
-                                margin:10px 20px;
-                                color:#958D6B;
-                                font-weight: bold;
-                            }
-                            &:nth-of-type(3) {
-                                display: flex;
-                                justify-content: space-around;
-                                >span {
-                                    border:3px solid #ccc;
-                                    padding:10px 30px;
-                                    border-radius:30px;
-                                    &:nth-of-type(2) {
-                                        background-color:#A06914;
-                                        color:#fff; 
-                                    }
-                                }
-                            }
-                        }
-                    }
-               }
+            //    >.tips {
+            //        width:96%;
+            //        margin-left:20px;
+            //         position: absolute;
+            //         top:0px;
+            //         left:0px;
+            //         z-index:99;
+            //         border:1px solid #ccc;
+            //         >p {
+            //             background-color: #E1E1E1;
+            //             text-align: center;
+            //             padding-top:20px;
+            //             padding-bottom: 20px;
+            //             font-size: 30px;
+            //             font-weight: bold;
+            //             border-bottom: 1px solid #ccc;
+            //             border-top:2px solid #544628;
+            //         }
+            //         >div {
+            //             background-color:#fff; 
+            //             padding: 30px 20px;
+            //             border-bottom: 1px solid #ccc;
+            //             border-left: 1px solid #ccc;
+            //             >p {
+            //                 line-height: 40px;
+            //                 &:nth-of-type(2) {
+            //                     margin:10px 20px;
+            //                     color:#958D6B;
+            //                     font-weight: bold;
+            //                 }
+            //                 &:nth-of-type(3) {
+            //                     display: flex;
+            //                     justify-content: space-around;
+            //                     >span {
+            //                         border:3px solid #ccc;
+            //                         padding:10px 30px;
+            //                         border-radius:30px;
+            //                         &:nth-of-type(2) {
+            //                             background-color:#A06914;
+            //                             color:#fff; 
+            //                         }
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //    }
            }
            >.statistics {
                margin-top:20px;

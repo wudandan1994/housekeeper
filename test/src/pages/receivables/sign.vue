@@ -97,11 +97,11 @@ export default {
 
                 axiosPost("/jxpay/sendmessage",data)
                 .then(res=>{
-                   console.log(res,"第一次签约")
+                //    console.log(res,"第一次签约")
                    setTimeout(()=>{
                        if(res.data.success){
                            this.$toast(res.data.message)
-                           console.log("开卡成功")
+                        //    console.log("开卡成功")
                            this.$router.push({
                                path:"/home/receivables",
                                query:{
@@ -124,13 +124,13 @@ export default {
     },
     created(){
         this.info=this.$route.query.info
-        console.log(this.info,'info')
+        // console.log(this.info,'info')
         this.accountNumber=this.info.cardNo
         this.tel=this.info.phone
         this.cvv2=this.info.cvv2
         this.expired=this.info.month+''+this.info.year
         this.merchantno=this.$route.query.merchantno
-        console.log(this.merchantno,"商户号")
+        // console.log(this.merchantno,"商户号")
 
     }
 }

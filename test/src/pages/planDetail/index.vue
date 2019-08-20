@@ -56,7 +56,7 @@
                                           <p v-else><van-icon size="30px" name="http://pay.91dianji.com.cn/xiaofei.png"/></p>
 
                                       </div>
-                                      <div class="left">
+                                      <div class="leftinfo">
                                           <p v-if="info.type=='9'"><span>还款账单&nbsp;</span><span class="gray">{{info.date}}</span></p>
                                           <p v-else><span>消费账单&nbsp;</span><span class="gray">{{info.date}}</span></p>
                                           <p><span class="gray">订单号：</span><span>{{info.parentNo}}</span></p>
@@ -336,7 +336,7 @@ export default {
                                       align-items: center;
                                       justify-content: space-between;
                                       padding:20px 10px;
-                                      .left {
+                                      .leftinfo {
                                           flex:1;
                                           padding-left:20px;
                                       }

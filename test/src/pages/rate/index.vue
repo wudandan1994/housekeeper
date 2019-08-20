@@ -75,15 +75,15 @@ export default {
               height: 300px;
               background-color: #4B66AF;
               position: relative;
+              box-sizing: border-box;
               >.detail {
-                  width:94%;
+                  width:90%;
                   position: absolute;
                   background-color: #fff;
                   top:180px;
-                  left:0px;
+                  left:5%;
                   border-radius: 10px;
-                  margin-left:20px;
-                  margin-right:50px;
+                  box-sizing: border-box;
                   box-shadow: 0px 2px 8px 3px #ccc;
                   display: flex;
                   padding:30px;

@@ -72,7 +72,7 @@ export default {
         },
         // 选择产品
         handleCheckProduct(item){
-            console.log('选中产品',item);
+            // console.log('选中产品',item);
             if(item == 'shiyou'){
                 this.shiyou = !this.shiyou;
             }else{
