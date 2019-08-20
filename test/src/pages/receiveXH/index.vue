@@ -27,7 +27,7 @@
                     </p>
                     <p>
                         <span>￥</span>
-                        <input type="number" v-model="number" @input="change"  placeholder="金额为100-20000">
+                        <input type="number" v-model="number" @input="change"  placeholder="金额为200-20000">
                     </p>
                     <div class="card" v-show="showCard">
                         <ul>
@@ -54,6 +54,9 @@
                          <span>立即支付</span>
                      </p>
                 </div>
+                
+                <!-- <p><van-icon size="46px" name="http://pay.91dianji.com.cn/paytype.png" /></p> -->
+                <img src="http://pay.91dianji.com.cn/paytype.png" alt="" srcset="">
                 <p>
                     <span><van-icon name="label"/></span>&nbsp;&nbsp;<b class="bold">商户收款</b>，支付通道新开户需要实名注册，信用卡应与绑定的结算卡户名要一致，<span>如出现没到账请及时更换收款储蓄卡后</span>
                      ，及时联系客服登记核查，感谢您的理解 。
@@ -75,20 +78,15 @@
                             <p>交易查询详细记录</p>
                         </div>
                     </li>
-                    <!-- <router-link tag="li" to="/home/receivables/passageway">
-                        <p><span><van-icon color="#4B66AF" size="20px" name="expand"/></span></p>
+                    
+                      <router-link tag="li" :to="{path:'/home/receivables/passageway',query:{type:'1'}}" >
+                        <p><span><van-icon color="#4B66AF" size="20px" name="gold-coin"/></span></p>
                         <div>
                             <p>通道说明</p>
                             <p>单笔交易限额明细</p>
                         </div>
-                    </router-link> -->
-                      <li @click="chanel">
-                        <p><span><van-icon color="#4B66AF" size="20px" name="expand"/></span></p>
-                        <div>
-                            <p>通道说明</p>
-                            <p>单笔交易限额明细</p>
-                        </div>
-                    </li>
+                    </router-link>
+
                     <router-link tag="li" to="/home/receiveXH/cardCX">
                         <p><span><van-icon color="#4B66AF" size="20px" name="card"/></span></p>
                         <div>
@@ -125,24 +123,25 @@
                  </ul>
              </div>
               <div class="covercx" >
-                    <van-popup v-model="showxy" position="right" :overlay="true">
+                    <van-popup v-model="showxy" position="right" >
                          <div class="action">
-                           
-                            <van-button  to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" round type="primary">添加信用卡</van-button>
-                             <van-button @click="closexy" round type="default">关闭</van-button>
+                             <van-icon name="add" @click="addcard"  size="26px" color="#4B66AF" />
+                             <van-icon name="clear" @click="closexy" size="26px" color="#4B66AF" />
+                            <!-- <van-button  to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" round type="primary">添加信用卡</van-button>
+                             <van-button @click="closexy" round type="default">关闭</van-button> -->
                         </div>
                          <div class="cards">
                              <ul>
-                                 <li v-for="(item,index) in xylist" :key="index">
+                                 <li @click="payxy(item)" v-for="(item,index) in xylist" :key="index">
                                      <div class="bank">
                                          <p>{{item.payerName}}</p>
                                          <p>{{item.bankNick}}</p>
                                      </div>
-                                     <!-- <p>{{item.name}}</p> bankname -->
-                                     <div class="pay">
+                                     <p>{{item.cardNo}}</p> 
+                                     <!-- <div class="pay">
                                          <p class="cardnum">{{item.cardNo}}</p>
                                          <van-button @click="payxy(item)" round type="default">去支付</van-button>
-                                     </div>
+                                     </div> -->
                                  </li>
                              </ul>
                          </div>
@@ -151,25 +150,27 @@
              </div>
 
               <div class="covercx" >
-                    <van-popup v-model="showcx" position="right" :overlay="true">
+                    <van-popup v-model="showcx" position="right" >
                         <div class="action">
+                             <van-icon name="add" @click="addcardcx"  size="26px" color="#4B66AF" />
+                             <van-icon name="clear" @click="closecx" size="26px" color="#4B66AF" />
                            
-                            <van-button  to="/personalCenter/addcard/UnionPay" round  type="primary">添加储蓄卡</van-button>
-                             <van-button @click="closecx" round type="default">关闭</van-button>
+                            <!-- <van-button  to="/personalCenter/addcard/UnionPay" round  type="primary">添加储蓄卡</van-button>
+                             <van-button @click="closecx" round type="default">关闭</van-button> -->
                         </div>
                          
                          <div class="cards">
                              <ul>
-                                 <li v-for="(item,index) in cxlist" :key="index">
+                                 <li @click="paycx(item)" v-for="(item,index) in cxlist" :key="index">
                                      <div class="bank">
                                          <p>{{item.name}}</p>
                                          <p>{{item.bankname}}</p>
                                      </div>
-                                     <!-- <p>{{item.name}}</p> bankname -->
-                                     <div class="pay">
+                                     <p>{{item.bankcardno}}</p> 
+                                     <!-- <div class="pay">
                                          <p class="cardnum">{{item.bankcardno}}</p>
                                          <van-button @click="paycx(item)" round type="default">到账卡</van-button>
-                                     </div>
+                                     </div> -->
                                  </li>
                              </ul>
                          </div>
@@ -220,6 +221,12 @@ export default {
     methods:{
         goBack () {
             this.$router.push('/home')
+        },
+        addcard(){
+            this.$router.push("/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard")
+        },
+        addcardcx(){
+            this.$router.push("/personalCenter/addcard/UnionPay")
         },
         chanel(){
             this.$toast("敬请期待")
@@ -301,15 +308,18 @@ export default {
             if(this.number.trim().length=="0"){
                 return this.$toast("请输入金额")
             } 
+            if(Number(this.number)<200){
+                return this.$toast("单笔金额200元起")
+            }
             // if(Number(this.number)<1000 || Number(this.number)>20000){
             //     return this.$toast("请输入正确的金额")
             // }
-            if(this.nick=="请选择支付信用卡"){
-                return this.$toast("请选择支付信用卡")
-            }
-             if(this.nickCX=="请选择到账储蓄卡"){
-                return this.$toast("请选择到账储蓄卡")
-            }
+            // if(this.nick=="请选择支付信用卡"){
+            //     return this.$toast("请选择支付信用卡")
+            // }
+            //  if(this.nickCX=="请选择到账储蓄卡"){
+            //     return this.$toast("请选择到账储蓄卡")
+            // }
 
             this.$router.push({
                 path:"/home/receiveXH/payXH",
@@ -412,7 +422,7 @@ export default {
                }
             .van-popup--right {
                 padding:15px;
-                top:80%;
+                top:51%;
                 right:0;
                 left:0;
                 bottom:-100%;
@@ -438,6 +448,9 @@ export default {
                         color:#fff;
                         font-weight: bold;
                         padding:30px;
+                        >p {
+                            margin-top:100px;
+                        }
                         .bank ,
                         .pay{
                             display: flex;
@@ -464,7 +477,7 @@ export default {
                 height: 400px;
                 .head {
                     width:120px;
-                    height: 100px;
+                    height: 120px;
                     >img {
                         width:100%;
                         border-radius: 50%;
@@ -493,7 +506,7 @@ export default {
            }
            >.merchant {
                background-color: #ECF0F3;
-               padding-top:160px;
+            //    padding-top:10px;
                position: relative;
                >.pay {
                    width:92%;

@@ -2,14 +2,14 @@
   <div id="app">
     
     <router-view/>
- 
+     <coverads name="fade"></coverads>
   </div>
 </template>
 
 <script>
 import {axiosPost,axiosGet} from '@/lib/http'
 import storage from '@/lib/storage'
-
+import coverads from '@/components/coverads.vue'
 
 
 export default {
@@ -26,9 +26,9 @@ export default {
       photo: '',
     }
   },
-  // components: {
-  //  
-  // },
+  components: {
+      coverads,
+  },
   methods:{
      // 微信授权
     handleOauth(){

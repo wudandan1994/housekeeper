@@ -70,8 +70,15 @@
                             <p>交易查询详细记录</p>
                         </div>
                     </li>
-                    <router-link tag="li" to="/home/receivables/passageway">
+                    <!-- <router-link tag="li" to="/home/receivables/passageway">
                         <p><span><van-icon color="#4B66AF" size="20px" name="expand"/></span></p>
+                        <div>
+                            <p>通道说明</p>
+                            <p>单笔交易限额明细</p>
+                        </div>
+                    </router-link> -->
+                    <router-link tag="li" :to="{path:'/home/receivables/passageway',query:{type:'2'}}" >
+                        <p><span><van-icon color="#4B66AF" size="20px" name="gold-coin"/></span></p>
                         <div>
                             <p>通道说明</p>
                             <p>单笔交易限额明细</p>

@@ -1,19 +1,15 @@
 <template>
     <div id="page_cancelCard">
-        <header class=" head">
-            <div class="center"  @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
-            <div>信用卡</div>
+        <!-- <header class=" head">
+            <div class="center"  @click=""><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div></div>
+        </header> -->
+        <header>
+            <span @click="handleReturnHome"><van-icon name="arrow-left"/></span>
+            <span>储蓄卡</span>
             <router-link tag="div" to="/personalCenter/addcard/UnionPay" class="add">添加储蓄卡</router-link>
+            
         </header>
-        <!-- <div class="per_card" v-for="(item,index) in form" :key="index">
-            <div class="bank">
-                 <div class="payer">{{item.payerName}}</div>
-                 <div class="payer">{{item.bankname}}</div>
-            </div>
-           
-            <div class="cardNo">{{item.cardNo}}</div>
-            <div class="back" @click="handleBack(item.bindId)">选择</div>
-        </div> -->
         <div class="list">
             <ul>
                 <li v-for="(item,index) in form" :key="index" >
@@ -167,22 +163,32 @@ export default {
 </script>
 <style lang="less" scoped>
 #page_cancelCard{
-    .head {
-         background: #4B66AF;
-         width:100%;
-         height: 86px;
-         line-height: 86px;
-         color:#fff;
-         display: flex;
-         position: fixed;
-         top:0px;
-         font-size:28px;
-         z-index:999;
-         justify-content: space-between;
-         .add {
-             padding-right:20px;
-         }
-     }
+     >header {
+           background-color: #4965AE;
+           width:100%;
+           height: 86px;
+           line-height: 86px;
+           padding-top:10px;
+           padding-right:10px;
+           color:#fff;
+           font-size:30px;
+           display: flex;
+           z-index:999;
+           position: fixed;
+           top:0;
+           justify-content: space-between;
+           box-sizing: border-box;
+           >span {
+               &:nth-of-type(1) {
+                   margin-left: 10px;
+               }
+               &:nth-of-type(3) {
+                   margin-right: 10px;
+                   display:flex;
+                   align-items: center;
+               }
+           }
+       }
    
     .list {
         margin-top:20px;

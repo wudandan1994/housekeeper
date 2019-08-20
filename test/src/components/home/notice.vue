@@ -83,25 +83,28 @@ export default {
         top: 0;
         left: 0;
         .notice{
-            width: 80vw;
-            height: 50vh;
-            box-sizing: border-box;
-            padding: 0px 40px;
-            margin: 25vh auto auto auto;
-            background: #FFD700;
-            border-radius: 10px;
-            .notice-title{
-                width: 100%;
-                height: 20%;
-                font-size: 32px;
-                font-weight: 700;
-            }
-            .notice-content{
-                font-size: 26px;
-                line-height: 50px;
-                text-align: justify;
-                letter-spacing: 1px;
-            }
+        width: 80vw;
+        height: auto;
+        box-sizing: border-box;
+        margin: 20vh auto auto auto;
+        background: #FFD700;
+        border-radius: 10px;
+        .notice-title{
+        width: 100%;
+        height: 150px;
+        font-size: 32px;
+        font-weight: 700;
+        }
+        .notice-content{
+        width: 100%;
+        height: auto;
+        font-size: 26px;
+        line-height: 50px;
+        text-align: justify;
+        letter-spacing: 1px;
+        box-sizing: border-box;
+        padding: 0px 30px 100px 30px;
+        }
         }
     }
 </style>

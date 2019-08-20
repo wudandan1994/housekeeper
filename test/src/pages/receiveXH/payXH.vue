@@ -31,7 +31,7 @@
                        <input v-model="payBankCard"  type="number" placeholder="支付信用卡卡号">
                    </li>
                     <li>
-                       <span>信用卡预留手机号</span>
+                       <span>信用卡手机号</span>
                        <input type="number" v-model="payPhoneNum" placeholder="信用卡预留手机">
                    </li> 
                     <div class="shadow"></div>
@@ -40,7 +40,7 @@
                        <input v-model="intoBankCard"  type="number" placeholder="储蓄卡卡号">
                    </li>
                     <li>
-                       <span>储蓄卡预留手机号</span>
+                       <span>储蓄卡手机号</span>
                        <input type="number" v-model="intoPhoneNum" placeholder="储蓄卡预留手机号">
                    </li> 
                     <li>
@@ -143,6 +143,11 @@ export default {
            this.intoPhoneNum.trim().length==0 ||this.payMoney.trim().length==0 ||this.valiateDate.trim().length==0 ||this.cvv2.trim().length==0  ) {
                return this.$toast("请将信息填写完整")
            }
+
+             if(Number(this.payMoney)<200){
+                return this.$toast("单笔金额200元起")
+            }
+
 
            let data={
               realName:this.realName,

@@ -85,7 +85,7 @@
                                 <div class="small" @click.stop="smallPass(item,'1')">
                                     <van-icon name="http://pay.91dianji.com.cn/smalle.png" size="26px"/>
                                     <div class="middle">
-                                          <p>小额通道 <span>预留额度5%-2000</span></p>
+                                          <p>小额通道</p>
                                           <span class="edu">还款金额为2000-20000</span>
                                     </div>
                                     <p> <van-icon name="checked" :color="colors" size="20px"/></p>

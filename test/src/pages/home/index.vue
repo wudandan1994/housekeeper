@@ -93,7 +93,7 @@
                                 </div>
                             </li> -->
 
-                            <li @click="applycard('https://creditcard.feierlaiedu.com/?token=5b842e25964f78313326b53f9e331c54','办卡中心')">
+                            <li @click="applycard('https://wsdev.1sta.cn/wechat/pages/wailian/wailian.html?merCode=b480446df76a4494948e3b95845db8ca','办卡中心')">
                                 <span class="handle">
                                     <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                                 </span>
@@ -110,7 +110,7 @@
                                     <!-- <span>官方渠道</span> -->
                                 </div>
                             </li>
-                            <li @click="handleIsAuth('/home/receivables',false,'')">
+                            <li @click="handlecollect('/home/receivables',false,'')">
                             <!-- <li @click="handleIsAuth('/home/collect',false,'')"> -->
                                 <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
                                 <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
@@ -124,7 +124,6 @@
                                             <van-swipe-item>多个选择</van-swipe-item>
                                             </van-swipe>
                                         </div>
-                                    <!-- <span>落地商户</span> -->
                                 </div>
                             </li>
                             <li @click="handleIsAuth('/loan/detail',true,'4')">
@@ -155,35 +154,39 @@
                                             <van-swipe-item>余额还款</van-swipe-item>
                                             </van-swipe>
                                         </div>
-                                    <!-- <span>完美账单</span> -->
                                 </div>                              
                             </li>
 
                         </ul>
-                        <!-- <div class="selectchannel">
-                            <div class="pay">
-                                <p>请先选择通道</p>
-                                <div class="channelfirst">
-                                    <p>通道一</p>
-                                    <p>优质通道</p>
-
+                       
+                         <div v-show="showpass" @click.self="showcover" :class="showpass?'cover':''">
+                           <div  class="pop">
+                               <h3>请选择通道</h3>
+                                <div class="small" @click.stop="smallPass('1')">
+                                    <van-icon name="http://pay.91dianji.com.cn/uz.png" size="26px"/>
+                                    <div class="middle">
+                                          <p>优质商户 </p>
+                                          <!-- <span class="edu">还款金额为2000-30000</span> -->
+                                    </div>
+                                    <p> <van-icon name="checked" :color="paychennel=='1'?'#4B66AF':'gray'" size="20px"/></p>
                                 </div>
-                                <div class="channelsecond">
-                                    <p>通道二</p>
-                                    <p>低质通道</p>
+                                <div class="large" @click.stop="smallPass('2')">
+                                    <van-icon name="http://pay.91dianji.com.cn/pt.png" size="26px"/>
+                                   <div class="middle">
+                                        <p>普通商户</p>
+                                        <!-- <span class="edu">优质银行商户通道，推荐高净值高授信用户使用</span> -->
+                                   </div>
+                                    <p> <van-icon name="checked" :color="paychennel=='2'?'#4B66AF':'gray'" size="20px"/></p>
                                 </div>
 
-                                <van-radio-group v-model="radio">
-                                    <van-radio name="1">通道一</van-radio>
-                                    <van-radio name="2">通道二</van-radio>
-                                </van-radio-group>
-                                <div class="surechannel">
-                                    <van-button type="default">确认</van-button>
-                                    <van-button type="default">取消</van-button>
-
+                                <div class="sure">
+                                    <van-button size="large" @click="handleselect" type="info">确定</van-button>
                                 </div>
-                            </div>
-                        </div> -->
+                             </div>
+                       </div>
+
+
+
                     </div>
                     <!-- 特色服务 -->
                     <div class="server">
@@ -236,12 +239,12 @@
                         <div class="remen_tuijian">
                             <div class="more"><van-icon name="arrow" color="#cccccc" size="30px"/></div>
                             <!-- <div  @click="handleIsAuth('/home/receivables',false,'')" class="secret"> -->
-                            <div  @click="handleIsAuth('/home/collect',false,'')" class="secret">
+                            <div  @click="handlecollect('/home/collect',false,'')" class="secret">
                                 <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan.png" size="34px" /></div>
                                 <div class="center">在线收款</div>
                             </div>
 
-                            <div @click="applycard('https://creditcard.feierlaiedu.com/?token=5b842e25964f78313326b53f9e331c54','办卡中心')" class="secret">
+                            <div @click="applycard('https://wsdev.1sta.cn/wechat/pages/wailian/wailian.html?merCode=b480446df76a4494948e3b95845db8ca','办卡中心')" class="secret">
                                 <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></div>
                                 <div class="center">信用卡办理</div>
                             </div>
@@ -295,7 +298,7 @@
                 <!-- 绑定手机模块 -->
                 <bindMobile></bindMobile>
                 <notice></notice>
-                  <!-- <coverads name="fade"></coverads> -->
+                 
             </van-pull-refresh>
             <footerMenu :active="active" @getChange="changeActive" ></footerMenu>
             <div class="guide" v-show="showguide">
@@ -345,7 +348,7 @@
 
 <script>
 import footerMenu from '@/components/footer'
-import coverads from '@/components/coverads.vue'
+
 import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
@@ -356,18 +359,22 @@ export default {
       footerMenu,
       bindMobile,
       notice,
-    //   coverads,
   },
      data() {
         return {
             // 轮播图图片
             componentload: true,
+            showchagnnel:false,
             loadtext:"    ",
             loostext:"   ",
             radio:"1",
+            showpass:false,
             ads:false,
+            isLight:true,
+            isSelect:false,
             showguide:false,
             lineheight:100,
+            colorl:"#4B66AF",
             images: [
                 {
                     routes: '/vip',
@@ -413,6 +420,7 @@ export default {
             updateVerson:0,  // 设备版本号
             height: 148.5,
             isLoading:false,
+            paychennel:""
         }
   },
    methods:{
@@ -421,6 +429,22 @@ export default {
         storage.remove('promotioncode');
         this.$toast('清除成功');
        },
+       handleselect(){
+           if(this.paychennel=="1"){
+               this.$router.push("/home/receiveXH")
+           } else if(this.paychennel=="2") {
+               this.$router.push("/home/receivables")
+           } else {
+               this.$toast("请先选择通道")
+           }
+       },
+       smallPass(i){
+           this.paychennel=i
+       },
+       showcover(){
+          this.showpass=false
+       },
+      
        sign(){
            this.$toast("敬请期待")
        },
@@ -641,6 +665,34 @@ export default {
                 // console.log('查询个人设置失败',res);
             })
         },
+        handlecollect(obj,boo,i){
+                 if(this.iscertification == '0' ){
+                //未认证
+                this.$toast('请先实名认证');
+                if(boo){
+                     let data ={
+                        type:i
+                    }
+                     axiosPost("/behavior/insertBehavior",data)
+                    .then(res=>{
+                      })
+                }
+            }else{
+
+                if(boo){
+                    let data ={
+                        type:i
+                    }
+                     axiosPost("/behavior/insertBehavior",data)
+                    .then(res=>{
+                         this.$router.push(obj);
+                        
+                    })
+                } 
+                this.showpass=true
+               
+            }
+        },
         // 判断是否实名认证
         handleIsAuth(obj,boo,i){ 
             if(this.iscertification == '0' ){
@@ -850,6 +902,7 @@ export default {
                     text-align: center;
                     line-height: 50px;
                     padding-bottom: 50px;
+                    margin-bottom: 50px;
                 }
                 .update {
                     position: absolute;
@@ -1227,24 +1280,159 @@ export default {
                             }
                         }
                     }
-                    .selectchannel {
-                        position: absolute;
-                        top:15px;
-                        left:15%;
-                        right:15%;
-                        bottom:10px;
-                        background-color: #fff;
-                        border:1px solid #ccc;
-                        border-radius: 10px;
-                        .pay {
-                            padding:10px;
-                            >p {
-                                text-align: center;
-                                font-weight: bold;
-                                padding:15px;
-                            }
-                        }
-                    }
+
+                     .cover {
+                          position: fixed;
+                          top:0px;
+                          bottom: 0px;
+                          left:0px;
+                          right:0px;
+                          background-color: rgba(0, 0, 0, .5);
+                          z-index: 99;
+                          .pop {
+                          position: absolute;
+                          top:26%;
+                          left:9%;
+                          width: 600px;
+                          padding:10px;
+                          background-color: #fff;
+                          border:1px solid #ccc;
+                          color:#000;
+                          z-index: 999;
+                          border-radius: 15px;
+                          h3 {
+                              text-align: center;
+                              font-weight: bold;
+                              font-size: 34px;
+                              padding:30px 0px 15px 0px;
+                          }
+                          >p {
+                              text-align: center;
+                              padding:18px 0px;
+                              border-bottom: 1px solid #ccc;
+                              color:#808080;
+                          }
+                          .sure {
+                              padding:30px;
+                          }
+                          .van-button--info {
+                                background: linear-gradient(to right,#D8B56D, #886929 );
+                                height: 80px;
+                                line-height: 80px;
+                                color:#fff;
+                                border:1px solid #886929;
+                          }
+                          >.small ,
+                           .large {
+                              display: flex;
+                              justify-content: space-between;
+                              padding-bottom: 20px;
+                              align-items: center;
+                              z-index: 1000;
+                              background-color: #fff;
+                              padding:15px;
+                              .middle {
+                                  flex:1;
+                                  padding-left:20px;
+                                  padding-bottom: 10px;
+                                  span {
+                                      font-size: 24px;
+                                  }
+                                  .edu {
+                                      color:#BCB291;
+                                      background-color: rgba(223, 219, 191, .2);
+                                      line-height: 38px;
+                                  }
+                              }
+                              p {
+                                  font-size: 32px;
+                                  font-weight: bold;
+                                  padding: 25px 0;
+                                  span{
+                                      font-weight: normal;
+                                      font-size: 26px;
+                                      color:#808080;
+                                  }
+                              }
+                          }
+                          .small {
+                              border-bottom: 1px solid #ccc;
+                          }
+                           .large {
+                               margin-top:5px;
+                           }
+                      }
+                      }
+
+
+                    // .selectchannel {
+                    //     position: absolute;
+                    //     top:15px;
+                    //     left:15%;
+                    //     right:15%;
+                    //     bottom:10px;
+                    //     background-color: #fff;
+                    //     border:1px solid #ccc;
+                    //     border-radius: 10px;
+                      
+                    //     .pay {
+                    //         padding:10px;
+                    //         >p {
+                    //             text-align: center;
+                    //             font-weight: bold;
+                    //             padding:15px;
+                    //         }
+                    //     }
+                    //     .channel {
+                    //         display: flex;
+                    //         justify-content: space-between;
+                    //         p {
+                    //             padding:15px;
+                    //             text-align: center;
+                    //         }
+                    //         .chan {
+                    //             font-size:34px;
+                    //             // color:#4B66AF;
+                    //         }
+                    //     }
+                    //     .radius {
+                    //         margin-top:20px;
+                    //         display:flex;
+                    //         justify-content: space-between;
+                    //         padding: 10px;
+                    //         >p {
+                    //             display: flex;
+                    //             align-items: center;
+                    //         }
+                    //         .dark {
+                    //              background-color: #ccc;
+                    //         }
+                    //         .light {
+                    //             background-color: #4965AE;
+                    //         }
+                    //         #round {
+                    //             display: inline-block;
+                    //             width:40px;
+                    //             height:40px;
+                    //             border-radius: 50%;
+                    //             border:1px solid #000;
+                               
+                    //         }
+                    //     }
+                    //     .surechannel {
+                    //         margin-top:20px;
+                    //         display: flex;
+                    //         justify-content: space-between;
+
+                    //         .van-button--info {
+                    //             background-color: #ccc;
+                    //         }
+                    //         .van-button {
+                    //             width:120px;
+                    //             height:80px;
+                    //         }
+                    //     }
+                    // }
                 }   
                 >.details {
                     margin-top:10px;
