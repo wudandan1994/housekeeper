@@ -6,17 +6,6 @@
              <span></span>
         </header>
         <div class="container">
-             <!-- <div class="trade">
-                 <p><span><van-icon name="label"/></span> <span>交易说明</span></p>
-                 <ul>
-                     <li>1.交易单笔最高限额：<span>50000元</span>整</li>
-                     <li>2.交易单笔最低限额：<span>500元</span>整</li>
-                     <li>3.交易单日最高限额：<span>50000元</span>整</li>
-                     <li>4.交易手续费扣率： A通道<span>0.65%+1.5元/笔</span></li>
-                     <li>5.交易时间：A通道&nbsp;00:00-20:00</li>
-                 </ul>
-                 <p class="read">有部分银行限额会有略微调整，详情请查阅各通道相关政策！</p>
-             </div> -->
              <div class="data" v-show="type=='2'">
                  <p class="trade">交易银行额度表</p>
                    <table class="table">

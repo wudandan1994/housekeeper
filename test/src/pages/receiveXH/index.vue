@@ -1,5 +1,5 @@
 <template>
-    <div id="receivables">
+    <div id="receive">
         <header>
             <p @click="goBack"><span><van-icon size="16px" name="arrow-left" /></span></p>
             <p>商户收款</p>
@@ -21,8 +21,8 @@
            
             <div class="merchant">
                 <div class="pay">
-                    <p>
-                        <span><van-icon name="gold-coin" /></span>
+                    <p class="union">
+                        <span><van-icon size="30px" name="http://pay.91dianji.com.cn/up.png" /></span>
                         <span>设置金额</span>
                     </p>
                     <p>
@@ -65,14 +65,14 @@
             <div class="transaction">
                 <ul>
                     <router-link tag="li" to="/home/receivables/rate">
-                        <p><span><van-icon color="#4B66AF" size="20px" name="gold-coin"/></span></p>
+                        <p><span><van-icon color="#4B66AF" size="26px" name="http://pay.91dianji.com.cn/dollar.png"/></span></p>
                         <div>
                             <p>我的费率</p>
                             <p>通道费率详细说明</p>
                         </div>
                     </router-link>
                     <li @click="goRecords">
-                        <p><span><van-icon color="#4B66AF" size="20px" name="comment"/></span></p>
+                        <p><span><van-icon color="#4B66AF" size="26px" name="http://pay.91dianji.com.cn/search.png"/></span></p>
                         <div>
                             <p>交易查询</p>
                             <p>交易查询详细记录</p>
@@ -80,7 +80,7 @@
                     </li>
                     
                       <router-link tag="li" :to="{path:'/home/receivables/passageway',query:{type:'1'}}" >
-                        <p><span><van-icon color="#4B66AF" size="20px" name="gold-coin"/></span></p>
+                        <p><span><van-icon color="#4B66AF"  size="26px" name="http://pay.91dianji.com.cn/channel.png"/></span></p>
                         <div>
                             <p>通道说明</p>
                             <p>单笔交易限额明细</p>
@@ -88,7 +88,7 @@
                     </router-link>
 
                     <router-link tag="li" to="/home/receiveXH/cardCX">
-                        <p><span><van-icon color="#4B66AF" size="20px" name="card"/></span></p>
+                        <p><span><van-icon color="#4B66AF" size="26px" name="http://pay.91dianji.com.cn/card.png"/></span></p>
                         <div>
                             <p>储蓄卡管理</p>
                             <p>修改储蓄卡信息</p>
@@ -387,7 +387,7 @@ export default {
 </script>
 
 <style lang="less">
-   #receivables {
+   #receive {
        >header {
            height: 86px;
            line-height: 86px;
@@ -415,7 +415,6 @@ export default {
                    .van-button--default {
                        background-color: #ccc;
                        border:1px solid #ccc;
-                    //    padding:5px 20px;
                        width:120px;
                    }
 
@@ -430,13 +429,8 @@ export default {
             .cards {
                 margin-top:15px;
                 ul {
-                    // padding:30px;
                     overflow-y: scroll;
                     li {
-                        //  padding:20px;
-                        //   border:2px solid #4B66AF;
-                        //   border-radius: 10px;
-                        //  width: 95%;
                         height: 320px;
                         margin-bottom: 20px;
                         margin-left: auto;
@@ -506,7 +500,7 @@ export default {
            }
            >.merchant {
                background-color: #ECF0F3;
-            //    padding-top:10px;
+               padding-top:20px;
                position: relative;
                >.pay {
                    width:92%;
@@ -517,6 +511,13 @@ export default {
                    margin:20px;
                    border-radius: 10px;
                    box-shadow: 0px 1px 2px 3px  #ccc;
+                   img {
+                       padding-top:20px;
+                   }
+                   .union {
+                       display:flex;
+                       align-items: center;
+                   }
                    .card {
                       ul{
                         padding-bottom: 20px;
