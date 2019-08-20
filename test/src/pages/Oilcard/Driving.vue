@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-08 11:17:46
+ * @LastEditTime: 2019-08-20 19:01:24
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-detail">
         <header>
@@ -10,52 +17,129 @@
         <div class="big-title start-center">上传行驶证照片</div>
         <div class="upload center">
             <div>
-                <van-icon name="photograph" color="#979797" size="2rem"/>
-                <img v-if="uploaded" src="" alt="">
+                <van-uploader :after-read="afterRead" class="center">
+                    <van-icon v-if="!uploaded" name="photograph" color="#979797" size="2rem"/>
+                    <img class="upload-img" v-if="uploaded" :src="fileList">
+                </van-uploader>
             </div>
         </div>
         <div class="person-detail">
             <div class="per-detail">
                 <div class="title start-center">所有人</div>
-                <div class="input end-center"><input type="text" v-model="name" placeholder="请输入您的行驶证姓名"/></div>
+                <div class="input end-center"><input type="text" v-model="params.name" placeholder="请输入行驶证姓名"/></div>
             </div>
             <div class="per-detail">
                 <div class="title start-center">车牌号码</div>
-                <div class="input end-center"><input type="text" v-model="carNo" placeholder="请输入您的车牌号码"/></div>
+                <div class="input end-center"><input type="text" v-model="params.carNum" placeholder="请输入车牌号码"/></div>
             </div>
             <div class="per-detail">
                 <div class="title start-center">车辆识别代号</div>
-                <div class="input end-center"><input type="text" v-model="distinguishNo"  placeholder="请输入您的车辆识别代号"/></div>
+                <div class="input end-center"><input type="text" v-model="params.carCode"  placeholder="请输入车辆识别代号"/></div>
             </div>
             <div class="per-detail">
                 <div class="title start-center">发动机号码</div>
-                <div class="input end-center"><input type="text" v-model="engineNo" placeholder="请输入您的发动机号码"/></div>
+                <div class="input end-center"><input type="text" v-model="params.engineNum" placeholder="请输入发动机号码"/></div>
             </div>
         </div>
-        <div class="submit center"><button>确定</button></div>
+        <div class="submit center" @click="handleSubmit"><button>确定</button></div>
+        <loading :componentload="componentload"></loading>
     </div>
 </template>
 <script>
+import loading from '@/components/loading'
+import {CommonPost} from '@/lib/http'
 export default {
     data(){
         return{
+            componentload: false,
             uploaded: false,
             name: '',
             carNo: '',
             distinguishNo: '',
-            engineNo: ''
+            engineNo: '',
+            fileList: '',
+            params: {
+                name: '',
+                carNum: '',
+                carCode: '',
+                engineNum: '',
+                photo: '',
+            }
         }
+    },
+    components: {
+        loading
     },
     methods: {
         handleBack(){
             this.$router.go(-1);
+        },
+        // 驾驶证上传
+        afterRead(file){
+            this.componentload = true;
+            console.log('驾驶证',file.content);
+            this.fileList = file.content;
+            this.uploaded = true;
+            let formData = new FormData();
+            formData.append('file',file.file);
+            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            let config = {
+                headers: { "Content-Type": "multipart/form-data" }
+            };
+             this.$http.post(url,formData,config).then(res =>{
+                 if(res.data.success){
+                     this.params.photo = res.data.data.imgUrl
+                 }else{
+                     this.$toast('驾驶证上传失败');
+                 }
+             }).catch(res =>{
+                 this.$toast('驾驶证上传失败');
+             })
+            setTimeout(() =>{
+                this.componentload = false;
+            },1000);
+        },
+        // 提交
+        handleSubmit(){
+            if(this.params.photo == ''){
+                this.$toast('请上传行驶证照片');
+                return false;
+            }
+            else if(this.params.name == ''){
+                this.$toast('请输入驾驶证姓名');
+                return false;
+            }
+            else if(this.params.carNum == ''){
+                this.$toast('请输入车牌号');
+                return false;
+            }
+            else if(this.params.carCode == ''){
+                this.$toast('请输入车辆识别代码');
+                return false;
+            }
+            else if(this.params.engineNum == ''){
+                this.$toast('请输入发动机号码');
+                return false;
+            }else{
+                CommonPost('/gasCard/bindDrivingLicense',this.params).then(res =>{
+                    console.log('行驶证添加成功',res);
+                    this.$toast('行驶证添加成功');
+                    setTimeout(() =>{
+                        this.$router.go(-1);
+                    },2000);
+                }).catch(res =>{
+                    console.log('行驶证添加失败',res);
+                })
+            }
         }
     }
 }
 </script>
 <style lang="less" scoped>
 #page-detail{
-    padding-top: 86px;
+    padding: 86px 0px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     header{
         width: 100%;
         height: 86px;
@@ -93,6 +177,19 @@ export default {
         height: 316px;
         background:rgba(248,248,248,1);
         margin: 20px auto auto auto;
+        >div{
+             height: 100% !important;
+             width: 100% !important;
+             .van-uploader{
+                height: 100% !important;
+                width: 100% !important;   
+                .upload-img{
+                    width: 100%;
+                    height: 100%;
+                }
+             }
+            
+        }
     }
     .person-detail{
         width: 89%;

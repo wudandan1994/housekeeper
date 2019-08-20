@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-08 10:13:21
+ * @LastEditTime: 2019-08-20 19:04:17
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-detail">
         <header>
@@ -8,34 +15,65 @@
         </header>
         <div class="big-title start-center">完善详细信息</div>
         <div class="menus">
-            <div class="per-menu">
+            <router-link tag="div" to="/home/verified/verifiedName" class="per-menu">
                 <div class="title start-center">实名认证</div>
                 <div class="state center"><div class="active center">已完成</div></div>
                 <div class="more end-center"><van-icon name="arrow"/></div>
-            </div>
+            </router-link>
             <router-link tag="div" to="Driving" class="per-menu">
                 <div class="title start-center">行驶证</div>
-                <div class="state center"><div class="normal center">未完成</div></div>
+                <!-- <div class="state center"><div class="center" :class="DrivingLicense == '已完成' ? 'active' : 'normal'">未完成</div></div> -->
                 <div class="more end-center"><van-icon name="arrow"/></div>
             </router-link>
-            <div class="per-menu">
+            <!-- <div class="per-menu">
                 <div class="title start-center">车辆信息</div>
                 <div class="state center"><div class="normal center">未完成</div></div>
                 <div class="more end-center"><van-icon name="arrow"/></div>
-            </div>
+            </div> -->
         </div>
-        <router-link tag="div" to="/collar" class="next center"><button>下一步</button></router-link>
+        <div class="next center" @click="handleNextStep"><button>下一步</button></div>
     </div>
 </template>
 <script>
+import { CommonPost } from '@/lib/http'
 export default {
     data(){
-        return{}
+        return{
+            have: false,
+            list: [],
+            type: ''
+        }
     },
     methods: {
         handleBack(){
             this.$router.go(-1);
+        },
+        // 查询行驶证
+        handleDriving(){
+           CommonPost('/gasCard/gascardDrivingList').then(res =>{
+                Object.keys(res.data.data).length == '0' ? this.have = false : this.have = true;
+                this.list = res.data.data;
+           }).catch(res =>{
+            //    console.log('行驶证查询失败',res);
+           })
+        },
+        // 下一步
+        handleNextStep(){
+            if(this.have){
+                this.$router.push({
+                    path: '/Recharge',
+                    query:{
+                        type: this.type
+                    }
+                })
+            }else{
+                this.$toast('请先添加行驶证');
+            }
         }
+    },
+    created(){
+        this.handleDriving();
+        this.type = this.$route.query.type;
     }
 }
 </script>

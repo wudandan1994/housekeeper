@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-09 11:04:05
+ * @LastEditTime: 2019-08-20 18:50:57
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-address">
         <header>
@@ -13,11 +20,11 @@
         <div class="input-list">
             <div class="per-input">
                 <div class="start-center">姓名</div>
-                <div><input type="text" v-model="name" placeholder="请输入收件人姓名"/></div>
+                <div><input type="text" v-model="params.name" placeholder="请输入收件人姓名"/></div>
             </div>
             <div class="per-input">
                 <div class="start-center">手机号</div>
-                <div><input type="text" v-model="mobile" placeholder="请输入收件人手机号"/></div>
+                <div><input type="text" v-model="params.mobile" placeholder="请输入收件人手机号"/></div>
             </div>
             <div class="per-input">
                 <div class="start-center">具体地址</div>
@@ -25,7 +32,7 @@
             </div>
         </div>
         <div class="address center">
-            <textarea cols="30" rows="10" v-model="address" placeholder="请输入收件具体地址"></textarea>
+            <textarea cols="30" rows="10" v-model="params.address" placeholder="请输入收件具体地址"></textarea>
         </div>
         <div class="submit center" @click="handleSubmit"><button>确定</button></div>
         <div class="success" v-if="success">
@@ -37,13 +44,17 @@
     </div>
 </template>
 <script>
+import { CommonPost } from '@/lib/http'
 export default {
     data(){
         return{
             success: false,
-            name: '',
-            mobile: '',
-            address: '',
+            params: {
+                name: '',
+                mobile: '',
+                address: '',
+                parentNo: '',
+            }
         }
     },
     methods:{
@@ -52,18 +63,27 @@ export default {
         },
         // 提交地址信息
         handleSubmit(){
-            if(this.name == ''){
+            if(this.params.name == ''){
                 this.$toast('请填写姓名');
             }
-            else if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+            else if(!(/^1[3456789]\d{9}$/.test(this.params.mobile))){
                 this.$toast('请填写正确的手机号');
             }
-            else if(this.address == ''){
+            else if(this.params.address == ''){
                 this.$toast('请填写具体地址');
             }else{
-                // 可以发起接口请求
+               CommonPost('/gasCard/addAddress',this.params).then(res =>{
+                   console.log('成功',res);
+                   this.$toast('添加成功');
+               }).catch(res =>{
+                   console.log('失败',res);
+                   this.$toast(res.data.message);
+               }) 
             }
         }
+    },
+    created(){
+        this.params.parentNo = this.$route.query.parentNo;
     }            
 }
 </script>
@@ -135,7 +155,7 @@ export default {
                 color: #666666;
                 input{
                     width: 100%;
-                    height: 90%;
+                    height: 85%;
                     text-align: right;
                     border: none;
                 }

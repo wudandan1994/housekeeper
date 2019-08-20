@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-09 16:57:17
+ * @LastEditTime: 2019-08-20 19:10:37
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="personal-center-component">
         <header class="header" id="head">
@@ -127,10 +134,10 @@
                 <div class="per-menu-title center">联系我们</div>
             </router-link>
 
-            <router-link tag="div" class="per-menu-list" to="/apply">
+            <div class="per-menu-list">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/314.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">名片夹</div>
-            </router-link>
+            </div>
         </div>
 
          <div class="buy-detail" v-if="pup2">

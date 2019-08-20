@@ -1,11 +1,19 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-05 15:42:48
+ * @LastEditTime: 2019-08-20 19:04:57
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-apply">
         <header>
+            <div class="back start-center"><van-icon name="arrow-left" color="#ffffff" size="24px" @click="handleBack"/></div>
             <div class="slogan">
                 <span>先加油</span>
                 <span>月结款</span>
             </div>
-            <router-link tag="div" to="/detailMessage" class="apply center">申请油卡</router-link>
+            <router-link tag="div" :to="{path: '/detailMessage',query:{type: '1'}}" class="apply center">申请油卡</router-link>
             <div class="selling center">全国50000余座油站联通</div>
             <div class="desc">
                 <span>给力加油服务</span>
@@ -14,9 +22,9 @@
             </div>
         </header>
         <div class="list">
-            <div class="per-list">
+            <div class="per-list" @click="handleMyOilCard">
                 <span class="start-center">我的油卡</span>
-                <span class="end-center">2张</span>
+                <span class="end-center"></span>
                 <span class="end-center"><van-icon name="arrow"/></span>
             </div>
             <router-link tag="div" to="/RechargeAllList" class="per-list">
@@ -45,17 +53,34 @@
 export default {
     data(){
         return{
-            Agreement: false,
+            Agreement: true,
         }
     },
     methods:{
+        handleBack(){
+            this.$router.go(-1);
+        },
         handleSubmit(){
             if(!this.Agreement){
                 this.$toast('请先阅读并同意协议');
             }else{
                 // 可正常提交
-                
+                this.$router.push({
+                    path: '/Recharge',
+                    query: {
+                        type: '2'
+                    }
+                })
             }
+        },
+        // 我的油卡
+        handleMyOilCard(){
+            this.$router.push({
+                path: '/Recharge',
+                query: {
+                    type: '2'
+                }
+            })
         }
     }
 }
@@ -70,7 +95,13 @@ export default {
             background: #4B66AF;
             box-shadow:0 25px 25px 15px #4B66AF;
             box-sizing: border-box;
-            padding-top: 80px;
+            // padding-top: 80px;
+            .back{
+                width: 100%;
+                height: 80px;
+                box-sizing: border-box;
+                padding-left: 10px;
+            }
             .slogan{
                 width: 42%;
                 height: 100px;

@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-10 17:27:52
+ * @LastEditTime: 2019-08-20 18:58:43
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-rechargedetail">
         <header>
@@ -8,54 +15,48 @@
             </div>
         </header>
         <div class="list-container">
-            <div class="per-recharge">
-                <div>2019年07月10日 14：00</div>
-                <div>500元</div>
-                <div>中石油</div>
-                <div>已充值</div>
-            </div>
-            <div class="per-recharge">
-                <div>2019年07月10日 14：00</div>
-                <div>500元</div>
-                <div>中石油</div>
-                <div>已充值</div>
-            </div>
-            <div class="per-recharge">
-                <div>2019年07月10日 14：00</div>
-                <div>500元</div>
-                <div>中石油</div>
-                <div>已充值</div>
-            </div>
-            <div class="per-recharge">
-                <div>2019年07月10日 14：00</div>
-                <div>500元</div>
-                <div>中石油</div>
-                <div>已充值</div>
-            </div>
-            <div class="per-recharge">
-                <div>2019年07月10日 14：00</div>
-                <div>500元</div>
-                <div>中石油</div>
-                <div>已充值</div>
-            </div>
-            <div class="per-recharge">
-                <div>2019年07月10日 14：00</div>
-                <div>500元</div>
-                <div>中石油</div>
-                <div>已充值</div>
+            <div class="per-recharge" v-for="(item,index) in list" :key="index">
+                <div>{{item.createddatetime}}</div>
+                <div>{{item.amount}}元</div>
+                <div v-if="item.cardType == '0'">中石油</div>
+                <div v-if="item.cardType == '1'">中石化</div>
+                <div v-if="item.status == '0'">处理中</div>
+                <div v-if="item.status == '1'">已充值</div>
+                <div v-if="item.status == '2'">充值失败</div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import { CommonPost } from '@/lib/http'
 export default {
     data(){
-        return{}
+        return{
+            params: {
+                page: 1,
+                pageSize: 200
+            },
+            list: [],
+        }
     },
     methods:{
         handleBack(){
             this.$router.go(-1);
         },
+        handleRechargeList(){
+            CommonPost('/gasCard/allGascardDeposit',this.params).then(res =>{
+                console.log('成功',res);
+                this.list = res.data.data;
+                if(res.data.data.length == '0'){
+                    this.$toast('暂无充值记录');
+                }
+            }).catch(res =>{
+                console.log('失败',res);
+            })
+        }
+    },
+    created(){
+        this.handleRechargeList();
     }    
 }
 </script>

@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:57:17
- * @LastEditTime: 2019-08-15 20:52:32
+ * @LastEditTime: 2019-08-20 19:37:58
  * @LastEditors: Please set LastEditors
  */
 import axios from 'axios'
@@ -56,5 +56,30 @@ export const axiosGet = (url,params = {}) =>{
         return res;
     }).catch(res=>{
         return res;
+    })
+}
+// 改进封装POST请求
+export const CommonPost = (url,params) =>{
+    const _axios = axios.create({
+        baseURL:hostUrl,
+        // baseURL: 'http://pay.91dianji.com.cn/api',
+        withCredentials: true,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
+    });
+    return new Promise((resolve,reject) =>{
+        _axios.post(url,qs.stringify(params)).then(res =>{
+                if(res.data.code == -1){
+                    reject(res);
+                    window.location.href = '#/logIn';
+                }else{
+                    if(res.data.success){
+                        resolve(res);
+                    }else{
+                        reject(res);
+                    }
+                }
+        }).catch(res =>{
+            reject(res);
+        })
     })
 }

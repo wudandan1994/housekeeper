@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-10 10:18:43
+ * @LastEditTime: 2019-08-20 18:27:52
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-rechargedetail">
         <header>
@@ -12,81 +19,61 @@
                 <span>中石油</span>
             </div>
             <div class="middle center">
-                13457********98765
+                {{cardID}}
             </div>
             <div class="bottom">
-                <router-link tag="span" to="/RechargeCenter" class="center">充值</router-link>
-                <!-- <router-link tag="span" to="RechargeDetail" class="center">明细</router-link> -->
-                <span class="center">挂失</span>
+                <!-- <router-link tag="span" to="/RechargeCenter" class="center">充值</router-link> -->
             </div>
         </div>
         <div class="recharge-list">
             <div class="big-title start-center">充值明细</div>
             <div class="list-container">
-                <div class="per-recharge">
-                    <div>2019年07月10日 14：00</div>
-                    <div>500元</div>
-                    <div>已充值</div>
+                <div class="per-recharge" v-for="(item,index) in list" :key="index">
+                    <div>{{item.createddatetime}}</div>
+                    <div>{{item.amount}}元</div>
+                    <div v-if="status == '0'">处理中</div>
+                    <div v-if="status == '1'">已充值</div>
+                    <div v-if="status == '2'">充值失败</div>
                 </div>
-                <div class="per-recharge">
-                    <div>2019年07月10日 14：00</div>
-                    <div>500元</div>
-                    <div>已充值</div>
-                </div>
-                <div class="per-recharge">
-                    <div>2019年07月10日 14：00</div>
-                    <div>500元</div>
-                    <div>已充值</div>
-                </div>
-                <div class="per-recharge">
-                    <div>2019年07月10日 14：00</div>
-                    <div>500元</div>
-                    <div>已充值</div>
-                </div>
-                <div class="per-recharge">
-                    <div>2019年07月10日 14：00</div>
-                    <div>500元</div>
-                    <div>已充值</div>
-                </div>
-                <div class="per-recharge">
-                    <div>2019年07月10日 14：00</div>
-                    <div>500元</div>
-                    <div>已充值</div>
-                </div>
-                <div class="per-recharge">
-                    <div>2019年07月10日 14：00</div>
-                    <div>500元</div>
-                    <div>已充值</div>
-                </div>
-                <div class="per-recharge">
-                    <div>2019年07月10日 14：00</div>
-                    <div>500元</div>
-                    <div>已充值</div>
-                </div>
-                <div class="per-recharge">
-                    <div>2019年07月10日 14：00</div>
-                    <div>500元</div>
-                    <div>已充值</div>
-                </div>
-                <div class="per-recharge">
-                    <div>2019年07月10日 14：00</div>
-                    <div>500元</div>
-                    <div>已充值</div>
-                </div>
+                
             </div>
            
         </div>
     </div>
 </template>
 <script>
+import { CommonPost } from '@/lib/http'
 export default {
     data(){
-        return{}
+        return{
+            cardID: '',
+            list: []
+        }
     },
     methods:{
         handleBack(){
             this.$router.go(-1);
         },
+        // 充值明细
+        handleRechargeDetailList(){
+            let params = {
+                cardId: this.cardID
+            }
+            CommonPost('/gasCard/gascardDepositByCard',params).then(res =>{
+                console.log('成功',res);
+                this.list = res.data.data;
+                if(res.data.data.length == '0'){
+                    this.$toast('您还没有充值记录');
+                }
+            }).catch(res =>{
+                console.log('失败',res);
+                this.$toast(res.data.message);
+            })
+        }
+    },
+    created(){
+        this.cardID = this.$route.query.cardID;
+        this.handleRechargeDetailList();
     }    
 }
 </script>

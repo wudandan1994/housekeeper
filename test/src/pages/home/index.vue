@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-06-28 10:58:28
- * @LastEditTime: 2019-08-15 20:50:42
+ * @LastEditTime: 2019-08-20 19:11:07
  * @LastEditors: Please set LastEditors
  -->
 
@@ -210,14 +210,15 @@
                                     <p><van-icon name="http://pay.91dianji.com.cn/qichebaoxian.png" size="30px" /></p>
                                     <p>汽车保险</p>
                             </li>
-
-
-
-                                <li  @click="changeLink('http://baoxian.pingan.com','意外险')" >
-                                    <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
-                                    <p>意外险</p>
+                            <li  @click="changeLink('http://baoxian.pingan.com','意外险')" >
+                                <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
+                                <p>意外险</p>
                             </li>
 
+                            <router-link tag="li" to="/apply" class="secret">
+                                <p> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></p>
+                                <p>油卡</p>
+                            </router-link>
                                 <!-- <li @click="handleExpect">
                                     <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
                                     <p>积分兑换</p>
@@ -265,9 +266,9 @@
                                 <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
                                 <div class="center">信息咨询</div>
                             </div>
-                            <!-- <router-link tag="div" class="secret" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
+                            <!-- <router-link tag="div" class="secret" to="/apply">
                                 <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
-                                <div class="center">商城</div>
+                                <div class="center">油卡</div>
                             </router-link> -->
                             <div class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')">
                                 <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/weizhang.png"  size="30px" /></div>
@@ -311,8 +312,6 @@
             </div>
         </div>
         
-
-
         <!-- 遮盖层 -->
         <div class="aside-left" :class="showAaside == true ? 'menu-active' : 'menu-normal'">
             <div class="info">
