@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-02 18:39:54
- * @LastEditTime: 2019-08-15 16:54:01
+ * @LastEditTime: 2019-08-20 10:00:12
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -59,19 +59,8 @@ export default {
         }
     },
     created () {
-        //  this.notice =  localStorage.getItem("notice")
-        //  if(this.notice===null){
-        //      this.notice=true
-        //  } else if(this.notice=="false"){
-        //      this.notice=false
-        //  }
         this.handleObtainNotice();
-        
-    },
-    mounted(){
-       
     }
-
 }
 </script>
 <style lang="less">
@@ -84,23 +73,26 @@ export default {
         left: 0;
         .notice{
             width: 80vw;
-            height: 50vh;
+            height: auto;
             box-sizing: border-box;
-            padding: 0px 40px;
-            margin: 25vh auto auto auto;
+            margin: 20vh auto auto auto;
             background: #FFD700;
             border-radius: 10px;
             .notice-title{
                 width: 100%;
-                height: 20%;
+                height: 150px;
                 font-size: 32px;
                 font-weight: 700;
             }
             .notice-content{
+                width: 100%;
+                height: auto;
                 font-size: 26px;
                 line-height: 50px;
                 text-align: justify;
                 letter-spacing: 1px;
+                box-sizing: border-box;
+                padding: 0px 30px 100px 30px;
             }
         }
     }

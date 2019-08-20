@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-09 15:28:03
+ * @LastEditTime: 2019-08-20 18:02:57
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-rachargelist">
         <header>
@@ -13,60 +20,143 @@
             </div>
         </header>
         <div class="list">
-            <div class="per-list shiyou" v-if="type == '0'">
+            <div class="per-list shiyou" v-for="(item,index) in list" :key="index" v-if="type == '0'">
                 <div class="top">
                     <span>油卡类型</span>
                     <span>中石油</span>
                 </div>
-                <div class="middle center">
-                    13457********98765
+                <div class="middle center" v-if="item.cardID === null">
+                   ******************
                 </div>
-                <div class="bottom">
-                    <router-link tag="span" to="/RechargeCenter" class="center">充值</router-link>
-                    <router-link tag="span" to="RechargeDetail" class="center">明细</router-link>
-                    <span class="center">挂失</span>
+                <div class="middle center" v-else>
+                   {{item.cardID}}
                 </div>
+                <div class="bottom" v-if="item.status == '0'">
+                    <span class="center" @click="handleActivation(item.id,'1')">激活</span>
+                </div>
+                <div class="bottom" v-if="item.status == '3'">
+                    <span class="center">激活中</span>
+                </div>
+                <div class="bottom" v-if="item.status == '1'">
+                    <span to="/RechargeCenter" class="center" v-on:click.self="handleRecharge(item.cardID)">充值</span>
+                    <span class="center" v-on:click.self="handleRechargeDetail(item.cardID)">明细</span>
+                    <!-- <span class="center">挂失</span> -->
+                </div>
+                <!-- <div class="bottom" v-if="item.status == '2'">
+                    <span class="center">已挂失</span>
+                </div> -->
             </div>
-            <div class="per-list shihua" v-if="type == '1'">
+            <div class="per-list shihua" v-for="(item,index) in list" :key="index" v-if="type == '1'">
                 <div class="top">
                     <span>油卡类型</span>
                     <span>中石化</span>
                 </div>
-                <div class="middle center">
-                    13447********98762
+                <div class="middle center" v-if="item.cardID === null">
+                   ******************
                 </div>
-                <div class="bottom">
-                    <span class="center">充值</span>
-                    <span class="center">明细</span>
-                    <router-link tag="span" to="/activation" class="center">激活</router-link>
+                <div class="middle center" v-else>
+                   {{item.cardID}}
                 </div>
+                <div class="bottom" v-if="item.status == '0'">
+                    <span class="center" @click="handleActivation(item.id,'1')">激活</span>
+                </div>
+                <div class="bottom" v-if="item.status == '3'">
+                    <span class="center">激活中</span>
+                </div>
+                <div class="bottom" v-if="item.status == '1'">
+                    <span class="center" v-on:click.self="handleRecharge(item.cardID)">充值</span>
+                    <span to="RechargeDetail" class="center" v-on:click.self="handleRechargeDetail(item.cardID)">明细</span>
+                    <!-- <span class="center">挂失</span> -->
+                </div>
+                <!-- <div class="bottom" v-if="item.status == '2'">
+                    <span class="center">已挂失</span>
+                </div> -->
             </div>
         </div>
     </div>
 </template>
 <script>
+import { CommonPost } from '@/lib/http'
 export default {
     data(){
         return{
             type: '0',
+            id: '',
+            list: [],
         }
     },
     methods:{
         handleBack(){
             this.$router.go(-1);
         },
+        // 油卡列表
+        handleOilCardList(){
+            let params = {
+                cardType: this.type,
+                drivingLicenseID: this.id
+            }
+            CommonPost('/gasCard/gascardList',params).then(res =>{
+                console.log('有啦列表请求成功',res);
+                this.list = res.data.data;
+            }).catch(res =>{
+                console.log('有啦列表请求失败',res);
+                this.$toast(res.data.message);
+            })
+        },
+        // 油卡切换
         handleCheckType(item){
+            console.log(item);
             this.type = item;
+            this.handleOilCardList();
+        },
+        // 激活
+        handleActivation(gascardId,type){
+            console.log('油卡id',gascardId);
+            console.log('类型',type);
+            this.$router.push({
+                path: '/activation',
+                query: {
+                    gascardId: gascardId,
+                    type: type
+                }
+            })
+        },
+        // 充值
+        handleRecharge(obj){
+            // console.log('油卡ID',obj);
+            this.$router.push({
+                path: '/RechargeCenter',
+                query:{
+                    uid: obj,
+                    drivingLicenseID: this.id,
+                    cardType: this.type
+                }
+            })
+        },
+        // 明细
+        handleRechargeDetail(obj){
+            this.$router.push({
+                path: '/RechargeDetail',
+                query: {
+                    cardID: obj
+                }
+            })
         }
+    },
+    created(){
+        this.id = this.$route.query.id;
+        this.handleOilCardList();
     }
 }
 </script>
 <style lang="less" scoped>
 #page-rachargelist{
     width: 100vw;
-    padding-top: 86px;
     height: calc(100vh - 86px);
+    padding: 86px 0px;
     background:rgba(248,248,248,1);
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     header{
         width: 100%;
         height: 86px;
@@ -123,6 +213,7 @@ export default {
             width: 100%;
             height: 340px;
             border-radius: 40px;
+            margin-top: 20px;
             .top{
                 width: 90%;
                 height: 30%;

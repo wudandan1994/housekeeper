@@ -1,4 +1,12 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-24 16:19:10
+ * @LastEditTime: 2019-08-16 11:09:46
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
+  <transition name="van-fade">
     <div id="loading-components" class="center" v-if="componentload">
         <div class="out">
             <div class="fade-in">
@@ -14,7 +22,8 @@
                 </div>
             </div>
         </div>
-    </div>   
+    </div>  
+  </transition> 
 </template>
 <script>
 export default {

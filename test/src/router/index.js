@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-09 16:57:17
+ * @LastEditTime: 2019-08-20 19:15:28
+ * @LastEditors: Please set LastEditors
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
@@ -556,5 +563,8 @@ export default new Router({
     {path: '/activation',component: activation},
     {path: '/RechargeAllList',component: RechargeAllList},
     {path: '/testpage',component: testpage},
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })

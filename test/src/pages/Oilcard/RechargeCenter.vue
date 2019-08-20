@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-09 18:02:44
+ * @LastEditTime: 2019-08-20 18:44:19
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-rechargecenter">
         <header>
@@ -16,7 +23,6 @@
                 <div class="center">{{item.price}}元</div>
                 <div class="center-start">售价{{item.Discount}}元</div>
             </div>
-           
         </div>
         <div class="buy-detail">
             <div class="big-title start-center">充值详情</div>
@@ -26,11 +32,18 @@
             </div>
             <div class="per-detail">
                 <span>充值金额</span>
-                <span>{{payprice}}元</span>
+                <span>{{params.itemPrice}}元</span>
             </div>
             <div class="per-detail">
                 <span>启用方式</span>
                 <span>充值后即可使用</span>
+            </div>
+            <div class="per-detail">
+                <span>付款方式</span>
+                <span>
+                    <span class="normal" :class="paytype == 'wx' ? 'wechat-active' : ''" @click="handleCheckPayType('wx')">微信</span>
+                    <span class="normal" :class="paytype == 'aliwap' ? 'alipay-active' : ''" @click="handleCheckPayType('aliwap')">支付宝</span>
+                </span>
             </div>
             <div class="submit center" @click="handleSubmit"><button>充值</button></div>
             <div class="agreement start-center"><van-checkbox v-model="agree" checked-color="#516BB4">我已阅读并同意<span>《加油卡充值协议》</span></van-checkbox></div>
@@ -52,12 +65,12 @@
     </div>
 </template>
 <script>
+import { CommonPost, axiosPost } from '@/lib/http'
 export default {
     data(){
         return{
             type: '0',
-            agree: false,
-            payprice: '485',
+            agree: true,
             options: [
                 {
                     price: 500,
@@ -80,6 +93,17 @@ export default {
                     id: 3
                 }
             ],
+            paytype: 'wx',
+            params: {
+                itemPrice: '485',
+                ext1: '',
+                type: '2',
+                amt: '1',
+                gascardId: '',
+            },
+            drivingLicenseID: '',
+            cardType: '',
+            price: '500',
         }
     },
     methods:{
@@ -88,16 +112,92 @@ export default {
         },
         handleCheckType(item){
             this.type = item.id;
-            this.payprice = item.Discount;
+            this.params.itemPrice = item.Discount;
+            this.price = item.price;
+        },
+        handleCheckPayType(obj){
+            this.paytype = obj; 
+        },
+        // 价格数据
+        handlePrice(){
+            CommonPost('/gasCard/getGascardPrice').then(res =>{
+                console.log('价格请求成功',res);
+            }).catch(res =>{
+                console.log('价格请求失败',res);
+            })
+        },
+        // 生成油卡订单
+        handleGeneratingOrders(){
+            let params = {
+                cardType: this.cardType,
+                cardQuota: this.price,
+                drivingLicenseID: this.drivingLicenseID,
+                gascardNo: this.params.gascardId,
+                orderType: '1',
+            };
+            CommonPost('/gasCard/newGascardOrder',params).then(res =>{
+                console.log('下单成功',res);
+                let objs = {
+                    orderid: res.data.data.parentNo,
+                    channel: this.paytype
+                };
+               if(res.data.data.parentNo != ''){
+                   this.handleInitiatePayment(objs);
+               }
+            }).catch(res =>{
+                console.log('下单失败',res);
+            })
+        },
+        // 发起支付
+        handleInitiatePayment(obj){
+            CommonPost('/gasCardPay/xhPay',obj).then(res =>{
+                console.log('支付成功',res);
+                let ua = navigator.userAgent.toLowerCase();
+                if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                    // 微信浏览器中打开
+                    window.location.href = res.data.data.url
+                    console.log('微信');
+                    
+                }else{
+                    // 非微信中打开
+                    if(this.paytype == 'wx'){
+                        // 此时无法在非微信中调用微信支付
+                        console.log('非微信中发起微信支付');
+                        this.$router.push({
+                            path: '/middle',
+                            query:{
+                                qrcode: res.data.data.codeUrl
+                            }
+                        })
+                    }else{
+                        console.log('非微信中发起支付宝支付',res.data.data.url);
+                        window.location.href = res.data.data.url 
+                    }
+                }
+            }).then(res =>{
+                console.log('支付失败',res);
+            })
         },
         // 立即充值
         handleSubmit(){
             if(!this.agree){
                 this.$toast('请先阅读协议');
             }else{
-                // 可以正常充值
+            //    充值步骤
+            // 1.下单
+            this.handleGeneratingOrders();
+            // 2.发起支付
+            // 3.调用充值接口
+               
             }
-        }
+        },
+        // 选址充值方式
+    },
+    created(){
+        this.params.gascardId = this.$route.query.uid;
+        this.drivingLicenseID = this.$route.query.drivingLicenseID;
+        this.cardType = this.$route.query.cardType;
+        this.handlePrice();
     }
 }
 </script>
@@ -227,6 +327,23 @@ export default {
             span:nth-child(2){
                 font-size: 32px;
                 color: #000000;
+                .normal{
+                    color: #000000;
+                    width: 120px;
+                    height: 60px;
+                    display: inline-block;
+                    text-align: center;
+                    line-height: 60px;
+                    border-radius: 15px;
+                }
+                .wechat-active{
+                    background: #00c250;
+                    color: #fff;
+                }
+                .alipay-active{
+                   background: #00AAEE;
+                   color: #fff; 
+                }
             }
         }
         .submit{
@@ -238,7 +355,7 @@ export default {
                 height: 100%;
                 border: none;
                 border-radius: 50px;
-                background: #D8D8D8;
+                background: #516BB4;
                 color: #fff;
                 font-size: 38px;
             }

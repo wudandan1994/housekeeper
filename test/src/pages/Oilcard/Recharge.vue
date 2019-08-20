@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-09 14:37:30
+ * @LastEditTime: 2019-08-20 17:59:52
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-recharge">
         <header>
@@ -7,71 +14,87 @@
             </div>
         </header>
         <div class="tips start-center">请选择您要查看油卡的行驶证，并点击确定</div>
-        <div class="list" :class="active == '0' ? 'active' : ''" @click="handleChecked('0')">
+        <div class="list" v-for="(item,index) in list" :key="index" :class="active == index ? 'active' : ''" @click="handleChecked(index,item.id)">
             <div class="per-detail">
                 <div>所有人</div>
-                <div>小明</div>
+                <div>{{item.name}}</div>
             </div>
             <div class="per-detail">
                 <div>车牌号码</div>
-                <div>京AA5599</div>
+                <div>{{item.carNum}}</div>
             </div>
             <div class="per-detail">
                 <div>车辆识别代号</div>
-                <div>HHGHH555778802669</div>
+                <div>{{item.carCode}}</div>
             </div>
             <div class="per-detail">
                 <div>发动机号码</div>
-                <div>1122444</div>
-            </div>
-        </div>
-        <div class="list" :class="active == '1' ? 'active' : ''" @click="handleChecked('1')">
-            <div class="per-detail">
-                <div>所有人</div>
-                <div>小明</div>
-            </div>
-            <div class="per-detail">
-                <div>车牌号码</div>
-                <div>京AA5599</div>
-            </div>
-            <div class="per-detail">
-                <div>车辆识别代号</div>
-                <div>HHGHH555778802669</div>
-            </div>
-            <div class="per-detail">
-                <div>发动机号码</div>
-                <div>1122444</div>
+                <div>{{item.engineNum}}</div>
             </div>
         </div>
         <div class="submit center" @click="handleSubmit"><button>确定</button></div>
     </div>
 </template>
 <script>
+import { CommonPost } from '@/lib/http'
 export default {
     data(){
         return{
             active: '0',
+            list: [],
+            checkid: '',
+            type: '',
         }
     },
     methods:{
         handleBack(){
             this.$router.go(-1);
         },
-        handleChecked(item){
+        handleChecked(item,id){
             this.active = item;
+            this.checkid = id;
         },
         handleSubmit(){
-            this.$router.push('/RechargeList');
-        }
+            // type = 1表示首次申请油卡，type = 2表示已经申请过油卡
+            if(this.type == '1'){
+                this.$router.push({
+                    path: '/Collar',
+                    query:{
+                        id: this.checkid
+                    }
+                });
+            }else{
+                this.$router.push({
+                    path: '/RechargeList',
+                    query:{
+                        id: this.checkid
+                    }
+                });
+            }
+        },
+         // 查询行驶证
+        handleDriving(){
+           CommonPost('/gasCard/gascardDrivingList').then(res =>{
+               this.list = res.data.data;
+               this.checkid = (res.data.data)[0].id;
+           }).catch(res =>{
+            //    console.log('行驶证查询失败',res);
+           })
+        },
+    },
+    created(){
+        this.handleDriving();
+        this.type = this.$route.query.type;
     }
 }
 </script>
 <style lang="less" scoped>
 #page-recharge{
     width: 100vw;
-    padding-top: 86px;
-    height: calc(100vh - 86px);
+    padding: 86px 0px;
     background:rgba(248,248,248,1);
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     header{
         width: 100%;
         height: 86px;

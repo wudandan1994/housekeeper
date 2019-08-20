@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-10 11:24:45
+ * @LastEditTime: 2019-08-20 14:15:57
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-activation">
         <header>
@@ -12,7 +19,7 @@
                 <span>中石油</span>
             </div>
             <div class="middle center">
-                13457********98765
+                ******************
             </div>
             <div class="bottom center">
                 待激活
@@ -32,22 +39,57 @@
                 <div>启用方式</div>
                 <div class="mode">领卡激活后圈存使用</div>
             </div>
-            <div class="activation center"><input type="text" v-model="cardNo" placeholder="请您在收到油卡后输入16位油卡号来激活油卡"/></div>
-            <div class="submit center"><button>激活油卡</button></div>
+            <div class="activation center"><input type="text" v-model="params.uid" placeholder="请输入16位油卡号来激活油卡"/></div>
+            <div class="activation center"><input type="text" v-model="params.ext1" placeholder="请输入您的手机号"/></div>
+            <div class="submit center" @click="handleAvation"><button>激活油卡</button></div>
         </div>
     </div>
 </template>
 <script>
+import { CommonPost } from '@/lib/http'
 export default {
     data(){
         return{
-            cardNo: '',
+            params: {
+                uid: '',
+                ext1: '',
+                gascardId: '',
+                type: '',
+                itemPrice: '1000',
+                amt: '1'
+            }
         }
     },
     methods:{
         handleBack(){
             this.$router.go(-1);
         },
+        // 激活
+        handleAvation(){
+            if(this.params.uid == ''){
+                this.$toast('请输入油卡号');
+            }
+            else if(!(/^1[3456789]\d{9}$/.test(this.params.ext1))){
+                this.$toast('请输入正确的手机号');
+            }
+            else{
+                CommonPost('/gasCard/newChange',this.params).then(res =>{
+                    console.log('激活成功',res);
+                    this.$toast('激活成功');
+                    setTimeout(() =>{
+                        this.$router.push({
+                            path: '/RechargeList'
+                        })
+                    },3000);
+                }).catch(res =>{
+                    this.$toast(res.data.message);
+                })
+            }
+        }
+    },
+    created(){
+        this.params.gascardId = this.$route.query.gascardId;
+        this.params.type = this.$route.query.type;
     }
 }
 </script>
@@ -182,7 +224,7 @@ export default {
         .activation{
             width: 92%;
             height: 100px;
-            margin: 50px auto;
+            margin: 20px auto;
             input{
                 width: 100%;
                 height: 100%;
