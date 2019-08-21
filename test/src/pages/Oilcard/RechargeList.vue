@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 15:28:03
- * @LastEditTime: 2019-08-20 18:02:57
+ * @LastEditTime: 2019-08-21 13:54:11
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -20,7 +20,7 @@
             </div>
         </header>
         <div class="list">
-            <div class="per-list shiyou" v-for="(item,index) in list" :key="index" v-if="type == '0'">
+            <div class="per-list shiyou" v-for="(item,index) in list" :key="index" v-show="type == '0'">
                 <div class="top">
                     <span>油卡类型</span>
                     <span>中石油</span>
@@ -32,7 +32,7 @@
                    {{item.cardID}}
                 </div>
                 <div class="bottom" v-if="item.status == '0'">
-                    <span class="center" @click="handleActivation(item.id,'1')">激活</span>
+                    <span class="center" @click="handleActivation(item.id,'1',item.orderNo)">激活</span>
                 </div>
                 <div class="bottom" v-if="item.status == '3'">
                     <span class="center">激活中</span>
@@ -46,7 +46,7 @@
                     <span class="center">已挂失</span>
                 </div> -->
             </div>
-            <div class="per-list shihua" v-for="(item,index) in list" :key="index" v-if="type == '1'">
+            <div class="per-list shihua" v-for="(item,index) in list" :key="index" v-show="type == '1'">
                 <div class="top">
                     <span>油卡类型</span>
                     <span>中石化</span>
@@ -58,7 +58,7 @@
                    {{item.cardID}}
                 </div>
                 <div class="bottom" v-if="item.status == '0'">
-                    <span class="center" @click="handleActivation(item.id,'1')">激活</span>
+                    <span class="center" @click="handleActivation(item.id,'1',item.orderNo)">激活</span>
                 </div>
                 <div class="bottom" v-if="item.status == '3'">
                     <span class="center">激活中</span>
@@ -96,28 +96,24 @@ export default {
                 drivingLicenseID: this.id
             }
             CommonPost('/gasCard/gascardList',params).then(res =>{
-                console.log('有啦列表请求成功',res);
                 this.list = res.data.data;
             }).catch(res =>{
-                console.log('有啦列表请求失败',res);
                 this.$toast(res.data.message);
             })
         },
         // 油卡切换
         handleCheckType(item){
-            console.log(item);
             this.type = item;
             this.handleOilCardList();
         },
         // 激活
-        handleActivation(gascardId,type){
-            console.log('油卡id',gascardId);
-            console.log('类型',type);
+        handleActivation(gascardId,type,gascardOrderNo){
             this.$router.push({
                 path: '/activation',
                 query: {
                     gascardId: gascardId,
-                    type: type
+                    type: type,
+                    gascardOrderNo: gascardOrderNo
                 }
             })
         },
@@ -190,7 +186,7 @@ export default {
                     height: 80%;
                     background:rgba(216,216,216,1);
                     border-radius: 16px;
-                    box-shadow: 0px 0px 1px 1px rgba(151,151,151,1);
+                    // box-shadow: 0px 0px 1px 1px rgba(151,151,151,1);
                     >span{
                         width: 50%;
                         height: 100%;

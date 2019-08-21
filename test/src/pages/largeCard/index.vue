@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-06-18 09:22:42
+ * @LastEditTime: 2019-08-21 15:53:06
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="largeCard">
         <header class="manage loan">
@@ -42,7 +49,7 @@
     </div>
 </template>
 <script>
-import area from '@/config/area.js'
+import area from '../../../static/area'
 import loading from '@/components/loading'
 import {axiosPost,axiosGet} from '@/lib/http'
 import storage from '@/lib/storage'

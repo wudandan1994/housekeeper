@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@huoyu/vue-digitroll": "^1.0.4",
-    "animate.css": "^3.7.2",
-    "axios": "^0.18.1",
     "clipboard": "^2.0.4",
     "cssnano": "^4.1.10",
     "lib-flexible": "^0.3.2",
@@ -24,8 +22,7 @@
     "vue-calendar-component": "^2.8.2",
     "vue-html5plus": "^1.0.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.1.0",
-    "weixin-jsapi": "^1.1.0"
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

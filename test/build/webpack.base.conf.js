@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-09 16:57:17
+ * @LastEditTime: 2019-08-21 15:35:18
+ * @LastEditors: Please set LastEditors
+ */
 'use strict'
 const path = require('path')
 const utils = require('./utils')
@@ -13,7 +20,12 @@ function resolve (dir) {
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/main.js',
+  },
+  externals: {
+    'axios': 'axios',
+    'weixin-jsapi': 'wx',
+    'area': 'area'
   },
   output: {
     path: config.build.assetsRoot,

@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 18:02:44
- * @LastEditTime: 2019-08-20 18:44:19
+ * @LastEditTime: 2019-08-21 13:50:24
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -47,7 +47,7 @@
             </div>
             <div class="submit center" @click="handleSubmit"><button>充值</button></div>
             <div class="agreement start-center"><van-checkbox v-model="agree" checked-color="#516BB4">我已阅读并同意<span>《加油卡充值协议》</span></van-checkbox></div>
-            <div class="desc">
+            <!-- <div class="desc">
                 <p>使用说明</p>
                 <p>
                     1、	本服务为油卡代充服务，不提供充值发票，敬请谅解； <br/>
@@ -60,7 +60,7 @@
                     8、	挂失卡、过期卡、损坏卡、超限卡等卡状态异常等加油卡无法充值； <br/>
                     9、	中石化每日晚上22:50至次日凌晨00:50是网站系统结算时间，在此时间段内不可充值，敬请谅解。
                 </p>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -71,28 +71,7 @@ export default {
         return{
             type: '0',
             agree: true,
-            options: [
-                {
-                    price: 500,
-                    Discount: 485,
-                    id: 0
-                },
-                {
-                    price: 1000,
-                    Discount: 970,
-                    id: 1
-                },
-                {
-                    price: 2000,
-                    Discount: 1940,
-                    id: 2
-                },
-                {
-                    price: 5000,
-                    Discount: 4850,
-                    id: 3
-                }
-            ],
+            options: [],
             paytype: 'wx',
             params: {
                 itemPrice: '485',
@@ -121,7 +100,15 @@ export default {
         // 价格数据
         handlePrice(){
             CommonPost('/gasCard/getGascardPrice').then(res =>{
-                console.log('价格请求成功',res);
+                var options = [];
+                for(let i in res.data.data){
+                    let item = '{"price":"'+ i +'","Discount":"'+ (res.data.data)[i] +'"}'
+                    options.push(JSON.parse(item));
+                }
+                this.options = options;
+                (this.options).forEach((item,index) =>{
+                    item.id = index;
+                })
             }).catch(res =>{
                 console.log('价格请求失败',res);
             })
@@ -207,6 +194,8 @@ export default {
     padding-top: 86px;
     height: calc(100vh - 86px);
     background:rgba(247,247,247,1);
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     header{
         width: 100%;
         height: 86px;

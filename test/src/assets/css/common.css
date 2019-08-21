@@ -21,9 +21,6 @@ time, mark, audio, video {
 	vertical-align: baseline;
 	list-style: none;
 }
-*{
-	touch-action:auto;
-}
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;

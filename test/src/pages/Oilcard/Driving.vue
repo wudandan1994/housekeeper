@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-08 11:17:46
- * @LastEditTime: 2019-08-20 19:01:24
+ * @LastEditTime: 2019-08-21 16:54:01
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -32,14 +32,14 @@
                 <div class="title start-center">车牌号码</div>
                 <div class="input end-center"><input type="text" v-model="params.carNum" placeholder="请输入车牌号码"/></div>
             </div>
-            <div class="per-detail">
+            <!-- <div class="per-detail">
                 <div class="title start-center">车辆识别代号</div>
                 <div class="input end-center"><input type="text" v-model="params.carCode"  placeholder="请输入车辆识别代号"/></div>
             </div>
             <div class="per-detail">
                 <div class="title start-center">发动机号码</div>
                 <div class="input end-center"><input type="text" v-model="params.engineNum" placeholder="请输入发动机号码"/></div>
-            </div>
+            </div> -->
         </div>
         <div class="submit center" @click="handleSubmit"><button>确定</button></div>
         <loading :componentload="componentload"></loading>
@@ -48,6 +48,7 @@
 <script>
 import loading from '@/components/loading'
 import {CommonPost} from '@/lib/http'
+import axios from 'axios'
 export default {
     data(){
         return{
@@ -61,9 +62,9 @@ export default {
             params: {
                 name: '',
                 carNum: '',
-                carCode: '',
-                engineNum: '',
-                photo: '',
+                // carCode: '',
+                // engineNum: '',
+                photo: 'sd',
             }
         }
     },
@@ -86,7 +87,7 @@ export default {
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
-             this.$http.post(url,formData,config).then(res =>{
+             axios.post(url,formData,config).then(res =>{
                  if(res.data.success){
                      this.params.photo = res.data.data.imgUrl
                  }else{
@@ -113,22 +114,23 @@ export default {
                 this.$toast('请输入车牌号');
                 return false;
             }
-            else if(this.params.carCode == ''){
-                this.$toast('请输入车辆识别代码');
-                return false;
-            }
-            else if(this.params.engineNum == ''){
-                this.$toast('请输入发动机号码');
-                return false;
-            }else{
+            // else if(this.params.carCode == ''){
+            //     this.$toast('请输入车辆识别代码');
+            //     return false;
+            // }
+            // else if(this.params.engineNum == ''){
+            //     this.$toast('请输入发动机号码');
+            //     return false;
+            // }
+            else{
                 CommonPost('/gasCard/bindDrivingLicense',this.params).then(res =>{
-                    console.log('行驶证添加成功',res);
+                    // console.log('行驶证添加成功',res);
                     this.$toast('行驶证添加成功');
                     setTimeout(() =>{
                         this.$router.go(-1);
                     },2000);
                 }).catch(res =>{
-                    console.log('行驶证添加失败',res);
+                    // console.log('行驶证添加失败',res);
                 })
             }
         }
@@ -213,6 +215,7 @@ export default {
                     text-align: right;
                     padding-right: 5px;
                     border: none;
+                    background: transparent;
                 }
                 input::-webkit-input-placeholder{
                     font-size: 28px;

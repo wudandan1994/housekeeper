@@ -1,9 +1,14 @@
 <template>
-    <div id="receive">
-        <header>
+    <div id="receivables">
+        <!-- <header>
             <p @click="goBack"><span><van-icon size="16px" name="arrow-left" /></span></p>
             <p>商户收款</p>
            <span></span> 
+        </header> -->
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">商户收款</div>
+            <div class="right-icon center"></div>
         </header>
         <div class="container">
             <div class="portrait">
@@ -180,10 +185,9 @@
                 
             </footer>
         </div>
-         <loading :componentload="componentload"></loading>
+        <loading :componentload="componentload"></loading>
     </div>
 </template>
-
 <script>
 import {axiosPost} from '@/lib/http'
 import Bank from '@/lib/bank'
@@ -259,9 +263,7 @@ export default {
             this.showxy=true
             this.showcx=false
             this.getcardsxy()
-
         },
-
         // 信用卡列表
         getcardsxy(){
              axiosPost("/creditCard/getMyCreditCard")
@@ -279,7 +281,6 @@ export default {
                  }
              })
         },
-
         // 储蓄卡列表
         getcardscx(){
             axiosPost("/customer/getBankCardByOpenid")
@@ -301,8 +302,6 @@ export default {
                  this.showCard=true
               }
         },
-
-
       
         showPay(){
             if(this.number.trim().length=="0"){
@@ -320,7 +319,6 @@ export default {
             //  if(this.nickCX=="请选择到账储蓄卡"){
             //     return this.$toast("请选择到账储蓄卡")
             // }
-
             this.$router.push({
                 path:"/home/receiveXH/payXH",
                 query:{
@@ -335,7 +333,6 @@ export default {
             axiosPost("/customer/getCustomer")
            .then(function(res){
                 if(res.data.success){
-
                 }
               })
            .catch(function(err){
@@ -358,20 +355,17 @@ export default {
                         }
                     })
                 }
-
             })
             .catch(err=>{
                 // console.log(err,"error");
             })
      }
-
     },
     created () {
         // this.searchInfo()
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
         this.lev=this.$store.state.wechat.level;
-
         if(this.lev=='1') {
             this.lev="黄金会员"
         } else if(this.lev=="2"){
@@ -385,7 +379,6 @@ export default {
     }
 }
 </script>
-
 <style lang="less">
    #receive {
        >header {
@@ -403,7 +396,8 @@ export default {
            box-sizing: border-box;
        }
        >.container {
-           background-color:#ECF0F3; 
+        //    background-color:#ECF0F3; 
+        
            .covercx {
                .action {
                    display: flex;
@@ -417,7 +411,6 @@ export default {
                        border:1px solid #ccc;
                        width:120px;
                    }
-
                }
             .van-popup--right {
                 padding:15px;
@@ -427,20 +420,17 @@ export default {
                 bottom:-100%;
             }
             .cards {
-                width:100%;
                 margin-top:15px;
-                height:100%;
+                overflow-y: auto;
                 ul {
-                    width:100%;
-                    height:100%;
                     overflow-y: scroll;
-                    padding-bottom: 30px;
                     li {
                         height: 320px;
                         margin-bottom: 20px;
                         margin-left: auto;
                         margin-right: auto;
                         border-radius: 20px;
+                        position: relative;
                         background: url('http://pay.91dianji.com.cn/bgc5.jpg') center center no-repeat;
                         background-size: 100% 100%;
                         color:#fff;

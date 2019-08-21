@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-08 10:13:21
- * @LastEditTime: 2019-08-20 19:04:17
+ * @LastEditTime: 2019-08-21 11:06:06
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -21,7 +21,7 @@
                 <div class="more end-center"><van-icon name="arrow"/></div>
             </router-link>
             <router-link tag="div" to="Driving" class="per-menu">
-                <div class="title start-center">行驶证</div>
+                <div class="title start-center">添加行驶证</div>
                 <!-- <div class="state center"><div class="center" :class="DrivingLicense == '已完成' ? 'active' : 'normal'">未完成</div></div> -->
                 <div class="more end-center"><van-icon name="arrow"/></div>
             </router-link>
@@ -163,7 +163,7 @@ export default {
         button{
             width: 100%;
             height: 100%;
-            background: rgba(229,229,229,1);
+            background: #92a4d8;
             color: #ffffff;
             border: none;
             border-radius: 50px;

@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-08 14:18:18
- * @LastEditTime: 2019-08-20 13:57:57
+ * @LastEditTime: 2019-08-21 14:28:08
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -18,7 +18,7 @@
                 <span>油卡类型</span>
                 <span>中石油</span>
             </div>
-            <div class="middle center">**********</div>
+            <div class="middle center">***************</div>
             <div class="bottom center">示例油卡</div>
         </div>
         <div class="buy-detail">
@@ -31,11 +31,9 @@
                 </div>
             </div>
             <div class="per-detail">
-                <div class="start-center">购买额度</div>
+                <div class="start-center">购买新卡</div>
                 <div class="end-center">
-                    <div class="center" :class="checked == '1000' ? 'price-active' : 'price-normal'" @click="handleCheckPrice('1000')">1000元</div>
-                    <div class="center" :class="checked == '5000' ? 'price-active' : 'price-normal'" @click="handleCheckPrice('5000')">5000元</div>
-                    <div class="center" :class="checked == '8000' ? 'price-active' : 'price-normal'" @click="handleCheckPrice('8000')">8000元</div>
+                    <div class="center" :class="checked == '1000' ? 'price-active' : 'price-normal'" @click="handleCheckPrice('1000')">15元</div>
                 </div>
             </div>
             <div class="per-detail">
@@ -96,6 +94,8 @@ export default {
                 cardType: cardType,
                 cardQuota: this.checked,
                 drivingLicenseID: this.id,
+                orderType: '0',
+                gascardNo: ''
             }
             CommonPost('/gasCard/newGascardOrder',params).then(res=>{
                 console.log('下单成功',res);
@@ -304,7 +304,7 @@ export default {
             button{
                 width: 100%;
                 height: 100%;
-                background: #E5E5E5;
+                background: #92a4d8;
                 color: #ffffff;
                 font-size: 38px;
                 border: none;

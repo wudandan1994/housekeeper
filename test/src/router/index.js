@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:57:17
- * @LastEditTime: 2019-08-20 19:15:28
+ * @LastEditTime: 2019-08-21 15:12:28
  * @LastEditors: Please set LastEditors
  */
 import Vue from 'vue'
@@ -380,29 +380,31 @@ const nextList = () =>import('@/pages/AIRadar/nextList')
 const nextOtherList = () =>import('@/pages/AIRadar/nextOtherList')  
 // 测试页，测试完请删除
 const testpage = () =>import('@/pages/AIRadar/test')  
-import cardsComponent from '@/pages/receivables/cards'  //收款信用卡列表  
+// import cardsComponent from '@/pages/receivables/cards'  //收款信用卡列表  
+const  cardsComponent = () =>import('@/pages/receivables/cards')
 
 
 
-import largeZYComponent from '@/pages/largeZY'  //哲杨大额  
-import largeVerificateComponent from '@/pages/largeVerificate'  // 哲杨大额短信验证
+// import largeZYComponent from '@/pages/largeZY'  //哲杨大额  
+const  largeZYComponent = () =>import('@/pages/largeZY')
+const largeVerificateComponent = () =>import('@/pages/largeVerificate')  // 哲杨大额短信验证
 
-import largeWFcardComponent from '@/pages/largeWFcard'  //WF大额绑卡
-import largeWFverifyComponent from '@/pages/largeWFcard/verify'  //WF大额短信验证
-import largeWFxeComponent from '@/pages/largeWFxe'  //WF小额绑卡
-import largeWFxeverifyComponent from '@/pages/largeWFxe/verify'  //WF小额短信验证
+const largeWFcardComponent = () => import('@/pages/largeWFcard')  //WF大额绑卡
+const largeWFverifyComponent = () => import('@/pages/largeWFcard/verify')  //WF大额短信验证
+const largeWFxeComponent = () => import('@/pages/largeWFxe')  //WF小额绑卡
+const largeWFxeverifyComponent = () => import('@/pages/largeWFxe/verify')  //WF小额短信验证
 
-import gameElsbComponent from '@/pages/games/gameElsb.vue'  // 2048游戏
-import gameCatComponent from '@/pages/games/gameCat.vue'  // 2048游戏
-import gameClockComponent from '@/pages/games/gameClock.vue'  // clock游戏  
+const gameElsbComponent = () => import('@/pages/games/gameElsb.vue')  // 2048游戏
+const gameCatComponent = () => import('@/pages/games/gameCat.vue')  // 2048游戏
+const gameClockComponent = () => import('@/pages/games/gameClock.vue')  // clock游戏  
 
 
-import receiveXHComponent from '@/pages/receiveXH'  // 收单小惠通道
-import cardCXComponent from '@/pages/receiveXH/cardCX.vue'  // 收单小惠通道储蓄卡管理
-import payXHComponent from '@/pages/receiveXH/payXH.vue'  // 收单小惠通道支付 
-import signXHComponent from '@/pages/receiveXH/signXH.vue'  // 收单小惠通道签约
+const receiveXHComponent = () => import('@/pages/receiveXH')  // 收单小惠通道
+const cardCXComponent = () => import('@/pages/receiveXH/cardCX.vue')  // 收单小惠通道储蓄卡管理
+const payXHComponent = () => import('@/pages/receiveXH/payXH.vue')  // 收单小惠通道支付 
+const signXHComponent = () => import('@/pages/receiveXH/signXH.vue')  // 收单小惠通道签约
 
-import signComponent from '@/pages/receivables/sign.vue'  // 收单小惠通道签约(通道二)
+const signComponent = () => import('@/pages/receivables/sign.vue')  // 收单小惠通道签约(通道二)
 
 
 

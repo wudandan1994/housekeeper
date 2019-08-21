@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-09 16:57:17
+ * @LastEditTime: 2019-08-21 14:21:12
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="vip">
         <header>升级代理</header>
@@ -429,6 +436,7 @@ export default {
 
 <style lang="less" scoped>
  #vip {
+     overflow-y: scroll;
      >header {
          width:100%;
          background-color: #4B66AF;

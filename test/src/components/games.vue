@@ -422,8 +422,6 @@ body {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
-      -ms-touch-action: none;
-      touch-action: none;
       .list {
         margin: 10px;
         width: 100px;
