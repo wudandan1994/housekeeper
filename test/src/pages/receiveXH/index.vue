@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-13 11:05:29
+ * @LastEditTime: 2019-08-21 16:52:42
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="receivables">
         <!-- <header>

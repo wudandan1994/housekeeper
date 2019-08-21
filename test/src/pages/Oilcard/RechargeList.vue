@@ -33,6 +33,7 @@
                 </div>
                 <div class="bottom" v-if="item.status == '0'">
                     <span class="center" @click="handleActivation(item.id,'1',item.orderNo)">激活</span>
+                      <span class="center" @click="handleaddress(item.orderNo)">地址</span>
                 </div>
                 <div class="bottom" v-if="item.status == '3'">
                     <span class="center">激活中</span>
@@ -46,26 +47,27 @@
                     <span class="center">已挂失</span>
                 </div> -->
             </div>
-            <div class="per-list shihua" v-for="(item,index) in list" :key="index" v-show="type == '1'">
+            <div class="per-list shihua" v-for="(items,i) in list" :key="i" v-show="type == '1'">
                 <div class="top">
                     <span>油卡类型</span>
                     <span>中石化</span>
                 </div>
-                <div class="middle center" v-if="item.cardID === null">
+                <div class="middle center" v-if="items.cardID === null">
                    ******************
                 </div>
                 <div class="middle center" v-else>
-                   {{item.cardID}}
+                   {{items.cardID}}
                 </div>
-                <div class="bottom" v-if="item.status == '0'">
-                    <span class="center" @click="handleActivation(item.id,'1',item.orderNo)">激活</span>
+                <div class="bottom" v-if="items.status == 0">
+                    <span class="center" @click="handleActivation(items.id,'1',items.orderNo)">激活</span> 
+                    <span class="center" @click="handleaddress(items.orderNo)">地址</span>
                 </div>
-                <div class="bottom" v-if="item.status == '3'">
+                <div class="bottom" v-if="items.status == '3'">
                     <span class="center">激活中</span>
                 </div>
-                <div class="bottom" v-if="item.status == '1'">
-                    <span class="center" v-on:click.self="handleRecharge(item.cardID)">充值</span>
-                    <span to="RechargeDetail" class="center" v-on:click.self="handleRechargeDetail(item.cardID)">明细</span>
+                <div class="bottom" v-if="items.status == '1'">
+                    <span class="center" v-on:click.self="handleRecharge(items.cardID)">充值</span>
+                    <span to="RechargeDetail" class="center" v-on:click.self="handleRechargeDetail(items.cardID)">明细</span>
                     <!-- <span class="center">挂失</span> -->
                 </div>
                 <!-- <div class="bottom" v-if="item.status == '2'">
@@ -88,6 +90,15 @@ export default {
     methods:{
         handleBack(){
             this.$router.go(-1);
+        },
+        handleaddress(parentNo){
+            this.$router.push({
+                path:"/Address",
+                query:{
+                   parentNo:parentNo,
+
+                }
+            })
         },
         // 油卡列表
         handleOilCardList(){

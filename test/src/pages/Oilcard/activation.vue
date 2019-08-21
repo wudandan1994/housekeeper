@@ -1,10 +1,3 @@
-<!--
- * @Description: In User Settings Edit
- * @Author: your name
- * @Date: 2019-07-10 11:24:45
- * @LastEditTime: 2019-08-21 10:53:08
- * @LastEditors: Please set LastEditors
- -->
 <template>
     <div id="page-activation">
         <header>
@@ -101,6 +94,8 @@ export default {
     padding-top: 86px;
     height: calc(100vh - 86px);
     background:#F5F5F5;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     header{
         width: 100%;
         height: 86px;
@@ -253,6 +248,7 @@ export default {
                 color: #fff;
                 font-size: 38px;
                 border: none;
+                background: rgba(146,164,216,1);
             }
         }
     }

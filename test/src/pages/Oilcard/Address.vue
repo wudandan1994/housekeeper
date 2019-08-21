@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 11:04:05
- * @LastEditTime: 2019-08-20 18:50:57
+ * @LastEditTime: 2019-08-21 18:39:37
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -53,7 +53,7 @@ export default {
                 name: '',
                 mobile: '',
                 address: '',
-                parentNo: '',
+                orderNo: '',
             }
         }
     },
@@ -83,7 +83,7 @@ export default {
         }
     },
     created(){
-        this.params.parentNo = this.$route.query.parentNo;
+        this.params.orderNo = this.$route.query.parentNo;
     }            
 }
 </script>
@@ -92,6 +92,8 @@ export default {
     width: 100vw;
     padding-top: 86px;
     height: calc(100vh - 86px);
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     header{
         width: 100%;
         height: 86px;
@@ -193,6 +195,7 @@ export default {
             font-size: 38px;
             border: none;
             border-radius: 50px;
+            background: rgba(146,164,216,1);
         }
     }
     .success{

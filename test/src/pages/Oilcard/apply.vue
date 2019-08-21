@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-05 15:42:48
- * @LastEditTime: 2019-08-21 11:18:13
+ * @LastEditTime: 2019-08-21 18:40:12
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -89,7 +89,8 @@ export default {
     #page-apply{
         width: 100vw;
         height: 100vh;
-        overflow-y: auto;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
         >header{
             width: 100vw;
             height: 440px;
