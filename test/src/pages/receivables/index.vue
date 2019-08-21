@@ -860,12 +860,16 @@ export default {
                 left:0;
                 bottom:-100%;
             }
-            .cards {
+           .cards {
+                width:100%;
                 margin-top:15px;
+                height:100%;
                 ul {
+                    width:100%;
+                    height:100%;
                     overflow-y: scroll;
+                    padding-bottom: 30px;
                     li {
-                        overflow-y: scroll;
                         height: 320px;
                         margin-bottom: 20px;
                         margin-left: auto;

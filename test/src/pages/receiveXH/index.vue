@@ -427,16 +427,20 @@ export default {
                 bottom:-100%;
             }
             .cards {
+                width:100%;
                 margin-top:15px;
+                height:100%;
                 ul {
+                    width:100%;
+                    height:100%;
                     overflow-y: scroll;
+                    padding-bottom: 30px;
                     li {
                         height: 320px;
                         margin-bottom: 20px;
                         margin-left: auto;
                         margin-right: auto;
                         border-radius: 20px;
-                        position: relative;
                         background: url('http://pay.91dianji.com.cn/bgc5.jpg') center center no-repeat;
                         background-size: 100% 100%;
                         color:#fff;

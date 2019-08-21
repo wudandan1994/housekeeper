@@ -21,6 +21,9 @@ time, mark, audio, video {
 	vertical-align: baseline;
 	list-style: none;
 }
+*{
+	touch-action:auto;
+}
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -234,14 +237,12 @@ table {
 		height: 30px !important;
 		line-height: 30px !important;
 		display: flex;
-		/* justify-content: center; */
 		align-items: flex-start;
 	}
 	.van-radio__label{
 		height: 30px !important;
 		line-height: 30px !important;
 		display: flex;
-		/* justify-content: center; */
 		align-items: flex-start;
 	}
 	.van-radio__icon .van-icon{

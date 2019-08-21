@@ -61,8 +61,8 @@ export const axiosGet = (url,params = {}) =>{
 // 改进封装POST请求
 export const CommonPost = (url,params) =>{
     const _axios = axios.create({
-        baseURL:hostUrl,
-        // baseURL: 'http://pay.91dianji.com.cn/api',
+        // baseURL:hostUrl,
+        baseURL: 'http://pay.91dianji.com.cn/api',
         withCredentials: true,
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
     });
