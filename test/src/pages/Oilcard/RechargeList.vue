@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 15:28:03
- * @LastEditTime: 2019-08-21 13:54:11
+ * @LastEditTime: 2019-08-21 17:58:14
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -98,6 +98,9 @@ export default {
             CommonPost('/gasCard/gascardList',params).then(res =>{
                 console.log('有啦列表请求成功',res);
                 this.list = res.data.data;
+                if(res.data.data.length == '0'){
+                    this.$toast('暂无油卡');
+                }
             }).catch(res =>{
                 console.log('有啦列表请求失败',res);
                 this.$toast(res.data.message);

@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-20 13:04:50
+ * @LastEditTime: 2019-08-21 17:17:45
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="open">
         <header>
@@ -59,6 +66,7 @@
 <script>
 import loading from '@/components/loading'
 import {axiosPost} from '@/lib/http'
+import axios from 'axios'
 export default {
      components:{
       loading
@@ -151,7 +159,7 @@ export default {
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
-            this.$http.post(url,form,config).then(res =>{
+            axios.post(url,form,config).then(res =>{
                 if(res.data.success){
                     this.cardback = res.data.data.thumImgUrl
                     let datas={
@@ -207,7 +215,7 @@ export default {
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
-            this.$http.post(url,form,config).then(res =>{
+            axios.post(url,form,config).then(res =>{
                 if(res.data.success){
                     this.cardWithhand = res.data.data.thumImgUrl
                     let datas={
@@ -264,7 +272,7 @@ export default {
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
-            this.$http.post(url,form,config).then(res =>{
+            axios.post(url,form,config).then(res =>{
                 if(res.data.success){
                     this.bankfront = res.data.data.thumImgUrl
                     let datas={
@@ -321,7 +329,7 @@ export default {
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
-            this.$http.post(url,form,config).then(res =>{
+            axios.post(url,form,config).then(res =>{
                 if(res.data.success){
                     this.bankback = res.data.data.thumImgUrl
                     let datas={

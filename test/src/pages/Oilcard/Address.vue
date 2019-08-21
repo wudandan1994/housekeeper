@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 11:04:05
- * @LastEditTime: 2019-08-20 18:50:57
+ * @LastEditTime: 2019-08-21 18:06:20
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -193,6 +193,7 @@ export default {
             font-size: 38px;
             border: none;
             border-radius: 50px;
+            background: rgba(146,164,216,1);
         }
     }
     .success{

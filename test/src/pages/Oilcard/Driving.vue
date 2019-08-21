@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-08 11:17:46
- * @LastEditTime: 2019-08-21 16:54:01
+ * @LastEditTime: 2019-08-21 18:04:01
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -231,7 +231,7 @@ export default {
         button{
             width: 100%;
             height: 100%;
-            background: rgba(229, 229, 229, 1);
+            background: rgba(146,164,216,1);
             color: #ffffff;
             border: none;
             border-radius: 50px;
