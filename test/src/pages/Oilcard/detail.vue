@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-08 10:13:21
- * @LastEditTime: 2019-08-21 11:06:06
+ * @LastEditTime: 2019-08-21 18:40:43
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -79,7 +79,12 @@ export default {
 </script>
 <style lang="less" scoped>
 #page-detail{
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
     padding-top: 86px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     header{
         width: 100%;
         height: 86px;

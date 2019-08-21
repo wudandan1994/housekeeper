@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-08 17:33:20
+ * @LastEditTime: 2019-08-21 18:41:19
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-youorder">
          <header>
@@ -67,6 +74,8 @@ export default {
     padding-top: 86px;
     height: calc(100vh - 86px);
     background: #D8D8D8;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     header{
         width: 100%;
         height: 86px;
