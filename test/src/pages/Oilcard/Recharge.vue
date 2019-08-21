@@ -2,7 +2,11 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 14:37:30
+<<<<<<< HEAD
  * @LastEditTime: 2019-08-21 11:06:23
+=======
+ * @LastEditTime: 2019-08-21 17:55:13
+>>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -23,14 +27,14 @@
                 <div>车牌号码</div>
                 <div>{{item.carNum}}</div>
             </div>
-            <div class="per-detail">
+            <!-- <div class="per-detail">
                 <div>车辆识别代号</div>
                 <div>{{item.carCode}}</div>
             </div>
             <div class="per-detail">
                 <div>发动机号码</div>
                 <div>{{item.engineNum}}</div>
-            </div>
+            </div> -->
         </div>
         <div class="submit center" @click="handleSubmit"><button>确定</button></div>
     </div>
@@ -44,6 +48,7 @@ export default {
             list: [],
             checkid: '',
             type: '',
+            length: '',
         }
     },
     methods:{
@@ -56,20 +61,24 @@ export default {
         },
         handleSubmit(){
             // type = 1表示首次申请油卡，type = 2表示已经申请过油卡
-            if(this.type == '1'){
-                this.$router.push({
-                    path: '/Collar',
-                    query:{
-                        id: this.checkid
-                    }
-                });
+            if(this.length == '0'){
+                this.$toast('请先添加行驶证');
             }else{
-                this.$router.push({
-                    path: '/RechargeList',
-                    query:{
-                        id: this.checkid
-                    }
-                });
+                if(this.type == '1'){
+                    this.$router.push({
+                        path: '/Collar',
+                        query:{
+                            id: this.checkid
+                        }
+                    });
+                }else{
+                    this.$router.push({
+                        path: '/RechargeList',
+                        query:{
+                            id: this.checkid
+                        }
+                    });
+                }
             }
         },
          // 查询行驶证
@@ -77,6 +86,10 @@ export default {
            CommonPost('/gasCard/gascardDrivingList').then(res =>{
                this.list = res.data.data;
                if(Object.keys(res.data.data).length == '0'){
+<<<<<<< HEAD
+=======
+                   this.length = '0';
+>>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
                    this.$toast('请先添加行驶证');
                 //    setTimeout(() =>{
                 //        this.$router.push({
@@ -166,7 +179,26 @@ export default {
         }
     }
     .active{
-        background: #fff;
+        background: #92a4d8;
+        .per-detail{
+            width: 100%;
+            height: 100px;
+            display: flex;
+            display: -webkit-flex;
+            justify-content: space-between;
+            -webkit-justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 0px 20px;
+            >div:nth-child(1){
+                font-size: 32px;
+                color: #f2f2f2;
+            }
+            >div:nth-child(2){
+                font-size: 32px;
+                color: #ffffff;
+            }
+        }
     }
     .submit{
         width: 92%;

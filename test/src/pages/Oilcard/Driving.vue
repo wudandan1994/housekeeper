@@ -2,7 +2,11 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-08 11:17:46
+<<<<<<< HEAD
  * @LastEditTime: 2019-08-21 16:54:01
+=======
+ * @LastEditTime: 2019-08-21 18:41:12
+>>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -139,6 +143,9 @@ export default {
 </script>
 <style lang="less" scoped>
 #page-detail{
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
     padding: 86px 0px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
@@ -231,7 +238,7 @@ export default {
         button{
             width: 100%;
             height: 100%;
-            background: rgba(229, 229, 229, 1);
+            background: rgba(146,164,216,1);
             color: #ffffff;
             border: none;
             border-radius: 50px;

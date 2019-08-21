@@ -2,7 +2,11 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 15:28:03
+<<<<<<< HEAD
  * @LastEditTime: 2019-08-21 13:54:11
+=======
+ * @LastEditTime: 2019-08-21 17:58:14
+>>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -33,7 +37,10 @@
                 </div>
                 <div class="bottom" v-if="item.status == '0'">
                     <span class="center" @click="handleActivation(item.id,'1',item.orderNo)">激活</span>
+<<<<<<< HEAD
                       <span class="center" @click="handleaddress(item.orderNo)">地址</span>
+=======
+>>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
                 </div>
                 <div class="bottom" v-if="item.status == '3'">
                     <span class="center">激活中</span>
@@ -58,9 +65,14 @@
                 <div class="middle center" v-else>
                    {{items.cardID}}
                 </div>
+<<<<<<< HEAD
                 <div class="bottom" v-if="items.status == 0">
                     <span class="center" @click="handleActivation(items.id,'1',items.orderNo)">激活</span> 
                     <span class="center" @click="handleaddress(items.orderNo)">地址</span>
+=======
+                <div class="bottom" v-if="item.status == '0'">
+                    <span class="center" @click="handleActivation(item.id,'1',item.orderNo)">激活</span>
+>>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
                 </div>
                 <div class="bottom" v-if="items.status == '3'">
                     <span class="center">激活中</span>
@@ -108,6 +120,9 @@ export default {
             }
             CommonPost('/gasCard/gascardList',params).then(res =>{
                 this.list = res.data.data;
+                if(res.data.data.length == '0'){
+                    this.$toast('暂无油卡');
+                }
             }).catch(res =>{
                 this.$toast(res.data.message);
             })
@@ -119,6 +134,11 @@ export default {
         },
         // 激活
         handleActivation(gascardId,type,gascardOrderNo){
+<<<<<<< HEAD
+=======
+            console.log('油卡id',gascardId);
+            console.log('类型',type);
+>>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
             this.$router.push({
                 path: '/activation',
                 query: {
