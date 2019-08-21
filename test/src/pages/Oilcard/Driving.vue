@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-08 11:17:46
- * @LastEditTime: 2019-08-21 14:22:03
+ * @LastEditTime: 2019-08-21 16:54:01
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -48,6 +48,7 @@
 <script>
 import loading from '@/components/loading'
 import {CommonPost} from '@/lib/http'
+import axios from 'axios'
 export default {
     data(){
         return{
@@ -86,7 +87,7 @@ export default {
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
-             this.$http.post(url,formData,config).then(res =>{
+             axios.post(url,formData,config).then(res =>{
                  if(res.data.success){
                      this.params.photo = res.data.data.imgUrl
                  }else{

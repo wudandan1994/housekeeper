@@ -410,9 +410,6 @@ const signComponent = () => import('@/pages/receivables/sign.vue')  // 收单小
 
 
 
-
-
-
 export default new Router({
   // mode:"hash",
   routes: [
@@ -441,6 +438,7 @@ export default new Router({
     {path:"/home/receiveXH/payXH",component:payXHComponent},  //收单小惠通道支付
     {path:"/home/receiveXH/signXH",component:signXHComponent},  //收单小惠通道签约
 
+    
     {path:"/home/receivables/sign",component:signComponent},  //收单小惠通道签约（通道二）
 
 

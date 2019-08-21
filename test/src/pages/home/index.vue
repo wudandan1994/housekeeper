@@ -1363,76 +1363,7 @@ export default {
                       }
                       }
 
-
-                    // .selectchannel {
-                    //     position: absolute;
-                    //     top:15px;
-                    //     left:15%;
-                    //     right:15%;
-                    //     bottom:10px;
-                    //     background-color: #fff;
-                    //     border:1px solid #ccc;
-                    //     border-radius: 10px;
-                      
-                    //     .pay {
-                    //         padding:10px;
-                    //         >p {
-                    //             text-align: center;
-                    //             font-weight: bold;
-                    //             padding:15px;
-                    //         }
-                    //     }
-                    //     .channel {
-                    //         display: flex;
-                    //         justify-content: space-between;
-                    //         p {
-                    //             padding:15px;
-                    //             text-align: center;
-                    //         }
-                    //         .chan {
-                    //             font-size:34px;
-                    //             // color:#4B66AF;
-                    //         }
-                    //     }
-                    //     .radius {
-                    //         margin-top:20px;
-                    //         display:flex;
-                    //         justify-content: space-between;
-                    //         padding: 10px;
-                    //         >p {
-                    //             display: flex;
-                    //             align-items: center;
-                    //         }
-                    //         .dark {
-                    //              background-color: #ccc;
-                    //         }
-                    //         .light {
-                    //             background-color: #4965AE;
-                    //         }
-                    //         #round {
-                    //             display: inline-block;
-                    //             width:40px;
-                    //             height:40px;
-                    //             border-radius: 50%;
-                    //             border:1px solid #000;
-                               
-                    //         }
-                    //     }
-                    //     .surechannel {
-                    //         margin-top:20px;
-                    //         display: flex;
-                    //         justify-content: space-between;
-
-                    //         .van-button--info {
-                    //             background-color: #ccc;
-                    //         }
-                    //         .van-button {
-                    //             width:120px;
-                    //             height:80px;
-                    //         }
-                    //     }
-                    // }
-                }   
+                 }   
                 >.details {
                     margin-top:10px;
                     border-top:1px solid #ccc;
