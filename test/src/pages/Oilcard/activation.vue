@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-10 11:24:45
- * @LastEditTime: 2019-08-20 14:15:57
+ * @LastEditTime: 2019-08-21 10:53:08
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -56,7 +56,8 @@ export default {
                 gascardId: '',
                 type: '',
                 itemPrice: '1000',
-                amt: '1'
+                amt: '1',
+                gascardOrderNo: ''
             }
         }
     },
@@ -90,6 +91,7 @@ export default {
     created(){
         this.params.gascardId = this.$route.query.gascardId;
         this.params.type = this.$route.query.type;
+        this.params.gascardOrderNo = this.$route.query.gascardOrderNo;
     }
 }
 </script>

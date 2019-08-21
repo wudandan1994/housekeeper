@@ -1,11 +1,18 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-09 16:57:17
+ * @LastEditTime: 2019-08-21 15:02:31
+ * @LastEditors: Please set LastEditors
+ */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from '@/vuex/index'
-import wx from 'weixin-jsapi'
-Vue.use(wx)
+// import wx from 'weixin-jsapi'
+// Vue.use(wx)
 Vue.config.productionTip = false
 // 引入插件兼容Ie
 import 'babel-polyfill'
@@ -15,17 +22,14 @@ import '@/assets/css/common.css'
 import back from './lib/back'
 // import touch from './lib/touch.js'
 
-// 引入animate.css
-// import animate from 'animate.css'
+// import animated from 'animate.css'
 
-import animated from 'animate.css'
-
-Vue.use(animated)
+// Vue.use(animated)
 
 
-import axios from 'axios'
+// import axios from 'axios'
 import utils from '@/lib/params'
-Vue.prototype.$http = axios
+// Vue.prototype.$http = axios
 Vue.prototype.$utils = utils
 // 引入适配
 import 'lib-flexible/flexible'

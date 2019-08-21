@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-09 16:57:17
+ * @LastEditTime: 2019-08-21 16:01:47
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="page-alipay">
         <header class="header-top row">
@@ -23,7 +30,7 @@
     </div>
 </template>
 <script>
-import area from '@/config/area.js'
+// import area from '../../../static/area'
 import loading from '@/components/loading'
 import {axiosPost,axiosGet} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -36,16 +43,16 @@ export default {
             area: '请选择支行地址',
             show: false,
             title: '获取验证码',
-            areaList:{},
+            // areaList:{},
             name:"",
             phone:"",
             bankcardno:"",
             componentload:false,
         }
     },
-    created(){
-        this.areaList = area;
-    },
+    // created(){
+    //     this.areaList = area;
+    // },
     methods:{
         handleReturnHome(){
             this.$router.go(-1);

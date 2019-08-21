@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 14:37:30
- * @LastEditTime: 2019-08-20 17:59:52
+ * @LastEditTime: 2019-08-21 11:06:23
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -76,7 +76,17 @@ export default {
         handleDriving(){
            CommonPost('/gasCard/gascardDrivingList').then(res =>{
                this.list = res.data.data;
-               this.checkid = (res.data.data)[0].id;
+               if(Object.keys(res.data.data).length == '0'){
+                   this.$toast('请先添加行驶证');
+                //    setTimeout(() =>{
+                //        this.$router.push({
+                //            path: '/Driving'
+                //        })
+                //    },1000)
+               }else{
+                    this.checkid = (res.data.data)[0].id;
+               }
+               
            }).catch(res =>{
             //    console.log('行驶证查询失败',res);
            })
@@ -91,6 +101,8 @@ export default {
 <style lang="less" scoped>
 #page-recharge{
     width: 100vw;
+    box-sizing: border-box;
+    height: 100vh;
     padding: 86px 0px;
     background:rgba(248,248,248,1);
     overflow-y: scroll;
@@ -163,7 +175,7 @@ export default {
         button{
             width: 100%;
             height: 100%;
-            background: #E5E5E5;
+            background: #92a4d8;
             color: #fff;
             font-size: 38px;
             border: none;

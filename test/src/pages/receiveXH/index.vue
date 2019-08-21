@@ -1,9 +1,21 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-13 11:05:29
+ * @LastEditTime: 2019-08-20 20:58:38
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="receivables">
-        <header>
+        <!-- <header>
             <p @click="goBack"><span><van-icon size="16px" name="arrow-left" /></span></p>
             <p>商户收款</p>
            <span></span> 
+        </header> -->
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">商户收款</div>
+            <div class="right-icon center"></div>
         </header>
         <div class="container">
             <div class="portrait">
@@ -180,10 +192,9 @@
                 
             </footer>
         </div>
-         <loading :componentload="componentload"></loading>
+        <loading :componentload="componentload"></loading>
     </div>
 </template>
-
 <script>
 import {axiosPost} from '@/lib/http'
 import Bank from '@/lib/bank'
@@ -385,7 +396,6 @@ export default {
     }
 }
 </script>
-
 <style lang="less">
    #receivables {
        >header {
@@ -403,7 +413,8 @@ export default {
            box-sizing: border-box;
        }
        >.container {
-           background-color:#ECF0F3; 
+        //    background-color:#ECF0F3; 
+        
            .covercx {
                .action {
                    display: flex;
@@ -429,6 +440,7 @@ export default {
             }
             .cards {
                 margin-top:15px;
+                overflow-y: auto;
                 ul {
                     // padding:30px;
                     overflow-y: scroll;
