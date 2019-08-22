@@ -2,11 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 14:37:30
-<<<<<<< HEAD
  * @LastEditTime: 2019-08-21 11:06:23
-=======
- * @LastEditTime: 2019-08-21 17:55:13
->>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -86,10 +82,7 @@ export default {
            CommonPost('/gasCard/gascardDrivingList').then(res =>{
                this.list = res.data.data;
                if(Object.keys(res.data.data).length == '0'){
-<<<<<<< HEAD
-=======
                    this.length = '0';
->>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
                    this.$toast('请先添加行驶证');
                 //    setTimeout(() =>{
                 //        this.$router.push({

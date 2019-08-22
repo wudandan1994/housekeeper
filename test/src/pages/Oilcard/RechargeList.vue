@@ -2,11 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 15:28:03
-<<<<<<< HEAD
  * @LastEditTime: 2019-08-21 13:54:11
-=======
- * @LastEditTime: 2019-08-21 17:58:14
->>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -100,7 +96,6 @@ export default {
                 path:"/Address",
                 query:{
                    parentNo:parentNo,
-
                 }
             })
         },

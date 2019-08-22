@@ -6,7 +6,7 @@
  * @LastEditors: Please set LastEditors
  -->
 <template>
-    <div id="receivables">
+    <div id="receive">
         <!-- <header>
             <p @click="goBack"><span><van-icon size="16px" name="arrow-left" /></span></p>
             <p>商户收款</p>
@@ -19,13 +19,13 @@
         </header>
         <div class="container">
             <div class="portrait">
-                <div class="head">
+                <div class="userimg">
                     <img :src="headimg" alt="">
                 </div>
                 <div class="recommend">
                     <p>
                         <span>{{nickname}}</span>
-                        <span><van-icon name="info-o" />{{lev}}</span>
+                        <span>{{lev}}</span>
                     </p>
                     <p>{{recommendedcode}}</p>
                 </div>
@@ -347,25 +347,11 @@ export default {
         })
      },
      goRecords(){
-          axiosPost("/creditCard/getMemberReg")
-            .then(res=>{
-                if(!res.data.success){
-                    this.$toast({
-                        message:res.data.message
-                    })
-                } else {
-                    this.chMerCode=res.data.data.chMerCode
-                    this.$router.push({
-                        path:"/home/collect/payment/records",
-                        query:{
-                            chMerCode:this.chMerCode
-                        }
-                    })
-                }
-            })
-            .catch(err=>{
-                // console.log(err,"error");
-            })
+
+         this.$router.push({
+             path:"/home/collect/payment/records",
+         })
+       
      }
     },
     created () {
@@ -386,7 +372,7 @@ export default {
     }
 }
 </script>
-<style lang="less">
+<style lang="less" scope>
    #receive {
        >header {
            height: 86px;
@@ -426,11 +412,15 @@ export default {
                 left:0;
                 bottom:-100%;
             }
-            .cards {
+           .cards {
+                width:100%;
                 margin-top:15px;
-                overflow-y: auto;
+                height:100%;
                 ul {
+                    width:100%;
+                    height:100%;
                     overflow-y: scroll;
+                    padding-bottom: 30px;
                     li {
                         height: 320px;
                         margin-bottom: 20px;
@@ -470,17 +460,19 @@ export default {
                 justify-content: space-between;
                 padding-top:20px;
                 height: 400px;
-                .head {
+                .userimg {
                     width:120px;
-                    height: 120px;
+                    height:120px;
+                    margin-top:70px;
                     >img {
                         width:100%;
                         border-radius: 50%;
                     }
                 }
                 >.recommend {
-                    margin-left:20px;
-                    flex:1;
+                       margin-top:90px;
+                      margin-left:20px;
+                      flex:1;
                     >p {
                         &:nth-of-type(1) {
                             font-size: 36px;
@@ -503,11 +495,12 @@ export default {
                background-color: #ECF0F3;
                padding-top:20px;
                position: relative;
+               padding-top:80px;
                >.pay {
                    width:92%;
                    background-color:#fff;
                    position: absolute;
-                   top:-280px;
+                   top:-220px;
                    left:0px;
                    margin:20px;
                    border-radius: 10px;

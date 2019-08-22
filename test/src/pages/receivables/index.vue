@@ -283,13 +283,13 @@ export default {
                             setTimeout(() =>{
                                 this.componentload = false;
                                 
-                            //      this.$router.push({
-                            //     path:"/loan/form/myOrder",
-                            //     query:{
-                            //         info:url,
-                            //         title:"支付"
-                            //       }
-                            // })
+                                //  this.$router.push({
+                                //  path:"/loan/form/myOrder",
+                                //  query:{
+                                //         info:url,
+                                //         title:"支付"
+                                //     }
+                                //     })
                             
                             if (!navigator.userAgent.match(/iPad|iPhone/i)){
                                 this.$router.push({
@@ -765,29 +765,13 @@ export default {
             
         })
      },
-     goRecords(){
-          axiosPost("/creditCard/getMemberReg")
-            .then(res=>{
-                if(!res.data.success){
-                    this.$toast({
-                        message:res.data.message
-                    })
-                } else {
-                    this.chMerCode=res.data.data.chMerCode
-                    this.$router.push({
-                        path:"/home/collect/payment/records",
-                        query:{
-                            chMerCode:this.chMerCode
-                        }
-                    })
-                }
-                 
-                   
+    
+       goRecords(){
 
-            })
-            .catch(err=>{
-                // console.log(err,"error");
-            })
+         this.$router.push({
+             path:"/home/collect/payment/records"
+         })
+       
      }
 
     },

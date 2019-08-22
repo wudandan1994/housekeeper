@@ -1,5 +1,5 @@
 <template>
-    <div id="page_cancelCard">
+    <div id="cardcx">
         <!-- <header class=" head">
             <div class="center"  @click=""><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div></div>
@@ -7,7 +7,7 @@
         <header>
             <span @click="handleReturnHome"><van-icon name="arrow-left"/></span>
             <span>储蓄卡</span>
-            <router-link tag="div" to="/personalCenter/addcard/UnionPay" class="add">添加储蓄卡</router-link>
+            <router-link tag="span" to="/personalCenter/addcard/UnionPay" >添加储蓄卡</router-link>
             
         </header>
         <div class="list">
@@ -162,7 +162,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-#page_cancelCard{
+#cardcx{
      >header {
            background-color: #4965AE;
            width:100%;

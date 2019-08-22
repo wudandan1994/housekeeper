@@ -488,6 +488,7 @@ export default {
             //              title:title
             //          }
             //      })
+
             
              if (!navigator.userAgent.match(/iPad|iPhone/i)){
                  this.$router.push({

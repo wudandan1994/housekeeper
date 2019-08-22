@@ -11,15 +11,18 @@
                   <li  v-for="(item,index)   in recordList" :key="index">
                       <h3>订单信息</h3>
                       <p><span>订单编号：</span><span>{{item.orderCode}}</span></p>
-                      <p><span>创建时间：</span><span>{{item.tranTime}}</span></p>
-                      <p><span>支付卡号：</span><span>{{item.accNo.replace(/^(\d{4})\d+(\d{4})$/,"$1 ****  **** $2")}}</span></p>
-                      <p><span>到账卡号：</span><span>{{item.accountNo.replace(/^(\d{4})\d+(\d{4})$/,"$1 ****  **** $2")}}</span></p>
+                      <p><span>创建时间：</span><span>{{item.createddatetime}}</span></p>
+                      <!-- <p><span>支付卡号：</span><span>{{item.accNo.replace(/^(\d{4})\d+(\d{4})$/,"$1 ****  **** $2")}}</span></p>
+                      <p><span>到账卡号：</span><span>{{item.accountNo.replace(/^(\d{4})\d+(\d{4})$/,"$1 ****  **** $2")}}</span></p> -->
+                      <p><span>支付卡号：</span><span>{{item.accNo}}</span></p>
+                      <p v-show="item.accountNo"><span>到账卡号：</span><span>{{item.accountNo}}</span></p>
                       <p><span>付款金额：</span><span>{{item.orderAmount}}</span></p>
                       <p><span>手续金额：</span><span>{{item.handingFee}}</span></p>
                   </li>
               </ul>
           </div>
         </div>
+          <loading :componentload="componentload"></loading>
     </div>
 
 </template>
@@ -27,11 +30,17 @@
 
 <script>
 import {axiosPost} from '@/lib/http'
+import loading from '@/components/loading'
+
 export default {
+     components:{
+      loading
+    },
     data() {
         return {
-            chMerCode:"",
-            recordList:[]
+            recordList:[],
+            componentload:false,
+          
         }
     },
     methods:{
@@ -40,21 +49,35 @@ export default {
         },
         getRecord(){
             let data={
-                chMerCode:this.chMerCode,
                 page:"1",
                 pageSize:"100"
             }
+            
             axiosPost("/creditCard/getTradeQueryList",data)
             .then(res=>{
-                // console.log(res)
                 if(!res.data.success){
                     this.$toast({
                         message:res.data.message
                     })
                 } else {
-                    this.recordList=res.data.data.data
-                    if(this.recordList.length===0){
+                      this.recordList=res.data.data.data
+                     if(this.recordList.length===0){
                         this.$toast("暂无记录")
+                    } else {
+                        let arr=this.recordList
+                        arr=arr.reverse()
+                        let arrlist=[]
+                        arr.forEach(item=>{
+                            if(item.accNo){
+                                item.accNo=item.accNo.replace(/^(\d{4})\d+(\d{4})$/,"$1 ****  **** $2")
+                            }
+                            if(item.accountNo) {
+                               item.accountNo=item.accountNo.replace(/^(\d{4})\d+(\d{4})$/,"$1 ****  **** $2")
+                            }
+                             arrlist.push(item)
+                            
+                        })
+                        this.recordList=arrlist
                     }
                 }
             })
@@ -64,9 +87,11 @@ export default {
         }
     },
     created () {
-        this.chMerCode=this.$route.query.chMerCode
-        this.getRecord()
+        // this.getRecord()
         
+    },
+    mounted () {
+        this.getRecord()
     }
 }
 </script>
