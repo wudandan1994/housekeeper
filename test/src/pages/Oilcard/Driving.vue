@@ -2,7 +2,11 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-08 11:17:46
+<<<<<<< HEAD
  * @LastEditTime: 2019-08-21 18:41:12
+=======
+ * @LastEditTime: 2019-08-23 11:35:31
+>>>>>>> 4b755bac520ec00aee31ded0e6c4ebc8fb767ed1
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -11,7 +15,7 @@
             <div class="top">
                 <span class="start-center" @click="handleBack"><van-icon name="arrow-left" color="#ffffff" size="22px"/>返回</span>
                 <span class="center">行驶证</span>
-                <span class="end-center"><van-icon name="friends-o" color="#fff" size="28px"/></span>
+                <span class="end-center"></span>
             </div>
         </header>
         <div class="big-title start-center">上传行驶证照片</div>

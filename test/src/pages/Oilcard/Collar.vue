@@ -2,11 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-08 14:18:18
-<<<<<<< HEAD
- * @LastEditTime: 2019-08-21 14:28:08
-=======
- * @LastEditTime: 2019-08-21 18:39:28
->>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
+ * @LastEditTime: 2019-08-23 15:37:00
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -14,7 +10,7 @@
         <header>
             <div class="top">
                 <span class="start-center" @click="handleBack"><van-icon name="arrow-left" color="#ffffff" size="22px"/>返回</span>
-                <span class="end-center"><van-icon name="friends-o" color="#fff" size="28px"/></span>
+                <span class="end-center"></span>
             </div>
         </header>
         <div class="example">
@@ -30,20 +26,22 @@
             <div class="per-detail">
                 <div class="start-center">选购产品</div>
                 <div class="end-center">
-                    <div class="center" :class="shiyou == true ? 'product-active' : 'product-normal'" @click="handleCheckProduct('shiyou')">中石油</div>
-                    <div class="center" :class="shihua == true ? 'product-active' : 'product-normal'" @click="handleCheckProduct('shihua')">中石化</div>
+                    <div class="center" :class="params.cardType == '0' ? 'product-active' : 'product-normal'" @click="handleCheckProduct('0')">中石油折扣卡</div>
+                    <div class="center" :class="params.cardType == '1' ? 'product-active' : 'product-normal'" @click="handleCheckProduct('1')">中石化折扣卡</div>
                 </div>
             </div>
             <div class="per-detail">
-                <div class="start-center">购买新卡</div>
+                <div class="start-center">邮寄信息</div>
+                <div class="price-active end-center" @click="addressShow = true">{{addressTitle}}</div>
+            </div>
+            <div class="per-detail">
+                <div class="start-center">配送方式</div>
                 <div class="end-center">
-                    <div class="center" :class="checked == '1000' ? 'price-active' : 'price-normal'" @click="handleCheckPrice('1000')">15元</div>
+                    <div class="center" :class="checked == '1000' ? 'price-active' : 'price-normal'" @click="handleCheckPrice('1000')">快递费15元</div>
                 </div>
             </div>
-            <div class="per-detail">
-                <div class="start-center">启用方式</div>
-                <div class="end-center">领卡激活后圈存使用</div>
-            </div>
+            
+            
             <div class="per-detail">
                 <div class="start-center">支付方式</div>
                 <div class="end-center">
@@ -51,7 +49,52 @@
                     <div class="center pay-normal" :class="paytype == 'alipay' ? 'ali-pay' : ''" @click="handleCheckPayType('alipay')">支付宝</div>
                 </div>
             </div>
+            <div class="per-detail">
+                <div class="start-center">使用说明</div>
+                <div class="price-active end-center" @click="desc = true">详细说明</div>
+            </div>
+            <div class="tips">备注：本服务为第三方提供的服务，此加油卡仅支持在本平台充值，持卡加油后，不提供消费发票，请谨慎办理。</div>
             <div class="submit center" @click="handleSubmit"><button>立即领卡</button></div>
+        </div>
+        <transition name="van-fade">
+            <div class="desc" v-show="desc">
+                加油卡到货后，用户请在“我的油卡”中
+                激活，激活成功即可充值使用，充值完成后
+                请至中国石油/中国石化的加油网点进行圈存
+                圈存成功后，即可使用
+                <div class="close center" @click="desc = false">关闭</div>
+            </div>
+        </transition>
+        <div class="address-dialog" v-show="addressShow">
+            <header>
+                <div class="top">
+                    <span class="start-center" @click="addressShow = false"><van-icon name="arrow-left" color="#ffffff" size="22px"/>返回</span>
+                    <span class="end-center"></span>
+                </div>
+            </header>
+            <div class="big-title row">
+                <div class="start-end">完善信息</div>
+                <div class="start-end">我们会把油卡快递到该地址</div>
+            </div>
+            <div class="input-list">
+                <div class="per-input">
+                    <div class="start-center">姓名</div>
+                    <div><input type="text" v-model="params.name" placeholder="请输入收件人姓名"/></div>
+                </div>
+                <div class="per-input">
+                    <div class="start-center">手机号</div>
+                    <div><input type="text" v-model="params.mobile" placeholder="请输入收件人手机号"/></div>
+                </div>
+                <div class="per-input">
+                    <div class="start-center">具体地址</div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="address center">
+                <textarea cols="30" rows="10" v-model="params.address" placeholder="请输入收件具体地址"></textarea>
+            </div>
+            <div class="submit center" @click="handleAddress"><button>确定</button></div>
+           
         </div>
     </div>
 </template>
@@ -60,12 +103,25 @@ import { CommonPost } from '@/lib/http'
 export default {
     data(){
         return{
-            shihua: false,
-            shiyou: true,
+            // shihua: false,
+            // shiyou: true,
             checked: '1000',
             paytype: 'wechat',
-            id: '',
-            parentNo: ''
+            // id: '',
+            parentNo: '',
+            desc: false,
+            params: {
+                cardType: '0',
+                cardQuota: '15',
+                drivingLicenseID: '',
+                gascardNo: '',
+                orderType: '0',
+                name: '',
+                mobile: '',
+                address: '',
+            },
+            addressShow: false,
+            addressTitle: '填写地址'
         }
     },
     methods:{
@@ -74,12 +130,7 @@ export default {
         },
         // 选择产品
         handleCheckProduct(item){
-            // console.log('选中产品',item);
-            if(item == 'shiyou'){
-                this.shiyou = !this.shiyou;
-            }else{
-                this.shihua = !this.shihua;
-            }
+            this.params.cardType = item
         },
         // 选择充值金额
         handleCheckPrice(item){
@@ -89,81 +140,91 @@ export default {
         handleCheckPayType(obj){
             this.paytype = obj;
         },
+         // 提交地址信息
+        handleAddress(){
+            if(this.params.name == ''){
+                this.$toast('请填写姓名');
+            }
+            else if(!(/^1[3456789]\d{9}$/.test(this.params.mobile))){
+                this.$toast('请填写正确的手机号');
+            }
+            else if(this.params.address == ''){
+                this.$toast('请填写具体地址');
+            }else{
+               this.addressShow = false;
+               this.addressTitle = '收货地址已填写';
+            }
+        },
         // 立即领卡,下单后发起付款
         handleSubmit(){
-            let cardType = '';
-            (this.shiyou == true && this.shihua == true) ? cardType = '2' : (this.shiyou == false && this.shihua == true) ? cardType = '1' : cardType = '0';
-            
-            let params = {
-                cardType: cardType,
-                cardQuota: this.checked,
-                drivingLicenseID: this.id,
-                orderType: '0',
-                gascardNo: ''
-            }
-            CommonPost('/gasCard/newGascardOrder',params).then(res=>{
-                console.log('下单成功',res);
-                this.parentNo = res.data.data.parentNo;
-                let params = '';
-                if(this.paytype == 'wechat'){
-                    params = {
-                        orderid: this.parentNo,
-                        channel: 'wx'
-                    }
-                }else{
-                     params = {
-                        orderid: this.parentNo,
-                        channel: 'aliwap'
-                    }
-                }
-                CommonPost('/gasCardPay/xhPay',params).then(res =>{
-                    console.log('支付成功',res);
-                    let ua = navigator.userAgent.toLowerCase();
-                    if(ua.match(/MicroMessenger/i)=="micromessenger") {
-                        // 微信浏览器中打开
-                        window.location.href = res.data.data.url
-                        
+            if(this.params.name == '' || this.params.mobile == '' || this.params.address == ''){
+                this.$toast('请填写地址');
+            }else{
+                CommonPost('/gasCard/newGascardOrder',this.params).then(res=>{
+                    console.log('下单成功',res);
+                    this.parentNo = res.data.data.parentNo;
+                    let params = '';
+                    if(this.paytype == 'wechat'){
+                        params = {
+                            orderid: this.parentNo,
+                            channel: 'wx'
+                        }
                     }else{
-                        // 非微信中打开
-                        if(this.paytype == 'wechat'){
-                            // 此时无法在非微信中调用微信支付
-                            this.$router.push({
-                                path: '/middle',
-                                query:{
-                                    qrcode: res.data.data.codeUrl
-                                }
-                            })
-                        }else{
-                           window.location.href = res.data.data.url 
+                        params = {
+                            orderid: this.parentNo,
+                            channel: 'aliwap'
                         }
                     }
-                    // this.$router.push({
-                    //     path: '/Address',
-                    //     query: {
-                    //         parentNo: this.parentNo
-                    //     }
-                    // })
+                    CommonPost('/gasCardPay/xhPay',params).then(res =>{
+                        console.log('支付成功',res);
+                        let ua = navigator.userAgent.toLowerCase();
+                        if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                            // 微信浏览器中打开
+                            window.location.href = res.data.data.url
+                            
+                        }else{
+                            // 非微信中打开
+                            if(this.paytype == 'wechat'){
+                                // 此时无法在非微信中调用微信支付
+                                this.$router.push({
+                                    path: '/middle',
+                                    query:{
+                                        qrcode: res.data.data.codeUrl
+                                    }
+                                })
+                            }else{
+                            window.location.href = res.data.data.url 
+                            }
+                        }
+                        // this.$router.push({
+                        //     path: '/Address',
+                        //     query: {
+                        //         parentNo: this.parentNo
+                        //     }
+                        // })
+                    }).catch(res =>{
+                        console.log('支付失败',res);
+                    })
                 }).catch(res =>{
-                    console.log('支付失败',res);
+                    console.log('下单失败',res);
+                    this.$toast(res.data.message);
                 })
-            }).catch(res =>{
-                console.log('下单失败',res);
-                this.$toast(res.data.message);
-            })
-        }
+            }
+            
+        },
     },
     created(){
-        this.id = this.$route.query.id;
+        this.params.drivingLicenseID = this.$route.query.id;
     }
 }
 </script>
 <style lang="less" scoped>
 #page-collar{
     width: 100vw;
-    padding-top: 86px;
-    height: calc(100vh - 86px);
+    padding: 86px 0px;
+    height: 100vh;
+    box-sizing: border-box;
     background: rgba(248,248,248,1);
-    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     header{
         width: 100%;
@@ -264,34 +325,39 @@ export default {
                 color: #000000;
                 font-size: 32px;
                 >div{
-                    width: 30%;
+                    width: auto;
                     height: 68px;
                     margin-right: 10px;
                     border-radius: 12px;
                 }
                 .product-normal{
-                    background: #E18737;
+                    background: #CCC;
                     color: #ffffff;
-                    font-size: 32px;
+                    font-size: 28px;
+                    padding: 0px 10px;
                 }
                 .product-active{
                     background:rgba(204,55,55,1);
                     color: #ffffff;
-                    font-size: 32px;
+                    font-size: 28px;
+                    padding: 0px 10px;
                 }
                 .price-normal{
                     border-radius: 6px;
                     box-shadow: 0px 0px 1px  1px  #FEC808;
                     font-size: 28px;
                     color: #FEB30E;
+                    padding: 0px 10px;
                 }
                 .price-active{
                     background:linear-gradient(180deg,rgba(255,176,9,1) 0%,rgba(245,205,60,1) 100%);
                     color: #000000;
                     font-size: 28px;
+                    padding: 0px 10px;
                 }
                 .pay-normal{
                     box-shadow: 0px 0px 1px 1px #f2f2f2;
+                    width: 120px;
                 }
                 .wechat-pay{
                     background: #00c250;
@@ -303,10 +369,19 @@ export default {
                 }
             }
         }
+        .tips{
+            width: 86%;
+            height: auto;
+            padding: 10px 0px;
+            margin: auto;
+            font-size: 26px;
+            color: #be0202;
+        }
         .submit{
             width: 92%;
             height: 100px;
-            margin: 100px auto auto auto;
+            margin: 20px auto auto auto;
+            padding-bottom: 20px;
             button{
                 width: 100%;
                 height: 100%;
@@ -315,6 +390,142 @@ export default {
                 font-size: 38px;
                 border: none;
                 border-radius: 50px;
+            }
+        }
+    }
+    .desc{
+        width: 90%;
+        height: auto;
+        background: rgba(255,176,9,1);
+        position: fixed;
+        bottom: 30vh;
+        left: 5vw;
+        box-sizing: border-box;
+        padding: 50px 50px 0px 50px;
+        font-size: 28px;
+        text-align: justify;
+        line-height: 50px;
+        border-radius: 10px;
+        .close{
+            width: 100%;
+            height: 80px;
+            border-top: solid 1px #ccc;
+            margin-top: 30px;
+        }
+    }
+    .address-dialog{
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        z-index: 100;
+        background: #fff;
+        box-sizing: border-box;
+        padding-top: 86px;
+        header{
+            width: 100%;
+            height: 86px;
+            position: fixed;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            background: rgba(60, 60, 60, 0.9);
+            .top{
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                padding: 0px 20px;
+                display: flex;
+                display: -webkit-flex;
+                justify-content: space-between;
+                -webkit-justify-content: space-between;
+                line-height: 86px;
+                span{
+                    font-size: 30px;
+                    color: #ffffff;
+                }
+            }
+        }
+        .big-title{
+            width: 90%;
+            height: 100px;
+            margin: 20px auto auto auto;
+            >div:nth-child(1){
+                font-size: 40px;
+                font-weight: 700;
+            }
+            >div:nth-child(2){
+                margin-left: 20px;
+                font-size: 26px;
+                color: #666666;
+            }
+        }
+        .input-list{
+            width: 90%;
+            height: auto;
+            margin: 100px auto auto auto;
+            .per-input{
+                width: 100%;
+                height: 120px;
+                display: flex;
+                display: -webkit-flex;
+                justify-content: space-between;
+                -webkit-justify-content: space-between;
+                border-bottom: solid 1px #E3E3E3;
+                >div:nth-child(1){
+                    width: 25%;
+                    height: 100%;
+                    font-size: 32px;
+                    color: #666666;
+                }
+                >div:nth-child(2){
+                    width: 75%;
+                    height: 100%;
+                    font-size: 32px;
+                    color: #666666;
+                    input{
+                        width: 100%;
+                        height: 85%;
+                        text-align: right;
+                        border: none;
+                        background: transparent;
+                    }
+                    input::-webkit-input-placeholder{
+                        padding-top: 10px;
+                        font-size: 28px;
+                    }
+                }
+            }
+        }
+        .address{
+            width: 90%;
+            height: 254px;
+            margin: 50px auto;
+            background: #FCFCFC;
+            color: #333;
+            textarea{
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                padding: 15px;
+                font-size: 28px;
+                background: transparent;
+                border-radius: 16px;
+            }
+        }
+        .submit{
+            width: 90%;
+            height: 100px;
+            margin: 20px auto auto auto;
+            button{
+                width: 100%;
+                height: 100%;
+                color: #fff;
+                font-size: 38px;
+                border: none;
+                border-radius: 50px;
+                background: rgba(146,164,216,1);
             }
         }
     }

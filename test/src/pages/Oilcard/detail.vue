@@ -10,7 +10,7 @@
  * @LastEditTime: 2019-08-21 18:40:43
 >>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
 =======
- * @LastEditTime: 2019-08-21 18:40:43
+ * @LastEditTime: 2019-08-23 11:35:11
 >>>>>>> cd7a66aec11b130f6c842a20ab278b9f2f1c2285
 =======
  * @LastEditTime: 2019-08-21 18:40:43
@@ -22,7 +22,7 @@
         <header>
             <div class="top">
                 <span class="start-center" @click="handleBack"><van-icon name="arrow-left" color="#ffffff" size="22px"/>返回</span>
-                <span class="end-center"><van-icon name="friends-o" color="#fff" size="28px"/></span>
+                <span class="end-center"></span>
             </div>
         </header>
         <div class="big-title start-center">完善详细信息</div>

@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-10 10:18:43
- * @LastEditTime: 2019-08-21 18:39:51
+ * @LastEditTime: 2019-08-23 11:36:10
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -10,7 +10,7 @@
         <header>
             <div class="top">
                 <span class="start-center" @click="handleBack"><van-icon name="arrow-left" color="#ffffff" size="22px"/>返回</span>
-                <span class="end-center"><van-icon name="friends-o" color="#fff" size="28px"/></span>
+                <span class="end-center"></span>
             </div>
         </header>
         <div class="oil-card shiyou">
@@ -29,15 +29,23 @@
             <div class="big-title start-center">充值明细</div>
             <div class="list-container">
                 <div class="per-recharge" v-for="(item,index) in list" :key="index">
-                    <div>{{item.createddatetime}}</div>
-                    <div>{{item.amount}}元</div>
-                    <div v-if="status == '0'">处理中</div>
-                    <div v-if="status == '1'">已充值</div>
-                    <div v-if="status == '2'">充值失败</div>
+                    <div>
+                        <div>充值金额: {{item.cardQuota}}元</div>
+                        <div>实际支付: {{item.amount}}元</div>
+                    </div>
+                    <div>
+                        <div>油卡号:{{item.cardID}}</div>
+                        <div v-if="item.cardType == '0'">中石油</div>
+                        <div v-if="item.cardType == '1'">中石化</div>
+                    </div>
+                    <div>
+                        <div v-if="item.status == '0'">处理中</div>
+                        <div v-if="item.status == '1'">已充值</div>
+                        <div v-if="item.status == '2'">充值失败</div>
+                        <div>{{item.createddatetime}}</div>
+                    </div>
                 </div>
-                
             </div>
-           
         </div>
     </div>
 </template>
@@ -193,15 +201,20 @@ export default {
             overflow-y: scroll;
             .per-recharge{
                 width: 90%;
-                height: 100px;
-                display: flex;
-                display: -webkit-flex;
-                justify-content: space-between;
-                -webkit-justify-content: space-between;
-                align-items: center;
+                height: auto;
                 margin: auto;
-                font-size: 32px;
+                font-size: 28px;
                 color: #4F4F4F;
+                border-bottom: solid 1px #f2f2f2;
+                >div{
+                    width: 100%;
+                    height: 50px;
+                    display: flex;
+                    display: -webkit-flex;
+                    justify-content: space-between;
+                    -webkit-justify-content: space-between;
+                    align-items: center;
+                }
             }
         }
     }
