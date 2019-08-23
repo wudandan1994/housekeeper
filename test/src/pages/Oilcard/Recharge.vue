@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 14:37:30
- * @LastEditTime: 2019-08-23 09:24:35
+ * @LastEditTime: 2019-08-23 11:31:14
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -76,17 +76,11 @@ export default {
                if(Object.keys(res.data.data).length == '0'){
                    this.length = '0';
                    this.$toast('请先添加行驶证');
-                //    setTimeout(() =>{
-                //        this.$router.push({
-                //            path: '/Driving'
-                //        })
-                //    },1000)
                }else{
                     this.checkid = (res.data.data)[0].id;
                }
                
            }).catch(res =>{
-            //    console.log('行驶证查询失败',res);
            })
         },
     },
