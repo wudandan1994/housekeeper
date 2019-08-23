@@ -66,8 +66,8 @@
                 <div class="signin">
                     <div class="normal center">签到</div>
                 </div>
-            </div> -->
-            <!-- <div class="desc">
+            </div>
+            <div class="desc">
                 <div class="desc-title">每月累计签到5天即可获得金币</div>
                 <div class="desc-list">
                     <div class="coin">
@@ -91,13 +91,13 @@
                         <div class="center">5</div>
                     </div>
                 </div>
-            </div>
-            <div class="rule-prize-task">
+            </div> -->
+            <!-- <div class="rule-prize-task">
                 <div class="center">签到规则</div>
                 <div class="center">兑换奖品库</div>
                 <div class="center">我的任务</div>
-            </div> -->
-            <!-- <div class="calendar">
+            </div>
+            <div class="calendar">
                 <div class="year-month center">{{year}}年{{month}}月</div>
                 <div class="days-content">
                     <div class="center" v-for="(item,index) in DateArray" :key="index">{{item}}</div>
@@ -150,11 +150,17 @@
         <div class="sign-rule">
             <div></div>
         </div>
+        <games></games>
     </div>
 </template>
 <script>
 import {axiosPost} from '@/lib/http'
+import games from '@/components/games.vue'
+
 export default {
+    components: {
+        games,
+    },
     data() {
         return {
             year: '',
@@ -194,8 +200,26 @@ export default {
             }
           })   
         },
+
+          fnDate(){
+                var date=new Date()
+                var year=date.getFullYear();//当前年份
+                var month=date.getMonth();//当前月份
+                var data=date.getDate();//天
+                this.currentTime=year+"-"+this.fnW((month+1))+"-"+this.fnW(data);
+            },
+            //补位 当某个字段不是两位数时补0
+         fnW(str){
+                var num;
+                str>9?num=str:num="0"+str;
+                return num;
+            } ,
          searchPunch(){
              let that = this
+
+           
+
+
            axiosPost("/customer/getSignDetail")
            .then(function(res){
             //    console.log(res,"created中的签到详情") 
@@ -241,6 +265,7 @@ export default {
     created () {
           this.handleCurrentTime();
            this.searchPunch()
+           this.fnDate()
     }
 }
 </script>
@@ -251,6 +276,7 @@ export default {
         color: #fff;
     }
     .container {
+        background-color: #ccc;
         >.task{
                background-color: #4b66af;
                color:#FFF1F6;

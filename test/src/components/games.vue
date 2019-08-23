@@ -7,7 +7,7 @@
     </div> -->
     <header>
       <span class="scort">总分：{{scort}}</span>
-      <button class="star" @click="init">New Game</button>
+      <button class="star" @click="init">再来一局</button>
       <span class="sd"></span>
     </header>
     <div class="all-container">
@@ -334,7 +334,7 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 .head {
-   background-color: #4965AE;
+   background-color: #ccc;
     width:100%;
     height: 86px;
     line-height: 86px;

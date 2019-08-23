@@ -11,18 +11,24 @@
             <van-tabs v-model="active" @click="handleChangeTabs">
                 <van-tab title="所得佣金" >
 
-                    <!-- <p class="select" @click="selected" >筛选<van-icon   name="arrow-down"/></p>
-                    <div class="cover">
-                         <van-popup v-model="show" position="top" :overlay="false">
-                            <ul>
-                                <li>提现收益</li>
-                                <li>代还收益</li>
-                                <li>商户收款收益</li>
-                            </ul>
-                       </van-popup>
-                    </div> -->
-                   
-
+                    <!-- <p class="select" @click="selected" >筛选<van-icon   name="arrow-down"/></p> -->
+                    <van-collapse v-model="activeName" accordion>
+                      
+                         <van-collapse-item title="筛选" name="1">
+                           <p>商户收款收益</p>
+                           <p>提现收益</p>
+                           <p>代还收益</p>
+                        </van-collapse-item>
+                        <!-- <van-collapse-item title="有赞零售" name="2">
+                           
+                            <p @click="gettext"> 网店吸粉获客、会员分层营销、一机多种收款，告别经营低效和客户流失</p>
+                        </van-collapse-item>
+                        <van-collapse-item title="有赞美业" name="3" disabled>
+                            线上拓客，随时预约，贴心顺手的开单收银
+                        </van-collapse-item> -->
+                       
+                    </van-collapse>
+    
                    
                    <div class="income-tab">
                         <div class="per-list" v-for="(item,index) in list" :key="index">
@@ -137,7 +143,8 @@ export default {
             DirectInvitationList: [],
             indirect: false,
             Invitationing: true,
-            show:true
+            show:true,
+            activeName:"1",
         }
     },
     methods:{
@@ -145,13 +152,17 @@ export default {
         handleReturnHome(){
             this.$router.go(-1);
         },
+        gettext(){
+            console.log('4566555665522552')
+        },
         // 更多
         handleMore(){
             this.$toast('尽请期待');
         },
         selected(){
-            this.show=true
+
         },
+      
         // 切换样式
         handleChange(){
             // console.log('当前状态',this.now);
@@ -351,6 +362,18 @@ export default {
         width: 100vw;
         height: auto;
         padding-top: 86px;
+        .van-collapse-item {
+            margin-top:60px;
+        }
+       
+        .van-cell__title {
+            font-size: 30px!important;
+            span {
+                font-size:50px;
+                font-weight: bold;
+            }
+        }
+       
         .select {
             margin-top:50px;
             padding:15px;

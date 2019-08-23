@@ -14,6 +14,7 @@ import store from '@/vuex/index'
 // import wx from 'weixin-jsapi'
 // Vue.use(wx)
 Vue.config.productionTip = false
+
 // 引入插件兼容Ie
 import 'babel-polyfill'
 import "../node_modules/babel-polyfill/dist/polyfill.js"
@@ -26,6 +27,8 @@ import back from './lib/back'
 
 // Vue.use(animated)
 
+// 引入导览
+import Smartour from 'smartour/dist/index.esm.js'
 
 // import axios from 'axios'
 import utils from '@/lib/params'

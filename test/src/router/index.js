@@ -437,8 +437,6 @@ export default new Router({
     {path:"/home/receiveXH/cardCX",component:cardCXComponent},  //收单小惠通道储蓄卡管理 
     {path:"/home/receiveXH/payXH",component:payXHComponent},  //收单小惠通道支付
     {path:"/home/receiveXH/signXH",component:signXHComponent},  //收单小惠通道签约
-
-    
     {path:"/home/receivables/sign",component:signComponent},  //收单小惠通道签约（通道二）
 
 

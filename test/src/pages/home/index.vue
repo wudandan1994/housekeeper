@@ -7,7 +7,7 @@
  -->
 
 <template>
-    <div id="home-component" @swipedown="swipe(x)">
+    <div id="home-component"    @swipedown="swipe(x)">
         <div class="home-container" :class="showAaside == false ? 'home-normal' : 'home-active'">
             <div  v-show="ads" class="ads" slot="loading">
                 <div class="tipsone">
@@ -302,14 +302,7 @@
                  
             </van-pull-refresh>
             <footerMenu :active="active" @getChange="changeActive" ></footerMenu>
-            <div class="guide" v-show="showguide">
-                <div class="arr">
-                    <p><van-icon size="140px" color="#fff" @click="cancelguide"  name="http://pay.91dianji.com.cn/cancel.png" /></p>
-                </div>
-                <div class="guide-first">
-
-                </div>
-            </div>
+          
         </div>
         
         <!-- 遮盖层 -->
@@ -361,7 +354,6 @@ export default {
   },
      data() {
         return {
-            // 轮播图图片
             componentload: true,
             showchagnnel:false,
             loadtext:"    ",
@@ -371,7 +363,7 @@ export default {
             ads:false,
             isLight:true,
             isSelect:false,
-            showguide:false,
+         
             lineheight:100,
             colorl:"#4B66AF",
             images: [
@@ -406,7 +398,6 @@ export default {
             // newaccess_token: '',
             nickname: '',
             photo: '',
-          
             lev:"",
             headimg:'',
             iscertification: '',
@@ -419,15 +410,17 @@ export default {
             updateVerson:0,  // 设备版本号
             height: 148.5,
             isLoading:false,
-            paychennel:""
+            paychennel:"",
+           
         }
   },
-   methods:{
+   methods:{     
        handleClear(){
         //    清除缓存
         storage.remove('promotioncode');
         this.$toast('清除成功');
        },
+
        handleselect(){
            if(this.paychennel=="1"){
                this.$router.push("/home/receiveXH")
@@ -443,12 +436,8 @@ export default {
        showcover(){
           this.showpass=false
        },
-      
        sign(){
            this.$toast("敬请期待")
-       },
-       cancelguide(){
-           this.showguide=false
        },
        onRefresh(){
            this.ads=true
@@ -572,10 +561,6 @@ export default {
                 },false);  
             }  
         } ,
-        // hideAside() {
-        //     this.showAaside=false
-        //     console.log('12');
-        // },
          // 自动登录
         automatic(){
             let data={
@@ -760,6 +745,7 @@ export default {
         // 更新
         // this.update() 
        
+      
     }
 }
 </script>
@@ -779,8 +765,126 @@ export default {
                 background-color: rgba(0, 0, 0, .4);
                 z-index:8888;
                 .arr {
-                    p {
-                        text-align: right;
+                  width:400px;
+                  height:400px;
+                  margin:left;                                                                                                                         
+                  img {
+                      width:100%;
+                  }
+                }
+                .guide-first {
+                    width:100%;
+                    height:600px;
+                    .arrowred {
+                        width:100%;
+                        height:300px;
+                        margin-top:156px;
+                        display:flex;
+                        .arrowright,
+                        .light {
+                            width:50%;
+                            img {
+                                width:100%;
+                            }
+                        }
+                    }
+                    .manguide {
+                        width:100%;
+                        height:500px;
+                         display:flex;
+                         .person,
+                         .text {
+                             width:50%;
+                             img {
+                                 width:100%;
+                             }
+                         }
+                    }
+
+                    
+                }
+                .guide-second {
+                    width:100;
+                    height:800px;
+                     .pay {
+                        width:100%;
+                        height:100px;
+                        margin-right:0;
+                        .guidekuan {
+                            width:50%;
+                            height:100%;
+                            float:right;
+                            img {
+                              width:100%;
+                           }
+                        }
+                        
+                     }
+                    .payment {
+                        width:100%;
+                        height:368px;
+                        display:flex;
+                        .guideman {
+                            width:50%;
+                            img {
+                                width:100%;
+                            }
+                        }
+                        .guidepay {
+                            width:50%;
+                            img {
+                                width:100%;
+                            }
+                        }
+
+                    }
+                }
+                .guide-third {
+                    width:100%;
+                    height:600px;
+                    .guidelevel {
+                        width:100%;
+                        height:300px;
+                        display:flex;
+                        .guideman,
+                        .guidetxt {
+                            width:50%;
+                            img {
+                                width:100%;
+
+                            }
+                        }
+                    }
+                    .guidevip {
+                        margin-top:300px;
+                        width:100%;
+                        height:300px;
+                        // display:flex;
+                        // justify-content: space-around;
+                        // div {
+                        //     width:25%;
+                        // }
+                        // img {
+                        //     width:100%;
+                        // }
+                        .vipcir {
+                            float:left;
+                            width:130px;
+                            height:100%;
+                            margin-top:268px;
+                            margin-left:210px;
+                            img {
+                                width:100%;
+                            }
+                        }
+                        .arrowleft {
+                            float:right;
+                            width:400px;
+                            height:100%;
+                            img {
+                                width:100%;
+                            }
+                        }
                     }
                 }
             }
@@ -1363,7 +1467,7 @@ export default {
                       }
                       }
 
-                 }   
+                   }   
                 >.details {
                     margin-top:10px;
                     border-top:1px solid #ccc;

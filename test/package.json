@@ -17,6 +17,7 @@
     "px2rem-loader": "^0.1.9",
     "qs": "^6.7.0",
     "request": "^2.88.0",
+    "smartour": "^2.0.0",
     "vant": "^1.6.10",
     "vue": "^2.5.2",
     "vue-calendar-component": "^2.8.2",
