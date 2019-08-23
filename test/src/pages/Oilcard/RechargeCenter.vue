@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 18:02:44
- * @LastEditTime: 2019-08-23 11:35:54
+ * @LastEditTime: 2019-08-23 15:49:33
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -32,7 +32,7 @@
             </div>
             <div class="per-detail">
                 <span>充值金额</span>
-                <span>{{params.itemPrice}}元</span>
+                <span>{{params.cardQuota}}元</span>
             </div>
             <div class="per-detail">
                 <span>启用方式</span>
@@ -46,26 +46,14 @@
                 </span>
             </div>
             <div class="submit center" @click="handleSubmit"><button>充值</button></div>
-            <div class="agreement start-center"><van-checkbox v-model="agree" checked-color="#516BB4">我已阅读并同意<span>《加油卡充值协议》</span></van-checkbox></div>
-            <!-- <div class="desc">
-                <p>使用说明</p>
-                <p>
-                    1、	本服务为油卡代充服务，不提供充值发票，敬请谅解； <br/>
-                    2、	本服务仅支持本平台新发卡，不支持其他渠道办理的加油卡； <br/>
-                    3、	请仔细核对加油卡卡号，若因用户自身原因导致的充值账号错误等情况，充值资金不予退还； <br/>
-                    4、	本充值暂无法使用XXXXX优惠券/积分卡，敬请谅解； <br/>
-                    5、	充值成功后，预计24-48小时内到账，若48小时仍未到账，请及时拨打合作方客服电话XXXXXXX； <br/>
-                    6、 如充值失败，退款将于2-7个工作日退还到原支付账户； <br/>
-                    7、	充实成功后，需要到中石油、中石化等对应油企站点圈存，圈存成功后，您可以持卡消费； <br/>
-                    8、	挂失卡、过期卡、损坏卡、超限卡等卡状态异常等加油卡无法充值； <br/>
-                    9、	中石化每日晚上22:50至次日凌晨00:50是网站系统结算时间，在此时间段内不可充值，敬请谅解。
-                </p>
-            </div> -->
+            <div class="agreement  row start-center"><van-checkbox v-model="agree" checked-color="#516BB4"></van-checkbox>&nbsp;&nbsp;我已阅读并同意<span @click="handleShowAgree('Entrust')">《加油卡充值协议》</span></div>
         </div>
+        <Agreement :agreeShow="agreeShow" :type="type" @closeAgree="handleCloseAgreement"></Agreement>
     </div>
 </template>
 <script>
 import { CommonPost, axiosPost } from '@/lib/http'
+import Agreement from '@/components/Agreement'
 export default {
     data(){
         return{
@@ -74,7 +62,7 @@ export default {
             paytype: 'wx',
             params: {
                 cardType: '',
-                cardQuota: '300.00',
+                cardQuota: '1000.00',
                 drivingLicenseID: '',
                 gascardNo: '',
                 gascardId: '',
@@ -86,7 +74,12 @@ export default {
             drivingLicenseID: '',
             cardType: '',
             price: '500',
+            agreeShow: false,
+            type: ''
         }
+    },
+    components:{
+        Agreement
     },
     methods:{
         handleBack(){
@@ -168,13 +161,18 @@ export default {
             }else{
             //    充值步骤
             // 1.下单
-            this.handleGeneratingOrders();
             // 2.发起支付
             // 3.调用充值接口
-               
+               this.handleGeneratingOrders();
             }
         },
-        // 选址充值方式
+        handleShowAgree(obj){
+            this.agreeShow = true;
+            this.type = obj;
+        },
+        handleCloseAgreement(){
+            this.agreeShow = false;
+        }
     },
     created(){
         this.params.gascardNo = this.$route.query.gascardNo;
@@ -352,6 +350,7 @@ export default {
             margin: auto;
             font-size: 26px;
             color: #999999;
+            padding-bottom: 20px;
             span{
                 color: #D04B4B;
             }

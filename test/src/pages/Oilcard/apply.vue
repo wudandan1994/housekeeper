@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-05 15:42:48
- * @LastEditTime: 2019-08-22 16:59:57
+ * @LastEditTime: 2019-08-23 15:29:00
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -34,28 +34,23 @@
                 <span class="end-center"><van-icon name="arrow"/></span>
             </router-link>
             <div class="submit" @click="handleSubmit"><button>充值</button></div>
-            <div class="checkbox"><van-checkbox v-model="Agreement" color="#979797" icon-size="18px" checked-color="#4b66af">我已阅读并同意<span style="color: #D04B4B">《钱夹宝加油服务协议》</span><span style="color: #D04B4B">《授权委托书》</span></van-checkbox></div>
+            <div class="checkbox row start-center"><van-checkbox v-model="Agreement" color="#979797" icon-size="18px" checked-color="#4b66af"></van-checkbox>&nbsp;&nbsp;我已阅读并同意<span style="color: #D04B4B" @click="handleShowAgree('agree')">《钱夹宝加油服务协议》</span><span style="color: #D04B4B" @click="handleShowAgree('Entrust')">《授权委托书》</span></div>
         </div>
-        <!-- <div class="instructions">
-            <h1>使用说明</h1>
-            <p>1、	本服务为油卡代充服务，不提供充值发票，敬请谅解；</p>
-            <p>2、	本服务仅支持本平台新发卡，不支持其他渠道办理的加油卡； </p>
-            <p>3、	请仔细核对加油卡卡号，若因用户自身原因导致的充值账号错误等情况，充值资金不予退还；</p>
-            <p>4、	本充值暂无法使用XXXXX优惠券/积分卡，敬请谅解；</p>
-            <p>5、	充值成功后，预计24-48小时内到账，若48小时仍未到账，请及时拨打合作方客服电话XXXXXXX；</p>
-            <p>6、 如充值失败，退款将于2-7个工作日退还到原支付账户；</p>
-            <p>7、	充实成功后，需要到中石油、中石化等对应油企站点圈存，圈存成功后，您可以持卡消费； </p>
-            <p>8、	挂失卡、过期卡、损坏卡、超限卡等卡状态异常等加油卡无法充值； </p>
-            <p>9、	中石化每日晚上22:50至次日凌晨00:50是网站系统结算时间，在此时间段内不可充值，敬请谅解。</p>
-        </div> -->
+        <Agreement :agreeShow="agreeShow" :type="type" @closeAgree="handleCloseAgreement"></Agreement>
     </div>    
 </template>
 <script>
+import Agreement from '@/components/Agreement' 
 export default {
     data(){
         return{
             Agreement: true,
+            agreeShow: false,
+            type: '',
         }
+    },
+    components: {
+        Agreement
     },
     methods:{
         handleBack(){
@@ -82,6 +77,13 @@ export default {
                     type: '2'
                 }
             })
+        },
+        handleShowAgree(obj){
+            this.agreeShow = true;
+            this.type = obj;
+        },
+        handleCloseAgreement(){
+            this.agreeShow = false;
         }
     }
 }
@@ -98,7 +100,6 @@ export default {
             background: #4B66AF;
             box-shadow:0 25px 25px 15px #4B66AF;
             box-sizing: border-box;
-            // padding-top: 80px;
             .back{
                 width: 100%;
                 height: 80px;

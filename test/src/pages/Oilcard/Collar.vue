@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-08 14:18:18
- * @LastEditTime: 2019-08-23 09:20:29
+ * @LastEditTime: 2019-08-23 15:37:00
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -31,19 +31,17 @@
                 </div>
             </div>
             <div class="per-detail">
+                <div class="start-center">邮寄信息</div>
+                <div class="price-active end-center" @click="addressShow = true">{{addressTitle}}</div>
+            </div>
+            <div class="per-detail">
                 <div class="start-center">配送方式</div>
                 <div class="end-center">
                     <div class="center" :class="checked == '1000' ? 'price-active' : 'price-normal'" @click="handleCheckPrice('1000')">快递费15元</div>
                 </div>
             </div>
-            <div class="per-detail">
-                <div class="start-center">邮寄信息</div>
-                <div class="price-active end-center" @click="addressShow = true">{{addressTitle}}</div>
-            </div>
-            <div class="per-detail">
-                <div class="start-center">使用说明</div>
-                <div class="price-active end-center" @click="desc = true">详细说明</div>
-            </div>
+            
+            
             <div class="per-detail">
                 <div class="start-center">支付方式</div>
                 <div class="end-center">
@@ -51,6 +49,11 @@
                     <div class="center pay-normal" :class="paytype == 'alipay' ? 'ali-pay' : ''" @click="handleCheckPayType('alipay')">支付宝</div>
                 </div>
             </div>
+            <div class="per-detail">
+                <div class="start-center">使用说明</div>
+                <div class="price-active end-center" @click="desc = true">详细说明</div>
+            </div>
+            <div class="tips">备注：本服务为第三方提供的服务，此加油卡仅支持在本平台充值，持卡加油后，不提供消费发票，请谨慎办理。</div>
             <div class="submit center" @click="handleSubmit"><button>立即领卡</button></div>
         </div>
         <transition name="van-fade">
@@ -366,10 +369,19 @@ export default {
                 }
             }
         }
+        .tips{
+            width: 86%;
+            height: auto;
+            padding: 10px 0px;
+            margin: auto;
+            font-size: 26px;
+            color: #be0202;
+        }
         .submit{
             width: 92%;
             height: 100px;
-            margin: 100px auto auto auto;
+            margin: 20px auto auto auto;
+            padding-bottom: 20px;
             button{
                 width: 100%;
                 height: 100%;

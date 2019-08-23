@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 15:28:03
- * @LastEditTime: 2019-08-23 10:15:15
+ * @LastEditTime: 2019-08-23 14:05:46
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -22,8 +22,8 @@
         <div class="list">
             <div class="per-list shiyou" v-for="(item,index) in list" :key="index" v-show="type == '0'">
                 <div class="top">
-                    <span>油卡类型</span>
-                    <span>中石油</span>
+                    <!-- <span>油卡类型</span>
+                    <span>中石油</span> -->
                 </div>
                 <div class="middle center" v-if="item.cardID === null">
                    ******************
@@ -48,8 +48,8 @@
             </div>
             <div class="per-list shihua" v-for="(items,index) in list" :key="'s' + index" v-show="type == '1'">
                 <div class="top">
-                    <span>油卡类型</span>
-                    <span>中石化</span>
+                    <!-- <span>油卡类型</span>
+                    <span>中石化</span> -->
                 </div>
                 <div class="middle center" v-if="items.cardID === null">
                    ******************
