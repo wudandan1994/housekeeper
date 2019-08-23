@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-06-28 10:58:28
- * @LastEditTime: 2019-08-20 19:11:07
+ * @LastEditTime: 2019-08-22 16:43:27
  * @LastEditors: Please set LastEditors
  -->
 
@@ -217,7 +217,7 @@
 
                             <router-link tag="li" to="/apply" class="secret">
                                 <p> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></p>
-                                <p>油卡</p>
+                                <p>特惠加油卡</p>
                             </router-link>
                                 <!-- <li @click="handleExpect">
                                     <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>

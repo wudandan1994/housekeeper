@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 14:37:30
- * @LastEditTime: 2019-08-21 11:06:23
+ * @LastEditTime: 2019-08-23 09:24:35
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -10,7 +10,7 @@
         <header>
             <div class="top">
                 <span class="start-center" @click="handleBack"><van-icon name="arrow-left" color="#ffffff" size="22px"/>返回</span>
-                <span class="end-center"><van-icon name="friends-o" color="#fff" size="28px"/></span>
+                <span class="end-center"></span>
             </div>
         </header>
         <div class="tips start-center">请选择您要查看油卡的行驶证，并点击确定</div>
@@ -23,14 +23,6 @@
                 <div>车牌号码</div>
                 <div>{{item.carNum}}</div>
             </div>
-            <!-- <div class="per-detail">
-                <div>车辆识别代号</div>
-                <div>{{item.carCode}}</div>
-            </div>
-            <div class="per-detail">
-                <div>发动机号码</div>
-                <div>{{item.engineNum}}</div>
-            </div> -->
         </div>
         <div class="submit center" @click="handleSubmit"><button>确定</button></div>
     </div>

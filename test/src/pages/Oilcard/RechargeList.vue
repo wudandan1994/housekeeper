@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 15:28:03
- * @LastEditTime: 2019-08-21 13:54:11
+ * @LastEditTime: 2019-08-23 10:15:15
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -16,7 +16,7 @@
                         <span class="center" :class="type == '1' ? 'active' : ''" @click="handleCheckType('1')">中石化</span>
                     </span>
                 </span>
-                <span class="end-center"><van-icon name="friends-o" color="#fff" size="28px"/></span>
+                <span class="end-center"></span>
             </div>
         </header>
         <div class="list">
@@ -31,15 +31,14 @@
                 <div class="middle center" v-else>
                    {{item.cardID}}
                 </div>
-                <div class="bottom" v-if="item.status == '0'">
-                    <span class="center" @click="handleActivation(item.id,'1',item.orderNo)">激活</span>
-                      <span class="center" @click="handleaddress(item.orderNo)">地址</span>
+                <div class="bottom" v-if="item.status == '1'">
+                    <span class="center" @click="handleActivation(item.id,'1')">激活</span>
                 </div>
                 <div class="bottom" v-if="item.status == '3'">
                     <span class="center">激活中</span>
                 </div>
-                <div class="bottom" v-if="item.status == '1'">
-                    <span to="/RechargeCenter" class="center" v-on:click.self="handleRecharge(item.cardID)">充值</span>
+                <div class="bottom" v-if="item.status == '2'">
+                    <span to="/RechargeCenter" class="center" v-on:click.self="handleRecharge(item.cardID,item.id)">充值</span>
                     <span class="center" v-on:click.self="handleRechargeDetail(item.cardID)">明细</span>
                     <!-- <span class="center">挂失</span> -->
                 </div>
@@ -47,7 +46,7 @@
                     <span class="center">已挂失</span>
                 </div> -->
             </div>
-            <div class="per-list shihua" v-for="(items,i) in list" :key="i" v-show="type == '1'">
+            <div class="per-list shihua" v-for="(items,index) in list" :key="'s' + index" v-show="type == '1'">
                 <div class="top">
                     <span>油卡类型</span>
                     <span>中石化</span>
@@ -59,14 +58,13 @@
                    {{items.cardID}}
                 </div>
                 <div class="bottom" v-if="items.status == 0">
-                    <span class="center" @click="handleActivation(items.id,'1',items.orderNo)">激活</span> 
-                    <span class="center" @click="handleaddress(items.orderNo)">地址</span>
+                    <span class="center" @click="handleActivation(items.id,'1')">激活</span>
                 </div>
                 <div class="bottom" v-if="items.status == '3'">
                     <span class="center">激活中</span>
                 </div>
                 <div class="bottom" v-if="items.status == '1'">
-                    <span class="center" v-on:click.self="handleRecharge(items.cardID)">充值</span>
+                    <span class="center" v-on:click.self="handleRecharge(items.cardID,items.id)">充值</span>
                     <span to="RechargeDetail" class="center" v-on:click.self="handleRechargeDetail(items.cardID)">明细</span>
                     <!-- <span class="center">挂失</span> -->
                 </div>
@@ -117,26 +115,28 @@ export default {
         // 油卡切换
         handleCheckType(item){
             this.type = item;
+            this.list = [];
             this.handleOilCardList();
         },
         // 激活
-        handleActivation(gascardId,type,gascardOrderNo){
+        handleActivation(gascardId,type){
             this.$router.push({
                 path: '/activation',
                 query: {
                     gascardId: gascardId,
-                    type: type,
-                    gascardOrderNo: gascardOrderNo
+                    cardType: this.type,
+                    drivingLicenseID: this.id,
                 }
             })
         },
         // 充值
-        handleRecharge(obj){
+        handleRecharge(gascardNo,gascardId){
             // console.log('油卡ID',obj);
             this.$router.push({
                 path: '/RechargeCenter',
                 query:{
-                    uid: obj,
+                    gascardNo: gascardNo,
+                    gascardId: gascardId,
                     drivingLicenseID: this.id,
                     cardType: this.type
                 }
@@ -185,12 +185,12 @@ export default {
             -webkit-justify-content: space-between;
             line-height: 86px;
             >span:nth-child(1),>span:nth-child(3){
-                width: 15%;
+                width: 20%;
                 font-size: 30px;
                 color: #ffffff;
             }
             >span:nth-child(2){
-                width: 70%;
+                width: 60%;
                 height: 100%;
                 font-size: 30px;
                 color: #fff;
@@ -199,16 +199,16 @@ export default {
                     height: 80%;
                     background:rgba(216,216,216,1);
                     border-radius: 16px;
-                    // box-shadow: 0px 0px 1px 1px rgba(151,151,151,1);
                     >span{
                         width: 50%;
                         height: 100%;
                         transition: 0.5s;
                     }
                     .active{
-                        background:rgba(79,79,79,1);
+                        background:linear-gradient(180deg,rgba(255,176,9,1) 0%,rgba(245,205,60,1) 100%);
                         border-radius: 16px;
-                        // box-shadow: 0px 0px 1px 1px rgba(151,151,151,1);
+                        color: #000;
+                        font-weight: 700;
                     }
                 }
             }
@@ -220,7 +220,7 @@ export default {
         margin: 40px auto;
         .per-list{
             width: 100%;
-            height: 340px;
+            height: 442px;
             border-radius: 40px;
             margin-top: 20px;
             .top{
@@ -269,7 +269,9 @@ export default {
             background:rgba(225,135,55,1);
         }
         .shiyou{
-            background:rgba(190,2,2,1);
+            // background:rgba(190,2,2,1);
+            background: url('http://pay.91dianji.com.cn/shiyou.png');
+            background-size: 100% 100%; 
         }
     }
 }

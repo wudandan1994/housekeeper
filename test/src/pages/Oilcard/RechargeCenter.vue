@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 18:02:44
- * @LastEditTime: 2019-08-21 13:50:24
+ * @LastEditTime: 2019-08-22 21:53:33
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -19,7 +19,7 @@
         <div class="big-title start-end">选择充值金额</div>
         <div class="price-list">
 
-            <div v-for="(item,index) in options" :key="index" class="normal column" :class="type == index ? 'active' : ''" @click="handleCheckType(item)">
+            <div v-for="(item,index) in options" :key="index" class="normal column" :class="params.cardQuota == item.price ? 'active' : ''" @click="handleCheckType(item)">
                 <div class="center">{{item.price}}元</div>
                 <div class="center-start">售价{{item.Discount}}元</div>
             </div>
@@ -69,16 +69,19 @@ import { CommonPost, axiosPost } from '@/lib/http'
 export default {
     data(){
         return{
-            type: '0',
             agree: true,
             options: [],
             paytype: 'wx',
             params: {
-                itemPrice: '485',
-                ext1: '',
-                type: '2',
-                amt: '1',
+                cardType: '',
+                cardQuota: '300.00',
+                drivingLicenseID: '',
+                gascardNo: '',
                 gascardId: '',
+                orderType: '2',
+                name: '',
+                mobile: '',
+                address: ''
             },
             drivingLicenseID: '',
             cardType: '',
@@ -90,8 +93,7 @@ export default {
             this.$router.go(-1);
         },
         handleCheckType(item){
-            this.type = item.id;
-            this.params.itemPrice = item.Discount;
+            this.params.cardQuota = item.price;
             this.price = item.price;
         },
         handleCheckPayType(obj){
@@ -115,22 +117,16 @@ export default {
         },
         // 生成油卡订单
         handleGeneratingOrders(){
-            let params = {
-                cardType: this.cardType,
-                cardQuota: this.price,
-                drivingLicenseID: this.drivingLicenseID,
-                gascardNo: this.params.gascardId,
-                orderType: '1',
-            };
-            CommonPost('/gasCard/newGascardOrder',params).then(res =>{
+            
+            CommonPost('/gasCard/newGascardOrder',this.params).then(res =>{
                 console.log('下单成功',res);
                 let objs = {
                     orderid: res.data.data.parentNo,
                     channel: this.paytype
                 };
-               if(res.data.data.parentNo != ''){
-                   this.handleInitiatePayment(objs);
-               }
+                if(res.data.data.parentNo != ''){
+                    this.handleInitiatePayment(objs);
+                }
             }).catch(res =>{
                 console.log('下单失败',res);
             })
@@ -181,9 +177,10 @@ export default {
         // 选址充值方式
     },
     created(){
-        this.params.gascardId = this.$route.query.uid;
-        this.drivingLicenseID = this.$route.query.drivingLicenseID;
-        this.cardType = this.$route.query.cardType;
+        this.params.gascardNo = this.$route.query.gascardNo;
+        this.params.gascardId = this.$route.query.gascardId;
+        this.params.drivingLicenseID = this.$route.query.drivingLicenseID;
+        this.params.cardType = this.$route.query.cardType;
         this.handlePrice();
     }
 }

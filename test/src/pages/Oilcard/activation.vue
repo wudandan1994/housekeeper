@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-10 11:24:45
- * @LastEditTime: 2019-08-21 18:40:03
+ * @LastEditTime: 2019-08-23 11:27:46
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -10,7 +10,7 @@
         <header>
             <div class="top">
                 <span class="start-center" @click="handleBack"><van-icon name="arrow-left" color="#ffffff" size="22px"/>返回</span>
-                <span class="end-center"><van-icon name="friends-o" color="#fff" size="28px"/></span>
+                <span class="end-center"></span>
             </div>
         </header>
         <div class="per-list shiyou">
@@ -33,14 +33,21 @@
             </div>
             <div class="per-detail">
                 <div>购买额度</div>
-                <div class="price center">1000元</div>
+                <div class="price center" :class="params.cardQuota == item.price ? 'price-check' : ''" v-for="(item,index) in options" :key="index" @click="handleCheckPrice(item.price)">{{item.price}}</div>
             </div>
             <div class="per-detail">
                 <div>启用方式</div>
                 <div class="mode">领卡激活后圈存使用</div>
             </div>
-            <div class="activation center"><input type="text" v-model="params.uid" placeholder="请输入16位油卡号来激活油卡"/></div>
-            <div class="activation center"><input type="text" v-model="params.ext1" placeholder="请输入您的手机号"/></div>
+            <div class="per-detail">
+                <span>付款方式</span>
+                <span>
+                    <span class="normal" :class="paytype == 'wx' ? 'wechat-active' : ''" @click="handleCheckPayType('wx')">微信</span>
+                    <span class="normal" :class="paytype == 'aliwap' ? 'alipay-active' : ''" @click="handleCheckPayType('aliwap')">支付宝</span>
+                </span>
+            </div>
+            <div class="activation center"><input type="text" v-model="params.gascardNo" placeholder="请输入16位油卡号来激活油卡"/></div>
+            <!-- <div class="activation center"><input type="text" v-model="params.ext1" placeholder="请输入您的手机号"/></div> -->
             <div class="submit center" @click="handleAvation"><button>激活油卡</button></div>
         </div>
     </div>
@@ -51,47 +58,108 @@ export default {
     data(){
         return{
             params: {
-                uid: '',
-                ext1: '',
+                cardType: '',
+                cardQuota: '300.00',
+                drivingLicenseID: '',
+                gascardNo: '',
                 gascardId: '',
-                type: '',
-                itemPrice: '1000',
-                amt: '1',
-                gascardOrderNo: ''
-            }
+                orderType: '1',
+                name: '',
+                mobile: '',
+                address: ''
+            },
+            options: [],
+            paytype: 'wx'
         }
     },
     methods:{
         handleBack(){
             this.$router.go(-1);
         },
+        // 价格数据
+        handlePrice(){
+            CommonPost('/gasCard/getGascardPrice').then(res =>{
+                var options = [];
+                for(let i in res.data.data){
+                    let item = '{"price":"'+ i +'","Discount":"'+ (res.data.data)[i] +'"}'
+                    options.push(JSON.parse(item));
+                }
+                this.options = options;
+                (this.options).forEach((item,index) =>{
+                    item.id = index;
+                })
+            }).catch(res =>{
+                console.log('价格请求失败',res);
+            })
+        },
+        // 用户激活时选中价格
+        handleCheckPrice(obj){
+            console.log('当前价格',obj);
+            this.params.cardQuota = obj;
+        },
+        // 选择付款方式
+        handleCheckPayType(obj){
+            this.paytype = obj; 
+        },
         // 激活
         handleAvation(){
-            if(this.params.uid == ''){
+            if(this.params.gascardNo == ''){
                 this.$toast('请输入油卡号');
             }
-            else if(!(/^1[3456789]\d{9}$/.test(this.params.ext1))){
-                this.$toast('请输入正确的手机号');
-            }
             else{
-                CommonPost('/gasCard/newChange',this.params).then(res =>{
+                CommonPost('/gasCard/newGascardOrder',this.params).then(res =>{
                     console.log('激活成功',res);
-                    this.$toast('激活成功');
-                    setTimeout(() =>{
-                        this.$router.push({
-                            path: '/RechargeList'
-                        })
-                    },3000);
+                    let objs = {
+                        orderid: res.data.data.parentNo,
+                        channel: this.paytype
+                    };
+                    if(res.data.data.parentNo != ''){
+                        this.handleInitiatePayment(objs);
+                    }
                 }).catch(res =>{
                     this.$toast(res.data.message);
                 })
             }
-        }
+        },
+        // 发起支付
+        handleInitiatePayment(obj){
+            CommonPost('/gasCardPay/xhPay',obj).then(res =>{
+                console.log('支付成功',res);
+                let ua = navigator.userAgent.toLowerCase();
+                if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                    // 微信浏览器中打开
+                    window.location.href = res.data.data.url
+                    console.log('微信');
+                    
+                }else{
+                    // 非微信中打开
+                    if(this.paytype == 'wx'){
+                        // 此时无法在非微信中调用微信支付
+                        console.log('非微信中发起微信支付');
+                        this.$router.push({
+                            path: '/middle',
+                            query:{
+                                qrcode: res.data.data.codeUrl
+                            }
+                        })
+                    }else{
+                        console.log('非微信中发起支付宝支付',res.data.data.url);
+                        window.location.href = res.data.data.url 
+                    }
+                }
+            }).then(res =>{
+                console.log('支付失败',res);
+            })
+        },
     },
     created(){
+        // this.params.gascardNo = this.$route.query.gascardId;
+        this.params.cardType = this.$route.query.cardType;
+        this.params.drivingLicenseID = this.$route.query.drivingLicenseID;
         this.params.gascardId = this.$route.query.gascardId;
-        this.params.type = this.$route.query.type;
-        this.params.gascardOrderNo = this.$route.query.gascardOrderNo;
+        this
+        this.handlePrice();
+
     }
 }
 </script>
@@ -99,10 +167,11 @@ export default {
 #page-activation{
     width: 100vw;
     padding-top: 86px;
-    height: calc(100vh - 86px);
+    height: 100vh;
     background:#F5F5F5;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
     header{
         width: 100%;
         height: 86px;
@@ -180,7 +249,7 @@ export default {
         height: calc(100vh - 506px);
         box-shadow:0px 0px 8px 2px rgba(216,216,216,0.5);
         border-radius:16px 16px 0px 0px;
-        border:1px solid rgba(255,255,255,1);
+        // border:1px solid rgba(255,255,255,1);
         background: #fff;
         .big-title{
             width: 92%;
@@ -200,7 +269,7 @@ export default {
             justify-content: space-between;
             -webkit-justify-content: space-between;
             align-items: center;
-            >div:nth-child(1){
+            >span:nth-child(1){
                 font-size: 32px;
                 color: #888888;
             }
@@ -215,7 +284,7 @@ export default {
             .price{
                 width: 140px;
                 height: 62px;
-                background:linear-gradient(180deg,rgba(255,176,9,1) 0%,rgba(245,205,60,1) 100%);
+                
                 border-radius: 12px;
                 font-size: 28px;
                 color: #000;
@@ -223,6 +292,26 @@ export default {
             .mode{
                 color: #000;
                 font-size: 32px;
+            }
+            .price-check{
+                background:linear-gradient(180deg,rgba(255,176,9,1) 0%,rgba(245,205,60,1) 100%);
+            }
+            .normal{
+                color: #000000;
+                width: 120px;
+                height: 60px;
+                display: inline-block;
+                text-align: center;
+                line-height: 60px;
+                border-radius: 15px;
+            }
+            .wechat-active{
+                background: #00c250;
+                color: #fff;
+            }
+            .alipay-active{
+                background: #00AAEE;
+                color: #fff; 
             }
         }
         .activation{

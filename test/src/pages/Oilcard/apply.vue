@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-05 15:42:48
- * @LastEditTime: 2019-08-21 18:40:12
+ * @LastEditTime: 2019-08-22 16:59:57
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -10,11 +10,12 @@
         <header>
             <div class="back start-center"><van-icon name="arrow-left" color="#ffffff" size="24px" @click="handleBack"/></div>
             <div class="slogan">
-                <span>先加油</span>
-                <span>月结款</span>
+                <span>中石油</span>
+                <span>中石化</span>
             </div>
-            <router-link tag="div" :to="{path: '/detailMessage',query:{type: '1'}}" class="apply center">申请油卡</router-link>
-            <div class="selling center">全国50000余座油站联通</div>
+            <div class="discount center">加油95折起</div>
+            <router-link tag="div" :to="{path: '/detailMessage',query:{type: '1'}}" class="apply center">立即办理</router-link>
+            <div class="selling center"> 充值有特惠 全国畅心油</div>
             <div class="desc">
                 <span>给力加油服务</span>
                 <span>银行联合服务</span>
@@ -116,6 +117,10 @@ export default {
                 justify-content: space-between;
                 -webkit-justify-content: space-between;
                 align-items: center;
+            }
+            .discount{
+                font-size: 28px;
+                color: #fff;
             }
             .apply{
                 background-color: #ffffff;
