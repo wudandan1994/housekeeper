@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 18:02:44
- * @LastEditTime: 2019-08-22 21:53:33
+ * @LastEditTime: 2019-08-23 11:35:54
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -13,7 +13,7 @@
                 <span class="center">
                    充值中心
                 </span>
-                <span class="end-center"><van-icon name="friends-o" color="#fff" size="28px"/></span>
+                <span class="end-center"></span>
             </div>
         </header>
         <div class="big-title start-end">选择充值金额</div>

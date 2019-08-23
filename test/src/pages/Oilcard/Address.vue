@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-09 11:04:05
- * @LastEditTime: 2019-08-21 18:39:37
+ * @LastEditTime: 2019-08-23 11:34:55
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -10,7 +10,7 @@
         <header>
             <div class="top">
                 <span class="start-center" @click="handleBack"><van-icon name="arrow-left" color="#ffffff" size="22px"/>返回</span>
-                <span class="end-center"><van-icon name="friends-o" color="#fff" size="28px"/></span>
+                <span class="end-center"></span>
             </div>
         </header>
         <div class="big-title row">
