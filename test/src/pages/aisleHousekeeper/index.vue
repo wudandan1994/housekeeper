@@ -239,7 +239,7 @@ export default {
             let data={
                bindId:i.bindId 
             }
-             axiosPost("/creditCard/getEsicashExist",data)
+             axiosPost("/creditCard/getEsicashExist",data)     // 查询是否签约  通道一
              .then(res=>{
                  if(!res.data.success){
                      this.$router.push({
@@ -255,9 +255,9 @@ export default {
                          axiosPost("/wfpay/getBindCardExist",params)
                          .then(res=>{
                             //  console.log(res,'resultWF')
-                            if(res.data.success){
+                            // if(res.data.success){
 
-                                if(res.data.data==null || res.data.data.state!="1"){ //去签约
+                                if(res.data.data==null || res.data.data.state!="1"){ //去签约    通道二
                                      this.$router.push({
                                         path:"/home/largeWFxe",
                                         query:{
@@ -265,17 +265,56 @@ export default {
                                         }
                                   })
                                 } else {
-                                        storage.set('channel',"1");
-                                        this.$router.push({
-                                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                                            query:{
-                                                info:i
-                                            }
-                                        })
+                                    let datas={
+                                        cardId:i.cardNo
+                                    }
+                                    axiosPost("/fwspay/getFwsMerchant",datas)   // 查询有没有商户号   通道三
+                                    .then(res=>{
+                                        console.log(res,"第三个通道查询结果")
+                                       
+                                   if(res.data.success){ 
+
+                                         let subMerchId=res.data.data.subMerchId
+
+                                       axiosPost("/fwspay/getBindCardExist",datas)    // 继续查询有没有绑卡
+                                       .then(res=>{
+                                           console.log(res,"查询是否绑卡")
+                                           if(res.data.success){
+                                                storage.set('channel',"1");
+                                            this.$router.push({
+                                                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                                query:{
+                                                    info:i
+                                                }
+                                            })
+                                           } else {
+                                               this.$router.push({
+                                                   path:"/home/easyPay/easycard",
+                                                   query:{
+                                                       info:i,
+                                                       subMerchId,
+                                                   }
+                                               })
+                                           }
+                                       })
+
+
+                                        }  else {
+                                            console.log("查询失败了，因为没有签约")
+                                            this.$router.push({
+                                                path:"/home/easypay",
+                                                query:{
+                                                    info:i
+                                                }
+                                            })
+                                        }
+                                    })
+
+                                   
                                       }
-                            } else {
-                                this.$toast(res.data.message)
-                            }
+                            // } else {
+                            //     this.$toast(res.data.message)
+                            // }
                          })
                          .catch(err=>{
                             this.$toast("登录超时，请重新登录")
@@ -339,85 +378,9 @@ export default {
                 })
 
 
-
-            // 哲杨
-
-            //  let data={                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-            //    bindId:i.bindId 
-            // }
-            //  axiosPost("/vtdcreditCard/getEnterNet",data)
-            //  .then(res=>{
-            //       if(res.data.success === false){
-            //          this.$router.push({
-            //              path:"/home/largeAmount",
-            //              query:{
-            //                  info:i
-            //               }
-            //          })
-            //      } else  {
-            //          if(res.data.data.user_no && res.data.data.state==="0"){
-            //             this.$router.push({
-            //                 path:"/home/active",
-            //                 query:{
-            //                     user:res.data.data.user_no,
-            //                     info:i
-            //                 }
-            //             })
-
-            //         }  else {
-                            // 查询是否签约
-
-                             // }
-
-             //  })
-            //  .catch(err=>{
-               
-            //  })
          } ,
        
-        // 智能通道是否签约
-        // thirdPass(i){
-        //     // 查询是否绑卡
-        //     let num={
-        //         cardNum:i.cardNo
-        //     }
-        //      axiosPost("/dhcreditCard/getDHBindExist",num)
-        //      .then(res=>{
-        //          if(res.data.success && res.data.data !=null ) {     
-        //                 storage.set('channel',"3");
-        //                 this.$router.push({
-        //                     path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-        //                     query:{
-        //                         info:i
-        //                     }
-        //                 })
-        //          } 
-        //          else { 
-        //              // 查询是否签约
-        //              axiosPost("/dhcreditCard/getDHRegisterExist")
-        //              .then(res=>{
-        //                  if(res.data.success && res.data.data.userId){
-        //                      this.userId=res.data.data.userId       //   然后去绑卡
-        //                     this.$router.push({
-        //                         path:"/home/DHbind",
-        //                         query:{
-        //                             info:i,
-        //                             userId:this.userId
-        //                         }
-        //                     })
-        //                  } else {
-        //                     // 去 注册
-        //                      this.$router.push({
-        //                         path:"/home/DHregister",
-        //                         query:{
-        //                             info:i,
-        //                         }
-        //                     })
-        //                  }
-        //              })
-        //          }
-        //      })
-        // },
+       
         repayment(i){
             this.num=i
             this.showdis=true

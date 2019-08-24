@@ -406,8 +406,9 @@ const signXHComponent = () => import('@/pages/receiveXH/signXH.vue')  // 收单�
 
 const signComponent = () => import('@/pages/receivables/sign.vue')  // 收单小惠通道签约(通道二)
 
+const easyPayComponent = () => import('@/pages/easyPay')  // 工易付小额代还
 
-
+const easycardComponent = () => import('@/pages/easyPay/easycard.vue')  // 工易付小额绑卡
 
 
 export default new Router({
@@ -438,6 +439,9 @@ export default new Router({
     {path:"/home/receiveXH/payXH",component:payXHComponent},  //收单小惠通道支付
     {path:"/home/receiveXH/signXH",component:signXHComponent},  //收单小惠通道签约
     {path:"/home/receivables/sign",component:signComponent},  //收单小惠通道签约（通道二）
+
+    {path:"/home/easyPay",component:easyPayComponent},  //工易付小额代还
+    {path:"/home/easyPay/easycard",component:easycardComponent},  //工易付小额代还
 
 
     {path:"/home/cardCenter/applyCard",component:applyCardComponent,},

@@ -12,22 +12,14 @@
                 <van-tab title="所得佣金" >
 
                     <!-- <p class="select" @click="selected" >筛选<van-icon   name="arrow-down"/></p> -->
-                    <van-collapse v-model="activeName" accordion>
+                    <!-- <van-collapse v-model="activeName" accordion>
                       
                          <van-collapse-item title="筛选" name="1">
                            <p>商户收款收益</p>
                            <p>提现收益</p>
                            <p>代还收益</p>
                         </van-collapse-item>
-                        <!-- <van-collapse-item title="有赞零售" name="2">
-                           
-                            <p @click="gettext"> 网店吸粉获客、会员分层营销、一机多种收款，告别经营低效和客户流失</p>
-                        </van-collapse-item>
-                        <van-collapse-item title="有赞美业" name="3" disabled>
-                            线上拓客，随时预约，贴心顺手的开单收银
-                        </van-collapse-item> -->
-                       
-                    </van-collapse>
+                    </van-collapse> -->
     
                    
                    <div class="income-tab">

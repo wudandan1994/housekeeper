@@ -74,7 +74,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home')
+            this.$router.go(-1)
         },
          onChange(picker, values) {
             picker.setColumnValues(1, citys[values[0]]);
