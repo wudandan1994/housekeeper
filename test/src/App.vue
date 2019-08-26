@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-09 16:57:17
+ * @LastEditTime: 2019-08-26 23:52:06
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div id="app">
     
@@ -256,6 +263,7 @@ export default {
                   link: 'http://pay.91dianji.com.cn/#/home?promotioncode=' + that.$store.state.wechat.promotioncode, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                   imgUrl: 'http://pay.91dianji.com.cn/logo.png', // 分享图标
                   success: function (res) {
+                    // 在这里写任务执行成功接口
                   }
               })
           });
