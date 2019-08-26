@@ -299,7 +299,9 @@ export default {
                 }
             })
             .catch(err=>{
-                this.$toast("登录超时，请重新登录")
+                // this.$toast("登录超时，请重新登录")
+                this.$toast(res.data.message)
+                console.log("登录超时，请重新登录")
             })
         },
         change(){

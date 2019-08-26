@@ -38,7 +38,7 @@
 
 
 <script>
-import qs from 'qs'
+import qs from 'qs' 
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
@@ -92,6 +92,10 @@ export default {
                     that.$store.commit('nickname',res.data.data.nickname);
                     that.$store.commit('headimg',res.data.data.photo);
                     that.$toast('登陆成功');
+
+
+
+
                     if(that.checked){
                         storage.set('rempass',true);
                     }else{

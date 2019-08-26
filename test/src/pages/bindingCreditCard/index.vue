@@ -95,6 +95,9 @@ export default {
         handleReturnHome(){
             this.$router.go(-1)
         },
+       
+
+       
            
         // 绑卡
         bindingCard(){
@@ -106,23 +109,35 @@ export default {
                 return
              }
 
-            if(this.name.trim().length===0 || this.phone.trim().length===0 || this.bankcardno.trim().length===0 || this.idCard.trim().length===0 ||
-                this.year.trim().length!=2 || this.month.trim().length!=2 || this.safeCode.trim().length!=3 || this.billdate.trim().length ===0 || this.duedate.trim().length!=2
-            ){
+            if(this.name.trim().length===0 || this.phone.trim().length===0 || this.bankcardno.trim().length===0 || this.idCard.trim().length===0){
                  this.$toast({
                     message:"请将信息填写完整"
                 })
                 return
             }
+
+             if(this.month.length==1){
+                this.month='0'+this.month
+            }
+            if(this.duedate.length==1){
+                this.duedate='0'+this.duedate
+            }
+            if(this.billdate.length==1){
+                this.billdate=='0'+this.billdate
+            }
+
             this.componentload=true
-             this.$http.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+this.bankcardno+'&cardBinCheck=true')
+            axios.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+this.bankcardno+'&cardBinCheck=true')
              .then(responce=>{
-                 this.bankcode=responce.data.bank
-                 Bank.forEach(info => {
+                 if(responce.data.bank){
+                      this.bankcode=responce.data.bank
+                      Bank.forEach(info => {
                         if(this.bankcode==info.bankCode){
                             this.bankcode=info.bankName
                         }
                     });
+                 }
+                
              })
              .catch(err=>{
                  console.log(err,"error")
@@ -143,6 +158,7 @@ export default {
                                 duedate:this.duedate,
                                 bankname:this.bankcode
                           }
+                        //   console.log(data,"data绑卡中的参数")
                         
                         axiosPost("/creditCard/bindCreditCard",data)
                             .then(res=>{
@@ -153,6 +169,7 @@ export default {
                                     this.componentload=false
                                 } else {
                                     this.$router.go(-1)
+                                    this.componentload=false
                                 }  
                             })
                             .catch(err=>{

@@ -150,16 +150,21 @@
         <div class="sign-rule">
             <div></div>
         </div>
-        <games></games>
+        <!-- <games></games> -->
+        <!-- <gameElsb></gameElsb> -->
     </div>
 </template>
 <script>
 import {axiosPost} from '@/lib/http'
 import games from '@/components/games.vue'
 
+import gameElsb from '@/components/gameElsb.vue'
+
+
 export default {
     components: {
         games,
+        gameElsb,
     },
     data() {
         return {

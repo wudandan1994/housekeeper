@@ -19,8 +19,8 @@
                            <p>提现收益</p>
                            <p>代还收益</p>
                         </van-collapse-item>
-                    </van-collapse> -->
-    
+                    </van-collapse>
+     -->
                    
                    <div class="income-tab">
                         <div class="per-list" v-for="(item,index) in list" :key="index">

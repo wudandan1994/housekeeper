@@ -3,7 +3,7 @@
     
     <router-view/>
      <coverads name="fade"></coverads>
-     <guide></guide>
+     <!-- <guide></guide> -->
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
   },
   components: {
       coverads,
-      guide,
+      // guide,
   },
   methods:{
      // 微信授权

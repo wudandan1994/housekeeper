@@ -13,7 +13,7 @@
                 <span>中石油</span>
                 <span>中石化</span>
             </div>
-            <div class="discount center">加油95折起</div>
+            <div class="discount center">钻石VIP96折</div>
             <router-link tag="div" :to="{path: '/detailMessage',query:{type: '1'}}" class="apply center">立即办理</router-link>
             <div class="selling center"> 充值有特惠 全国畅心油</div>
             <div class="desc">
