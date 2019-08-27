@@ -16,10 +16,10 @@
             <div class="avator-signin">
                 <div class="avator"><img :src="headimg" alt=""></div>
                 <div class="signin">
-                    <div class="normal center" @click="handleSign">{{Sign}}</div>
+                    <div class="normal center" :id="Sign=='签到'?'sign':''" @click="handleSign">{{Sign}}</div>
                 </div>
             </div>
-            <!-- <div class="desc">
+            <div class="desc">
                 <div class="desc-title">每月累计签到5天即可获得金币</div>
                 <div class="desc-list">
                     <div class="coin">
@@ -43,7 +43,7 @@
                         <div class="center">5</div>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <div class="rule-prize-task">
                 <div class="center">签到规则</div>
                 <div class="center">兑换奖品库</div>
@@ -56,20 +56,22 @@
                 </div>
                 <div class="task">
                     <div class="task-title center">今日任务</div>
-                    <div class="task-share center"></div>
+                     <div @click="getTask" class="task-share center">
+                        <img src="http://pay.91dianji.com.cn/renwu @3x.png" alt="" srcset="">
+                    </div>
                 </div>
                 <div class="bottom"></div>
             </div>
         </div>
         <div class="task-list">
             <div class="start-center">
-                <van-icon name="card" color="#ECC648" size="28px"/>
+                <van-icon name="http://pay.91dianji.com.cn/jiluhb.png" color="#ECC648" size="24px"/>
                 <span>任务记录</span>
             </div>
             <span>{{sum}}</span>
         </div>
         <div class="record-list">
-            <div class="task-record" v-for="(item,index) in taskList" :key="index" v-if="taskList.length != '0'">
+            <div class="task-record" v-for="(item,index) in taskList" :key="index" v-show="taskList.length != '0'">
                 <div>
                     <div class="start-center">{{item.title}}</div>
                     <div class="start-center">{{item.createddatetime}}</div>
@@ -78,7 +80,7 @@
             </div>
             <div class="none center" v-if="taskList.length == '0'">暂无任务记录</div>
             
-        </div>
+        </div> 
         <!-- 签到规则 -->
         <div class="sign-rule">
             <div></div>
@@ -90,6 +92,7 @@
 <script>
 import {CommonPost} from '@/lib/http'
 import games from '@/components/games.vue'
+import {axiosPost} from '@/lib/http'
 
 import gameElsb from '@/components/gameElsb.vue'
 
@@ -118,24 +121,48 @@ export default {
         handleReturnHome() {
             this.$router.go(-1);
         },
+        //查询任务
+        getTask(){
+            axiosPost("/activity/getAmount")
+            .then(res=>{
+                if(!res.data.success) {
+                    this.$toast(res.data.message)
+                } else {
+                    if(res.data.code=="0"){
+
+                        this.$router.push({
+                            path:"/home/totalPunch/wallet",
+                            query:{
+                                amount:res.data.data.amount
+                            }
+                        })
+
+                    } else {
+                        this.$router.push({
+                            path:"/home/totalPunch/tasked",
+                            query:{
+                                task:res.data.message,
+                                amount:res.data.data.amount                                
+                            }
+                        })
+                    }
+
+                }
+            })
+
+        },
         // 查询签到详情
         handleSignDetail(){
             CommonPost('/customer/getSignDetail').then(res =>{
-                // console.log('签到详情成功',res.data.data.list);
-                // console.log('日历请求成功',this.DateArray);
                 let s = (res.data.data.list).find(i =>i.signtime == this.current);
-                // let arr = [];
                 (res.data.data.list).forEach((item,index) =>{
-                    // arr.push((item.signtime).substr(8,2));
                     (this.DateArray).forEach((element,key) =>{
-                        // console.log(element);
                         if(element.date == (item.signtime).substr(8,2)){
                             element.signed = 'true';
                         }
                     })
                     
                 })
-                console.log(this.DateArray);
                 if(typeof s == 'undefined'){
                     this.Sign = '签到'
                 }else{
@@ -151,6 +178,7 @@ export default {
                 CommonPost('/customer/insertSign').then(res =>{
                     this.Sign = '已签到';
                     this.$toast('签到成功');
+                    this.handleSignDetail()
                 }).catch(res =>{
                     // console.log('签到失败',res);
                 })
@@ -184,11 +212,10 @@ export default {
         // 查询任务记录
         handleTaskList(){
             CommonPost('/activity/getActivityList').then(res =>{
-                console.log('查询成功',res);
                 this.taskList = res.data.data.activityList;
                 this.sum = res.data.data.sum;
             }).catch(res =>{
-                console.log('查询失败',res);
+                // console.log('查询失败',res);
             })
         }
         
@@ -327,6 +354,24 @@ export default {
                     background-size: 100% 100%;
                     font-size: 32px;
                 }
+                #sign {
+                     animation:  tosign .8s linear infinite;
+                     -webkit-animation:  tosign .8s linear infinite;
+                 }
+                 @keyframes tosign {
+                        0%{
+                           margin-top:0;
+                           transform: scale(0.8);
+                        }
+                        50%{
+                           margin-top:40px;
+                           transform: scale(1);
+                        }
+                        100%{
+                           margin-top:0;
+                           transform: scale(0.8);
+                        }
+                    }
             }
         }
         .desc{
@@ -399,11 +444,14 @@ export default {
                     height: 60px;
                     font-size: 28px;
                     font-weight: 700;
+                     margin:3px;
+                    box-sizing: border-box;
                 }
                 .active{
                     background: #ed8080;
                     color: #fff;
                     border-radius: 15px;
+                    margin:3px;
                 }
             }
             .task{
@@ -419,15 +467,35 @@ export default {
                     color: #C63232;
                     font-weight: 700;
                     font-size: 48px;
+                    margin-bottom: 10px;
+                    animation:  renwu .8s linear infinite;
+                    -webkit-animation:  renwu .8s linear infinite;
                 }
+
+                 @keyframes renwu {
+                        0%{
+                            opacity: 1;
+                        }
+                        50%{
+                            opacity: 0;
+                        }
+                        100%{
+                             opacity: 1;
+                        }
+                    }
+
+
                 .task-share{
-                    width: 210px;
-                    height: 210px;
+                    width: 230px;
+                    height:230px;
                     background:linear-gradient(180deg,rgba(237,128,128,1) 0%,rgba(173,21,51,1) 100%);
                     box-shadow:0px 3px 4px 0px rgba(234,156,156,0.5);
                     border-radius:8px;
                     opacity:0.96;
                     margin: auto;
+                    img {
+                        width:100%;
+                    }
                 }
             }
             .bottom{

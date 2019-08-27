@@ -127,70 +127,42 @@ export default {
             }
 
             this.componentload=true
-            axios.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+this.bankcardno+'&cardBinCheck=true')
-             .then(responce=>{
-                 if(responce.data.bank){
-                      this.bankcode=responce.data.bank
-                      Bank.forEach(info => {
-                        if(this.bankcode==info.bankCode){
-                            this.bankcode=info.bankName
-                        }
-                    });
-                 }
-                
-             })
-             .catch(err=>{
-                 console.log(err,"error")
-             })
-
-
-             setTimeout(()=>{
-                              let data={
-                                cardNo:this.bankcardno,
-                                phone:this.phone,
-                                idCardNo:this.idCard,
-                                idCardType:"身份证",
-                                payerName:this.name,
-                                year:this.year,
-                                month:this.month,
-                                cvv2:this.safeCode,
-                                billdate:this.billdate,
-                                duedate:this.duedate,
-                                bankname:this.bankcode
-                          }
-                        //   console.log(data,"data绑卡中的参数")
-                        
-                        axiosPost("/creditCard/bindCreditCard",data)
-                            .then(res=>{
-                                    if(!res.data.success){
-                                    this.$toast({
-                                        message:res.data.message
-                                    })
-                                    this.componentload=false
-                                } else {
-                                    this.$router.go(-1)
-                                    this.componentload=false
-                                }  
-                            })
-                            .catch(err=>{
-                                
-                            })
-
-                        },100)
-            // this.$http.get('https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo='+this.bankcardno+'&cardBinCheck=true')
-            //         .then(responce=>{
-            //             let bank=responce.data.bank
-            //              Bank.forEach(item => {
-            //                 if(item.bankCode==bank){
-            //                     this.bankcode=item.bankName
-            //                 }
-            //             });
-
-            //         })
-             
-              
-
+           
+            let data={
+                cardNo:this.bankcardno,
+                phone:this.phone,
+                idCardNo:this.idCard,
+                idCardType:"身份证",
+                payerName:this.name,
+                year:this.year,
+                month:this.month,
+                cvv2:this.safeCode,
+                billdate:this.billdate,
+                duedate:this.duedate,
+                bankname:this.bankcode
         }
+    
+            axiosPost("/creditCard/bindCreditCard",data)
+                .then(res=>{
+
+                    setTimeout(()=>{
+
+                    if(!res.data.success){
+                        this.$toast({
+                            message:res.data.message
+                        })
+                    } else {
+                        this.$router.go(-1)
+                    }  
+                    this.componentload=false
+                  },1500)
+                })
+                .catch(err=>{
+                    
+                })
+
+                    
+             }
 
        
     }    

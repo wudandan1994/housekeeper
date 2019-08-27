@@ -437,7 +437,6 @@ export default {
 },
 
 
-
 // howToGoLeft(ele, direction, max)：该函数判断单个格子怎么移动
  howToGo(ele, direction, max, testMode) {
 	var prevGrid,
@@ -636,7 +635,15 @@ export default {
 		this.backgroundColorToNumber();
 		this.scaleWidth();
 		this.touch();
-    },
+	},
+	mounted () {
+		// this.giveNumber(2, 2);
+		// this.newGameBotton();
+		// this.getReady();
+		// this.backgroundColorToNumber();
+		// this.scaleWidth();
+		// this.touch();
+	}
     
 }
 </script>

@@ -410,6 +410,10 @@ const easyPayComponent = () => import('@/pages/easyPay')  // 工易付小额代�
 
 const easycardComponent = () => import('@/pages/easyPay/easycard.vue')  // 工易付小额绑卡
 
+const walletComponent = () => import('@/pages/totalPunch/wallet.vue')  //签到领红包
+const taskedComponent = () => import('@/pages/totalPunch/tasked.vue')  //任务已完成
+
+
 
 export default new Router({
   // mode:"hash",
@@ -489,7 +493,10 @@ export default new Router({
     {path:"/home/accountManagement", component:accountManagementComponent,},
     {path:"/home/accountManagement/modifyLoginPassword", component:modifyLoginPasswordComponent,},
     {path:"/home/bindingPhone", component:bindingPhoneComponent,},
-    {path:"/home/totalPunch",component:totalPunchComponent},
+    {path:"/home/totalPunch",component:totalPunchComponent}, // 签到
+    {path:"/home/totalPunch/wallet",component:walletComponent}, // 红包任务
+    {path:"/home/totalPunch/tasked",component:taskedComponent}, // 任务完成
+
     {path:"/home/violationInquiry",component:violationInquiryComponent},
     {path:"/home/violationInquiry/addCar",component:addCarComponent},
     {path:"/home/violationInquiry/addCar/addSave",component:addSaveComponent},

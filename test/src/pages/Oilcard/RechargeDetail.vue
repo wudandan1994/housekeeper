@@ -65,16 +65,16 @@ export default {
         // 充值明细
         handleRechargeDetailList(){
             let params = {
-                cardId: this.cardID
+                cardID: this.cardID
             }
             CommonPost('/gasCard/gascardDepositByCard',params).then(res =>{
-                console.log('成功',res);
+                // console.log('成功',res);
                 this.list = res.data.data;
                 if(res.data.data.length == '0'){
                     this.$toast('您还没有充值记录');
                 }
             }).catch(res =>{
-                console.log('失败',res);
+                // console.log('失败',res);
                 this.$toast(res.data.message);
             })
         }
