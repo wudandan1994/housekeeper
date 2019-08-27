@@ -13,7 +13,7 @@
             <!-- <div class="right-icon center"><van-icon name="gold-coin" size="24px" color="#FCDD6D"/>245300</div> -->
         </header>
         <div class="container">
-             <div class="task">
+             <!-- <div class="task">
                <div class="punch">
                    <div class="left">
                        <p>我的金币</p>
@@ -60,8 +60,8 @@
                        </li>
                    </ul>
                </div>
-           </div>
-            <!-- <div class="avator-signin">
+           </div> -->
+            <div class="avator-signin">
                 <div class="avator"><img src="http://pay.91dianji.com.cn/wx.png" alt=""></div>
                 <div class="signin">
                     <div class="normal center">签到</div>
@@ -91,8 +91,8 @@
                         <div class="center">5</div>
                     </div>
                 </div>
-            </div> -->
-            <!-- <div class="rule-prize-task">
+            </div>
+            <div class="rule-prize-task">
                 <div class="center">签到规则</div>
                 <div class="center">兑换奖品库</div>
                 <div class="center">我的任务</div>
@@ -107,9 +107,9 @@
                     <div class="task-share center"></div>
                 </div>
                 <div class="bottom"></div>
-            </div> -->
+            </div>
         </div>
-        <!-- <div class="task-list">
+        <div class="task-list">
             <div class="start-center">
                 <van-icon name="card" color="#ECC648" size="28px"/>
                 <span>任务记录</span>
@@ -145,7 +145,7 @@
                 </div>
                 <div>+30</div>
             </div>
-        </div> -->
+        </div>
         <!-- 签到规则 -->
         <div class="sign-rule">
             <div></div>

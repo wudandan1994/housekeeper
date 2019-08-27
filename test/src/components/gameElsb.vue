@@ -186,15 +186,15 @@ export default {
     newGameBotton() {
         var newGameBtn = document.getElementsByClassName("new-game")[0];
         newGameBtn.addEventListener("click", function () {
-            newGame();
+           this.newGame();
         }, false); 
         newGameBtn.addEventListener("touchend", function () {
-            newGame();
+           this.newGame();
         }, false); 
     },
     // backgroundColorToNumber：数字跟背景颜色/大小对应
- backgroundColorToNumber() {
-	var gridNum,
+     backgroundColorToNumber() {
+	  var gridNum,
 		// child,
 		grid = document.getElementsByClassName("grid");
 	  for (var i = 0; i < grid.length; i ++) {
@@ -258,7 +258,7 @@ export default {
 
         window.onkeydown = function(e) {
          this.deleteTempGrid();  // 在其他位置
-            keyDown(e.keyCode);
+           this.keyDown(e.keyCode);
             // backgroundColorToNumber();
         }
     },
@@ -333,7 +333,7 @@ export default {
 			for (var j = 1; j <= 3; j ++) {
 				// console.log(col[j]);
 				max = j;
-				go = howToGo(arr[j], dir, max); // 叠加返回得分
+				go = this.howToGo(arr[j], dir, max); // 叠加返回得分
 
 				// console.log("go2:" + go);
 				signal += go;
@@ -344,7 +344,7 @@ export default {
 		} else if (dir == "down" || dir == "right") {
 			for (var j = 2; j >= 0; j --) {
 				max = 3 - j;
-				go = howToGo(arr[j], dir, max);
+				go = this.howToGo(arr[j], dir, max);
 				// gridMove(arr[j], dir, 1);
 				// console.log("go:" + go);
 				signal += go;
@@ -360,11 +360,11 @@ export default {
 		// console.log("signal:" + signal);
 		this.giveNumber(2, 1);
 		this.backgroundColorToNumber();
-		testGameOver();
+		this.testGameOver();
 	}
 	// 格子移动，且得分＞0
 	if (count > 0) {
-		addScore(count);
+		this.addScore(count);
 	}
 	return count;
 },
@@ -406,16 +406,16 @@ export default {
 		//判断滑动方向，滑动角度大于15°
 		if(Math.abs(distanceX) / Math.abs(distanceY) > 1.73 && distanceX > 0){
 		  this.deleteTempGrid();
-		    keyDown(39);
+		   this.keyDown(39);
 		}else if(Math.abs(distanceX) / Math.abs(distanceY) > 1.73 && distanceX < 0){
 		 this.deleteTempGrid();
-		    keyDown(37);
+		   this.keyDown(37);
 		}else if(Math.abs(distanceY) / Math.abs(distanceX) > 1.73 && distanceY < 0){
 		  this.deleteTempGrid();
-		    keyDown(38);
+		   this.keyDown(38);
 		}else if(Math.abs(distanceY) / Math.abs(distanceX) > 1.73 && distanceY > 0){
 		  this.deleteTempGrid();
-		    keyDown(40);
+		   this.keyDown(40);
 		}else{
 		    console.log('点击未滑动');
 		}
@@ -428,10 +428,10 @@ export default {
 	var span = document.getElementsByClassName("number"),
 		currentScore = parseInt(span[0].innerText),
 		bestScore = parseInt(span[1].innerText);
-	span[0].innerText = score + currentScore;
-	scoreUpAnimaton("score", score);
+ 	    span[0].innerText = score + currentScore;
+	    this.scoreUpAnimaton("score", score);
 	if (span[0].innerText > bestScore) {
-		scoreUpAnimaton("best", score);
+		this.scoreUpAnimaton("best", score);
 		span[1].innerText = span[0].innerText;
 	}
 },
@@ -464,7 +464,7 @@ export default {
 		max -= 1;
 		// gridMove(ele, direction, 1);
 		if (max) {
-			go = howToGo(prevGrid, direction, max);
+			go = this.howToGo(prevGrid, direction, max);
 			// 0、double、continue
 		}
 		// 返回1
@@ -492,7 +492,7 @@ export default {
 			ele.children[0].innerText = "";
 			// console.log('gridNum：' + gridNum)
 			if (gridNum == 2048) {
-				popup("win");
+				this.popup("win");
 			}
 			// 如果数字叠加，就返回得分，且得分≥4
 		}
@@ -533,10 +533,10 @@ export default {
 			count -= 2;
 		}
 		for (var i = 0; i < grid.length; i ++) {
-			if(!howToGo(grid[i], "left", 1, true) && !howToGo(grid[i], "right", 1, true) && !howToGo(grid[i], "up", 1, true) && !howToGo(grid[i], "down", 1, true)) {
+			if(!this.howToGo(grid[i], "left", 1, true) && !this.howToGo(grid[i], "right", 1, true) && !this.howToGo(grid[i], "up", 1, true) && !this.howToGo(grid[i], "down", 1, true)) {
 				count --;
 				if (count == 0) {
-					popup("game-over");
+					this.popup("game-over");
 					return true;
 				}
 			}
@@ -567,10 +567,10 @@ export default {
 	}
 	tryAgainEle = document.getElementsByClassName("try-again")[num];
 	tryAgainEle.addEventListener("click", function () {
-		tryAgain(ele, headerEle, gameBoardEle);
+		this.tryAgain(ele, headerEle, gameBoardEle);
 	}, false);
 	tryAgainEle.addEventListener("touchend", function () {
-		tryAgain(ele, headerEle, gameBoardEle);
+		this.tryAgain(ele, headerEle, gameBoardEle);
 	}, false);
 },
 
@@ -578,7 +578,7 @@ export default {
 	ele.style.display = "none";
 	headerEle.style.opacity = "1.0";
 	gameBoardEle.style.opacity = "1.0";
-	newGame();
+	this.newGame();
 },
 
 
@@ -588,9 +588,9 @@ export default {
 		timer;
 	timer = setInterval(function() {
 		randomInt = Math.floor(Math.random() * 4) + 37;
-		keyDown(randomInt);
+		this.keyDown(randomInt);
 		// console.log(randomInt);
-		if (testGameOver()) {
+		if (this.testGameOver()) {
 			clearInterval(timer);
 		}
 	}, 300);
