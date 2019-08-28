@@ -557,10 +557,10 @@ export default {
                           left:0px;
                           right:0px;
                           background-color: rgba(0, 0, 0, .5);
-                          z-index: 99;
+                          z-index: 999;
                           .pop {
                           position: absolute;
-                          top:40%;
+                          top:30%;
                           left:9%;
                           width: 600px;
                           padding:10px;

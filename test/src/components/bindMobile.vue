@@ -7,8 +7,8 @@
                 <div class="mobile"><input type="text" v-model="mobile" placeholder="请输入手机号"/></div>
                 <div class="mobile"><input type="password" v-model="newPassword" placeholder="请输入6到18位数字与字母组合密码" /></div>
                 <div class="mobile"><input type="password" v-model="suerPassword" placeholder="请确认密码" /></div>
-                <div class="mobile"><input type="text" v-model="name" placeholder="请输入姓名" /></div>
-                <div class="mobile"><input type="text" v-model="idcard" placeholder="请输入身份证号" /></div>
+                <!-- <div class="mobile"><input type="text" v-model="name" placeholder="请输入姓名" /></div>
+                <div class="mobile"><input type="text" v-model="idcard" placeholder="请输入身份证号" /></div> -->
                 <div class="mobile row">
                     <input type="number" v-model="authcode" placeholder="请输入验证码" />
                     <span @click="getCode" v-show="showCode">获取验证码</span>
@@ -33,8 +33,8 @@ export default {
             showCode:true,
             count:60,
             show:false,
-            name:"",
-            idcard:"",
+            // name:"",
+            // idcard:"",
 
         }
     },
@@ -107,6 +107,14 @@ export default {
                 })
                  return
             }
+
+            // if(this.name.trim().length==0){
+            //     return ths.$toast("请填写姓名")
+            // }
+            // if(this.idcard.trim().length==0){
+            //     return this.$toast("请填写身份证号码")
+            // }
+
             let data={
                 password:this.suerPassword,
                 mobile:this.mobile,
@@ -114,39 +122,37 @@ export default {
             }
              axiosPost("/customer/updatePassWord",data)  // 绑定手机
              .then(res =>{
-                if(res.data.success){    // 绑定手机号成功
-
-                  axiosPost('/customer/getIdentification')   // 查询是否实名
-                    .then(res=>{
-                       if(res.data.success && res.data.data.status=='0' ){    // 未实名
-                         
-                             let params={
-                                    idcardnumber:this.idcard,
-                                    name:this.name
-                               }
-                             axiosPost("/customer/insertIdentification",params)
-                                .then(res=>{
-                                    if(res.data.success){
-                                        this.$toast(res.data.message);
-                                        this.$store.commit('iscertification','2');
-                                        this.show=false
-                                       
-                                    } else {
-                                        this.$toast(res.data.message);
-                                        this.show=false
-                                    }
-                              })
-
-                          
-                       } else {
-                           this.$toast(res.data.message)
-                           this.show=false
-                       }
-                    })
-                } else {
+                     
                      this.$toast(res.data.message)
                      this.show = false;
-                }
+                //   axiosPost('/customer/getIdentification')   // 查询是否实名
+                //     .then(res=>{
+                //        if(res.data.success && res.data.data.status=='0' ){    // 未实名
+                         
+                //              let params={
+                //                     idcardnumber:this.idcard,
+                //                     name:this.name
+                //                }
+                //              axiosPost("/customer/insertIdentification",params)
+                //                 .then(res=>{
+                //                     if(res.data.success){
+                //                         this.$toast(res.data.message);
+                //                         this.$store.commit('iscertification','2');
+                //                         this.show=false
+                                       
+                //                     } else {
+                //                         this.$toast(res.data.message);
+                //                         this.show=false
+                //                     }
+                //               })
+
+                          
+                //        } else {
+                //            this.$toast(res.data.message)
+                //            this.show=false
+                //        }
+                //     })
+               
              })
              .catch(res =>{
              })
@@ -157,7 +163,6 @@ export default {
        
     },
     mounted(){
-        this.getInfo()
         setTimeout(() =>{
             if(this.$store.state.wechat.mobile){
                 this.show = false;

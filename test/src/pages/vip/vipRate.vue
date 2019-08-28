@@ -60,19 +60,19 @@
                 </div>
                  <div class="rows row">
                     <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>优质商户收款费率</div>
-                    <div class="end-center">0.65%+2元/笔</div>
+                    <div class="end-center"><span>{{levelhj.sd2}}</span>元/笔</div>
                 </div>
                 <div class="rows row">
                     <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>普通商户收款费率</div>
-                    <div class="end-center">0.55%+2元/笔</div>
+                    <div class="end-center"><span>{{levelhj.sd1}}</span>元/笔</div>
                 </div>
                 <div class="rows row">
                     <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>大额还款费率</div>
-                    <div class="end-center">0.70%+2元/笔</div>
+                    <div class="end-center"><span>{{levelhj.dh2}}</span>元/笔</div>
                 </div>
                  <div class="rows row">
                     <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>小额还款费率</div>
-                    <div class="end-center">0.65%+2元/笔</div>
+                    <div class="end-center"><span>{{levelhj.dh1}}</span>元/笔</div>
                 </div>
             </div>
             <div class="big_title center">推广充值奖励</div>
@@ -131,20 +131,20 @@
                     <div class="center">对应费率</div>
                 </div>
                  <div class="rows row">
-                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>收款费率</div>
-                    <div class="end-center">0.50%+2元/笔</div>
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>优质通道收款费率</div>
+                    <div class="end-center"><span>{{levelzs.sd2}}</span>元/笔</div>
                 </div>
                 <div class="rows row">
-                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>收款费率</div>
-                    <div class="end-center">0.50%+2元/笔</div>
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>普通通道收款费率</div>
+                    <div class="end-center"><span>{{levelzs.sd1}}</span>元/笔</div>
                 </div>
                 <div class="rows row">
                     <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>大额还款费率</div>
-                    <div class="end-center">0.60%+2元/笔</div>
+                    <div class="end-center"><span>{{levelzs.dh2}}</span>元/笔</div>
                 </div>
                  <div class="rows row">
                     <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>小额还款费率</div>
-                    <div class="end-center">0.55%+2元/笔</div>
+                    <div class="end-center"><span>{{levelzs.dh1}}</span>元/笔</div>
                 </div>
             </div>
             <div class="big_title center">推广充值奖励</div>
@@ -262,19 +262,40 @@
     </div>
 </template>
 <script>
+import { axiosPost } from '../../lib/http';
+
 export default {
     data(){
         return{
             level: '0',
             headimg: '',
+            rates:[],
+            levelhj:{},
+            levelzs:{}
         }
     },
     methods:{
        handleReturn(){
            this.$router.go(-1);
+       },
+       getRate(){
+           axiosPost("/content/getRate")
+           .then(res=>{
+            //    console.log(res,"费率")
+            //    console.log(res.data.data,'feilv')
+               if(res.data.success){
+                   this.rates=res.data.data
+                   this.rates=JSON.parse(this.rates)
+                   this.levelhj=this.rates[1]
+                   this.levelzs=this.rates[2]
+               } else {
+                   this.$toast(res.data.message)
+               }
+           })
        }
     },
     created(){
+        this.getRate()
         this.headimg = this.$store.state.wechat.headimg;
         this.level = this.$route.query.level;
     }

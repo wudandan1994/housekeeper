@@ -209,7 +209,6 @@ export default {
         }
     },
     created(){
-        console.log(this.$store.state.wechat.promotioncode);
         this.handleAIRadar();
         // console.log(this.$store.state.wechat.promotioncode)
     }
@@ -220,11 +219,13 @@ export default {
     #radar{
         width: 100vw;
         height: calc(100vh - 100px);
-        overflow-y: scroll;
-        overflow-x: hidden;
+        overflow-y: scroll;   //   1
+        overflow-x: hidden; 
+         padding-bottom: 10vh;    //   4
         .header{
             width: 100%;
-            height: calc(90vw + 330px);
+            // height: calc(90vw + 330px);      2
+             height: 980px;
             background: #4b66af;
             position: relative;
             .big-title{
@@ -253,7 +254,12 @@ export default {
             }
             .circle{
                 width: 100%;
-                height: 90vw;
+                // height: 90vw;   3
+                height: auto;
+                position: absolute;
+                top: 160px;
+                right: 0px;
+                z-index: 3;
                 .container{
                     width: 90vw;
                     height: 90vw;

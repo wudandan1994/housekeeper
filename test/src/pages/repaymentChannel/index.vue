@@ -98,6 +98,7 @@
 
 
 <script>
+import storage from '@/lib/storage'
 export default {
     data() {
         return {
@@ -119,11 +120,15 @@ export default {
                 })
                 return
             }
+
+
+            storage.set('type',i)
+
             this.$router.push({
                 path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
                 query:{
                     info:this.item,
-                    type:i
+                    // type:i
                 }
             })
 

@@ -93,7 +93,12 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
+            this.$router.push({
+                path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
+                query:{
+                    info:this.item
+                }
+            })
         },
         changePage(){
            this.details= this.plans.splice((this.currentPage-1)*10,10)

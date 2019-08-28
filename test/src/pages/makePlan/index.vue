@@ -174,7 +174,12 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
+            this.$router.push({
+                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                query:{
+                     info:this.item
+                }
+            })
         },
          onChange(picker, values) {
             picker.setColumnValues(1, citys[values[0]]);
@@ -250,7 +255,7 @@ export default {
                 bindId:this.item.bindId,
                 amount:this.amount,
                 payment:this.payment,
-                type:this.type,
+                type:storage.get('type'),
                 enddate:this.enddate,
                 startdate:this.startdate,
                 channel:storage.get('channel') 
@@ -287,7 +292,7 @@ export default {
     },
     created () {
          this.item=this.$route.query.info 
-          this.type=this.$route.query.type
+        //   this.type=this.$route.query.type
            this.limit=localStorage.getItem("channel")
          if(this.limit=='1'){
              this.place="预留5%-2000"

@@ -58,7 +58,7 @@
             </div>
             <div class="transaction">
                 <ul>
-                    <router-link tag="li" to="/home/receivables/rate">
+                    <router-link tag="li" :to="{path:'/home/receivables/rate',query:{'type':'2'}}">
                         <p><span><van-icon color="#4B66AF" size="26px" name="http://pay.91dianji.com.cn/dollar.png"/></span></p>
                         <div>
                             <p>我的费率</p>
@@ -120,10 +120,10 @@
              <div class="covercx" >
                     <van-popup v-model="showxy" position="right" :overlay="true">
                          <div class="action">
-                            <!-- <van-button  to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" round type="primary">添加信用卡</van-button>
-                             <van-button @click="closexy" round type="default">关闭</van-button> -->
-                            <van-icon name="add" @click="addcard"  size="30px" color="#4B66AF" />
-                            <van-icon name="clear" @click="closexy" size="30px" color="#4B66AF" />
+                            <van-button  to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" round type="primary">添加信用卡</van-button>
+                             <van-button @click="closexy" round type="default">关闭</van-button>
+                            <!-- <van-icon name="add" @click="addcard"  size="30px" color="#4B66AF" />
+                            <van-icon name="clear" @click="closexy" size="30px" color="#4B66AF" /> -->
                         </div>
                          <div class="cards">
                              <ul>
@@ -830,12 +830,15 @@ export default {
                        background-color: #4B66AF;
                        border:1px solid #4B66AF;
                         font-size: 34px;
+                        height:75px;
                    }
                    .van-button--default {
                        background-color: #ccc;
                        border:1px solid #ccc;
                        width:120px;
                        font-size: 34px;
+                        height:75px;
+
                    }
 
                }

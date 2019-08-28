@@ -74,8 +74,7 @@
                     <div class="pannel-news row">
                         <div class="pannel-title center">钱&nbsp;夹<br/>资&nbsp;讯</div>
                         <div class="pannel-detail center" @click="handleContactUs">
-                            <!-- <van-notice-bar text="好消息：从7月8日至7月14日，连续在朋友圈推广钱夹宝相关海报，连续时间7天，可免费成为993会员一个月！费率低至0.47！相关活动内容请联系客服"/>  -->
-                            <van-notice-bar text="最新推广活动：7月16日～8月31日，推广成功10个钻石会员，可免费升级永久钻石会员，费率低至0.50，并领取1000元现金奖励！活动详情，请联系您的专属客服！"/> 
+                            <van-notice-bar :text="news"/> 
                         </div>
                     </div>
 
@@ -356,6 +355,7 @@ export default {
         return {
             componentload: true,
             showchagnnel:false,
+            news:"",
             loadtext:"    ",
             loostext:"   ",
             radio:"1",
@@ -722,6 +722,16 @@ export default {
        
         handleGarbage(){
             this.$router.push('/garbage');
+        },
+        getNews(){
+            axiosPost("/content/getInformation")
+            .then(res=>{
+                if(res.data.success){
+                    this.news=res.data.data
+                } else {
+                    this.news="敬请期待"
+                }
+            })
         }
     },
     created(){
@@ -729,6 +739,7 @@ export default {
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
         this.lev=this.$store.state.wechat.level;
+        this.getNews()
          if(this.lev=='0'){
                         this.lev="免费粉丝"
                     } else if(this.lev=='1'){
@@ -1531,6 +1542,7 @@ export default {
         .aside-left {
             color:#fff;
             text-align: center;
+            z-index: 103;
             >.info {
                 width:100%;
                 height: 100%;

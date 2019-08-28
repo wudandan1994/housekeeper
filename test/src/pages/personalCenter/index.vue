@@ -456,7 +456,7 @@ export default {
       width: 100%;
       height: 90vh;
       overflow: scroll;
-      padding-bottom: 5vh;
+      padding-bottom: 10vh;
       background: #F2F2F2;
       .header{
           width: 100vw;

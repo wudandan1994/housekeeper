@@ -3,7 +3,9 @@
         <header>
             <span @click="goBack"><van-icon size="20px" name="arrow-left"/></span>
             <span>游戏规则</span>
-            <span @click="showCover"> <van-icon color="white" size="20px" name="weapp-nav"/> </span>
+            <span @click="showCover">
+                 <!-- <van-icon color="white" size="20px" name="weapp-nav"/>  -->
+            </span>
         </header>
         <div class="container">
            <div class="nationwide">
@@ -27,7 +29,7 @@
             </div>
            </div>
            <div class="invite" >
-               <div class="share" @click="showCover">
+               <div class="share">
                    <p></p>
                     <p><van-icon size="28px" name="http://pay.91dianji.com.cn/wx.png"/></p>
                     <p class="wxin">发微信邀请</p>

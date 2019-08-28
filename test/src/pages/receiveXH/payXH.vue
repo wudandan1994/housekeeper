@@ -1,5 +1,5 @@
 <template>
-    <div id="payment">
+    <div id="payxh">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>确认支付</span>
@@ -243,7 +243,7 @@ export default {
 </script>
 
 <style lang="less">
-   #payment {
+   #payxh {
        >header {
            background-color: #4965AE;
            width:100%;

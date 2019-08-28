@@ -17,13 +17,15 @@
             </div>
             <div class="rate-explain"> 
                 <p> <span ><van-icon name="label" /></span> &nbsp;&nbsp;<span>费率说明</span></p>
-                <div class="reduce">
-                    <!-- <p>自己刷卡可省：</p> -->
-                    <!-- <p>升到钻石LV3最高可省：<span>0.14%+0.4/每笔</span></p> -->
-                    <p v-if="level=='0'">当前收款费率：万60+3元/笔</p>
-                    <p v-if="level=='1'">当前收款费率：万55+2元/笔</p>
-                    <p v-if="level=='2'">当前收款费率：万50+2元/笔</p>
-
+                <div class="reduce"  v-show="rateyz">
+                    <p v-if="level=='0'">当前收款费率：<span>{{levelpt.sd2}}</span>元/笔</p>
+                    <p v-if="level=='1'">当前收款费率：<span>{{levelhj.sd2}}</span>元/笔</p>
+                    <p v-if="level=='2'">当前收款费率：<span>{{levelzs.sd2}}</span>元/笔</p>
+                </div>
+                 <div class="reduce" v-show="ratept" >
+                    <p v-if="level=='0'">当前收款费率：<span>{{levelpt.sd1}}</span>元/笔</p>
+                    <p v-if="level=='1'">当前收款费率：<span>{{levelhj.sd1}}</span>元/笔</p>
+                    <p v-if="level=='2'">当前收款费率：<span>{{levelzs.sd1}}</span>元/笔</p>
                 </div>
             </div>
         </div>
@@ -31,21 +33,57 @@
 </template>
 
 <script>
+import {axiosPost} from '@/lib/http'
+
 export default {
     data() {
         return {
             nickname:"",
             recommendedcode:"",
             headimg:"",
-            level:""
+            level:"",
+            rateyz:false,
+            ratept:false,
+            type:"",
+            rates:[],
+            levelpt:{},
+            levelhj:{},
+            levelzs:{},
+           
         }
     },
     methods:{
         goBack() {
             this.$router.go(-1)
-        }
+        },
+         getRate(){
+           axiosPost("/content/getRate")
+           .then(res=>{
+            //    console.log(res,"费率")
+            //    console.log(res.data.data,'feilv')
+               if(res.data.success){
+                   this.rates=res.data.data
+                   this.rates=JSON.parse(this.rates)
+                   this.levelhj=this.rates[1]
+                   this.levelzs=this.rates[2]
+                   this.levelpt=this.rates[0]
+               } else {
+                   this.$toast(res.data.message)
+               }
+           })
+       }
+
     },
      created(){
+         this.type=this.$route.query.type
+         this.getRate()
+         if(this.type=='1'){
+             this.rateyz=true
+             this.ratept=false
+         } else if(this.type=='2'){
+             this.ratept=true
+             this.rateyz=false
+         }
         this.nickname=this.$store.state.wechat.nickname
         this.headimg=this.$store.state.wechat.headimg
         this.recommendedcode=this.$store.state.wechat.recommendedcode

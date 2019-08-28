@@ -24,14 +24,14 @@
             <div class="title start-center">联系我们</div>
             <div class="contact_us row">
                 <div class="icon center"><van-icon name="http://fx.91dianji.com.cn/fengxing_fuwushijian.png"/></div>
-                <div class="contact_title">服务时间:</div>
-                <div class="contact_time start-center">周一至周日（09：00-22：00）</div>
+                <div class="contact_title">{{time.title}}</div>
+                <div class="contact_time start-center">{{time.content}}</div>
             </div>
             <div class="contact_us row">
                 <div class="icon center"><van-icon name="http://fx.91dianji.com.cn/fengxing_dianhua.png"/></div>
-                <div class="contact_title">加盟热线:</div>
+                <div class="contact_title">{{phone.title}}</div>
                 <div class="jiameng_rexian">
-                    <span>021-60592500</span>
+                    <span>{{phone.content}}</span>
                     <span>朱经理</span>
                 </div>
                 <div class="btn center">
@@ -40,10 +40,10 @@
             </div>
             <div class="contact_us row">
                 <div class="icon center"><van-icon name="http://fx.91dianji.com.cn/fengxing_zuoji.png"/></div>
-                <div class="contact_title">客服电话:</div>
-                <div class="contact_detail start-center">400-1059-769</div>
+                <div class="contact_title">{{mobile.title}}</div>
+                <div class="contact_detail start-center">{{mobile.content}}</div>
                 <div class="btn center" @click="contact('12')">
-                    <span @click="contact('12')"><a href="tel:400-1059-769">拨打</a></span>
+                    <span @click="contact('12')"><a  :href="'tel:'+mobile.content">拨打</a></span>
                 </div>
             </div>
         </div>
@@ -72,7 +72,11 @@ export default {
                     title: '业务沟通',
                     content: '公司一直致力于创新和发展，如果你有好的资源、好的项目或者想对接我们的资源和项目请直接联系我们。'
                 }
-            ]
+            ],
+            list:[],
+            time:{},
+            phone:{},
+            mobile:{}
         }
     },
     methods:{
@@ -123,7 +127,22 @@ export default {
             clipboard.on('error', function(e) {
                 that.$toast('复制失败');
             });
+        },
+        getInfo(){
+            axiosPost("/content/getAboutUs")
+            .then(res=>{
+                console.log(res.data.data,"women")
+                this.list=res.data.data
+                this.list=JSON.parse(this.list)
+                this.time=this.list[0]
+                this.phone=this.list[1]
+                this.mobile=this.list[2]
+
+            })
         }
+    },
+    created () {
+        this.getInfo()
     }
 }
 </script>
