@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:57:17
- * @LastEditTime: 2019-08-26 19:14:11
+ * @LastEditTime: 2019-08-28 10:02:00
  * @LastEditors: Please set LastEditors
  */
 import axios from 'axios'
@@ -11,8 +11,8 @@ import { hostUrl } from './config.js'
 // 封装POST请求
 export const axiosPost = (url, params = {}) =>{;
     const _axios = axios.create({
-        // baseURL:hostUrl,
-        baseURL: 'http://pay.91dianji.com.cn/api',
+        baseURL:hostUrl,
+        // baseURL: 'http://pay.91dianji.com.cn/api',
         withCredentials: true,
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
     });
@@ -61,8 +61,8 @@ export const axiosGet = (url,params = {}) =>{
 // 改进封装POST请求
 export const CommonPost = (url,params) =>{
     const _axios = axios.create({
-        // baseURL:hostUrl,
-        baseURL: 'http://pay.91dianji.com.cn/api',
+        baseURL:hostUrl,
+        // baseURL: 'http://pay.91dianji.com.cn/api',
         withCredentials: true,
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
     });
