@@ -122,8 +122,8 @@
                          <div class="action">
                             <!-- <van-button  to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" round type="primary">添加信用卡</van-button>
                              <van-button @click="closexy" round type="default">关闭</van-button> -->
-                            <van-icon name="add" @click="addcard"  size="26px" color="#4B66AF" />
-                            <van-icon name="clear" @click="closexy" size="26px" color="#4B66AF" />
+                            <van-icon name="add" @click="addcard"  size="30px" color="#4B66AF" />
+                            <van-icon name="clear" @click="closexy" size="30px" color="#4B66AF" />
                         </div>
                          <div class="cards">
                              <ul>
@@ -823,7 +823,9 @@ export default {
             .covercx {
                .action {
                    display: flex;
-                   justify-content: space-between;
+                   margin-top:30px;
+                   margin-bottom: 20px;
+                   justify-content: space-around;
                    .van-button--primary {
                        background-color: #4B66AF;
                        border:1px solid #4B66AF;

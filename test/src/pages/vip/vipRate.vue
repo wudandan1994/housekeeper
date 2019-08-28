@@ -58,8 +58,12 @@
                     <div class="center">对应通道</div>
                     <div class="center">对应费率</div>
                 </div>
+                 <div class="rows row">
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>优质商户收款费率</div>
+                    <div class="end-center">0.65%+2元/笔</div>
+                </div>
                 <div class="rows row">
-                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>收款费率</div>
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>普通商户收款费率</div>
                     <div class="end-center">0.55%+2元/笔</div>
                 </div>
                 <div class="rows row">
@@ -125,6 +129,10 @@
                 <div class="title row">
                     <div class="center">对应通道</div>
                     <div class="center">对应费率</div>
+                </div>
+                 <div class="rows row">
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>收款费率</div>
+                    <div class="end-center">0.50%+2元/笔</div>
                 </div>
                 <div class="rows row">
                     <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>收款费率</div>

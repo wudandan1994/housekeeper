@@ -137,8 +137,8 @@
               <div class="covercx" >
                     <van-popup v-model="showxy" position="right" >
                          <div class="action">
-                             <van-icon name="add" @click="addcard"  size="26px" color="#4B66AF" />
-                             <van-icon name="clear" @click="closexy" size="26px" color="#4B66AF" />
+                             <van-icon name="add" @click="addcard"  size="30px" color="#4B66AF" />
+                             <van-icon name="clear" @click="closexy" size="30px" color="#4B66AF" />
                             <!-- <van-button  to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" round type="primary">添加信用卡</van-button>
                              <van-button @click="closexy" round type="default">关闭</van-button> -->
                         </div>
@@ -164,8 +164,8 @@
               <div class="covercx" >
                     <van-popup v-model="showcx" position="right" >
                         <div class="action">
-                             <van-icon name="add" @click="addcardcx"  size="26px" color="#4B66AF" />
-                             <van-icon name="clear" @click="closecx" size="26px" color="#4B66AF" />
+                             <van-icon name="add" @click="addcardcx"  size="30px" color="#4B66AF" />
+                             <van-icon name="clear" @click="closecx" size="30px" color="#4B66AF" />
                            
                             <!-- <van-button  to="/personalCenter/addcard/UnionPay" round  type="primary">添加储蓄卡</van-button>
                              <van-button @click="closecx" round type="default">关闭</van-button> -->
@@ -395,8 +395,10 @@ export default {
         
            .covercx {
                .action {
+                   margin-top:30px;
+                   margin-bottom: 20px;
                    display: flex;
-                   justify-content: space-between;
+                   justify-content: space-around;
                    .van-button--primary {
                        background-color: #4B66AF;
                        border:1px solid #4B66AF;
