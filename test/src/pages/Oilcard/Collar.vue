@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-08 14:18:18
- * @LastEditTime: 2019-08-23 15:37:00
+ * @LastEditTime: 2019-08-29 17:30:36
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -27,7 +27,7 @@
                 <div class="start-center">选购产品</div>
                 <div class="end-center">
                     <div class="center" :class="params.cardType == '0' ? 'product-active' : 'product-normal'" @click="handleCheckProduct('0')">中石油折扣卡</div>
-                    <div class="center" :class="params.cardType == '1' ? 'product-active' : 'product-normal'" @click="handleCheckProduct('1')">中石化折扣卡</div>
+                    <!-- <div class="center" :class="params.cardType == '1' ? 'product-active' : 'product-normal'" @click="handleCheckProduct('1')">中石化折扣卡</div> -->
                 </div>
             </div>
             <div class="per-detail">
