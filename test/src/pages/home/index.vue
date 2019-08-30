@@ -62,11 +62,11 @@
                             </router-link>
                             <router-link tag="li" to="/home/totalPunch">
                                 <p> <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search  rotateZ"  /></p>
-                                <span>签到打卡</span>
+                                <span>会员任务</span>
                             </router-link>
                             <!-- <li @click="sign">
                                 <p> <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search  rotateZ"  /></p>
-                                <span>签到打卡</span>
+                                <span>会员任务</span>
                             </li> -->
                         </ul>
                     </div>

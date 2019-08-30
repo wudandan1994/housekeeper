@@ -412,6 +412,8 @@ const easycardComponent = () => import('@/pages/easyPay/easycard.vue')  // 工�
 
 const walletComponent = () => import('@/pages/totalPunch/wallet.vue')  //签到领红包
 const taskedComponent = () => import('@/pages/totalPunch/tasked.vue')  //任务已完成
+const taskrecordComponent = () => import('@/pages/totalPunch/taskrecord.vue')  //任务记录
+
 
 
 
@@ -496,6 +498,8 @@ export default new Router({
     {path:"/home/totalPunch",component:totalPunchComponent}, // 签到
     {path:"/home/totalPunch/wallet",component:walletComponent}, // 红包任务
     {path:"/home/totalPunch/tasked",component:taskedComponent}, // 任务完成
+    {path:"/home/totalPunch/taskrecord",component:taskrecordComponent}, // 任务纪录
+
 
     {path:"/home/violationInquiry",component:violationInquiryComponent},
     {path:"/home/violationInquiry/addCar",component:addCarComponent},

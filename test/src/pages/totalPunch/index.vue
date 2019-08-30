@@ -19,7 +19,7 @@
                     <div class="normal center" :id="Sign=='签到'?'sign':''" @click="handleSign">{{Sign}}</div>
                 </div>
             </div>
-            <div class="desc">
+            <!-- <div class="desc">
                 <div class="desc-title">每月累计签到5天即可获得金币</div>
                 <div class="desc-list">
                     <div class="coin">
@@ -43,7 +43,7 @@
                         <div class="center">5</div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="rule-prize-task">
                 <div class="center">签到规则</div>
                 <div class="center">兑换奖品库</div>
@@ -59,11 +59,14 @@
                      <div @click="getTask" class="task-share center">
                         <img src="http://pay.91dianji.com.cn/renwu @3x.png" alt="" srcset="">
                     </div>
+                    <div class="dollars">
+                        <img src="http://pay.91dianji.com.cn/dollars.png" alt="" srcset="">
+                    </div>
                 </div>
                 <div class="bottom"></div>
             </div>
         </div>
-        <div class="task-list">
+        <!-- <div class="task-list">
             <div class="start-center">
                 <van-icon name="http://pay.91dianji.com.cn/jiluhb.png" color="#ECC648" size="24px"/>
                 <span>任务记录</span>
@@ -80,7 +83,7 @@
             </div>
             <div class="none center" v-if="taskList.length == '0'">暂无任务记录</div>
             
-        </div> 
+        </div>  -->
         <!-- 签到规则 -->
         <div class="sign-rule">
             <div></div>
@@ -473,7 +476,52 @@ export default {
                 background: #DBE4FC;
                 margin-top: 50px;
                 padding-bottom: 50px;
+                position: relative;
+                .dollars {
+                    width:120px;
+                    height:120px;
+                    position: absolute;
+                    top:30%;
+                    left:45%;
+                     animation:  dollars .8s linear infinite;
+                    -webkit-animation:  dollars .8s linear infinite;
+                    >img {
+                        width:100%;
+                        animation:  self .8s linear infinite;
+                       -webkit-animation:  self .8s linear infinite;
+
+
+
+
+                      @keyframes self {
+                        0%{
+                             transform: scale(0.6);
+                        }
+                        50%{
+                            transform: scale(1.5);
+                        }
+                        100%{
+                             transform: scale(0.6);
+                        }
+                    }
+
+
+
+                    }
+                     @keyframes dollars {
+                        0%{
+                            top:45%;
+                        }
+                        50%{
+                            top:-5%;
+                        }
+                        100%{
+                             top:45%;
+                        }
+                    }
+                }
                 .task-title{
+                    margin-bottom:20px;
                     width: 100%;
                     height: 100px;
                     color: #C63232;

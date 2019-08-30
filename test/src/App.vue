@@ -10,7 +10,7 @@
     
     <router-view/>
      <coverads name="fade"></coverads>
-     <!-- <guide></guide> -->
+     <guide></guide>
   </div>
 </template>
 
@@ -279,7 +279,7 @@ export default {
                         .then(res=>{
 
                             this.$toast(res.data.message)
-                            
+
                         })
                   }
               });

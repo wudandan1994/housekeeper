@@ -28,13 +28,16 @@
                 <img  src="http://pay.91dianji.com.cn/silk.png" alt="" srcset="">
             </div>
            </div>
-           <div class="invite" >
+           <div class="invite" @click="invite" >
                <div class="share">
-                   <p></p>
+                   <!-- <p></p> -->
                     <p><van-icon size="28px" name="http://pay.91dianji.com.cn/wx.png"/></p>
-                    <p class="wxin">发微信邀请</p>
-                    <p></p>
+                    <p class="wxin">点击右上角分享至好友或朋友圈</p>
+                    <!-- <p></p> -->
                </div>
+               
+         </div>
+         <!-- <p class="friends">点击右上角分享至好友或朋友圈</p> -->
 
              <div class="sharemove" v-show="Sharewxf">
                <div class="wx">
@@ -54,7 +57,7 @@
                </div>
             </div>
           </div>
-           </div>
+         
         </div>
     </div>
 
@@ -74,7 +77,10 @@ export default {
         goBack() {
             this.$router.go(-1)
         },
-          showCover(){
+        invite(){
+
+        },
+        showCover(){
         //    this.Sharewxf=!this.Sharewxf
         this.$toast("敬请期待")
         },
@@ -336,6 +342,10 @@ export default {
                         }
                     }
               }
+           }
+           .friends {
+               color:#fff;
+               margin-top:10px;
            }
           
        }

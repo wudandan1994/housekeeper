@@ -3,7 +3,7 @@
         <header>
             <span @click="goBack"><van-icon size="20px" name="arrow-left"/></span>
             <span></span>
-            <span>游戏规则</span>
+            <router-link to="/home/totalPunch/taskrecord" tag="span">任务记录</router-link>
         </header>
         <div class="container">
            <div class="nationwide">
@@ -25,13 +25,13 @@
                    </div>
                   
               </div>
-               <div class="circle">
+               <div class="circle" :id="animate?'circle':''">
                        <img src="http://pay.91dianji.com.cn/circleinner.png" alt="">
                        <p><span>{{amount}}</span>现金红包到账</p>
                 </div>
            </div>
            <div class="invite">
-               <div class="share">
+               <div class="share" @click="handleGetAmount">
                     <p>现金红包已存至您的账户，前往查看</p>
                </div>
            </div>
@@ -43,23 +43,48 @@
 
 
 <script>
+import {axiosPost} from '@/lib/http'
+
 export default {
     data() {
         return {
             task:"",
             amount:"",
-            info:""
+            info:"",
+            animate:false,
+            amountSum:''
         }
     },
     methods:{
         goBack() {
             this.$router.go(-1)
-        }
+        },
+     
+         handleGetAmount(){
+            let url = '/customer/getCustomer';
+            let params = { };
+            axiosPost(url,params).then(res =>{
+                if(res.data.success){
+                    this.amountSum = res.data.data.amountSum;
+                    this.$router.push({
+                        path:"/personalCenter/income",
+                        query:{
+                             amountSum:this.amountSum
+                        }
+                    })
+                } else {
+                    this.$toast(res.data.message)
+                }
+            })
+         },
     },
     created () {
         this.task=this.$route.query.task
         this.amount=this.$route.query.amount
         this.info=this.$route.query.info
+        setTimeout(()=>{
+             this.animate=true
+        },100)
     }
 }
 </script>
@@ -95,6 +120,22 @@ export default {
                margin:30px 0;
                width:100%;
                position: relative;
+
+
+                 #circle{
+                  animation:  down .3s linear 1;
+                 -webkit-animation:  down .3s linear 1;
+
+                     @keyframes down {
+                        0%{
+                              bottom:500px;             
+                        } 
+                        100%{
+                               bottom:0;                            
+                        }
+                    }
+                 }
+
                 .circle {
                     width:300px;
                     position: absolute;
@@ -178,6 +219,7 @@ export default {
                }
              
            }
+          
            .invite {
               width:100%;
               box-sizing: border-box;
