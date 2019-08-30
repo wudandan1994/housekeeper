@@ -115,6 +115,7 @@ export default {
             headimg: '',
             taskList: [],
             sum: 0,
+            task:"",
         }
     },
     methods:{
@@ -128,8 +129,8 @@ export default {
                 if(!res.data.success) {
                     this.$toast(res.data.message)
                 } else {
+                    console.log(res,"查询结果")
                     if(res.data.code=="0"){
-
                         this.$router.push({
                             path:"/home/totalPunch/wallet",
                             query:{
@@ -138,11 +139,22 @@ export default {
                         })
 
                     } else {
+
+
+                    let type=res.data.data.type
+                    if(type=='1'){
+                        this.task="炫彩黄金任务"
+                    } else if(type=='2'){
+                        this.task="璀璨钻石任务"
+                    }
+
+
                         this.$router.push({
                             path:"/home/totalPunch/tasked",
                             query:{
                                 task:res.data.message,
-                                amount:res.data.data.amount                                
+                                amount:res.data.data.amount,
+                                info:this.task                                
                             }
                         })
                     }

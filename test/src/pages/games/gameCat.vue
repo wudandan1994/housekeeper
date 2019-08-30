@@ -1,295 +1,426 @@
 <template>
-  <div class="layout">
-      <div class="head">
-       <span @click="goBack"><van-icon name="arrow-left"/></span>
-        <span>CAT</span>
-        <span></span>
+    <div class="wrapper">
+        <div class="header">
+            <p @click="goBack"><van-icon size="20px" name="arrow-left"/></p>
+            <p>2048</p>
+            <span></span>
+        </div>
+        <div class="container">
+
+           <div class="btn btn-mg" @click="newGame">新游戏</div>
+             <div class="score">
+                <div>
+                    <span>分数</span>
+                    <span class="num">{{score}}</span>
+                </div>
+                <div>
+                    <span>最高纪录</span>
+                    <span class="num">{{bestScore}}</span>
+                </div>
+            </div>
+
+
+
+        </div>
+           
+        <div>
+            <div @click="discover" class="over" v-if="over">
+                <p>游戏结束</p>
+                <div class="btn" @click="newGame">再来一局</div>
+            </div>
+            <div class="box">
+                <div class="row" v-for="(row,index) in list" :key="index">
+                    <div class="col" :class="'n-'+col" v-for="(col,index) in row" :key="index">{{col}}</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <header>
-      <span class="scort">步数：{{step}}</span>
-      <button class="star" @click="init">New Game</button>
-      <span class="sd"></span>
-    </header>
-    <div class="all-container" @click="addBlock">
-      <span 
-        :class="`circle ${e.fill ? 'block':''}`"
-        :data-index="`${e.x}-${e.y}-${e.z}`" 
-        :style="`transform: translate(${cssTransition(e)});`"
-        v-for="(e,j) in map" 
-        :key="j"></span>
-      <span 
-        class="cat"
-        :style="`transform: translate(${cssTransition(cat)});`"
-      >猫啊</span>
-    </div>
-  </div>
 </template>
 
 <script>
-const dely = ms => new Promise(res=>setTimeout(res, ms))
-import map from "@/lib/map";
-class Stack {
-  constructor(){
-    this.map = map;
-  }
-  // 某个点是否存在
-  isExist({x,y,z}){
-    return this.map.find(e=> e.x ===x && e.y ===y && e.z ===z)
-  }
-  // 初始化棋盘，随机大约15个点
-  init(){
-    this.map.forEach((e,i)=>{
-      e.fill = false;
-      if(Math.random()>0.8 && i>0){
-        e.fill = true;
-      }
-    })
-  }
-  // 为某个确定点添加点击事件
-  add({x,y,z}){
-    this.map.filter(e=>!e.fill).forEach(e=>{
-      if(e.x==x&&e.y==y&&e.z==z){
-        e.fill = true;
-      }
-    })
-  }
-  // 找出周围6个点坐标
-  findAround({x,y,z}){
-    const container = []
-    container.push({x,y:y+1,z});
-    container.push({x,y,z:z+1});
-    container.push({x:x+1,y,z});
-    container.push({x,y:y+1,z:z+1});
-    container.push({x:x+1,y,z:z+1});
-    container.push({x:x+1,y:y+1,z});
-    return container.map(e=>{
-      const {x,y,z} = e;
-      if(x!==0&&y!==0&&z!==0){
-        const min = Math.min(x,y,z);
-        return {x:x-min,y:y-min,z:z-min}
-      } else {
-        return e
-      }
-    })
-  }
-  // 找出猫的下一步最可能靠近外面的那一步
-  findNext({x,y,z}) {
-    const canGo = this.findAround({x,y,z})
-      .filter(e=>this.isExist(e) ? !this.isExist(e).fill: true)
-    if(canGo.filter(e=>e.x>5||e.y>5||e.z>5).length>0){
-      return '神经🐱跑了'
-    } else if (canGo.length===0) {
-      return `神经猫被围住了`;
-    } else {
-      // 只有一条路可走，不需要计算
-      // 多条路可选，导出数组，交给path类来计算。
-      return canGo
-    }
-  }
-}
-window.times = 0;
-class Path {
-  constructor(){
-    this.pool = []
-  }
-  isStepInPathRepeat({
-    coord,
-    pathStack
-  }){
-    const {x,y,z} = coord;
-    return pathStack.find(e=> e.x ===x && e.y ===y && e.z ===z)
-  }
-  findPath({
-    coord,
-    pathStack=[]
-  }){
-    const {x,y,z} = coord;
-    const nextStep = stack.findNext({x,y,z})
-    if(typeof nextStep === 'string'){
-      if(this.pool.length>0){
-        const minLen = Math.min(...this.pool.map(e=>e.length))
-        if(pathStack.length < minLen){
-          this.pool.push(pathStack)
+    export default {
+        data() {
+            return {
+                size: 4,
+                score: 0,
+                list: [],
+                intiNum: [2, 4],
+                pr: 0.9,
+                score: 0,
+                bestScore: localStorage.getItem('bestScore'),
+                over: false,
+                direction: [{
+                    x: 0,
+                    y: -1
+                }, {
+                    x: 0,
+                    y: 1
+                }, {
+                    x: -1,
+                    y: 0
+                }, {
+                    x: 1,
+                    y: 0
+                }]
+            }
+        },
+        mounted() {
+            //初始化数组
+            this.init()
+        },
+        methods: {
+
+          discover(){
+              this.over=false
+          },
+
+            goBack(){
+                this.$router.go(-1)
+            },
+            init() {
+                this.newGame()
+                document.addEventListener('keyup', this.keyDown)
+            },
+            newGame() {
+                this.score = 0
+                this.over = false
+                this.list = Array.from(Array(this.size)).map(() => Array(this.size).fill(undefined))
+                this.setRandom()
+            },
+            //插入新格子
+            setRandom() {
+                if (this.hasAvailableCells()) {
+                    let [x, y] = this.randomAvailableCells()
+                    this.list[x][y] = this.randomValue()
+                }
+            },
+            //获取数值
+            randomValue() {
+                return Math.random() < this.pr ? this.intiNum[0] : this.intiNum[1]
+            },
+            //获取随机一个空格子坐标
+            randomAvailableCells() {
+                let cells = this.availableCells()
+                if (cells.length) {
+                    return cells[Math.floor(Math.random() * cells.length)]
+                }
+            },
+            //所有空格子的坐标
+            availableCells() {
+                let cells = []
+                for (let i = 0; i < this.size; i++) {
+                    for (let j = 0; j < this.size; j++) {
+                        if (!this.list[i][j]) {
+                            cells.push([i, j])
+                        }
+                    }
+                }
+                return cells
+            },
+            //是否存在空格子
+            hasAvailableCells() {
+                return !!this.availableCells().length
+            },
+            hasMergedCells() {
+                for (let i = 0; i < this.size; i++) {
+                    for (let j = 0; j < this.size; j++) {
+                        let cell = this.list[i][j]
+                        if (cell) {
+                            for (let dir = 0; dir < 4; dir++) {
+                                let vector = this.direction[dir]
+                                if (this.withinBounds(i + vector.x, j + vector.y)) {
+                                    let other = this.list[i + vector.x][j + vector.y]
+                                    if (other && other === cell) {
+                                        return true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return false
+            },
+            withinBounds(x, y) {
+                return x > 0 && y > 0 && x < this.size && y < this.size
+            },
+            isAvailable() {
+                return this.hasAvailableCells() || this.hasMergedCells()
+            },
+            //获取0-n的随机数
+            randomNum(index) {
+                return Math.floor(Math.random() * index)
+            },
+            //键盘监听事件
+            keyDown(e) {
+                let arr = null
+                switch (e.keyCode) {
+                    case 38: //上
+                        this.move(1)
+                        break
+                    case 40: //下
+                        this.move(3)
+                        break
+                    case 37: //左
+                        this.move(0)
+                        break
+                    case 39: //右
+                        this.move(2)
+                        break
+                }
+                this.setRandom()
+            },
+            //移动算法，i表示旋转次数
+            move(i) {
+                let arr = this.rotate(Array.from(this.list), i).map((item, index) => {
+                    return this.moveLeft(item)
+                })
+                this.list = this.rotate(arr, this.size - i)
+                this.setLocalstorage()
+                if (!this.isAvailable()) {
+                    this.over = true
+                }
+            },
+            //单行左移
+            moveLeft(list) {
+                let _list = [] //当前行非空格子
+                let flg = false
+                for (let i = 0; i < this.size; i++) {
+                    if (list[i]) {
+                        _list.push({
+                            x: i,
+                            merged: false,
+                            value: list[i]
+                        })
+                    }
+                }
+                _list.forEach(item => {
+                    let farthest = this.farthestPosition(list, item)
+                    let next = list[farthest - 1]
+                    if (next && next === item.value && !_list[farthest - 1].merged) {
+                        //合并
+                        list[farthest - 1] = next * 2
+                        list[item.x] = undefined
+                        item = {
+                            x: farthest - 1,
+                            merged: true,
+                            value: next * 2
+                        }
+                        this.score += next * 2
+                    } else {
+                        if (farthest != item.x) {
+                            list[farthest] = item.value
+                            list[item.x] = undefined
+                            item.x = farthest
+                        }
+                    }
+                })
+                return list
+            },
+            //逆时针旋转
+            rotate(arr, n) {
+                n = n % 4
+                if (n === 0) return arr
+                let tmp = Array.from(Array(this.size)).map(() => Array(this.size).fill(undefined))
+                for (let i = 0; i < this.size; i++) {
+                    for (let j = 0; j < this.size; j++) {
+                        tmp[this.size - 1 - i][j] = arr[j][i]
+                    }
+                }
+                if (n > 1) tmp = this.rotate(tmp, n - 1)
+                return tmp
+            },
+            //左边最远空格的x位置
+            farthestPosition(list, cell) {
+                let farthest = cell.x
+                while (farthest > 0 && !list[farthest - 1]) {
+                    farthest = farthest - 1
+                }
+                return farthest
+            },
+            setLocalstorage() {
+                let score = localStorage.getItem('bestScore')
+                if (score) {
+                    if (this.score > score) {
+                        localStorage.setItem('bestScore', this.score)
+                        this.bestScore = this.score
+                    }
+                } else {
+                    localStorage.setItem('bestScore', this.score)
+                    this.bestScore = this.score
+                }
+            }
         }
-      } else {
-        this.pool.push(pathStack)
-      }
-    }else{
-      if(this.pool.length>0){
-        const minLen = Math.min(...this.pool.map(e=>e.length))
-        // 将路径池里面的路径，清除路径过长的那些。
-        this.pool = this.pool.filter(e=> e.length <= minLen)
-        // 如果本身步数已经比我的this.pool里面的某条已完成路径的步数还要多，则根本没有计算下去的必要。
-        if (pathStack.length >= minLen) return
-      }
-      nextStep.forEach(e=>{
-        if(pathStack.length > 0 && this.isStepInPathRepeat({pathStack,coord:e})) return
-        window.times++;
-        if(window.times>2000)return
-        // console.log('计算次数',window.times);
-        this.findPath({coord:e,pathStack:[...pathStack,e]})
-      })
     }
-  }
-}
-const stack = new Stack();
-export default {
-  data() {
-    return {
-      step: 0,
-      cat: {
-        x: 0,
-        y: 0,
-        z: 0
-      },
-      map: stack.map,
-    };
-  },
-  mounted() {
-    window.app = this;
-    window.stack = stack;
-  },
-  created(){
-    stack.init();
-  },
-  methods: {
-    cssTransition(e) {
-      return `${(-e.x+(e.y+e.z)/2) *55}px,${((e.y-e.z)*1.733/2 ) * 55}px`
-    },
-    goBack(){
-      this.$router.go(-1)
-    },
-    addBlock(e) {
-      window.times = 0;
-      let index = e.target.dataset.index
-      if (!index) return;
-      index = index.split('-')
-      stack.add({
-        x: index[0],
-        y: index[1],
-        z: index[2]
-      })
-      const path = new Path();
-      path.findPath({coord:this.cat,pathStack:[this.cat]});
-      const pool = path.pool;
-      const nextStep = stack.findNext(this.cat);
-      this.step++;
-      if(typeof nextStep === 'string') {
-        // alert(nextStep);
-        if(nextStep === '神经猫被围住了'){
-          alert(`你一共花了${this.step}步数，超过了全国${((this.step/30>0) ? (this.step/30) : 5 ).toFixed(2) * 100}%的人`)
-        }
-        return
-      }else if( pool.length === 0){
-        // console.log('crazy')
-        this.cat = nextStep[0];
-        // 没路了。神经猫要发神经了
-      }else{
-        // 有出路
-        this.cat = pool[0][1];
-        path.pool[0].forEach(e=>{
-          document.querySelector(`span[data-index='${e.x}-${e.y}-${e.z}']`).style.backgroundColor='red';
-          setTimeout(() => {
-            document.querySelector(`span[data-index='${e.x}-${e.y}-${e.z}']`).style.backgroundColor='';
-          }, 1000);
-        })
-      }
-      if(this.cat.x ===5){
-        alert('猫跑了')
-      }else if(this.cat.y === 5){
-        alert('猫跑了')
-      }else if(this.cat.z === 5){
-        alert('猫跑了')
-      }
-    },
-    init() {
-      this.step = 0;
-      this.cat = {x:0,y:0,z:0};
-      stack.init();
-    }
-  }
-};
 </script>
 
-<style lang="less" scoped>
-body {
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  .layout {
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    overflow: auto;
-
-    .head {
-        background-color: #4965AE;
-        width:100%;
-        height: 86px;
-        line-height: 86px;
-        padding-top:10px;
-        font-size:28px;
-        color:#fff;
-        display: flex;
-        top:0;
-        position: fixed;
-        z-index:999;
-        justify-content: space-between;
-    }
-     
-    header {
-      display: flex;
-      max-width: 600px;
-      width: 100%;
-      padding: 20px;
-      flex-direction: row;
-      justify-content: space-around;
-      margin-top:90px;
-      
-      button {
-        border: none;
-        background: #8f7a66;
-        color: #fff;
-        font-size: 20px;
-        padding: 10px 30px;
-        cursor: pointer;
-        border-radius: 10px;
-      }
-      span {
-        width: 100px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-    .all-container {
-      background-color: #666;
-      width: 600px;
-      height:600px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top:150px;
-      .circle {
-        width: 40px;
-        height:40px;
-        background-color: #b5b5b5;
-        border-radius: 100%;
-        position: absolute;
-        cursor: pointer;
-        &.block {
-          background-color: #ff845e;
-          cursor: no-drop;
+<style scoped lang="less">
+    .wrapper {
+        // display: flex;
+        // justify-content: center;
+        // flex-direction: column;
+        // align-items: center;
+        .header {
+           background: #4B66AF;
+           width:100%;
+           height: 86px;
+           line-height: 86px;
+           padding-top:10px;
+           color:#fff;
+           display: flex;
+           font-size:32px;
+           z-index:999;
+           position: fixed;
+           justify-content: space-between;
         }
-      }
-      .cat {
-        z-index: 1;
-        cursor: no-drop;
-      }
+        .container {
+           padding-top:106px;
+           .btn {
+            //  margin-top:20px;
+            
+              display: inline-block;
+              padding: 0 20px;
+              height: 80px;
+              line-height: 80px;
+              border-radius: 5px;
+              cursor: pointer;
+              text-align: center;
+              color: #f9f6f2;
+              background: #8f7a66;
+              &.btn-mg {
+                  // margin-bottom: 10px;
+                   margin:0 auto;
+              }
+         }
+
+           .score {
+                box-sizing: border-box;
+                margin:20px;
+                display: flex;
+                justify-content: space-between;
+                height: 80px; // line-height: 60px;
+                div {
+                    // width: 100px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 30px;
+                    border-radius: 5px;
+                    background: #bbada0;
+                   font-size: 34px;
+                    .num {
+                        font-size: 30px;
+                        font-weight: bold;
+                        color: #ffffff;
+                        display:inline-block;
+                        padding-top:10px;
+                    }
+                    &:last-child {
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+        }
+        .over {
+            position: fixed;
+            // width: 400px;
+            // height: 400px;
+            top:0;
+            right:0;
+            bottom:0;
+            left:0;
+            background: rgba(238, 228, 218, 0.73);
+            z-index: 1000;
+            border-radius: 5px;
+            text-align: center;
+            color: #8f7a66;
+            p {
+                font-size: 60px;
+                font-weight: bold;
+                margin-top:30%;
+                height: 60px;
+                line-height: 60px;
+            }
+            .btn {
+              margin-top:25%;
+              font-size: 30px;
+              color:#000;
+            }
+        }
+       
+        .box {
+            width: 600px;
+            height:600px;
+            padding: 15px;
+            margin-top:30px;
+            margin-left:10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+            border-radius: 5px;
+            background: #bbada0;
+            font-size: 30px;
+            .row {
+                width: 100%;
+                height: 23%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                font-size: 30px;
+
+                .col {
+                    width: 23%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 30px;
+                    border-radius: 3px;
+                    background: #cec1b3;
+                    &.n-2 {
+                        background: #f8f3e8;
+                    }
+                    &.n-4 {
+                        background: #ede0c8;
+                    }
+                    
+                    &.n-8 {
+                        background: #f26179;
+                    }
+                    &.n-16 {
+                        background: #f59563;
+                    }
+                    &.n-32 {
+                        background: #f67c5f;
+                    }
+                    &.n-64 {
+                        background: #f65e36;
+                    }
+                    &.n-128 {
+                        background: #edcf72;
+                    }
+                    &.n-256 {
+                        background: #edcc61;
+                    }
+                    &.n-512 {
+                        background: #9c0;
+                    }
+                    &.n-1024 {
+                        background: #3365a5;
+                    }
+                    &.n-2048 {
+                        background: #09c;
+                    }
+                    &.n-4096 {
+                        background: #a6bc;
+                    }
+                    &.n-8192 {
+                        background: #93c;
+                    }
+                }
+            }
+        }
     }
-  }
-}
 </style>

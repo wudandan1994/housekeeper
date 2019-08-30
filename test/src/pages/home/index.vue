@@ -109,7 +109,7 @@
                                     <!-- <span>官方渠道</span> -->
                                 </div>
                             </li>
-                            <li @click="handlecollect('/home/receivables',false,'')">
+                            <li @click="handlecollect('/home/receivables',true,'2')">
                             <!-- <li @click="handleIsAuth('/home/collect',false,'')"> -->
                                 <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
                                 <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
@@ -239,7 +239,7 @@
                         <div class="remen_tuijian">
                             <div class="more"><van-icon name="arrow" color="#cccccc" size="30px"/></div>
                             <!-- <div  @click="handleIsAuth('/home/receivables',false,'')" class="secret"> -->
-                            <div  @click="handlecollect('/home/collect',false,'')" class="secret">
+                            <div  @click="handlecollect('/home/collect',true,'2')" class="secret">
                                 <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan.png" size="34px" /></div>
                                 <div class="center">在线收款</div>
                             </div>
@@ -670,9 +670,7 @@ export default {
                     }
                      axiosPost("/behavior/insertBehavior",data)
                     .then(res=>{
-                         this.$router.push(obj);
-                        
-                    })
+                      })
                 } 
                 this.showpass=true
                
@@ -723,6 +721,7 @@ export default {
         handleGarbage(){
             this.$router.push('/garbage');
         },
+        //消息咨询
         getNews(){
             axiosPost("/content/getInformation")
             .then(res=>{
@@ -732,6 +731,15 @@ export default {
                     this.news="敬请期待"
                 }
             })
+        },
+        //获取外部链接
+        getLinks(){
+              axiosPost("/content/getOutUrl")
+              .then(res=>{
+                //   console.log(res,"外部地址")
+                //   console.log(res.data.data,"dizhi")
+              })
+             
         }
     },
     created(){
@@ -740,6 +748,7 @@ export default {
         this.city=this.$store.state.wechat.city;
         this.lev=this.$store.state.wechat.level;
         this.getNews()
+        // this.getLinks()
          if(this.lev=='0'){
                         this.lev="免费粉丝"
                     } else if(this.lev=='1'){

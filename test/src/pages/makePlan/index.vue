@@ -64,7 +64,10 @@
                           <input class="city" readonly  v-model="area" type="text" placeholder="位置">
                           <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
-                         <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
+                         <!-- <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/> -->
+                        <van-popup v-model="citypopup" position="bottom" :overlay="false">
+                           <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
+                      </van-popup>  
                   </div>
 
 
@@ -92,13 +95,25 @@
                           <input class="city" readonly  v-model="startdate" type="text" >
                           <p><span @click="showStartpicker"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
-                       <van-datetime-picker
+                       <!-- <van-datetime-picker
                         v-model="currentDate"
                         type="date"
                           @confirm="confirmStart"
                         v-show="showStart"
                          @cancel="cancelStart"
-                        />
+                        /> -->
+
+                     <van-popup v-model="startpop" position="bottom" :overlay="false">
+                             <van-datetime-picker
+                            v-model="currentDate"
+                            type="date"
+                            @confirm="confirmStart"
+                            v-show="showStart"
+                            @cancel="cancelStart"
+                            />
+
+                       </van-popup>
+
                   </div>
 
                      <!-- <div class="eara">
@@ -113,25 +128,32 @@
                           <input class="city" readonly  v-model="enddate" type="text" >
                           <p><span @click="showEndpicker"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
-                       <van-datetime-picker
+                       <!-- <van-datetime-picker
                         v-model="currentDate"
                         type="date"
                         @confirm="confirmEnd"
                         v-show="showEnd"
                         @cancel="cancelEnd"
-                        />
+                        /> -->
+
+                         <van-popup v-model="endpopup" position="bottom" :overlay="false">
+                            <van-datetime-picker
+                            v-model="currentDate"
+                            type="date"
+                            @confirm="confirmEnd"
+                            v-show="showEnd"
+                            @cancel="cancelEnd"
+                            />
+                      </van-popup>
+
                   </div>
                   
-
-                 
-
                </div>
            </div>
             <div class="make">
                 <van-button size="large" @click="makePlan" round type="info">制定计划</van-button>
             </div>
         </div>
-       
     </div>
 </template>
 
@@ -155,8 +177,10 @@ export default {
            showFlag:false,
            showStart:false,
            showEnd:false,
+           citypopup:false,
+           startpop:false,
+           endpopup:false,
            enddate:"",
-           
            columns: [
                 {
                 values: Object.keys(citys),
@@ -224,9 +248,11 @@ export default {
          },
          showStartpicker(){
              this.showStart=true
+              this.startpop=true
          },
          showEndpicker(){
              this.showEnd=true
+             this.endpopup=true
          },
          onConfirm(value){
              this.area=value.join("-")
@@ -237,6 +263,7 @@ export default {
          },
          showPick(){
              this.showFlag=true
+             this.citypopup=true
          },
         makePlan(){
             if(this.payment.trim().length===0 || this.amount.trim().length===0 || this.area.trim().length===0 || this.startdate.trim().length===0 || this.enddate.trim().length===0){

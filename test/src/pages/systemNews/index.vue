@@ -29,8 +29,6 @@ export default {
         getNews(){
             axiosPost("/content/getSystem")
             .then(res=>{
-                console.log(res,"消息")
-                console.log(res.data.data,"xiaoxi")
                 if(res.data.success){
                     this.text=res.data.data
 

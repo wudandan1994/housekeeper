@@ -8,7 +8,7 @@
         <div class="container">
            <div class="nationwide">
                <p class="first">{{task}}</p>
-               <p class="second">璀璨钻石任务</p>
+               <p class="second">{{info}}</p>
            </div>
            <div class="wallet">
               <div class="open">
@@ -47,7 +47,8 @@ export default {
     data() {
         return {
             task:"",
-            amount:""
+            amount:"",
+            info:""
         }
     },
     methods:{
@@ -58,7 +59,7 @@ export default {
     created () {
         this.task=this.$route.query.task
         this.amount=this.$route.query.amount
-
+        this.info=this.$route.query.info
     }
 }
 </script>

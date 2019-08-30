@@ -274,12 +274,12 @@ export default {
                   link: 'http://pay.91dianji.com.cn/#/home?promotioncode=' + that.$store.state.wechat.promotioncode, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                   imgUrl: 'http://pay.91dianji.com.cn/logo.png', // 分享图标
                   success: function (res) {
-                      alert("分享成功之后调用的接口")
                     // 在这里写任务执行成功接口
                         axiosPost("/activity/executeActivity")
                         .then(res=>{
-                          console.log("分享成功的回调",res);
-                          alert("调用接口")
+
+                            this.$toast(res.data.message)
+                            
                         })
                   }
               });
@@ -290,12 +290,12 @@ export default {
                   link: 'http://pay.91dianji.com.cn/#/home?promotioncode=' + that.$store.state.wechat.promotioncode, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                   imgUrl: 'http://pay.91dianji.com.cn/logo.png', // 分享图标
                   success: function (res) {
-                      alert("分享成功之后调用的接口")
                     // 在这里写任务执行成功接口
                         axiosPost("/activity/executeActivity")
                         .then(res=>{
-                          console.log("分享成功的回调",res);
-                          alert("调用接口")
+                         
+                            this.$toast(res.data.message)
+                        
                         })
                   }
               });
