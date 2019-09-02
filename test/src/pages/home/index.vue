@@ -617,8 +617,6 @@ export default {
                           return
                       } else {
                           storage.remove('openid');
-                        //   storage.remove("cxcard")
-                        //   storage.remove("cxcardnumber")
                           that.$router.push("/logIn")
                       }
                      

@@ -31,13 +31,14 @@
            <div class="invite" @click="invite" >
                <div class="share">
                    <!-- <p></p> -->
-                    <p><van-icon size="28px" name="http://pay.91dianji.com.cn/wx.png"/></p>
-                    <p class="wxin">点击右上角分享至好友或朋友圈</p>
+                    <p  @click="invite"><van-icon size="28px" name="http://pay.91dianji.com.cn/wx.png"/></p>
+                    <!-- <p class="wxin">点击右上角分享至好友或朋友圈</p> -->
+                    <p  @click="invite" class="wxin">点击分享至好友或朋友圈</p>
+
                     <!-- <p></p> -->
                </div>
                
          </div>
-         <!-- <p class="friends">点击右上角分享至好友或朋友圈</p> -->
 
              <div class="sharemove" v-show="Sharewxf">
                <div class="wx">
@@ -45,11 +46,11 @@
                     <ul>
                         <li id="wxF"  @click="wxfri">
                             <p><van-icon name="http://pay.91dianji.com.cn/wx.png" size="40px"/></p>
-                            <p>分享给好友</p>
+                            <p class="friends">分享给好友</p>
                         </li>
                         <li @click="wxcir">
                             <p><van-icon color="white"  size="40px"  name="http://pay.91dianji.com.cn/pyq.png"/></p>
-                            <p>分享到朋友圈</p>
+                            <p class="friends">分享到朋友圈</p>
                         </li>
                     </ul>
                <div class="button">
@@ -78,7 +79,7 @@ export default {
             this.$router.go(-1)
         },
         invite(){
-
+            this.Sharewxf=!this.Sharewxf
         },
         showCover(){
         //    this.Sharewxf=!this.Sharewxf
@@ -122,16 +123,10 @@ export default {
                 //  thumbs:"../../assets/images/slt.jpg",
                  href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode, extra: { scene: "WXSceneTimeline" } }
                 , function(){
-                // alert("分享成功！");
 
                  axiosPost("/activity/executeActivity")
                 .then(res=>{
-                alert("开始执行任务555555")
-                if(res.data.success){
-                    alert("已经分享到微信，领取红包 22222")
-                } else {
-                    alert("分享失败，1111111")
-                }
+               
                 })
 
 
@@ -154,12 +149,7 @@ export default {
 
             axiosPost("/activity/executeActivity")
             .then(res=>{
-               alert("开始执行任务555555")
-               if(res.data.success){
-                   alert("已经分享到微信，领取红包 22222")
-               } else {
-                   alert("分享失败，1111111")
-               }
+              
             })
 
         }, function (e) {
@@ -207,13 +197,16 @@ export default {
             .sharemove {
                 width:100%;
                 height:400px;
+                .friends {
+                    color:#fff;
+                }
                 .shareBtn {
                     margin:100px 0px 50px 100px;
                     width:100px;
                     text-align: center;
                 }
                 ul{
-                    padding-top:50px;
+                    padding-top:30px;
                     display: flex;
                     justify-content: space-between;
                     box-sizing: border-box;
@@ -306,6 +299,7 @@ export default {
              
            }
            .invite {
+               margin-top:100px;
               width:100%;
               height:100px;
               box-sizing: border-box;

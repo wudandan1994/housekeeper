@@ -262,49 +262,49 @@ export default {
                                         }
                                   })
                                 } else {
-                                    let datas={
-                                        cardId:i.cardNo
-                                    }
-                                    axiosPost("/fwspay/getFwsMerchant",datas)   // 查询有没有商户号   通道三
-                                    .then(res=>{
-                                        console.log(res,"第三个通道查询结果")
+                                //     let datas={
+                                //         cardId:i.cardNo
+                                //     }
+                                //     axiosPost("/fwspay/getFwsMerchant",datas)   // 查询有没有商户号   通道三
+                                //     .then(res=>{
+                                //         console.log(res,"第三个通道查询结果")
                                        
-                                   if(res.data.success){ 
+                                //    if(res.data.success){ 
 
-                                         let subMerchId=res.data.data.subMerchId
+                                //          let subMerchId=res.data.data.subMerchId
 
-                                       axiosPost("/fwspay/getBindCardExist",datas)    // 继续查询有没有绑卡
-                                       .then(res=>{
-                                           console.log(res,"查询是否绑卡")
-                                           if(res.data.success){
-                                                storage.set('channel',"1");
+                                //        axiosPost("/fwspay/getBindCardExist",datas)    // 继续查询有没有绑卡
+                                //        .then(res=>{
+                                //            console.log(res,"查询是否绑卡")
+                                //            if(res.data.success){
+                                //                 storage.set('channel',"1");
                                             this.$router.push({
                                                 path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
                                                 query:{
                                                     info:i
                                                 }
                                             })
-                                           } else {
-                                               this.$router.push({
-                                                   path:"/home/easyPay/easycard",
-                                                   query:{
-                                                       info:i,
-                                                       subMerchId,
-                                                   }
-                                               })
-                                           }
-                                       })
+                                //            } else {
+                                //                this.$router.push({
+                                //                    path:"/home/easyPay/easycard",
+                                //                    query:{
+                                //                        info:i,
+                                //                        subMerchId,
+                                //                    }
+                                //                })
+                                //            }
+                                //        })
 
-                                        }  else {
-                                            console.log("查询失败了，因为没有签约")
-                                            this.$router.push({
-                                                path:"/home/easypay",
-                                                query:{
-                                                    info:i
-                                                }
-                                            })
-                                        }
-                                    })
+                                //         }  else {
+                                            // console.log("查询失败了，因为没有签约")
+                                            // this.$router.push({
+                                            //     path:"/home/easypay",
+                                            //     query:{
+                                            //         info:i
+                                            //     }
+                                            // })
+                                        // }
+                                    // })
                                }
                          })
                          .catch(err=>{
