@@ -135,8 +135,8 @@ export default {
                     })
                     .catch(res =>{
                     })
-                  }else{
-                    // 已注册
+                  }else{    // 已注册
+                   
                     // 登录
                     let params = {
                         openid: this.$store.state.wechat.openid

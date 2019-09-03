@@ -32,8 +32,8 @@
                <div class="share">
                    <!-- <p></p> -->
                     <p  @click="invite"><van-icon size="28px" name="http://pay.91dianji.com.cn/wx.png"/></p>
-                    <!-- <p class="wxin">点击右上角分享至好友或朋友圈</p> -->
-                    <p  @click="invite" class="wxin">点击分享至好友或朋友圈</p>
+                    <p class="wxin">点击右上角分享至好友或朋友圈</p>
+                    <!-- <p  @click="invite" class="wxin">点击分享至好友或朋友圈</p> -->
 
                     <!-- <p></p> -->
                </div>

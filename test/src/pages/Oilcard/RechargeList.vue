@@ -31,8 +31,13 @@
                 <div class="middle center" v-else>
                    {{item.cardID}}
                 </div>
+                 <div class="numbers" >
+                      &nbsp;快递单号
+                     <span> {{item.expressNumber}}</span>
+                </div>
                 <div class="bottom" v-if="item.status == '1'">
                     <span class="center" @click="handleActivation(item.id,'1')">激活</span>
+                    <span class="center" @click="search('https://www.kuaidi100.com/','快递单号查询')" >查询</span>
                 </div>
                 <div class="bottom" v-if="item.status == '3'">
                     <span class="center">激活中</span>
@@ -88,6 +93,33 @@ export default {
     methods:{
         handleBack(){
             this.$router.go(-1);
+        },
+        search(url,title){
+
+
+            //   this.$router.push({
+            //     path:"/loan/form/myOrder",
+            //     query:{
+            //             info:url,
+            //             title:title
+            //         }
+            //     })
+                            
+            if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                this.$router.push({
+                path:"/loan/form/myOrder",
+                query:{
+                    info:url,
+                    title:title
+                    }
+                 })
+                } else {
+                    location.href=url
+                }
+
+
+
+
         },
         handleaddress(parentNo){
             this.$router.push({
@@ -235,15 +267,25 @@ export default {
                 font-size: 28px;
                 color: #fff;
             }
+            .numbers {
+                width:90%;
+                height:50px;
+                margin:auto;
+                letter-spacing:12px;
+                color:#fff;
+                box-sizing: border-box;
+                font-size: 40px;
+                padding: 0px 15px;
+            }
             .middle{
                 width: 90%;
-                height: 40%;
+                height: 30%;
                 margin: auto;
                 font-size: 40px;
                 color: #fff;
                 letter-spacing: 12px;
                 box-sizing: border-box;
-                padding: 0px 20px;
+                padding: 0px 15px;
             }
             .bottom{
                 width: 90%;

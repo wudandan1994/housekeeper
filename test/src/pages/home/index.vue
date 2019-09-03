@@ -640,12 +640,10 @@ export default {
             };
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                //    console.log('查询个人设置成功',res)
                    this.iscertification = res.data.data.iscertification;
                    this.$store.commit('mobile',res.data.data.mobile);
                 }
             }).catch(res =>{
-                // console.log('查询个人设置失败',res);
             })
         },
         handlecollect(obj,boo,i){
@@ -734,10 +732,9 @@ export default {
         getLinks(){
               axiosPost("/content/getOutUrl")
               .then(res=>{
-                //   console.log(res,"外部地址")
-                //   console.log(res.data.data,"dizhi")
+                  console.log(res,"外部地址")
+                  console.log(res.data.data,"dizhi")
               })
-             
         }
     },
     created(){

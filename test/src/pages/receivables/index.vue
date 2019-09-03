@@ -284,11 +284,11 @@ export default {
                                 this.componentload = false;
                                 
                                 //  this.$router.push({
-                                //  path:"/loan/form/myOrder",
-                                //  query:{
-                                //         info:url,
-                                //         title:"支付"
-                                //     }
+                                //     path:"/loan/form/myOrder",
+                                //     query:{
+                                //             info:url,
+                                //             title:"支付"
+                                //         }
                                 //     })
                             
                             if (!navigator.userAgent.match(/iPad|iPhone/i)){

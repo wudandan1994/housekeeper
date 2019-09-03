@@ -4,7 +4,9 @@
                 <div class="arr">
                     <!-- <p @click="cancelguide"><van-icon size="40px" color="rgba(0,0,0,.6)"   name="clear" /></p> -->
                     <img  @click.self="cancelguide"  src="http://pay.91dianji.com.cn/cancel.png" alt="" srcset="">
+                  
                 </div>
+                <p class="remind" @click="remind"><span>不再提醒</span></p>
                 <div class="guide-first" v-show="shouGuideFirst">
                      <div class="arrowred">
                          <div class="arrowright">
@@ -69,6 +71,7 @@
 </template>
 
 <script>
+import storage from '@/lib/storage'
 export default {
     data(){
         return {
@@ -80,6 +83,11 @@ export default {
         }
     },
     methods: {
+        remind(){
+              storage.set("isremind","false")
+              this.showguide=false
+        },
+
         cancelguide(){
            this.showguide=false
            this.guidei=1
@@ -112,10 +120,14 @@ export default {
       
     },
     created () {
-        setTimeout(()=>{
-            this.showguide=true
-        },4000)
-        
+
+        if(storage.get("isremind")=='false'){
+             this.showguide=false
+        } else {
+             setTimeout(()=>{
+                this.showguide=true
+             },4000)
+        }
     }
 
 }
@@ -134,11 +146,27 @@ export default {
     z-index:8888;
     .arr {
         width:400px;
-        height:400px;
-        margin:left;                                                                                                                         
+        height:400px;                                                                                                                       
         img {
             width:100%;
         }
+    }
+    .remind {
+        position: absolute;
+        top:15%;
+        right:10%;
+        font-size: 34px;
+        text-align: right;
+        padding-right:30px;
+        span {
+            display:inline-block;
+            border:1px solid #ccc;
+            padding:10px 15px;
+            border-radius: 20px;
+            background-color: #fff;
+            color:#aaa;
+        }
+
     }
     .guide-first {
         width:100%;
@@ -146,7 +174,7 @@ export default {
         .arrowred {
             width:100%;
             height:300px;
-            margin-top:156px;
+            margin-top:158px;
             display:flex;
             .arrowright,
             .light {
