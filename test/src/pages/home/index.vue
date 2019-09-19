@@ -296,7 +296,7 @@
                     
                 </div>
                 <!-- 绑定手机模块 -->
-                <!-- <bindMobile></bindMobile> -->
+                <bindMobile></bindMobile>
                 <notice></notice>
                  
             </van-pull-refresh>
@@ -340,7 +340,7 @@
 <script>
 import footerMenu from '@/components/footer'
 
-// import bindMobile from '@/components/bindMobile'
+import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -348,7 +348,7 @@ import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-    //   bindMobile,
+      bindMobile,
       notice,
   },
      data() {
@@ -473,26 +473,26 @@ export default {
             
         },
         changeLink(url,title){
-              this.$router.push({
-                     path:"/loan/form/myOrder",
-                     query:{
-                         info:url,
-                         title:title
-                     }
-                 })
-
-            
-            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
-            //      this.$router.push({
+            //   this.$router.push({
             //          path:"/loan/form/myOrder",
             //          query:{
             //              info:url,
             //              title:title
             //          }
             //      })
-            //  } else {
-            //      location.href=url
-            //  }
+
+            
+             if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                 this.$router.push({
+                     path:"/loan/form/myOrder",
+                     query:{
+                         info:url,
+                         title:title
+                     }
+                 })
+             } else {
+                 location.href=url
+             }
         },
         handleAuth(){
              if(this.iscertification == '2'){
@@ -762,12 +762,12 @@ export default {
                     }
 
         this.handleSearchAuths()
-         this.automatic() //自动登录
-         this.getUpdate() //获取版本
+        //  this.automatic() //自动登录
+        //  this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        this.update() 
+        // this.update() 
        
       
     }

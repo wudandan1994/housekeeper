@@ -416,6 +416,10 @@ const taskrecordComponent = () => import('@/pages/totalPunch/taskrecord.vue')  /
 
 const smallAmountMCComponent = () => import('@/pages/smallAmountMC')  //mc小额  
 
+const largeAmountHCComponent = () => import('@/pages/largeAmountHC')  //汇潮大额 注册商户
+const sendmsgHCComponent = () => import('@/pages/largeAmountHC/sendmsgHC.vue')  //汇潮大额 发送短信
+const uploadmsgComponent = () => import('@/pages/largeAmountHC/uploadmsg.vue')  //汇潮大额 短信验证
+
 
 
 export default new Router({
@@ -441,6 +445,11 @@ export default new Router({
     {path:"/home/games/gameCat",component:gameCatComponent},  //cat游戏  
     {path:"/home/games/gameClock",component:gameClockComponent},  //clock游戏  
     {path:"/home/smallAmountMC",component:smallAmountMCComponent},  //mc小额  
+
+    {path:"/home/largeAmountHC",component:largeAmountHCComponent},  //汇潮大额 注册商户  
+    {path:"/home/largeAmountHC/sendmsgHC",component:sendmsgHCComponent},  //汇潮大额 发送短信 
+    {path:"/home/largeAmountHC/uploadmsg",component:uploadmsgComponent},  //汇潮大额 短信验证
+
 
 
     {path:"/home/receiveXH",component:receiveXHComponent},  //收单小惠通道  

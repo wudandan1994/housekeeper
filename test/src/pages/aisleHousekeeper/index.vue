@@ -261,79 +261,68 @@ export default {
                                           }
                                      })
                                 } else {
+                                    let datas={
+                                        cardId:i.cardNo
+                                     }
+                                    axiosPost("/fwspay/getFwsMerchant",datas)   // 查询有没有商户号   通道三
+                                    .then(res=>{
+                                      if(res.data.success){ 
 
-                                      storage.set('channel',"1")
-                                        this.$router.push({
-                                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                                            query:{
-                                                info:i
-                                               }
-                                             })
+                                         let subMerchId=res.data.data.subMerchId
 
+                                       axiosPost("/fwspay/getBindCardExist",datas)    // 继续查询有没有绑卡
+                                       .then(res=>{
+                                           if(res.data.success){
 
-                                         // let datas={
-                                    //     cardId:i.cardNo
-                                    // }
-                                    // axiosPost("/fwspay/getFwsMerchant",datas)   // 查询有没有商户号   通道三
-                                    // .then(res=>{
-                                    //   if(res.data.success){ 
-
-                                    //      let subMerchId=res.data.data.subMerchId
-
-                                    //    axiosPost("/fwspay/getBindCardExist",datas)    // 继续查询有没有绑卡
-                                    //    .then(res=>{
-                                    //        if(res.data.success){
-
-
-                                           
                                             // 查询mc是否有绑卡，若有则直接提交计划，若无，则去签约
 
-                                                // let cards={
-                                                //     creditCardNo:i.cardNo
-                                                // }
-                                                // axiosPost("/mcpay/getBindCardExist",cards)
-                                                // .then(res=>{
-                                                //     console.log(res,"mc通道")
-                                                //     if(res.data.success){
-                                                //         storage.set('channel',"1");
-                                                //         this.$router.push({
-                                                //             path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                                                //             query:{
-                                                //                 info:i
-                                                //             }
-                                                //         })
-                                                //     } else {
-                                                //         // console.log(res,"失败了")
-                                                //         this.$router.push({
-                                                //             path:"/home/smallAmountMC",
-                                                //             query:{
-                                                //                 cardnumber:i
-                                                //             }
-                                                //         })
-
-                                                //     }
-                                                // })  
-                                        //    } else {
-                                        //        this.$router.push({
-                                        //            path:"/home/easyPay/easycard",
-                                        //            query:{
-                                        //                info:i,
-                                        //                subMerchId,
-                                        //            }
-                                        //        })
-
-
-
+                                                let cards={
+                                                    creditCardNo:i.cardNo
+                                                }
+                                                axiosPost("/mcpay/getBindCardExist",cards)
+                                                .then(res=>{
+                                                    // console.log(res,"mc通道")
+                                                    if(res.data.success){
+                                                        storage.set('channel',"1");
+                                                        this.$router.push({
+                                                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                                            query:{
+                                                                info:i
+                                                            }
+                                                        })
+                                                    } else {
+                                                        this.$router.push({
+                                                            path:"/home/smallAmountMC",
+                                                            query:{
+                                                                cardnumber:i
+                                                            }
+                                                        })
+                                                    }
+                                                })  
+                                           } else {
+                                               this.$router.push({
+                                                   path:"/home/easyPay/easycard",
+                                                   query:{
+                                                       info:i,
+                                                       subMerchId,
+                                                   }
+                                               })
                                            }
                                     })
                               
                          .catch(err=>{
                             this.$toast("登录失败")
                          })
+                    } else {
+                        this.$toast(res.data.message)
                     }
-             })
+                })
              .catch(err=>{
                  this.$toast("登录失败")
+             })
+               }
+            })
+          }
              })
         },
          // 查询大额通道是否签约
@@ -353,13 +342,48 @@ export default {
                             }
                         })
                     } else {
-                            storage.set('channel',"2");
-                            this.$router.push({
-                                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                                query:{
-                                  info:i
-                             }
-                         })  
+                        let data={
+                            bankcardNum:i.cardNo
+                        }
+
+                        axiosPost("hcpay/getHcOpenCard",data)
+                        .then(res=>{
+                            // console.log(res,"查看是否签约")
+                            if(res.data.success){
+                                 storage.set('channel',"2");
+                                 this.$router.push({
+                                     path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                     query:{
+                                     info:i
+                                   }
+                                })  
+                            } else {
+                                // console.log("未签约")
+                                axiosPost("hcpay/getHcMerchant")
+                                .then(res=>{
+                                    // console.log(res,"查询是否注册")
+                                    if(res.data.success){   // 如果已注册,则直接去发送短信
+                                        let merchantno=res.data.data.merchantno
+                                        this.$router.push({
+                                        path:"/home/largeAmountHC/sendmsgHC",
+                                        query:{
+                                            merchantno:merchantno,
+                                            info:i
+                                        }
+                                })
+
+                                    } else {   // 去注册
+                                        this.$router.push({
+                                            path:"/home/largeAmountHC",
+                                            query:{
+                                                info:i
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        })
+
                      }
                 } else {
                     this.$toast(res.data.message)
@@ -414,7 +438,7 @@ export default {
                         this.vip ="免费粉丝";
                     }
                     else if(res.data.data.level == '1'){
-                        this.vip ="白金会员";
+                        this.vip ="黄金会员";
                     }else{
                         this.vip = "钻石会员";
                     }
