@@ -10,7 +10,7 @@
     
     <router-view/>
      <coverads name="fade"></coverads>
-     <guide></guide>
+     <!-- <guide></guide> -->
   </div>
 </template>
 
@@ -18,7 +18,7 @@
 import {axiosPost,axiosGet} from '@/lib/http'
 import storage from '@/lib/storage'
 import coverads from '@/components/coverads.vue'
-import guide from '@/components/guide.vue'
+// import guide from '@/components/guide.vue'
 
 
 
@@ -38,7 +38,7 @@ export default {
   },
   components: {
       coverads,
-      guide,
+      // guide,
   },
   methods:{
      // 微信授权

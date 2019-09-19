@@ -414,6 +414,7 @@ const walletComponent = () => import('@/pages/totalPunch/wallet.vue')  //签到�
 const taskedComponent = () => import('@/pages/totalPunch/tasked.vue')  //任务已完成
 const taskrecordComponent = () => import('@/pages/totalPunch/taskrecord.vue')  //任务记录
 
+const smallAmountMCComponent = () => import('@/pages/smallAmountMC')  //mc小额  
 
 
 
@@ -439,6 +440,8 @@ export default new Router({
     {path:"/home/games/gameElsb",component:gameElsbComponent},  //2048游戏 
     {path:"/home/games/gameCat",component:gameCatComponent},  //cat游戏  
     {path:"/home/games/gameClock",component:gameClockComponent},  //clock游戏  
+    {path:"/home/smallAmountMC",component:smallAmountMCComponent},  //mc小额  
+
 
     {path:"/home/receiveXH",component:receiveXHComponent},  //收单小惠通道  
     {path:"/home/receiveXH/cardCX",component:cardCXComponent},  //收单小惠通道储蓄卡管理 

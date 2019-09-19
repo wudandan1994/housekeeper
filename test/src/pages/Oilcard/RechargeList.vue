@@ -33,11 +33,11 @@
                 </div>
                  <div class="numbers" >
                       &nbsp;快递单号
-                     <span> {{item.expressNumber}}</span>
+                     <span id="mobile"> {{item.expressNumber}}</span>
                 </div>
                 <div class="bottom" v-if="item.status == '1'">
                     <span class="center" @click="handleActivation(item.id,'1')">激活</span>
-                    <span class="center" @click="search('https://www.kuaidi100.com/','快递单号查询')" >查询</span>
+                    <span class="test center"  data-clipboard-action="copy" data-clipboard-target="#mobile"  @click="handleCopy(item.expressNumber)" >复制</span>
                 </div>
                 <div class="bottom" v-if="item.status == '3'">
                     <span class="center">激活中</span>
@@ -82,6 +82,9 @@
 </template>
 <script>
 import { CommonPost } from '@/lib/http'
+import ClipboardJS from "clipboard"
+
+
 export default {
     data(){
         return{
@@ -94,33 +97,22 @@ export default {
         handleBack(){
             this.$router.go(-1);
         },
-        search(url,title){
-
-
-            //   this.$router.push({
-            //     path:"/loan/form/myOrder",
-            //     query:{
-            //             info:url,
-            //             title:title
-            //         }
-            //     })
-                            
-            if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                this.$router.push({
-                path:"/loan/form/myOrder",
-                query:{
-                    info:url,
-                    title:title
-                    }
-                 })
-                } else {
-                    location.href=url
-                }
-
-
-
-
+       
+         handleCopy(data){
+            var that = this;
+            var clipboard = new ClipboardJS('.test');
+            //成功回调
+            clipboard.on('success', function(e) {
+                that.$toast('复制成功');
+                e.clearSelection();
+            });
+            //失败回调
+            clipboard.on('error', function(e) {
+                that.$toast('复制失败');
+            });
         },
+
+
         handleaddress(parentNo){
             this.$router.push({
                 path:"/Address",

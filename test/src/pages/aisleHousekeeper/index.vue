@@ -246,7 +246,6 @@ export default {
                          path:"/home/insertEsiCash",
                          query:{info:i}
                      })
-                   
                  } else {
                       let params={
                                 bankCardNo:i.cardNo,
@@ -259,54 +258,75 @@ export default {
                                         path:"/home/largeWFxe",
                                         query:{
                                             info:i
-                                        }
-                                  })
+                                          }
+                                     })
                                 } else {
-                                //     let datas={
-                                //         cardId:i.cardNo
-                                //     }
-                                //     axiosPost("/fwspay/getFwsMerchant",datas)   // 查询有没有商户号   通道三
-                                //     .then(res=>{
-                                //         console.log(res,"第三个通道查询结果")
-                                       
-                                //    if(res.data.success){ 
 
-                                //          let subMerchId=res.data.data.subMerchId
+                                      storage.set('channel',"1")
+                                        this.$router.push({
+                                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                            query:{
+                                                info:i
+                                               }
+                                             })
 
-                                //        axiosPost("/fwspay/getBindCardExist",datas)    // 继续查询有没有绑卡
-                                //        .then(res=>{
-                                //            console.log(res,"查询是否绑卡")
-                                //            if(res.data.success){
-                                //                 storage.set('channel',"1");
-                                            this.$router.push({
-                                                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                                                query:{
-                                                    info:i
-                                                }
-                                            })
-                                //            } else {
-                                //                this.$router.push({
-                                //                    path:"/home/easyPay/easycard",
-                                //                    query:{
-                                //                        info:i,
-                                //                        subMerchId,
-                                //                    }
-                                //                })
-                                //            }
-                                //        })
 
-                                //         }  else {
-                                            // console.log("查询失败了，因为没有签约")
-                                            // this.$router.push({
-                                            //     path:"/home/easypay",
-                                            //     query:{
-                                            //         info:i
-                                            //     }
-                                            // })
-                                        // }
-                                    // })
-                               }
-                         })
+                                         // let datas={
+                                    //     cardId:i.cardNo
+                                    // }
+                                    // axiosPost("/fwspay/getFwsMerchant",datas)   // 查询有没有商户号   通道三
+                                    // .then(res=>{
+                                    //   if(res.data.success){ 
+
+                                    //      let subMerchId=res.data.data.subMerchId
+
+                                    //    axiosPost("/fwspay/getBindCardExist",datas)    // 继续查询有没有绑卡
+                                    //    .then(res=>{
+                                    //        if(res.data.success){
+
+
+                                           
+                                            // 查询mc是否有绑卡，若有则直接提交计划，若无，则去签约
+
+                                                // let cards={
+                                                //     creditCardNo:i.cardNo
+                                                // }
+                                                // axiosPost("/mcpay/getBindCardExist",cards)
+                                                // .then(res=>{
+                                                //     console.log(res,"mc通道")
+                                                //     if(res.data.success){
+                                                //         storage.set('channel',"1");
+                                                //         this.$router.push({
+                                                //             path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                                //             query:{
+                                                //                 info:i
+                                                //             }
+                                                //         })
+                                                //     } else {
+                                                //         // console.log(res,"失败了")
+                                                //         this.$router.push({
+                                                //             path:"/home/smallAmountMC",
+                                                //             query:{
+                                                //                 cardnumber:i
+                                                //             }
+                                                //         })
+
+                                                //     }
+                                                // })  
+                                        //    } else {
+                                        //        this.$router.push({
+                                        //            path:"/home/easyPay/easycard",
+                                        //            query:{
+                                        //                info:i,
+                                        //                subMerchId,
+                                        //            }
+                                        //        })
+
+
+
+                                           }
+                                    })
+                              
                          .catch(err=>{
                             this.$toast("登录失败")
                          })
@@ -318,57 +338,36 @@ export default {
         },
          // 查询大额通道是否签约
         large(i){
-
-            let data={
-                accountNumber:i.cardNo
-            }
-                axiosPost("/zypay/getZYPayExist",data)
+                let params={
+                    bankCardNo:i.cardNo,
+                    channel:"2"
+                }
+                axiosPost("/wfpay/getBindCardExist",params)
                 .then(res=>{
-                    if(!res.data.success && res.data.code=='100'){
-                        this.$router.push({
-                            path:"/home/largeZY",
+                if(res.data.success){
+                    if(res.data.data==null || res.data.data.state!="1"){ //去签约
+                            this.$router.push({
+                            path:"/home/largeWFcard",
                             query:{
                                 info:i
                             }
                         })
                     } else {
-                            let params={
-                                bankCardNo:i.cardNo,
-                                channel:"2"
-                            }
-                         axiosPost("/wfpay/getBindCardExist",params)
-                         .then(res=>{
-                            //  console.log(res,'resultWF')
-                            if(res.data.success){
-
-                                if(res.data.data==null || res.data.data.state!="1"){ //去签约
-                                     this.$router.push({
-                                        path:"/home/largeWFcard",
-                                        query:{
-                                            info:i
-                                        }
-                                  })
-                                } else {
-                                     storage.set('channel',"2");
-                                     this.$router.push({
-                                        path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                                        query:{
-                                            info:i
-                                        }
-                                    })  
-                                }
-
-                            } else {
-                                this.$toast(res.data.message)
-                            }
-                         })
-                         .catch(err=>{
-                            this.$toast("登录超时，请重新登录")
-                         })
+                            storage.set('channel',"2");
+                            this.$router.push({
+                                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                query:{
+                                  info:i
+                             }
+                         })  
                      }
+                } else {
+                    this.$toast(res.data.message)
+                }
                 })
-
-
+                .catch(err=>{
+                          this.$toast("登录超时，请重新登录")
+                })
          } ,
        
        

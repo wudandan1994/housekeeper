@@ -28,7 +28,6 @@
                     <div>
                         <div class="menu start-center">
                             <van-icon name="wap-nav" size="24px" @click="showAaside = !showAaside" :class="showAaside == true ? 'menu-icon-active' : 'menu-icon-normal'"/>
-                            
                     </div>
                     <span class="location">
                         </span>
@@ -201,19 +200,19 @@
                                     <p> <van-icon name="http://pay.91dianji.com.cn/tie.png" size="30px" /></p>
                                     <p>垃圾分类</p>
                                 </li>
-                                <li class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')" >
-                                    <p> <van-icon name="http://pay.91dianji.com.cn/weizhang.png" size="30px" /></p>
-                                    <p>违章查询</p>
+                                <li v-show="wzcx.state=='1'" class="secret" @click="changeLink(wzcx.link,wzcx.title)" >
+                                    <p> <van-icon :name="'http://pay.91dianji.com.cn/'+wzcx.icon" size="30px" /></p>
+                                    <p>{{wzcx.title}}</p>
                                 </li>
-                                <li class="secret"  @click="changeLink('http://www.epicc.com.cn/','汽车保险')" >
-                                    <p><van-icon name="http://pay.91dianji.com.cn/qichebaoxian.png" size="30px" /></p>
-                                    <p>汽车保险</p>
-                            </li>
-                            <li  @click="changeLink('http://baoxian.pingan.com','意外险')" >
-                                <p><van-icon name="http://pay.91dianji.com.cn/yiwaixian.png" size="30px" /></p>
-                                <p>意外险</p>
-                            </li>
-
+                                <li v-show="qcbx.state=='1'" class="secret"  @click="changeLink(qcbx.link,qcbx.title)" >
+                                    <p><van-icon :name="'http://pay.91dianji.com.cn/'+qcbx.icon" size="30px" /></p>
+                                    <p>{{qcbx.title}}</p>
+                               </li>
+                                <li  v-show="ywx.state=='1'" @click="changeLink(ywx.link,ywx.title)" >
+                                    <p><van-icon :name="'http://pay.91dianji.com.cn/'+ywx.icon" size="30px" /></p>
+                                    <p>{{ywx.title}}</p>
+                                </li>
+ 
                             <router-link tag="li" to="/apply" class="secret">
                                 <p> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></p>
                                 <p>特惠加油卡</p>
@@ -269,10 +268,11 @@
                                 <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
                                 <div class="center">油卡</div>
                             </router-link> -->
-                            <div class="secret" @click="changeLink('https://m2.weizhang8.cn/','违章查询')">
-                                <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/weizhang.png"  size="30px" /></div>
-                                <div class="center">违章查询</div>
+                            <div class="secret" @click="changeLink(wzcx.link,wzcx.title)">
+                                <div class="center-end"> <van-icon :name="'http://pay.91dianji.com.cn/'+wzcx.icon"  size="30px" /></div>
+                                <div class="center">{{wzcx.title}}</div>
                             </div>
+
                         </div>
                     </div>
                     <!-- 更新 -->
@@ -296,7 +296,7 @@
                     
                 </div>
                 <!-- 绑定手机模块 -->
-                <bindMobile></bindMobile>
+                <!-- <bindMobile></bindMobile> -->
                 <notice></notice>
                  
             </van-pull-refresh>
@@ -340,7 +340,7 @@
 <script>
 import footerMenu from '@/components/footer'
 
-import bindMobile from '@/components/bindMobile'
+// import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -348,7 +348,7 @@ import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-      bindMobile,
+    //   bindMobile,
       notice,
   },
      data() {
@@ -411,7 +411,10 @@ export default {
             height: 148.5,
             isLoading:false,
             paychennel:"",
-           
+            wzcx:{},
+            qcbx:{},
+            ywx:{},
+            downUrl:[]
         }
   },
    methods:{     
@@ -470,26 +473,26 @@ export default {
             
         },
         changeLink(url,title){
-            //   this.$router.push({
-            //          path:"/loan/form/myOrder",
-            //          query:{
-            //              info:url,
-            //              title:title
-            //          }
-            //      })
-
-            
-             if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                 this.$router.push({
+              this.$router.push({
                      path:"/loan/form/myOrder",
                      query:{
                          info:url,
                          title:title
                      }
                  })
-             } else {
-                 location.href=url
-             }
+
+            
+            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
+            //      this.$router.push({
+            //          path:"/loan/form/myOrder",
+            //          query:{
+            //              info:url,
+            //              title:title
+            //          }
+            //      })
+            //  } else {
+            //      location.href=url
+            //  }
         },
         handleAuth(){
              if(this.iscertification == '2'){
@@ -506,12 +509,12 @@ export default {
                 var u = navigator.userAgent;
                 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
                 var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-                 if(isAndroid) {
-                  window.location.href=" https://www.pgyer.com/vFbf"
-               } else if(isiOS) {
-                  window.location.href="http://znd.hvv.dnf-w3.cn/KXxv61"
-              } 
 
+                 if(isAndroid) {
+                  window.location.href=this.downUrl[1].link
+               } else if(isiOS) {
+                  window.location.href=this.downUrl[0].link
+              } 
         },
         getUpdate(){ // 获取历史版本号
                axiosPost("/customer/getVersion")
@@ -528,36 +531,37 @@ export default {
                    
                })
         },
+        getDownloadUrl(){
+             axiosPost("/content/getDownLoadUrl")
+            .then(res=>{
+                if(res.data.success){
+                    this.downUrl=res.data.data
+                    this.downUrl=JSON.parse(this.downUrl)
+                } 
+            })
+
+        },
         update(){
             let that=this
               // 获取设备的版本号
               if(window.plus){  
-                //     that.updateVerson=parseFloat(plus.runtime.version);
-                //    if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
-                //        that.showUpdate=true
-                //    }
+               
                 plus.runtime.getProperty(plus.runtime.appid,function(inf){
                 that.updateVerson=parseFloat(inf.version);
-                // console.log(that.updateVerson,'version')
                     if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
+                       that.getDownloadUrl()
                    }
                });
             }else{  
-                document.addEventListener('plusready',function () {  
-                    //   that.updateVerson=parseFloat(plus.runtime.version);
-                    //      if(that.versionAndroid>that.updateVerson|| that.versionIos>that.updateVerson ){
-                    //          that.showUpdate=true
-                    //     }
-
+                document.addEventListener('plusready',function () { 
                  plus.runtime.getProperty(plus.runtime.appid,function(inf){
                 that.updateVerson=parseFloat(inf.version);
-                //  console.log(that.updateVerson,'version')
                     if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
+                       that.getDownloadUrl()
                            }
                         });
-
                 },false);  
             }  
         } ,
@@ -571,7 +575,6 @@ export default {
              .then(res=>{
                 if(!res.data.success){
                      this.$router.push("/logIn");
-                    //  this.$toast('登录失败');
                 }else {
                     this.$store.commit('iscertification',res.data.data.iscertification);
                     this.$store.commit('level',res.data.data.level);
@@ -646,6 +649,7 @@ export default {
             }).catch(res =>{
             })
         },
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
         handlecollect(obj,boo,i){
                  if(this.iscertification == '0' ){
                 //未认证
@@ -707,7 +711,6 @@ export default {
         },
         // 点击轮播图进入详情
         handleSwipeDetail(item){
-            // console.log('详情',item.routes);
             this.$router.push({
                 path: '/vip',
                 query: {params: item.params}
@@ -732,8 +735,14 @@ export default {
         getLinks(){
               axiosPost("/content/getOutUrl")
               .then(res=>{
-                  console.log(res,"外部地址")
-                  console.log(res.data.data,"dizhi")
+                //  console.log(res,"result")
+                if(res.data.success){
+                    let links=res.data.data
+                    links=JSON.parse(links)
+                    this.wzcx=links[0]
+                    this.qcbx=links[1]
+                    this.ywx=links[2]
+                }
               })
         }
     },
@@ -743,7 +752,7 @@ export default {
         this.city=this.$store.state.wechat.city;
         this.lev=this.$store.state.wechat.level;
         this.getNews()
-        // this.getLinks()
+        this.getLinks()
          if(this.lev=='0'){
                         this.lev="免费粉丝"
                     } else if(this.lev=='1'){
@@ -753,12 +762,12 @@ export default {
                     }
 
         this.handleSearchAuths()
-        //  this.automatic() //自动登录
-        //  this.getUpdate() //获取版本
+         this.automatic() //自动登录
+         this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        // this.update() 
+        this.update() 
        
       
     }

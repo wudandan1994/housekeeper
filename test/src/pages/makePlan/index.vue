@@ -293,10 +293,12 @@ export default {
                       this.$toast({
                           message:res.data.message
                         })
+
                     //  this.$router.push({
                     //      path:"/home/insertEsiCash",
                     //      query:{info:this.item}
                     //  })
+                    
                  } else {
                     storage.set('amount',this.amount);
                     let planList=res.data.data

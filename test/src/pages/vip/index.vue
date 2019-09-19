@@ -201,6 +201,7 @@ export default {
             nickname: '',
             showcontantUs:false,
             type:"",
+            openid:""
         }
     },
     methods:{
@@ -326,6 +327,44 @@ export default {
             this.pup1 = false;
             this.pup2 = false;
         },
+
+
+         plusReady(){
+            var channel=null;
+            let that=this
+            plus.payment.getChannels(function(channels){
+                for(var i in channels){
+                    var iap=channels[i];
+                    if(iap.id==='wxpay'){
+                        channel=iap;
+                    }
+                }
+                let param = {
+                    orderid: that.orderid,
+                }
+                axiosPost('/order/wxPayH5App',param).then(res =>{
+                         
+                        plus.payment.request(channel,res.data,function(result){
+                            //alert(result);
+                            plus.nativeUI.alert("支付成功！",function(){
+                                back();
+                            });
+                        },function(error){
+                            //alert("")
+                            plus.nativeUI.alert("支付失败");
+                        });
+                   
+                }).catch(res =>{
+                    alert("失败")
+                })
+               
+                
+                },function(e){
+                alert("获取支付通道失败："+e.message);
+            });
+            // document.addEventListener('plusready',plusReady,false);
+        },
+
         // 立即购买
         handleBuyNow(){
             // 首先判断选择哪一种支付方式
@@ -348,11 +387,22 @@ export default {
                 //     window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
                 // } 
             }else{
-                let params = {
+
+
+                //  this.plusReady()   // app微信支付
+
+                //h5支付 --->四方平台
+
+                let params = {           
                     orderid: this.orderid,
                     channel: 'wx'
                 };
                 this.handlePay(params);
+
+               
+
+
+
                 // var  params = {
                 //     orderid: this.orderid,
                 //     trade_type: 'JSAPI',

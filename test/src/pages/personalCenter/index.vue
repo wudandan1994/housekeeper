@@ -199,26 +199,11 @@
                     <van-icon name="http://pay.91dianji.com.cn/Android.png"  size="90px" color="#dab17b"/>
                     <p> 安卓手机下载</p>
                 </li>
-                 <!-- <router-link @click="uploadIos"  tag="li"  :to="{path: '/loan/form/myOrder',query: {info: 'http://znd.hvv.dnf-w3.cn/KXxv61',title: '苹果下载'}}" >
-           
-                     <van-icon name="http://pay.91dianji.com.cn/Android.png"  size="40px" color="#dab17b"/>
-                    <p>苹果手机下载</p>
-                 </router-link> -->
                  <li  @click="uploadIos">
                      <van-icon name="http://pay.91dianji.com.cn/ios.png"  size="90px" color="#dab17b"/>
                     <p>苹果手机下载</p>
                  </li>
             </ul>
-            <!-- <div v-show="showand" class="cover">
-                    <dir class="dis">
-                         <van-icon name="http://pay.91dianji.com.cn/Aandroidem.png"  size="30px" color="#dab17b"/>
-                    </dir>
-            </div>
-            <div v-show="showios" class="cover">
-                    <dir class="dis">
-                        <img src="http://pay.91dianji.com.cn/iosem.png" alt="">
-                    </dir>
-            </div> -->
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
         <loading :componentload="componentload"></loading>
@@ -249,7 +234,6 @@ export default {
             commission: '',
             showand:false,
             showios:false,
-            // showYYS:true,
             isUpgrade:false,
             show:false,
             showCover:false,
@@ -283,11 +267,46 @@ export default {
         handleCancelOrder(){
             this.showCover=false
         },
+
         handlePayTypeWX(){
             this.paytype="wechat"
         },
         handlePayTypeZFB(){
              this.paytype="alipay"
+        },
+         handlePay(obj){
+            let params = obj;
+            let url = '/order/xhPay';
+            axiosPost(url,params).then(res =>{
+                if(res.data.success){
+                    // console.log('支付成功',res);
+                    let ua = navigator.userAgent.toLowerCase();
+                    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                        // 微信浏览器中打开
+                        window.location.href = res.data.data.url
+                        
+                    }else{
+                        // 非微信中打开
+                        if(this.paytype == 'wechat'){
+                            // 此时无法在非微信中调用微信支付
+                            this.$router.push({
+                                path: '/middle',
+                                query:{
+                                    qrcode: res.data.data.codeUrl
+                                }
+                            })
+                        }else{
+                           window.location.href = res.data.data.url 
+                        }
+                    }
+                }else{
+                    // console.log('支付失败',res);
+                    this.$toast('支付失败');
+                }
+            }).catch(res =>{
+                // console.log('支付失败',res);
+                this.$toast('支付失败');
+            })
         },
         handleBuyCancel(){
             this.pup2=false
@@ -321,60 +340,135 @@ export default {
                  }
             })
         },
+
+
+         plusReady(){
+            var channel=null;
+            let that=this
+            plus.payment.getChannels(function(channels){
+                for(var i in channels){
+                    var iap=channels[i];
+                    if(iap.id==='wxpay'){
+                        channel=iap;
+                    }
+                }
+                let param = {
+                    orderid: that.orderid,
+                }
+                axiosPost('/order/wxPayH5App',param).then(res =>{
+                         
+                        plus.payment.request(channel,res.data,function(result){
+                           
+                            plus.nativeUI.alert("支付成功！",function(){
+                                back();
+                            });
+                        },function(error){
+                            
+                            plus.nativeUI.alert("支付失败" );
+                        });
+                   
+                }).catch(res =>{
+                    alert("失败")
+                })
+               
+                
+                },function(e){
+                alert("获取支付通道失败："+e.message);
+            });
+            // document.addEventListener('plusready',plusReady,false);
+        },
+
+
         handleBuyNow(){
             // 首先判断选择哪一种支付方式
             if(this.paytype == 'alipay'){
-                // 支付宝支付
-                var ua = navigator.userAgent.toLowerCase();
-                if(ua.match(/MicroMessenger/i)=="micromessenger") {
-                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
-                         
-                } else {
-                    // 非微信浏览器
-                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
-                } 
-            }else{
-                var  params = {
+
+                 let params = {
                     orderid: this.orderid,
-                    trade_type: 'JSAPI',
-                    openid: storage.get('openid')
+                    channel: 'aliwap'
                 };
-                var url = '/order/wxPayH5';
-                axiosPost(url,params).then(res =>{
-                        var radom = Math.random().toString(36).substr(2);
-                        var tmp = Date.parse( new Date() ).toString();
-                        tmp = tmp.substr(0,10);
-                        wx.chooseWXPay({
-                            timestamp: res.data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                            nonceStr: res.data.nonceStr, // 支付签名随机串，不长于 32 位
-                            package: res.data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
-                            signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                            paySign: res.data.paySign, // 支付签名
-                            success: function (res) {
-                            }
-                        });
-                    }).catch(res =>{
-                    })
+                this.handlePay(params);
+
+
+
+                // 支付宝支付
+                // var ua = navigator.userAgent.toLowerCase();
+                // if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                //     window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
+                         
+                // } else {
+                //     // 非微信浏览器
+                //     window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
+                // } 
+            }else{
+
+                    // this.plusReady()    // app微信支付
+
+                      //h5支付 --->四方平台
+
+                let params = {           
+                    orderid: this.orderid,
+                    channel: 'wx'
+                };
+                this.handlePay(params);
+
+
+                //h5支付
+
+                // var  params = {
+                //     orderid: this.orderid,
+                //     trade_type: 'JSAPI',
+                //     openid: storage.get('openid')
+                // };
+                // var url = '/order/wxPayH5';
+                // axiosPost(url,params).then(res =>{
+                //         var radom = Math.random().toString(36).substr(2);
+                //         var tmp = Date.parse( new Date() ).toString();
+                //         tmp = tmp.substr(0,10);
+                //         wx.chooseWXPay({
+                //             timestamp: res.data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                //             nonceStr: res.data.nonceStr, // 支付签名随机串，不长于 32 位
+                //             package: res.data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                //             signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                //             paySign: res.data.paySign, // 支付签名
+                //             success: function (res) {
+                //             }
+                //         });
+                //     }).catch(res =>{
+                //     })
             }
         },
+        getUrl(data){
+            axiosPost("/content/getDownLoadUrl")
+            .then(res=>{
+                if(res.data.success){
+                    let links=res.data.data
+                    links=JSON.parse(links)
+                    links.forEach(item=>{
+                        if(item.title==data){
+                            // console.log(item.link)
+                            location.href=item.link
+                        }
+                    })
+                } else {
+                    this.$toast(res.data.message)
+                }
+            })
+        },
         uploadAnd(){
-            location.href=" https://www.pgyer.com/vFbf"
-            // this.showand=!this.showand
-            // this.showios=false
-            // setTimeout(()=>{
-            //     this.showand=false
-            // },6000)
+           this.getUrl('android')
+
+            // location.href=" https://www.pgyer.com/vFbf"
+           
         },
         uploadIos(){
-            location.href="http://znd.hvv.dnf-w3.cn/KXxv61"
-            // this.showios=!this.showios
-            // this.showand=false
-            // setTimeout(()=>{
-            //     this.showios=false
-            // },6000)
+
+             this.getUrl('ios')
+            // location.href="http://znd.hvv.dnf-w3.cn/KXxv61"
+          
         },
         changeActive(obj){
-            // console.log('obj', obj);
+          
         },
         // 查询个人设置
         handleGetAmount(){
@@ -383,7 +477,7 @@ export default {
                 openid:this.$store.state.wechat.openid,
             };
             axiosPost(url,params).then(res =>{
-                // console.log('查询个人设置成功',res)
+               
                 if(res.data.success){
                     setTimeout(()=>{
                         this.componentload = false;
@@ -395,7 +489,7 @@ export default {
                     this.amountSum = res.data.data.amountSum;
                     this.commission = res.data.data.commission;
                     this.pic=res.data.data.level
-                    // console.log(this.pic)
+                    
                     this.ispartner=res.data.data.ispartner
                     res.data.data.iscertification == '0' ? this.iscertification = '实名认证' : ( res.data.data.iscertification == '1' ? this.iscertification = '审核中' : (res.data.data.iscertification == '2' ? this.iscertification = '认证成功' : this.iscertification = '认证失败，请重试')); 
                     if(res.data.data.level == '0'){

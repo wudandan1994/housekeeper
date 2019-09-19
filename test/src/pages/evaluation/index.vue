@@ -202,14 +202,6 @@ export default {
                         })
                     } else {
                         window.location.href=res.data.data
-                            // let url=res.data.data
-                        //     this.$router.push({
-                        //     path:"/home/online",
-                        //     query:{
-                        //         info:url,
-                        //         title:"测评"
-                        //       }
-                        //   })
                     }
               },1000)
 
