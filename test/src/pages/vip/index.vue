@@ -391,12 +391,15 @@ export default {
 
                 //  this.plusReady()   // app微信支付
 
+                
+
                 //h5支付 --->四方平台
 
                 let params = {           
                     orderid: this.orderid,
                     channel: 'wx'
                 };
+
                 this.handlePay(params);
 
                

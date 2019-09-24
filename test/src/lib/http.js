@@ -65,7 +65,7 @@ export const CommonPost = (url,params) =>{
         baseURL: 'http://pay.91dianji.com.cn/api',
         withCredentials: true,
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
-    });
+    }); 
     return new Promise((resolve,reject) =>{
         _axios.post(url,qs.stringify(params)).then(res =>{
                 if(res.data.code == -1){
