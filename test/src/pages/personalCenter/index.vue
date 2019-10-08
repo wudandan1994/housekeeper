@@ -447,7 +447,7 @@ export default {
                     links.forEach(item=>{
                         if(item.title==data){
                             // console.log(item.link)
-                            location.href=item.link
+                            location.href=item.link 
                         }
                     })
                 } else {
@@ -457,15 +457,9 @@ export default {
         },
         uploadAnd(){
            this.getUrl('android')
-
-            // location.href=" https://www.pgyer.com/vFbf"
-           
         },
         uploadIos(){
-
              this.getUrl('ios')
-            // location.href="http://znd.hvv.dnf-w3.cn/KXxv61"
-          
         },
         changeActive(obj){
           

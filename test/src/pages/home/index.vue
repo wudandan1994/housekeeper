@@ -522,9 +522,7 @@ export default {
                    if(res.data.success){
                       let version=res.data.data
                       this.versionAndroid=parseFloat(version[0].version)
-                    //   console.log(this.versionAndroid,'and')
                       this.versionIos=parseFloat(version[1].version)
-                    //    console.log(this.versionIos,'ios')
                    }
                }) 
                .catch(err=>{
