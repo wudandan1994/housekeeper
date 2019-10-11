@@ -144,15 +144,7 @@ export default {
         showCover(){
            this.Sharewxf=!this.Sharewxf
         },
-        // save(){
-        //     plus.gallery.save( '/wx.png', (result) => {
-        //         console.log(result.file)
-        //         this.$toast("保存成功")
-        //         } ,(e) => {
-        //         console.log(JSON.stringify(e))
-        //          this.$toast("保存失败")
-        //         });
-        // },
+       
         
         // 区间随机数
         handlechangeRandom(){

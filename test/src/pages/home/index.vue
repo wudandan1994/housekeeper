@@ -467,8 +467,10 @@ export default {
                 this.$toast('请先实名认证');
                     
             }else{
-               
-               this.changeLink(url,title)
+                
+                 this.$router.push("/home/cardCenter")
+            //    this.changeLink(url,title)
+
             }
             
         },

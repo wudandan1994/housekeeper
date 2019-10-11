@@ -420,6 +420,8 @@ const largeAmountHCComponent = () => import('@/pages/largeAmountHC')  //汇潮�
 const sendmsgHCComponent = () => import('@/pages/largeAmountHC/sendmsgHC.vue')  //汇潮大额 发送短信
 const uploadmsgComponent = () => import('@/pages/largeAmountHC/uploadmsg.vue')  //汇潮大额 短信验证
 
+// const changeBillComponent = () => import('@/pages/changeBill')    // 换信用卡信息  
+import changeBillComponent from '@/pages/changeBill'  // 换信用卡信息  
 
 
 export default new Router({
@@ -450,7 +452,7 @@ export default new Router({
     {path:"/home/largeAmountHC/sendmsgHC",component:sendmsgHCComponent},  //汇潮大额 发送短信 
     {path:"/home/largeAmountHC/uploadmsg",component:uploadmsgComponent},  //汇潮大额 短信验证
 
-
+    {path:"/home/changeBill",component:changeBillComponent}, //更换账单 
 
     {path:"/home/receiveXH",component:receiveXHComponent},  //收单小惠通道  
     {path:"/home/receiveXH/cardCX",component:cardCXComponent},  //收单小惠通道储蓄卡管理 
