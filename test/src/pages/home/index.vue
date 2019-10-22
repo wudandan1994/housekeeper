@@ -345,6 +345,7 @@ import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 
+
 export default {
   components:{
       footerMenu,
@@ -467,10 +468,10 @@ export default {
                 this.$toast('请先实名认证');
                     
             }else{
-                
-                 this.$router.push("/home/cardCenter")
-            //    this.changeLink(url,title)
 
+                //  this.$router.push("/home/cardCenter")
+            //    this.changeLink(url,title)
+              location.href=rul
             }
             
         },
@@ -768,8 +769,6 @@ export default {
     mounted () {
         // 更新
         // this.update() 
-       
-      
     }
 }
 </script>

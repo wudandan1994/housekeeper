@@ -416,12 +416,16 @@ const taskrecordComponent = () => import('@/pages/totalPunch/taskrecord.vue')  /
 
 const smallAmountMCComponent = () => import('@/pages/smallAmountMC')  //mc小额  
 
-const largeAmountHCComponent = () => import('@/pages/largeAmountHC')  //汇潮大额 注册商户
+const largeAmountHCComponent = () => import('@/pages/largeAmountHC')  //汇潮大额 注册商户 
 const sendmsgHCComponent = () => import('@/pages/largeAmountHC/sendmsgHC.vue')  //汇潮大额 发送短信
 const uploadmsgComponent = () => import('@/pages/largeAmountHC/uploadmsg.vue')  //汇潮大额 短信验证
 
 // const changeBillComponent = () => import('@/pages/changeBill')    // 换信用卡信息  
 import changeBillComponent from '@/pages/changeBill'  // 换信用卡信息  
+
+const largeAmountSCComponent = () => import('@/pages/largeAmountSC')  //SC大额通道 注册商户 
+const sendmsgSCComponent = () => import('@/pages/largeAmountSC/sendmsgSC.vue')  //汇潮大额 发送短信
+
 
 
 export default new Router({
@@ -451,6 +455,11 @@ export default new Router({
     {path:"/home/largeAmountHC",component:largeAmountHCComponent},  //汇潮大额 注册商户  
     {path:"/home/largeAmountHC/sendmsgHC",component:sendmsgHCComponent},  //汇潮大额 发送短信 
     {path:"/home/largeAmountHC/uploadmsg",component:uploadmsgComponent},  //汇潮大额 短信验证
+
+
+    {path:"/home/largeAmountSC",component:largeAmountSCComponent},  //SC大额通道 注册商户  
+    {path:"/home/largeAmountSC/sendmsgSC",component:sendmsgSCComponent},  //汇潮大额 短信验证
+
 
     {path:"/home/changeBill",component:changeBillComponent}, //更换账单 
 
