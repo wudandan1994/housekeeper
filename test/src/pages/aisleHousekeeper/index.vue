@@ -102,14 +102,6 @@
                                 <div class="sure">
                                     <van-button size="large" @click="selectPass" type="info">确定</van-button>
                                 </div>
-
-
-                                 <!-- <div class="small" @click.stop="thirdPass(item)">
-                                        <van-icon name="http://pay.91dianji.com.cn/dae.png" size="40px"/>
-                                        <p>小额通道&nbsp;&nbsp;<span>(还款金额低于20000)</span></p>
-                                        <p> <van-icon name="arrow" size="30px"/></p>
-                                </div> -->
-                                
                              </div>
                        </div>
                        
@@ -263,13 +255,13 @@ export default {
 
                     // 查询mc是否有绑卡，若有则直接提交计划，若无，则去签约
 
-                        let cards={
-                            creditCardNo:i.cardNo
-                        }
-                        axiosPost("/mcpay/getBindCardExist",cards)
-                        .then(res=>{
-                            // console.log(res,"mc通道")
-                            if(res.data.success){
+                        // let cards={
+                        //     creditCardNo:i.cardNo
+                        // }
+                        // axiosPost("/mcpay/getBindCardExist",cards)
+                        // .then(res=>{
+                        //     // console.log(res,"mc通道")
+                        //     if(res.data.success){
                                 storage.set('channel',"1");
                                 this.$router.push({
                                     path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
@@ -277,15 +269,15 @@ export default {
                                         info:i
                                     }
                                 })
-                            } else {
-                                this.$router.push({
-                                    path:"/home/smallAmountMC",
-                                    query:{
-                                        cardnumber:i
-                                    }
-                                })
-                            }
-                        })  
+                            // } else {
+                            //     this.$router.push({
+                            //         path:"/home/smallAmountMC",
+                            //         query:{
+                            //             cardnumber:i
+                            //         }
+                            //     })
+                        //     }
+                        // })  
                     } else {
                         this.$router.push({
                             path:"/home/easyPay/easycard",
@@ -295,13 +287,18 @@ export default {
                             }
                         })
                     }
-            })
+               })
                         
             .catch(err=>{
             this.$toast("登录失败")
             })
             } else {
-                this.$toast(res.data.message)
+                 this.$router.push({
+                    path:"/home/easyPay",
+                    query:{
+                        info:i
+                    }
+                 })
                     }
                 })
              .catch(err=>{

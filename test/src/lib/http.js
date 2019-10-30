@@ -30,7 +30,6 @@ export const axiosPost = (url, params = {}) =>{;
     })
      
 
-
     // return new Promise((resolve,reject) =>{
     //     _axios.post(url,qs.stringify(params)).then(res =>{
     //             if(res.data.code == -1){

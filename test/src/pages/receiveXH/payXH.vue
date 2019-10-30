@@ -164,8 +164,6 @@ export default {
            this.componentload=true
            axiosPost("/creditCard/zlpayment",data)
            .then(res=>{
-            //    console.log(res,'支付结果')
-            //    console.log(res.data.data,"data数据")
                if(res.data.success) {
                    let responce=res.data.data
                    responce=JSON.parse(responce)
