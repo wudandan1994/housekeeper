@@ -426,7 +426,10 @@ import changeBillComponent from '@/pages/changeBill'  // 换信用卡信息
 const largeAmountSCComponent = () => import('@/pages/largeAmountSC')  //SC大额通道 注册商户 
 const sendmsgSCComponent = () => import('@/pages/largeAmountSC/sendmsgSC.vue')  //汇潮大额 发送短信
 
+const videosComponent = () => import('@/pages/share/videos.vue')  //视频播放
 
+const billDetailsComponent = () => import('@/pages/aisleHousekeeper/billDetails')  //立即还款
+const budgetComponent = () => import('@/pages/aisleHousekeeper/budget')  //预算费用
 
 export default new Router({
   // mode:"hash",
@@ -451,12 +454,14 @@ export default new Router({
     {path:"/home/games/gameCat",component:gameCatComponent},  //cat游戏  
     {path:"/home/games/gameClock",component:gameClockComponent},  //clock游戏  
     {path:"/home/smallAmountMC",component:smallAmountMCComponent},  //mc小额  
+    {path:"/home/billDetails",component:billDetailsComponent},  //立即还款
+    {path:"/home/budget",component:budgetComponent},  //立即还款
 
     {path:"/home/largeAmountHC",component:largeAmountHCComponent},  //汇潮大额 注册商户  
     {path:"/home/largeAmountHC/sendmsgHC",component:sendmsgHCComponent},  //汇潮大额 发送短信 
     {path:"/home/largeAmountHC/uploadmsg",component:uploadmsgComponent},  //汇潮大额 短信验证
 
-
+    {path:"/home/share/videos",component:videosComponent},  //视频  
     {path:"/home/largeAmountSC",component:largeAmountSCComponent},  //SC大额通道 注册商户  
     {path:"/home/largeAmountSC/sendmsgSC",component:sendmsgSCComponent},  //汇潮大额 短信验证
 

@@ -216,27 +216,27 @@ export default {
 
                         setTimeout(()=>{
                             
-                            // this.$router.push({
-                            //         path:"/home/online",
-                            //         query:{
-                            //             info:url,
-                            //             title:"贷款中心"
-                            //         }
-                            //     })
-
-
-                         if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                                this.$router.push({
-                                    path:"/loan/form/myOrder",
+                            this.$router.push({
+                                    path:"/home/online",
                                     query:{
                                         info:url,
                                         title:"贷款中心"
                                     }
                                 })
-                                } else {
-                                    this.componentload=false
-                                    location.href=url
-                                }
+
+
+                        //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                        //         this.$router.push({
+                        //             path:"/loan/form/myOrder",
+                        //             query:{
+                        //                 info:url,
+                        //                 title:"贷款中心"
+                        //             }
+                        //         })
+                        //         } else {
+                        //             this.componentload=false
+                        //             location.href=url
+                        //         }
 
                         },1000)
                    }

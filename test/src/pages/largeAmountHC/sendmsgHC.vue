@@ -65,6 +65,7 @@ export default {
         this.info=this.$route.query.info
 
         this.merchantno=this.$route.query.merchantno
+        // console.log(this.merchantno,"merchantno")
 
         this.expired_time=this.info.month+this.info.year
 
@@ -86,7 +87,7 @@ export default {
                   return   this.$toast("请输入11位手机号码")
              }
 
-            if(this.merchantno.trim().length===0 ||  this.bankcardNum.trim().length===0 ||  this.cvv.trim().length===0||  this.expired_time.trim().length===0){
+            if(this.phone.trim().length===0 ||  this.bankcardNum.trim().length===0 ||  this.cvv.trim().length===0||  this.expired_time.trim().length===0){
                  this.$toast({
                     message:"请将信息填写完整"
                 })

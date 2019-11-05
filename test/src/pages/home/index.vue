@@ -13,7 +13,7 @@
                 <div class="tipsone">
                     <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
                     <div class="cres animated zoomIn">
-                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
+                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
                         <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/yong.png" /> </span>
                         <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/fu.png" /> </span>
                         <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/wu.png" /> </span>
@@ -296,7 +296,7 @@
                     
                 </div>
                 <!-- 绑定手机模块 -->
-                <bindMobile></bindMobile>
+                <!-- <bindMobile></bindMobile> -->
                 <notice></notice>
                  
             </van-pull-refresh>
@@ -340,7 +340,7 @@
 <script>
 import footerMenu from '@/components/footer'
 
-import bindMobile from '@/components/bindMobile'
+// import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -349,7 +349,7 @@ import storage from '@/lib/storage'
 export default {
   components:{
       footerMenu,
-      bindMobile,
+    //   bindMobile,
       notice,
   },
      data() {
@@ -364,7 +364,6 @@ export default {
             ads:false,
             isLight:true,
             isSelect:false,
-         
             lineheight:100,
             colorl:"#4B66AF",
             images: [
@@ -470,32 +469,32 @@ export default {
             }else{
 
                 //  this.$router.push("/home/cardCenter")
-            //    this.changeLink(url,title)
-              location.href=rul
+               this.changeLink(url,title)
+            //   location.href=url
             }
             
         },
         changeLink(url,title){
-            //   this.$router.push({
-            //          path:"/loan/form/myOrder",
-            //          query:{
-            //              info:url,
-            //              title:title
-            //          }
-            //      })
-
-            
-             if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                 this.$router.push({
+              this.$router.push({
                      path:"/loan/form/myOrder",
                      query:{
                          info:url,
                          title:title
                      }
                  })
-             } else {
-                 location.href=url
-             }
+
+            
+            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
+            //      this.$router.push({
+            //          path:"/loan/form/myOrder",
+            //          query:{
+            //              info:url,
+            //              title:title
+            //          }
+            //      })
+            //  } else {
+            //      location.href=url
+            //  }
         },
         handleAuth(){
              if(this.iscertification == '2'){
@@ -512,7 +511,6 @@ export default {
                 var u = navigator.userAgent;
                 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
                 var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-
                  if(isAndroid) {
                   window.location.href=this.downUrl[1].link
                } else if(isiOS) {
@@ -674,7 +672,6 @@ export default {
                       })
                 } 
                 this.showpass=true
-               
             }
         },
         // 判断是否实名认证
@@ -698,12 +695,10 @@ export default {
                      axiosPost("/behavior/insertBehavior",data)
                     .then(res=>{
                          this.$router.push(obj);
-                        
                     })
                 } else {
                      this.$router.push(obj);
                 }
-               
             }
         },
         // 联系客服
@@ -763,12 +758,12 @@ export default {
                     }
 
         this.handleSearchAuths()
-        //  this.automatic() //自动登录
-        //  this.getUpdate() //获取版本
+         this.automatic() //自动登录
+         this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
-        // this.update() 
+        this.update() 
     }
 }
 </script>

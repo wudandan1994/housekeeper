@@ -131,7 +131,6 @@ export default {
         getInfo(){
             axiosPost("/content/getAboutUs")
             .then(res=>{
-                console.log(res.data.data,"women")
                 this.list=res.data.data
                 this.list=JSON.parse(this.list)
                 this.time=this.list[0]

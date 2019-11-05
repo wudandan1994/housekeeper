@@ -80,13 +80,19 @@
                 <router-link tag="li" to="/video" >
                     <p><van-icon name="http://bc.91dianji.com.cn/407.png" /></p>
                     <p>钱夹宝视频</p>
-                    <p>钱夹宝视频.一键分享</p>
+                    <p>教学视频.一键分享</p>
                 </router-link>
-                <li @click="handleExpect">
+                <!-- <li @click="handleExpect">
                     <p><van-icon name="http://bc.91dianji.com.cn/408.png" /></p>
-                    <p>名片推广</p>
-                    <p>分享名片.快速增粉</p>
-                </li>
+                    <p>推广视频</p>
+                    <p>分享视频.快速增粉</p>
+                </li> -->
+                  <router-link tag="li" to="/home/share/videos">
+                    <p><van-icon name="http://bc.91dianji.com.cn/408.png" /></p>
+                    <p>推广视频</p>
+                    <p>分享视频.快速增粉</p>
+                  </router-link>
+
                 <li @click="handleHref">
                     <p><van-icon name="http://bc.91dianji.com.cn/409.png" /></p>
                     <p>生成短链接</p>

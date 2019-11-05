@@ -169,39 +169,35 @@ export default {
                    responce=JSON.parse(responce)
                    let url=responce.payUrl
 
-                    // this.$router.push({
-                    //     path:"/home/online",
-                    //     query:{
-                    //         info:url,
-                    //         title:"支付"
-                    //     }
-                    // })
-
-
-                    if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                        this.$router.push({
-                            path:"/loan/form/myOrder",
-                            query:{
-                                info:url,
-                                title:"支付"
-                            }
-                        })
-                         this.componentload=false
-                        } else {
-                            this.componentload=false
-                            location.href=url
+                    this.$router.push({
+                        path:"/home/online",
+                        query:{
+                            info:url,
+                            title:"支付"
                         }
-               }
-            //    setTimeout(()=>{
-            //         if(res.data.success){
-            //             this.$toast(res.data.message)
-            //         } else {
-            //             this.$toast(res.data.message)
-            //         }
-            //     //  this.componentload=false
+                    })
 
-            //    },1500)
-             
+
+                    // if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                    //     this.$router.push({
+                    //         path:"/loan/form/myOrder",
+                    //         query:{
+                    //             info:url,
+                    //             title:"支付"
+                    //         }
+                    //     })
+                    //      this.componentload=false
+                    //     } else {
+                    //         this.componentload=false
+                    //         location.href=url
+                    //     }
+               } else {
+                   setTimeout(()=>{
+                       this.componentload=false
+                       this.$toast(res.data.message)
+                   },1500)
+                     
+               }
            })
        }
      

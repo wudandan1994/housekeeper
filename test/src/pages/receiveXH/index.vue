@@ -112,7 +112,7 @@
             </div>
              <div class="statistics">
                  <ul>
-                     <router-link tag="li" to="/home/news">
+                      <router-link tag="li" :to="{path:'/home/news',query:{title:'商户收款流程',url:'http://pay.91dianji.com.cn/collet.jpg'}}">
                          <span><van-icon name="column" size="20px" color="#4B66AF" /></span>
                          <p><span>操作流程说明</span><span><van-icon name="arrow" /></span></p>   
                      </router-link>

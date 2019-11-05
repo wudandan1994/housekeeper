@@ -40,7 +40,6 @@
                                 <p>支付信用卡：</p>
                                 <p><span>{{nick}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{cardnumber}}</span></p>
                                 <p @click="getxycard" class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></p>
-                              
                                 <!-- <router-link tag="p" :to="{query:{type:'1',},path:'/home/receivables/cards'}"  class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></router-link> -->
                             </li>
                         </ul>
@@ -92,7 +91,7 @@
             </div>
              <div class="statistics">
                  <ul>
-                     <router-link tag="li" to="/home/news">
+                     <router-link tag="li" :to="{path:'/home/news',query:{title:'商户收款流程',url:'http://pay.91dianji.com.cn/collet.jpg'}}">
                          <span><van-icon name="column" size="20px" color="#4B66AF" /></span>
                          <p><span>操作流程说明</span><span><van-icon name="arrow" /></span></p>   
                      </router-link>
@@ -283,26 +282,26 @@ export default {
                             setTimeout(() =>{
                                 this.componentload = false;
                                 
-                                //  this.$router.push({
-                                //     path:"/loan/form/myOrder",
-                                //     query:{
-                                //             info:url,
-                                //             title:"支付"
-                                //         }
-                                //     })
-                            
-                            if (!navigator.userAgent.match(/iPad|iPhone/i)){
-                                this.$router.push({
-                                path:"/loan/form/myOrder",
-                                query:{
-                                    info:url,
-                                    title:"支付"
-                                    }
+                                 this.$router.push({
+                                    path:"/loan/form/myOrder",
+                                    query:{
+                                            info:url,
+                                            title:"支付"
+                                        }
                                     })
-                                } else {
-                                    this.componentload=false
-                                    location.href=url
-                                }
+                            
+                            // if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                            //     this.$router.push({
+                            //     path:"/loan/form/myOrder",
+                            //     query:{
+                            //         info:url,
+                            //         title:"支付"
+                            //         }
+                            //         })
+                            //     } else {
+                            //         this.componentload=false
+                            //         location.href=url
+                            //     }
 
                             },2000)
                     }

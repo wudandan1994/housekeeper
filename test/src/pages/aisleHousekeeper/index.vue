@@ -2,11 +2,11 @@
     <div id="credit-housekeeper">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>信用卡管家</span>
-            <span></span>
+            <span>智能还款</span>
+            <router-link tag="span" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard"><van-icon name="add" size="24px" color="#1890FF" /></router-link>
         </header>
         <div class="container">
-           <div class="swipe">
+           <!-- <div class="swipe">
                  <div class="top row">
                     <div class="avator"><img :src="headimg" alt=""></div>
                     <div class="name-code">
@@ -15,7 +15,96 @@
                          <p>推荐码：<span>{{promotioncode}}</span></p>
                     </div>
                  </div>
-               
+                 <p> 绑卡：{{cardNum}}张</p>
+           </div> -->
+           <div class="personinfo">
+               <div class="up">
+                   <div class="photo">
+                       <img :src="headimg" alt="">
+                   </div>
+                   <div class="level">
+                       <p>微信昵称：<span>{{nickname}}</span></p> 
+                       <p>会员等级：<span>{{vip}}</span></p>
+                       <p>推荐码：<span>{{promotioncode}}</span></p>
+                   </div>
+                   <div class="cardsnum">
+                       <p>帮卡：{{cardNum}}张</p>
+                       <p @click="toolsflag=!toolsflag">常用工具</p>
+                   </div>
+               </div>
+               <div class="down">
+                   <div class="nums">
+                       <p>未来11日待还（元）</p>
+                       <p>12345.00</p>
+                   </div>
+                   <div class="bankname">
+                       <p>中国光大银行</p>
+                       <p>免息期50天</p>
+                   </div>
+                   <div class="days">
+                       <p>3天</p>
+                       <p>最后宽限期</p>
+                   </div>
+               </div>
+           </div>
+           <div class="tools" v-show="toolsflag">
+               <div class="lists">
+                   <div class="setting">
+                       <span><van-icon size="20px" color="#9B9B9B" name="setting"/></span>
+                       <span>常用工具</span>
+                   </div>
+                   <div class="list">
+                       <ul>
+                           <router-link to="/home/budget" tag="li">
+                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p>预算费用</p>
+                           </router-link>
+                            <router-link tag="li" :to="{path:'/home/news',query:{title:'还款流程',url:'http://pay.91dianji.com.cn/collet.jpg'}}">
+                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p>流程说明</p>
+                            </router-link>
+                            <li>
+                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p>信用卡提额</p>
+                           </li>
+                            <li>
+                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p>账单查询</p>
+                           </li>
+                            <router-link to="/home/punch" tag="li">
+                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p>计划列表</p>
+                            </router-link>
+                            <router-link to="/personalCenter/contactus" tag="li">
+                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p>在线客服</p>
+                            </router-link>
+                            <router-link to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" tag="li">
+                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p>添加信用卡</p>
+                            </router-link>
+                            <li>
+                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p>信用卡编辑</p>
+                           </li>
+                             <router-link tag="li" :to="{path:'/home/news',query:{title:'',url:'http://pay.91dianji.com.cn/banklimit.png'}}">
+                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p>还款宽限期</p>
+                             </router-link>
+                            <li>
+                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p>信用卡费用</p>
+                           </li>
+                            <router-link tag="li" to="/cancelCard">
+                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p>信用卡恢复</p>
+                            </router-link>
+                       </ul>
+                   </div>
+               </div>
+               <div class="delete">
+                   <p @click="toolsflag=false"><van-icon name="close" size="34px" color="#fff" /></p>
+               </div>
            </div>
            <div class="bind">
                <ul>
@@ -28,7 +117,6 @@
                                   {{item.payerName.replace(1,"*")}}
                               </p>
                               <p>
-                                 <!-- <van-button @click="unbinding(item)" round type="default">解绑</van-button>   -->
                                 <span @click="unbinding(item)">解绑</span>
                               </p>
                           </div>
@@ -45,7 +133,7 @@
                                   </div>
                               </div>
                               <p>
-                                  <van-button @click="repayment(index)" class="repayment" round type="info">立即还款</van-button>
+                                  <van-button @click="repayment(index,item)" class="repayment" round type="info">立即还款</van-button>
                               </p>
                           </div>
                        </div>
@@ -55,22 +143,31 @@
                                    <p>{{item.realamount}}</p>
                                    <p>还款金额</p>
                                </li>
-                               <!-- <li>
-                                    <p v-if="item.state=='0'">待执行</p>
-                                    <p v-if="item.state=='1'">已成功</p>
-                                    <p v-if="item.state=='2'">已取消</p>
-                                    <p v-if="item.state=='3'">进行中</p>
-                                    <p v-if="item.state=='4'">失败</p>
-                                    <p>还款状态</p>
-                               </li> -->
-
                                 <li>
-                                   <!-- <p>{{item.repaycount}}</p> -->
-                                  <p>{{item.already}}/{{item.repaycount}}</p>
+                                  <p class="gradient">{{item.already}}/{{item.repaycount}}</p>
                                    <p>还款进度</p>
                                </li>
                                 <li>
                                    <p>{{item.poundage}}</p>
+                                   <p>手续费</p>
+                               </li>
+                               <li>
+                                
+                               </li>
+                           </ul>
+                       </div>
+                        <div class="bottom"  v-else>
+                           <ul>
+                               <li>
+                                   <p>未知</p>
+                                   <p>还款金额</p>
+                               </li>
+                                <li>
+                                  <p>未知</p>
+                                   <p>还款进度</p>
+                               </li>
+                                <li>
+                                   <p>未知</p>
                                    <p>手续费</p>
                                </li>
                                <li>
@@ -109,13 +206,13 @@
                </ul>
            </div>
          
-           <div class="plansdetail">
+           <!-- <div class="plansdetail">
                <div class="plans">
                    <router-link tag="div" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard"  class="addcard"><van-icon name="plus" />添加信用卡</router-link>
                    <router-link tag="div" to="/home/punch" class="allplans"><van-icon name="send-gift-o" />查看全部计划</router-link>                 
                </div>
                 <router-link tag="div" class="manage" to="/cancelCard"><van-icon name="card" /> 信用卡管理</router-link>
-           </div>
+           </div> -->
           
         </div>
     </div>
@@ -153,11 +250,14 @@ export default {
             colors:"",
             colorl:"",
             cardinfo:"",
-            number:""
+            number:"",
+            cardNum:0,
+            toolsflag:false,
+
         }
     },
     mounted () {
-        // this.amount=storage.get("amount")
+       
     },
     methods:{
         goBack() {
@@ -167,7 +267,6 @@ export default {
         showcover(){
             this.showdis=!this.showdis
             this.showpass=false
-
         },
         // 解绑信用卡
         unbinding(item){
@@ -365,10 +464,16 @@ export default {
          } ,
        
        
-        repayment(i){
-            this.num=i
-            this.showdis=true
-            this.showpass=true
+        repayment(i,item){
+            // this.num=i
+            // this.showdis=true
+            // this.showpass=true
+            this.$router.push({
+                path:"/home/billDetails",
+                query:{
+                    i:item
+                }
+            })
            
         },
         // 查询绑卡列表
@@ -383,7 +488,7 @@ export default {
                          arrXun.push(item)
                      });
                      this.cardList=arrXun
-                    //  this.cardNum=this.cardList.length
+                     this.cardNum=this.cardList.length
                  }
              })
              .catch(err=>{
@@ -436,12 +541,13 @@ export default {
 <style lang="less" scope>
    #credit-housekeeper{
        >header {
-           background-color: #4965AE;
+        //    background-color: #4965AE;
+           background-color: #fff;
            width:100%;
            height: 86px;
            line-height: 86px;
            padding-top:10px;
-           color:#fff;
+        //    color:#fff;
            z-index:999;
            display: flex;
            position: fixed;
@@ -463,6 +569,69 @@ export default {
            box-sizing: border-box;
         // margin-top:96px;
            padding-bottom: 50px;
+           .tools{
+                position: fixed;
+                top:0px;
+                bottom: 0px;
+                left:0px;
+                right:0px;
+                background-color: rgba(0, 0, 0, .5);
+                z-index: 999;
+                .lists {
+                    width:90%;
+                    background-color: #fff;
+                    margin-top:30%;
+                    margin-left:auto;
+                    margin-right: auto;
+                    border-radius: 15px;
+                    .setting {
+                        background-color: #EDEDED;
+                        height:100px;
+                        display: flex;
+                        align-items: center;
+                        text-align: center;
+                        padding-left:40%;
+                        span{
+                            &:nth-of-type(2){
+                                color:#000;
+                                padding-left:20px;
+                                font-size: 30px;
+                            }
+                        }
+                    }
+                    .list{
+                        ul{
+                            padding:17px;
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-items: center;
+                            li{
+                                width:25%;
+                                text-align: center;
+                                border-bottom: 1px solid #ccc;
+                                padding-top:15px;
+                                p{
+                                    &:nth-of-type(2){
+                                        padding:25px 0px 35px 0px;
+                                    }
+                                }
+                                &:nth-of-type(9),
+                                &:nth-of-type(10),
+                                &:nth-of-type(11){
+                                    border:none;
+                                }
+
+                            }
+                        }
+                    }
+                }
+                .delete {
+                    margin-top:80px;
+                    p{
+                        text-align: center;
+                    }
+                }
+           }
            .van-button--normal {
                font-size: 34px;
            }
@@ -530,6 +699,58 @@ export default {
           .operator {
               margin-right:30px;
           }
+           }
+           .personinfo {
+               width:100%;
+               border:1px solid #9DD0FF;
+               height:350px;
+               box-sizing: border-box;
+               border-radius: 15px;
+               background-color: #E7F3FF;
+               .up {
+                   width:100%;
+                   height:200px;
+                   display: flex;
+                   align-items: center;
+                   justify-content: space-around;
+                   border-bottom: 1px solid #1890FF;
+                   .photo {
+                       width:150px;
+                       img {
+                           width:100%;
+                           border-radius: 50%;
+                       }
+                   }
+                   .level{
+                       p{
+                           &:nth-of-type(2){
+                               padding:16px 0px;
+                           }
+                           color:#000;
+                           span{
+                               color:#999;
+                           }
+                       }
+                   }
+                   .cardsnum {
+                       p{
+                           &:nth-of-type(2){
+                               background-color: #223BA8;
+                               padding:10px 14px;
+                               color:#fff;
+                               margin-top:15px;
+                           }
+                       }
+                   }
+               }
+               .down{
+                   display: flex;
+                   justify-content: space-around;
+                   align-items: center;
+                   p {
+                       margin-top:30px;
+                   }
+               }
            }
             .bind {
                 box-sizing: border-box;
@@ -693,7 +914,6 @@ export default {
                           bottom: 0px;
                           left:0px;
                           right:0px;
-                        //   background-color: rgba(0, 0, 0, .2);
                           >ul{
                               display: flex;
                               justify-content: space-around;
@@ -714,14 +934,12 @@ export default {
                                       &:nth-of-type(2){
                                           margin-top:10px;
                                       }
-                                  }
-                                  &:nth-of-type(2){
-                                       >p:nth-child(1){
-                                        background: -webkit-gradient(linear, left top, right top, from(#D3B773), color-stop(170%, #553400));
+                                      &.gradient{
+                                         background: -webkit-gradient(linear, left top, right top, from(#D3B773), color-stop(170%, #553400));
                                         background: linear-gradient(to right, #D3B773 0%, #553400 170%);
                                         padding: 8px 0px;
                                         border-radius: 15px;
-                                  }
+                                      }
                                   }
                               }
                           }
