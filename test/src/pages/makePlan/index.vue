@@ -6,7 +6,7 @@
             <span></span>
         </header>
         <div class="container">
-            <div class="bind">
+            <!-- <div class="bind">
                <ul >
                    <li >
                        <div class="top">
@@ -37,13 +37,16 @@
                        </div>
                    </li>
                </ul>
+           </div> -->
+           <div class="makes">
+               <img src="http://pay.91dianji.com.cn/make.png" alt="">
            </div>
            <div class="notice">
                <p>*在经济条件允许范围内，不要长期低于总额度30%，可以降低银行系统风控</p>
            </div>
            <div class="plan">
-               <p><van-icon name="setting" />系统计划</p>
-               <div class="content">
+               <!-- <p><van-icon name="setting" />系统计划</p> -->
+               <!-- <div class="content">
                   <div class="eara">
                       <p>请输入还款金额</p>
                       <input class="input" v-model="payment" type="number" placeholder="请输入还款金额">
@@ -54,7 +57,6 @@
                   </div>
 
 
-
                    <div class="eara">
                       <p>请选择消费城市</p>
                       <div class="last">
@@ -63,29 +65,11 @@
                           <input class="city" readonly  v-model="area" type="text" placeholder="位置">
                           <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
-                         <!-- <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/> -->
                         <van-popup v-model="citypopup" position="bottom" :overlay="false">
                            <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
                       </van-popup>  
                   </div>
 
-
-                   <!-- <p>范围广泛的地区</p>
-                   <div class="eara">
-                      <p>请选择消费城市</p>
-                      <div class="last">
-                          <p> <van-icon  size="20px" name="location"/></p>
-                          <input class="city" readonly  v-model="area" type="text" placeholder="位置">
-                          <p><span @click="showPick"><van-icon size="20px" name="arrow"/></span></p>
-                      </div>
-                        <van-area :area-list="areaList" v-show="showFlag" :columns-num="2"   @cancel="onCancel"  @confirm="onConfirm" />
-                  </div> -->
-
-
-                  <!-- <div class="eara">
-                      <p>开始还款时间</p>
-                      <input class="input" v-model="startdate" type="text" placeholder="开始还款时间">
-                  </div> -->
 
                    <div class="eara">
                       <p>开始还款时间</p>
@@ -94,14 +78,7 @@
                           <input class="city" readonly  v-model="startdate" type="text" >
                           <p><span @click="showStartpicker"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
-                       <!-- <van-datetime-picker
-                        v-model="currentDate"
-                        type="date"
-                          @confirm="confirmStart"
-                        v-show="showStart"
-                         @cancel="cancelStart"
-                        /> -->
-
+                     
                      <van-popup v-model="startpop" position="bottom" :overlay="false">
                              <van-datetime-picker
                             v-model="currentDate"
@@ -110,16 +87,10 @@
                             v-show="showStart"
                             @cancel="cancelStart"
                             />
-
                        </van-popup>
-
                   </div>
 
-                     <!-- <div class="eara">
-                       <p>还款结束时间</p>
-                      <input class="input" v-model="enddate" type="text" placeholder="还款结束时间">
-                    </div> -->
-
+                    
                    <div class="eara">
                       <p>还款结束时间</p>
                       <div class="last">
@@ -127,14 +98,7 @@
                           <input class="city" readonly  v-model="enddate" type="text" >
                           <p><span @click="showEndpicker"><van-icon size="20px" name="arrow"/></span></p>
                       </div>
-                       <!-- <van-datetime-picker
-                        v-model="currentDate"
-                        type="date"
-                        @confirm="confirmEnd"
-                        v-show="showEnd"
-                        @cancel="cancelEnd"
-                        /> -->
-
+                      
                          <van-popup v-model="endpopup" position="bottom" :overlay="false">
                             <van-datetime-picker
                             v-model="currentDate"
@@ -147,10 +111,64 @@
 
                   </div>
                   
-               </div>
+               </div> -->
            </div>
+           <div class="lists">
+               <ul>
+                   <li>
+                       <p>还款金额</p>
+                       <input  v-model="payment" type="number" placeholder="输入还款金额">
+                       <p></p>
+                   </li>
+                   <li>
+                       <p>预留金额</p>
+                       <input  v-model="amount" type="number" :placeholder="place">
+                       <p></p>
+                   </li>
+                    <li>
+                       <p>选择消费城市</p>
+                        <input class="city" readonly  v-model="area" type="text" placeholder="位置">
+                        <p @click="showPick"><span @click="showPick"><van-icon size="24px" name="arrow"/></span></p>
+                   </li>
+                    <li>
+                       <p>消费开始时间</p>
+                        <input class="city" readonly     v-model="startdate" type="text" >
+                        <p><span @click="showStartpicker"><van-icon size="24px" name="arrow"/></span></p>
+                   </li>
+                    <li>
+                       <p>消费结束时间</p>
+                        <input class="city" readonly  v-model="enddate" type="text" >
+                         <p><span @click="showEndpicker"><van-icon size="24px" name="arrow"/></span></p>
+                   </li>
+               </ul>
+           </div>
+            <van-popup v-model="citypopup" position="bottom" :overlay="false">
+                <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
+            </van-popup>  
+
+             <van-popup v-model="startpop" position="bottom" :overlay="false">
+                    <van-datetime-picker
+                v-model="currentDate"
+                type="date"
+                @confirm="confirmStart"
+                v-show="showStart"
+                @cancel="cancelStart"
+                />
+            </van-popup>
+
+               <van-popup v-model="endpopup" position="bottom" :overlay="false">
+                            <van-datetime-picker
+                            v-model="currentDate"
+                            type="date"
+                            @confirm="confirmEnd"
+                            v-show="showEnd"
+                            @cancel="cancelEnd"
+                            />
+                      </van-popup>
+
+
             <div class="make">
-                <van-button size="large" @click="makePlan" round type="info">制定计划</van-button>
+                <van-button size="large" @click="makePlan"  type="info">制定计划</van-button>
             </div>
         </div>
     </div>
@@ -159,7 +177,6 @@
 <script>
 import { axiosPost } from '../../lib/http'
 import { citys } from '../../lib/city.js'
-// import { arealist } from '../../lib/arealist.js'
 import storage from '@/lib/storage'
 
 export default {
@@ -171,7 +188,6 @@ export default {
            item:"",
            type:"",
            area:"",
-        //    areaList:arealist,
            startdate:"",
            showFlag:false,
            showStart:false,
@@ -293,11 +309,6 @@ export default {
                           message:res.data.message
                         })
 
-                    //  this.$router.push({
-                    //      path:"/home/insertEsiCash",
-                    //      query:{info:this.item}
-                    //  })
-                    
                  } else {
                     storage.set('amount',this.amount);
                     let planList=res.data.data
@@ -357,6 +368,7 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
+           overflow-x: hidden;
            .bind {
                 box-sizing: border-box;
               >ul{
@@ -433,14 +445,18 @@ export default {
                   }
               }
           }
+          .makes{
+              width:100%;
+              >img {
+                  width:100%;
+              }
+          }
           >.notice {
               background-color: #eee;
               line-height: 38px;
               padding:10px 0px;
           }
           >.plan {
-            //  padding:15px;
-            // margin:15px;
              >p {
                  margin:20px;
                  color:#4B66AF;
@@ -499,11 +515,39 @@ export default {
                  
              }
           }
+          .lists{
+              padding:15px;
+              ul{
+                  li{
+                      display: flex;
+                      align-items: center;
+                      padding:20px 0px;
+                      border-bottom: 1px solid #ccc;
+                      font-size: 30px;
+                      >p{
+                          &:nth-of-type(2){
+                              width:20%;
+                              text-align: center;
+                          }
+                      }
+                      input {
+                          border:none;
+                          flex: 1;
+                          text-align: right;
+                      }
+                  }
+              }
+          }
           >.make {
               margin-top:50px;
-              padding:0 30px;
+              padding:0 40px;
               .van-button--info {
                   background-color: #4B66AF;
+              }
+              .van-button--large{
+                  height: 80px;
+                  line-height: 80px;
+                  border-radius: 10px;
               }
           }
        }

@@ -23,7 +23,7 @@
                                 <li @click="goPlanDetail(item.id,item.bankNick,item.cardNo,item.payerName)" v-for="(item,index) in list" :key="index">
                                     <div class="top">
                                         <!-- <p>{{item.cardNo.substr(item.cardNo.length-4)}}</p> -->
-                                          <p>{{item.bankNick}}</p>
+                                        <p>{{item.bankNick}}</p>
                                         <p>{{item.payerName}}</p>
                                         <p>本期账单：￥<span>{{item.realamount}}</span></p>
                                     </div>
@@ -32,18 +32,24 @@
                                           
                                              <div   class="sign-out">
                                                 <van-button v-show="item.state=='0' || item.state=='3'" @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                                <van-button v-show="item.state=='1' || item.state=='2'" @click.stop="stopPlan(item.id)" type="disabled" round>停止计划</van-button>
+
+                                                <!-- <van-button  @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
+
                                             </div> 
                                             <!-- <p v-show="item.state=='4'"> <span>{{item.remark}}</span></p> -->
                                         </div>
                                         <div class="m-right">
-                                            <p>执行状态</p>
                                             <!-- <p>{{item.state}}</p> -->
-                                            <p v-if="item.state=='0'">待执行</p>
+                                            <!-- <p v-if="item.state=='0'">待执行</p>
                                             <p v-else-if="item.state=='1'">已成功</p>
                                             <p v-else-if="item.state=='2'">已取消</p>
-                                            <p v-else-if="item.state=='3'">进行中</p>
-                                            <!-- <p v-else>失败</p> -->
-                                            <p v-show="item.state=='4' || item.state=='5' "><span>{{item.remark}}</span>&nbsp; <span v-if="item.state=='4'">失败</span></p>    
+                                            <p v-else-if="item.state=='3'">进行中</p> -->
+                                            <p v-if="item.state=='0'"><van-icon size="120px" name="http://pay.91dianji.com.cn/waiting.png"/></p>
+                                             <p v-else-if="item.state=='1'"><van-icon size="120px" name="http://pay.91dianji.com.cn/chenggong.png"/></p>
+                                            <p v-else-if="item.state=='2'"><van-icon size="120px" name="http://pay.91dianji.com.cn/quxiao.png"/></p>
+                                            <p v-else-if="item.state=='3'"><van-icon size="120px" name="http://pay.91dianji.com.cn/zhixing.png"/></p>
+                                            <p v-show="item.state=='4' || item.state=='5' "><span>{{item.remark}}</span>&nbsp; <span v-if="item.state=='4'"><van-icon size="120px" name="http://pay.91dianji.com.cn/shibai.png"/></span></p>    
 
                                         </div>
                                     </div>
@@ -82,8 +88,7 @@
                                             <!-- <p>等待执行：2019/5/17:14:33:37</p> -->
                                         </div>
                                         <div class="m-right">
-                                            <p>执行状态</p>
-                                            <p>等待执行</p>
+                                            <p><van-icon size="100px" name="http://pay.91dianji.com.cn/waiting.png"/></p>
                                             
                                             <van-button @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             
@@ -125,7 +130,7 @@
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-                                            <p>还款成功</p>
+                                            <p><van-icon size="100px" name="http://pay.91dianji.com.cn/chenggong.png"/></p>
                                             <!-- <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
                                             
                                         </div>
@@ -166,7 +171,7 @@
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-                                            <p>已取消</p>
+                                            <p><van-icon size="100px" name="http://pay.91dianji.com.cn/quxiao.png"/></p>
                                             <!-- <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
                                             
                                         </div>
@@ -208,7 +213,7 @@
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-                                            <p>进行中</p>
+                                            <p><van-icon size="100px" name="http://pay.91dianji.com.cn/zhixing.png"/></p>
                                             <van-button @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             
                                         </div>
@@ -249,7 +254,7 @@
                                         </div>
                                         <div class="m-right">
                                             <p>执行状态</p>
-                                            <p>失败</p>
+                                            <p><van-icon size="100px" name="http://pay.91dianji.com.cn/shibai.png"/></p>
                                             <!-- <van-button @click.self="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
                                             
                                         </div>
@@ -496,18 +501,18 @@ export default {
                         }
 
                           >.top {
-                            //   background-color: rgba(0, 0, 0, .5);
                              padding-top:13px;
                              height:20px !important;
                               padding:20px 10px;
                               display: flex;
                               justify-content: space-between;
-                              margin:0px !important;
+                              background-color: rgba(0, 0, 0, .2);
+                              margin-top:10px;
                           }
                           >.middle{
                                display: flex;
                               justify-content: space-around;
-                              margin-top:20px;
+                              align-items: center;
                               >.m-left {
                                   >p {
                                       &:nth-of-type(1){
@@ -517,26 +522,28 @@ export default {
                                           background-color: rgba(0, 0, 0, .2);
                                           padding:15px;
                                           border-radius:20px;
-                                          margin-top:15px;
                                       }
                                   }
                               }
                               >.m-right{
                                   >p {
                                       &:nth-of-type(1){
-                                          padding-bottom: 10px;
-                                      }
-                                      &:nth-of-type(2){
-                                          margin:10px 0px;
+                                        margin-left:50px;
                                       }
                                   }
                                   .sign-out {
-                                       margin-top:20px;
+                                       margin-top:50px;
                                         .van-dialog,
                                         .van-dialog__message,
                                         .van-button {
                                             font-size: 30px;
                                         }
+                                        .van-button--round{
+                                            width:100px !important;
+                                            height:40px !important;
+                                        }
+
+
                                          .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
                                             height:70px;
                                         }
@@ -549,18 +556,14 @@ export default {
                               }
                           }
                           >.bottom {
-                              margin-top:30px;
                               >ul{
                                   display: flex;
                                   padding:10px 5px;
-                                  margin-top:70px;
                                   >li {
-                                      padding-top:20px;
                                       width:33%;
                                       text-align: center;
                                       >p {
                                           &:nth-of-type(1){
-                                              margin-top:20px;
                                               padding-bottom: 30px;
                                           }
                                       }

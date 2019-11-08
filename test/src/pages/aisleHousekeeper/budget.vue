@@ -10,17 +10,36 @@
                <ul>
                    <li>
                        <span>还款金额：</span>
-                       <input type="text" v-model="budget" placeholder="请输入还款金额">
+                       <input type="number" v-model="budget" placeholder="请输入还款金额">
                        <span>元</span>
                    </li>
                     <li>
-                       <span>还款金额：</span>
-                       <input type="text" v-model="reserve" placeholder="请输入预留金额">
+                       <span>预留金额：</span>
+                       <input type="number" @input="setamount" v-model="reserve" placeholder="请输入预留金额">
                        <span>元</span>
                    </li>
+                    <li v-show="showdetail">
+                       <span>还款笔数：</span>
+                       <input type="text" readonly v-model="num" >
+                       <span>笔</span>
+                   </li >
+                     <li v-show="showdetail">
+                       <span>手续费约：</span>
+                       <input type="text" readonly  v-model="charge" >
+                       <span>元</span>
+                   </li>
+                     <li v-show="showdetail">
+                       <span>刷卡费率：</span>
+                       <input type="text" readonly  v-model="cardrate" >
+                       <span>元</span>
+                   </li>
+                    
+
                </ul>
            </div>
-           
+           <div :class="selectclolr?'calculation':''" @click="getnum">
+               {{text}}
+           </div>
         </div>
     </div>
 
@@ -28,17 +47,91 @@
 
 
 <script>
+import { axiosPost } from '../../lib/http';
 export default {
     data() {
         return {
-            budget:"",
-            reserve:"",
+            budget:'',
+            reserve:'',
+            selectclolr:false,
+            num:"",
+            charge:"",
+            rate:"",
+            space:"",
+            showdetail:false,
+            text:"点击预算",
+            rate:0,
+            lev:0,
+            rates:"",
+            cardrate:""
         }
     },
     methods:{
         goBack() {
             this.$router.go(-1)
+        },
+        setamount(){
+            this.selectclolr=true
+        },
+        getnum(){
+            if(this.text==="重新计算"){
+                this.showdetail=false
+                this.text="点击预算"
+                this.budget=""
+                this.reserve=""
+                this.selectclolr=false
+                return
+            }
+
+             if(this.budget.length===0 || this.reserve.length===0){
+                return this.$toast("请填写金额")
+            }
+             this.showdetail=true
+
+            let repayment=Number(this.budget)  // 还款金额
+
+            let amount=Number(this.reserve)  // 预留金额
+
+            if(repayment<amount){
+                amount=repayment/2
+            }
+           
+            this.num=Math.ceil(repayment/(amount*0.9)) % 2===0?Math.ceil(repayment/(amount*0.9)):Math.ceil(repayment/(amount*0.9))+1
+
+            this.charge='￥'+(repayment*this.rate+this.lev*this.num)
+
+            this.cardrate=this.rates
+
+            this.text="重新计算"
+        },
+         handleGetAmount(){
+            axiosPost("/customer/getCustomer")
+            .then(res =>{
+                if(res.data.success){
+                   if(res.data.data.level == '0'){
+                        this.rate =0.008;
+                        this.lev=3
+                        this.rates='0.8%'
+                    }
+                    else if(res.data.data.level == '1'){
+                        this.rate =0.007 
+                         this.lev=2
+                         this.rates='0.7%'
+                    }else{
+                        this.rate = 0.006
+                         this.lev=2
+                         this.rates='0.6%'
+                    }
+                }else{
+                     this.$toast('查询失败')
+                }
+            }).catch(res =>{
+                    this.$toast('查询失败')
+            })
         }
+    },
+    created () {
+        this.handleGetAmount()
     }
 }
 </script>
@@ -69,6 +162,8 @@ export default {
        >.container {
            padding-top:96px;
            padding-bottom: 50px;
+           overflow-x: hidden;
+           box-sizing: border-box;
            .cost {
                padding:20px;
                ul{
@@ -98,6 +193,26 @@ export default {
                        }
                    }
                }
+           }
+           >div{
+               &:nth-of-type(2){
+                //    calculation
+                    width:90%;
+                    height: 80px;
+                    background-color: #C9C9C9;
+                    color:#fff;
+                    text-align: center;
+                    line-height: 80px;
+                    font-size: 30px;
+                    box-sizing: border-box;
+                    overflow-x: hidden;
+                    margin:30px auto 0px auto;
+                    border-radius: 10px;
+                    &.calculation{
+                        background: linear-gradient(to right, #9FB0DF, #223BA8);
+                    }
+               }
+              
            }
        }
    }

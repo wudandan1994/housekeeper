@@ -56,7 +56,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.go(-1)
+            this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
         },
         submit(){
             let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/ 

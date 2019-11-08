@@ -3,7 +3,7 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>智能还款</span>
-            <router-link tag="span" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard"><van-icon name="add" size="24px" color="#1890FF" /></router-link>
+            <router-link tag="span" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard"><i>添卡</i><van-icon name="add" size="24px" color="#1890FF" /></router-link>
         </header>
         <div class="container">
            <!-- <div class="swipe">
@@ -28,21 +28,22 @@
                        <p>推荐码：<span>{{promotioncode}}</span></p>
                    </div>
                    <div class="cardsnum">
-                       <p>帮卡：{{cardNum}}张</p>
+                       <p>绑卡：{{cardNum}}张</p>
                        <p @click="toolsflag=!toolsflag">常用工具</p>
                    </div>
                </div>
                <div class="down">
                    <div class="nums">
-                       <p>未来11日待还（元）</p>
-                       <p>12345.00</p>
+                       <p>还款金额</p>
+                       <p v-if="bankinfo.amount===null">未设置</p>
+                       <p v-else>{{bankinfo.amount}}</p>
                    </div>
                    <div class="bankname">
-                       <p>中国光大银行</p>
-                       <p>免息期50天</p>
+                       <p>{{bankinfo.bankname}}</p>
+                       <p>免息期：{{bankinfo.free }}天</p>
                    </div>
                    <div class="days">
-                       <p>3天</p>
+                       <p>{{bankinfo.day}}天</p>
                        <p>最后宽限期</p>
                    </div>
                </div>
@@ -56,47 +57,47 @@
                    <div class="list">
                        <ul>
                            <router-link to="/home/budget" tag="li">
-                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon1.png"/></p>
                                <p>预算费用</p>
                            </router-link>
                             <router-link tag="li" :to="{path:'/home/news',query:{title:'还款流程',url:'http://pay.91dianji.com.cn/collet.jpg'}}">
-                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon2.png"/></p>
                                <p>流程说明</p>
                             </router-link>
-                            <li>
-                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                            <router-link to="/home/cardCenter/liftingAmount" tag="li">
+                               <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon3.png"/></p>
                                <p>信用卡提额</p>
-                           </li>
-                            <li>
-                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                            </router-link>
+                            <router-link to="/home/query" tag="li">
+                               <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon4.png"/></p>
                                <p>账单查询</p>
-                           </li>
+                            </router-link>
                             <router-link to="/home/punch" tag="li">
-                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon5.png"/></p>
                                <p>计划列表</p>
                             </router-link>
                             <router-link to="/personalCenter/contactus" tag="li">
-                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon6.png"/></p>
                                <p>在线客服</p>
                             </router-link>
                             <router-link to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" tag="li">
-                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon7.png"/></p>
                                <p>添加信用卡</p>
                             </router-link>
-                            <li>
-                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                            <!-- <li>
+                               <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon8.png"/></p>
                                <p>信用卡编辑</p>
-                           </li>
+                           </li> -->
                              <router-link tag="li" :to="{path:'/home/news',query:{title:'',url:'http://pay.91dianji.com.cn/banklimit.png'}}">
-                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon9.png"/></p>
                                <p>还款宽限期</p>
                              </router-link>
-                            <li>
-                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                             <router-link tag="li" :to="{path:'/home/news',query:{title:'',url:'http://pay.91dianji.com.cn/query.jpg'}}">
+                               <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon10.png"/></p>
                                <p>信用卡费用</p>
-                           </li>
+                             </router-link>
                             <router-link tag="li" to="/cancelCard">
-                               <p><van-icon size="20px" color="red" name="setting"/></p>
+                               <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon11.png"/></p>
                                <p>信用卡恢复</p>
                             </router-link>
                        </ul>
@@ -108,7 +109,7 @@
            </div>
            <div class="bind">
                <ul>
-                   <li v-for="(item, index) in cardList" :key="index">
+                   <li v-for="(item, index) in cardList" :key="index" @click="getfreeday(item)">
                        <div class="top">
                           <div class="bankName">
                               <p>{{item.bankNick}}</p>
@@ -117,13 +118,14 @@
                                   {{item.payerName.replace(1,"*")}}
                               </p>
                               <p>
-                                <span @click="unbinding(item)">解绑</span>
+                                <span @click="unbinding(item)" style="color:#EC171D;">解绑</span>
                               </p>
                           </div>
                           <div class="now">
                               <div>
-                                  <p class="botton">{{amount}}</p>
-                                  <router-link :to="{path:'/home/changeBill',query:{info:item}}" tag="p">账单编辑</router-link>
+                                  <!-- <p class="botton">{{amount}}</p> -->
+                                  <p> <van-icon color="white" size="20px" name="edit"/></p>
+                                  <router-link :to="{path:'/home/changeBill',query:{info:item}}" tag="p">信用卡编辑</router-link>
                               </div>
                               <div class="pay">
                                   <!-- <p class="days">16</p> -->
@@ -223,6 +225,8 @@
 <script>
 import { axiosPost,axiosGet }  from '../../lib/http'   
 import { bankCardAttribution } from '../../lib/bankName'
+import bankfree  from '../../lib/bankfree'   
+
 import loading from '@/components/loading'
 import storage from '@/lib/storage' 
 export default {
@@ -253,7 +257,12 @@ export default {
             number:"",
             cardNum:0,
             toolsflag:false,
-
+            bankinfo:{
+                 "bankname":"光大银行",
+                 "free":"50",
+                 "day":"undefined"
+            },
+            nick:""
         }
     },
     mounted () {
@@ -463,7 +472,6 @@ export default {
             })
          } ,
        
-       
         repayment(i,item){
             // this.num=i
             // this.showdis=true
@@ -482,13 +490,23 @@ export default {
              .then(res=>{
                  if(res.data.success){
                      let arr= res.data.data
-                     let arrXun=[]
-                     arr.forEach((item,i) => {
-                         item.bankNick=bankCardAttribution(item.cardNo).bankName
-                         arrXun.push(item)
+                     if(arr.length===0){
+                         this.$toast("您还未绑定信用卡")
+                     } else {
+                          let arrXun=[]
+                        arr.forEach((item,i) => {
+                            item.bankNick=bankCardAttribution(item.cardNo).bankName
+                            arrXun.push(item)
                      });
                      this.cardList=arrXun
+                    //  this.bankinfo=this.cardList[0]
+                    //  this.nick=this.bankinfo.bankNick
+                     this.getbankname(this.cardList[0])
                      this.cardNum=this.cardList.length
+                     }
+                    
+                 } else {
+                     this.$toast(res.data.message)
                  }
              })
              .catch(err=>{
@@ -529,11 +547,29 @@ export default {
                     this.$toast('查询失败')
                 },500)
             })
+        },
+        getbankname(name){
+              bankfree.some(item=>{
+                if(name.bankNick===item.bankname){
+                    this.bankinfo=item
+                    this.bankinfo.amount=name.realamount
+                }
+             })
+             if(this.bankinfo.day==="undefined"){
+                 this.bankinfo={amount:"未知",day:"未知",bankname:"未知",free:"未知"}
+             }
+        },
+        getfreeday(item){
+            this.getbankname(item)
         }
     },
     created () {
        this.handleGetAmount()
        this.getCardList()
+      
+    },
+    mounted () {
+       
     }
 }
 </script>
@@ -553,12 +589,15 @@ export default {
            position: fixed;
            font-size: 28px;
            justify-content: space-between;
+           align-items: center;
            >span {
                &:nth-of-type(1) {
                    margin-left: 10px;
                }
                &:nth-of-type(3) {
                    margin-right: 10px;
+                   display: flex;
+                   align-items: center;
                }
            }
        }
@@ -722,6 +761,7 @@ export default {
                        }
                    }
                    .level{
+                       margin-left:-50px;
                        p{
                            &:nth-of-type(2){
                                padding:16px 0px;
@@ -844,7 +884,7 @@ export default {
                       }
                       }
                       color:#fff;
-                      padding:10px;
+                    //   padding:10px;
                        box-sizing: border-box;
                        margin-bottom: 15px;
                     //    background-image:url("http://pay.91dianji.com.cn/gd.jpg");
@@ -883,12 +923,14 @@ export default {
                        background-size:100%;
                        >.top {
                            padding-bottom: 150px;
-                           padding-top:10px;
+                        //    padding-top:10px;
                            .bankName {
                           display: flex;
                           justify-content: space-around;
                           align-items: center;
                           margin-bottom: 15px;
+                          background-color: rgba(0, 0, 0, .2);
+                          padding:20px 0px;
                           margin-top:8px;
                             .van-dialog .van-button{
                                 height: 80px;
@@ -949,6 +991,16 @@ export default {
                           justify-content: space-around;
                           align-items: center;
                           padding-top:40px;
+                          >div{
+                              &:nth-of-type(1){
+                                >p{
+                                    &:nth-of-type(1){
+                                        margin-top: -5px;
+                                        margin-left:30px;
+                                    }
+                                }
+                              }
+                          }
                           >.pay {
                               display: flex;
                               >.days {

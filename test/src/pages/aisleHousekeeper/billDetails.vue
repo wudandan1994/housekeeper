@@ -13,12 +13,12 @@
                         <li @click="selectsmalss" :class="channel=='1'?'selectcolor':''">
                              <h2><van-checkbox class="checkbox" v-model="checked"   checked-color="#4694FF"></van-checkbox> </h2>
                              <p  :class="channel=='1'?'skyblue':''">小额通道</p>
-                             <p  :class="channel=='1'?'skyblue':''">还款金额2000-20000</p>
+                             <p  :class="channel=='1'?'skyblue':''">还款金额2000-30000</p>
                         </li>
                          <li  @click="selectlarge" :class="channel=='2'?'selectcolor':''" >
                              <h2><van-checkbox class="checkbox" v-model="selected"  checked-color="#4694FF"></van-checkbox> </h2>
                              <p :class="channel=='2'?'skyblue':''">大额通道</p> 
-                             <p :class="channel=='2'?'skyblue':''">还款金额2000-50000</p>
+                             <p :class="channel=='2'?'skyblue':''">还款金额2000-500000</p>
                         </li>
                     </ul>
                 </div>
@@ -34,13 +34,17 @@
                                 <p  class="gray">持卡人</p>
                                 <p>{{info.payerName}}</p>
                             </li>
-                             <li>
+                             <li v-if="info.repaycount!==null">
                                 <p  class="gray">还款金额</p>
-                                <p>￥2044.06</p>
+                                <p>￥{{info.repaycount}}</p>
                             </li>
-                             <li>
+                             <li v-else>
+                                <p  class="gray">还款金额</p>
+                                <p>未知</p>
+                            </li>
+                             <li >
                                 <p  class="gray">还款日</p>
-                                <p>10-01</p>
+                                <p>{{data}}</p>
                             </li>
                         </ul>
                     </div>
@@ -66,7 +70,9 @@ export default {
            checked:false,
            selected:false,
            channel:'',
-           info:""
+           info:"",
+           due:"",
+           data:""
         }
     },
     methods: {
@@ -228,11 +234,22 @@ export default {
                 this.large(this.info)
             }
         },
+        getday(){
+              let date=new Date();
+              let month=date.getMonth() + 1   //当前月份
+              let day = date.getDate()   //day是当天日期  
+              if(Number(day)<Number(this.due)){
+                  this.data=month+'-'+this.due
+              } else {
+                  this.data=month+1+'-'+this.due
+              }
+        }
       
     },
     created(){
        this.info=this.$route.query.i
-      
+       this.due=this.info.duedate
+        this.getday()
     }
 }
 </script>

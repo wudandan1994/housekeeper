@@ -84,25 +84,25 @@ export default {
             this.$router.go(-1);
         },
           changeLink(url,title){
-              this.$router.push({
-                     path:"/loan/form/myOrder",
-                     query:{
-                         info:url,
-                         title:title
-                     }
-                 })
-            
-            //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
-            //      this.$router.push({
-            //          path:"/home/online",
+            //   this.$router.push({
+            //          path:"/loan/form/myOrder",
             //          query:{
             //              info:url,
             //              title:title
             //          }
             //      })
-            //  } else {
-            //      location.href=url
-            //  }
+            
+             if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                 this.$router.push({
+                     path:"/home/online",
+                     query:{
+                         info:url,
+                         title:title
+                     }
+                 })
+             } else {
+                 location.href=url
+             }
         },
         contact(i){
             let data={

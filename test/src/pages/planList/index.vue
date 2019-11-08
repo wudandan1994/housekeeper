@@ -119,6 +119,7 @@ export default {
                         this.componentload=true
                         setTimeout(()=>{
                             this.componentload=false
+                            this.$toast(res.data.message)
                                  this.$router.push({
                                     path:"/home/punch",
                                     query:{

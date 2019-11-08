@@ -65,7 +65,6 @@ export default {
         this.info=this.$route.query.info
 
         this.merchantno=this.$route.query.merchantno
-        // console.log(this.merchantno,"merchantno")
 
         this.expired_time=this.info.month+this.info.year
 
@@ -77,7 +76,7 @@ export default {
     },
     methods:{
         handleReturnHome(){
-            this.$router.go(-1)
+            this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
         },
            
         // 绑卡
