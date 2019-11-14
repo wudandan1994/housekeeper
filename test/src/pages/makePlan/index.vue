@@ -322,7 +322,6 @@ export default {
                          }
                      })
                    }
-                
              })
              .catch(err=>{
                 //  console.log(err)
@@ -525,16 +524,24 @@ export default {
                       border-bottom: 1px solid #ccc;
                       font-size: 30px;
                       >p{
+                          &:nth-of-type(1){
+                              width:30%;
+                          }
                           &:nth-of-type(2){
-                              width:20%;
+                              width:18%;
                               text-align: center;
                           }
                       }
                       input {
                           border:none;
                           flex: 1;
+
                           text-align: right;
+                          background-color: #F2F2F4;
                       }
+                      ::-webkit-input-placeholder{
+                            background-color: #F2F2F4;
+                        }
                   }
               }
           }

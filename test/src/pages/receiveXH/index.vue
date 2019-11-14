@@ -395,7 +395,8 @@ export default {
         
            .covercx {
                .action {
-                   margin-top:30px;
+                //    margin-top:30px;
+                   padding-top:100px;
                    margin-bottom: 20px;
                    display: flex;
                    justify-content: space-around;
@@ -411,13 +412,11 @@ export default {
                        width:120px;
                        height:75px;
                        font-size: 34px;
-                       
-                       
                    }
                }
             .van-popup--right {
                 padding:15px;
-                top:51%;
+                top:58%;
                 right:0;
                 left:0;
                 bottom:-100%;

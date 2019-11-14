@@ -434,6 +434,9 @@ const billDetailsComponent = () => import('@/pages/aisleHousekeeper/billDetails'
 const budgetComponent = () => import('@/pages/aisleHousekeeper/budget')  //预算费用
 const queryComponent = () => import('@/pages/aisleHousekeeper/query')  //账单查询
 
+const extensionComponent = () => import('@/pages/vip/extension')  //账单查询
+
+
 export default new Router({
   // mode:"hash",
   routes: [
@@ -452,6 +455,8 @@ export default new Router({
     {path:"/home/punch/planDetail",component:planDetailComponent},
     {path:"/home/news",component:newsComponent},
     {path:"/home/addCard",component:addCardComponent},
+    {path:"/vip/extension",component:extensionComponent},  // 推广升级
+ 
     {path:"/home/receivables/cards",component:cardsComponent},  //收款信用卡列表
     {path:"/home/games/gameElsb",component:gameElsbComponent},  //2048游戏 
     {path:"/home/games/gameCat",component:gameCatComponent},  //cat游戏  

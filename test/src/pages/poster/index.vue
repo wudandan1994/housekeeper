@@ -3,14 +3,14 @@
         <header class="header-top row">
             <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">海报</div>
-            <div @click="showCover" class="right-icon center">
+            <!-- <div @click="showCover" class="right-icon center">
                      <van-icon color="white" size="20px" name="weapp-nav"/>
-            </div>
+            </div> -->
         </header>
         <div class="poster-canvas center"><canvas id="poster" width="375" height="667"></canvas>  </div>
-        <div class="btn row">
+        <div class="btn row center">
             <div @click="handlechangeRandom" class="change center">换一换</div>
-            <div @click="handlePrivacySettings" class="rightnow center">隐私设置</div>
+            <!-- <div @click="handlePrivacySettings" class="rightnow center">隐私设置</div> -->
             <div @click="savePoster" class="rightnow center">立即合成</div>
         </div>
         <div class="share" v-show="Sharewxf">
@@ -39,8 +39,8 @@
             <div class="imgs" v-if="!showUpload">
                 <div class="savePoster center"><img :src="imgUrl" ></div>
                 <div class="success center">
-                    <!-- 海报生成成功，长按保存或分享 -->
-                     海报生成成功
+                    海报生成成功，长按保存或分享
+                     <!-- 海报生成成功 -->
                 </div>
                 
             </div>
@@ -67,7 +67,7 @@ export default {
             imgShow: false,
             url: 'http://pay.91dianji.com.cn',
             qrcode: '',
-            random: '1',
+            random: '2',
             shares:null,
             sharewx:null,
             Sharewxf:false,
@@ -150,6 +150,9 @@ export default {
         handlechangeRandom(){
             this.componentload = true;
             this.random = Math.floor(Math.random()*(this.max - this.min + 1) + this.min);
+            if(this.random===1 || this.random===0){
+                this.random=2
+            }
             this.handlePoster();
         },
         handlePosterWithoutDetail(){
@@ -161,7 +164,9 @@ export default {
 
             var bigPoster = new Image();
             
-            bigPoster.src = 'http://pay.91dianji.com.cn/POP'+ this.random +'.jpg';
+            // bigPoster.src = 'http://pay.91dianji.com.cn/POP'+ this.random +'.jpg';
+            bigPoster.src = 'http://pay.91dianji.com.cn/pop'+ this.random +'.png';
+
             bigPoster.onload = function(){
                 ctx.drawImage(bigPoster,0,0,375,600);
                 setTimeout(()=>{
@@ -172,11 +177,14 @@ export default {
             var qrcode = new Image();
             qrcode.src = 'http://pay.91dianji.com.cn/' + this.qrcode;
             qrcode.onload = function(){
-                ctx.drawImage(qrcode,10,610,50,50);
+                // ctx.drawImage(qrcode,10,610,50,50);
+                 ctx.drawImage(qrcode,127.5,200,120,120);
             };
             ctx.fillStyle="#000";
             ctx.font="14px Arial";
-            ctx.fillText('长按识别二维码体验更多惊喜',80,640);
+            // ctx.fillText('长按识别二维码体验更多惊喜',80,640);
+            ctx.fillText('长按识别二维码体验更多惊喜',40,640);
+
             setTimeout(()=>{
                 this.componentload = false;
             },2500);
@@ -190,7 +198,7 @@ export default {
 
             var bigPoster = new Image();
             
-            bigPoster.src = 'http://pay.91dianji.com.cn/POP'+ this.random +'.jpg';
+            bigPoster.src = 'http://pay.91dianji.com.cn/pop'+ this.random +'.png';
             bigPoster.onload = function(){
                 ctx.drawImage(bigPoster,0,0,375,600);
                 setTimeout(()=>{
@@ -199,9 +207,13 @@ export default {
             };
             
             var qrcode = new Image();
+            // qrcode.src = 'http://pay.91dianji.com.cn/' + this.qrcode;
             qrcode.src = 'http://pay.91dianji.com.cn/' + this.qrcode;
+
             qrcode.onload = function(){
-                ctx.drawImage(qrcode,300,610,50,50);
+                // ctx.drawImage(qrcode,300,610,50,50);
+                ctx.drawImage(qrcode,127.5,200,120,120);
+
             };
             var headimg = new Image();
             var url = this.$store.state.wechat.headimg;
@@ -320,7 +332,7 @@ export default {
            font-size: 28px;
            margin-top: -50px;
            display: flex;
-           justify-content: space-between;
+           justify-content: center;
            .change{
             //    width: 30%;
                height: 100%;

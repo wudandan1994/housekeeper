@@ -32,9 +32,8 @@
                                           
                                              <div   class="sign-out">
                                                 <van-button v-show="item.state=='0' || item.state=='3'" @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
-                                                <van-button v-show="item.state=='1' || item.state=='2'" @click.stop="stopPlan(item.id)" type="disabled" round>停止计划</van-button>
+                                                <!-- <van-button v-show="item.state=='1' || item.state=='2'" @click.stop="stopPlan(item.id)" type="disabled" round>停止计划</van-button> -->
 
-                                                <!-- <van-button  @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
 
                                             </div> 
                                             <!-- <p v-show="item.state=='4'"> <span>{{item.remark}}</span></p> -->

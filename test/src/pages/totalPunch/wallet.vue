@@ -3,9 +3,9 @@
         <header>
             <span @click="goBack"><van-icon size="20px" name="arrow-left"/></span>
             <span>游戏规则</span>
-            <span @click="showCover">
-                 <!-- <van-icon color="white" size="20px" name="weapp-nav"/>  -->
-            </span>
+            <!-- <span @click="showCover">
+                 <van-icon color="white" size="20px" name="weapp-nav"/> 
+            </span> -->
         </header>
         <div class="container">
            <div class="nationwide">
@@ -22,7 +22,6 @@
                   <div class="dollars">
                       <img  src="http://pay.91dianji.com.cn/dollars.png" alt="" srcset="">
                   </div>
-                 
               </div>
             <div class="silk">
                 <img  src="http://pay.91dianji.com.cn/silk.png" alt="" srcset="">

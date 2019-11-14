@@ -24,7 +24,8 @@
             <div class="desc">注:钱夹宝提现工作日1-2天到账，手续费5%+1元/笔，最低提现金额100元起提。</div>
             <div class="checkbank row">
                 <div class="bankname start-center">{{bankname}}</div>
-                <div class="selectbank" @click="handleOpenBankList"><i class="iconfont icon-more"></i></div>
+                <div class="selectbank" @click="handleOpenBankList">  <van-icon  size="24px" name="arrow"/></div>
+
             </div>
             <!-- 银行卡选择器 -->
             <div class="bank-picker" v-if="bank_select">

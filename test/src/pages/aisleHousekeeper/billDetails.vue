@@ -7,7 +7,7 @@
         </header>
         <div class="container">
             <div class="methods">
-                <p>还款方式</p>
+                <p class="edit">还款方式</p>
                 <div class="channels">
                     <ul>
                         <li @click="selectsmalss" :class="channel=='1'?'selectcolor':''">
@@ -263,9 +263,10 @@ export default {
         overflow-x: hidden;
         .methods{
             background-color: #5471CB;
+           
             >p{
                 color:#fff;
-                padding:30px 0px 30px 30px;
+                padding:50px 0px 50px 30px;
                 font-size: 32px;
             }
             .channels{
@@ -311,6 +312,7 @@ export default {
             >p{
                 &:nth-of-type(1){
                     font-size: 32px;
+                    padding:20px 0px;
                     span{
                         font-size: 24px;
                     }

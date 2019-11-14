@@ -11,8 +11,25 @@
             <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="#ffffff" size="20px" name="arrow-left"/></div>
             <div class="top-title center">任务中心</div>
             <!-- <div class="right-icon center"><van-icon name="gold-coin" size="24px" color="#FCDD6D"/>245300</div> -->
+            <div class="top-title center" @click="rule=true">规则说明</div>
+
         </header>
         <div class="container">
+            <div class="cover" v-show="rule">
+                <p class="close" @click="rule=false"><van-icon name="close" color="#fff" size="36px" /></p>
+                <div class="rule">
+                    <p>领取推广活动任务</p>
+                    <div>
+                       直推一个黄金会员，开启7天推广任务红包奖励，上午分享链接领取5元红包，下午分享链接领取10元红包
+                    </div>
+                    <div>
+                       直推一个钻石会员，开启7天推广任务红包奖励，上午分享链接领取15元红包，下午分享链接领取25元红包
+                    </div>
+                    <div>
+                        任务说明：分享任务页面链接至微信群或朋友圈
+                    </div>
+                </div>
+            </div>
             <div class="avator-signin">
                 <div class="avator"><img :src="headimg" alt=""></div>
                 <div class="signin">
@@ -119,11 +136,15 @@ export default {
             taskList: [],
             sum: 0,
             task:"",
+            rule:false
         }
     },
     methods:{
         handleReturnHome() {
             this.$router.go(-1);
+        },
+        showrule(){
+
         },
         //查询任务
         getTask(){
@@ -251,6 +272,42 @@ export default {
     }
     .container {
         background-color: #ccc;
+        .cover{
+            position: fixed;
+            top:0;
+            right:0;
+            bottom:0;
+            left:0;
+            background-color: rgba(0, 0, 0, .2);
+            .close{
+                font-size: 34px;
+                margin-top:20%;
+                text-align: center;
+            }
+            .rule{
+                width:80%;
+                height: 500px;
+                background-color: #fff;
+                margin-left:8%;
+                margin-top:10%;
+                padding:20px;
+                border-radius: 15px;
+                p{
+                    padding-bottom: 20px;
+                    text-align: center;
+                    font-size: 32px;
+                    color:royalblue;
+                }
+                div{
+                    font-size: 30px;
+                    line-height: 34px;
+                    margin-bottom: 40px;
+                    &:nth-of-type(3){
+                        font-weight: bold;
+                    }   
+                }
+            }
+        }
         >.task{
                background-color: #4b66af;
                color:#FFF1F6;

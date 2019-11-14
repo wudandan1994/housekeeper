@@ -51,17 +51,17 @@
 
 
 
-                 <router-link tag="li" :to="{path: '/share/poster',query:{max: '10',min: '1'}}">
+                 <router-link tag="li" :to="{path: '/share/poster',query:{max: '10',min: '2'}}">
                     <p><van-icon name="http://bc.91dianji.com.cn/405.png" /></p>
                     <p>推广海报图</p>
                     <p>分享二维码、快速增粉</p>
                 </router-link>
-                 <router-link tag="li" :to="{path: '/share/poster',query:{max: '112',min: '100'}}">
+                 <router-link tag="li" :to="{path: '/share/poster',query:{max: '21',min: '11'}}">
                     <p><van-icon name="http://bc.91dianji.com.cn/413.png" /></p>
                     <p>推广素材图</p>
                     <p>各种视频+图片</p>
                 </router-link>
-                <router-link tag="li" :to="{path: '/share/poster',query:{max: '208',min: '200'}}">
+                <router-link tag="li" :to="{path: '/share/poster',query:{max: '33',min: '22'}}">
                     <p><van-icon name="http://bc.91dianji.com.cn/414.png" /></p>
                     <p>信用卡推广图</p>
                     <p>信用卡推广图.一键锁粉</p>

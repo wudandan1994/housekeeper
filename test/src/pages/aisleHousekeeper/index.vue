@@ -1,12 +1,12 @@
 <template>
-    <div id="credit-housekeeper">
+    <div id="aisle-housekeeper">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>智能还款</span>
-            <router-link tag="span" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard"><i>添卡</i><van-icon name="add" size="24px" color="#1890FF" /></router-link>
+            <router-link tag="span" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard"><i>添卡</i><van-icon name="add" size="24px" color="#fff" /></router-link>
         </header>
         <div class="container">
-           <!-- <div class="swipe">
+           <div class="swipe">
                  <div class="top row">
                     <div class="avator"><img :src="headimg" alt=""></div>
                     <div class="name-code">
@@ -15,9 +15,8 @@
                          <p>推荐码：<span>{{promotioncode}}</span></p>
                     </div>
                  </div>
-                 <p> 绑卡：{{cardNum}}张</p>
-           </div> -->
-           <div class="personinfo">
+           </div>
+           <!-- <div class="personinfo">
                <div class="up">
                    <div class="photo">
                        <img :src="headimg" alt="">
@@ -47,7 +46,7 @@
                        <p>最后宽限期</p>
                    </div>
                </div>
-           </div>
+           </div> -->
            <div class="tools" v-show="toolsflag">
                <div class="lists">
                    <div class="setting">
@@ -60,7 +59,7 @@
                                <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon1.png"/></p>
                                <p>预算费用</p>
                            </router-link>
-                            <router-link tag="li" :to="{path:'/home/news',query:{title:'还款流程',url:'http://pay.91dianji.com.cn/collet.jpg'}}">
+                            <router-link tag="li" :to="{path:'/home/news',query:{title:'还款流程',url:'http://pay.91dianji.com.cn/newpay.jpg'}}">
                                <p><van-icon size="20px" color="red" name="http://pay.91dianji.com.cn/icon2.png"/></p>
                                <p>流程说明</p>
                             </router-link>
@@ -135,7 +134,9 @@
                                   </div>
                               </div>
                               <p>
+                                  <!-- <van-button @click="repayment(index,item)" class="repayment" round type="info">立即还款</van-button> -->
                                   <van-button @click="repayment(index,item)" class="repayment" round type="info">立即还款</van-button>
+
                               </p>
                           </div>
                        </div>
@@ -185,7 +186,7 @@
                                     <van-icon name="http://pay.91dianji.com.cn/smalle.png" size="26px"/>
                                     <div class="middle">
                                           <p>小额通道</p>
-                                          <span class="edu">还款金额为2000-20000</span>
+                                          <span class="edu">还款金额为2000-30000</span>
                                     </div>
                                     <p> <van-icon name="checked" :color="colors" size="20px"/></p>
                                 </div>
@@ -208,13 +209,13 @@
                </ul>
            </div>
          
-           <!-- <div class="plansdetail">
+           <div class="plansdetail">
                <div class="plans">
                    <router-link tag="div" to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard"  class="addcard"><van-icon name="plus" />添加信用卡</router-link>
                    <router-link tag="div" to="/home/punch" class="allplans"><van-icon name="send-gift-o" />查看全部计划</router-link>                 
                </div>
                 <router-link tag="div" class="manage" to="/cancelCard"><van-icon name="card" /> 信用卡管理</router-link>
-           </div> -->
+           </div>
           
         </div>
     </div>
@@ -499,9 +500,7 @@ export default {
                             arrXun.push(item)
                      });
                      this.cardList=arrXun
-                    //  this.bankinfo=this.cardList[0]
-                    //  this.nick=this.bankinfo.bankNick
-                     this.getbankname(this.cardList[0])
+                    //  this.getbankname(this.cardList[0])
                      this.cardNum=this.cardList.length
                      }
                     
@@ -557,6 +556,7 @@ export default {
              })
              if(this.bankinfo.day==="undefined"){
                  this.bankinfo={amount:"未知",day:"未知",bankname:"未知",free:"未知"}
+                 this.bankinfo.day="未知"
              }
         },
         getfreeday(item){
@@ -575,15 +575,15 @@ export default {
 </script>
 
 <style lang="less" scope>
-   #credit-housekeeper{
+   #aisle-housekeeper{
        >header {
-        //    background-color: #4965AE;
-           background-color: #fff;
+           background-color: #4965AE;
+        //    background-color: #fff;
+           color:#fff;
            width:100%;
            height: 86px;
            line-height: 86px;
            padding-top:10px;
-        //    color:#fff;
            z-index:999;
            display: flex;
            position: fixed;
@@ -740,12 +740,16 @@ export default {
           }
            }
            .personinfo {
-               width:100%;
-               border:1px solid #9DD0FF;
+               width:94%;
+               border:2px solid #1890FF;
                height:350px;
                box-sizing: border-box;
                border-radius: 15px;
                background-color: #E7F3FF;
+               margin-top:30px;
+               margin-left:3%;
+               box-sizing: border-box;
+               overflow-x: hidden;
                .up {
                    width:100%;
                    height:200px;

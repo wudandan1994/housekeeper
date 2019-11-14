@@ -9,7 +9,7 @@
     <div id="vip">
         <header>升级代理</header>
         <div class="containt">
-            <ul>
+            <!-- <ul>
                 <li id="huangjin">
                     <img src="http://pay.91dianji.com.cn/vip001.png" alt="">
                      <div class="diamonds">
@@ -75,11 +75,6 @@
                                              <p>加盟热线：021-60592500 &nbsp;&nbsp;朱经理</p>
                                               <p @click="contact('11')"><a href="tel:021-60592500">拨打</a></p>
                                          </li>
-                                          <!-- <li>
-                                                <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
-                                                <p id="mobile">微信号码：18017459488 </p>
-                                                <p data-clipboard-action="copy" data-clipboard-target="#mobile" class="test" @click="handleCopy('18017459488')">复制</p>
-                                         </li> -->
                                           <li>
                                              <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
                                              <p>客服电话 ：400-1059-769</p>
@@ -91,6 +86,90 @@
                             </van-popup>
                      </div>
                 </li>
+            </ul> -->
+            <ul>
+                <li id="huangjin" >
+                    <img src="http://pay.91dianji.com.cn/vip001.png" alt="">
+                    <div :class="gradeFlaghj===true?'gold':'gray'">
+                        <div class="up">
+                            <p>黄金会员</p>
+                            <p  @click="handleSeeDetail('1')">权益说明</p>
+                        </div>
+                        <div class="down">
+                            <p>￥393</p>
+                            <p @click="handleVip('393')" :class="gradeFlaghj===true?'gold':'gray'">立即开通VIP</p>
+                            <router-link to="/vip/extension" tag="p">免费升级</router-link>
+                        </div>
+                    </div>
+                </li>
+                 <li >
+                    <img src="http://pay.91dianji.com.cn/vip002.png" alt="">
+                    <div :class="gradeFlagzs===true?'dark':'gray'">
+                        <div class="up">
+                            <p>钻石会员</p>
+                            <p  @click="handleSeeDetail('2')">权益说明</p>
+                        </div>
+                        <div class="down">
+                            <p>￥993</p>
+                            <p @click="handleVip('993')" :class="gradeFlagzs===true?'gold':'gray'">立即开通VIP</p>
+                             <router-link to="/vip/extension" tag="p">免费升级</router-link>
+                        </div>
+                    </div>
+                </li>
+                 <li >
+                    <img src="http://pay.91dianji.com.cn/vip003.png" alt="">
+                    <div class="detail">
+                        <div class="up">
+                            <p>城市合伙人</p>
+                            <p  @click="handleSeeDetail('3')">权益说明</p>
+                        </div>
+                        <div class="down">
+                            <p>￥19800</p>
+                            <p @click="contactUs('7')" class="gray">联系我们</p>
+                             <router-link to="/vip/extension" tag="p">免费升级</router-link>
+                        </div>
+                    </div>
+                </li>
+
+                <li >
+                    <img src="http://pay.91dianji.com.cn/vip004.png" alt="">
+                    <div class="detail">
+                        <div class="up">
+                            <p>城市运营商</p>
+                            <p  @click="handleSeeDetail('4')">权益说明</p>
+                        </div>
+                        <div class="down">
+                            <p>￥58000-￥159800</p>
+                            <p @click="contactUs('8')" class="gray">联系我们</p>
+                            <!-- <p>推广升级</p> -->
+                        </div>
+                    </div>
+                </li>
+
+                 <van-popup v-model="showcontantUs">
+                    <div  class="contact">
+                            <p>联系我们</p>
+                            <ul>
+                                <li>
+                                    <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
+                                    <p>服务时间：周一至周日（09：00-22:00）</p>
+                                    <span></span>
+                                </li>
+                                <li>
+                                    <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
+                                    <p>加盟热线：021-60592500 &nbsp;&nbsp;朱经理</p>
+                                    <p @click="contact('11')"><a href="tel:021-60592500">拨打</a></p>
+                                </li>
+                                <li>
+                                    <p><van-icon name="http://pay.91dianji.com.cn/icon_63.png"/></p>
+                                    <p>客服电话 ：400-1059-769</p>
+                                    <p  @click="contact('12')"><a href="tel:400-1059-769">拨打</a></p>
+                                </li>
+                            </ul>
+
+                    </div>
+                </van-popup>
+                
             </ul>
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
@@ -107,7 +186,6 @@
                         <li v-if="level == '钱夹宝钻石会员'"><span class="van-rate">推荐指数：</span><van-rate class="van-rate" readonly  v-model="value" /></li>
                         <li v-if="level == '钱夹宝黄金会员'"><span class="van-rate">推荐指数：</span><van-rate class="van-rate" readonly  v-model="value1" /></li>
                     </ul>
-                    <!-- <div class="tips center">(保证金将按业绩退还)</div> -->
                 </div>
                 <div class="button row">
                     <van-button class="cancel" type="default" @click="handleCancelOrder">取消</van-button>
@@ -201,7 +279,10 @@ export default {
             nickname: '',
             showcontantUs:false,
             type:"",
-            openid:""
+            openid:"",
+            grade:"",
+            gradeFlaghj:false,
+            gradeFlagzs:false,
         }
     },
     methods:{
@@ -211,6 +292,7 @@ export default {
                 path:'/ponserCenter/userAccountManage'
             })
         },
+       
         contactUs(i){
             this.showcontantUs=true
             let data={
@@ -469,19 +551,36 @@ export default {
                 // console.log('支付失败',res);
                 this.$toast('支付失败');
             })
+        },
+        // 查询会员等级
+        getLevel(){
+            axiosPost("/customer/getCustomer")
+            .then(res=>{
+                if(res.data.success){
+                    this.grade=res.data.data.level
+                    if(this.grade===1){
+                        this.gradeFlaghj=true
+                    } else if(this.grade===2){
+                        this.gradeFlagzs=true
+                        this.gradeFlaghj=true
+                    }
+                }
+            })
         }
     },
     created(){
         this.nickname = this.$store.state.wechat.nickname;
-        
+        this.getLevel()
     },
     mounted(){
         // console.log(this.$route.query.params)
-        if(this.$route.query.params == '1'){
-            this.TocontOne();
-        }else{
-            this.TocontTwo();
-        }
+        // if(this.$route.query.params == '1'){
+        //     this.TocontOne();
+        // }else{
+        //     this.TocontTwo();
+        // }
+        // this.getLevel()
+
        
     }
 }
@@ -507,6 +606,107 @@ export default {
          >ul {
              padding:20px 30px;
              margin-bottom: 100px;
+             li{
+                 margin-bottom: 30px; 
+                
+                  >img {
+                     width:100%;
+                     height: auto;
+                 }
+                 >div{
+                     width:100%;
+                    //  background: linear-gradient(to right,#A7814B, #E7C28E);
+                     border-radius: 15px;
+                     padding:10px;
+                     box-sizing: border-box;
+                     margin-top:10px;
+                     &.detail ,
+                     &.gray{
+                       background: linear-gradient(to right,#A7814B, #E7C28E);
+                     }
+                     &.gold{
+                       background-color: #D8D8D8;
+                    }
+                    &.dark{
+                        background-color: #D8D8D8;
+                    }
+                     .up,
+                     .down{
+                         display: flex;
+                         justify-content: space-between;
+                         color:#fff;
+                         padding:20px 40px;
+                         font-size: 30px;
+                         align-items: center;
+                     }
+                     .down{
+                         >p{
+                             &:nth-of-type(2){
+                                //  background-color: #D9AD70;
+                                 padding:10px 20px;
+                                 border-radius: 20px;
+                             }
+                             &.gray{
+                                background-color: #DFB67D; 
+                             }
+                             &.gold{
+                                 background-color: #CDCDCC;
+                             }
+                         }
+                     }
+                 }
+             }
+             .contact {
+                width:600px;
+                padding-top:30px;
+                height: 600px;
+                border-radius: 10px;
+                font-size: 28px;
+                text-align: justify;
+                background-color: #fff;
+                line-height: 40px;
+                >ul {
+                    margin-top:15px;
+                    >li {
+                        display: flex;
+                        padding:15px;
+                        justify-content: space-around;
+                        align-items: center;
+                        >p {
+                            &:nth-of-type(1){
+                                width:50px;
+                            }
+                                &:nth-of-type(2){
+                                flex:1;
+                            }
+                                &:nth-of-type(3){
+                                background-color: #4B66AF;
+                                padding:10px;
+                                color:#fff;
+                                >a {
+                                    color:#fff;
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+                >p{
+                    &:nth-of-type(1){
+                        color:#000;
+                        text-align: center;
+                        font-size: bold;
+                        margin-bottom: 20px;
+                        font-size: 30px;
+                    }
+                    &:nth-of-type(2){
+                        color:#000;
+                        line-height: 38px;
+                    }
+                }
+                        
+             }
+
              >li {
                  margin-bottom: 30px;
             
@@ -597,55 +797,55 @@ export default {
                      margin-top:30px;
                      justify-content: space-between;
                      margin-bottom: 15px;
-                      .rule {
-                            width:600px;
-                            padding-top:30px;
-                            height: 600px;
-                            border-radius: 10px;
-                            font-size: 28px;
-                            text-align: justify;
-                            background-color: #fff;
-                            line-height: 40px;
-                            >ul {
-                                margin-top:15px;
-                                >li {
-                                    display: flex;
-                                    padding:15px;
-                                    justify-content: space-around;
-                                    align-items: center;
-                                    >p {
-                                        &:nth-of-type(1){
-                                           width:50px;
-                                        }
-                                         &:nth-of-type(2){
-                                          flex:1;
-                                        }
-                                          &:nth-of-type(3){
-                                         background-color: #4B66AF;
-                                         padding:10px;
-                                         color:#fff;
-                                         >a {
-                                             color:#fff;
-                                         }
-                                        }
-                                    }
+                    //   .rule {
+                    //         width:600px;
+                    //         padding-top:30px;
+                    //         height: 600px;
+                    //         border-radius: 10px;
+                    //         font-size: 28px;
+                    //         text-align: justify;
+                    //         background-color: #fff;
+                    //         line-height: 40px;
+                    //         >ul {
+                    //             margin-top:15px;
+                    //             >li {
+                    //                 display: flex;
+                    //                 padding:15px;
+                    //                 justify-content: space-around;
+                    //                 align-items: center;
+                    //                 >p {
+                    //                     &:nth-of-type(1){
+                    //                        width:50px;
+                    //                     }
+                    //                      &:nth-of-type(2){
+                    //                       flex:1;
+                    //                     }
+                    //                       &:nth-of-type(3){
+                    //                      background-color: #4B66AF;
+                    //                      padding:10px;
+                    //                      color:#fff;
+                    //                      >a {
+                    //                          color:#fff;
+                    //                      }
+                    //                     }
+                    //                 }
                                     
-                                }
-                            }
-                            >p{
-                                &:nth-of-type(1){
-                                    color:#000;
-                                    text-align: center;
-                                    font-size: bold;
-                                    margin-bottom: 20px;
-                                    font-size: 30px;
-                                }
-                                &:nth-of-type(2){
-                                    color:#000;
-                                    line-height: 38px;
-                                }
-                            }
-                         }
+                    //             }
+                    //         }
+                    //         >p{
+                    //             &:nth-of-type(1){
+                    //                 color:#000;
+                    //                 text-align: center;
+                    //                 font-size: bold;
+                    //                 margin-bottom: 20px;
+                    //                 font-size: 30px;
+                    //             }
+                    //             &:nth-of-type(2){
+                    //                 color:#000;
+                    //                 line-height: 38px;
+                    //             }
+                    //         }
+                    //      }
                      >.new-price {
                          color:#E84529;
                          font-weight: bolder;

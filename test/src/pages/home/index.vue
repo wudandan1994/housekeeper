@@ -52,21 +52,28 @@
                                 <span>新人教程</span>
                             </router-link>
                             <router-link to="/vip" tag="li">
-                                <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
+                                <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search "  /></p>
                                 <p>升级代理</p>
                             </router-link>
                             <router-link to="/personalCenter/incomedetail" tag="li">
                                 <p> <van-icon name="http://pay.91dianji.com.cn/103.png"  class="zx-search"  /></p>
                                 <span>收益明细</span>
                             </router-link>
-                            <router-link tag="li" to="/home/totalPunch">
-                                <p> <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search  rotateZ"  /></p>
+                            <!-- <router-link tag="li" to="/home/totalPunch">
+                                <p class="dot"> 
+                                    <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search rotateZ "  />
+                                    <span v-show="showdot">1</span>
+                                </p>
                                 <span>会员任务</span>
-                            </router-link>
-                            <!-- <li @click="sign">
-                                <p> <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search  rotateZ"  /></p>
+                            </router-link> -->
+                             <li  @click="goTask">
+                                <p class="dot"> 
+                                    <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search rotateZ "  />
+                                    <span v-show="showdot">1</span>
+                                </p>
                                 <span>会员任务</span>
-                            </li> -->
+                            </li>
+                            
                         </ul>
                     </div>
                     <!-- 名片咨询模块 -->
@@ -91,7 +98,7 @@
                                 </div>
                             </li> -->
 
-                            <li @click="applycard('https://wsdev.1sta.cn/wechat/pages/wailian/wailian.html?merCode=b480446df76a4494948e3b95845db8ca','办卡中心')">
+                            <li @click="applycard('https://wsdev.1sta.cn/wechat/pages/wailian/wailian.html?merCode=f95b64acd760439682dac2d83b6d32ea','办卡中心')">
                                 <span class="handle">
                                     <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                                 </span>
@@ -414,7 +421,8 @@ export default {
             wzcx:{},
             qcbx:{},
             ywx:{},
-            downUrl:[]
+            downUrl:[],
+            showdot:false
         }
   },
    methods:{     
@@ -423,6 +431,21 @@ export default {
         storage.remove('promotioncode');
         this.$toast('清除成功');
        },
+        // 查看任务
+        getTask(){
+             axiosPost("/activity/activityExit")
+            .then(res=>{
+                if(res.data.success && res.data.code==="1"){
+                    this.showdot=true
+                }
+            })
+        },
+        goTask(){
+            this.$router.push({
+                path:"/home/totalPunch"
+            })
+            this.showdot=false
+        },
 
        handleselect(){
            if(this.paychennel=="1"){
@@ -758,6 +781,7 @@ export default {
                     }
 
         this.handleSearchAuths()
+        this.getTask()
         //  this.automatic() //自动登录
         //  this.getUpdate() //获取版本
     }  ,
@@ -1107,7 +1131,16 @@ export default {
                             >p {
                                 text-align: center;
                                 margin-bottom:10px;
-                            
+                                &.dot{
+                                    >span{
+                                        display: inline-block;
+                                        width:26px;
+                                        height:26px;
+                                        border-radius: 50%;
+                                        background-color: red;
+                                        color:#fff;
+                                    }
+                                }
                                 .rotateZ {
                                     //   animation: icon 2s 1s linear infinite;
                                     //  -webkit-animation: icon 2s 1s linear  infinite;

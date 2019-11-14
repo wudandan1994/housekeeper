@@ -25,11 +25,11 @@
 
         <p class="lesson">收款教学</p>
        <div class="learn">
-            <video  src="http://video.91dianji.com.cn/v/skjiaocheng.mp4" controls></video>
+            <video  src="http://video.91dianji.com.cn/v/shoukuan.mp4" controls></video>
        </div>
        <p class="lesson">还款教学</p>
        <div class="learn">
-            <video  src="http://video.91dianji.com.cn/v/hkjiaocheng.mp4" controls></video>
+            <video  src="http://video.91dianji.com.cn/v/huankuan.mp4" controls></video>
        </div>
     </div>
 </template>
