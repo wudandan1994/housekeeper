@@ -49,7 +49,6 @@ export default {
     },
     created(){
         this.orderNum=this.$route.query.orderNum
-        console.log(this.orderNum,"orderNum")
        
     },
     methods:{
@@ -73,8 +72,6 @@ export default {
              }
               axiosPost("/scpay/bindCardTrans",data)
               .then(res=>{
-
-                  console.log(res,"短信验证")
 
                 this.componentload=true 
 

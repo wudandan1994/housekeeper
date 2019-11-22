@@ -5,7 +5,7 @@
             <div class="top-title center">平台手册</div>
             <div class="right-icon varify center"></div>
         </header>
-        <div class="big-title">概述-——首页简介</div>
+        <div class="big-title">概述——首页简介</div>
         
         <div class="small-title">
             （1）菜单栏：点击可完善个人资料，展示个人信息</br>

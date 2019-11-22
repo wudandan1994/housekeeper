@@ -144,9 +144,7 @@ export default {
         handleReturnHome(){
             this.$router.go(-1);
         },
-        gettext(){
-            console.log('4566555665522552')
-        },
+      
         // 更多
         handleMore(){
             this.$toast('尽请期待');

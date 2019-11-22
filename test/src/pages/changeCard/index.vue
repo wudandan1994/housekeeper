@@ -25,10 +25,12 @@
                    <li>
                        <span>开户行</span>
                        <input type="text"  @click="handleBankNumber" :placeholder="bankName">
+                       <span  @click="handleBankNumber"><van-icon name="search" size="20px" /></span>
                    </li>
                    <li>
                         <span>联行号</span>
                        <input v-model="subBankCode" type="number" placeholder="输入该支开户行行号或者联行号">
+
                    </li>
                      <div class="shadow"></div>
                     <!-- <li>

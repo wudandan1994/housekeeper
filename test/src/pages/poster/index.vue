@@ -10,7 +10,7 @@
         <div class="poster-canvas center"><canvas id="poster" width="375" height="667"></canvas>  </div>
         <div class="btn row center">
             <div @click="handlechangeRandom" class="change center">换一换</div>
-            <!-- <div @click="handlePrivacySettings" class="rightnow center">隐私设置</div> -->
+            <div @click="handlePrivacySettings" class="rightnow center">隐私设置</div>
             <div @click="savePoster" class="rightnow center">立即合成</div>
         </div>
         <div class="share" v-show="Sharewxf">
@@ -20,7 +20,7 @@
                         <li id="wxF"  @click="wxfri">
                             <p><van-icon name="http://pay.91dianji.com.cn/wx.png" size="40px"/></p>
                             <p>分享给好友</p>
-                        </li>
+                        </li>      
                         <li @click="wxcir">
                             <p><van-icon color="white"  size="40px"  name="http://pay.91dianji.com.cn/pyq.png"/></p>
                             <p>分享到朋友圈</p>

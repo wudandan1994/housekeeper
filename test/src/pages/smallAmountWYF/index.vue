@@ -6,7 +6,7 @@
  * @LastEditors: Please set LastEditors
  -->
 <template>
-    <div id="large-amount-hc">
+    <div id="small-amount-wyf">
         <header class="manage loan">
             <van-nav-bar title="注册商户" left-text="" left-arrow @click-left="handleReturnHome" >
                
@@ -25,11 +25,19 @@
                    </li>
                     <li>
                         <span>银行卡号：</span>
-                       <input v-model="bank_cardno"  type="number" placeholder="所持银行卡号">
+                       <input v-model="bank_cardno"  type="number" placeholder="信用卡卡号">
                    </li>
                     <li>
                        <span>手机号：</span>
-                       <input type="number" v-model="phone" placeholder="银行卡预留手机号">
+                       <input type="number" v-model="phone" placeholder="信用卡预留手机号">
+                   </li> 
+                    <li>
+                       <span>安全码：</span>
+                       <input type="number" v-model="cvv" placeholder="信用卡安全码">
+                   </li> 
+                    <li>
+                       <span>有效期：</span>
+                       <input type="number" v-model="bankAccountExpiry" placeholder="信用卡有效期 如06/21 填写 0621">
                    </li> 
                    
                </ul>
@@ -42,7 +50,6 @@
     </div>
 </template>
 <script>
-import area from '../../../static/area'
 import loading from '@/components/loading'
 import {axiosPost,axiosGet} from '@/lib/http'
 import storage from '@/lib/storage'
@@ -57,8 +64,9 @@ export default {
             id_cardno:"",
             bank_cardno:"",
             phone:"",
-            info:{}
-           
+            info:{},
+            bankAccountExpiry:"",
+            cvv:""
         }
     },
     created(){
@@ -67,6 +75,8 @@ export default {
         this.id_cardno=this.info.idCardNo
         this.bank_cardno=this.info.cardNo
         this.phone=this.info.phone
+        this.cvv=this.info.cvv2
+        this.bankAccountExpiry=this.info.month+this.info.year
     },
     methods:{
         handleReturnHome(){
@@ -80,45 +90,55 @@ export default {
                   return   this.$toast("请输入11位手机号码")
              }
 
-            if(this.merchant_name.trim().length===0 ||  this.id_cardno.trim().length===0 ||  this.bank_cardno.trim().length===0||  this.phone.trim().length===0){
+            if(this.merchant_name.trim().length===0 || this.bankAccountExpiry.trim().length===0 ||  this.id_cardno.trim().length===0 ||  this.bank_cardno.trim().length===0||  this.phone.trim().length===0 || this.cvv.trim().length===0){
                  this.$toast({
                     message:"请将信息填写完整"
                 })
-                return
+  
+             return
             } 
 
              let data={
-                 merchant_name:this.merchant_name,
-                 id_cardno:this.id_cardno,
-                 bank_cardno:this.bank_cardno,
-                 phone:this.phone
+                 subMerchantName:this.merchant_name,
+                 certificateNo:this.id_cardno,
+                 bankAccountNo:this.bank_cardno,
+                 mobile:this.phone
              }
-              axiosPost("/hcpay/insertRegister",data)
+             this.componentload=true
+              axiosPost("/wyfpay/insertRegister",data)
               .then(res=>{
-                this.componentload=true 
-                setTimeout(()=>{
-                     this.componentload=false
-                      if(!res.data.success){
-                          let messages=res.data.data
-                          messages=JSON.parse(messages)
-                      this.$toast(messages.message)
-                  } else {
+                       if(res.data.success){
+                           let responce=res.data.data
+                           responce=JSON.parse(responce)
+                           let subMerchantNo=responce.subMerchantNo
+                           let data={
+                               bankAccountName:this.merchant_name,
+                               certificateNo:this.id_cardno,
+                               bankAccountNo:this.bank_cardno,
+                               mobile:this.phone,
+                               subMerchantNo:subMerchantNo,
+                               cvv:this.cvv,
+                               bankAccountExpiry:this.bankAccountExpiry
+                               
+                           }
+                             axiosPost("/wyfpay/bindcard",data)
+                             .then(res=>{
+                                 if(res.data.success){
+                                     this.$toast(res.data.message)
+                                     this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
+                                 }else {
+                                     this.componentload=false
+                                     this.$toast(res.data.message)
+                                 }
+                             })
 
-                        let datas=res.data.data
-                        datas=JSON.parse(datas)
-                        let merchantno=datas.merchantno
-            
-                      this.$router.push({
-                          path:"/home/largeAmountHC/sendmsgHC",
-                          query:{
-                              merchantno:merchantno,
-                              info:this.info
-                          }
-                      })
-                  }  
-
-                },1000)
-                              
+                       } else {
+                          
+                           setTimeout(()=>{
+                               this.componentload=false
+                              this.$toast(res.data.success)
+                           },1500)
+                       }      
               })
               .catch(err=>{
                    if(!err.data.success){
@@ -130,7 +150,7 @@ export default {
 }
 </script>
 <style lang="less" >
-    #large-amount-hc{
+    #small-amount-wyf{
         background: #EEEFF1;
         width: 100vw;
         height: 120vh;

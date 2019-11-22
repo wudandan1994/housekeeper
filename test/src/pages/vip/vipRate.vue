@@ -373,6 +373,7 @@ export default {
         background-image: url('http://pay.91dianji.com.cn/vip004.png');
         background-size: 100% 100%;
     }
+    
     .level{
         margin-top: 50px;
         img{
@@ -396,8 +397,10 @@ export default {
             .title{
                 width: 100%;
                 height: 80px;
+                display:flex;
+                justify-content: space-between;
                 >div{
-                    width: 50%;
+                    width: 30%;
                     height: 100%;
                 }
                 font-size: 30px;

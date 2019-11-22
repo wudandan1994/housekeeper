@@ -161,7 +161,6 @@ export default {
                 this.$toast('请填写地址');
             }else{
                 CommonPost('/gasCard/newGascardOrder',this.params).then(res=>{
-                    console.log('下单成功',res);
                     this.parentNo = res.data.data.parentNo;
                     let params = '';
                     if(this.paytype == 'wechat'){
@@ -176,7 +175,6 @@ export default {
                         }
                     }
                     CommonPost('/gasCardPay/xhPay',params).then(res =>{
-                        console.log('支付成功',res);
                         let ua = navigator.userAgent.toLowerCase();
                         if(ua.match(/MicroMessenger/i)=="micromessenger") {
                             // 微信浏览器中打开
@@ -203,10 +201,10 @@ export default {
                         //     }
                         // })
                     }).catch(res =>{
-                        console.log('支付失败',res);
+                       
                     })
                 }).catch(res =>{
-                    console.log('下单失败',res);
+                   
                     this.$toast(res.data.message);
                 })
             }

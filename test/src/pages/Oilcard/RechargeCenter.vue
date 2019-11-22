@@ -105,14 +105,14 @@ export default {
                     item.id = index;
                 })
             }).catch(res =>{
-                console.log('价格请求失败',res);
+              
             })
         },
         // 生成油卡订单
         handleGeneratingOrders(){
             
             CommonPost('/gasCard/newGascardOrder',this.params).then(res =>{
-                console.log('下单成功',res);
+              
                 let objs = {
                     orderid: res.data.data.parentNo,
                     channel: this.paytype
@@ -121,24 +121,22 @@ export default {
                     this.handleInitiatePayment(objs);
                 }
             }).catch(res =>{
-                console.log('下单失败',res);
+               
             })
         },
         // 发起支付
         handleInitiatePayment(obj){
             CommonPost('/gasCardPay/xhPay',obj).then(res =>{
-                console.log('支付成功',res);
+               
                 let ua = navigator.userAgent.toLowerCase();
                 if(ua.match(/MicroMessenger/i)=="micromessenger") {
                     // 微信浏览器中打开
                     window.location.href = res.data.data.url
-                    console.log('微信');
-                    
                 }else{
                     // 非微信中打开
                     if(this.paytype == 'wx'){
                         // 此时无法在非微信中调用微信支付
-                        console.log('非微信中发起微信支付');
+                        // console.log('非微信中发起微信支付');
                         this.$router.push({
                             path: '/middle',
                             query:{
@@ -146,12 +144,12 @@ export default {
                             }
                         })
                     }else{
-                        console.log('非微信中发起支付宝支付',res.data.data.url);
+                        // console.log('非微信中发起支付宝支付',res.data.data.url);
                         window.location.href = res.data.data.url 
                     }
                 }
             }).then(res =>{
-                console.log('支付失败',res);
+                // console.log('支付失败',res);
             })
         },
         // 立即充值

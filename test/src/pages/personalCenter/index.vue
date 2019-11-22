@@ -507,13 +507,13 @@ export default {
                     //    this.background=''
                     // }
                     if(this.ispartner=='1'){
-                       this.background='http://pay.91dianji.com.cn/vip0003.png'
+                       this.background='http://pay.91dianji.com.cn/vip003.png'
                     }else  if(this.pic=='1'){
                        this.background='http://pay.91dianji.com.cn/vip001.png'
                     } else if(this.pic=='2'){
                       this.background='http://pay.91dianji.com.cn/vip002.png'
                     } else {
-                      this.background=''
+                      this.background='http://pay.91dianji.com.cn/vip000.png'
                     }
 
                 }else{

@@ -63,6 +63,7 @@ export const CommonPost = (url,params) =>{
         baseURL: 'http://pay.91dianji.com.cn/api',
         // baseURL: 'http://test.91dianji.com.cn/api',
         withCredentials: true,
+        
         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
     }); 
     return new Promise((resolve,reject) =>{

@@ -83,13 +83,13 @@
                                     </div>
                                     <div class="middle">
                                         <div class="m-left">
-                                          
+                                             <van-button @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
                                             <!-- <p>等待执行：2019/5/17:14:33:37</p> -->
                                         </div>
                                         <div class="m-right">
                                             <p><van-icon size="100px" name="http://pay.91dianji.com.cn/waiting.png"/></p>
                                             
-                                            <van-button @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button>
+                                            <!-- <van-button @click.stop="stopPlan(item.id)" type="default" round>停止计划</van-button> -->
                                             
                                         </div>
                                     </div>

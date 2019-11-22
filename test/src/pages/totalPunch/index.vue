@@ -62,9 +62,9 @@
                 </div>
             </div> -->
             <div class="rule-prize-task">
-                <div class="center">签到规则</div>
-                <div class="center">兑换奖品库</div>
-                <div class="center">我的任务</div>
+                <div class="center" @click="getMore">签到规则</div>
+                <div class="center" @click="getMore">兑换奖品库</div>
+                <div class="center" @click="getMore">我的任务</div>
             </div>
             <div class="calendar">
                 <div class="year-month center">{{year}}年{{month}}月</div>
@@ -146,6 +146,9 @@ export default {
         showrule(){
 
         },
+        getMore(){
+            this.$toast("敬请期待")
+        },
         //查询任务
         getTask(){
             axiosPost("/activity/getAmount")
@@ -153,7 +156,6 @@ export default {
                 if(!res.data.success) {
                     this.$toast(res.data.message)
                 } else {
-                    console.log(res,"查询结果")
                     if(res.data.code=="0"){
                         this.$router.push({
                             path:"/home/totalPunch/wallet",
@@ -171,8 +173,6 @@ export default {
                     } else if(type=='2'){
                         this.task="璀璨钻石任务"
                     }
-
-
                         this.$router.push({
                             path:"/home/totalPunch/tasked",
                             query:{
@@ -398,7 +398,6 @@ export default {
                        }
                    }
                }
-               
            }
         background: #4b66af;
         .avator-signin{
@@ -413,7 +412,6 @@ export default {
                 height: 120px;
                 img{
                     width: 100%;
-                    height: 100%;
                     border-radius: 50%;
                 }
             }

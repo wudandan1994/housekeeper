@@ -131,7 +131,15 @@
                                         </div>
                                 </div>
                             </li>
-                            <li @click="handleIsAuth('/loan/detail',true,'4')">
+                            <!-- <li @click="handleIsAuth('/loan/detail',true,'4')">
+                                <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
+                                <div class="channel">
+                                    <h3>信息咨询</h3>
+                                    <p>实时审批&nbsp;授信额度</p>
+                                    <span>GO>></span>
+                                </div>  
+                            </li> -->
+                             <li @click="sign">
                                 <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
                                 <div class="channel">
                                     <h3>信息咨询</h3>
@@ -267,7 +275,11 @@
                                 <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></div>
                                 <div class="center">卡·测评</div>
                             </router-link>
-                            <div @click="handleIsAuth('/loan/detail',true,'4')" class="secret">
+                            <!-- <div @click="handleIsAuth('/loan/detail',true,'4')" class="secret">
+                                <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
+                                <div class="center">信息咨询</div>
+                            </div> -->
+                              <div @click="sign" class="secret">
                                 <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
                                 <div class="center">信息咨询</div>
                             </div>
@@ -330,7 +342,7 @@
                     <router-link to="/personalCenter/contactus" tag="li">关于我们</router-link>
                     <!-- <li class="switch">声音开关
                     </li> -->
-                    <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
+                    <router-link to="/home/accountManagement" tag="li">账号管理</router-link>
                     <li @click="handleClear">清除缓存</li>
                     <router-link tag="li" class="center" to="/register">个人设置</router-link>
                 </ul>

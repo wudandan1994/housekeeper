@@ -47,7 +47,7 @@
                             <p><van-icon name="http://pay.91dianji.com.cn/wx.png" size="40px"/></p>
                             <p class="friends">分享给好友</p>
                         </li>
-                        <li @click="wxcir">
+                        <li @click="wxcir"> 
                             <p><van-icon color="white"  size="40px"  name="http://pay.91dianji.com.cn/pyq.png"/></p>
                             <p class="friends">分享到朋友圈</p>
                         </li>
@@ -81,8 +81,8 @@ export default {
             this.Sharewxf=!this.Sharewxf
         },
         showCover(){
-        //    this.Sharewxf=!this.Sharewxf
-        this.$toast("敬请期待")
+           this.Sharewxf=!this.Sharewxf
+        // this.$toast("敬请期待")
         },
          wxfri(){
              let that=this

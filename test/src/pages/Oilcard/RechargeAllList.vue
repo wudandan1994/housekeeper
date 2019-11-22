@@ -60,13 +60,13 @@ export default {
         },
         handleRechargeList(){
             CommonPost('/gasCard/allGascardDeposit',this.params).then(res =>{
-                console.log('成功',res);
+             
                 this.list = res.data.data;
                 if(res.data.data.length == '0'){
                     this.$toast('暂无充值记录');
                 }
             }).catch(res =>{
-                console.log('失败',res);
+              
             })
         }
     },

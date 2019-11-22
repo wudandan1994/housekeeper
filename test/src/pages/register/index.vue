@@ -66,7 +66,7 @@
                        </div>
                        <div class="icon-left end-center"><van-icon name="arrow" /></div>
                    </div>
-                    <div class="per-userinfo row">
+                    <!-- <div class="per-userinfo row">
                        <div class="avator start-center"><van-icon name="todo-list" size="22px"/>微信二维码</div>
                        <div class="detail end-center">
                             <van-uploader :after-read="onWechatQr"  class="upload-component" accept="image/*" multiple name="zhengm">                           
@@ -74,7 +74,7 @@
                             </van-uploader>
                        </div>
                        <div class="icon-left end-center"><van-icon name="arrow" /></div>
-                   </div>
+                   </div> -->
                    <!-- <div class="per-userinfo row">
                        <div class="avator start-center"><van-icon name="stop-circle" size="22px"/>声音开关</div>
                        <div class="detail end-center">

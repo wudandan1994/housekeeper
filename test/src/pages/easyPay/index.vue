@@ -89,7 +89,6 @@ export default {
 
                 axiosPost("/fwspay/insertRegister",data)
                 .then(res=>{
-                    console.log(res,'商户号在此生成')
                     if(res.data.success){
                         let responce=res.data.data
                         responce=JSON.parse(responce)

@@ -436,6 +436,7 @@ const queryComponent = () => import('@/pages/aisleHousekeeper/query')  //账单�
 
 const extensionComponent = () => import('@/pages/vip/extension')  //账单查询
 
+const smallAmountWYFComponent = () => import('@/pages/smallAmountWYF')  // wyf小额
 
 export default new Router({
   // mode:"hash",
@@ -467,7 +468,7 @@ export default new Router({
     {path:"/home/query",component:queryComponent},  //账单查询
     {path:"/home/liftingAmount/bankservice",component:bankserviceComponent},  //账单查询
 
-
+    {path:"/home/smallAmountWYF",component:smallAmountWYFComponent},  //账单查询
 
     {path:"/home/largeAmountHC",component:largeAmountHCComponent},  //汇潮大额 注册商户  
     {path:"/home/largeAmountHC/sendmsgHC",component:sendmsgHCComponent},  //汇潮大额 发送短信 

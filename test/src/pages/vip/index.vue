@@ -647,7 +647,7 @@ export default {
                                  border-radius: 20px;
                              }
                              &.gray{
-                                background-color: #DFB67D; 
+                                background-color: #A9834E; 
                              }
                              &.gold{
                                  background-color: #CDCDCC;

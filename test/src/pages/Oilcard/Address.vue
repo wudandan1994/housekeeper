@@ -73,10 +73,8 @@ export default {
                 this.$toast('请填写具体地址');
             }else{
                CommonPost('/gasCard/addAddress',this.params).then(res =>{
-                   console.log('成功',res);
                    this.$toast('添加成功');
                }).catch(res =>{
-                   console.log('失败',res);
                    this.$toast(res.data.message);
                }) 
             }

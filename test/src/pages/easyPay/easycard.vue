@@ -91,8 +91,6 @@ export default {
 
                 axiosPost("/fwspay/bindcard",data)
                 .then(res=>{
-                    console.log(res,"查询结果")
-                    console.log(res.data.data)
                     if(res.data.success){
                         setTimeout(()=>{
                            let url=res.data.data

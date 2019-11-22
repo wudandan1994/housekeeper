@@ -108,7 +108,6 @@ export default {
              }
               axiosPost("/scpay/bindCard",data)
               .then(res=>{
-                  console.log(res,"注册结果")
                 this.componentload=true 
                 setTimeout(()=>{
                      this.componentload=false

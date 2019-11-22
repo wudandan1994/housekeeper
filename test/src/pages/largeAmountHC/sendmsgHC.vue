@@ -102,7 +102,6 @@ export default {
              }
               axiosPost("/hcpay/sendmessage",data)
               .then(res=>{
-                  console.log(res,"发送短信")
                 this.componentload=true 
                 setTimeout(()=>{
                      this.componentload=false
