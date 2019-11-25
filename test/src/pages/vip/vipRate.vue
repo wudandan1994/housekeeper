@@ -216,19 +216,19 @@
                     <div class="center">领取条件</div>
                 </div>
                 <div class="rows row">
-                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>直推393元/个，奖60元/个</div>
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>直推393元/个，奖40元/个</div>
                     <div class="end-center">升级任意<br/>会员可领</div>
                 </div>
                 <div class="rows row">
-                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>间推393元/个，奖120元/个</div>
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>间推393元/个，奖70元/个</div>
                     <div class="end-center">升级任意<br/>会员可领</div>
                 </div>
                 <div class="rows row">
-                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>直推993元/个，奖120元/个</div>
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>直推993元/个，奖100元/个</div>
                     <div class="end-center">升级钻石<br/>会员可领</div>
                 </div>
                 <div class="rows row">
-                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>间推993元/个，奖200元/个</div>
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>间推993元/个，奖150元/个</div>
                     <div class="end-center">升级钻石<br/>会员可领</div>
                 </div>
             </div>
@@ -240,11 +240,11 @@
                     <div class="center">领取条件</div>
                 </div>
                 <div class="rows row">
-                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>直推分润&nbsp;60%</div>
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>直推分润&nbsp;50%</div>
                     <div class="end-center">升级任意<br/>会员可领</div>
                 </div>
                 <div class="rows row">
-                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>间推分润&nbsp;20%</div>
+                    <div class="start-center"><van-icon size="28px" name="http://fx.91dianji.com.cn/yinlian.png"/>间推分润&nbsp;10%</div>
                     <div class="end-center">升级任意<br/>会员可领</div>
                 </div>
                 <div class="rows row">
@@ -271,7 +271,7 @@ export default {
             headimg: '',
             rates:[],
             levelhj:{},
-            levelzs:{}
+            levelzs:{},
         }
     },
     methods:{
@@ -373,6 +373,7 @@ export default {
         background-image: url('http://pay.91dianji.com.cn/vip004.png');
         background-size: 100% 100%;
     }
+    
     .level{
         margin-top: 50px;
         img{
@@ -396,8 +397,10 @@ export default {
             .title{
                 width: 100%;
                 height: 80px;
+                display:flex;
+                justify-content: space-between;
                 >div{
-                    width: 50%;
+                    width: 30%;
                     height: 100%;
                 }
                 font-size: 30px;

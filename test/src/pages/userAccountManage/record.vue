@@ -12,7 +12,7 @@
                    <div class="end-center" v-if="item.status == 0">被驳回</div>
                    <div class="end-center" v-if="item.status == 1">待审核</div>
                    <div class="end-center" v-if="item.status == 3">已完成</div>
-                   <div class="start-center">到账金额: <span style="font-weight: 700;color:red">&nbsp;{{item.withdraw_apply_amount}}</span></div>
+                   <!-- <div class="start-center">到账金额: <span style="font-weight: 700;color:red">&nbsp;{{item.withdraw_apply_amount}}</span></div> -->
                    <div class="end-center">{{item.withdraw_apply_time}}</div>
                </div>
            </div>

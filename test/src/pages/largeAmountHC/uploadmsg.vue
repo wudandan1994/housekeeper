@@ -77,8 +77,6 @@ export default {
               axiosPost("/hcpay/putMessageCode",data)
               .then(res=>{
 
-                  console.log(res,"短信验证")
-
                 this.componentload=true 
 
                 setTimeout(()=>{

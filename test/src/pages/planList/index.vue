@@ -119,6 +119,7 @@ export default {
                         this.componentload=true
                         setTimeout(()=>{
                             this.componentload=false
+                            this.$toast(res.data.message)
                                  this.$router.push({
                                     path:"/home/punch",
                                     query:{
@@ -144,7 +145,7 @@ export default {
             //补位 当某个字段不是两位数时补0
             fnW(str){
                 var num;
-                str>10?num=str:num="0"+str;
+                str>9?num=str:num="0"+str;
                 return num;
             } 
     },

@@ -35,7 +35,7 @@
                     <span>朱经理</span>
                 </div>
                 <div class="btn center">
-                    <span @click="contact('11')"><a href="tel:021-60592500">拨打</a></span>
+                    <span @click="contact('11')"><a :href="'tel:'+phone.content">拨打</a></span>
                 </div>
             </div>
             <div class="contact_us row">
@@ -131,7 +131,6 @@ export default {
         getInfo(){
             axiosPost("/content/getAboutUs")
             .then(res=>{
-                console.log(res.data.data,"women")
                 this.list=res.data.data
                 this.list=JSON.parse(this.list)
                 this.time=this.list[0]

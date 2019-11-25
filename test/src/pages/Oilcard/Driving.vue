@@ -82,7 +82,6 @@ export default {
         // 驾驶证上传
         afterRead(file){
             this.componentload = true;
-            console.log('驾驶证',file.content);
             this.fileList = file.content;
             this.uploaded = true;
             let formData = new FormData();

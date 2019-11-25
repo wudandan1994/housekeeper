@@ -268,11 +268,9 @@ export default {
                 settleAccType:"2",
                 merType:"1"
             }
-            // console.log(data,'data')
             that.componentload=true
             axiosPost("/creditCard/memberReg",data)
             .then(function(res){
-                // console.log(res,'注册商户')
                 if(!res.data.success){
                     that.componentload=false
                     that.$toast({

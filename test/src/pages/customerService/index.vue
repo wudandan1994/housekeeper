@@ -65,6 +65,7 @@ export default {
        }
        >.contain {
            padding-top:96px;
+           overflow-x: hidden;
            .logo{
                width: 100%;
                height: auto;

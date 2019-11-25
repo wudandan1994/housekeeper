@@ -3,9 +3,9 @@
         <header>
             <span @click="goBack"><van-icon size="20px" name="arrow-left"/></span>
             <span>游戏规则</span>
-            <span @click="showCover">
-                 <!-- <van-icon color="white" size="20px" name="weapp-nav"/>  -->
-            </span>
+            <!-- <span @click="showCover">
+                 <van-icon color="white" size="20px" name="weapp-nav"/> 
+            </span> -->
         </header>
         <div class="container">
            <div class="nationwide">
@@ -22,7 +22,6 @@
                   <div class="dollars">
                       <img  src="http://pay.91dianji.com.cn/dollars.png" alt="" srcset="">
                   </div>
-                 
               </div>
             <div class="silk">
                 <img  src="http://pay.91dianji.com.cn/silk.png" alt="" srcset="">
@@ -48,7 +47,7 @@
                             <p><van-icon name="http://pay.91dianji.com.cn/wx.png" size="40px"/></p>
                             <p class="friends">分享给好友</p>
                         </li>
-                        <li @click="wxcir">
+                        <li @click="wxcir"> 
                             <p><van-icon color="white"  size="40px"  name="http://pay.91dianji.com.cn/pyq.png"/></p>
                             <p class="friends">分享到朋友圈</p>
                         </li>
@@ -82,8 +81,8 @@ export default {
             this.Sharewxf=!this.Sharewxf
         },
         showCover(){
-        //    this.Sharewxf=!this.Sharewxf
-        this.$toast("敬请期待")
+           this.Sharewxf=!this.Sharewxf
+        // this.$toast("敬请期待")
         },
          wxfri(){
              let that=this

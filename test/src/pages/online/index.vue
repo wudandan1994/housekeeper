@@ -60,7 +60,7 @@ export default {
     },
     
     created(){
-        this.url=this.$route.query.info
+         this.url=this.$route.query.info
          this.title=this.$route.query.title
         //  this.webview();
     }

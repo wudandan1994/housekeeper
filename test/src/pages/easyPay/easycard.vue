@@ -56,7 +56,7 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.go(-1)
+            this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
         },
         submit(){
             let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/ 
@@ -91,8 +91,6 @@ export default {
 
                 axiosPost("/fwspay/bindcard",data)
                 .then(res=>{
-                    console.log(res,"查询结果")
-                    console.log(res.data.data)
                     if(res.data.success){
                         setTimeout(()=>{
                            let url=res.data.data

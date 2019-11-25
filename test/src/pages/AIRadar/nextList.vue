@@ -173,7 +173,6 @@ export default {
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
                     // console.log('请求成功',res);
-                    
                     if(res.data.data.count == '0'){
                         this.$toast('暂无数据');
                         this.list = res.data.data.data;
@@ -267,7 +266,6 @@ export default {
     },
     created(){
         this.type = this.$route.query.type;
-        console.log('传递参数',this.$route.query.type);
         this.startdate = this.$route.query.startdate;
         this.enddate = this.$route.query.enddate;
         this.handleGetListByTypeCheck();

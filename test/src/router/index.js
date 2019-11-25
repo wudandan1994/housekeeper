@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:57:17
- * @LastEditTime: 2019-09-27 15:11:58
+ * @LastEditTime: 2019-11-25 11:09:33
  * @LastEditors: Please set LastEditors
  */
 import Vue from 'vue'
@@ -66,6 +66,8 @@ const noviceGuideComponent = () =>import('@/pages/noviceGuide')
 
 // import liftingAmountComponent from '@/pages/liftingAmount'
 const liftingAmountComponent = () =>import('@/pages/liftingAmount')
+
+const bankserviceComponent = () =>import('@/pages/liftingAmount/bankservice')
 
 // import myOrderComponent from '@/pages/myOrder'
 const myOrderComponent = () =>import('@/pages/myOrder')
@@ -416,14 +418,25 @@ const taskrecordComponent = () => import('@/pages/totalPunch/taskrecord.vue')  /
 
 const smallAmountMCComponent = () => import('@/pages/smallAmountMC')  //mc小额  
 
-const largeAmountHCComponent = () => import('@/pages/largeAmountHC')  //汇潮大额 注册商户
+const largeAmountHCComponent = () => import('@/pages/largeAmountHC')  //汇潮大额 注册商户 
 const sendmsgHCComponent = () => import('@/pages/largeAmountHC/sendmsgHC.vue')  //汇潮大额 发送短信
 const uploadmsgComponent = () => import('@/pages/largeAmountHC/uploadmsg.vue')  //汇潮大额 短信验证
 
-// 更多特权
-const moreGoods = () =>import('@/pages/home/more')
+// const changeBillComponent = () => import('@/pages/changeBill')    // 换信用卡信息  
+import changeBillComponent from '@/pages/changeBill'  // 换信用卡信息  
 
+const largeAmountSCComponent = () => import('@/pages/largeAmountSC')  //SC大额通道 注册商户 
+const sendmsgSCComponent = () => import('@/pages/largeAmountSC/sendmsgSC.vue')  //汇潮大额 发送短信
 
+const videosComponent = () => import('@/pages/share/videos.vue')  //视频播放
+
+const billDetailsComponent = () => import('@/pages/aisleHousekeeper/billDetails')  //立即还款
+const budgetComponent = () => import('@/pages/aisleHousekeeper/budget')  //预算费用
+const queryComponent = () => import('@/pages/aisleHousekeeper/query')  //账单查询
+
+const extensionComponent = () => import('@/pages/vip/extension')  //账单查询
+
+const smallAmountWYFComponent = () => import('@/pages/smallAmountWYF')  // wyf小额
 
 export default new Router({
   // mode:"hash",
@@ -443,17 +456,30 @@ export default new Router({
     {path:"/home/punch/planDetail",component:planDetailComponent},
     {path:"/home/news",component:newsComponent},
     {path:"/home/addCard",component:addCardComponent},
+    {path:"/vip/extension",component:extensionComponent},  // 推广升级
+ 
     {path:"/home/receivables/cards",component:cardsComponent},  //收款信用卡列表
     {path:"/home/games/gameElsb",component:gameElsbComponent},  //2048游戏 
     {path:"/home/games/gameCat",component:gameCatComponent},  //cat游戏  
     {path:"/home/games/gameClock",component:gameClockComponent},  //clock游戏  
     {path:"/home/smallAmountMC",component:smallAmountMCComponent},  //mc小额  
+    {path:"/home/billDetails",component:billDetailsComponent},  //立即还款
+    {path:"/home/budget",component:budgetComponent},  //预算
+    {path:"/home/query",component:queryComponent},  //账单查询
+    {path:"/home/liftingAmount/bankservice",component:bankserviceComponent},  //账单查询
+
+    {path:"/home/smallAmountWYF",component:smallAmountWYFComponent},  //账单查询
 
     {path:"/home/largeAmountHC",component:largeAmountHCComponent},  //汇潮大额 注册商户  
     {path:"/home/largeAmountHC/sendmsgHC",component:sendmsgHCComponent},  //汇潮大额 发送短信 
     {path:"/home/largeAmountHC/uploadmsg",component:uploadmsgComponent},  //汇潮大额 短信验证
 
+    {path:"/home/share/videos",component:videosComponent},  //视频  
+    {path:"/home/largeAmountSC",component:largeAmountSCComponent},  //SC大额通道 注册商户  
+    {path:"/home/largeAmountSC/sendmsgSC",component:sendmsgSCComponent},  //汇潮大额 短信验证
 
+
+    {path:"/home/changeBill",component:changeBillComponent}, //更换账单 
 
     {path:"/home/receiveXH",component:receiveXHComponent},  //收单小惠通道  
     {path:"/home/receiveXH/cardCX",component:cardCXComponent},  //收单小惠通道储蓄卡管理 
@@ -590,7 +616,7 @@ export default new Router({
     {path: '/RechargeDetail',component: RechargeDetail},
     {path: '/activation',component: activation},
     {path: '/RechargeAllList',component: RechargeAllList},
-    {path: '/moreGoods',component: moreGoods},
+    // {path: '/moreGoods',component: moreGoods},
     {path: '/testpage',component: testpage},
   ],
   scrollBehavior (to, from, savedPosition) {

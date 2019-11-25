@@ -447,7 +447,7 @@ export default {
                     links.forEach(item=>{
                         if(item.title==data){
                             // console.log(item.link)
-                            location.href=item.link
+                            location.href=item.link 
                         }
                     })
                 } else {
@@ -457,15 +457,9 @@ export default {
         },
         uploadAnd(){
            this.getUrl('android')
-
-            // location.href=" https://www.pgyer.com/vFbf"
-           
         },
         uploadIos(){
-
              this.getUrl('ios')
-            // location.href="http://znd.hvv.dnf-w3.cn/KXxv61"
-          
         },
         changeActive(obj){
           
@@ -513,13 +507,13 @@ export default {
                     //    this.background=''
                     // }
                     if(this.ispartner=='1'){
-                       this.background='http://pay.91dianji.com.cn/vip0003.png'
+                       this.background='http://pay.91dianji.com.cn/vip003.png'
                     }else  if(this.pic=='1'){
                        this.background='http://pay.91dianji.com.cn/vip001.png'
                     } else if(this.pic=='2'){
                       this.background='http://pay.91dianji.com.cn/vip002.png'
                     } else {
-                      this.background=''
+                      this.background='http://pay.91dianji.com.cn/vip000.png'
                     }
 
                 }else{

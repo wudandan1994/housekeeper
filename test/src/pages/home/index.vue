@@ -12,7 +12,7 @@
                 <div class="tipsone">
                     <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
                     <div class="cres animated zoomIn">
-                            <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
+                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
                         <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/yong.png" /> </span>
                         <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/fu.png" /> </span>
                         <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/wu.png" /> </span>
@@ -51,21 +51,28 @@
                                 <span>新人教程</span>
                             </router-link>
                             <router-link to="/vip" tag="li">
-                                <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
+                                <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search "  /></p>
                                 <p>升级代理</p>
                             </router-link>
                             <router-link to="/personalCenter/incomedetail" tag="li">
                                 <p> <van-icon name="http://pay.91dianji.com.cn/103.png"  class="zx-search"  /></p>
                                 <span>收益明细</span>
                             </router-link>
-                            <router-link tag="li" to="/home/totalPunch">
-                                <p> <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search  rotateZ"  /></p>
+                            <!-- <router-link tag="li" to="/home/totalPunch">
+                                <p class="dot"> 
+                                    <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search rotateZ "  />
+                                    <span v-show="showdot">1</span>
+                                </p>
                                 <span>会员任务</span>
-                            </router-link>
-                            <!-- <li @click="sign">
-                                <p> <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search  rotateZ"  /></p>
+                            </router-link> -->
+                             <li  @click="goTask">
+                                <p class="dot"> 
+                                    <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search rotateZ "  />
+                                    <span v-show="showdot">1</span>
+                                </p>
                                 <span>会员任务</span>
-                            </li> -->
+                            </li>
+                            
                         </ul>
                     </div>
                     <!-- 名片咨询模块 -->
@@ -90,7 +97,7 @@
                                 </div>
                             </li> -->
 
-                            <li @click="applycard('https://wsdev.1sta.cn/wechat/pages/wailian/wailian.html?merCode=b480446df76a4494948e3b95845db8ca','办卡中心')">
+                            <li @click="applycard('https://wsdev.1sta.cn/wechat/pages/wailian/wailian.html?merCode=f95b64acd760439682dac2d83b6d32ea','办卡中心')">
                                 <span class="handle">
                                     <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
                                 </span>
@@ -123,7 +130,15 @@
                                         </div>
                                 </div>
                             </li>
-                            <li @click="handleIsAuth('/loan/detail',true,'4')">
+                            <!-- <li @click="handleIsAuth('/loan/detail',true,'4')">
+                                <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
+                                <div class="channel">
+                                    <h3>信息咨询</h3>
+                                    <p>实时审批&nbsp;授信额度</p>
+                                    <span>GO>></span>
+                                </div>  
+                            </li> -->
+                             <li @click="sign">
                                 <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
                                 <div class="channel">
                                     <h3>信息咨询</h3>
@@ -259,7 +274,11 @@
                                 <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></div>
                                 <div class="center">卡·测评</div>
                             </router-link>
-                            <div @click="handleIsAuth('/loan/detail',true,'4')" class="secret">
+                            <!-- <div @click="handleIsAuth('/loan/detail',true,'4')" class="secret">
+                                <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
+                                <div class="center">信息咨询</div>
+                            </div> -->
+                              <div @click="sign" class="secret">
                                 <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
                                 <div class="center">信息咨询</div>
                             </div>
@@ -322,7 +341,7 @@
                     <router-link to="/personalCenter/contactus" tag="li">关于我们</router-link>
                     <!-- <li class="switch">声音开关
                     </li> -->
-                    <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
+                    <router-link to="/home/accountManagement" tag="li">账号管理</router-link>
                     <li @click="handleClear">清除缓存</li>
                     <router-link tag="li" class="center" to="/register">个人设置</router-link>
                 </ul>
@@ -344,6 +363,7 @@ import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 
+
 export default {
   components:{
       footerMenu,
@@ -362,7 +382,6 @@ export default {
             ads:false,
             isLight:true,
             isSelect:false,
-         
             lineheight:100,
             colorl:"#4B66AF",
             images: [
@@ -413,7 +432,8 @@ export default {
             wzcx:{},
             qcbx:{},
             ywx:{},
-            downUrl:[]
+            downUrl:[],
+            showdot:false
         }
   },
    methods:{     
@@ -422,6 +442,21 @@ export default {
         storage.remove('promotioncode');
         this.$toast('清除成功');
        },
+        // 查看任务
+        getTask(){
+             axiosPost("/activity/activityExit")
+            .then(res=>{
+                if(res.data.success && res.data.code==="1"){
+                    this.showdot=true
+                }
+            })
+        },
+        goTask(){
+            this.$router.push({
+                path:"/home/totalPunch"
+            })
+            this.showdot=false
+        },
 
        handleselect(){
            if(this.paychennel=="1"){
@@ -466,8 +501,10 @@ export default {
                 this.$toast('请先实名认证');
                     
             }else{
-               
-               this.changeLink(url,title)
+
+                //  this.$router.push("/home/cardCenter")
+            //    this.changeLink(url,title)
+              location.href=url
             }
             
         },
@@ -508,7 +545,6 @@ export default {
                 var u = navigator.userAgent;
                 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
                 var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-
                  if(isAndroid) {
                   window.location.href=this.downUrl[1].link
                } else if(isiOS) {
@@ -521,9 +557,7 @@ export default {
                    if(res.data.success){
                       let version=res.data.data
                       this.versionAndroid=parseFloat(version[0].version)
-                    //   console.log(this.versionAndroid,'and')
                       this.versionIos=parseFloat(version[1].version)
-                    //    console.log(this.versionIos,'ios')
                    }
                }) 
                .catch(err=>{
@@ -672,7 +706,6 @@ export default {
                       })
                 } 
                 this.showpass=true
-               
             }
         },
         // 判断是否实名认证
@@ -696,12 +729,10 @@ export default {
                      axiosPost("/behavior/insertBehavior",data)
                     .then(res=>{
                          this.$router.push(obj);
-                        
                     })
                 } else {
                      this.$router.push(obj);
                 }
-               
             }
         },
         // 联系客服
@@ -761,14 +792,13 @@ export default {
                     }
 
         this.handleSearchAuths()
+        this.getTask()
         //  this.automatic() //自动登录
         //  this.getUpdate() //获取版本
     }  ,
     mounted () {
         // 更新
         // this.update() 
-       
-      
     }
 }
 </script>
@@ -1112,7 +1142,16 @@ export default {
                             >p {
                                 text-align: center;
                                 margin-bottom:10px;
-                            
+                                &.dot{
+                                    >span{
+                                        display: inline-block;
+                                        width:26px;
+                                        height:26px;
+                                        border-radius: 50%;
+                                        background-color: red;
+                                        color:#fff;
+                                    }
+                                }
                                 .rotateZ {
                                     //   animation: icon 2s 1s linear infinite;
                                     //  -webkit-animation: icon 2s 1s linear  infinite;

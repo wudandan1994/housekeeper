@@ -95,10 +95,7 @@ export default {
         handleReturnHome(){
             this.$router.go(-1)
         },
-       
-
-       
-           
+          
         // 绑卡
         bindingCard(){
              let partern=/0?(13|14|15|16|17|18|19)[0-9]{9}/

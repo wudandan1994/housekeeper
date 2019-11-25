@@ -164,8 +164,6 @@ export default {
            this.componentload=true
            axiosPost("/creditCard/zlpayment",data)
            .then(res=>{
-            //    console.log(res,'支付结果')
-            //    console.log(res.data.data,"data数据")
                if(res.data.success) {
                    let responce=res.data.data
                    responce=JSON.parse(responce)
@@ -193,17 +191,13 @@ export default {
                             this.componentload=false
                             location.href=url
                         }
+               } else {
+                   setTimeout(()=>{
+                       this.componentload=false
+                       this.$toast(res.data.message)
+                   },1500)
+                     
                }
-            //    setTimeout(()=>{
-            //         if(res.data.success){
-            //             this.$toast(res.data.message)
-            //         } else {
-            //             this.$toast(res.data.message)
-            //         }
-            //     //  this.componentload=false
-
-            //    },1500)
-             
            })
        }
      

@@ -171,7 +171,7 @@ export default {
 
                 axiosPost("/txstar/openCard",data)
                 .then(res=>{
-                   console.log(res,"第一次签约")
+                //    console.log(res,"第一次签约")
                    setTimeout(()=>{
                        if(res.data.success){
                            this.$toast(res.data.message)
@@ -195,7 +195,6 @@ export default {
     },
     created(){
         this.info=this.$route.query.info
-        console.log(this.info,'info')
         this.accountNumber=this.info.cardNo
         this.tel=this.info.phone
         this.cvv2=this.info.cvv2

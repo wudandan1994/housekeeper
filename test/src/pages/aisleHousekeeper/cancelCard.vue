@@ -74,7 +74,7 @@ export default {
         position: relative;
         z-index: 1;
         color: #fff;
-        background: #4b66af;
+        background: #DEE3F3;
         border-radius: 15px;
         .name{
             position: absolute;

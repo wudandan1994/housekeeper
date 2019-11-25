@@ -131,6 +131,7 @@ export default {
                 idcardnumber:this.idcardnumber,
                 name:this.name
             }
+            
              axiosPost("/customer/insertIdentification",data)
              .then(res=>{
                  if(res.data.success){

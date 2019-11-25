@@ -56,8 +56,6 @@ export default {
             }
             axiosPost("/mcpay/bindcard",data)
             .then(res=>{
-                console.log(res,"测试结果")
-                console.log(res.data.data,"订单号")
                 if(res.data.success){
                     this.requestNo=res.data.data.result
                 } else {
@@ -79,7 +77,6 @@ export default {
            }
            axiosPost("/mcpay/confirmBindCard",datas)
            .then(res=>{
-               console.log(res,"签约是否成功")
                 setTimeout(()=>{
                     if(res.data.success){
                         this.$toast(res.data.message)

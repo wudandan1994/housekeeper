@@ -76,7 +76,7 @@ export default {
     },
     methods:{
         handleReturnHome(){
-            this.$router.go(-1)
+            this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
         },
            
         // 绑卡
@@ -86,7 +86,7 @@ export default {
                   return   this.$toast("请输入11位手机号码")
              }
 
-            if(this.merchantno.trim().length===0 ||  this.bankcardNum.trim().length===0 ||  this.cvv.trim().length===0||  this.expired_time.trim().length===0){
+            if(this.phone.trim().length===0 ||  this.bankcardNum.trim().length===0 ||  this.cvv.trim().length===0||  this.expired_time.trim().length===0){
                  this.$toast({
                     message:"请将信息填写完整"
                 })
@@ -102,7 +102,6 @@ export default {
              }
               axiosPost("/hcpay/sendmessage",data)
               .then(res=>{
-                  console.log(res,"发送短信")
                 this.componentload=true 
                 setTimeout(()=>{
                      this.componentload=false
