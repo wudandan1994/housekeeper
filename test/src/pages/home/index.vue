@@ -2,10 +2,9 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-06-28 10:58:28
- * @LastEditTime: 2019-08-22 16:43:27
+ * @LastEditTime: 2019-09-26 14:14:10
  * @LastEditors: Please set LastEditors
  -->
-
 <template>
     <div id="home-component"    @swipedown="swipe(x)">
         <div class="home-container" :class="showAaside == false ? 'home-normal' : 'home-active'">

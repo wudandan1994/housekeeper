@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:57:17
- * @LastEditTime: 2019-08-21 15:12:28
+ * @LastEditTime: 2019-09-27 15:11:58
  * @LastEditors: Please set LastEditors
  */
 import Vue from 'vue'
@@ -420,6 +420,9 @@ const largeAmountHCComponent = () => import('@/pages/largeAmountHC')  //汇潮�
 const sendmsgHCComponent = () => import('@/pages/largeAmountHC/sendmsgHC.vue')  //汇潮大额 发送短信
 const uploadmsgComponent = () => import('@/pages/largeAmountHC/uploadmsg.vue')  //汇潮大额 短信验证
 
+// 更多特权
+const moreGoods = () =>import('@/pages/home/more')
+
 
 
 export default new Router({
@@ -587,6 +590,7 @@ export default new Router({
     {path: '/RechargeDetail',component: RechargeDetail},
     {path: '/activation',component: activation},
     {path: '/RechargeAllList',component: RechargeAllList},
+    {path: '/moreGoods',component: moreGoods},
     {path: '/testpage',component: testpage},
   ],
   scrollBehavior (to, from, savedPosition) {
