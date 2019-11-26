@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:57:17
- * @LastEditTime: 2019-08-21 15:12:28
+ * @LastEditTime: 2019-11-26 16:55:39
  * @LastEditors: Please set LastEditors
  */
 import Vue from 'vue'
@@ -442,6 +442,12 @@ const smallAmountSCComponent = () => import('@/pages/smallAmountSC')  // sc小�
 
 const smallSCactiveComponent = () => import('@/pages/smallAmountSC/smallSCactive.vue')  // sc小额
 
+// 全球出行
+const Trip = ()=>import('@/pages/mall/Trip')
+// 安卓商城跳转中间件
+const MallmiddleWare = ()=>import('@/pages/mall/MallmiddleWare')
+// 大牌美食
+const famousFoods = ()=>import('@/pages/mall/famousFoods')
 
 export default new Router({
   // mode:"hash",
@@ -624,7 +630,11 @@ export default new Router({
     {path: '/RechargeDetail',component: RechargeDetail},
     {path: '/activation',component: activation},
     {path: '/RechargeAllList',component: RechargeAllList},
+    // {path: '/moreGoods',component: moreGoods},
     {path: '/testpage',component: testpage},
+    {path: '/Trip',component: Trip},
+    {path: '/MallmiddleWare',component: MallmiddleWare},
+    {path: '/famousFoods',component: famousFoods}
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }
