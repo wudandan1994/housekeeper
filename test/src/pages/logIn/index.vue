@@ -30,8 +30,8 @@
             <div class="wx-login" @click="logIn">
                 <div class="center">———————其他登录方式———————</div>
                 <div class="center"><van-icon size="28px" name="http://pay.91dianji.com.cn/wx.png"/></div>
-            </div>
-        </div>
+            </div> 
+        </div> 
     </div>
 
 </template>

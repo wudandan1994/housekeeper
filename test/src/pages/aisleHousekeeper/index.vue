@@ -337,112 +337,91 @@ export default {
 
         // 查询小额通道是否签约
         small(i){
+
+            let data={
+               bankCard: i.cardNo,
+               channel:"1"
+            }
+            axiosPost("/newscpay/bindCardExist",data)
+            .then(res=>{
+                if(res.data.success){
+                    storage.set('channel',"1");
+                        this.$router.push({
+                        path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                        query:{
+                            info:i
+                        }
+                    })
+                } else {
+                    this.$router.push({
+                        path:"/home/smallAmountSC",
+                        query:{
+                            info:i,
+                            type:"1"
+                        }
+                    })
+                }
+            })
                    
-            // let datas={
-            //     cardId:i.cardNo
-            //     }
-            // axiosPost("/fwspay/getFwsMerchant",datas)   // 查询有没有商户号   通道三
+            // let data={
+            //     bankAccountNo:i.cardNo
+            // }
+            // axiosPost("/wyfpay/getWyfMerchant",data)
             // .then(res=>{
-            //     if(res.data.success){ 
-
-            //         let subMerchId=res.data.data.subMerchId
-
-            //     axiosPost("/fwspay/getBindCardExist",datas)    // 继续查询有没有绑卡
-            //     .then(res=>{
-            //         if(res.data.success){
-
-                        // 查询有没有商户号
-
-                          let data={
-                                bankAccountNo:i.cardNo
-                            }
-                         axiosPost("/wyfpay/getWyfMerchant",data)
-                         .then(res=>{
-                            //  console.log(res,"测试有没有商户号")
-                             if(!res.data.success){
-                                // 注册商户
-                                // console.log("去注册商户")
-                                this.$router.push({
-                                    path:"/home/smallAmountWYF",
-                                    query:{
-                                        info:i
-                                    }
-                                })
-                             }else {
-                                
-                                let subMerchantNo=res.data.data.subMerchantNo
-
-                                //查询有没有绑卡  
-
-                                 axiosPost("/wyfpay/getBindCardExist",data)
-                                 .then(res=>{
-                                     if(res.data.success){
-                                          storage.set('channel',"1");
-                                          this.$router.push({
-                                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                                            query:{
-                                                info:i
-                                            }
-                                        })
-                                     } else {
-                                        //  去绑卡
-                                       
-                                        let info=i
-                                        let params={
-                                                bankAccountName:i.payerName,
-                                                certificateNo:i.idCardNo,
-                                                bankAccountNo:i.cardNo,
-                                                mobile:i.phone,
-                                                subMerchantNo:subMerchantNo,
-                                                cvv:i.cvv2,
-                                                bankAccountExpiry:i.month+i.year
-                                          }
-                                         axiosPost("/wyfpay/bindcard",params)
-                                         .then(res=>{
-                                             if(res.data.success){
-                                                  storage.set('channel',"1");
-                                                  this.$router.push({
-                                                      path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                                                      query:{
-                                                         info:i
-                                                     } 
-                                                    })
-                                             }else {
-                                                 this.$toast(res.data.message)
-                                             }
-                                         })
-                                     }
-                                 })
-
-                             }
-                         }) 
-
-            //         } else {
-            //             this.$router.push({
-            //                 path:"/home/easyPay/easycard",
-            //                 query:{
-            //                     info:i,
-            //                     subMerchId,
-            //                 }
-            //             })
-            //         }
-            //    })
-                        
-            // .catch(err=>{
-            // this.$toast("登录失败")
-            // })
-            // } else {
-            //      this.$router.push({
-            //         path:"/home/easyPay",
+            //     if(!res.data.success){
+            //     // 注册商户
+            //     // console.log("去注册商户")
+            //     this.$router.push({
+            //         path:"/home/smallAmountWYF",
             //         query:{
             //             info:i
             //         }
-            //      })
-            //         }
             //     })
-            //  .catch(err=>{
-            //      this.$toast("登录失败")
-            //  })
+            //     }else {
+            //     let subMerchantNo=res.data.data.subMerchantNo
+            //     //查询有没有绑卡  
+            //         axiosPost("/wyfpay/getBindCardExist",data)
+            //         .then(res=>{
+            //             if(res.data.success){
+            //                 storage.set('channel',"1");
+            //                 this.$router.push({
+            //                 path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+            //                 query:{
+            //                     info:i
+            //                 }
+            //             })
+            //             } else {
+            //             //  去绑卡
+                        
+            //             let info=i
+            //             let params={
+            //                     bankAccountName:i.payerName,
+            //                     certificateNo:i.idCardNo,
+            //                     bankAccountNo:i.cardNo,
+            //                     mobile:i.phone,
+            //                     subMerchantNo:subMerchantNo,
+            //                     cvv:i.cvv2,
+            //                     bankAccountExpiry:i.month+i.year
+            //                 }
+            //                 axiosPost("/wyfpay/bindcard",params)
+            //                 .then(res=>{
+            //                     if(res.data.success){
+            //                         storage.set('channel',"1");
+            //                         this.$router.push({
+            //                             path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+            //                             query:{
+            //                                 info:i
+            //                             } 
+            //                         })
+            //                     }else {
+            //                         this.$toast(res.data.message)
+            //                     }
+            //                 })
+            //             }
+            //         })
+
+            //     }
+            // }) 
                
         },
          // 查询大额通道是否签约
@@ -459,13 +438,40 @@ export default {
                       axiosPost("/scpay/bindCardExist",datas)
                       .then(res=>{
                           if(res.data.success){
-                                storage.set('channel',"2");
-                                this.$router.push({
-                                    path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                                    query:{
-                                    info:i
-                                }
-                            })  
+                            //     storage.set('channel',"2");
+                            //     this.$router.push({
+                            //         path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                            //         query:{
+                            //         info:i
+                            //     }
+                            // })  
+
+                              let params={
+                                    bankCard: i.cardNo,
+                                    channel:"2"
+                                    }
+                                    axiosPost("/newscpay/bindCardExist",params)
+                                    .then(res=>{
+                                        if(res.data.success){
+                                            storage.set('channel',"2");
+                                                this.$router.push({
+                                                path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                                query:{
+                                                    info:i,
+                                                }
+                                            })
+                                        } else {
+                                            this.$router.push({
+                                                path:"/home/smallAmountSC",
+                                                query:{
+                                                    info:i,
+                                                    type:"2"
+                                                }
+                                            })
+                                        }
+                                    })
+
+
                           }else {
                               this.$router.push({
                                   path:"/home/largeAmountSC",

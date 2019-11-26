@@ -438,6 +438,11 @@ const extensionComponent = () => import('@/pages/vip/extension')  //账单查询
 
 const smallAmountWYFComponent = () => import('@/pages/smallAmountWYF')  // wyf小额
 
+const smallAmountSCComponent = () => import('@/pages/smallAmountSC')  // sc小额
+
+const smallSCactiveComponent = () => import('@/pages/smallAmountSC/smallSCactive.vue')  // sc小额
+
+
 export default new Router({
   // mode:"hash",
   routes: [
@@ -468,7 +473,10 @@ export default new Router({
     {path:"/home/query",component:queryComponent},  //账单查询
     {path:"/home/liftingAmount/bankservice",component:bankserviceComponent},  //账单查询
 
-    {path:"/home/smallAmountWYF",component:smallAmountWYFComponent},  //账单查询
+    {path:"/home/smallAmountWYF",component:smallAmountWYFComponent},  //wyf小额
+
+    {path:"/home/smallAmountSC",component:smallAmountSCComponent},  //sc小额
+    {path:"/home/smallSCactive",component:smallSCactiveComponent},  //sc小额
 
     {path:"/home/largeAmountHC",component:largeAmountHCComponent},  //汇潮大额 注册商户  
     {path:"/home/largeAmountHC/sendmsgHC",component:sendmsgHCComponent},  //汇潮大额 发送短信 
