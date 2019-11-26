@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:57:17
- * @LastEditTime: 2019-11-25 11:09:33
+ * @LastEditTime: 2019-11-26 16:04:11
  * @LastEditors: Please set LastEditors
  */
 import Vue from 'vue'
@@ -438,6 +438,13 @@ const extensionComponent = () => import('@/pages/vip/extension')  //账单查询
 
 const smallAmountWYFComponent = () => import('@/pages/smallAmountWYF')  // wyf小额
 
+// 全球出行
+const Trip = ()=>import('@/pages/mall/Trip')
+// 安卓商城跳转中间件
+const MallmiddleWare = ()=>import('@/pages/mall/MallmiddleWare')
+// 大牌美食
+const famousFoods = ()=>import('@/pages/mall/famousFoods')
+
 export default new Router({
   // mode:"hash",
   routes: [
@@ -618,6 +625,9 @@ export default new Router({
     {path: '/RechargeAllList',component: RechargeAllList},
     // {path: '/moreGoods',component: moreGoods},
     {path: '/testpage',component: testpage},
+    {path: '/Trip',component: Trip},
+    {path: '/MallmiddleWare',component: MallmiddleWare},
+    {path: '/famousFoods',component: famousFoods}
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }
