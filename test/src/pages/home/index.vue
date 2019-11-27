@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-06-28 10:58:28
- * @LastEditTime: 2019-11-26 16:51:00
+ * @LastEditTime: 2019-11-27 14:31:33
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -209,22 +209,17 @@ export default {
                 {
                     routes: '/vip',
                     params: '1',
-                    url: 'http://pay.91dianji.com.cn/banner-01.png',
+                    url: 'http://pay.91dianji.com.cn/banner01-1.1.png',
                 },
                 {
                     routes: '/vip',
                     params: '1',
-                    url: 'http://pay.91dianji.com.cn/banner-02.png',
+                    url: 'http://pay.91dianji.com.cn/banner02-1.1.png',
                 },
                 {
                     routes: '/vip',
                     params: '2',
-                    url: 'http://pay.91dianji.com.cn/banner-03.png',
-                },
-                {
-                    routes: '/vip',
-                    params: '2',
-                    url: 'http://pay.91dianji.com.cn/banner-04.png',
+                    url: 'http://pay.91dianji.com.cn/banner03-1.1.png',
                 }
             ],
             showAaside:false, 
@@ -247,7 +242,7 @@ export default {
             versionAndroid:"",// 安卓版本号
             versionIos:"", // ios 版本号
             updateVerson:0,  // 设备版本号
-            height: 148.5,
+            height: 190,
             paychennel:"",
             wzcx:{},
             qcbx:{},
@@ -627,7 +622,7 @@ export default {
             // banner
             .swipe {
                 width: 100%;
-                height: 270px;
+                // height: 380px;
                 position: relative;
                 .per-img{
                     width: 100vw;
