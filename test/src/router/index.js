@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:57:17
- * @LastEditTime: 2019-11-26 16:55:39
+ * @LastEditTime: 2019-11-28 15:24:47
  * @LastEditors: Please set LastEditors
  */
 import Vue from 'vue'
@@ -448,6 +448,8 @@ const Trip = ()=>import('@/pages/mall/Trip')
 const MallmiddleWare = ()=>import('@/pages/mall/MallmiddleWare')
 // 大牌美食
 const famousFoods = ()=>import('@/pages/mall/famousFoods')
+// 生活服务
+const lifeservice =()=>import('@/pages/mall/lifeservice')
 
 export default new Router({
   // mode:"hash",
@@ -634,7 +636,8 @@ export default new Router({
     {path: '/testpage',component: testpage},
     {path: '/Trip',component: Trip},
     {path: '/MallmiddleWare',component: MallmiddleWare},
-    {path: '/famousFoods',component: famousFoods}
+    {path: '/famousFoods',component: famousFoods},
+    {path: '/lifeservice',component: lifeservice}
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }

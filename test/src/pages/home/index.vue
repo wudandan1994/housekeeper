@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-06-28 10:58:28
- * @LastEditTime: 2019-11-27 14:31:33
+ * @LastEditTime: 2019-11-28 17:43:41
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -77,14 +77,14 @@
                         <div class="center-end">加油卡</div>
                         <div class="center"><van-icon name="http://pay.91dianji.com.cn/youka-1.1.png" size="40px"/></div>
                     </router-link>
-                    <div class="fuwu" @click="handleExpect">
+                    <router-link tag="div" class="fuwu" to="/lifeservice">
                         <div class="center-end">生活服务</div>
                         <div class="center"><van-icon name="http://pay.91dianji.com.cn/shenghuofuwu-1.1.png" size="40px"/></div>
-                    </div>
-                    <div class="meishi" @click="handleExpect">
+                    </router-link>
+                    <router-link tag="div" class="meishi" to="/famousFoods">
                         <div class="center-end">大牌美食</div>
                         <div class="center"><van-icon name="http://pay.91dianji.com.cn/meishi-1.1.png" size="40px"/></div>
-                    </div>
+                    </router-link>
                 </div>
             </div>
 
@@ -131,19 +131,39 @@
                     </div>
                 </div>
             </div>
-
-            <div class="container">
-                <!-- 更新 -->
-                <div @click.self="showUpdate=false" v-show="showUpdate" class="update">
-                    <div  class="cover">
-                        <div class="version">
-                        <h3>版本更新</h3>
-                            <p>钱夹宝升级了，快来体验吧！</p>
-                            <div class="butt">
-                                <div class="cancle" @click="showUpdate=false">取消</div>
-                                <div class="upd" @click="download">更新</div>
-                            </div>
+            <!-- 更新 -->
+            <div @click.self="showUpdate=false" v-show="showUpdate" class="update">
+                <div  class="cover">
+                    <div class="version">
+                    <h3>版本更新</h3>
+                        <p>钱夹宝升级了，快来体验吧！</p>
+                        <div class="butt">
+                            <div class="cancle" @click="showUpdate=false">取消</div>
+                            <div class="upd" @click="download">更新</div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-show="showpass" @click.self="showcover" :class="showpass?'cover':''">
+                <div  class="pop">
+                    <h3>请选择通道</h3>
+                    <div class="small" @click.stop="smallPass('1')">
+                        <van-icon name="http://pay.91dianji.com.cn/uz.png" size="26px"/>
+                        <div class="middle">
+                            <p>优质商户 </p>
+                        </div>
+                        <p> <van-icon name="checked" :color="paychennel=='1'?'#4B66AF':'gray'" size="20px"/></p>
+                    </div>
+                    <div class="large" @click.stop="smallPass('2')">
+                        <van-icon name="http://pay.91dianji.com.cn/pt.png" size="26px"/>
+                        <div class="middle">
+                            <p>普通商户</p>
+                        </div>
+                        <p> <van-icon name="checked" :color="paychennel=='2'?'#4B66AF':'gray'" size="20px"/></p>
+                    </div>
+                    <div class="sure">
+                        <van-button size="large" @click="handleselect" type="info">确定</van-button>
                     </div>
                 </div>
             </div>
@@ -999,7 +1019,84 @@ export default {
                         
                     }
                 }
-            }    
+            }  
+            // 普通or优质商户选择
+            .cover{
+                position: fixed;
+                top:0px;
+                bottom: 0px;
+                left:0px;
+                right:0px;
+                background-color: rgba(0, 0, 0, .5);
+                z-index: 99;
+                .pop{
+                    position: absolute;
+                    top:26%;
+                    left:9%;
+                    width: 600px;
+                    padding:10px;
+                    background-color: #fff;
+                    border:1px solid #ccc;
+                    color:#000;
+                    z-index: 999;
+                    border-radius: 15px;
+                    h3{
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 34px;
+                        padding:30px 0px 15px 0px;
+                    }
+                    >p {
+                        text-align: center;
+                        padding:18px 0px;
+                        border-bottom: 1px solid #ccc;
+                        color:#808080;
+                    }
+                    .sure {
+                        padding:30px;
+                    }
+                    .van-button--info {
+                        background: linear-gradient(to right,#D8B56D, #886929 );
+                        height: 80px;
+                        line-height: 80px;
+                        color:#fff;
+                        border:1px solid #886929;
+                    }
+                    >.small,.large {
+                        display: flex;
+                        justify-content: space-between;
+                        padding-bottom: 20px;
+                        align-items: center;
+                        z-index: 1000;
+                        background-color: #fff;
+                        padding:15px;
+                        .middle {
+                            flex:1;
+                            padding-left:20px;
+                            padding-bottom: 10px;
+                            span {
+                                font-size: 24px;
+                            }
+                        }
+                        p {
+                            font-size: 32px;
+                            font-weight: bold;
+                            padding: 25px 0;
+                            span{
+                                font-weight: normal;
+                                font-size: 26px;
+                                color:#808080;
+                            }
+                        }
+                    }
+                    .small {
+                        border-bottom: 1px solid #ccc;
+                    }
+                    .large {
+                        margin-top:5px;
+                    }
+                }
+            }
         }
         .home-normal{
             position: relative;
