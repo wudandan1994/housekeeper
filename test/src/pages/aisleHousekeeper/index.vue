@@ -338,30 +338,48 @@ export default {
         // 查询小额通道是否签约
         small(i){
 
-            let data={
-               bankCard: i.cardNo,
-               channel:"1"
-            }
-            axiosPost("/newscpay/bindCardExist",data)
-            .then(res=>{
-                if(res.data.success){
-                    storage.set('channel',"1");
+                 axiosPost("/dspay/getDebitCardExist")
+                 .then(res=>{
+                     console.log(res,"测试")
+                     if(res.data.code==="0"){
+                          storage.set('channel',"1");
                         this.$router.push({
                         path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
                         query:{
                             info:i
                         }
-                    })
-                } else {
-                    this.$router.push({
-                        path:"/home/smallAmountSC",
-                        query:{
-                            info:i,
-                            type:"1"
-                        }
-                    })
-                }
-            })
+                      })
+                     }else if(res.data.code==="100"){
+                           this.$router.push({
+                            path:"/home/collect"
+                        })    
+                     }
+                 })
+
+            // let data={
+            //    bankCard: i.cardNo,
+            //    channel:"1"
+            // }
+            // axiosPost("/newscpay/bindCardExist",data)
+            // .then(res=>{
+            //     if(res.data.success){
+            //         storage.set('channel',"1");
+            //             this.$router.push({
+            //             path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+            //             query:{
+            //                 info:i
+            //             }
+            //         })
+            //     } else {
+            //         this.$router.push({
+            //             path:"/home/smallAmountSC",
+            //             query:{
+            //                 info:i,
+            //                 type:"1"
+            //             }
+            //         })
+            //     }
+            // })
                    
             // let data={
             //     bankAccountNo:i.cardNo

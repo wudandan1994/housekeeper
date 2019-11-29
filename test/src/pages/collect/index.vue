@@ -281,9 +281,7 @@ export default {
 
                   setTimeout(()=>{
                         that.componentload=false
-                        that.$router.push({
-                           path:"/home/receivables",
-                        })
+                        that.$router.go(-1)
                     },500)
 
                           // axiosPost("/creditCard/getMemberReg")
