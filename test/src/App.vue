@@ -2,14 +2,14 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:57:17
- * @LastEditTime: 2019-08-28 10:42:42
+ * @LastEditTime: 2019-09-26 15:18:05
  * @LastEditors: Please set LastEditors
  -->
 <template>
   <div id="app">
     
     <router-view/>
-     <coverads name="fade"></coverads>
+     <!-- <coverads name="fade"></coverads> -->
      <!-- <guide></guide> -->
   </div>
 </template>

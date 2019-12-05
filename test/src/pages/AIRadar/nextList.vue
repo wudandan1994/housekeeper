@@ -158,6 +158,7 @@ export default {
         },
         // 查询下级浏览数以及点击方式
         handleGetListByTypeCheck(){
+            console.log('参数',this.type);
             let params = {
                 page: this.page,
                 pageSize: this.pageSize,

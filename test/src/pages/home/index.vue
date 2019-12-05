@@ -1,328 +1,169 @@
-<!--
- * @Description: In User Settings Edit
- * @Author: your name
- * @Date: 2019-06-28 10:58:28
- * @LastEditTime: 2019-08-22 16:43:27
- * @LastEditors: Please set LastEditors
- -->
-
 <template>
-    <div id="home-component"    @swipedown="swipe(x)">
+    <div id="home-component">
         <div class="home-container" :class="showAaside == false ? 'home-normal' : 'home-active'">
-            <div  v-show="ads" class="ads" slot="loading">
-                <div class="tipsone">
-                    <p class="title"><van-icon size="40px"  name="http://pay.91dianji.com.cn/wxc.png" /><span>钱夹宝</span></p>
-                    <div class="cres animated zoomIn">
-                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/xin.png" /> </span>
-                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/yong.png" /> </span>
-                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/fu.png" /> </span>
-                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/wu.png" /> </span>
-                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/ping.png" /> </span>
-                        <span> <van-icon  size="30px"  name="http://pay.91dianji.com.cn/tai.png" /> </span>
+
+            <!-- banner -->
+            <div class="swipe">
+                <van-swipe :autoplay="3000" :height="height">
+                    <van-swipe-item v-for="(item, index) in images" :key="index" @click="handleSwipeDetail(item)">
+                        <img v-lazy="item.url" class="per-img" />
+                    </van-swipe-item>
+                </van-swipe>
+                <div class="space-between" :class="showAaside == false ? 'menus-normal' : 'menus-active'">
+                    <div><van-icon name="wap-nav" size="24px" @click="showAaside = !showAaside" :class="showAaside == true ? 'menu-icon-active' : 'menu-icon-normal'"/></div>
+                    <router-link tag="div" to="/home/systemNews"><van-icon name="volume" size="24px"/></router-link>        
+                </div>
+            </div>
+
+            <!-- 顶部菜单 -->
+            <div class="top-menus">
+                <ul>
+                    <router-link to="/video" tag="li">
+                        <p><van-icon name="http://pay.91dianji.com.cn/jiaocheng-1.1.png" class="zx-search"/></p>
+                        <span>新人教程</span>
+                    </router-link>
+                    <router-link to="/vip" tag="li">
+                        <p><van-icon name="http://pay.91dianji.com.cn/daili-1.1.png"  class="zx-search "/></p>
+                        <p>升级代理</p>
+                    </router-link>
+                    <router-link to="/personalCenter/incomedetail" tag="li">
+                        <p><van-icon name="http://pay.91dianji.com.cn/mingxi-1.1.png"  class="zx-search"/></p>
+                        <span>收益明细</span>
+                    </router-link>
+                        <li  @click="goTask">
+                        <p class="dot"> 
+                            <van-icon  name="http://pay.91dianji.com.cn/renwu-1.1.png"  class="zx-search rotateZ "/>
+                            <span v-show="showdot">1</span>
+                        </p>
+                        <span>会员任务</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 钱夹资讯 -->
+            <div class="pannel-news row">
+                <div class="pannel-title end-center">
+                    <van-icon name="http://pay.91dianji.com.cn/zixun-icon-1.1.png" size="28px"/>
+                    <van-icon name="http://pay.91dianji.com.cn/zixun-title-1.1.png" size="38px"/>
+                </div>
+                <div class="pannel-detail center" @click="handleContactUs"><van-notice-bar :text="news"/> </div>
+            </div>
+
+            <!-- 分类商城 -->
+            <div class="link-mall">
+                <router-link tag="div" class="mall-one" to="/Trip">
+                    <div class="center">全球出行</div>
+                    <div class="center"><van-icon name="http://pay.91dianji.com.cn/quanqiuchuxing-1.1.png" size="60px"/></div>
+                </router-link>
+                <div class="mall-two">
+                    <div class="shoukuan" @click="handlecollect('/home/collect',true,'2')">
+                        <div class="start-end">在线收款</div>
+                        <div class="end-center"><van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan-1.1.png" size="40px"/></div>
+                    </div>
+                    <div class="huankuan" @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')">
+                        <div class="center-end">智能还款</div>
+                        <div class="center"><van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan-1.1.png" size="40px"/></div>
                     </div>
                 </div>
-                <div class="tiptwo"></div>
-            </div> 
-            <van-pull-refresh v-model="isLoading" @refresh="onRefresh" :loading-text="loadtext" :loosing-text="loostext" :head-height="lineheight">
-                <header>
-                    <div>
-                        <div class="menu start-center">
-                            <van-icon name="wap-nav" size="24px" @click="showAaside = !showAaside" :class="showAaside == true ? 'menu-icon-active' : 'menu-icon-normal'"/>
-                    </div>
-                    <span class="location">
-                        </span>
-                    </div>  
-                    <span class="icon"><img src="http://pay.91dianji.com.cn/top_icon.png" alt=""></span>
-                    <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
-                </header>
-                <div class="container">
-                    <!-- 轮播图模块 -->
-                    <div class="swipe">
-                        <van-swipe :autoplay="3000" :height="height">
-                            <van-swipe-item v-for="(item, index) in images" :key="index" @click="handleSwipeDetail(item)">
-                                <img v-lazy="item.url" class="per-img" />
-                            </van-swipe-item>
-                        </van-swipe>
-                    </div>
-                    <!-- 查询模块 -->
-                    <div class="search">
-                        <ul>
-                            <router-link to="/video" tag="li">
-                                <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
-                                <span>新人教程</span>
-                            </router-link>
-                            <router-link to="/vip" tag="li">
-                                <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search "  /></p>
-                                <p>升级代理</p>
-                            </router-link>
-                            <router-link to="/personalCenter/incomedetail" tag="li">
-                                <p> <van-icon name="http://pay.91dianji.com.cn/103.png"  class="zx-search"  /></p>
-                                <span>收益明细</span>
-                            </router-link>
-                            <!-- <router-link tag="li" to="/home/totalPunch">
-                                <p class="dot"> 
-                                    <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search rotateZ "  />
-                                    <span v-show="showdot">1</span>
-                                </p>
-                                <span>会员任务</span>
-                            </router-link> -->
-                             <li  @click="goTask">
-                                <p class="dot"> 
-                                    <van-icon  name="http://pay.91dianji.com.cn/104.png"  class="zx-search rotateZ "  />
-                                    <span v-show="showdot">1</span>
-                                </p>
-                                <span>会员任务</span>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                    <!-- 名片咨询模块 -->
-                    <div class="pannel-news row">
-                        <div class="pannel-title center">钱&nbsp;夹<br/>资&nbsp;讯</div>
-                        <div class="pannel-detail center" @click="handleContactUs">
-                            <van-notice-bar :text="news"/> 
-                        </div>
-                    </div>
-
-                    <!-- 信用卡模块 -->
-                    <div class="credit">
-                        <ul>
-                            <!-- <li @click="handleIsAuth('/home/cardCenter',false,'')">
-                                <span class="handle">
-                                    <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
-                                </span>
-                                <div class="channel">
-                                    <h3>信用卡办理</h3>
-                                    <p>佣金当天结算</p>
-                                    <span>官方渠道</span>
-                                </div>
-                            </li> -->
-
-                            <li @click="applycard('https://wsdev.1sta.cn/wechat/pages/wailian/wailian.html?merCode=f95b64acd760439682dac2d83b6d32ea','办卡中心')">
-                                <span class="handle">
-                                    <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
-                                </span>
-                                <div class="channel">
-                                    <h3>信用卡办理</h3>
-                                    <p>佣金当天结算</p>
-                                        <div class="cardmodule">
-                                            <van-swipe :autoplay="2000" vertical :height="60" indicator-color="#54866A">
-                                            <van-swipe-item>官方渠道</van-swipe-item>
-                                            <van-swipe-item>免费办卡</van-swipe-item>
-                                            </van-swipe>
-                                        </div>
-                                    
-                                    <!-- <span>官方渠道</span> -->
-                                </div>
-                            </li>
-                            <li @click="handlecollect('/home/receivables',true,'2')">
-                            <!-- <li @click="handleIsAuth('/home/collect',false,'')"> -->
-                                <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" />
-                                <!-- <van-icon name="new" color="red" class="hot new"  size="26px" /> -->
-                                </span>
-                                <div class="channel">
-                                    <h3>在线收款</h3>
-                                    <p>快捷支付</p>
-                                        <div class="cardmodule">
-                                            <van-swipe :autoplay="2000" vertical :height="60" indicator-color="#54866A">
-                                            <van-swipe-item>落地商户</van-swipe-item>
-                                            <van-swipe-item>多个选择</van-swipe-item>
-                                            </van-swipe>
-                                        </div>
-                                </div>
-                            </li>
-                            <!-- <li @click="handleIsAuth('/loan/detail',true,'4')">
-                                <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
-                                <div class="channel">
-                                    <h3>信息咨询</h3>
-                                    <p>实时审批&nbsp;授信额度</p>
-                                    <span>GO>></span>
-                                </div>  
-                            </li> -->
-                             <li @click="sign">
-                                <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
-                                <div class="channel">
-                                    <h3>信息咨询</h3>
-                                    <p>实时审批&nbsp;授信额度</p>
-                                    <span>GO>></span>
-                                </div>  
-                            </li>
-                            <!-- <router-link tag="li" to="/home/creditHousekeeper">
-                                <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
-                                <div class="channel">
-                                    <h3>智能还款</h3>
-                                    <p>落地商户空卡周转</p>
-                                    <span>完美账单</span>
-                                </div>
-                            </router-link> -->
-
-                            <li  @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')" >
-                                <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /> <van-icon name="hot" color="red" class="hot pay"  size="20px" /></span>
-                                <div class="channel">
-                                    <h3>智能还款</h3>
-                                    <p>落地商户空卡周转</p>
-                                    <div class="cardmodule">
-                                            <van-swipe :autoplay="2000" vertical :height="60" indicator-color="#54866A">
-                                            <van-swipe-item>完美账单</van-swipe-item>
-                                            <van-swipe-item>余额还款</van-swipe-item>
-                                            </van-swipe>
-                                        </div>
-                                </div>                              
-                            </li>
-
-                        </ul>
-                       
-                         <div v-show="showpass" @click.self="showcover" :class="showpass?'cover':''">
-                           <div  class="pop">
-                               <h3>请选择通道</h3>
-                                <div class="small" @click.stop="smallPass('1')">
-                                    <van-icon name="http://pay.91dianji.com.cn/uz.png" size="26px"/>
-                                    <div class="middle">
-                                          <p>优质商户 </p>
-                                          <!-- <span class="edu">还款金额为2000-30000</span> -->
-                                    </div>
-                                    <p> <van-icon name="checked" :color="paychennel=='1'?'#4B66AF':'gray'" size="20px"/></p>
-                                </div>
-                                <div class="large" @click.stop="smallPass('2')">
-                                    <van-icon name="http://pay.91dianji.com.cn/pt.png" size="26px"/>
-                                   <div class="middle">
-                                        <p>普通商户</p>
-                                        <!-- <span class="edu">优质银行商户通道，推荐高净值高授信用户使用</span> -->
-                                   </div>
-                                    <p> <van-icon name="checked" :color="paychennel=='2'?'#4B66AF':'gray'" size="20px"/></p>
-                                </div>
-
-                                <div class="sure">
-                                    <van-button size="large" @click="handleselect" type="info">确定</van-button>
-                                </div>
-                             </div>
-                       </div>
-
-
-
-                    </div>
-                    <!-- 特色服务 -->
-                    <div class="server">
-                        <p>特色服务</p>
-                        <div class="special">
-                            <ul>
-                                <router-link tag="li" to="/home/evaluation" class="secret">
-                                    <p> <van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></p>
-                                    <p>卡·测评</p>
-                                </router-link>
-                                
-                                <li  @click="handleGarbage" class="secret">
-                                    <p> <van-icon name="http://pay.91dianji.com.cn/tie.png" size="30px" /></p>
-                                    <p>垃圾分类</p>
-                                </li>
-                                <li v-show="wzcx.state=='1'" class="secret" @click="changeLink(wzcx.link,wzcx.title)" >
-                                    <p> <van-icon :name="'http://pay.91dianji.com.cn/'+wzcx.icon" size="30px" /></p>
-                                    <p>{{wzcx.title}}</p>
-                                </li>
-                                <li v-show="qcbx.state=='1'" class="secret"  @click="changeLink(qcbx.link,qcbx.title)" >
-                                    <p><van-icon :name="'http://pay.91dianji.com.cn/'+qcbx.icon" size="30px" /></p>
-                                    <p>{{qcbx.title}}</p>
-                               </li>
-                                <li  v-show="ywx.state=='1'" @click="changeLink(ywx.link,ywx.title)" >
-                                    <p><van-icon :name="'http://pay.91dianji.com.cn/'+ywx.icon" size="30px" /></p>
-                                    <p>{{ywx.title}}</p>
-                                </li>
- 
-                            <router-link tag="li" to="/apply" class="secret">
-                                <p> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></p>
-                                <p>特惠加油卡</p>
-                            </router-link>
-                                <!-- <li @click="handleExpect">
-                                    <p> <van-icon name="http://pay.91dianji.com.cn/jifen.png" size="30px" /></p>
-                                    <p>积分兑换</p>
-                                </li> -->
-                                <!-- <li  @click="changeLink('http://www.jd.com','商城')"  >
-                                <p> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></p>
-                                <p>商城</p>
-                                </li> -->
-                                <!-- <li @click="handleExpect">
-                                    <p> <van-icon name="http://pay.91dianji.com.cn/gengduo.png" size="30px" /></p>
-                                    <p>更多</p>
-                                </li> -->
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- 热门推荐 -->
-                    <div class=" hotdoor">
-                        <div class="title start-center">热门推荐</div>
-                        <div class="remen_tuijian">
-                            <div class="more"><van-icon name="arrow" color="#cccccc" size="30px"/></div>
-                            <!-- <div  @click="handleIsAuth('/home/receivables',false,'')" class="secret"> -->
-                            <div  @click="handlecollect('/home/collect',true,'2')" class="secret">
-                                <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan.png" size="34px" /></div>
-                                <div class="center">在线收款</div>
-                            </div>
-
-                            <div @click="applycard('https://wsdev.1sta.cn/wechat/pages/wailian/wailian.html?merCode=b480446df76a4494948e3b95845db8ca','办卡中心')" class="secret">
-                                <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/kabanli.png" size="30px" /></div>
-                                <div class="center">信用卡办理</div>
-                            </div>
-                            <div class="secret"  @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')" >
-                                <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan.png" size="30px" /></div>
-                                <div class="center">智能还款</div>
-                            </div>
-
-                            <router-link tag="div" class="secret"  to="/vip">
-                                <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/shengji.png" size="30px" /></div>
-                                <div class="center">升级代理</div>
-                            </router-link>
-                            <router-link tag="div" class="secret"  to="/home/evaluation">
-                                <div class="center-end"><van-icon name="http://pay.91dianji.com.cn/kace.png" size="30px" /></div>
-                                <div class="center">卡·测评</div>
-                            </router-link>
-                            <!-- <div @click="handleIsAuth('/loan/detail',true,'4')" class="secret">
-                                <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
-                                <div class="center">信息咨询</div>
-                            </div> -->
-                              <div @click="sign" class="secret">
-                                <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/daikuan.png" size="30px" /></div>
-                                <div class="center">信息咨询</div>
-                            </div>
-                            <!-- <router-link tag="div" class="secret" to="/apply">
-                                <div class="center-end"> <van-icon name="http://pay.91dianji.com.cn/mall.png" size="30px" /></div>
-                                <div class="center">油卡</div>
-                            </router-link> -->
-                            <div class="secret" @click="changeLink(wzcx.link,wzcx.title)">
-                                <div class="center-end"> <van-icon :name="'http://pay.91dianji.com.cn/'+wzcx.icon"  size="30px" /></div>
-                                <div class="center">{{wzcx.title}}</div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- 更新 -->
-                    <div @click.self="showUpdate=false" v-show="showUpdate" class="update">
-                        <div  class="cover">
-                            <div class="version">
-                            <h3>版本更新</h3>
-                                <p>钱夹宝升级了，快来体验吧！</p>
-                                <div class="butt">
-                                    <div class="cancle" @click="showUpdate=false">取消</div>
-                                    <div class="upd" @click="download">更新</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="address">
-                        <p>与多家三方支付公司签约达成战略合作</p>
-                        <p>传帮带（上海）网络科技有限公司提供技术支持</p>
-                        <p>上海市宝山区泰和路2038号A座303室</p>
-                    </div>
-                    
+                <div class="mall-three">
+                    <router-link tag="div" to="/apply" class="jiayou">
+                        <div class="center-end">加油卡</div>
+                        <div class="center"><van-icon name="http://pay.91dianji.com.cn/youka-1.1.png" size="40px"/></div>
+                    </router-link>
+                    <router-link tag="div" class="fuwu" to="/lifeservice">
+                        <div class="center-end">生活服务</div>
+                        <div class="center"><van-icon name="http://pay.91dianji.com.cn/shenghuofuwu-1.1.png" size="40px"/></div>
+                    </router-link>
+                    <router-link tag="div" class="meishi" to="/famousFoods">
+                        <div class="center-end">大牌美食</div>
+                        <div class="center"><van-icon name="http://pay.91dianji.com.cn/meishi-1.1.png" size="40px"/></div>
+                    </router-link>
                 </div>
-                <!-- 绑定手机模块 -->
-                <bindMobile></bindMobile>
-                <notice></notice>
-                 
-            </van-pull-refresh>
-            <footerMenu :active="active" @getChange="changeActive" ></footerMenu>
-          
+            </div>
+
+            <!-- 乐享出游 -->
+            <router-link tag="div" class="big-banner center" to="/Trip">
+                <img src="http://pay.91dianji.com.cn/chuyou-1.1.png" alt="">
+            </router-link>
+
+            <!-- 特色服务 -->
+            <div class="special-service">
+                <div class="title start-center">特色服务</div>
+                <div class="content">
+                    <router-link tag="div" class="per-menu" to="/apply">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/jiayouzhan-1.1.png" size="36px"/></div>
+                        <div class="name center">特惠加油站</div>
+                    </router-link>
+                    <router-link tag="div" class="per-menu" to="/home/evaluation">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/kaceping-1.1.png" size="36px"/></div>
+                        <div class="name center">卡·测评</div>
+                    </router-link>
+                    <div class="per-menu" v-show="wzcx.state=='1'" @click="changeLink(wzcx.link,wzcx.title)">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/weizhangchaxun-1.1.png" size="36px"/></div>
+                        <div class="name center">违章查询</div>
+                    </div>
+                    <div class="per-menu" @click="applycard('https://wsdev.1sta.cn/wechat/pages/wailian/wailian.html?merCode=b480446df76a4494948e3b95845db8ca','办卡中心')">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/xinyongkabaili-1.1.png" size="36px"/></div>
+                        <div class="name center">信用卡办理</div>
+                    </div>
+                    <div class="per-menu" @click="handleGarbage">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/lajifenlei-1.1.png" size="36px"/></div>
+                        <div class="name center">垃圾分类</div>
+                    </div>
+                    <div class="per-menu" v-show="qcbx.state=='1'" @click="changeLink(qcbx.link,qcbx.title)">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/qichebaoxian-1.1.png" size="36px"/></div>
+                        <div class="name center">汽车保险</div>
+                    </div>
+                    <div class="per-menu" @click="handlecollect('/home/receivables',true,'2')">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan-1.1-new.png" size="36px"/></div>
+                        <div class="name center">在线收款</div>
+                    </div>
+                    <div class="per-menu" @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan-1.1-new.png" size="36px"/></div>
+                        <div class="name center">智能还款</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 更新 -->
+            <div @click.self="showUpdate=false" v-show="showUpdate" class="update">
+                <div  class="cover">
+                    <div class="version">
+                    <h3>版本更新</h3>
+                        <p>钱夹宝升级了，快来体验吧！</p>
+                        <div class="butt">
+                            <div class="cancle" @click="showUpdate=false">取消</div>
+                            <div class="upd" @click="download">更新</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-show="showpass" @click.self="showcover" :class="showpass?'cover':''">
+                <div  class="pop">
+                    <h3>请选择通道</h3>
+                    <div class="small" @click.stop="smallPass('1')">
+                        <van-icon name="http://pay.91dianji.com.cn/uz.png" size="26px"/>
+                        <div class="middle">
+                            <p>优质商户 </p>
+                        </div>
+                        <p> <van-icon name="checked" :color="paychennel=='1'?'#4B66AF':'gray'" size="20px"/></p>
+                    </div>
+                    <div class="large" @click.stop="smallPass('2')">
+                        <van-icon name="http://pay.91dianji.com.cn/pt.png" size="26px"/>
+                        <div class="middle">
+                            <p>普通商户</p>
+                        </div>
+                        <p> <van-icon name="checked" :color="paychennel=='2'?'#4B66AF':'gray'" size="20px"/></p>
+                    </div>
+                    <div class="sure">
+                        <van-button size="large" @click="handleselect" type="info">确定</van-button>
+                    </div>
+                </div>
+            </div>
+            <!-- 绑定手机模块 -->
+            <bindMobile></bindMobile>
+            <notice></notice>
         </div>
-        
         <!-- 遮盖层 -->
         <div class="aside-left" :class="showAaside == true ? 'menu-active' : 'menu-normal'">
             <div class="info">
@@ -352,19 +193,15 @@
                 </div> 
             </div>
         </div>
+        <footerMenu :active="active" @getChange="changeActive"></footerMenu>
     </div>
-   
 </template>
-
 <script>
 import footerMenu from '@/components/footer'
-
 import bindMobile from '@/components/bindMobile'
 import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
-
-
 export default {
   components:{
       footerMenu,
@@ -376,35 +213,26 @@ export default {
             componentload: true,
             showchagnnel:false,
             news:"",
-            loadtext:"    ",
-            loostext:"   ",
             radio:"1",
             showpass:false,
-            ads:false,
             isLight:true,
             isSelect:false,
-            lineheight:100,
             colorl:"#4B66AF",
             images: [
                 {
                     routes: '/vip',
                     params: '1',
-                    url: 'http://pay.91dianji.com.cn/banner-01.png',
+                    url: 'http://pay.91dianji.com.cn/banner01-1.1.png',
                 },
                 {
                     routes: '/vip',
                     params: '1',
-                    url: 'http://pay.91dianji.com.cn/banner-02.png',
+                    url: 'http://pay.91dianji.com.cn/banner02-1.1.png',
                 },
                 {
                     routes: '/vip',
                     params: '2',
-                    url: 'http://pay.91dianji.com.cn/banner-03.png',
-                },
-                {
-                    routes: '/vip',
-                    params: '2',
-                    url: 'http://pay.91dianji.com.cn/banner-04.png',
+                    url: 'http://pay.91dianji.com.cn/banner03-1.1.png',
                 }
             ],
             showAaside:false, 
@@ -427,8 +255,7 @@ export default {
             versionAndroid:"",// 安卓版本号
             versionIos:"", // ios 版本号
             updateVerson:0,  // 设备版本号
-            height: 148.5,
-            isLoading:false,
+            height: 190,
             paychennel:"",
             wzcx:{},
             qcbx:{},
@@ -476,13 +303,6 @@ export default {
        },
        sign(){
            this.$toast("敬请期待")
-       },
-       onRefresh(){
-           this.ads=true
-           setTimeout(()=>{
-              this.ads=false
-              this.isLoading=false
-           },2000)
        },
         isShow() {
             this.showAaside=true
@@ -807,268 +627,349 @@ export default {
 <style lang="less" >
    #home-component {
         width: 100vw;
-        overflow-y: scroll;
-        .home-container{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-              overflow-y: scroll;
-            .guide {
-                position: fixed;
+        height: 100vh; 
+        background: #ECECEC;
+        .home-container{
+            width: 100%;
+            height: calc(100vh - 100px);
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            // banner
+            .swipe {
+                width: 100%;
+                // height: 380px;
+                position: relative;
+                .per-img{
+                    width: 100vw;
+                    height: auto;
+                }
+                .menus-normal{
+                    width: 100%;
+                    height: 86px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    color: #ffffff;
+                    box-sizing: border-box;
+                    padding: 0px 15px;
+                    transition: 0.8s;
+                    .menu-icon-normal{
+                        transition: 0.8s;
+                        transform: rotate(0deg);
+                    }
+                    .menu-icon-active{
+                        transition: 0.8s;
+                        transform: rotate(90deg);
+                    }
+                }
+                .menus-active{
+                    width: 50%;
+                    height: 86px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    color: #ffffff;
+                    box-sizing: border-box;
+                    padding: 0px 15px;
+                    transition: 0.8s;
+                    .menu-icon-normal{
+                        transition: 0.8s;
+                        transform: rotate(0deg);
+                    }
+                    .menu-icon-active{
+                        transition: 0.8s;
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+            // 顶部菜单
+            .top-menus {
+                height: auto;
+                margin-top: 10px;
+                >ul{
+                    list-style: none;
+                    display: flex;
+                    height: 100%;
+                    background-color: #fff;
+                    padding-bottom:20px;
+                    padding-top:20px;
+                    >li {
+                        width:33%;
+                        text-align: center;
+                        >span {
+                            font-size: 24px;
+                        }
+                        >p {
+                            text-align: center;
+                            margin-bottom:10px;
+                            &.dot{
+                                >span{
+                                    display: inline-block;
+                                    width:26px;
+                                    height:26px;
+                                    border-radius: 50%;
+                                    background-color: red;
+                                    color:#fff;
+                                }
+                            }
+                            .rotateZ {
+                                //   animation: icon 2s 1s linear infinite;
+                                //  -webkit-animation: icon 2s 1s linear  infinite;
+                                -webkit-animation: Tada 3s both infinite;
+                                -moz-animation: Tada 3s both infinite;
+                                -ms-animation: Tada 3s both infinite;
+                                animation: Tada 3s both infinite;
+                            }
+
+                            @keyframes Tada {
+                                0% {
+                                    transform: scale(1);
+                                    transform: scale(1)
+                                }
+                                70%,73%{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                                    transform: scale(0.9) rotate(-10deg);
+                                    transform: scale(0.9) rotate(-10deg)
+                                }
+                                77%,83%,90%,97%  {
+                                    transform: scale(1.2) rotate(10deg);
+                                    transform: scale(1.2) rotate(10deg)
+                                }
+                                80%,87%,93%{
+                                    transform: scale(1.2) rotate(-10deg);
+                                    transform: scale(1.2) rotate(-10deg)
+                                }
+                                100% {
+                                    transform: scale(1) rotate(0);
+                                    transform: scale(1) rotate(0)
+                                }
+                            }
+                            >.zx-search {
+                                font-size: 60px;
+                            }
+                        }   
+                    }
+                }
+            }
+            // 钱夹资讯
+            .pannel-news{
+                width: 100vw;
+                height: 100px;
+                margin-top:10px;
+                background-color: #fff;
+                .pannel-title{
+                    width: 20%;
+                    height: 100%;
+                    // color: white;
+                    font-weight: bold;
+                    font-size: 34px;
+                    letter-spacing: 5px;
+                    line-height: 48px;
+                }
+                .van-notice-bar {
+                    color:#222;
+                }
+                .pannel-detail{
+                    width: 80%;
+                    height: 100%;
+                    color: #000;
+                    font-size: 28px;
+                    animation: pannleRoll 1s ease-in-out;
+                }
+                @keyframes pannelRoll {
+                0% {
+                    transform: translateX(200px);
+                        -webkit-transform: translateX(200px);
+                    }
+                    100% {
+                        transform: translateX(-100%);
+                        -webkit-transform: translateX(-100%);
+                    }
+                }
+            }
+            // 分类商城
+            .link-mall{
+                width: 100%;
+                height: 398px;
+                background: #fff;
+                box-sizing: border-box;
+                padding: 10px;
+                display: grid;
+                grid-template-columns: repeat(7,1fr);
+                grid-template-rows: repeat(2,2fr);
+                grid-gap: 10px;
+                margin-top: 15px;
+                grid-template-areas:  
+                    "l l r r r r r"
+                    "l l b b b b b";
+                .mall-one{
+                    background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                    border-radius:8px;
+                    grid-area: l;
+                    div{
+                        width: 100%;
+                        height: 50%;
+                        color: #FBFBFB;
+                        font-size: 30px;
+                    }
+                }
+                .mall-two{
+                    grid-area: r;
+                    display: grid;
+                    grid-gap: 10px;
+                    grid-template-columns: repeat(7,1fr);
+                    grid-template-rows: 1fr;
+                    grid-template-areas: "l2 l2 l2 l2 r2 r2 r2";
+                    .shoukuan{
+                        grid-area: l2;
+                        background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                        border-radius:8px;
+                        div:nth-child(1){
+                            width: 100%;
+                            height: 40%;
+                            color: #FBFBFB;
+                            font-size: 30px;
+                            box-sizing: border-box;
+                            padding-left: 10%;
+                        }
+                        div:nth-child(2){
+                            width: 100%;
+                            height: 60%;
+                            box-sizing: border-box;
+                            padding-right: 10%;
+                        }
+                    }
+                    .huankuan{
+                        grid-area: r2;
+                        background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                        border-radius:8px;
+                        div:nth-child(1){
+                            width: 100%;
+                            height: 40%;
+                            color: #FBFBFB;
+                            font-size: 30px;
+                        }
+                        div:nth-child(2){
+                            width: 100%;
+                            height: 60%;
+                        }
+                    }
+                }
+                .mall-three{
+                    grid-area: b;
+                    display: grid;
+                    grid-template-columns: repeat(6,1fr);
+                    grid-template-rows: 1fr;
+                    grid-template-areas: "l3 l3 m3 m3 r3 r3";
+                    grid-gap: 10px;
+                    .jiayou{
+                        grid-area: l3;
+                        background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                        border-radius:8px;
+                        div:nth-child(1){
+                            color: #FBFBFB;
+                            width: 100%;
+                            height: 40%;
+                            font-size: 30px;
+                        }
+                        div:nth-child(2){
+                            width: 100%;
+                            height: 60%;
+                        }
+                    }
+                    .fuwu{
+                        grid-area: m3;
+                        background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                        border-radius:8px;
+                        div:nth-child(1){
+                            color: #FBFBFB;
+                            width: 100%;
+                            height: 40%;
+                            font-size: 30px;
+                        }
+                        div:nth-child(2){
+                            width: 100%;
+                            height: 60%;
+                        }
+                    }
+                    .meishi{
+                        grid-area: r3;
+                        background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                        border-radius:8px;
+                        div:nth-child(1){
+                            color: #FBFBFB;
+                            width: 100%;
+                            height: 40%;
+                            font-size: 30px;
+                        }
+                        div:nth-child(2){
+                            width: 100%;
+                            height: 60%;
+                        }
+                    }
+                }
+            }
+            // 乐享出游
+            .big-banner{
+                width: 100%;
+                height: auto;
+                margin-top: 10px;
+                box-sizing: border-box;
+                padding: 0px 10px;
+                img{
+                    width: 100%;
+                    height: auto;
+                }
+            }
+            // 特色服务
+            .special-service{
+                width: 100%;
+                height: auto;
+                background: #fff;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                .title{
+                    width: calc(100% - 30px);
+                    height: 50px;
+                    margin-left: 10px;
+                    border-left: solid 10px #5165B7;
+                    padding-left: 10px;
+                    font-size: 36px;
+                    font-weight: 700;
+                }
+                .content{
+                    width: 100vw;
+                    box-sizing: border-box;
+                    padding: 0px 10px;
+                    margin-top: 10px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    .per-menu{
+                        width: calc(calc(100vw - 20px) / 4);
+                        height: calc(calc(100vw - 20px) / 4);
+                        box-sizing: border-box;
+                        grid-area: c;
+                        border: solid 1px #ccc;
+                        .icon{
+                            width: 100%;
+                            height: 60%;
+                        }
+                        .name{
+                            width: 100%;
+                            height: 40%;
+                            font-size: 26px;
+                        }
+                    }
+                }
+            }
+            // 更新 
+            .update {
+                position: absolute;
                 top:0;
                 bottom:0;
                 left:0;
                 right:0;
-                background-color: rgba(0, 0, 0, .4);
-                z-index:8888;
-                .arr {
-                  width:400px;
-                  height:400px;
-                  margin:left;                                                                                                                         
-                  img {
-                      width:100%;
-                  }
-                }
-                .guide-first {
-                    width:100%;
-                    height:600px;
-                    .arrowred {
-                        width:100%;
-                        height:300px;
-                        margin-top:156px;
-                        display:flex;
-                        .arrowright,
-                        .light {
-                            width:50%;
-                            img {
-                                width:100%;
-                            }
-                        }
-                    }
-                    .manguide {
-                        width:100%;
-                        height:500px;
-                         display:flex;
-                         .person,
-                         .text {
-                             width:50%;
-                             img {
-                                 width:100%;
-                             }
-                         }
-                    }
-
-                    
-                }
-                .guide-second {
-                    width:100;
-                    height:800px;
-                     .pay {
-                        width:100%;
-                        height:100px;
-                        margin-right:0;
-                        .guidekuan {
-                            width:50%;
-                            height:100%;
-                            float:right;
-                            img {
-                              width:100%;
-                           }
-                        }
-                        
-                     }
-                    .payment {
-                        width:100%;
-                        height:368px;
-                        display:flex;
-                        .guideman {
-                            width:50%;
-                            img {
-                                width:100%;
-                            }
-                        }
-                        .guidepay {
-                            width:50%;
-                            img {
-                                width:100%;
-                            }
-                        }
-
-                    }
-                }
-                .guide-third {
-                    width:100%;
-                    height:600px;
-                    .guidelevel {
-                        width:100%;
-                        height:300px;
-                        display:flex;
-                        .guideman,
-                        .guidetxt {
-                            width:50%;
-                            img {
-                                width:100%;
-
-                            }
-                        }
-                    }
-                    .guidevip {
-                        margin-top:300px;
-                        width:100%;
-                        height:300px;
-                        // display:flex;
-                        // justify-content: space-around;
-                        // div {
-                        //     width:25%;
-                        // }
-                        // img {
-                        //     width:100%;
-                        // }
-                        .vipcir {
-                            float:left;
-                            width:130px;
-                            height:100%;
-                            margin-top:268px;
-                            margin-left:210px;
-                            img {
-                                width:100%;
-                            }
-                        }
-                        .arrowleft {
-                            float:right;
-                            width:400px;
-                            height:100%;
-                            img {
-                                width:100%;
-                            }
-                        }
-                    }
-                }
-            }
-            .ads {
-                position: fixed;
-                top:0px;
-                left:0;
-                box-sizing: border-box;
-                .tipsone { 
-                    .title {
-                        // text-align: center;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        >span {
-                            font-size: 34px;
-                            font-weight: bold;
-                        }
-                    }
-                    .cres {
-                        margin-left:100px;
-                        margin-top:30px;
-                        padding-bottom: 10px;
-                        box-sizing: border-box;
-                    }
-                }
-            }
-            header{
-                width: 100%;
-                height:86px;
-                font-size:28px;
-                line-height: 86px;
-                background-color: #4B66AF;
-                color:white;
-                display:flex;
-                justify-content: space-between;
-                position: absolute;
-                top: 0px;
-                left: 0;
-                z-index:999;
-                align-items: center;
-                >div {
-                    margin-left:15px;
-                    display: flex;
-                    >.menu {
-                        margin-left:5px;
-                        position: relative;
-                        .menu-icon-normal{
-                            transition: 0.8s;
-                            transform: rotate(0deg);
-                        }
-                        .menu-icon-active{
-                            transition: 0.8s;
-                            transform: rotate(90deg);
-                        }
-                    }
-                }
-                .location {
-                    margin-left:15px;
-                }
-                >.news {
-                    margin-right:15px;
-                }
-                .icon{
-                    width: 60px;
-                    height: 60px;
-                    img{
-                        width: 60px;
-                        height: 60px;
-                        animation: myfirst 5s ease-in-out infinite;
-                        -moz-animation: myfirst 5s ease-in-out infinite;	/* Firefox */
-                        -webkit-animation: myfirst 5s ease-in-out infinite;	/* Safari 和 Chrome */
-                        -o-animation: myfirst 5s ease-in-out infinite;
-                    
-                    }
-                    @keyframes myfirst
-                    {
-                        0%{
-                            transform: rotateY(0deg);
-                        }
-                        50%{
-                            transform: rotateY(360deg);
-                        }
-                        100%{
-                            transform: rotateY(0deg);
-                        }
-                    }
-                }
-            }
-            .container {
-                padding-top:86px;
-                overflow-x: hidden;
-                
-                position: relative;
-                background: #eee;
-                .cardmodule {
-                        .van-swipe {
-                        height: 40px;
-                        background-color: #54866A;
-                        color:#fff;
-                        box-sizing: border-box;
-                        width:140px;
-                        border-radius: 15px;
-                        // text-align: center;
-                        padding-left:15px;
-                        padding-top:8px;
-                    }
-                    .van-swipe__track {
-                            height: 100%;
-                        }
-                    .van-swipe-item {
-                            height: 100%;
-                        }
-                }
-                
-                .address{
-                    padding-top:30px;
-                    text-align: center;
-                    line-height: 50px;
-                    padding-bottom: 50px;
-                    margin-bottom: 50px;
-                }
-                .update {
-                    position: absolute;
-                    top:0;
-                    bottom:0;
-                    left:0;
-                    right:0;
-                    background-color: rgba(0, 0, 0, .2);
-                    .cover {
+                background-color: rgba(0, 0, 0, .2);
+                .cover {
                     width:600px;
                     height: 400px;
                     z-index: 99;
@@ -1114,468 +1015,82 @@ export default {
                         
                     }
                 }
-
-                }
-                >.swipe {
-                    height: 270px;
-                    .per-img{
-                        width: 100vw;
-                        height: auto;
+            }  
+            // 普通or优质商户选择
+            .cover{
+                position: fixed;
+                top:0px;
+                bottom: 0px;
+                left:0px;
+                right:0px;
+                background-color: rgba(0, 0, 0, .5);
+                z-index: 99;
+                .pop{
+                    position: absolute;
+                    top:26%;
+                    left:9%;
+                    width: 600px;
+                    padding:10px;
+                    background-color: #fff;
+                    border:1px solid #ccc;
+                    color:#000;
+                    z-index: 999;
+                    border-radius: 15px;
+                    h3{
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 34px;
+                        padding:30px 0px 15px 0px;
                     }
-                }
-                .search {
-                    height: 110px;
-                    >ul{
-                        list-style: none;
+                    >p {
+                        text-align: center;
+                        padding:18px 0px;
+                        border-bottom: 1px solid #ccc;
+                        color:#808080;
+                    }
+                    .sure {
+                        padding:30px;
+                    }
+                    .van-button--info {
+                        background: linear-gradient(to right,#D8B56D, #886929 );
+                        height: 80px;
+                        line-height: 80px;
+                        color:#fff;
+                        border:1px solid #886929;
+                    }
+                    >.small,.large {
                         display: flex;
-                        height: 100%;
+                        justify-content: space-between;
+                        padding-bottom: 20px;
+                        align-items: center;
+                        z-index: 1000;
                         background-color: #fff;
-                        border-bottom:2px solid #ccc;
-                        padding-bottom:20px;
-                        padding-top:10px;
-                        >li {
-                            width:33%;
-                            text-align: center;
-                            margin-bottom:20px;
-                            >span {
+                        padding:15px;
+                        .middle {
+                            flex:1;
+                            padding-left:20px;
+                            padding-bottom: 10px;
+                            span {
                                 font-size: 24px;
                             }
-                            >p {
-                                text-align: center;
-                                margin-bottom:10px;
-                                &.dot{
-                                    >span{
-                                        display: inline-block;
-                                        width:26px;
-                                        height:26px;
-                                        border-radius: 50%;
-                                        background-color: red;
-                                        color:#fff;
-                                    }
-                                }
-                                .rotateZ {
-                                    //   animation: icon 2s 1s linear infinite;
-                                    //  -webkit-animation: icon 2s 1s linear  infinite;
-                                    -webkit-animation: Tada 3s both infinite;
-                                    -moz-animation: Tada 3s both infinite;
-                                    -ms-animation: Tada 3s both infinite;
-                                    animation: Tada 3s both infinite;
-                                }
-
-                                @keyframes Tada {
-                                    0% {
-                                        transform: scale(1);
-                                        transform: scale(1)
-                                    }
-                                    70%,73%{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-                                        transform: scale(0.9) rotate(-10deg);
-                                        transform: scale(0.9) rotate(-10deg)
-                                    }
-                                    77%,83%,90%,97%  {
-                                        transform: scale(1.2) rotate(10deg);
-                                        transform: scale(1.2) rotate(10deg)
-                                    }
-                                    80%,87%,93%{
-                                        transform: scale(1.2) rotate(-10deg);
-                                        transform: scale(1.2) rotate(-10deg)
-                                    }
-                                    100% {
-                                        transform: scale(1) rotate(0);
-                                        transform: scale(1) rotate(0)
-                                    }
-                                }
-                                >.zx-search {
-                                font-size:80px;
-                            }
                         }
-                            
-                        }
-                    }
-                }
-                >.server {
-                    margin-top:15px;
-                    background-color: #fff;
-                    padding-top:15px;
-                    >p {
-                        padding-left:30px;
-                        font-size: 34px;
-                        font-weight: bold;
-                    }
-                    >.special {
-                        >ul{
-                            padding:15px;
-                            margin-top:20px;
-                            display:flex;
-                            flex-wrap: wrap;
-                            >li {
-                                width:25%;
-                                text-align: center;
-                                &.secret {
-                                margin-bottom:25px;
-                                
-                                }
-                                >p {
-                                    &:nth-of-type(2){
-                                        padding-bottom:10px 0px;
-                                        
-                                    }
-                                }
-                            }
-                            >li:last-child{
-                                position: relative;
-                                #more{
-                                    width: 80vw;
-                                    height: 400px;
-                                    position: absolute;
-                                    right: 80px;
-                                    bottom: 80px;
-                                    z-index: 1000;
-                                    background: #ffff;
-                                    border-radius: 15px;
-                                    color: #fff;
-                                }
+                        p {
+                            font-size: 32px;
+                            font-weight: bold;
+                            padding: 25px 0;
+                            span{
+                                font-weight: normal;
+                                font-size: 26px;
+                                color:#808080;
                             }
                         }
                     }
-                }
-                .hotdoor {
-                    background-color: #fff;
-                    padding-bottom: 20px;
-                    margin-top:10px;
-                    position: relative;
-                    .title{
-                        width: 98%;
-                        height: 50px;
-                        padding-left: 2%;
-                        font-size: 34px;
-                        font-weight: bold;
+                    .small {
+                        border-bottom: 1px solid #ccc;
                     }
-                    .remen_tuijian{
-                        width: 100%;
-                        height: 150px;
-                        padding-top: 5px;
-                        padding-bottom: 10px;
-                        overflow-x: scroll;
-                        white-space: nowrap;
-                        .more{
-                            position: absolute;
-                            top: 42%;
-                            right: 1px;
-                            z-index: 2;
-                            animation: more 1s linear 0s infinite ;
-                            -webkit-animation: more 1s linear 0s infinite ;
-                        }
-                        @keyframes more{
-                            0%{
-                                transform: scale(1);
-                                right: 1px;
-                            }
-                            50%{
-                                transform: scale(1.2);
-                                right: 25px;
-                            }
-                            100%{
-                                transform: scale(1);
-                                right: 1px;
-                            }
-                        }
-                        .secret{
-                            width: 200px;
-                            height: 100%;
-                            display: inline-block;
-                            margin-left: 30px;
-                            box-shadow: 0px 0px 5px 5px #f2f2f2;
-                            border-radius: 10px;
-                            div{
-                                width: 100%;
-                                height: 50%;
-                            } 
-                        }
+                    .large {
+                        margin-top:5px;
                     }
-                }
-                >.business-card {
-                    display: flex;
-                    flex-wrap: nowrap;
-                    height: 100px;
-                    margin-top:50px;
-                    background-color: white;
-                    >.information {
-                        font-weight: bolder;
-                        margin-left:10px;
-                        float:left;
-                        line-height: 100px;
-                    }
-                    >.Investment {
-                        float:right;
-                        margin-top:25px;
-                        margin-left:20px;
-                    }
-                }
-                >.pannel-news{
-                    width: 100vw;
-                    height: 100px;
-                    margin-top:45px;
-                    margin-left: auto;
-                    background-color: #fff;
-                    margin-right: auto;
-                    // background-image: -webkit-linear-gradient(0deg, #4965AE, #7189C4);
-                    .pannel-title{
-                        width: 20%;
-                        height: 100%;
-                        // color: white;
-                        font-weight: bold;
-                        font-size: 34px;
-                        letter-spacing: 5px;
-                        line-height: 48px;
-                    }
-                    .van-notice-bar {
-                        color:#222;
-                }
-                    .pannel-detail{
-                        width: 80%;
-                        height: 100%;
-                        color: #000;
-                        font-size: 28px;
-                        animation: pannleRoll 1s ease-in-out;
-                    }
-                    @keyframes pannelRoll {
-                    0% {
-                        transform: translateX(200px);
-                            -webkit-transform: translateX(200px);
-                        }
-                        100% {
-                            transform: translateX(-100%);
-                            -webkit-transform: translateX(-100%);
-                        }
-                    }
-                }
-            
-                >.credit {
-                    margin-top:20px;
-                    background-color: #fff;
-                    position: relative;
-                    >ul {
-                        display: flex;
-                        flex-wrap: wrap;
-                        justify-content: space-around;
-                        padding:10px;
-                        list-style: none;
-                        >li {
-                            display: flex;
-                            justify-content: space-around;
-                            align-items: center;
-                            width:47%;
-                            border: 2px solid #ccc;
-                            border-radius:10px;
-                            padding-bottom:20px;
-                            padding-top:35px;
-                            margin-top:10px;
-                            background-color:#FAFAFA;
-                            &:nth-of-type(1),
-                            &:nth-of-type(2){
-                            background: linear-gradient(to bottom;#4E64B8,#7186B7);  
-                            }
-                            &:nth-of-type(3),
-                            &:nth-of-type(4){
-                            background: linear-gradient(to bottom;#7186B7,#4E64B8);  
-                            }
-                            >.handle {
-                                color:#CF9C5D;
-                                font-size: 60px;
-                                margin-left: 10px;
-                                margin-top:30px;
-                                position: relative;
-                                >.hot {
-                                    position: absolute;
-                                    top:-60px;
-                                    right:-210px;
-                                }
-                                .new {
-                                    animation: icon  1s linear infinite;
-                                    -webkit-animation: icon  1s linear  infinite;
-                                }
-                                @keyframes icon{
-                                    0%{
-                                            transform: rotateZ(0deg);
-                                    }
-                                    25%{
-                                            transform: rotateZ(45deg);
-                                    }
-                                    50%{
-                                            transform: rotateZ(0deg);
-                                    }
-                                     75%{
-                                            transform: rotateZ(-45deg);
-                                    }
-                                    100%{
-                                            transform: rotateZ(0deg);
-                                    }
-                                }
-                                .pay {
-                                    -webkit-animation: Tada 3s both infinite;
-                                    -moz-animation: Tada 3s both infinite;
-                                    -ms-animation: Tada 3s both infinite;
-                                    animation: Tada 3s both infinite;
-                                }
-                            }
-                            >.channel {
-                                text-align: left;
-                                flex:1;
-                                margin-left:20px;
-                                >h3 {
-                                    font-size:30px;
-                                    font-weight: bolder;
-                                    color:#fff;
-                                }
-                                >p {
-                                    font-size:28px;
-                                    margin-top:10px;
-                                    margin-bottom:10px;
-                                    // color:#4B66AF;
-                                    color:#fff;
-                                }
-                                >span {
-                                    // color:#4B66AF;
-                                    color:#fff;
-                                    background-color:#54866A;
-                                    border-radius:15px;
-                                    padding:5px 20px;
-                                    font-size: 28px;
-                                    margin-bottom: 10px;
-                                }
-                            }
-                        }
-                    }
-
-                     .cover {
-                          position: fixed;
-                          top:0px;
-                          bottom: 0px;
-                          left:0px;
-                          right:0px;
-                          background-color: rgba(0, 0, 0, .5);
-                          z-index: 99;
-                          .pop {
-                          position: absolute;
-                          top:26%;
-                          left:9%;
-                          width: 600px;
-                          padding:10px;
-                          background-color: #fff;
-                          border:1px solid #ccc;
-                          color:#000;
-                          z-index: 999;
-                          border-radius: 15px;
-                          h3 {
-                              text-align: center;
-                              font-weight: bold;
-                              font-size: 34px;
-                              padding:30px 0px 15px 0px;
-                          }
-                          >p {
-                              text-align: center;
-                              padding:18px 0px;
-                              border-bottom: 1px solid #ccc;
-                              color:#808080;
-                          }
-                          .sure {
-                              padding:30px;
-                          }
-                          .van-button--info {
-                                background: linear-gradient(to right,#D8B56D, #886929 );
-                                height: 80px;
-                                line-height: 80px;
-                                color:#fff;
-                                border:1px solid #886929;
-                          }
-                          >.small ,
-                           .large {
-                              display: flex;
-                              justify-content: space-between;
-                              padding-bottom: 20px;
-                              align-items: center;
-                              z-index: 1000;
-                              background-color: #fff;
-                              padding:15px;
-                              .middle {
-                                  flex:1;
-                                  padding-left:20px;
-                                  padding-bottom: 10px;
-                                  span {
-                                      font-size: 24px;
-                                  }
-                                  .edu {
-                                      color:#BCB291;
-                                      background-color: rgba(223, 219, 191, .2);
-                                      line-height: 38px;
-                                  }
-                              }
-                              p {
-                                  font-size: 32px;
-                                  font-weight: bold;
-                                  padding: 25px 0;
-                                  span{
-                                      font-weight: normal;
-                                      font-size: 26px;
-                                      color:#808080;
-                                  }
-                              }
-                          }
-                          .small {
-                              border-bottom: 1px solid #ccc;
-                          }
-                           .large {
-                               margin-top:5px;
-                           }
-                      }
-                      }
-
-                   }   
-                >.details {
-                    margin-top:10px;
-                    border-top:1px solid #ccc;
-                    background-color: #fff;
-                    padding-bottom:100px;
-                    margin-bottom: 50px;
-                    >ul{
-                        display: flex;
-                        flex-wrap: wrap;
-                        >li {
-                            width:50%;
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            border-bottom: 1px solid #ccc;
-                            border-right: 1px solid #ccc;
-                            box-sizing: border-box;
-                            >span {
-                                margin-left: 40px;
-                                font-size: 40px;
-                                color:#CF9C5D;
-                            }
-                            >.detail-item {
-                                margin-left:10px;
-                                flex:1;
-                                >h3 {
-                                    font-weight: bolder;
-                                    font-size: 30px;
-                                    margin-top:30px;
-                                    margin-bottom: 20px;
-                                }
-                                >p {
-                                    font-size:30px;
-                                    margin-bottom: 20px;
-                                    color:#666;
-                                }
-                            }
-                        }
-                    }
-                }
-                >.serve {
-                    margin-bottom: 50px;
-                    padding:20px 20px 50px 30px;
-                    font-size:34px;
-                    color:#4965AE;
                 }
             }
         }
@@ -1591,7 +1106,7 @@ export default {
             left: 50%;
             transition: 0.8s;
         }
-        .aside-left {
+        .aside-left{
             color:#fff;
             text-align: center;
             z-index: 103;
@@ -1658,7 +1173,7 @@ export default {
             }
         }
         .menu-normal{
-            width: calc(50% + 1px);
+            width: 50%;
             height: 100%;
             position: fixed;
             overflow: visible;
@@ -1669,7 +1184,7 @@ export default {
             background-color: rgba(0, 0, 0, 0);
         }
         .menu-active{
-            width: calc(50% + 1px);
+            width: 50%;
             height: 100%;
             position: fixed;
             overflow: visible;
@@ -1681,4 +1196,3 @@ export default {
         }
     }
 </style>
-

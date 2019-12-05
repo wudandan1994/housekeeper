@@ -337,110 +337,44 @@ export default {
 
         // 查询小额通道是否签约
         small(i){
+            axiosPost("/rhpay/getRhMerchant")
+            .then(res=>{
+                if(res.data.success){    // 查询商户 成功   查绑卡
 
-                 axiosPost("/dspay/getDebitCardExist")
-                 .then(res=>{
-                     console.log(res,"测试")
-                     if(res.data.code==="0"){
-                          storage.set('channel',"1");
+                    let merchantNo=res.data.data.merchantNo
+
+                    let data={
+                        accNo:i.cardNo
+                    }
+                     axiosPost("/rhpay/getRhBindCard",data)
+                     .then(res=>{
+                          if(res.data.success){  // 绑卡成功
+                                storage.set('channel',"1");
+                                this.$router.push({
+                                    path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                    query:{
+                                    info:i
+                                }
+                            })  
+                          } else {  // 去绑卡
+                            this.$router.push({
+                                path:"/home/smallAmountRH/rhbinding",
+                                query:{
+                                    info:i,
+                                    merchantNo:merchantNo
+                                }
+                            })
+                          }
+                     })
+                } else {   // 查询商户 不成功  注册商户
                         this.$router.push({
-                        path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                        query:{
-                            info:i
-                        }
-                      })
-                     }else if(res.data.code==="100"){
-                           this.$router.push({
-                            path:"/home/collect"
-                        })    
-                     }
-                 })
-
-            // let data={
-            //    bankCard: i.cardNo,
-            //    channel:"1"
-            // }
-            // axiosPost("/newscpay/bindCardExist",data)
-            // .then(res=>{
-            //     if(res.data.success){
-            //         storage.set('channel',"1");
-            //             this.$router.push({
-            //             path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-            //             query:{
-            //                 info:i
-            //             }
-            //         })
-            //     } else {
-            //         this.$router.push({
-            //             path:"/home/smallAmountSC",
-            //             query:{
-            //                 info:i,
-            //                 type:"1"
-            //             }
-            //         })
-            //     }
-            // })
-                   
-            // let data={
-            //     bankAccountNo:i.cardNo
-            // }
-            // axiosPost("/wyfpay/getWyfMerchant",data)
-            // .then(res=>{
-            //     if(!res.data.success){
-            //     // 注册商户
-            //     // console.log("去注册商户")
-            //     this.$router.push({
-            //         path:"/home/smallAmountWYF",
-            //         query:{
-            //             info:i
-            //         }
-            //     })
-            //     }else {
-            //     let subMerchantNo=res.data.data.subMerchantNo
-            //     //查询有没有绑卡  
-            //         axiosPost("/wyfpay/getBindCardExist",data)
-            //         .then(res=>{
-            //             if(res.data.success){
-            //                 storage.set('channel',"1");
-            //                 this.$router.push({
-            //                 path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-            //                 query:{
-            //                     info:i
-            //                 }
-            //             })
-            //             } else {
-            //             //  去绑卡
-                        
-            //             let info=i
-            //             let params={
-            //                     bankAccountName:i.payerName,
-            //                     certificateNo:i.idCardNo,
-            //                     bankAccountNo:i.cardNo,
-            //                     mobile:i.phone,
-            //                     subMerchantNo:subMerchantNo,
-            //                     cvv:i.cvv2,
-            //                     bankAccountExpiry:i.month+i.year
-            //                 }
-            //                 axiosPost("/wyfpay/bindcard",params)
-            //                 .then(res=>{
-            //                     if(res.data.success){
-            //                         storage.set('channel',"1");
-            //                         this.$router.push({
-            //                             path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-            //                             query:{
-            //                                 info:i
-            //                             } 
-            //                         })
-            //                     }else {
-            //                         this.$toast(res.data.message)
-            //                     }
-            //                 })
-            //             }
-            //         })
-
-            //     }
-            // }) 
-               
+                            path:"/home/smallAmountRH",
+                            query:{
+                                info:i
+                            }
+                        })
+                }
+            })
         },
          // 查询大额通道是否签约
         large(i){

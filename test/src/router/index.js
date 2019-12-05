@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-04-09 16:57:17
- * @LastEditTime: 2019-08-21 15:12:28
+ * @LastEditTime: 2019-11-28 15:24:47
  * @LastEditors: Please set LastEditors
  */
 import Vue from 'vue'
@@ -442,6 +442,20 @@ const smallAmountSCComponent = () => import('@/pages/smallAmountSC')  // sc小�
 
 const smallSCactiveComponent = () => import('@/pages/smallAmountSC/smallSCactive.vue')  // sc小额
 
+const smallAmountRHComponent = () => import('@/pages/smallAmountRH')  // rh小额
+
+const rhbindingComponent = () => import('@/pages/smallAmountRH/rhbinding')  // rh小额
+
+
+
+// 全球出行
+const Trip = ()=>import('@/pages/mall/Trip')
+// 安卓商城跳转中间件
+const MallmiddleWare = ()=>import('@/pages/mall/MallmiddleWare')
+// 大牌美食
+const famousFoods = ()=>import('@/pages/mall/famousFoods')
+// 生活服务
+const lifeservice =()=>import('@/pages/mall/lifeservice')
 
 export default new Router({
   // mode:"hash",
@@ -477,6 +491,11 @@ export default new Router({
 
     {path:"/home/smallAmountSC",component:smallAmountSCComponent},  //sc小额
     {path:"/home/smallSCactive",component:smallSCactiveComponent},  //sc小额
+
+    {path:"/home/smallAmountRH",component:smallAmountRHComponent},  //rh小额
+    {path:"/home/smallAmountRH/rhbinding",component:rhbindingComponent},  //rh小额绑卡
+
+
 
     {path:"/home/largeAmountHC",component:largeAmountHCComponent},  //汇潮大额 注册商户  
     {path:"/home/largeAmountHC/sendmsgHC",component:sendmsgHCComponent},  //汇潮大额 发送短信 
@@ -624,7 +643,12 @@ export default new Router({
     {path: '/RechargeDetail',component: RechargeDetail},
     {path: '/activation',component: activation},
     {path: '/RechargeAllList',component: RechargeAllList},
+    // {path: '/moreGoods',component: moreGoods},
     {path: '/testpage',component: testpage},
+    {path: '/Trip',component: Trip},
+    {path: '/MallmiddleWare',component: MallmiddleWare},
+    {path: '/famousFoods',component: famousFoods},
+    {path: '/lifeservice',component: lifeservice}
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }

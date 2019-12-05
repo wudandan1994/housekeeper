@@ -133,6 +133,7 @@ export default {
                          return
                      } else {
                          let url=res.data.data
+                         console.log(url,'url')
                         document.write(url)
                         //  this.$router.push({
                         //      path:"/home/insertEsiCash/iframe",
