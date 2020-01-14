@@ -123,8 +123,6 @@ export default {
                 this.billdate=='0'+this.billdate
             }
 
-            this.componentload=true
-           
             let data={
                 cardNo:this.bankcardno,
                 phone:this.phone,
@@ -136,8 +134,10 @@ export default {
                 cvv2:this.safeCode,
                 billdate:this.billdate,
                 duedate:this.duedate,
-                bankname:this.bankcode
-        }
+                // bankname:this.bankcode
+            }
+
+           this.componentload=true
     
             axiosPost("/creditCard/bindCreditCard",data)
                 .then(res=>{
@@ -148,6 +148,7 @@ export default {
                         this.$toast({
                             message:res.data.message
                         })
+                         this.componentload=false
                     } else {
                         this.$router.go(-1)
                     }  
@@ -158,10 +159,8 @@ export default {
                     
                 })
 
-                    
              }
 
-       
     }    
 }
 </script>

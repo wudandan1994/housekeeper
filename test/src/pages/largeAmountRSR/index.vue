@@ -6,32 +6,31 @@
  * @LastEditors: Please set LastEditors
  -->
 <template>
-    <div id="small-amount-rh">
+    <div id="large-amount-rsr">
         <header class="manage loan">
             <van-nav-bar title="注册商户" left-text="" left-arrow @click-left="handleReturnHome" >
                
             </van-nav-bar>
         </header>
-        <div class="container">
+        <div class="container">  
              <div class="phone">
                <ul>
                     <li>
                         <span>真实姓名：</span>
-                       <input v-model="merchant_name" type="text" placeholder="姓名">
+                       <input v-model="accountName" type="text" placeholder="姓名">
                    </li>
                     <li>
                         <span>身份证号：</span>
-                       <input v-model="id_cardno"  type="text" placeholder="所持身份证号码">
+                       <input v-model="idNo"  type="text" placeholder="所持身份证号码">
                    </li>
                     <li>
-                        <span>银行卡号：</span>
-                       <input v-model="bank_cardno"  type="number" placeholder="储蓄卡卡号">
+                        <span>信用卡卡卡号：</span>
+                       <input v-model="bankCard"  type="number" placeholder="所持信用卡卡号">
                    </li>
                     <li>
                        <span>手机号：</span>
-                       <input type="number" v-model="phone" placeholder="信用卡预留手机号">
+                       <input type="number" v-model="mobile" placeholder="银行卡预留手机号">
                    </li> 
-              
                    
                </ul>
               <div @click="bindingCard" class="btn">
@@ -53,20 +52,21 @@ export default {
     data(){
         return{
             componentload: false,
-            merchant_name:"",
-            id_cardno:"",
-            bank_cardno:"",
-            phone:"",
+            accountName:"",
+            idNo:"",
+            bankCard:"",
+            mobile:"",
             info:{},
+           
         }
     },
     created(){
-        if(this.info){
-            this.info=this.$route.query.info
-            this.merchant_name=this.info.payerName
-            this.id_cardno=this.info.idCardNo
-            this.phone=this.info.phone
-        }
+        this.info=this.$route.query.info
+        this.accountName=this.info.payerName
+        this.idNo=this.info.idCardNo
+        this.mobile=this.info.phone
+        this.bankCard=this.info.cardNo
+        
     },
     methods:{
         handleReturnHome(){
@@ -76,50 +76,46 @@ export default {
         // 绑卡
         bindingCard(){
              let partern=/0?(13|14|15|16|17|18|19)[0-9]{9}/
-             if(!partern.test(this.phone)){
+             if(!partern.test(this.mobile)){
                   return   this.$toast("请输入11位手机号码")
              }
 
-            if(this.merchant_name.trim().length===0 || this.id_cardno.trim().length===0 ||  this.bank_cardno.trim().length===0||  this.phone.trim().length===0 ){
+            if(this.accountName.trim().length===0  || this.idNo.trim().length===0 ||  this.bankCard.trim().length===0 ||  this.mobile.trim().length===0 ){
                  this.$toast({
                     message:"请将信息填写完整"
                 })
-  
-             return
+                return
             } 
 
              let data={
-                 accountName:this.merchant_name,
-                 idCard:this.id_cardno,
-                 accountNo:this.bank_cardno,
-                 mobile:this.phone,
+                 merch_name:this.accountName,
+                 id_card:this.idNo,
+                 card_no:this.bankCard,
+                 principal_mobile:this.mobile,
              }
-             console.log(data)
-
-                this.componentload=true
-              axiosPost("/jftpay/memberReg",data)
+              axiosPost("/rsrpay/merchin",data)
               .then(res=>{
-                        console.log(res,"注册商户，商户号在此生成")
-                       if(res.data.success){
-                           console.log("注册商户成功")
+                  console.log(res,"注册结果")
+                this.componentload=true 
+                setTimeout(()=>{
+                     this.componentload=false
+                      if(!res.data.success){
+                   
+                          this.$toast(res.data.message)
+                          
+                  } else {
 
-                           let responce=res.data.data
-                           responce=JSON.parse(responce)
-                           let chMerCode=responce.chMerCode
-                           this.$router.push({
-                              path:"/home/smallAmountRH/rhbinding",
-                              query:{
-                                  chMerCode:chMerCode,
-                                  info:this.info
-                              }
-                          })
+                    //   去绑卡
+                      this.$router.push({
+                          path:"/home/largeAmountRSR/rsrBinding",
+                          query:{
+                            info:this.info
+                          }
+                      })
+                  }  
 
-                       } else {
-                           setTimeout(()=>{
-                              this.componentload=false
-                              this.$toast(res.data.message)
-                           },1500)
-                       }      
+                },1000)
+                              
               })
               .catch(err=>{
                    if(!err.data.success){
@@ -131,7 +127,7 @@ export default {
 }
 </script>
 <style lang="less" >
-    #small-amount-rh{
+    #large-amount-rsr{
         background: #EEEFF1;
         width: 100vw;
         height: 120vh;
@@ -153,9 +149,7 @@ export default {
                         }
                     }
                >ul{
-                  
                    background-color: #fff;
-                    
                    >li{
                        display: flex;
                        flex-wrap: nowrap;
@@ -254,7 +248,6 @@ export default {
                     position: relative;
                     bottom:0px;
                  }
-                 
             }
             .safe-code{
                 width: 40vw;
@@ -276,7 +269,6 @@ export default {
                      position: relative;
                    bottom:0px;
                 }
-                
             }
             .get-code{
                 width: 30vw;

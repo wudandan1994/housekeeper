@@ -122,6 +122,10 @@
                         <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan-1.1-new.png" size="36px"/></div>
                         <div class="name center">智能还款</div>
                     </div>
+                       <div class="per-menu" @click="getBill">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/card.png" size="36px"/></div>
+                        <div class="name center">美化账单</div>
+                    </div>
                 </div>
             </div>
             <!-- 更新 -->
@@ -264,7 +268,10 @@ export default {
             showdot:false
         }
   },
-   methods:{     
+   methods:{    
+       getBill(){
+           this.$router.push("/home/beautyBill")
+       } ,
        handleClear(){
         //    清除缓存
         storage.remove('promotioncode');
@@ -288,7 +295,8 @@ export default {
 
        handleselect(){
            if(this.paychennel=="1"){
-               this.$router.push("/home/receiveXH")
+            //    this.$router.push("/home/receiveXH")
+            this.$toast("通道升级中")
            } else if(this.paychennel=="2") {
                this.$router.push("/home/receivables")
            } else {

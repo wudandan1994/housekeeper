@@ -15,21 +15,29 @@
         <div class="container">
              <div class="phone">
                <ul>
-                    <!-- <li>
+                    <li>
                         <span>真实姓名：</span>
-                       <input v-model="merchant_name" type="text" placeholder="姓名">
+                       <input v-model="accName" type="text" placeholder="姓名">
                    </li>
                     <li>
                         <span>身份证号：</span>
-                       <input v-model="id_cardno"  type="text" placeholder="所持身份证号码">
-                   </li> -->
+                       <input v-model="idCard"  type="text" placeholder="所持身份证号码">
+                   </li>
                     <li>
-                        <span>银行卡号：</span>
+                        <span>信用卡卡号：</span>
                        <input v-model="bank_cardno"  type="number" placeholder="信用卡卡号">
                    </li>
                     <li>
                        <span>手机号：</span>
                        <input type="number" v-model="phone" placeholder="信用卡预留手机号">
+                   </li> 
+                    <li>
+                       <span>安全码：</span>
+                       <input type="number" v-model="cvv2" placeholder="信用卡安全码">
+                   </li> 
+                    <li>
+                       <span>有效期：</span>
+                       <input type="number" v-model="validityDate" placeholder="信用卡有效期">
                    </li> 
               
                    
@@ -56,15 +64,24 @@ export default {
             bank_cardno:"",
             phone:"",
             info:{},
-            merchantNo:""
+            chMerCode:"",
+            cvv2:"",
+            validityDate:"",
+            idCard:"",
+            accName:""
         }
     },
     created(){
         if(this.info){
             this.info=this.$route.query.info
-            this.merchantNo=this.$route.query.merchantNo
+            console.log(this.info,"info")
+            this.chMerCode=this.$route.query.chMerCode
             this.bank_cardno=this.info.cardNo
             this.phone=this.info.phone
+            this.cvv2=this.info.cvv2
+            this.validityDate=this.info.month+this.info.year
+            this.accName=this.info.payerName
+            this.idCard=this.info.idCardNo
         }
     },
     methods:{
@@ -89,20 +106,30 @@ export default {
 
              let data={
                  accNo:this.bank_cardno,
-                 phone:this.phone,
-                 merchantNo:this.merchantNo
+                 mobile:this.phone,
+                 accName:this.accName,
+                 idCard:this.idCard,
+                 cvv2:this.cvv2,
+                 validityDate:this.validityDate,
+                 chMerCode:this.chMerCode
              }
-                this.componentload=true
-              axiosPost("/rhpay/sendMessage",data)
+                // this.componentload=true
+              axiosPost("/jftpay/bindcard",data)
               .then(res=>{
+                        console.log(res,"绑卡结果")
                        if(res.data.success){
-                           let url=res.data.data
-                           let first=url.split('<!--')
-                          let second=first[1].split('//-->')
-                          let address=first[0]+second[0]+second[1]
-                            document.write(address)
-                            document.close()
-                          
+
+                           let responce=res.data.data
+                           responce=JSON.parse(responce)
+                           location.href=responce.url
+
+
+                        //    let url=res.data.data
+                        //    let first=url.split('<!--')
+                        //   let second=first[1].split('//-->')
+                        //   let address=first[0]+second[0]+second[1]
+                        //     document.write(address)
+                        //     document.close()
                        } else {
                           
                            setTimeout(()=>{

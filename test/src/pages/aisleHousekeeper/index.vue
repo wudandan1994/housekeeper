@@ -173,8 +173,7 @@
                                    <p>未知</p>
                                    <p>手续费</p>
                                </li>
-                               <li>
-                                
+                               <li> 
                                </li>
                            </ul>
                        </div>
@@ -204,7 +203,6 @@
                                 </div>
                              </div>
                        </div>
-                       
                    </li>
                </ul>
            </div>
@@ -272,6 +270,7 @@ export default {
     methods:{
         goBack() {
             this.$router.push("/home")
+            console.log("")
         },
         // 点击遮盖层，通道隐藏
         showcover(){
@@ -337,67 +336,63 @@ export default {
 
         // 查询小额通道是否签约
         small(i){
-            axiosPost("/rhpay/getRhMerchant")
-            .then(res=>{
-                if(res.data.success){    // 查询商户 成功   查绑卡
+            this.$toast("通道维护中")
+            // axiosPost("/jftpay/getRegist")
+            // .then(res=>{
+            //     if(res.data.success){    // 查询商户 成功   查绑卡
 
-                    let merchantNo=res.data.data.merchantNo
+            //         console.log(res,"查询商户号成功")
 
-                    let data={
-                        accNo:i.cardNo
-                    }
-                     axiosPost("/rhpay/getRhBindCard",data)
-                     .then(res=>{
-                          if(res.data.success){  // 绑卡成功
-                                storage.set('channel',"1");
-                                this.$router.push({
-                                    path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                                    query:{
-                                    info:i
-                                }
-                            })  
-                          } else {  // 去绑卡
-                            this.$router.push({
-                                path:"/home/smallAmountRH/rhbinding",
-                                query:{
-                                    info:i,
-                                    merchantNo:merchantNo
-                                }
-                            })
-                          }
-                     })
-                } else {   // 查询商户 不成功  注册商户
-                        this.$router.push({
-                            path:"/home/smallAmountRH",
-                            query:{
-                                info:i
-                            }
-                        })
-                }
-            })
+            //         let chMerCode=res.data.data.chMerCode
+
+            //         let data={
+            //             accNo:i.cardNo
+            //         }
+            //          axiosPost("/jftpay/getBindCard",data)  // 查询绑卡
+            //          .then(res=>{
+            //               if(res.data.success){  // 绑卡成功
+            //                     storage.set('channel',"1");
+            //                     this.$router.push({
+            //                         path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+            //                         query:{
+            //                         info:i
+            //                     }
+            //                 })  
+            //               } else {  // 去绑卡
+            //                 this.$router.push({
+            //                     path:"/home/smallAmountRH/rhbinding",
+            //                     query:{
+            //                         info:i,
+            //                         chMerCode:chMerCode
+            //                     }
+            //                 })
+            //               }
+            //          })
+            //     } else {   // 查询商户 不成功  注册商户
+            //             console.log(res,"需要注册")
+            //             this.$router.push({
+            //                 path:"/home/smallAmountRH",
+            //                 query:{
+            //                     info:i
+            //                 }
+            //             })
+            //     }
+            // })
         },
          // 查询大额通道是否签约
         large(i){
-            let data={
-                bankcardNum:i.cardNo
-            }
-            axiosPost("/hcpay/getHcOpenCard",data)
-            .then(res=>{
-                if(res.data.success){
+            // let data={
+            //     bankcardNum:i.cardNo
+            // }
+            // axiosPost("/hcpay/getHcOpenCard",data)
+            // .then(res=>{
+            //     if(res.data.success){
                     let datas={
                         bankCard:i.cardNo
                     }
                       axiosPost("/scpay/bindCardExist",datas)
                       .then(res=>{
                           if(res.data.success){
-                            //     storage.set('channel',"2");
-                            //     this.$router.push({
-                            //         path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
-                            //         query:{
-                            //         info:i
-                            //     }
-                            // })  
-
                               let params={
                                     bankCard: i.cardNo,
                                     channel:"2"
@@ -412,6 +407,49 @@ export default {
                                                     info:i,
                                                 }
                                             })
+
+                                            // // 查询是否有商户号                                                                                                                                                                                                         
+                                            //  axiosPost("/rsrpay/getMerchant")
+                                            //  .then(res=>{
+                                            //      console.log(res,"")
+                                            //      if(res.data.success){  // 查询绑卡
+                                            //          let obj={
+                                            //              card_no:i.cardNo
+                                            //          }
+                                            //     axiosPost("/rsrpay/getBindCard",obj)
+                                            //     .then(res=>{
+                                            //         if(res.data.success){
+                                            //               storage.set('channel',"2");
+                                            //                 this.$router.push({
+                                            //                 path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                                            //                 query:{
+                                            //                     info:i,
+                                            //                 }
+                                            //             })
+                                            //         } else {
+                                            //             console.log("去绑卡")
+                                            //             this.$router.push({
+                                            //                 path:"/home/largeAmountRSR/rsrBinding",
+                                            //                 query:{
+                                            //                     info:i
+                                            //                 }
+                                            //             })
+                                            //         }
+                                            //     })
+                                            //      } else {
+                                            //          this.$router.push({
+                                            //              path:"/home/largeAmountRSR",
+                                            //              query:{
+                                            //                  info:i
+                                            //              }
+                                            //          })
+                                            //         //  console.log("注册商户")
+                                            //      }
+                                            //  })
+
+
+
+
                                         } else {
                                             this.$router.push({
                                                 path:"/home/smallAmountSC",
@@ -434,30 +472,30 @@ export default {
                           }
                       })
 
-                } else {
-                    axiosPost("/hcpay/getHcMerchant")
-                    .then(res=>{
-                        if(res.data.success){   // 如果已注册,则直接去发送短信
-                            let merchantno=res.data.data.merchantno
-                            this.$router.push({
-                            path:"/home/largeAmountHC/sendmsgHC",
-                            query:{
-                                merchantno:merchantno,
-                                info:i
-                            }
-                      })
+                // } else {
+                //     axiosPost("/hcpay/getHcMerchant")
+                //     .then(res=>{
+                //         if(res.data.success){   // 如果已注册,则直接去发送短信
+                //             let merchantno=res.data.data.merchantno
+                //             this.$router.push({
+                //             path:"/home/largeAmountHC/sendmsgHC",
+                //             query:{
+                //                 merchantno:merchantno,
+                //                 info:i
+                //             }
+                //       })
 
-                        } else {   // 去注册
-                            this.$router.push({
-                                path:"/home/largeAmountHC",
-                                query:{
-                                    info:i
-                                }
-                            })
-                        }
-                    })
-                }
-            })
+                //         } else {   // 去注册
+                //             this.$router.push({
+                //                 path:"/home/largeAmountHC",
+                //                 query:{
+                //                     info:i
+                //                 }
+                //             })
+                //         }
+                //     })
+                // }
+            // })
          } ,
        
         repayment(i,item){

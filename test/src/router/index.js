@@ -446,6 +446,21 @@ const smallAmountRHComponent = () => import('@/pages/smallAmountRH')  // rh小�
 
 const rhbindingComponent = () => import('@/pages/smallAmountRH/rhbinding')  // rh小额
 
+const largeAmountRSRComponent = () => import('@/pages/largeAmountRSR')  // rsr大额注册商户
+
+const rsrBindingComponent = () => import('@/pages/largeAmountRSR/rsrBinding')  // rsr大额绑卡
+
+const rsrActiveComponent = () => import('@/pages/largeAmountRSR/rsrActive')  // rsr激活
+
+const beautyBillComponent = () => import('@/pages/beautyBill')  // 美化账单
+
+const exchangeRateComponent = () => import('@/pages/beautyBill/exchangeRate.vue')  // 实时汇率
+
+const checkComponent = () => import('@/pages/beautyBill/check.vue')  // 选择卡验证
+
+const detailbillComponent = () => import('@/pages/beautyBill/detailbill.vue')  // 选择金额
+
+
 
 
 // 全球出行
@@ -476,6 +491,11 @@ export default new Router({
     {path:"/home/news",component:newsComponent},
     {path:"/home/addCard",component:addCardComponent},
     {path:"/vip/extension",component:extensionComponent},  // 推广升级
+    {path:"/home/beautyBill",component:beautyBillComponent},  // 美化账单
+    {path:"/home/beautyBill/exchangeRate",component:exchangeRateComponent},  // 实时汇率
+    {path:"/home/beautyBill/check",component:checkComponent},  // 选择卡验证
+    {path:"/home/beautyBill/detailbill",component:detailbillComponent},  // 选择金额
+
  
     {path:"/home/receivables/cards",component:cardsComponent},  //收款信用卡列表
     {path:"/home/games/gameElsb",component:gameElsbComponent},  //2048游戏 
@@ -486,38 +506,32 @@ export default new Router({
     {path:"/home/budget",component:budgetComponent},  //预算
     {path:"/home/query",component:queryComponent},  //账单查询
     {path:"/home/liftingAmount/bankservice",component:bankserviceComponent},  //账单查询
-
     {path:"/home/smallAmountWYF",component:smallAmountWYFComponent},  //wyf小额
-
     {path:"/home/smallAmountSC",component:smallAmountSCComponent},  //sc小额
     {path:"/home/smallSCactive",component:smallSCactiveComponent},  //sc小额
 
+    {path:"/home/largeAmountRSR",component:largeAmountRSRComponent},  //rsr大额注册商户
+
+    {path:"/home/largeAmountRSR/rsrBinding",component:rsrBindingComponent},  //rsr大额绑卡
+    
+    {path:"/home/largeAmountRSR/rsrActive",component:rsrActiveComponent},  //rsr大额激活
+
     {path:"/home/smallAmountRH",component:smallAmountRHComponent},  //rh小额
     {path:"/home/smallAmountRH/rhbinding",component:rhbindingComponent},  //rh小额绑卡
-
-
-
     {path:"/home/largeAmountHC",component:largeAmountHCComponent},  //汇潮大额 注册商户  
     {path:"/home/largeAmountHC/sendmsgHC",component:sendmsgHCComponent},  //汇潮大额 发送短信 
     {path:"/home/largeAmountHC/uploadmsg",component:uploadmsgComponent},  //汇潮大额 短信验证
-
     {path:"/home/share/videos",component:videosComponent},  //视频  
     {path:"/home/largeAmountSC",component:largeAmountSCComponent},  //SC大额通道 注册商户  
     {path:"/home/largeAmountSC/sendmsgSC",component:sendmsgSCComponent},  //汇潮大额 短信验证
-
-
     {path:"/home/changeBill",component:changeBillComponent}, //更换账单 
-
     {path:"/home/receiveXH",component:receiveXHComponent},  //收单小惠通道  
     {path:"/home/receiveXH/cardCX",component:cardCXComponent},  //收单小惠通道储蓄卡管理 
     {path:"/home/receiveXH/payXH",component:payXHComponent},  //收单小惠通道支付
     {path:"/home/receiveXH/signXH",component:signXHComponent},  //收单小惠通道签约
     {path:"/home/receivables/sign",component:signComponent},  //收单小惠通道签约（通道二）
-
     {path:"/home/easyPay",component:easyPayComponent},  //工易付小额代还
     {path:"/home/easyPay/easycard",component:easycardComponent},  //工易付小额代还
-
-
     {path:"/home/cardCenter/applyCard",component:applyCardComponent,},
     {path:"/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard",component:bindingCreditCardComponent,},
     {path:"/home/creditHousekeeper/aisleHousekeeper/repayment",component:repaymentComponent},
@@ -535,18 +549,12 @@ export default new Router({
     {path:"/home/evaluation",component:evaluationComponent}, //卡测评
     {path:"/home/DHbind",component:DHbindComponent}, //第三条还款通道  
     {path:"/home/DHregister",component:DHregisterComponent}, //第三条还款通道 注册
-    
     {path:"/home/largeZY",component:largeZYComponent}, //哲杨发送短信  
     {path:"/home/largeVerificate",component:largeVerificateComponent}, //哲杨短信验证
-
     {path:"/home/largeWFcard",component:largeWFcardComponent}, //WF大额通道绑卡
     {path:"/home/largeWFcard/verify",component:largeWFverifyComponent}, //WF大额通道验证
     {path:"/home/largeWFxe",component:largeWFxeComponent}, //WF小额通道绑卡
     {path:"/home/largeWFxe/verify",component:largeWFxeverifyComponent}, //WF小额通道绑卡
-
-
-
-
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},
     {path:"/share/promotionMaterial",component:promotionMaterialComponent},
@@ -567,8 +575,6 @@ export default new Router({
     {path:"/home/totalPunch/wallet",component:walletComponent}, // 红包任务
     {path:"/home/totalPunch/tasked",component:taskedComponent}, // 任务完成
     {path:"/home/totalPunch/taskrecord",component:taskrecordComponent}, // 任务纪录
-
-
     {path:"/home/violationInquiry",component:violationInquiryComponent},
     {path:"/home/violationInquiry/addCar",component:addCarComponent},
     {path:"/home/violationInquiry/addCar/addSave",component:addSaveComponent},
@@ -622,7 +628,6 @@ export default new Router({
     {path: '/cardManager',component: cardManager},
     {path: '/help',component: help},
     {path: '/vipRate',component: vipRate},
-
     {path: '/Extension',component: Extension},
     {path: '/video',component: video},
     {path: '/radar',component: radar},

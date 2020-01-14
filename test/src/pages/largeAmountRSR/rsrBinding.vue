@@ -6,9 +6,9 @@
  * @LastEditors: Please set LastEditors
  -->
 <template>
-    <div id="small-amount-rh">
+    <div id="rsrBinding">
         <header class="manage loan">
-            <van-nav-bar title="注册商户" left-text="" left-arrow @click-left="handleReturnHome" >
+            <van-nav-bar title="绑卡" left-text="" left-arrow @click-left="handleReturnHome" >
                
             </van-nav-bar>
         </header>
@@ -17,21 +17,28 @@
                <ul>
                     <li>
                         <span>真实姓名：</span>
-                       <input v-model="merchant_name" type="text" placeholder="姓名">
+                       <input v-model="accountName" type="text" placeholder="姓名">
                    </li>
                     <li>
                         <span>身份证号：</span>
-                       <input v-model="id_cardno"  type="text" placeholder="所持身份证号码">
+                       <input v-model="idNo"  type="text" placeholder="所持身份证号码">
                    </li>
                     <li>
-                        <span>银行卡号：</span>
-                       <input v-model="bank_cardno"  type="number" placeholder="储蓄卡卡号">
+                        <span>信用卡号：</span>
+                       <input v-model="bankCard"  type="number" placeholder="所持信用卡卡号">
                    </li>
                     <li>
                        <span>手机号：</span>
-                       <input type="number" v-model="phone" placeholder="信用卡预留手机号">
+                       <input type="number" v-model="mobile" placeholder="银行卡预留手机号">
                    </li> 
-              
+                     <li>
+                       <span>安全码：</span>
+                       <input type="number" v-model="cvn2" placeholder="信用卡安全码">
+                   </li> 
+                     <li>
+                       <span>有效期：</span>
+                       <input type="number" v-model="expired" placeholder="信用卡有效期 如06/21 填写2106">
+                   </li> 
                    
                </ul>
               <div @click="bindingCard" class="btn">
@@ -53,20 +60,24 @@ export default {
     data(){
         return{
             componentload: false,
-            merchant_name:"",
-            id_cardno:"",
-            bank_cardno:"",
-            phone:"",
+            accountName:"",
+            idNo:"",
+            bankCard:"",
+            mobile:"",
+            cvn2:"",
             info:{},
+            expired:""
+           
         }
     },
     created(){
-        if(this.info){
-            this.info=this.$route.query.info
-            this.merchant_name=this.info.payerName
-            this.id_cardno=this.info.idCardNo
-            this.phone=this.info.phone
-        }
+        this.info=this.$route.query.info
+        this.accountName=this.info.payerName
+        this.idNo=this.info.idCardNo
+        this.bankCard=this.info.cardNo
+        this.mobile=this.info.phone
+        this.expired=this.info.year+this.info.month
+        this.cvn2=this.info.cvv2
     },
     methods:{
         handleReturnHome(){
@@ -76,50 +87,58 @@ export default {
         // 绑卡
         bindingCard(){
              let partern=/0?(13|14|15|16|17|18|19)[0-9]{9}/
-             if(!partern.test(this.phone)){
+             if(!partern.test(this.mobile)){
                   return   this.$toast("请输入11位手机号码")
              }
 
-            if(this.merchant_name.trim().length===0 || this.id_cardno.trim().length===0 ||  this.bank_cardno.trim().length===0||  this.phone.trim().length===0 ){
+            if(this.accountName.trim().length===0 || this.expired.trim().length===0 || this.idNo.trim().length===0 ||  this.bankCard.trim().length===0 ||  this.mobile.trim().length===0 || this.cvn2.trim().length===0){
                  this.$toast({
                     message:"请将信息填写完整"
                 })
-  
-             return
+                return
             } 
 
              let data={
-                 accountName:this.merchant_name,
-                 idCard:this.id_cardno,
-                 accountNo:this.bank_cardno,
-                 mobile:this.phone,
+                 cardholder:this.accountName,
+                 id_no:this.idNo,
+                 card_no:this.bankCard,
+                 mobile_no:this.mobile,
+                 cvv2:this.cvn2,
+                 expiredate:this.expired,
+                 app_merch_no:this.mobile,
              }
-             console.log(data)
-
-                this.componentload=true
-              axiosPost("/jftpay/memberReg",data)
+              axiosPost("/rsrpay/insertBindCard",data)
               .then(res=>{
-                        console.log(res,"注册商户，商户号在此生成")
-                       if(res.data.success){
-                           console.log("注册商户成功")
-
-                           let responce=res.data.data
-                           responce=JSON.parse(responce)
-                           let chMerCode=responce.chMerCode
+                  console.log(res,"绑卡结果")
+                this.componentload=true 
+                setTimeout(()=>{
+                     this.componentload=false
+                 if(!res.data.success){
+                          this.$toast(res.data.message)
+                  } else {
+                      let responce=res.data.data
+                      responce=JSON.parse(responce)
+                      console.log(responce,"绑卡结果")
+                      if(responce.code==="0000"){
+                          let app_order=responce.app_order_no
                            this.$router.push({
-                              path:"/home/smallAmountRH/rhbinding",
-                              query:{
-                                  chMerCode:chMerCode,
-                                  info:this.info
-                              }
-                          })
+                            path:"/home/largeAmountRSR/rsrActive",
+                            query:{
+                                app_order:app_order
+                            }
+                        })
+                      } else if(responce.code==="0001"){
+                          this.$toast("操作成功")
+                          this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
+                      } else if(responce.code==="999"){
+                          this.$toast("开通失败")
+                      }
 
-                       } else {
-                           setTimeout(()=>{
-                              this.componentload=false
-                              this.$toast(res.data.message)
-                           },1500)
-                       }      
+                     
+                  }  
+
+                },1000)
+                              
               })
               .catch(err=>{
                    if(!err.data.success){
@@ -131,7 +150,7 @@ export default {
 }
 </script>
 <style lang="less" >
-    #small-amount-rh{
+    #rsrBinding{
         background: #EEEFF1;
         width: 100vw;
         height: 120vh;

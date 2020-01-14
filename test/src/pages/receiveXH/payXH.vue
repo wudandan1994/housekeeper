@@ -199,10 +199,7 @@ export default {
                      
                }
            })
-       }
-     
-      
-    
+       }   
     
     },
     created () {
