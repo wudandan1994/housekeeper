@@ -14,7 +14,7 @@
                    </li>
                     <li>
                         <span>身份证号：</span>
-                       <input v-model="idCard"  type="number" placeholder="所持身份证号码">
+                       <input v-model="idCard"  type="text" placeholder="所持身份证号码">
                    </li>
                     <li>
                         <span>银行卡号：</span>
@@ -228,13 +228,13 @@ export default {
                 return
              }
              
-              let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-               if(!parttenId.test(this.idCard)){
-                 this.$toast({
-                    message:"请填写正确的身份证号"
-                })
-                return
-             }
+            //   let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+            //    if(!parttenId.test(this.idCard)){
+            //      this.$toast({
+            //         message:"请填写正确的身份证号"
+            //     })
+            //     return
+            //  }
 
 
             if(this.name.trim().length===0 || this.phone.trim().length===0 || this.bankcardno.trim().length===0 || this.idCard.trim().length===0 ||
