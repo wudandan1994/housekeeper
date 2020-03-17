@@ -96,7 +96,7 @@ export default {
     },
     created(){
         this.amountSum = this.$route.query.amountSum;
-        // console.log('路由',this);
+        // console.log('路由',this.$route.query.params);
         this.handleGetData();
     }
 }

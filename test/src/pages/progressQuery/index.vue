@@ -5,10 +5,9 @@
             <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
-         <div class="box" style="width:100vw;height:100vh;">　
-            　　<iframe v-if="type" :src="url" scrolling="auto" class="iframe" frameborder="0" width="100vw" height="100vh"></iframe>
-            　　<iframe v-else :src="url" frameborder="0" class="iframe" height="100vh" scrolling='auto' style="width: 1px; min-width: 100vw; *width: 100vw;"></iframe>
-            </div>
+        <div class="container">
+             <iframe class="iframe"  :src="url" frameborder="0" target="_self"></iframe>
+        </div>
     </div>
 
 </template>
@@ -31,23 +30,6 @@ export default {
        
         webview(){
             if(window.plus){  
-                //  var yinlian = plus.webview.open(this.url,"yinlian",{
-                //          top: "40px",  
-                //         bottom: '0px',
-                //         left:'0px',
-                //         scrollIndicator:'none'
-                //     });
-                // let self= plus.webview.currentWebview(); 
-                // var yinlian= plus.webview.create(this.url, "yinlian", {  
-                // top: "40px",  
-                // // width:"100%",
-                // bottom: "0px",
-                //  right:"0px",
-                // left:"0px",
-                // scrollIndicator:"vertical"
-                // });  
-                // yinlian.show()
-                //  self.append(yinlian)
              var yinlian= plus.webview.create(this.url, "yinlian");  
                yinlian.setStyle({
                    width:"100%",
@@ -70,26 +52,6 @@ export default {
                                 margin:"auto",
                         })
                             yinlian.show()
-
-
-                    // var w = plus.webview.open('http://m.weibo.cn/u/3196963860');
-                    // var yinlian = plus.webview.open(this.url,"yinlian",{
-                    //      top: "40px",  
-                    //     bottom: '0px',
-                    //     left:'0px',
-                    //     scrollIndicator:'none'
-                    // });
-                    // let self= plus.webview.currentWebview(); 
-                    //     var yinlian= plus.webview.create(this.url, "yinlian", {  
-                    //     top: "100px",  
-                       
-                    //     bottom: '0px',
-                    //     left:'0px',
-                    //     scrollIndicator:'none'
-                    // });  
-                   
-                    //   yinlian.show()
-                    //    self.append(yinlian)
                 },false);  
             }  
         }
@@ -99,16 +61,9 @@ export default {
     },
     
     created(){
-        this.url=this.$route.query.info
+         this.url=this.$route.query.info
          this.title=this.$route.query.title
         //  this.webview();
-          var u = navigator.userAgent;
-        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-        if(isAndroid){
-        　　this.type = true
-        }else{
-        　　this.type = false
-        }
     }
 }
 </script>
@@ -118,24 +73,12 @@ export default {
        header {
             background-color: #4965AE;
        }
-        .box {
-               overflow-x: hidden;
-           }
-       .iframe{
+         .container {
+           width:100%;
+           .iframe{
                width: 100%;
                height:100vh !important;
-               overflow-x:hidden;
            }
-
-    //    width: 100vw;
-    //    height: calc(100vh - 86px);
-    //    padding-top: 86px;
-        // .iframe{
-        //     width: 100vw;
-        //     height: calc(100vh - 86px);
-        // }
-        // .out {
-            
-        // }
-   }
+       }
+  }
 </style>

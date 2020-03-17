@@ -1,5 +1,5 @@
 <template>
-    <div id="credit-housekeeper">
+    <div id="credit-housekeeper" class="flipInX">
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>信用卡管家</span>
@@ -7,7 +7,7 @@
         </header>
        <div class="container">
            <h3>钱夹宝智能还款</h3>
-           <p class="mode">智能,极速2种模式</p>
+           <p class="mode">小额,大额2种通道</p>
            <div class="light">
                <ul>
                    <!-- <li>
@@ -34,7 +34,7 @@
                    <li>
                        <p><van-icon name="http://pay.91dianji.com.cn/114.png"/></p>
                        <div>
-                           <p>极速还款，全新模式</p>
+                           <p>完美账单，全新模式</p>
                            <p>距还款日只剩1-3天又想账单尽量完美，极速模式，照样可以还</p>
                        </div>
                    </li>
@@ -58,11 +58,11 @@
                       <div class="select" >
                           <p>请选择还款模式</p>
                       <ul>
-                          <li @click="searchInfo">
+                          <!-- <li @click="searchInfo">
                               <div><van-icon name="http://pay.91dianji.com.cn/putong.png" size="40px"/></div>
                               <p>普通代还</p>
                                <p> <van-icon name="arrow" size="30px"/></p>
-                          </li>
+                          </li> -->
                           <router-link tag="li" to="/home/creditHousekeeper/aisleHousekeeper">
                               <div><van-icon name="http://pay.91dianji.com.cn/wanmei.png" size="40px"/></div>
                               <p>完美账单</p>
@@ -94,12 +94,9 @@ export default {
         searchInfo(){
             axiosPost("/creditCard/getMerchantSettled")
             .then(res=>{
-                // console.log('链接请求成功',res);
                 if(res.data.code==="1"){
                     this.$router.push("/home/addCard")
                 } else if(res.data.code==="0"){
-                    window.location.href=res.data.data.url   
-                    // let url=res.data.data.url
                     //     this.$router.push({
                     //         path:"/home/online",
                     //         query:{
@@ -107,10 +104,24 @@ export default {
                     //             title:"还款"
                     //           }
                     //     })
+
+                    let url=res.data.data.url
+
+                    if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                                this.$router.push({
+                                    path:"/loan/form/myOrder",
+                                    query:{
+                                        info:url,
+                                        title:"还款"
+                                    }
+                                })
+                                } else {
+                                    this.componentload=false
+                                    location.href=url
+                                }
                 }
             })
             .catch(err=>{
-                // console.log(err,"失败");
             })
         },
     },
@@ -121,6 +132,8 @@ export default {
 
 <style lang="less">
    #credit-housekeeper{
+    //    animation: enlarge 0.6s linear;
+    //     -webkit-animation: enlarge 0.6s linear;
        >header {
            background-color: #4B66AF;
            width:100%;

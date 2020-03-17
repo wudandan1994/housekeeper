@@ -26,7 +26,7 @@
                    </li>
                    <li>
                         <span>开户地区：</span>
-                       <input class="area" v-model="area" type="text" placeholder="示例：江苏省-苏州市">
+                       <input class="area" readonly v-model="area" type="text" placeholder="示例：江苏省-苏州市">
                         <span @click="showPick"><van-icon name="arrow"/></span>
                    </li>
                    <van-picker v-show="showFlag" :columns="columns" @change="onChange"   @confirm="onConfirm"    @cancel="onCancel"  :default-index="0"   show-toolbar/>
@@ -39,7 +39,6 @@
             <div>
                
             </div>
-
         </div>
     </div>
 
@@ -75,13 +74,16 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home')
+            this.$router.go(-1)
         },
          onChange(picker, values) {
             picker.setColumnValues(1, citys[values[0]]);
          }, 
          onConfirm(value){
             this.area=value.join("-")
+              if(this.area=='北京市-'){
+                this.area='北京市-北京市'
+            }
             this.showFlag=false
          },
          showPick(){
@@ -99,7 +101,7 @@ export default {
                     })
                     return
               }
-               let partten = /0?(13|14|15|17|18|19)[0-9]{9}/ 
+               let partten = /0?(13|14|15|16|17|18|19)[0-9]{9}/ 
                if(!partten.test(this.mobileNo)){
                  this.$toast({
                     message:"请填写11位手机号码"
@@ -131,6 +133,7 @@ export default {
                          return
                      } else {
                          let url=res.data.data
+                         console.log(url,'url')
                         document.write(url)
                         //  this.$router.push({
                         //      path:"/home/insertEsiCash/iframe",
@@ -205,9 +208,7 @@ export default {
                                font-weight: bold;
                            }
                        }
-                       &:last-child {
-                        //    border:none;
-                       }
+                      
                        >span {
                            &:nth-of-type(2){
                                padding:0 10px;
@@ -233,7 +234,12 @@ export default {
                    }
                }
                .van-picker__cancel{
+                   font-size:30px;
                    color:#000;
+               }
+               .van-picker-column__item--selected {
+                   color:#4B66AF;
+                   font-weight: bold;
                }
                .van-picker__toolbar{
                    height: 40px;

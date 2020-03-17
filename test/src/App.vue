@@ -1,13 +1,27 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-09 16:57:17
+ * @LastEditTime: 2019-09-26 15:18:05
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div id="app">
     
     <router-view/>
+     <!-- <coverads name="fade"></coverads> -->
+     <!-- <guide></guide> -->
   </div>
 </template>
 
 <script>
 import {axiosPost,axiosGet} from '@/lib/http'
 import storage from '@/lib/storage'
+import coverads from '@/components/coverads.vue'
+// import guide from '@/components/guide.vue'
+
+
+
 export default {
   name: 'App',
   data(){
@@ -22,10 +36,17 @@ export default {
       photo: '',
     }
   },
+  components: {
+      coverads,
+      // guide,
+  },
   methods:{
      // 微信授权
     handleOauth(){
+      // 正式
         location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+      // 测试
+        // location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2ftest.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
     },
     // 获取url参数
     GetUrlParam(name) {
@@ -36,11 +57,17 @@ export default {
     },
     // 获取access_token
     handleAccessToken(){
+      // 正式
         let url = 'http://pay.91dianji.com.cn/wxApi/sns/oauth2/access_token?appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0&code='+this.code+'&grant_type=authorization_code';
+        // 测试
+        // let url = 'http://test.91dianji.com.cn/wxApi/sns/oauth2/access_token?appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0&code='+this.code+'&grant_type=authorization_code';
         axiosGet(url).then(res =>{
             storage.set('access_token',res.data.access_token); 
             // 继续请求昵称头像等信息
+            // 正式
             let url = 'http://pay.91dianji.com.cn/wxApi/sns/userinfo?access_token='+ storage.get('access_token') +'&openid='+ res.data.openid +'&lang=zh_CN';
+            // 测试
+            // let url = 'http://test.91dianji.com.cn/wxApi/sns/userinfo?access_token='+ storage.get('access_token') +'&openid='+ res.data.openid +'&lang=zh_CN';
             axiosGet(url).then(res =>{
                 this.nickname = res.data.nickname;
                 this.photo = res.data.headimgurl;
@@ -60,7 +87,7 @@ export default {
                       nickname: this.$store.state.wechat.nickname,
                       openid:   this.$store.state.wechat.openid,
                       photo:    this.$store.state.wechat.headimg,
-                      recommendedcode: storage.get('recommendedcode')
+                      recommendedcode: storage.get('promotioncode')
                     }
                     let url = '/customer/registered';
                     axiosPost(url,params)
@@ -108,8 +135,8 @@ export default {
                     })
                     .catch(res =>{
                     })
-                  }else{
-                    // 已注册
+                  }else{    // 已注册
+                   
                     // 登录
                     let params = {
                         openid: this.$store.state.wechat.openid
@@ -146,6 +173,10 @@ export default {
     },
   },
   created(){
+    if(this.$utils.getUrlKey('promotioncode') != "" && this.$utils.getUrlKey('code') === null){
+      storage.set('promotioncode',this.$utils.getUrlKey('promotioncode'));
+      // console.log('链接进入推荐码',this.$utils.getUrlKey('promotioncode'));
+    }
     // 首先判断是否存储了openid
     if(storage.get('openid') != '' && storage.get('openid') !== null){
       // 已经注册过，可直接登录，无需再次授权
@@ -178,9 +209,6 @@ export default {
       })
     }else{
       // 拿不到openid，需要授权登录
-      if(this.$router.currentRoute.query.promotioncode != '' && typeof(this.$router.currentRoute.query.promotioncode) != 'undefined'){
-        storage.set('recommendedcode',this.$router.currentRoute.query.promotioncode);
-      }
       // 判断是否是微信浏览器
       var ua = navigator.userAgent.toLowerCase();
       if(ua.match(/MicroMessenger/i)=="micromessenger") {
@@ -200,9 +228,15 @@ export default {
   },
   mounted(){
     // js-sdk的access_token 
+    // 正式
     let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
+    // 测试
+    // let url = 'http://test.91dianji.com.cn/wxApi/cgi-bin/token?grant_type=client_credential&appid=wx779a30a563ad570d&secret=d89c480f3181c49cbee43d4cec49b4b0';
     axiosGet(url).then(res =>{
+      // 正式
       let url = 'http://pay.91dianji.com.cn/wxApi/cgi-bin/ticket/getticket?access_token='+ res.data.access_token +'&type=jsapi';
+      // 测试
+      // let url = 'http://test.91dianji.com.cn/wxApi/cgi-bin/ticket/getticket?access_token='+ res.data.access_token +'&type=jsapi';
       axiosGet(url).then(res =>{
         storage.set('ticket',res.data.ticket);
         // 请求签名信息
@@ -227,24 +261,44 @@ export default {
               nonceStr: radom, // 必填，生成签名的随机串
               signature: res.data.data.signature,// 必填，签名
               jsApiList: [
-                'chooseImage',
-                'uploadImage',
-                'getLocation',
-                'updateAppMessageShareData',
-                'onMenuShareTimeline',
                 'onMenuShareAppMessage',
+                'onMenuShareTimeline',
                 'chooseWXPay'
               ] // 必填，需要使用的JS接口列表
           });
           wx.ready(function(){
+            // 分享给朋友
               wx.onMenuShareAppMessage({ 
                   title: '钱夹宝综合金融服务推广平台，点滴成就未来', // 分享标题
                   desc: '让每个人都能找到人生的意义', // 分享描述
                   link: 'http://pay.91dianji.com.cn/#/home?promotioncode=' + that.$store.state.wechat.promotioncode, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                   imgUrl: 'http://pay.91dianji.com.cn/logo.png', // 分享图标
                   success: function (res) {
+                    // 在这里写任务执行成功接口
+                        axiosPost("/activity/executeActivity")
+                        .then(res=>{
+
+                            this.$toast(res.data.message)
+
+                        })
                   }
-              })
+              });
+              // 分享到朋友圈
+              wx.onMenuShareTimeline({ 
+                  title: '钱夹宝综合金融服务推广平台，点滴成就未来', // 分享标题
+                  desc: '让每个人都能找到人生的意义', // 分享描述
+                  link: 'http://pay.91dianji.com.cn/#/home?promotioncode=' + that.$store.state.wechat.promotioncode, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                  imgUrl: 'http://pay.91dianji.com.cn/logo.png', // 分享图标
+                  success: function (res) {
+                    // 在这里写任务执行成功接口
+                        axiosPost("/activity/executeActivity")
+                        .then(res=>{
+                         
+                            this.$toast(res.data.message)
+                        
+                        })
+                  }
+              });
           });
           wx.error(function(res){
     
@@ -266,5 +320,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  height:100vh;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
 </style>

@@ -24,7 +24,8 @@
             <div class="desc">注:钱夹宝提现工作日1-2天到账，手续费5%+1元/笔，最低提现金额100元起提。</div>
             <div class="checkbank row">
                 <div class="bankname start-center">{{bankname}}</div>
-                <div class="selectbank" @click="handleOpenBankList"><i class="iconfont icon-more"></i></div>
+                <div class="selectbank" @click="handleOpenBankList">  <van-icon  size="24px" name="arrow"/></div>
+
             </div>
             <!-- 银行卡选择器 -->
             <div class="bank-picker" v-if="bank_select">
@@ -87,13 +88,8 @@ export default {
             timerId:null,
             amount: '222',
             cardLength: '',
-            bankcardlist: [
-                // {
-                //     abridge: '中国民生银行5323',
-                //     id: '2'
-                // }
-            ],
-            abridge: '中国民生银行5323',
+            bankcardlist: [],
+            abridge: '',
             bank_select: false,
             bankname: '请选择您要提现的银行卡',
             avator: 'http://pay.91dianji.com.cn/logo.png',
@@ -125,6 +121,7 @@ export default {
              }else{
                  this.bank_select = false;
                 this.bankname = value;
+                this.abridge = value;
                 this.cardId = ((this.bankcardlist).filter(item =>item.abridge == value))[0].id
              }
         },

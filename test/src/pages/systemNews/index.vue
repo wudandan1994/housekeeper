@@ -6,24 +6,41 @@
             <div class="right-icon center"></div>
         </header>
         <div class="container">
-            传帮带（上海）网络科技有限公司在四月二十日正式上线银联手机POS应用APP钱夹宝1.0，实现在线信用卡智能还款，信用卡办理，商户收款和贷款等功能。以后一部手机就能化身pos机，随时随地享受刷卡，闪付，收款和还款等功能。
+            {{text}}
         </div>
-    </div>
+</div>
 
 </template>
 
 
 <script>
+import {axiosPost} from '@/lib/http'
+
 export default {
     data() {
         return {
-
+            text:""
         }
     },
     methods:{
         handleReturnHome() {
             this.$router.push('/home')
+        },
+        getNews(){
+            axiosPost("/content/getSystem")
+            .then(res=>{
+                if(res.data.success){
+                    this.text=res.data.data
+
+                } else {
+                    this.text="敬请期待"
+                }
+            })
         }
+
+    },
+    created () {
+        this.getNews()
     }
 }
 </script>

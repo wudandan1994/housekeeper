@@ -9,7 +9,19 @@
              
 
             <van-tabs v-model="active" @click="handleChangeTabs">
-                <van-tab title="所得佣金">
+                <van-tab title="所得佣金" >
+
+                    <!-- <p class="select" @click="selected" >筛选<van-icon   name="arrow-down"/></p> -->
+                    <!-- <van-collapse v-model="activeName" accordion>
+                      
+                         <van-collapse-item title="筛选" name="1">
+                           <p>商户收款收益</p>
+                           <p>提现收益</p>
+                           <p>代还收益</p>
+                        </van-collapse-item>
+                    </van-collapse>
+     -->
+                   
                    <div class="income-tab">
                         <div class="per-list" v-for="(item,index) in list" :key="index">
                             <div class="avator center"><img :src="item.photo" alt=""></div>
@@ -21,6 +33,7 @@
                                 <span v-if="item.type == 4">商户收款收益</span>
                                 <span>+{{item.amount}}</span>
                             </div>
+                           
                         </div>
                     </div> 
                 </van-tab>
@@ -89,9 +102,9 @@
                         </div>
                     </div>
                 </van-tab>
-                <van-tab title="招商收益">
+                <!-- <van-tab title="招商收益">
                     
-                </van-tab>
+                </van-tab> -->
             </van-tabs>
         </div>
         <loading :componentload='componentload'></loading>
@@ -122,6 +135,8 @@ export default {
             DirectInvitationList: [],
             indirect: false,
             Invitationing: true,
+            show:true,
+            activeName:"1",
         }
     },
     methods:{
@@ -129,10 +144,15 @@ export default {
         handleReturnHome(){
             this.$router.go(-1);
         },
+      
         // 更多
         handleMore(){
             this.$toast('尽请期待');
         },
+        selected(){
+
+        },
+      
         // 切换样式
         handleChange(){
             // console.log('当前状态',this.now);
@@ -332,8 +352,29 @@ export default {
         width: 100vw;
         height: auto;
         padding-top: 86px;
+        .van-collapse-item {
+            margin-top:60px;
+        }
+       
+        .van-cell__title {
+            font-size: 30px!important;
+            span {
+                font-size:50px;
+                font-weight: bold;
+            }
+        }
+       
+        .select {
+            margin-top:50px;
+            padding:15px;
+            text-align: right;
+            font-size: 34px;
+            line-height: 34px;
+            }
+            .cover {
+                z-index: 1000010;
+            }
         .income-tab{
-           
             .top-tab{
                 width: 100%;
                 height: 100px;
@@ -355,6 +396,11 @@ export default {
                 height: 120px;
                 border-bottom: solid 1px #ccc;
                 position: relative;
+                &:nth-of-type(1) {
+                     margin-top:36px;
+                     border-top:1px solid #ccc;
+                }
+               
                 .avator{
                     width: auto;
                     height: 100%;

@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-20 13:04:50
+ * @LastEditTime: 2019-08-21 17:17:45
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="open">
         <header>
@@ -59,6 +66,7 @@
 <script>
 import loading from '@/components/loading'
 import {axiosPost} from '@/lib/http'
+import axios from 'axios'
 export default {
      components:{
       loading
@@ -89,6 +97,7 @@ export default {
             var form = new FormData()
             form.append('file',file.file)
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            // let url = 'api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
@@ -120,8 +129,7 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                             this.$router.push({
-                                                path:"/home/collect/payment",
-                                                chMerCode:this.info
+                                                path:"/home/receivables",
                                             })
                                          }
                                         
@@ -146,11 +154,12 @@ export default {
          onReadF(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+           let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            // let url = 'api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
-            this.$http.post(url,form,config).then(res =>{
+            axios.post(url,form,config).then(res =>{
                 if(res.data.success){
                     this.cardback = res.data.data.thumImgUrl
                     let datas={
@@ -178,8 +187,7 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                              this.$router.push({
-                                                path:"/home/collect/payment",
-                                                chMerCode:this.info
+                                                path:"/home/receivables",
                                             })
                                          }
                                       
@@ -203,10 +211,11 @@ export default {
             var form = new FormData()
             form.append('file',file.file)
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            // let url = 'api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
-            this.$http.post(url,form,config).then(res =>{
+            axios.post(url,form,config).then(res =>{
                 if(res.data.success){
                     this.cardWithhand = res.data.data.thumImgUrl
                     let datas={
@@ -234,8 +243,7 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                             this.$router.push({
-                                                path:"/home/collect/payment",
-                                                chMerCode:this.info
+                                               path:"/home/receivables",
                                             })
                                          } 
                                        
@@ -259,11 +267,12 @@ export default {
          onReadQ(file) {
             var form = new FormData()
             form.append('file',file.file)
-            let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+          let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            // let url = 'api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
-            this.$http.post(url,form,config).then(res =>{
+            axios.post(url,form,config).then(res =>{
                 if(res.data.success){
                     this.bankfront = res.data.data.thumImgUrl
                     let datas={
@@ -291,8 +300,7 @@ export default {
                                             return
                                         } else if(res.data.data.uploadStatus==="0"){
                                             this.$router.push({
-                                                path:"/home/collect/payment",
-                                                chMerCode:this.info
+                                                path:"/home/receivables",
                                             })
                                          } 
                                        
@@ -317,10 +325,11 @@ export default {
             var form = new FormData()
             form.append('file',file.file)
             let url = 'http://pay.91dianji.com.cn/api/upload/uploadImg'
+            // let url = 'api/upload/uploadImg'
             let config = {
                 headers: { "Content-Type": "multipart/form-data" }
             };
-            this.$http.post(url,form,config).then(res =>{
+            axios.post(url,form,config).then(res =>{
                 if(res.data.success){
                     this.bankback = res.data.data.thumImgUrl
                     let datas={
@@ -348,8 +357,7 @@ export default {
                                         return
                                     } else if(res.data.data.uploadStatus==="0"){
                                         this.$router.push({
-                                                path:"/home/collect/payment",
-                                                chMerCode:this.info
+                                                path:"/home/receivables"
                                             })
                                         } 
                                     
@@ -408,7 +416,7 @@ export default {
     
     created () {
         this.searchInfo()
-          console.log(this.info,"open")
+        //   console.log(this.info,"open")
           this.findphoto()
     }
 }

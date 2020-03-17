@@ -1,253 +1,138 @@
-
 <template>
     <div id="home-component">
-        <header>
-            <div>
-                <div class="menu" @click="isShow">
-                    <van-icon name="wap-nav" />
-                    菜单
-               </div>
-               <span class="location">
-                    <!-- <van-icon name="location-o" /> -->
-                </span>
-                <!-- <span>{{city}}</span> -->
-            </div>  
-            <span>首页</span>
-            <router-link tag="span" to="/home/systemNews" class="news"><van-icon name="volume" />&nbsp;消息</router-link>        
-        </header>
-        <div class="container">
-            <!-- 轮播图模块 -->
+        <div class="home-container" :class="showAaside == false ? 'home-normal' : 'home-active'">
+
+            <!-- banner -->
             <div class="swipe">
-                <van-swipe :autoplay="3000">
-                    <van-swipe-item v-for="(image, index) in images" :key="index">
-                        <img v-lazy="image" class="per-img" />
+                <van-swipe :autoplay="3000" :height="height">
+                    <van-swipe-item v-for="(item, index) in images" :key="index" @click="handleSwipeDetail(item)">
+                        <img v-lazy="item.url" class="per-img" />
                     </van-swipe-item>
                 </van-swipe>
+                <div class="space-between" :class="showAaside == false ? 'menus-normal' : 'menus-active'">
+                    <div><van-icon name="wap-nav" size="24px" @click="showAaside = !showAaside" :class="showAaside == true ? 'menu-icon-active' : 'menu-icon-normal'"/></div>
+                    <router-link tag="div" to="/home/systemNews"><van-icon name="volume" size="24px"/></router-link>        
+                </div>
             </div>
-            <!-- 查询模块 -->
-            <div class="search">
-                <ul>
-                    <!-- <router-link :to="{path: '/loan/form/myOrder',query: {info: 'https://www.creditchina.gov.cn/gerenxinyong/?navPage=14',title: '征信查询'}}" tag="li"> -->
-                    <router-link :to="{path: '/home/cardCenter/progressQuery',query: {info:'https://m.youku.com/video/id_XNDE5MjE3MjYzMg==.html?spm=a2h3j.8428770.3416059.1&source=&sharetype=secondtime&from=singlemessage',title: '新手教程'}}" tag="li">
 
-                        <p> <van-icon name="http://pay.91dianji.com.cn/101.png"  class="zx-search"  /></p>
+            <!-- 顶部菜单 -->
+            <div class="top-menus">
+                <ul>
+                    <router-link to="/video" tag="li">
+                        <p><van-icon name="http://pay.91dianji.com.cn/jiaocheng-1.1.png" class="zx-search"/></p>
                         <span>新人教程</span>
                     </router-link>
                     <router-link to="/vip" tag="li">
-                         <p> <van-icon name="http://pay.91dianji.com.cn/102.png"  class="zx-search"  /></p>
+                        <p><van-icon name="http://pay.91dianji.com.cn/daili-1.1.png"  class="zx-search "/></p>
                         <p>升级代理</p>
                     </router-link>
                     <router-link to="/personalCenter/incomedetail" tag="li">
-                         <p> <van-icon name="http://pay.91dianji.com.cn/103.png"  class="zx-search"  /></p>
+                        <p><van-icon name="http://pay.91dianji.com.cn/mingxi-1.1.png"  class="zx-search"/></p>
                         <span>收益明细</span>
                     </router-link>
-                    <router-link tag="li" to="/home/totalPunch">
-                        <p> <van-icon name="http://pay.91dianji.com.cn/104.png"  class="zx-search"  /></p>
-                        <span>签到打卡</span>
-                    </router-link>
+                        <li  @click="goTask">
+                        <p class="dot"> 
+                            <van-icon  name="http://pay.91dianji.com.cn/renwu-1.1.png"  class="zx-search rotateZ "/>
+                            <span v-show="showdot">1</span>
+                        </p>
+                        <span>会员任务</span>
+                    </li>
                 </ul>
             </div>
-            <!-- 名片咨询模块 -->
+
+            <!-- 钱夹资讯 -->
             <div class="pannel-news row">
-                <div class="pannel-title center">钱夹<br/>资讯</div>
-                <div class="pannel-detail center" @click="handleContactUs">
-                    <van-notice-bar text="现成为993会员，即可享有19800元代理商的相关权限，名额有限，相关内容，请联系您的专属客户经理，确认活动详情"/>
+                <div class="pannel-title end-center">
+                    <van-icon name="http://pay.91dianji.com.cn/zixun-icon-1.1.png" size="28px"/>
+                    <van-icon name="http://pay.91dianji.com.cn/zixun-title-1.1.png" size="38px"/>
                 </div>
+                <div class="pannel-detail center" @click="handleContactUs"><van-notice-bar :text="news"/> </div>
             </div>
 
-            <!-- 信用卡模块 -->
-            <div class="credit">
-                <ul>
-                    <li @click="handleIsAuth('/home/cardCenter')">
-                        <span class="handle">
-                            <van-icon name="http://pay.91dianji.com.cn/105.png" size="40px" />
-                        </span>
-                        <div class="channel">
-                            <h3>信用卡办理</h3>
-                            <p>佣金当天结算</p>
-                            <span>官方渠道</span>
-                        </div>
-                    </li>
-                    <li @click="handleIsAuth('/home/collect')">
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/106.png" size="40px" /></span>
-                        <div class="channel">
-                            <h3>商户收款</h3>
-                            <p>快捷支付</p>
-                            <span>落地商户</span>
-                        </div>
-                    </li>
-                    <li @click="handleIsAuth('/loan/detail')">
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/107.png" size="40px" /></span>
-                        <div class="channel">
-                            <h3>我要贷款</h3>
-                            <p>实时审批&nbsp;授信额度</p>
-                            <span>GO>></span>
-                        </div>  
-                    </li>
-                    <!-- <li @click="searchInfo">
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
-                        <div class="channel">
-                            <h3>信用卡管家</h3>
-                            <p>落地商户空卡周转</p>
-                            <span>智能还款</span>
-                        </div>
-                    </li> -->
-                     <router-link tag="li" to="/home/creditHousekeeper">
-                        <span class="handle"> <van-icon name="http://pay.91dianji.com.cn/108.png" size="40px" /></span>
-                        <div class="channel">
-                            <h3>信用卡管家</h3>
-                            <p>落地商户空卡周转</p>
-                            <span>智能还款</span>
-                        </div>
-                     </router-link>
-
-                </ul>
-            </div>
-            <!-- 详情模块 -->
-            <div class="details">
-                <ul>
-                    <li @click="handleExpect">
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_49.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>授权分润</h3>
-                            <p>给实习会员设置分润</p>
-                        </div>
-                    </li>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.epicc.com.cn/',title: '汽车保险'}}">
-                        <span>
-                        <van-icon name="http://pay.91dianji.com.cn/icon_50.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>汽车保险</h3>
-                            <p>没有中间商差价</p>
-                        </div>
-                    </router-link>
-                    <li>
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_51.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>发圈素材</h3>
-                            <p>发朋友圈获得奖金</p>
-                        </div>
-                    </li>
-                    <li @click="handleExpect">
-                        <span>
-                            <van-icon name="http://pay.91dianji.com.cn/icon_52.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>排行榜</h3>
-                            <p>钱夹宝业务排名</p>
-                        </div>
-                    </li>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://baoxian.pingan.com',title: '意外险'}}">
-                        <span>
-                            <van-icon name="http://pay.91dianji.com.cn/icon_53.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>意外险</h3>
-                            <p>出行安全有保障</p>
-                        </div>
-                    </router-link>
-                    <li>
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_60.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>提额秘籍</h3>
-                            <p>快速提额</p>
-                        </div>
-                    </li>
-                    <li @click="handleExpect">
-                        <span>
-                            <van-icon name="http://pay.91dianji.com.cn/icon_61.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>共享奖金池</h3>
-                            <p>参与奖金池奖励分配</p>
-                        </div>
-                    </li>
-                    <li @click="handleExpect">
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_62.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>给团队绑卡</h3>
-                            <p>TA绑卡开通注册</p>
-                        </div>
-                    </li>
-                    <li @click="handleExpect">
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_63.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>积分兑换</h3>
-                            <p>积分不失/换乐无穷</p>
-                        </div>
-                    </li>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'http://www.jd.com',title: '商城'}}">
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_64.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>商城</h3>
-                            <p>商城</p>
-                        </div>
-                    </router-link>
-                    <router-link tag="li" :to="{path: '/loan/form/myOrder',query: {info: 'https://m2.weizhang8.cn/',title: '违章查询'}}">
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_65.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>违章查询</h3>
-                            <p>违章查询  </p>
-                        </div>
-                    </router-link>
-                     <!-- <li @click="handleExpect">
-                        <span>
-                           <van-icon name="http://pay.91dianji.com.cn/icon_63.png" size="30px" />
-                        </span>
-                        <div class="detail-item">
-                            <h3>卡·测评</h3>
-                            <p>信用卡“体检”报告</p>
-                        </div>
-                    </li> -->
-                </ul>
-            </div>
-            <!-- 客服 -->
-            <!-- <div class="serve">
-               <router-link tag="p" :to="{path: '/home/cardCenter/progressQuery',query: {info: 'https://kefu.easemob.com/webim/im.html?configId=9cb49ac7-e183-4e98-afbd-e5860ff3b6a0',title: '在线客服'}}"> <van-icon  name="friends" />在线客服</router-link>
-            </div> -->
-            <!-- 遮盖层 -->
-            <div class="aside-left" v-show="showAaside" @click.self="hideAside">
-                <div class="info">
-                    <div class="avatar">
-                         <span><van-icon :name="headimg" /></span>
-                         <p>{{nickname}}</p>
+            <!-- 分类商城 -->
+            <div class="link-mall">
+                <router-link tag="div" class="mall-one" to="/Trip">
+                    <div class="center">全球出行</div>
+                    <div class="center"><van-icon name="http://pay.91dianji.com.cn/quanqiuchuxing-1.1.png" size="60px"/></div>
+                </router-link>
+                <div class="mall-two">
+                    <div class="shoukuan" @click="handlecollect('/home/collect',true,'2')">
+                        <div class="start-end">在线收款</div>
+                        <div class="end-center"><van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan-1.1.png" size="40px"/></div>
                     </div>
-                    <ul>
-                        <router-link tag="li" to="/home/systemNews">系统消息</router-link>
-                        <router-link tag="li" to="/home/verified">实名认证</router-link>
-                        <router-link to="/home/bindingPhone" tag="li">绑定手机</router-link>
-                        <router-link to="/home/customerService" tag="li">联系客服</router-link>
-                        <router-link to="/home/aboutUs" tag="li">关于我们</router-link>
-                        <!-- <li class="switch">声音开关
-                        </li> -->
-                        <router-link to="/home/accountManagement" tag="li">账户管理</router-link>
-                        <!-- <router-link to="/home/clearCache" tag="li">清除缓存</router-link> -->
-                    </ul>
-                   
-                      <div  @click="signOut" class="sign-out">
-                        <span>退出登录</span>
-                    </div> 
+                    <div class="huankuan" @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')">
+                        <div class="center-end">智能还款</div>
+                        <div class="center"><van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan-1.1.png" size="40px"/></div>
+                    </div>
+                </div>
+                <div class="mall-three">
+                    <router-link tag="div" to="/apply" class="jiayou">
+                        <div class="center-end">加油卡</div>
+                        <div class="center"><van-icon name="http://pay.91dianji.com.cn/youka-1.1.png" size="40px"/></div>
+                    </router-link>
+                    <router-link tag="div" class="fuwu" to="/lifeservice">
+                        <div class="center-end">生活服务</div>
+                        <div class="center"><van-icon name="http://pay.91dianji.com.cn/shenghuofuwu-1.1.png" size="40px"/></div>
+                    </router-link>
+                    <router-link tag="div" class="meishi" to="/famousFoods">
+                        <div class="center-end">大牌美食</div>
+                        <div class="center"><van-icon name="http://pay.91dianji.com.cn/meishi-1.1.png" size="40px"/></div>
+                    </router-link>
                 </div>
             </div>
+
+            <!-- 乐享出游 -->
+            <router-link tag="div" class="big-banner center" to="/Trip">
+                <img src="http://pay.91dianji.com.cn/chuyou-1.1.png" alt="">
+            </router-link>
+
+            <!-- 特色服务 -->
+            <div class="special-service">
+                <div class="title start-center">特色服务</div>
+                <div class="content">
+                    <router-link tag="div" class="per-menu" to="/apply">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/jiayouzhan-1.1.png" size="36px"/></div>
+                        <div class="name center">特惠加油站</div>
+                    </router-link>
+                    <router-link tag="div" class="per-menu" to="/home/evaluation">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/kaceping-1.1.png" size="36px"/></div>
+                        <div class="name center">卡·测评</div>
+                    </router-link>
+                    <div class="per-menu" v-show="wzcx.state=='1'" @click="changeLink(wzcx.link,wzcx.title)">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/weizhangchaxun-1.1.png" size="36px"/></div>
+                        <div class="name center">违章查询</div>
+                    </div>
+                    <div class="per-menu" @click="applycard('https://wsdev.1sta.cn/wechat/pages/wailian/wailian.html?merCode=b480446df76a4494948e3b95845db8ca','办卡中心')">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/xinyongkabaili-1.1.png" size="36px"/></div>
+                        <div class="name center">信用卡办理</div>
+                    </div>
+                    <div class="per-menu" @click="handleGarbage">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/lajifenlei-1.1.png" size="36px"/></div>
+                        <div class="name center">垃圾分类</div>
+                    </div>
+                    <div class="per-menu" v-show="qcbx.state=='1'" @click="changeLink(qcbx.link,qcbx.title)">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/qichebaoxian-1.1.png" size="36px"/></div>
+                        <div class="name center">汽车保险</div>
+                    </div>
+                    <div class="per-menu" @click="handlecollect('/home/receivables',true,'2')">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/zaixianshoukuan-1.1-new.png" size="36px"/></div>
+                        <div class="name center">在线收款</div>
+                    </div>
+                    <div class="per-menu" @click="handleIsAuth('/home/creditHousekeeper/aisleHousekeeper',true,'3')">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/zhinenghuankuan-1.1-new.png" size="36px"/></div>
+                        <div class="name center">智能还款</div>
+                    </div>
+                       <div class="per-menu" @click="getBill">
+                        <div class="icon center"><van-icon name="http://pay.91dianji.com.cn/card.png" size="36px"/></div>
+                        <div class="name center">美化账单</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 更新 -->
             <div @click.self="showUpdate=false" v-show="showUpdate" class="update">
                 <div  class="cover">
                     <div class="version">
-                       <h3>版本更新</h3>
+                    <h3>版本更新</h3>
                         <p>钱夹宝升级了，快来体验吧！</p>
                         <div class="butt">
                             <div class="cancle" @click="showUpdate=false">取消</div>
@@ -256,28 +141,103 @@
                     </div>
                 </div>
             </div>
+
+            <div v-show="showpass" @click.self="showcover" :class="showpass?'cover':''">
+                <div  class="pop">
+                    <h3>请选择通道</h3>
+                    <div class="small" @click.stop="smallPass('1')">
+                        <van-icon name="http://pay.91dianji.com.cn/uz.png" size="26px"/>
+                        <div class="middle">
+                            <p>优质商户 </p>
+                        </div>
+                        <p> <van-icon name="checked" :color="paychennel=='1'?'#4B66AF':'gray'" size="20px"/></p>
+                    </div>
+                    <div class="large" @click.stop="smallPass('2')">
+                        <van-icon name="http://pay.91dianji.com.cn/pt.png" size="26px"/>
+                        <div class="middle">
+                            <p>普通商户</p>
+                        </div>
+                        <p> <van-icon name="checked" :color="paychennel=='2'?'#4B66AF':'gray'" size="20px"/></p>
+                    </div>
+                    <div class="sure">
+                        <van-button size="large" @click="handleselect" type="info">确定</van-button>
+                    </div>
+                </div>
+            </div>
+            <!-- 绑定手机模块 -->
+            <bindMobile></bindMobile>
+            <notice></notice>
         </div>
-        <!-- <div v-show="allmap" id="allmap"></div> -->
+        <!-- 遮盖层 -->
+        <div class="aside-left" :class="showAaside == true ? 'menu-active' : 'menu-normal'">
+            <div class="info">
+                <div class="avatar">
+                    <!-- <span><van-icon :name="headimg" /></span> -->
+                    <div class="himg">
+                        <img :src="headimg" alt="">
+                    </div>
+                    <p><span>{{nickname}}</span> &nbsp;&nbsp; <span>{{lev}}</span></p>
+                </div>
+                <ul>
+                    <router-link tag="li" to="/home/systemNews">系统消息</router-link>
+                    <!-- <router-link tag="li" to="/home/verified">实名认证</router-link> -->
+                    <li @click="handleAuth">实名认证</li>
+                    <router-link to="/home/bindingPhone" tag="li">修改手机</router-link>
+                    <router-link to="/home/customerService" tag="li">联系客服</router-link>
+                    <router-link to="/personalCenter/contactus" tag="li">关于我们</router-link>
+                    <!-- <li class="switch">声音开关
+                    </li> -->
+                    <router-link to="/home/accountManagement" tag="li">账号管理</router-link>
+                    <li @click="handleClear">清除缓存</li>
+                    <router-link tag="li" class="center" to="/register">个人设置</router-link>
+                </ul>
+            
+                <div  @click="signOut" class="sign-out">
+                    <span>退出登录</span>
+                </div> 
+            </div>
+        </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
     </div>
 </template>
 <script>
 import footerMenu from '@/components/footer'
+import bindMobile from '@/components/bindMobile'
+import notice from '@/components/home/notice'
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
   components:{
-      footerMenu
+      footerMenu,
+      bindMobile,
+      notice,
   },
      data() {
         return {
-            // 轮播图图片
+            componentload: true,
+            showchagnnel:false,
+            news:"",
+            radio:"1",
+            showpass:false,
+            isLight:true,
+            isSelect:false,
+            colorl:"#4B66AF",
             images: [
-                'http://pay.91dianji.com.cn/banner01.jpg',
-                'http://pay.91dianji.com.cn/banner02.jpg',
-                'http://pay.91dianji.com.cn/banner03.jpg',
-                'http://pay.91dianji.com.cn/banner04.jpg',
-                'http://pay.91dianji.com.cn/banner05.jpg'
+                {
+                    routes: '/vip',
+                    params: '1',
+                    url: 'http://pay.91dianji.com.cn/banner01-1.1.png',
+                },
+                {
+                    routes: '/vip',
+                    params: '1',
+                    url: 'http://pay.91dianji.com.cn/banner02-1.1.png',
+                },
+                {
+                    routes: '/vip',
+                    params: '2',
+                    url: 'http://pay.91dianji.com.cn/banner03-1.1.png',
+                }
             ],
             showAaside:false, 
             checked:true,
@@ -289,6 +249,7 @@ export default {
             // newaccess_token: '',
             nickname: '',
             photo: '',
+            lev:"",
             headimg:'',
             iscertification: '',
             city: '',
@@ -297,12 +258,113 @@ export default {
             showUpdate:false,
             versionAndroid:"",// 安卓版本号
             versionIos:"", // ios 版本号
-            updateVerson:0  // 设备版本号
+            updateVerson:0,  // 设备版本号
+            height: 190,
+            paychennel:"",
+            wzcx:{},
+            qcbx:{},
+            ywx:{},
+            downUrl:[],
+            showdot:false
         }
   },
-   methods:{
+   methods:{    
+       getBill(){
+           this.$router.push("/home/beautyBill")
+       } ,
+       handleClear(){
+        //    清除缓存
+        storage.remove('promotioncode');
+        this.$toast('清除成功');
+       },
+        // 查看任务
+        getTask(){
+             axiosPost("/activity/activityExit")
+            .then(res=>{
+                if(res.data.success && res.data.code==="1"){
+                    this.showdot=true
+                }
+            })
+        },
+        goTask(){
+            this.$router.push({
+                path:"/home/totalPunch"
+            })
+            this.showdot=false
+        },
+
+       handleselect(){
+           if(this.paychennel=="1"){
+            //    this.$router.push("/home/receiveXH")
+            this.$toast("通道升级中")
+           } else if(this.paychennel=="2") {
+               this.$router.push("/home/receivables")
+           } else {
+               this.$toast("请先选择通道")
+           }
+       },
+       smallPass(i){
+           this.paychennel=i
+       },
+       showcover(){
+          this.showpass=false
+       },
+       sign(){
+           this.$toast("敬请期待")
+       },
         isShow() {
             this.showAaside=true
+        },
+        applycard(url,title){
+
+            let data ={
+                type:'1'
+            }
+            // ai雷达
+             axiosPost("/behavior/insertBehavior",data)
+            .then(res=>{
+                })
+
+             if(this.iscertification == '0' ){
+                //未认证
+                this.$toast('请先实名认证');
+                    
+            }else{
+
+                //  this.$router.push("/home/cardCenter")
+            //    this.changeLink(url,title)
+              location.href=url
+            }
+            
+        },
+        changeLink(url,title){
+            //   this.$router.push({
+            //          path:"/loan/form/myOrder",
+            //          query:{
+            //              info:url,
+            //              title:title
+            //          }
+            //      })
+
+            
+             if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                 this.$router.push({
+                     path:"/loan/form/myOrder",
+                     query:{
+                         info:url,
+                         title:title
+                     }
+                 })
+             } else {
+                 location.href=url
+             }
+        },
+        handleAuth(){
+             if(this.iscertification == '2'){
+                this.$router.push('/home/verified/verifiedName');
+            }else{
+                this.$router.push('/home/verified');
+            }
         },
         handleExpect(){
             this.$toast('敬请期待')
@@ -313,16 +375,14 @@ export default {
                 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
                 var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
                  if(isAndroid) {
-                  window.location.href=" https://www.pgyer.com/vFbf"
+                  window.location.href=this.downUrl[1].link
                } else if(isiOS) {
-                  window.location.href="http://znd.hvv.dnf-w3.cn/KXxv61"
+                  window.location.href=this.downUrl[0].link
               } 
-
         },
         getUpdate(){ // 获取历史版本号
                axiosPost("/customer/getVersion")
                .then(res=>{
-                   console.log(res)
                    if(res.data.success){
                       let version=res.data.data
                       this.versionAndroid=parseFloat(version[0].version)
@@ -333,29 +393,40 @@ export default {
                    
                })
         },
+        getDownloadUrl(){
+             axiosPost("/content/getDownLoadUrl")
+            .then(res=>{
+                if(res.data.success){
+                    this.downUrl=res.data.data
+                    this.downUrl=JSON.parse(this.downUrl)
+                } 
+            })
+
+        },
         update(){
             let that=this
               // 获取设备的版本号
               if(window.plus){  
-                   that.updateVerson=parseFloat(plus.runtime.version);
-                   console.log(that.versionAndroid)
-                    console.log(that.versionIos)
-                   if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
+               
+                plus.runtime.getProperty(plus.runtime.appid,function(inf){
+                that.updateVerson=parseFloat(inf.version);
+                    if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
                        that.showUpdate=true
+                       that.getDownloadUrl()
                    }
+               });
             }else{  
-                document.addEventListener('plusready',function () {  
-                      that.updateVerson=parseFloat(plus.runtime.version);
-                         if(that.versionAndroid>that.updateVerson|| that.versionIos>that.updateVerson ){
-                             that.showUpdate=true
-                        }
-
+                document.addEventListener('plusready',function () { 
+                 plus.runtime.getProperty(plus.runtime.appid,function(inf){
+                that.updateVerson=parseFloat(inf.version);
+                    if(that.versionAndroid>that.updateVerson || that.versionIos>that.updateVerson){
+                       that.showUpdate=true
+                       that.getDownloadUrl()
+                           }
+                        });
                 },false);  
             }  
         } ,
-        hideAside() {
-            this.showAaside=false
-        },
          // 自动登录
         automatic(){
             let data={
@@ -366,9 +437,7 @@ export default {
              .then(res=>{
                 if(!res.data.success){
                      this.$router.push("/logIn");
-                    //  this.$toast('登录失败');
                 }else {
-                    // console.log(res,"自动登录成功")
                     this.$store.commit('iscertification',res.data.data.iscertification);
                     this.$store.commit('level',res.data.data.level);
                     this.$store.commit('promotioncode',res.data.data.promotioncode);
@@ -382,6 +451,14 @@ export default {
                     this.headimg=res.data.data.photo
                     this.nickname=res.data.data.nickname
                     this.$store.commit('city',res.data.data.city);
+                    this.lev=res.data.data.level
+                    if(this.lev=='0'){
+                        this.lev="免费粉丝"
+                    } else if(this.lev=='1'){
+                        this.lev="黄金会员"
+                    } else {
+                        this.lev='钻石会员'
+                    }
                 }
              })
              .catch(err=>{
@@ -404,6 +481,7 @@ export default {
                           })
                           return
                       } else {
+                          storage.remove('openid');
                           that.$router.push("/logIn")
                       }
                      
@@ -416,6 +494,7 @@ export default {
                 });
         },
         changeActive(obj){
+
         } ,
         // 查询实名认证
         handleSearchAuths(){
@@ -426,51 +505,123 @@ export default {
             };
             axiosPost(url,params).then(res =>{
                 if(res.data.success){
-                //    console.log('查询个人设置成功',res)
                    this.iscertification = res.data.data.iscertification;
                    this.$store.commit('mobile',res.data.data.mobile);
                 }
             }).catch(res =>{
-                // console.log('查询个人设置失败',res);
             })
         },
-        // 判断是否实名认证
-        handleIsAuth(obj){ 
-            if(this.iscertification == '0'){
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+        handlecollect(obj,boo,i){
+                 if(this.iscertification == '0' ){
                 //未认证
                 this.$toast('请先实名认证');
+                if(boo){
+                     let data ={
+                        type:i
+                    }
+                     axiosPost("/behavior/insertBehavior",data)
+                    .then(res=>{
+                      })
+                }
             }else{
-                this.$router.push(obj);
+
+                if(boo){
+                    let data ={
+                        type:i
+                    }
+                     axiosPost("/behavior/insertBehavior",data)
+                    .then(res=>{
+                      })
+                } 
+                this.showpass=true
+            }
+        },
+        // 判断是否实名认证
+        handleIsAuth(obj,boo,i){ 
+            if(this.iscertification == '0' ){
+                //未认证
+                this.$toast('请先实名认证');
+                if(boo){
+                     let data ={
+                        type:i
+                    }
+                     axiosPost("/behavior/insertBehavior",data)
+                    .then(res=>{
+                      })
+                }
+            }else{
+                if(boo){
+                    let data ={
+                        type:i
+                    }
+                     axiosPost("/behavior/insertBehavior",data)
+                    .then(res=>{
+                         this.$router.push(obj);
+                    })
+                } else {
+                     this.$router.push(obj);
+                }
             }
         },
         // 联系客服
         handleContactUs(){
             this.$router.push('/personalCenter/contactus')
         },
-        // searchInfo(){
-        //     axiosPost("/creditCard/getMerchantSettled")
-        //     .then(res=>{
-        //         if(res.data.code==="1"){
-        //             this.$router.push("/home/addCard")
-        //         } else if(res.data.code==="0"){
-        //             // window.location.href = res.data.data.url;
-        //             storage.set('cardManager',res.data.data.url);
-        //             this.$router.push({
-        //                 path: '/cardManager'
-        //             })
-        //         }
-        //     })
-        //     .catch(err=>{
-        //         // console.log(err,"失败");
-                
-        //     })
-        // },
+        // 点击轮播图进入详情
+        handleSwipeDetail(item){
+            this.$router.push({
+                path: '/vip',
+                query: {params: item.params}
+            })
+        },
+       
+        handleGarbage(){
+            this.$router.push('/garbage');
+        },
+        //消息咨询
+        getNews(){
+            axiosPost("/content/getInformation")
+            .then(res=>{
+                if(res.data.success){
+                    this.news=res.data.data
+                } else {
+                    this.news="敬请期待"
+                }
+            })
+        },
+        //获取外部链接
+        getLinks(){
+              axiosPost("/content/getOutUrl")
+              .then(res=>{
+                //  console.log(res,"result")
+                if(res.data.success){
+                    let links=res.data.data
+                    links=JSON.parse(links)
+                    this.wzcx=links[0]
+                    this.qcbx=links[1]
+                    this.ywx=links[2]
+                }
+              })
+        }
     },
     created(){
         this.nickname=this.$store.state.wechat.nickname;
         this.headimg=this.$store.state.wechat.headimg;
         this.city=this.$store.state.wechat.city;
+        this.lev=this.$store.state.wechat.level;
+        this.getNews()
+        this.getLinks()
+         if(this.lev=='0'){
+                        this.lev="免费粉丝"
+                    } else if(this.lev=='1'){
+                        this.lev="黄金会员"
+                    } else {
+                        this.lev='钻石会员'
+                    }
+
         this.handleSearchAuths()
+        this.getTask()
         //  this.automatic() //自动登录
         //  this.getUpdate() //获取版本
     }  ,
@@ -483,367 +634,573 @@ export default {
 
 <style lang="less" >
    #home-component {
-       background-color: #eee;
-       >header {
-        height:86px;
-        font-size:28px;
-        line-height: 86px;
-        background-color: #4B66AF;
-        color:white;
-        display:flex;
-        justify-content: space-between;
-        padding-top:10px;
-        position: fixed;
-        width:100%;
-        z-index:999;
-        align-items: center;
-        >div {
-            margin-left:15px;
-            display: flex;
-            >.menu {
-                margin-left:5px;
-                position: relative;
-           }
-        }
-        .location {
-            margin-left:15px;
-        }
-        >.news {
-            margin-right:15px;
-        }
-       }
-       >.container {
-           padding-bottom:96px;
-           padding-top:96px;
-           overflow-x: hidden;
-            position: relative;
-           .update {
-               position: absolute;
-               top:0;
-               bottom:0;
-               left:0;
-               right:0;
-               background-color: rgba(0, 0, 0, .2);
-               >.cover {
-                   width:600px;
-                   height: 400px;
-                   z-index: 99;
-                   position: absolute;
-                   top:30%;
-                   left:10%;
-                   border-radius: 15px;
-                   >.version {
-                       background-color: #fff;
-                       padding:10px;
-                         height: 400px;
-                       box-sizing: border-box;
-                       border-radius: 15px;
-                       >h3 {
-                           margin-top:20px;
-                           text-align: center;
-                           font-size: 34px;
-                           color:#4B66AF;
-                           padding:20px 0px;
-                           font-weight: bolder;
-                       }
-                       >p {
-                           margin-top:20px;
-                           text-align: center;
-                       }
-                       >.butt {
-                           display: flex;
-                           justify-content: space-between;
-                           height: 80px;
-                           >div {
-                               margin-top:90px;
-                               width:49%;
-                               height: 100%;
-                               border:1px solid #ccc;
-                               line-height: 80px;
-                               text-align: center;
-                               &.upd {
-                                   background-color: #4965AE;
-                                   color:#fff;
-                               }
-                           }
-                       }
-                       
-                   }
-               }
-
-           }
-            >.swipe {
-           height: 390px;
-           .per-img{
-               width: 100vw;
-               height: 390px;
-           }
-       }
-        >.search {
-            margin-top:15px;
-            height: 110px;
-            >ul{
-                list-style: none;
-                display: flex;
-                height: 100%;
-                background-color: #fff;
-                border-bottom:2px solid #ccc;
-                padding-bottom:20px;
-                padding-top:10px;
-                >li {
-                    width:33%;
-                    text-align: center;
-                     margin-bottom:20px;
-                     >span {
-                         font-size: 24px;
-                     }
-                     >p {
-                          text-align: center;
-                          margin-bottom:10px;
-                        //   transform: translateX(25%);
-                         >.zx-search {
-                        // display:block;
-                        font-size:80px;
-                        // text-align: center;
-                    }
-                }
-                    
-                }
-            }
-        }
-        >.business-card {
-            display: flex;
-            flex-wrap: nowrap;
-            height: 100px;
-            margin-top:50px;
-            background-color: white;
-            >.information {
-                font-weight: bolder;
-                margin-left:10px;
-                float:left;
-                line-height: 100px;
-            }
-            >.Investment {
-                float:right;
-                margin-top:25px;
-                margin-left:20px;
-            }
-        }
-        >.pannel-news{
-            width: 98vw;
-            height: 150px;
-            margin-top:50px;
-            margin-left: auto;
-            margin-right: auto;
-            background-image: -webkit-linear-gradient(0deg, #4965AE, #7189C4);
-            .pannel-title{
-                width: 20%;
-                height: 100%;
-                color: white;
-                font-weight: bold;
-                font-size: 38px;
-                letter-spacing: 5px;
-                line-height: 48px;
-            }
-            .pannel-detail{
-                width: 80%;
-                height: 100%;
-                color: white;
-                font-size: 28px;
-                animation: pannleRoll 1s ease-in-out;
-            }
-            @keyframes pannelRoll {
-               0% {
-                transform: translateX(200px);
-                    -webkit-transform: translateX(200px);
-                }
-                100% {
-                    transform: translateX(-100%);
-                    -webkit-transform: translateX(-100%);
-                }
-            }
-        }
-       
-        >.credit {
-            margin-top:20px;
-            background-color: #fff;
-            >ul {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-                padding:10px;
-                list-style: none;
-                >li {
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                    width:47%;
-                    border: 2px solid #ccc;
-                    border-radius:10px;
-                    padding-bottom:20px;
-                    padding-top:35px;
-                    margin-top:10px;
-                    background-color:#FAFAFA;
-                    >.handle {
-                        color:#CF9C5D;
-                        font-size: 60px;
-                        margin-left: 10px;
-                        margin-top:30px;
-                    }
-                    >.channel {
-                        text-align: left;
-                        flex:1;
-                        margin-left:20px;
-                        >h3 {
-                            font-size:30px;
-                            font-weight: bolder;
-                        }
-                        >p {
-                            font-size:28px;
-                            margin-top:10px;
-                            margin-bottom:10px;
-                            color:#4B66AF;
-                        }
-                        >span {
-                            color:#4B66AF;
-                            background-color:#E8ECF7;
-                            border-radius:15px;
-                            padding:5px 20px;
-                            font-size: 28px;
-                            margin-bottom: 10px;
-                        }
-                    }
-                }
-            }
-        }   
-        >.details {
-            margin-top:10px;
-            border-top:1px solid #ccc;
-            background-color: #fff;
-            padding-bottom:100px;
-            margin-bottom: 50px;
-            >ul{
-                display: flex;
-                flex-wrap: wrap;
-                >li {
-                    width:50%;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    border-bottom: 1px solid #ccc;
-                    border-right: 1px solid #ccc;
-                    box-sizing: border-box;
-                    >span {
-                        margin-left: 40px;
-                        font-size: 40px;
-                        color:#CF9C5D;
-                    }
-                    >.detail-item {
-                        margin-left:10px;
-                        flex:1;
-                        >h3 {
-                            font-weight: bolder;
-                            font-size: 30px;
-                            margin-top:30px;
-                            margin-bottom: 20px;
-                        }
-                        >p {
-                            font-size:30px;
-                            margin-bottom: 20px;
-                            color:#666;
-                        }
-                    }
-                }
-            }
-        }
-         >.serve {
-            //  background-color: red;
-             margin-bottom: 50px;
-             padding:20px 20px 50px 30px;
-             font-size:34px;
-             color:#4965AE;
-
-        }
-        >.aside-left {
+        width: 100vw;
+        height: 100vh; 
+        background: #ECECEC;
+        .home-container{
+            width: 100%;
+            height: calc(100vh - 100px);
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            // banner
+            .swipe {
                 width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, .4);
-                position: fixed;
-                overflow: visible;
-                top:0px;
-                right:0px;
-                bottom: 0px;
-                left:0px;
-                z-index: 999;
-                color:#fff;
-                text-align: center;
-                >.info {
-                    width:50%;
+                // height: 380px;
+                position: relative;
+                .per-img{
+                    width: 100vw;
+                    height: auto;
+                }
+                .menus-normal{
+                    width: 100%;
+                    height: 86px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    color: #ffffff;
+                    box-sizing: border-box;
+                    padding: 0px 15px;
+                    transition: 0.8s;
+                    .menu-icon-normal{
+                        transition: 0.8s;
+                        transform: rotate(0deg);
+                    }
+                    .menu-icon-active{
+                        transition: 0.8s;
+                        transform: rotate(90deg);
+                    }
+                }
+                .menus-active{
+                    width: 50%;
+                    height: 86px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    color: #ffffff;
+                    box-sizing: border-box;
+                    padding: 0px 15px;
+                    transition: 0.8s;
+                    .menu-icon-normal{
+                        transition: 0.8s;
+                        transform: rotate(0deg);
+                    }
+                    .menu-icon-active{
+                        transition: 0.8s;
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+            // 顶部菜单
+            .top-menus {
+                height: auto;
+                margin-top: 10px;
+                >ul{
+                    list-style: none;
+                    display: flex;
                     height: 100%;
-                    overflow-y: scroll;
-                    background-color: #4965AE;
-                    position: fixed;
-                    top:0px;
-                    right: 0px;
-                    left:0px;
-                    bottom: 0px;
-                    padding-bottom: 20px;
-                    z-index: 999;
-                   
-                    >.avatar {
-                        padding-top:50px;
+                    background-color: #fff;
+                    padding-bottom:20px;
+                    padding-top:20px;
+                    >li {
+                        width:33%;
+                        text-align: center;
                         >span {
-                            font-size:100px;
+                            font-size: 24px;
                         }
                         >p {
-                            margin-top:20px;
-                            margin-bottom:80px;
-                        }
-                    }
-                    >ul{
-                        margin-left:100px;
-                        margin-right:100px;
-                        >li {
-                            border-top:3px dashed #ccc;
-                            padding:50px 10px;
-                            font-size: 28px;
-                             &.switch {
-                             >p {
-                                 margin-top:-5px;
-                             }
-                          }
-                        }
-                    }
-                    >.sign-out {
-                        margin-top:20px;
-                        // margin-bottom:20px;
-                         >span{
-                            border:2px solid #fff;
-                           background-color:#8E9CCE;
-                           padding:30px 60px;
-                           border-radius: 10px;
-                         }
-                    }
-                    .van-dialog .van-button {
-                        /* border: 0; */
-                        border: 1px solid #4b66af;
-                    }
+                            text-align: center;
+                            margin-bottom:10px;
+                            &.dot{
+                                >span{
+                                    display: inline-block;
+                                    width:26px;
+                                    height:26px;
+                                    border-radius: 50%;
+                                    background-color: red;
+                                    color:#fff;
+                                }
+                            }
+                            .rotateZ {
+                                //   animation: icon 2s 1s linear infinite;
+                                //  -webkit-animation: icon 2s 1s linear  infinite;
+                                -webkit-animation: Tada 3s both infinite;
+                                -moz-animation: Tada 3s both infinite;
+                                -ms-animation: Tada 3s both infinite;
+                                animation: Tada 3s both infinite;
+                            }
 
-                    .van-dialog,
-                    .van-dialog__message,
-                    .van-button {
+                            @keyframes Tada {
+                                0% {
+                                    transform: scale(1);
+                                    transform: scale(1)
+                                }
+                                70%,73%{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                                    transform: scale(0.9) rotate(-10deg);
+                                    transform: scale(0.9) rotate(-10deg)
+                                }
+                                77%,83%,90%,97%  {
+                                    transform: scale(1.2) rotate(10deg);
+                                    transform: scale(1.2) rotate(10deg)
+                                }
+                                80%,87%,93%{
+                                    transform: scale(1.2) rotate(-10deg);
+                                    transform: scale(1.2) rotate(-10deg)
+                                }
+                                100% {
+                                    transform: scale(1) rotate(0);
+                                    transform: scale(1) rotate(0)
+                                }
+                            }
+                            >.zx-search {
+                                font-size: 60px;
+                            }
+                        }   
+                    }
+                }
+            }
+            // 钱夹资讯
+            .pannel-news{
+                width: 100vw;
+                height: 100px;
+                margin-top:10px;
+                background-color: #fff;
+                .pannel-title{
+                    width: 20%;
+                    height: 100%;
+                    // color: white;
+                    font-weight: bold;
+                    font-size: 34px;
+                    letter-spacing: 5px;
+                    line-height: 48px;
+                }
+                .van-notice-bar {
+                    color:#222;
+                }
+                .pannel-detail{
+                    width: 80%;
+                    height: 100%;
+                    color: #000;
+                    font-size: 28px;
+                    animation: pannleRoll 1s ease-in-out;
+                }
+                @keyframes pannelRoll {
+                0% {
+                    transform: translateX(200px);
+                        -webkit-transform: translateX(200px);
+                    }
+                    100% {
+                        transform: translateX(-100%);
+                        -webkit-transform: translateX(-100%);
+                    }
+                }
+            }
+            // 分类商城
+            .link-mall{
+                width: 100%;
+                height: 398px;
+                background: #fff;
+                box-sizing: border-box;
+                padding: 10px;
+                display: grid;
+                grid-template-columns: repeat(7,1fr);
+                grid-template-rows: repeat(2,2fr);
+                grid-gap: 10px;
+                margin-top: 15px;
+                grid-template-areas:  
+                    "l l r r r r r"
+                    "l l b b b b b";
+                .mall-one{
+                    background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                    border-radius:8px;
+                    grid-area: l;
+                    div{
+                        width: 100%;
+                        height: 50%;
+                        color: #FBFBFB;
                         font-size: 30px;
                     }
                 }
-                .van-button .van-button--default .van-button--large .van-dialog__confirm .van-hairline--left{
-                    height:70px;
+                .mall-two{
+                    grid-area: r;
+                    display: grid;
+                    grid-gap: 10px;
+                    grid-template-columns: repeat(7,1fr);
+                    grid-template-rows: 1fr;
+                    grid-template-areas: "l2 l2 l2 l2 r2 r2 r2";
+                    .shoukuan{
+                        grid-area: l2;
+                        background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                        border-radius:8px;
+                        div:nth-child(1){
+                            width: 100%;
+                            height: 40%;
+                            color: #FBFBFB;
+                            font-size: 30px;
+                            box-sizing: border-box;
+                            padding-left: 10%;
+                        }
+                        div:nth-child(2){
+                            width: 100%;
+                            height: 60%;
+                            box-sizing: border-box;
+                            padding-right: 10%;
+                        }
+                    }
+                    .huankuan{
+                        grid-area: r2;
+                        background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                        border-radius:8px;
+                        div:nth-child(1){
+                            width: 100%;
+                            height: 40%;
+                            color: #FBFBFB;
+                            font-size: 30px;
+                        }
+                        div:nth-child(2){
+                            width: 100%;
+                            height: 60%;
+                        }
+                    }
                 }
-         }
-          .van-dialog .van-button{
-             height: 80px;
-         }
-        
-     }
-   }
-</style>
+                .mall-three{
+                    grid-area: b;
+                    display: grid;
+                    grid-template-columns: repeat(6,1fr);
+                    grid-template-rows: 1fr;
+                    grid-template-areas: "l3 l3 m3 m3 r3 r3";
+                    grid-gap: 10px;
+                    .jiayou{
+                        grid-area: l3;
+                        background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                        border-radius:8px;
+                        div:nth-child(1){
+                            color: #FBFBFB;
+                            width: 100%;
+                            height: 40%;
+                            font-size: 30px;
+                        }
+                        div:nth-child(2){
+                            width: 100%;
+                            height: 60%;
+                        }
+                    }
+                    .fuwu{
+                        grid-area: m3;
+                        background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                        border-radius:8px;
+                        div:nth-child(1){
+                            color: #FBFBFB;
+                            width: 100%;
+                            height: 40%;
+                            font-size: 30px;
+                        }
+                        div:nth-child(2){
+                            width: 100%;
+                            height: 60%;
+                        }
+                    }
+                    .meishi{
+                        grid-area: r3;
+                        background:linear-gradient(180deg,rgba(80,101,185,1) 0%,rgba(60,107,213,1) 100%);
+                        border-radius:8px;
+                        div:nth-child(1){
+                            color: #FBFBFB;
+                            width: 100%;
+                            height: 40%;
+                            font-size: 30px;
+                        }
+                        div:nth-child(2){
+                            width: 100%;
+                            height: 60%;
+                        }
+                    }
+                }
+            }
+            // 乐享出游
+            .big-banner{
+                width: 100%;
+                height: auto;
+                margin-top: 10px;
+                box-sizing: border-box;
+                padding: 0px 10px;
+                img{
+                    width: 100%;
+                    height: auto;
+                }
+            }
+            // 特色服务
+            .special-service{
+                width: 100%;
+                height: auto;
+                background: #fff;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                .title{
+                    width: calc(100% - 30px);
+                    height: 50px;
+                    margin-left: 10px;
+                    border-left: solid 10px #5165B7;
+                    padding-left: 10px;
+                    font-size: 36px;
+                    font-weight: 700;
+                }
+                .content{
+                    width: 100vw;
+                    box-sizing: border-box;
+                    padding: 0px 10px;
+                    margin-top: 10px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    .per-menu{
+                        width: calc(calc(100vw - 20px) / 4);
+                        height: calc(calc(100vw - 20px) / 4);
+                        box-sizing: border-box;
+                        grid-area: c;
+                        border: solid 1px #ccc;
+                        .icon{
+                            width: 100%;
+                            height: 60%;
+                        }
+                        .name{
+                            width: 100%;
+                            height: 40%;
+                            font-size: 26px;
+                        }
+                    }
+                }
+            }
+            // 更新 
+            .update {
+                position: absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+                background-color: rgba(0, 0, 0, .2);
+                .cover {
+                    width:600px;
+                    height: 400px;
+                    z-index: 99;
+                    position: absolute;
+                    top:30%;
+                    left:10%;
+                    border-radius: 15px;
+                    >.version {
+                        background-color: #fff;
+                        padding:10px;
+                            height: 400px;
+                        box-sizing: border-box;
+                        border-radius: 15px;
+                        >h3 {
+                            margin-top:20px;
+                            text-align: center;
+                            font-size: 34px;
+                            color:#4B66AF;
+                            padding:20px 0px;
+                            font-weight: bolder;
+                        }
+                        >p {
+                            margin-top:20px;
+                            text-align: center;
+                        }
+                        >.butt {
+                            display: flex;
+                            justify-content: space-between;
+                            height: 80px;
+                            >div {
+                                margin-top:90px;
+                                width:49%;
+                                height: 100%;
+                                border:1px solid #ccc;
+                                line-height: 80px;
+                                text-align: center;
+                                &.upd {
+                                    background-color: #4965AE;
+                                    color:#fff;
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }  
+            // 普通or优质商户选择
+            .cover{
+                position: fixed;
+                top:0px;
+                bottom: 0px;
+                left:0px;
+                right:0px;
+                background-color: rgba(0, 0, 0, .5);
+                z-index: 99;
+                .pop{
+                    position: absolute;
+                    top:26%;
+                    left:9%;
+                    width: 600px;
+                    padding:10px;
+                    background-color: #fff;
+                    border:1px solid #ccc;
+                    color:#000;
+                    z-index: 999;
+                    border-radius: 15px;
+                    h3{
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 34px;
+                        padding:30px 0px 15px 0px;
+                    }
+                    >p {
+                        text-align: center;
+                        padding:18px 0px;
+                        border-bottom: 1px solid #ccc;
+                        color:#808080;
+                    }
+                    .sure {
+                        padding:30px;
+                    }
+                    .van-button--info {
+                        background: linear-gradient(to right,#D8B56D, #886929 );
+                        height: 80px;
+                        line-height: 80px;
+                        color:#fff;
+                        border:1px solid #886929;
+                    }
+                    >.small,.large {
+                        display: flex;
+                        justify-content: space-between;
+                        padding-bottom: 20px;
+                        align-items: center;
+                        z-index: 1000;
+                        background-color: #fff;
+                        padding:15px;
+                        .middle {
+                            flex:1;
+                            padding-left:20px;
+                            padding-bottom: 10px;
+                            span {
+                                font-size: 24px;
+                            }
+                        }
+                        p {
+                            font-size: 32px;
+                            font-weight: bold;
+                            padding: 25px 0;
+                            span{
+                                font-weight: normal;
+                                font-size: 26px;
+                                color:#808080;
+                            }
+                        }
+                    }
+                    .small {
+                        border-bottom: 1px solid #ccc;
+                    }
+                    .large {
+                        margin-top:5px;
+                    }
+                }
+            }
+        }
+        .home-normal{
+            position: relative;
+            top: 0px;
+            left: 0px;
+            transition: 0.8s;
+        }
+        .home-active{
+            position: relative;
+            top: 0px;
+            left: 50%;
+            transition: 0.8s;
+        }
+        .aside-left{
+            color:#fff;
+            text-align: center;
+            z-index: 103;
+            >.info {
+                width:100%;
+                height: 100%;
+                overflow-y: scroll;
+                background-color: #4965AE;
+                padding-bottom: 20px;
+                >.avatar {
+                    padding-top:50px;
+                    .himg {
+                        width:150px;
+                        height:150px;
+                        margin:0 auto;
+                        img {
+                            width:100%;
+                            border-radius: 50%;
+                        }
+                    }
+                    >p {
+                        margin-top:20px;
+                        margin-bottom:80px;
+                    }
+                }
+                >ul{
+                    margin-left:100px;
+                    margin-right:100px;
+                    >li {
+                        border-top:3px dashed #ccc;
+                        padding:40px 10px;
+                        font-size: 28px;
+                            &.switch {
+                            >p {
+                                margin-top:-5px;
+                            }
+                        }
+                    }
+                }
+                >.sign-out {
+                    margin-top:50px;
+                    
+                    .van-button--large {
+                        height:48px!important;
+                    }
+                    .van-dialog__message--has-title {
+                        height:70px!important;
+                    }
+                        >span{
+                            box-shadow: #32406E -10px -10px 15px 4px inset;
+                        border:2px solid #556BB7;
+                        background-color: #2A54B3;
+                        padding:30px 60px;
+                        border-radius:30px;
+                        }
+                }
+                .van-dialog .van-button {
+                    border: 1px solid #4b66af;
+                }
 
+                .van-dialog,.van-dialog__message,.van-button {
+                    font-size: 30px;
+                }
+            }
+        }
+        .menu-normal{
+            width: 50%;
+            height: 100%;
+            position: fixed;
+            overflow: visible;
+            top: 0%;
+            left: -50%;
+            z-index: 999;
+            transition: 0.8s;
+            background-color: rgba(0, 0, 0, 0);
+        }
+        .menu-active{
+            width: 50%;
+            height: 100%;
+            position: fixed;
+            overflow: visible;
+            top:0px;
+            left:0px;
+            z-index: 999;
+            transition: 0.8s;
+            background-color: rgba(0, 0, 0, .4);
+        }
+    }
+</style>

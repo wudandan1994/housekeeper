@@ -1,35 +1,61 @@
 <template>
     <div id="add-card">
         <header class="header-top row">
-            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="white" size="20px" name="arrow-left"/></div>
-            <div class="top-title center">银行卡管理</div>
-            <div class="right-icon center"></div>
+            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="#434343" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">我的银行卡</div>
+            <router-link tag="div" class="right-icon center" to="/personalCenter/addcard/UnionPay">添加</router-link>
         </header>
-        <router-link tag="div" to="/personalCenter/addcard/UnionPay" class="UnionPay row">
+        <!-- <router-link tag="div" to="/personalCenter/addcard/UnionPay" class="UnionPay row">
             <div class="pay-icon end-center"> <svg class="icon" aria-hidden="true"><use xlink:href="#icon-pay-unionpay"></use></svg></div>
             <div class="add-icon center"><van-icon name="plus" size="20px"/></div>
             <div class="add-title start-center">添加银行卡</div>
             <div class="more-icon center"><van-icon name="arrow"/></div>
-        </router-link>
+        </router-link> -->
         <div class="card-list">
             <div class="per-card" v-for="(item,index) in bankcardlist" :key="index">
                 <div class="name">{{item.name}}</div>
                 <div class="bankname">{{item.bankname}}</div>
-                <div class="bankcardno">{{item.bankcardno}}</div>
+                <div class="bankcardno">{{item.abridge}}</div>
+                <div class="phone">{{(item.phone).substr(0,4) +'****'+(item.phone).substr(7,11)}}</div>
             </div>
         </div>
+        <loading :componentload='componentload'></loading>
     </div>
 </template>
 <script>
+import loading from'@/components/loading'
 import { axiosPost } from '../../lib/http';
 export default {
+    components: {
+        loading
+    },
     data(){
         return {
+            componentload: true,
             nickname:'',
             headimg:'',
             recommendedcode:'',
-            level:'',
-            bankcardlist: [],
+            level:'', 
+            bankcardlist: [
+                {
+                    name: 'JACK',
+                    bankname: '中国农业银行',
+                    abridge: '中国农业银行8555',
+                    phone: '13258948512'
+                },
+                {
+                    name: 'JACK',
+                    bankname: '中国农业银行',
+                    abridge: '中国农业银行8555',
+                    phone: '13258948512'
+                },
+                {
+                    name: 'JACK',
+                    bankname: '中国农业银行',
+                    abridge: '中国农业银行8555',
+                    phone: '13258948512'
+                }
+            ],
         }
     },
     methods:{
@@ -50,13 +76,27 @@ export default {
                 // console.log('获取已绑定银行卡列表成功',res);
                 if(res.data.success){
                     if(res.data.data.length == '0'){
-                        this.$toast('您还未绑定银行卡');
+                        setTimeout(()=>{
+                            this.componentload = false;
+                            this.$toast('您还未绑定银行卡');
+                        },700)
                     }else{
                         this.bankcardlist = res.data.data;
+                        setTimeout(()=>{
+                            this.componentload = false;
+                        },700)
                     }
+                }else{
+                    setTimeout(()=>{
+                        this.componentload = false;
+                        this.$toast.fail('查询失败');
+                    },700)
                 }
             }).catch(res =>{
-                // console.log('获取已绑定银行卡列表失败',res)
+                setTimeout(()=>{
+                    this.componentload = false;
+                    this.$toast.fail('查询失败');
+                },700)
             })
         },
     },
@@ -73,8 +113,16 @@ export default {
     #add-card{
         width: 100vw;
         height: calc(100vh - 90px);
-        background: #EEEFF1;
         padding-top: 90px;
+        .header-top{
+            background: #f1f1f1;
+            .top-title{
+                color:#151515;
+            }
+            .right-icon{
+                color:#4b66af;
+            }
+        }
         .personal{
             width: 100vw;
             height: 120px;
@@ -143,20 +191,20 @@ export default {
         .card-list{
             width: 100vw;
             height: calc(100vh - 86px);
-            margin-top: 86px;
+            margin-top: 20px;
             .per-card{
-                width: 97%;
-                height: 200px;
+                width: 95%;
+                height: 220px;
                 margin-left: auto;
                 margin-right: auto;
-                background: #4b66af;
-                margin-top: 25px;
                 border-radius: 20px;
                 position: relative;
+                background: url('http://pay.91dianji.com.cn/ka01@2x.png') center center no-repeat;
+                background-size: 100% 100%;
                 .name{
                     position: absolute;
-                    top: 40px;
-                    left: 30px;
+                    top: 31px;
+                    left: 70px;
                     color: #ffffff;
                     font-size: 30px;
                     font-weight: 700;
@@ -169,10 +217,18 @@ export default {
                     font-size: 30px;
                     font-weight: 700;
                 }
+                .phone{
+                    position: absolute;
+                    top: 85px;
+                    left: 40px;
+                    color: #ffffff;
+                    font-size: 30px;
+                    font-weight: 700;
+                }
                 .bankcardno{
                     position: absolute;
                     top: 140px;
-                    left: 20px;
+                    left: 40px;
                     color: #ffffff;
                     font-size: 30px;
                     font-weight: 700;

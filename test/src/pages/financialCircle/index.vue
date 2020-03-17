@@ -33,15 +33,15 @@
         <div class="share" v-show="showShare">
             <ul>
                <ul>
-                                <li id="wxF"  @click="wxfri">
-                                    <p><van-icon name="http://pay.91dianji.com.cn/wx.png"/></p>
-                                    <p>好友</p>
-                                </li>
-                                <li @click="wxcir">
-                                    <p><van-icon color="white" size="20px" name="http://pay.91dianji.com.cn/pyq.png"/></p>
-                                    <p>朋友圈</p>
-                                </li>
-                            </ul>
+                    <li id="wxF"  @click="wxfri">
+                        <p><van-icon name="http://pay.91dianji.com.cn/wx.png"/></p>
+                        <p>好友</p>
+                    </li>
+                    <li @click="wxcir">
+                        <p><van-icon color="white" size="20px" name="http://pay.91dianji.com.cn/pyq.png"/></p>
+                        <p>朋友圈</p>
+                    </li>
+                </ul>
             </ul>
         </div>
     </div>
@@ -62,9 +62,7 @@ export default {
             threshold: 6,
             isActive: '1',
             active: 4,
-            showShare:false,
-            shares:null,
-            sharewx:null,
+            showShare:false
         }
     },
     components: {
@@ -90,7 +88,7 @@ export default {
                 alert("获取分享服务列表失败：" + e.message);
             });
         },
-       
+        wxcir(){},
          shareWeixinMessage() {
              let that=this
              that.sharewx.send({ content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝", href: "http://pay.91dianji.com.cn/#/home?promotioncode=02400219", extra: { scene: "WXSceneSession" } }, function () {
@@ -115,7 +113,7 @@ export default {
 
 <style lang="less" scoped>
 #financial-circle-component{
-        color: white;
+        // color: white;
         .more{
             width: 100%;
             height: 86px;

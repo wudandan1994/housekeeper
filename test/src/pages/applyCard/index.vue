@@ -100,7 +100,6 @@ export default {
             }
             axiosPost("/creditCard/insertCreditCard",data)
             .then(function(res){
-
                 if(!res.data.success){
                     that.$toast({
                         message:res.data.message
@@ -117,9 +116,21 @@ export default {
                                 title:"办卡中心"
                               }
                         })
+
+
+                        //  if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                        //         that.$router.push({
+                        //             path:"/loan/form/myOrder",
+                        //             query:{
+                        //                 info:url,
+                        //                 title:"办卡中心"
+                        //             }
+                        //         })
+                        //         } else {
+                        //             that.componentload=false
+                        //             location.href=url
+                        //         }
                     },1000)
-                   
-                       
                     //  location.href=res.data.data.data
                 }
                
@@ -144,7 +155,6 @@ export default {
                     this.merMobile = this.$store.state.wechat.mobile;
                 }
             }).catch(res =>{
-                // console.log('获取实名认证状态失败',res);
             })
         }
        

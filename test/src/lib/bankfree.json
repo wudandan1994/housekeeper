@@ -1,0 +1,21 @@
+[
+    {"bankname":"中国工商银行","free":"56","day":"0"},
+    {"bankname":"中国农业银行","free":"56","day":"2"},
+    {"bankname":"中国交通银行","free":"56","day":"3"},
+    {"bankname":"广发银行","free":"56","day":"3"},
+    {"bankname":"上海银行","free":"56","day":"3"},
+    {"bankname":"南京银行","free":"56","day":"未知"},
+    {"bankname":"农商银行","free":"56","day":"未知"},
+    {"bankname":"中国建设银行","free":"50","day":"3"},
+    {"bankname":"中国银行","free":"50","day":"3"},
+    {"bankname":"中国邮政储蓄银行","free":"50","day":"3"},
+    {"bankname":"招商银行","free":"50","day":"3"},
+    {"bankname":"中信银行","free":"50","day":"3"},
+    {"bankname":"浦发银行","free":"50","day":"3"},
+    {"bankname":"兴业银行","free":"50","day":"3"},
+    {"bankname":"中国民生银行","free":"50","day":"3"},
+    {"bankname":"中国光大银行","free":"50","day":"3"},
+    {"bankname":"深发/平安银行","free":"50","day":"3"},
+    {"bankname":"北京银行","free":"50","day":"3"}
+
+    ]

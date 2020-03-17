@@ -1,9 +1,9 @@
 <template>
     <div id="progress-query">
         <div class="container">
-           <div class="logo">
-               <img src="http://pay.91dianji.com.cn/logo.png" alt="">
-           </div>
+            <div class="logo center">
+                <img src="http://pay.91dianji.com.cn/top_icon.png" alt="">
+            </div>
            <div class="info">
                 <p>
                     <span><van-icon name="phone" size="28px"/></span>
@@ -27,21 +27,18 @@
                     <p>登录</p>
                 </div>
            </div>
-            <div class="wx-login row">
-                <div class="logIn start-center" @click="logIn">
-                    <span class="wx-logo"><van-icon name="http://pay.91dianji.com.cn/wx.png"/></span>
-                    <span>微信登录</span>
-                </div>
-                <!-- <div class="register end-center" @click="register">注册</div> -->
-            </div>
-        </div>
+            <div class="wx-login" @click="logIn">
+                <div class="center">———————其他登录方式———————</div>
+                <div class="center"><van-icon size="28px" name="http://pay.91dianji.com.cn/wx.png"/></div>
+            </div> 
+        </div> 
     </div>
 
 </template>
 
 
 <script>
-import qs from 'qs'
+import qs from 'qs' 
 import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
@@ -55,8 +52,6 @@ export default {
     },
 
     methods:{
-        // password(){
-        // },
         forgetPassword() {
             this.$router.push('/forgetPassword')
         },
@@ -84,6 +79,8 @@ export default {
             axiosPost("/customer/login",data)
             .then(function(res){
                 if(res.data.success){
+                    storage.set('cid',res.data.data.id);
+                    storage.set('promotioncode',res.data.data.promotioncode);
                     that.$store.commit('iscertification',res.data.data.iscertification);
                     that.$store.commit('level',res.data.data.level);
                     that.$store.commit('promotioncode',res.data.data.promotioncode);
@@ -94,8 +91,11 @@ export default {
                     that.$store.commit('openid',res.data.data.openid);
                     that.$store.commit('nickname',res.data.data.nickname);
                     that.$store.commit('headimg',res.data.data.photo);
-                    // console.log('登陆成功',res);
                     that.$toast('登陆成功');
+
+
+
+
                     if(that.checked){
                         storage.set('rempass',true);
                     }else{
@@ -117,13 +117,12 @@ export default {
                 }
             })
             .catch(function(err){
-                // console.log(err,"error");
                 that.$toast('登录失败')  
             })
         },
         // 登录
             logIn(){
-                // console.log(location.href)
+                // location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2ftest.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
                 window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx779a30a563ad570d&redirect_uri=http%3a%2f%2fpay.91dianji.com.cn%2f%23%2fhome&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
           
         //    var auths=null
@@ -181,7 +180,6 @@ export default {
            width:100%;
            height: 86px;
            line-height: 86px;
-           padding-top:10px;
            color:#fff;
            display: flex;
            font-size:28px;
@@ -198,45 +196,35 @@ export default {
            }
        }
        >.container {
-        //    padding-top:96px;
-           padding-bottom: 50px;
-           background-color: #fff;
-           >.logo {
-               padding-top:100px;
-               width:40%;
-                margin:0 auto;
-               >img {
-                   display: block;
-                   width:100%;
-                   padding-bottom: 20px;
-                   -webkit-animation: spin 4s linear infinite;
-		           animation: spin 2s linear infinite;
-               }
-            //    @-webkit-keyframes spin {
-            //             0%   {
-            //                 -webkit-transform: rotate(0deg);
-            //                 -ms-transform: rotate(0deg);
-            //                 transform: rotate(0deg);
-            //             }
-            //             100% {
-            //                 -webkit-transform: rotate(360deg);
-            //                 -ms-transform: rotate(360deg);
-            //                 transform: rotate(360deg);
-            //             }
-            //         }
-            //         @keyframes spin {
-            //             0%   {
-            //                 -webkit-transform: rotate(0deg);
-            //                 -ms-transform: rotate(0deg);
-            //                 transform: rotate(0deg);
-            //             }
-            //             100% {
-            //                 -webkit-transform: rotate(360deg);
-            //                 -ms-transform: rotate(360deg);
-            //                 transform: rotate(360deg);
-            //             }
-            //         }
-           }
+            padding-bottom: 50px;
+            background-color: #fff;
+            .logo{
+                width: 100%;
+                height: 200px;
+                margin-top: 50px;
+                img{
+                    width: 200px;
+                    height: 200px;
+                    animation: myfirst 5s ease-in-out infinite;
+                    -moz-animation: myfirst 5s ease-in-out infinite;	/* Firefox */
+                    -webkit-animation: myfirst 5s ease-in-out infinite;	/* Safari 和 Chrome */
+                    -o-animation: myfirst 5s ease-in-out infinite;
+                }
+                @keyframes myfirst {
+                    0%{
+                        transform: rotateY(0deg);
+                        opacity: 1;
+                    }
+                    50%{
+                        transform: rotateY(360deg);
+                        opacity: 0.8;
+                    }
+                    100%{
+                        transform: rotateY(0deg);
+                        opacity: 1;
+                    }
+                }
+            }
            >.info {
                width:80%;
                margin:80px 10% 0px 10%;
@@ -271,6 +259,10 @@ export default {
                justify-content: space-between;
                padding-bottom: 20px;
                margin-top:50px;
+               .van-checkbox__icon .van-icon{
+                    border:1px solid #000;
+                    margin-bottom: 8px !important;
+                }
                >p {
                     padding:15px 0px;
                     font-size:28px;
@@ -285,6 +277,7 @@ export default {
                width:80%;
                  margin:0 auto;
                padding:0 30px;
+               
                >.log {
                    width:100%;
                    height: 100px;
@@ -303,23 +296,15 @@ export default {
             //    }
            }
            
-           >.wx-login {
-                width:80%;
-                height: 80px;
-                margin-left: 10%;
-                display: flex;
-                justify-content: space-around;
-                margin-top:20px;
-                font-size: 32px;
-                .logIn{
-                    width: 70%;
-                    height: 100%;
-                }
-                .register{
-                    width: 30%;
-                    height: 100%;
-                }
-           }
+            .wx-login {
+                 width: 100%;
+                 height: 100px;
+                 margin: 50px auto;   
+                 >div{
+                     width: 100%;
+                     height: 50px;
+                 }
+            }
        }
    }
 </style>

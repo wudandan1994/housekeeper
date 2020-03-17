@@ -1,39 +1,41 @@
 <template>
-    <div>请在浏览器中打开</div>
+    <div id="page-scan-pay">
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="handleReturn"><van-icon color="white" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">扫码支付</div>
+            <div class="right-icon varify center"></div>
+        </header>
+        <div class="code center">
+            <img :src="url+src"/>
+        </div>
+        <div class="tips center">
+            使用手机微信扫一扫或长按识别二维码完成支付
+        </div>
+    </div>
 </template>
 <script>
 export default {
     data(){
         return{
-            
+            url: 'http://pay.91dianji.com.cn/',
+            src: ''
         }
     },
     methods:{
-         // 获取url参数
-        GetUrlParam(paraName) {
-    　　　　var url = document.location.toString();
-    　　　　var arrObj = url.split("?");
-    　　　　if (arrObj.length > 1) {
-    　　　　　　var arrPara = arrObj[1].split("&");
-    　　　　　　var arr;
-    　　　　　　for (var i = 0; i < arrPara.length; i++) {
-    　　　　　　　　arr = arrPara[i].split("=");
-    　　　　　　　　if (arr != null && arr[0] == paraName) {
-    　　　　　　　　　　return arr[1];
-    　　　　　　　　}
-    　　　　　　}
-    　　　　　　return "";
-    　　　　}
-    　　　　else {
-    　　　　　　return "";
-    　　　　}
-    　　},
+        handleReturn(){
+            this.$router.go(-1);
+        }
     },
     created(){
-        alert('参数'+this.GetUrlParam('orderid'));
+        this.src = this.$route.query.qrcode;
     }
 }
 </script>
-<style scoped>
-
+<style scoped lang="less">
+#page-scan-pay{
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    padding-top: 100px;
+}
 </style>

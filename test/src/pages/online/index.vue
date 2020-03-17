@@ -5,12 +5,10 @@
             <div class="top-title center">{{title}}</div>
             <div class="right-icon center"></div>
         </header>
-         <div class="box" style="width:100vw;height:100vh;">　
-            　　<iframe v-if="type" :src="url" scrolling="auto" class="iframe" frameborder="0" width="100vw" height="100vh"></iframe>
-            　　<iframe v-else :src="url" frameborder="0" class="iframe" height="100vh" scrolling='auto' style="width: 1px; min-width: 100vw; *width: 100vw;"></iframe>
-            </div>
+          <div class="box" style="overflow-y: scroll;">　
+            　　<iframe :src="url"  ref="iframe" id="bdIframe" class="iframe"  scrolling="no"  frameborder="0" ></iframe>
+         </div>
     </div>
-
 </template>
  
 
@@ -62,16 +60,9 @@ export default {
     },
     
     created(){
-        this.url=this.$route.query.info
+         this.url=this.$route.query.info
          this.title=this.$route.query.title
         //  this.webview();
-          var u = navigator.userAgent;
-        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-        if(isAndroid){
-        　　this.type = true
-        }else{
-        　　this.type = false
-        }
     }
 }
 </script>
@@ -82,23 +73,16 @@ export default {
             background-color: #4965AE;
        }
         .box {
-               overflow-x: hidden;
+                overflow: auto;
+                -webkit-overflow-scrolling:touch;
+                width:100%;
+                height: 100%;
+                 .iframe{
+                    width:100vw;
+                    height: 100vh;
+                    margin-top:70px;
+                    padding-top:10px;
+                 }
            }
-       .iframe{
-               width: 100%;
-               height:100vh !important;
-               overflow-x:hidden;
-           }
-
-    //    width: 100vw;
-    //    height: calc(100vh - 86px);
-    //    padding-top: 86px;
-        // .iframe{
-        //     width: 100vw;
-        //     height: calc(100vh - 86px);
-        // }
-        // .out {
-            
-        // }
    }
 </style>

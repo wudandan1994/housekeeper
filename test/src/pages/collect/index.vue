@@ -3,59 +3,59 @@
         <header>
             <span @click="goBack"><van-icon name="arrow-left"/></span>
             <span>商户申请</span>
-            <router-link to="/home/news" tag="span">操作说明</router-link>
+            <!-- <router-link to="/home/news" tag="span">操作说明</router-link> -->
+            <span></span>
         </header>
         <div class="container">
            <div class="phone">
                <ul>
-                   <li>
-                       <span>手机号：</span>
-                       <input type="number" v-model="reservedMobile" placeholder="输入银行预留手机号码">
-                       <!-- <span>
-                            <span v-show="showCount">{{count}}秒后再次获取</span>
-                            <span @click="getCode" v-show="showCode">获取验证码</span>
-                       </span> -->
-                   </li>
-                    <li>
+                    <!-- <li>
                         <span>商户名称：</span>
                        <input v-model="merName" type="text" placeholder="商户名称">
-                   </li>
+                   </li> -->
                     <li>
-                        <span>真实姓名：</span>
+                        <span>真实姓名</span>
                        <input v-model="realName"  type="text" placeholder="真实姓名">
                    </li>
                     <li>
+                       <span>手机号</span>
+                       <input type="number" v-model="reservedMobile" placeholder="输入银行预留手机号码">
+                   </li>
+                   <div class="shadow"></div>
+                    <!-- <li>
                         <span>地址：</span>
                        <input  v-model="merAddress"   type="text" placeholder="地址信息">
-                   </li>
+                   </li> -->
                     <li>
-                        <span>证件号：</span>
+                        <span>证件号</span>
                        <input v-model="idCard"  type="text" placeholder="身份证号码">
                    </li>
-                   <li>
+                   <!-- <li>
                         <span>结算户名：</span>
                        <input  v-model="accountName" type="text" placeholder="真实姓名与结算户名必须一致">
-                   </li>
+                   </li> -->
                     <li>
-                        <span>卡号：</span>
+                        <span>卡号</span>
                        <input v-model="accountNo"  type="number" placeholder="储蓄卡卡号">
                    </li>
-                   <li>
+                     <div class="shadow"></div>
+                   <!-- <li>
                        <span>手机号：</span>
                        <input type="number" v-model="mobile" placeholder="手机号码">
-                   </li>
+                   </li> -->
                    <li>
-                       <span>开户行：</span>
+                       <span>开户行</span>
                        <!-- <span class="bank" @click="handleBankNumber">{{bankName}}</span> -->
                        <input type="text"  @click="handleBankNumber" :placeholder="bankName">
                        <span><van-icon name="search" size="20px" /></span>
                        <!-- <span @click="handleBankNumber">测试</span> -->
                    </li>
                    <li>
-                        <span>联行号：</span>
+                        <span>联行号</span>
                        <input v-model="subBankCode" type="number" placeholder="输入该支开户行行号或者联行号">
                    </li>
-                    <li>
+                     <div class="shadow"></div>
+                    <!-- <li>
                         <span>结算户类型：</span>
                        <input v-model="settleAccType"  type="text" placeholder="选择结算户类型">
                        <span @click="showAcc"><van-icon name="arrow"/></span>
@@ -66,8 +66,8 @@
                             @select="onSelect"
                             @cancel="onCancel"
                             />
-                   </li>
-                   <li>
+                   </li> -->
+                   <!-- <li>
                         <span>商户类型：</span>
                        <input  v-model="merType" type="text" placeholder="选择商户类型">
                         <span @click="showMer"><van-icon name="arrow"/></span>
@@ -78,7 +78,7 @@
                             @select="onSelectTwo"
                             @cancel="onCancelTwo"
                             />
-                   </li>
+                   </li> -->
                </ul>
            </div>
            <!-- <router-link to="/home/online" tag="p">联行号在线查询</router-link> -->
@@ -99,6 +99,7 @@
                 <van-picker show-toolbar :columns="columns" @change="onChange" @confirm="onConfirm" />
             </div>
          </div>
+          <loading :componentload="componentload"></loading>
     </div>
 </template>
 
@@ -115,18 +116,20 @@ export default {
     },
     data() {
         return {
-            componentload:true,
+            // componentload:true,
+            componentload:false,
+
             value: '',
             reservedMobile:"",
             mobile:"",
-            merName:"",
+            // merName:"",
             realName:"",
             merAddress:"",
             idCard:"",
-            accountName:"",
+            // accountName:"",
             accountNo:"",
             subBankCode:"",
-            settleAccType:"",
+            // settleAccType:"",
             merType:"",
             show:false,
             showTwo:false,
@@ -161,11 +164,9 @@ export default {
     },
     methods:{
         onChange(picker, value, index) {
-            // console.log('当前值：',value);
             this.bankName = value;
             // 根据当前关键字查询联行号
             var subBankCode = bankNumber.filter(item =>item.bankName == value);
-            // console.log('联行号',subBankCode[0].bankCode);
             this.subBankCode = subBankCode[0].bankCode;
         },
         // 选择器确定时间
@@ -207,10 +208,8 @@ export default {
         },
         // 搜索关键字
         handleChangeSearchName(obj){
-            // console.log('当前关键字',obj.target.value);
             // 根据关键字过滤json
             var list = bankNumber.filter(item =>(item.bankName).indexOf(obj.target.value) > -1);
-            // console.log('关键字过滤后',list);
             if(list.length == '0'){
                 this.$toast('查询为空');
             }else{
@@ -228,14 +227,14 @@ export default {
         register(){
             let that=this
             let type=""
-            let partten=/0?(13|14|15|17|18|19)[0-9]{9}/ 
-            if(that.reservedMobile.trim().length===0 || that.mobile.trim().length===0){
+            let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/ 
+            if(that.reservedMobile.trim().length===0 ){
                 that.$toast({
                     message:"手机号码不能为空"
                 })
                 return
             }
-            if(!partten.test(that.reservedMobile) || !partten.test(that.mobile)){
+            if(!partten.test(that.reservedMobile) ){
                 that.$toast({
                     message:"请填写11位手机号码"
                 })
@@ -248,88 +247,110 @@ export default {
                 })
                 return
             }
-            // let parttenCard=/^([1-9]{1})(\d{15}|\d{18})$/
-            //  if(!parttenCard.test(that.accountNo)){
-            //     that.$toast({
-            //         message:"请填正确卡号"
-            //     })
-            //     return
-            // }
-            if(that.realName.trim().length===0 || that.merName.trim().length===0 || that.merAddress.trim().length===0 || that.idCard.trim().length===0 || that.accountName.trim().length===0
-            || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0 || that.settleAccType.trim().length===0 || that.merType.trim().length===0
-            ){
+          
+            if(that.realName.trim().length===0  ||  that.idCard.trim().length===0 || that.accountNo.trim().length===0 || that.subBankCode.trim().length===0    ){
                 that.$toast({
                     message:"请将信息填写完整"
                 })
                 return
             }
-            if(that.realName!==that.accountName){
-                 that.$toast({
-                    message:"姓名与结算户名不一致"
-                })
-                return
-            }
-            if(that.merType==="个人户"){
-                type="1"
-            } else if(that.merType==="小微户"){
-                type="2"
-            } else if(that.merType==="个体户"){
-                type="3"
-            } else {
-                type="4"
-            }
+          
             let data={
-                merName:that.merName,
+                merName:that.realName,
                 realName:that.realName,
-                merAddress:that.merAddress,
+                merAddress:that.realName,
                 idCard:that.idCard,
-                mobile:that.mobile,
-                accountName:that.accountName,
+                mobile:that.reservedMobile,
+                accountName:that.realName,
                 accountNo:that.accountNo,
                 reservedMobile:that.reservedMobile,
                 subBankCode:that.subBankCode,
-                settleAccType:that.settleAccType==="公户"? "1":"2",
-                merType:type
+                settleAccType:"2",
+                merType:"1"
             }
+            that.componentload=true
             axiosPost("/creditCard/memberReg",data)
             .then(function(res){
-                // console.log(res,"注册之后的第一次信息");
                 if(!res.data.success){
+                    that.componentload=false
                     that.$toast({
                         message:res.data.message
                     })
-                    return
+                   
                 } else {
-                    axiosPost("/creditCard/getMemberReg")
-                    .then(function(res){
-                        // console.log(res,"个人信息查询的结果")
-                        if(res.data.success){
-                            let info=res.data.data.chMerCode
-                            that.componentload=true
-                            setTimeout(()=>{
-                                that.componentload=false
-                                that.$router.push({
-                                path:"/home/collect/open",
-                                query:{
-                                   info,
-                                }
-                             })
-                            },500)
-                            
-                       } else {
-                           that.$toast({
-                               message:res.data.message
-                           })
-                       }
-                    })
-                    .catch(function(err){
-                        // console.log(err,"错误的信息");
 
-                    })
+                  setTimeout(()=>{
+                        that.componentload=false
+                        that.$router.go(-1)
+                    },500)
+
+                          // axiosPost("/creditCard/getMemberReg")
+                    // .then(function(res){
+                    //     if(res.data.success){
+                    //         let info=res.data.data.chMerCode
+                    //         that.componentload=true
+                    //         setTimeout(()=>{
+                    //             that.componentload=false
+                    //             that.$router.push({
+                    //             path:"/home/receivables",
+                    //             query:{
+                    //                info,
+                    //             }
+                    //          })
+                    //         },500)
+                            
+                    //    } else {
+                    //          that.componentload=false
+                    //        that.$toast({
+                    //            message:res.data.message
+                    //        })
+                    //    }
+                    // })
+                    // .catch(function(err){
+
+                    // })
+
+
+
+                   
+                    // 查询通道二是否有注册
+                    // let params={
+                    //     bank_cardno:that.accountNo
+                    // }
+                    // axiosPost("/jxpay/getJxMerchant",params)
+                    // .then(res=>{
+                    //     console.log(res,'通道二的查询')
+                    //     if(res.data.success){
+                    //         console.log(res.data.data,'通道二已经签约,要去支付')
+                    //         that.$router.push("/home/receivables")
+                    //     }else {
+                    //         console.log('通道二没有签约，去签约')
+                    //         let  datas={
+                    //             merchant_name:that.realName,
+                    //             id_cardno:that.idCard,
+                    //             phone:that.reservedMobile,
+                    //             bank_cardno:that.accountNo,
+                    //         }
+                    //         axiosPost("/jxpay/insertRegister",datas)
+                    //         .then(res=>{
+                    //             console.log(res,'第二条通道注册')
+                    //             if(!res.data.success) {
+                    //                 that.$toast(res.data.message)
+                    //             } else {
+                    //                 console.log("第二条通道注册成功，获取商户号")
+                    //                  that.$router.push("/home/receivables")
+                    //             }
+                    //         })
+                    //     }
+                    // })
+
+
+
+
+                  
                 }
             })
             .catch(function(err){
-                // console.log(err,"error")
             })
         },
         // 查询个人信息
@@ -342,17 +363,13 @@ export default {
              },500)
              let info=res.data.data.chMerCode
              this.$router.push({
-                     path:"/home/collect/payment",
-                    query:{
-                        info,
-                     }
+                     path:"/home/collect/open",
                  })
             }else {
                  this.componentload=false
             }
         })
         .catch(err=>{
-            // console.log(err,"error个人信息")
         })
      },
      // 获取实名认证信息
@@ -367,13 +384,12 @@ export default {
                     this.mobile = this.$store.state.wechat.mobile;
                 }
             }).catch(res =>{
-                // console.log('获取实名认证状态失败',res);
             })
         }
     },
    
     created () {
-        this.searchInfo();
+        // this.searchInfo();
         this.handleGetAOuth();
         // 将json对象转换为数组
         for(var item in bankNumber){
@@ -412,11 +428,20 @@ export default {
            padding-bottom: 50px;
            background-color: #EEEFF1;
            font-size: 34px;
+           .van-button--info {
+               background-color: #4965AE;
+               border-color: #4965AE;
+           }
            >.phone {
                >ul{
-                   padding-left:30px;
                    background-color: #fff;
+                   .shadow {
+                       height:20px;
+                       width:100%;
+                       background-color: rgb(243, 239, 239);
+                   }
                    >li{
+                       padding-left:20px;
                        display: flex;
                        flex-wrap: nowrap;
                        border-bottom: 1px solid #ccc;
@@ -466,7 +491,7 @@ export default {
           }
            
            >.at-once {
-               margin-top:150px;
+               margin-top:60px;
                padding:0 20px;
                >button {
                    height: 90px;

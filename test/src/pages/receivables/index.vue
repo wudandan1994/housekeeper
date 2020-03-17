@@ -1,36 +1,55 @@
 <template>
     <div id="receivables">
         <header>
-            <p @click="goBack"><span><van-icon name="arrow-left" /></span></p>
+            <p @click="goBack"><span><van-icon size="16px" name="arrow-left" /></span></p>
             <p>商户收款</p>
-            <p><span><van-icon name="ellipsis" /></span> </p>
+           <span></span> 
         </header>
         <div class="container">
             <div class="portrait">
-                <p><span><van-icon name="manager" /></span></p>
+                <div class="userimg">
+                    <img :src="headimg" alt="">
+                </div>
                 <div class="recommend">
                     <p>
-                        <span>可乐—5-2</span>
-                        <span><van-icon name="info-o" />实习</span>
+                        <span>{{nickname}}</span>
+                        <span>{{lev}}</span>
                     </p>
-                    <p>推荐码：10472992</p>
+                    <p>{{recommendedcode}}</p>
                 </div>
-                <p>(&nbsp;推荐人&nbsp;)</p>
             </div>
+           
             <div class="merchant">
                 <div class="pay">
-                    <p>
-                        <span><van-icon name="photo" /></span>
+                    <p class="union">
+                        <span><van-icon size="30px" name="http://pay.91dianji.com.cn/up.png" /></span>
                         <span>设置金额</span>
                     </p>
                     <p>
                         <span>￥</span>
-                        <input type="number" placeholder="请输入金额最低500元">
+                        <input type="number" v-model="number" @input="change" placeholder="请输入金额最低200元">
                     </p>
+                    <div class="card" v-show="showCard">
+                        <ul>
+                            <!-- <li>
+                                <p>到账储蓄卡：</p>
+                                <p><span>民生银行</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>5323</span></p>
+                                <p class="change">更换<van-icon  name="arrow"  color="#4B66AF" /></p>
+                            </li> -->
+                             <li>
+                                <p>支付信用卡：</p>
+                                <p><span>{{nick}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{cardnumber}}</span></p>
+                                <p @click="getxycard" class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></p>
+                                <!-- <router-link tag="p" :to="{query:{type:'1',},path:'/home/receivables/cards'}"  class="change">选择<van-icon  name="arrow"   color="#4B66AF" /></router-link> -->
+                            </li>
+                        </ul>
+                    </div>
                      <p @click="showPay">
                          <span>立即支付</span>
                      </p>
+
                 </div>
+                <img src="http://pay.91dianji.com.cn/paytype.png" alt="" srcset="">
                 <p>
                     <span><van-icon name="label"/></span>&nbsp;&nbsp;<b class="bold">商户收款</b>，支付通道新开户需要实名注册，信用卡应与绑定的结算卡户名要一致，<span>如出现没到账请及时更换收款储蓄卡后</span>
                      ，及时联系客服登记核查，感谢您的理解 。
@@ -38,118 +57,746 @@
             </div>
             <div class="transaction">
                 <ul>
-                    <router-link tag="li" to="/home/receivables/rate">
-                        <p><span><van-icon name="gold-coin"/></span></p>
+                    <router-link tag="li" :to="{path:'/home/receivables/rate',query:{'type':'2'}}">
+                        <p><span><van-icon color="#4B66AF" size="26px" name="http://pay.91dianji.com.cn/dollar.png"/></span></p>
                         <div>
                             <p>我的费率</p>
                             <p>通道费率详细说明</p>
                         </div>
                     </router-link>
-                    <router-link tag="li" to="/home/receivables/transactionQuery">
-                        <p><span><van-icon name="gold-coin"/></span></p>
+                    <li @click="goRecords">
+                        <p><span><van-icon color="#4B66AF" size="26px" name="http://pay.91dianji.com.cn/search.png"/></span></p>
                         <div>
                             <p>交易查询</p>
                             <p>交易查询详细记录</p>
                         </div>
-                    </router-link>
-                    <router-link tag="li" to="/home/receivables/passageway">
-                        <p><span><van-icon name="gold-coin"/></span></p>
+                    </li>
+                    <router-link tag="li" :to="{path:'/home/receivables/passageway',query:{type:'2'}}" >
+                        <p><span><van-icon color="#4B66AF" size="26px" name="http://pay.91dianji.com.cn/channel.png"/></span></p>
                         <div>
                             <p>通道说明</p>
                             <p>单笔交易限额明细</p>
                         </div>
                     </router-link>
-                    <li @click="changeTips">
-                        <p><span><van-icon name="gold-coin"/></span></p>
+                    <router-link tag="li" to="/home/changeCard">
+                        <p><span><van-icon color="#4B66AF" size="26px" name="http://pay.91dianji.com.cn/card.png" /></span></p>
                         <div>
                             <p>储蓄卡管理</p>
-                            <p>添加回款账户储蓄</p>
+                            <p>修改储蓄卡信息</p>
                         </div>
-                    </li>
+                    </router-link>
                     
                 </ul>
-                <div class="tips" v-show="showTips">
-                    <p>温馨提示</p>
-                    <div>
-                        <p>尊敬的用户，为了确保用户信息的唯一性和安全性，确保账户资金安全，请您先进行银行储蓄卡实名认证，
-                            方可免费办理次业务！
-                        </p>
-                        <p>自家账户不能给他人信用卡支付使用</p>
-                        <p>
-                            <span @click="cancle">取消</span>
-                            <router-link tag="span" to="/home/receivables/storage">实名认证</router-link>
-                        </p>
-                    </div>
-                </div>
+            
             </div>
              <div class="statistics">
                  <ul>
-                     <li>
-                         <span><van-icon name="underway" /></span>
-                         <p><span>操作流程说明</span>&nbsp;&nbsp;<span>(新手必看)</span><span><van-icon name="arrow" /></span> </p>    
-                                     
-                     </li>
-                     <li>
+                     <router-link tag="li" :to="{path:'/home/news',query:{title:'商户收款流程',url:'http://pay.91dianji.com.cn/collet.jpg'}}">
+                         <span><van-icon name="column" size="20px" color="#4B66AF" /></span>
+                         <p><span>操作流程说明</span><span><van-icon name="arrow" /></span></p>   
+                     </router-link>
+                     <!-- <li>
                          <span><van-icon name="underway" /></span>
                          <p><span>实名认证</span> <span><van-icon name="arrow" /></span> </p>                                       
-                     </li>
-                      <li>
+                     </li> -->
+                      <!-- <li>
                          <span><van-icon name="underway" /></span>
                          <p><span>我的分润</span> <span><van-icon name="arrow" /></span> </p>                                       
-                     </li>
-                      <li>
-                         <span><van-icon name="underway" /></span>
+                     </li> -->
+                      <li @click="goRecords">
+                         <span><van-icon name="underway"  size="20px" color="#4B66AF"  /></span>
                          <p><span>商户收款明细</span> <span><van-icon name="arrow" /></span> </p>                                       
                      </li>
-                      <li>
+                      <!-- <li>
                          <span><van-icon name="underway" /></span>
                          <p><span>收款统计</span> <span><van-icon name="arrow" /></span> </p>                                       
-                     </li>
+                     </li> -->
                  </ul>
              </div>
             <footer>
                 
             </footer>
+             <div class="covercx" >
+                    <van-popup v-model="showxy" position="right" :overlay="true">
+                         <div class="action">
+                            <van-button  to="/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard" round type="primary">添加信用卡</van-button>
+                             <van-button @click="closexy" round type="default">关闭</van-button>
+                            <!-- <van-icon name="add" @click="addcard"  size="30px" color="#4B66AF" />
+                            <van-icon name="clear" @click="closexy" size="30px" color="#4B66AF" /> -->
+                        </div>
+                         <div class="cards">
+                             <ul>
+                                 <li @click.stop="payxy(item)" v-for="(item,index) in xylist" :key="index">
+                                     <div class="bank">
+                                         <p>{{item.payerName}}</p>
+                                         <p>{{item.bankNick}}</p>
+                                     </div>
+                                     <!-- <p>{{item.name}}</p> bankname -->
+                                     <!-- <div class="pay">
+                                         <van-button @click="payxy(item)" round type="default">去支付</van-button>
+                                     </div> -->
+                                      <p class="cardnum">{{item.cardNo}}</p>
+                                 </li>
+                             </ul>
+                         </div>
+                    </van-popup>
+             </div>
         </div>
+         <loading :componentload="componentload"></loading>
     </div>
 </template>
 
 <script>
 import {axiosPost} from '@/lib/http'
+import Bank from '@/lib/bank'
+import loading from '@/components/loading'
+import { bankCardAttribution } from '../../lib/bankName'
+
 export default {
+    components:{
+      loading
+    },
     data() {
         return {
             showTips:false,
-            personInfo:{}
+            headimg:"",
+            nickname:"",
+            level:"",
+            recommendedcode:"",
+            info:"",
+            chMerCode:"",
+            number:"",
+            showCard:false,
+            info:"",
+            flag:false,
+            nick:"请选择支付信用卡",
+            cardnumber:"",
+            cardInfo:"",
+            ordernumber:"",
+            componentload:false,
+            merchantno:"",
+            showxy:false,
+            xylist:[],
+            xyinfo:{}
         }
     },
     methods:{
         goBack () {
             this.$router.push('/home')
         },
-        changeTips() {
-            this.showTips=true
+        closexy(){
+            this.showxy=false
         },
-        cancle(){
-             this.showTips=false
+        addcard(){
+            this.$router.push("/home/creditHousekeeper/aisleHousekeeper/bindingCreditCard")
+        },
+        payxy(info){
+            this.xyinfo=info
+            // console.log(this.xyinfo,'xyinfo')
+            this.showxy=false
+            this.nick=this.xyinfo.bankNick
+            this.cardnumber=this.xyinfo.cardNo.substr(this.xyinfo.cardNo.length-4,4)
+        },
+        getxycard(){
+            this.showxy=true
+               // 信用卡列表
+            this.getcardsxy()
+        },
+          getcardsxy(){
+             axiosPost("/creditCard/getMyCreditCard")
+             .then(res=>{
+                 if(res.data.success){
+                     let arr= res.data.data
+                     let arrXun=[]
+                     arr.forEach((item,i) => {
+                         item.bankNick=bankCardAttribution(item.cardNo).bankName
+                         arrXun.push(item)
+                     });
+                     this.xylist=arrXun
+                 }
+             })
+        },
+
+        change(){
+              if(this.number.trim().length==0){
+                  this.showCard=false
+              } else {
+                 this.showCard=true
+              }
         },
         showPay(){
-             this.showTips=true
+             if(this.number.trim().length==0){
+                return this.$toast("请输入金额")
+            } 
+            if(this.nick=="请选择支付信用卡"){
+                return this.$toast("请先选择支付信用卡")
+            }
+            this.componentload=true
+            // 查询是否有商户号
+             axiosPost("/creditCard/getMemberReg")
+           .then(res=>{
+                if(res.data.success){  //已申请商户
+
+                // 通道一的商户号
+                 this.chMerCode=res.data.data.chMerCode
+
+
+                     var rand = "";
+                 for(var i = 0; i < 2; i++){
+                     var r = Math.floor(Math.random() * 10);
+                     rand += r
+                 }
+                this.ordernumber= new Date().getTime()+rand
+        
+                function generateTimeReqestNumber() {
+                        var date = new Date();
+                        return date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) 
+                        + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds())
+                    }
+                        
+                function pad2(n) { return n < 10 ? '0' + n : n }
+
+                let datapay={
+                    busCode:"2001",
+                    orderAmount:this.number, //金额
+                    realName:this.xyinfo.payerName,  //姓名
+                    idCard:this.xyinfo.idCardNo, //身份证
+                    accNo:this.xyinfo.cardNo, // 信用卡卡号
+                    mobile:this.xyinfo.phone, // 手机号
+                    orderCode:this.ordernumber, // 订单号
+                    chMerCode:this.chMerCode, // 商户编号
+                    orderTime:generateTimeReqestNumber()
+                }  
+
+                axiosPost("/creditCard/quickPay",datapay)
+                .then(res=>{
+                    if(!res.data.success){
+                        setTimeout(() =>{
+                            this.componentload = false;
+                            this.$toast({
+                            message:res.data.message
+                            })
+                        },1000)
+                    } else {
+                    let url=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
+                            setTimeout(() =>{
+                                this.componentload = false;
+                                
+                                //  this.$router.push({
+                                //     path:"/loan/form/myOrder",
+                                //     query:{
+                                //             info:url,
+                                //             title:"支付"
+                                //         }
+                                //     })
+                            
+                            if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                                this.$router.push({
+                                path:"/loan/form/myOrder",
+                                query:{
+                                    info:url,
+                                    title:"支付"
+                                    }
+                                    })
+                                } else {
+                                    this.componentload=false
+                                    location.href=url
+                                }
+
+                            },2000)
+                    }
+                })
+                .catch(err=>{
+                })
+
+
+
+
+                } else { // 去注册商户
+                      this.$router.push({
+                      path:"/home/collect"
+                  })
+                  this.componentload=false
+                }
+           })
+           
+         
         },
+
+        // showPay(){
+
+               
+        //     if(this.number.trim().length==0){
+        //         return this.$toast("请输入金额")
+        //     } 
+        //     if(this.nick=="请选择支付信用卡"){
+        //         return this.$toast("请先选择支付信用卡")
+        //     }
+         
+        //      // 请求接口，判断用那个通道支付  
+        //     let banks={
+        //         cardNo:this.cardnumber,
+        //         amount:this.number,
+        //     }
+        //     axiosPost("/creditCard/getPayChannel",banks)
+        //     .then(res=>{
+        //         if(!res.data.success){
+        //             this.$toast(res.data.message)
+        //         } else {
+        //             console.log(res.data.data,'判读是一还是二')
+        //             if(res.data.data=='1') {  // 通道一的支付
+
+        //             // 查询支付信息
+
+        //             axiosPost("/creditCard/getMemberReg")
+        //             .then(res=>{
+        //                 console.log(res,"查询信息")
+        //                 if(res.data.success){
+        //                     let name=res.data.data.accountName
+        //                     let idcard=res.data.data.idCard
+        //                     let mobile=res.data.data.reservedMobile
+                            
+        //                 } else {
+                            
+        //                 }
+                      
+
+        //             })
+
+
+        //          var rand = "";
+        //          for(var i = 0; i < 2; i++){
+        //              var r = Math.floor(Math.random() * 10);
+        //              rand += r
+        //          }
+        //         this.ordernumber= new Date().getTime()+rand
+        
+        //         function generateTimeReqestNumber() {
+        //                 var date = new Date();
+        //                 return date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) 
+        //                 + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds())
+        //             }
+                        
+        //         function pad2(n) { return n < 10 ? '0' + n : n }
+
+        //         let datapay={
+        //             busCode:"2001",
+        //             orderAmount:this.number, //金额
+        //             realName:name,  //姓名
+        //             idCard:idcard, //身份证
+        //             accNo:this.cardnumber, // 信用卡卡号
+        //             mobile:mobile, // 手机号
+        //             orderCode:this.ordernumber, // 订单号
+        //             chMerCode:this.chMerCode, // 商户编号
+        //             orderTime:generateTimeReqestNumber()
+        //         }  
+
+        //         axiosPost("/creditCard/quickPay",datapay)
+        //         .then(res=>{
+        //             if(!res.data.success){
+        //                 setTimeout(() =>{
+        //                     this.componentload = false;
+        //                     this.$toast({
+        //                     message:res.data.message
+        //                     })
+        //                 },1000)
+        //             } else {
+        //             let url=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
+        //                     setTimeout(() =>{
+        //                         this.componentload = false;
+                                
+        //                     //      this.$router.push({
+        //                     //     path:"/loan/form/myOrder",
+        //                     //     query:{
+        //                     //         info:url,
+        //                     //         title:"支付"
+        //                     //       }
+        //                     // })
+                            
+        //                     if (!navigator.userAgent.match(/iPad|iPhone/i)){
+        //                         this.$router.push({
+        //                         path:"/loan/form/myOrder",
+        //                         query:{
+        //                             info:url,
+        //                             title:"支付"
+        //                             }
+        //                             })
+        //                         } else {
+        //                             this.componentload=false
+        //                             location.href=url
+        //                         }
+
+        //                     },1000)
+                        
+        //             }
+        //         })
+        //         .catch(err=>{
+        //         })
+
+
+        //             } else if(res.data.data=='2') { //通道2的支付
+
+        //                 let datachannel={
+        //                     bankcardNum:this.cardnumber,
+        //                     merchantno:this.merchantno,
+        //                     amount:this.number,
+        //                 }
+        //                 axiosPost("/jxpay/repaymentConsume",datachannel)
+        //                 .then(res=>{
+        //                     console.log(res,"通道二支付结果")
+        //                     if(res.data.success){
+        //                         this.$toast(res.data.message)
+        //                         console.log(res.data.data,'支付地址，然后跳转')
+        //                     } else {
+        //                         this.$toast(res.data.message)
+        //                     }
+        //                 })
+        //             }
+        //         }
+        //     })
+
+        // },
+
+       
+        // showPay(){
+            
+        //     //  查询商户号，若没有 商户申请，上传图片 ，若有在查询是否有绑定信用卡
+        //     if(this.number.trim().length==0){
+        //         return this.$toast("请输入金额")
+        //     } 
+        //     if(this.nick=="请选择支付信用卡"){
+        //         return this.$toast("请先选择支付信用卡")
+        //     }
+         
+        //     // 查询通道一有没有商户，如果没有去注册商户，如果有查询通道二     注：注册商户时用同一个储蓄卡
+        //     // 查询通道二有没有商户，如果没有去注册商户，如果有，根据金额查询用那个通道支付
+        //     // 根据返回的‘1’或者‘2’去支付
+
+        //     // console.log(this.cardnumber,"cardnumber信用卡卡号")
+
+        //     axiosPost("/creditCard/getMemberReg")
+        //    .then(res=>{
+        //     if(res.data.success){  //已申请商户
+
+        //         // 通道一的商户号
+        //          this.chMerCode=res.data.data.chMerCode
+
+
+        //         // // 通道一注册商户使用的储蓄卡,名字，卡号，身份证号
+        //         let  accountNo=res.data.data.accountNo
+        //         let  mobile=res.data.data.reservedMobile
+        //         let  idcard=res.data.data.idCard
+        //         let  name=res.data.data.accountName
+
+        //         // 查询第二条通道是否注册
+        //          let params={
+        //                 bank_cardno:accountNo
+        //             }
+        //             axiosPost("/jxpay/getJxMerchant",params)
+        //             .then(res=>{
+        //                 console.log(res,'查询第二个道')
+        //                 if(!res.data.success) {
+
+        //                     // 如果第二个通道没有注册，隐式注册
+
+        //                     let datas={
+        //                         merchant_name:name,
+        //                         id_cardno:idcard,
+        //                         phone:mobile,
+        //                         bank_cardno:accountNo,
+        //                     }
+        //                     axiosPost("/jxpay/insertRegister",datas)
+        //                     .then(res=>{
+        //                         console.log(res,"第二个通道注册")
+        //                         if(!res.data.success) {
+        //                             this.$toast(res.data.message)
+        //                         } else {
+        //                             // 第二个通道生成的商户号
+        //                             let responce=res.data.data
+        //                             responce=JSON.parse(responce)
+        //                             this.merchantno=responce.merchantno
+        //                         }
+        //                     })
+
+
+        //                 } else {
+
+        //                       // 第二个通道生成的商户号
+        //                       console.log(res.data.data,'生成的商户号')
+        //                       this.merchantno=res.data.data.merchantno
+
+        //                 }
+
+        //                  // 请求接口，判断用那个通道支付  
+        //                  let banks={
+        //                      cardNo:this.cardnumber,
+        //                      amount:this.number,
+        //                  }
+        //                  axiosPost("/creditCard/getPayChannel",banks)
+        //                  .then(res=>{
+        //                      console.log(res,'请求用哪个通道支付')
+        //                      if(!res.data.success){
+        //                          this.$toast(res.data.message)
+        //                      } else {
+        //                          console.log(res.data.data,'判读是一还是二')
+        //                          if(res.data.data=='1') {  // 通道一的支付
+
+
+        //                          var rand = "";
+        //                          for(var i = 0; i < 2; i++){
+        //                                 var r = Math.floor(Math.random() * 10);
+        //                                 rand += r
+        //                             }
+        //                         this.ordernumber= new Date().getTime()+rand
+                        
+        //                         function generateTimeReqestNumber() {
+        //                                 var date = new Date();
+        //                                 return date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) 
+        //                                 + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds())
+        //                             }
+                                        
+        //                         function pad2(n) { return n < 10 ? '0' + n : n }
+
+        //                         let datapay={
+        //                             busCode:"2001",
+        //                             orderAmount:this.number, //金额
+        //                             realName:name,  //姓名
+        //                             idCard:idcard, //身份证
+        //                             accNo:this.cardnumber, // 信用卡卡号
+        //                             mobile:mobile, // 手机号
+        //                             orderCode:this.ordernumber, // 订单号
+        //                             chMerCode:this.chMerCode, // 商户编号
+        //                             orderTime:generateTimeReqestNumber()
+        //                         }  
+
+        //                         axiosPost("/creditCard/quickPay",datapay)
+        //                         .then(res=>{
+        //                             if(!res.data.success){
+        //                                 setTimeout(() =>{
+        //                                     this.componentload = false;
+        //                                     this.$toast({
+        //                                     message:res.data.message
+        //                                     })
+        //                                 },1000)
+        //                             } else {
+        //                             let url=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
+        //                                     setTimeout(() =>{
+        //                                         this.componentload = false;
+                                                
+        //                                     //      this.$router.push({
+        //                                     //     path:"/loan/form/myOrder",
+        //                                     //     query:{
+        //                                     //         info:url,
+        //                                     //         title:"支付"
+        //                                     //       }
+        //                                     // })
+                                            
+        //                                     if (!navigator.userAgent.match(/iPad|iPhone/i)){
+        //                                         this.$router.push({
+        //                                         path:"/loan/form/myOrder",
+        //                                         query:{
+        //                                             info:url,
+        //                                             title:"支付"
+        //                                           }
+        //                                          })
+        //                                         } else {
+        //                                             this.componentload=false
+        //                                             location.href=url
+        //                                         }
+
+        //                                     },1000)
+                                        
+        //                             }
+        //                         })
+        //                         .catch(err=>{
+        //                         })
+
+
+        //                          } else if(res.data.data=='2') { //通道2的支付
+
+        //                                 let datachannel={
+        //                                     bankcardNum:this.cardnumber,
+        //                                     merchantno:this.merchantno,
+        //                                     amount:this.number,
+        //                                 }
+        //                                 axiosPost("/jxpay/repaymentConsume",datachannel)
+        //                                 .then(res=>{
+        //                                     console.log(res,"通道二支付结果")
+        //                                     if(res.data.success){
+        //                                         this.$toast(res.data.message)
+        //                                         console.log(res.data.data,'支付地址，然后跳转')
+        //                                         let responce=res.data.data
+        //                                         responce=JSON.parse(responce)
+        //                                         let url=responce.message
+
+        //                                             //   this.$router.push({
+        //                                             //     path:"/loan/form/myOrder",
+        //                                             //     query:{
+        //                                             //         info:url,
+        //                                             //         title:"支付"
+        //                                             //       }
+        //                                             // })
+                        
+        //                                         if (!navigator.userAgent.match(/iPad|iPhone/i)){
+        //                                             this.$router.push({
+        //                                             path:"/loan/form/myOrder",
+        //                                             query:{
+        //                                                 info:url,
+        //                                                 title:"支付"
+        //                                               }
+        //                                              })
+        //                                             } else {
+                                                    
+        //                                                 location.href=url
+        //                                             }
+
+        //                                     } else {
+        //                                         this.$toast(res.data.message)
+        //                                     }
+        //                                 })
+        //                          }
+        //                      }
+        //                  })
+
+
+        //             })
+
+
+
+
+        //     // 通道一的支付
+
+        //     //      var rand = "";
+        //     //     for(var i = 0; i < 2; i++){
+        //     //         var r = Math.floor(Math.random() * 10);
+        //     //         rand += r
+        //     //     }
+        //     //    this.ordernumber= new Date().getTime()+rand
+    
+        //     //  function generateTimeReqestNumber() {
+        //     //         var date = new Date();
+        //     //         return date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) 
+        //     //         + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds())
+        //     //     }
+                    
+        //     //  function pad2(n) { return n < 10 ? '0' + n : n }
+
+        //     //  let data={
+        //     //     busCode:"2001",
+        //     //     orderAmount:this.number, //金额
+        //     //     realName:this.cardInfo.payerName,  //姓名
+        //     //     idCard:this.cardInfo.idCardNo, //身份证
+        //     //     accNo:this.cardInfo.cardNo, // 卡号
+        //     //     mobile:this.cardInfo.phone, // 手机号
+        //     //     orderCode:this.ordernumber, // 订单号
+        //     //     chMerCode:info, // 商户编号
+        //     //     orderTime:generateTimeReqestNumber()
+        //     // }  
+
+        //     // axiosPost("/creditCard/quickPay",data)
+        //     //  .then(res=>{
+        //     //     if(!res.data.success){
+        //     //         setTimeout(() =>{
+        //     //             this.componentload = false;
+        //     //              this.$toast({
+        //     //               message:res.data.message
+        //     //             })
+        //     //         },1000)
+        //     //     } else {
+        //     //     let url=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
+        //     //             setTimeout(() =>{
+        //     //                 this.componentload = false;
+                            
+        //     //             //      this.$router.push({
+        //     //             //     path:"/loan/form/myOrder",
+        //     //             //     query:{
+        //     //             //         info:url,
+        //     //             //         title:"支付"
+        //     //             //       }
+        //     //             // })
+                        
+        //     //               if (!navigator.userAgent.match(/iPad|iPhone/i)){
+        //     //                 this.$router.push({
+        //     //                 path:"/loan/form/myOrder",
+        //     //                 query:{
+        //     //                     info:url,
+        //     //                     title:"支付"
+        //     //                   }
+        //     //                  })
+        //     //                 } else {
+        //     //                      this.componentload=false
+        //     //                      location.href=url
+        //     //                 }
+
+        //     //             },1000)
+                       
+        //     //        }
+        //     //    })
+        //     // .catch(err=>{
+        //     // })
+
+            
+        //     }else {    // 通道一没有注册
+                
+        //          this.$router.push({
+        //              path:"/home/collect"
+        //          })
+        //     }
+
+        //     // 查询是否有绑定信用卡，
+            
+        // })
+        // .catch(err=>{
+        //     // console.log(err,"error个人信息")
+        // })
+ 
+        // },
+        
         searchInfo(){
-            let that=this
-            axiosPost("/creditCard/getMemberReg")
-        .then(function(res){
-            that.personInfo=res.data.data
-        })
-        .catch(function(err){
+            axiosPost("/customer/getCustomer")
+           .then(function(res){
+               console.log(res,'data')
+                if(res.data.success){
+                    console.log(res.data.data.nickname)
+                }
+              })
+           .catch(function(err){
             
         })
+     },
+    
+       goRecords(){
+
+         this.$router.push({
+             path:"/home/collect/payment/records"
+         })
+       
      }
 
     },
     created () {
-        this.searchInfo()
+        // this.searchInfo()
+        this.nickname=this.$store.state.wechat.nickname;
+        this.headimg=this.$store.state.wechat.headimg;
+        this.lev=this.$store.state.wechat.level;
+        this.cardInfo=this.$route.query.params
+        if(this.cardInfo) {
+            this.showCard=true
+            this.nick=this.cardInfo.bankname
+            this.cardnumber=this.cardInfo.cardNo
+        }
+        // console.log(this.cardInfo,'cardinfo')
+
+        if(this.lev=='1') {
+            this.lev="黄金会员"
+        } else if(this.lev=="2"){
+            this.lev="钻石会员"
+        } else {
+            this.lev="免费粉丝"
+        }
+    },
+    mounted () {
+        // this.searchInfo()
     }
 }
 </script>
@@ -167,9 +814,73 @@ export default {
            justify-content: space-between;
            color:#fff;
            z-index:999;
+           padding:0 10px;
+           box-sizing: border-box;
        }
        >.container {
            background-color:#ECF0F3; 
+            .covercx {
+               .action {
+                   display: flex;
+                   margin-top:30px;
+                   margin-bottom: 20px;
+                   justify-content: space-around;
+                   .van-button--primary {
+                       background-color: #4B66AF;
+                       border:1px solid #4B66AF;
+                        font-size: 34px;
+                        height:75px;
+                   }
+                   .van-button--default {
+                       background-color: #ccc;
+                       border:1px solid #ccc;
+                       width:120px;
+                       font-size: 34px;
+                        height:75px;
+
+                   }
+
+               }
+            .van-popup--right {
+                padding:15px;
+                top:51%;
+                right:0;
+                left:0;
+                bottom:-100%;
+            }
+           .cards {
+                width:100%;
+                margin-top:15px;
+                height:100%;
+                ul {
+                    width:100%;
+                    height:100%;
+                    overflow-y: scroll;
+                    padding-bottom: 30px;
+                    li {
+                        height: 320px;
+                        margin-bottom: 20px;
+                        margin-left: auto;
+                        margin-right: auto;
+                        border-radius: 20px;
+                        background: url('http://pay.91dianji.com.cn/bgc5.jpg') center center no-repeat;
+                        background-size: 100% 100%;
+                        color:#fff;
+                        font-weight: bold;
+                        padding:30px;
+                        .cardnum {
+                            margin-top:100px;
+                        }
+                        .bank  {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                       
+                    }
+                }
+            }
+        }
            >.portrait {
                background-color:#4B66AF; 
                color:#eee;
@@ -178,14 +889,17 @@ export default {
                 justify-content: space-between;
                 padding-top:20px;
                 height: 400px;
-                >p {
-                    &:nth-of-type(1){
-                        font-size:100px;
-                        color:pink;
+                .userimg {
+                    width:120px;
+                    height:120px;
+                    >img {
+                        width:100%;
+                        border-radius: 50%;
                     }
                 }
                 >.recommend {
-                    margin-left:-150px;
+                    margin-left:20px;
+                    flex:1;
                     >p {
                         &:nth-of-type(1) {
                             font-size: 36px;
@@ -206,7 +920,7 @@ export default {
            }
            >.merchant {
                background-color: #ECF0F3;
-               padding-top:160px;
+               padding-top:20px;
                position: relative;
                >.pay {
                    width:92%;
@@ -216,8 +930,33 @@ export default {
                    left:0px;
                    margin:20px;
                    border-radius: 10px;
-                  
                    box-shadow: 0px 1px 2px 3px  #ccc;
+                   .union {
+                       display:flex;
+                       align-items: center;
+                   }
+                   .card {
+                      ul{
+                          li{
+                              display: flex;
+                              padding:10px 15px;
+                              justify-content: space-between;
+                              align-items: center;
+                              div {
+                                  flex:1;
+                                  padding-left: 20px;
+                                  >p {
+                                      &:nth-of-type(2){
+                                          padding:10px 0px;
+                                      }
+                                  }
+                              }
+                              .change {
+                                  color:#4B66AF;
+                              }
+                          }
+                      }  
+                   }
                    >P{
                        &:nth-of-type(1){
                            margin-top:40px;
@@ -226,8 +965,8 @@ export default {
                             padding-left:30px;
                        }
                        &:nth-of-type(2){
-                           margin-top:50px;
-                           margin-bottom:50px;
+                           margin-top:30px;
+                           margin-bottom:30px;
                            font-size: 30px;
                             padding-left:30px;
                            >span {
@@ -242,12 +981,12 @@ export default {
                            background-color:#4B66AF; 
                            color:#fff;
                            text-align: center;
-                           padding-top:30px;
+                           padding-top:20px;
                            width:90%;
                            margin:0 auto;
                            padding-bottom: 30px;
                            border-radius: 10px;
-                           margin-bottom: 40px;
+                           margin-bottom: 20px;
                            font-size: 38px;
                        }
                    }
@@ -361,9 +1100,11 @@ export default {
                background-color: #fff;
                margin-bottom: 100px;
                >ul{
+                   padding:0 20px;
                    >li {
                        display: flex;
                        justify-content: space-between;
+                       align-items: center;
                        padding:30px 10px;
                        border-bottom: 1px solid #ccc;
                        >p {

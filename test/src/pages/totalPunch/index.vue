@@ -1,259 +1,315 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: Giovanni
+ * @Date: 2019-08-14
+ * @LastEditTime: 2019-08-26 23:15:00
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="total-punch">
-        <header>
-            <span @click="goBack"><van-icon name="arrow-left"/></span>
-            <span>打卡签到</span>
-            <span></span>
+        <header class="header-top row">
+            <div class="left-icon start-center" @click="handleReturnHome"><van-icon color="#ffffff" size="20px" name="arrow-left"/></div>
+            <div class="top-title center">任务中心</div>
+            <!-- <div class="right-icon center"><van-icon name="gold-coin" size="24px" color="#FCDD6D"/>245300</div> -->
+            <div class="top-title center" @click="rule=true">规则说明</div>
+
         </header>
         <div class="container">
-           <div class="task">
-               <div class="punch">
-                   <div class="left">
-                       <p>我的金币</p>
-                       <p>
-                           <span></span>
-                           <span>{{gold}}</span>
-                       </p>
-                   </div>
-                   <div @click="sign" class="middle">
-                      <p>{{isPunch?"已签到":"未签到"}}</p>
-                   </div>
-                   <div class="right">
-                       <p>当月累计签到</p>
-                           <span>{{signcount}}</span>
-                           天
-                   </div>
-               </div>
-               <p>每月累计签到5天即可获得金币</p>
-               <div class="gold">
-                   <ul>
-                       <li>
-                           <p>5天</p>
-                           <span></span>
-                       </li>
-                        <li>
-                           <p>10天</p>
-                           <span></span>
-                       </li>
-                        <li>
-                           <p>15天</p>
-                           <span></span>
-                       </li>
-                        <li>
-                           <p>20天</p>
-                           <span></span>
-                       </li>
-                        <li>
-                           <p>25天</p>
-                           <span></span>
-                       </li>
-                        <li>
-                           <p>全</p>
-                           <span></span>
-                       </li>
-                   </ul>
-               </div>
-           </div>
-            <div class="rule">
-                   <ul>
-                       <li>签到规则</li>
-                       <li>兑换奖品库</li>
-                       <li>我的任务</li>
-                   </ul>
+            <div class="cover" v-show="rule">
+                <p class="close" @click="rule=false"><van-icon name="close" color="#fff" size="36px" /></p>
+                <div class="rule">
+                    <p>领取推广活动任务</p>
+                    <div>
+                       直推一个黄金会员，开启7天推广任务红包奖励，上午分享链接领取5元红包，下午分享链接领取10元红包
+                    </div>
+                    <div>
+                       直推一个钻石会员，开启7天推广任务红包奖励，上午分享链接领取15元红包，下午分享链接领取25元红包
+                    </div>
+                    <div>
+                        任务说明：分享任务页面链接至微信群或朋友圈
+                    </div>
+                </div>
             </div>
-            
+            <div class="avator-signin">
+                <div class="avator"><img :src="headimg" alt=""></div>
+                <div class="signin">
+                    <div class="normal center" :id="Sign=='签到'?'sign':''" @click="handleSign">{{Sign}}</div>
+                </div>
+            </div>
+            <!-- <div class="desc">
+                <div class="desc-title">每月累计签到5天即可获得金币</div>
+                <div class="desc-list">
+                    <div class="coin">
+                        <div class="center">5天</div>
+                        <div class="center">5</div>
+                    </div>
+                    <div class="coin">
+                        <div class="center">10天</div>
+                        <div class="center">5</div>
+                    </div>
+                    <div class="coin">
+                        <div class="center">15天</div>
+                        <div class="center">5</div>
+                    </div>
+                    <div class="coin">
+                        <div class="center">25天</div>
+                        <div class="center">5</div>
+                    </div>
+                    <div class="coin">
+                        <div class="center">25天</div>
+                        <div class="center">5</div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="rule-prize-task">
+                <div class="center" @click="getMore">签到规则</div>
+                <div class="center" @click="getMore">兑换奖品库</div>
+                <div class="center" @click="getMore">我的任务</div>
+            </div>
+            <div class="calendar">
+                <div class="year-month center">{{year}}年{{month}}月</div>
+                <div class="days-content">
+                    <div class="center" v-for="(item,index) in DateArray" :key="index" :class="item.signed == 'true' ? 'active' : ''">{{item.date}}</div>
+                </div>
+                <div class="task">
+                    <div class="task-title center">今日任务</div>
+                     <div @click="getTask" class="task-share center">
+                        <img src="http://pay.91dianji.com.cn/renwu @3x.png" alt="" srcset="">
+                    </div>
+                    <div class="dollars">
+                        <img src="http://pay.91dianji.com.cn/dollars.png" alt="" srcset="">
+                    </div>
+                </div>
+                <div class="bottom"></div>
+            </div>
         </div>
+        <!-- <div class="task-list">
+            <div class="start-center">
+                <van-icon name="http://pay.91dianji.com.cn/jiluhb.png" color="#ECC648" size="24px"/>
+                <span>任务记录</span>
+            </div>
+            <span>{{sum}}</span>
+        </div>
+        <div class="record-list">
+            <div class="task-record" v-for="(item,index) in taskList" :key="index" v-show="taskList.length != '0'">
+                <div>
+                    <div class="start-center">{{item.title}}</div>
+                    <div class="start-center">{{item.createddatetime}}</div>
+                </div>
+                <div>+{{item.amount}}</div>
+            </div>
+            <div class="none center" v-if="taskList.length == '0'">暂无任务记录</div>
+            
+        </div>  -->
+        <!-- 签到规则 -->
+        <div class="sign-rule">
+            <div></div>
+        </div>
+        <!-- <games></games> -->
+        <!-- <gameElsb></gameElsb> -->
     </div>
-
 </template>
-
-
 <script>
+import {CommonPost} from '@/lib/http'
+import games from '@/components/games.vue'
 import {axiosPost} from '@/lib/http'
+
+import gameElsb from '@/components/gameElsb.vue'
+
+
 export default {
+    components: {
+        games,
+        gameElsb,
+    },
     data() {
         return {
-            currentDay: 1,
-            currentMonth: 1,
-            currentYear: 1970,
-            currentWeek: 1,
+            Sign: '签到',
+            year: '',
+            month: '',
+            date: '',
+            DateArray: [],
             days: [],
-            isPunch:false,
-             signcount:0,//连续签到
-             gold:0 , //金币数量
-            currentTime:""
-
+            current: '',
+            Signed: [],
+            headimg: '',
+            taskList: [],
+            sum: 0,
+            task:"",
+            rule:false
         }
     },
     methods:{
-        goBack() {
-            this.$router.push('/home')
+        handleReturnHome() {
+            this.$router.go(-1);
         },
-        sign(){
-            let that =this
-            axiosPost("/customer/insertSign")
-           .then(function(res){
-            //    console.log(res,"每日签到")
-            if(!res.data.success){
-                    that.$toast({
-                    message:res.data.message
-             })
-        } else {
-                that.isPunch=true
-                that.$toast({
-                    message:res.data.message
-                   })
-                axiosPost("/customer/getSignDetail")
-                .then(function(res){
-                    that.signcount=res.data.data.signcount
-                    that.gold=res.data.data.gold
-                })
-            }
-          })   
+        showrule(){
+
         },
-         searchPunch(){
-             let that = this
-           axiosPost("/customer/getSignDetail")
-           .then(function(res){
-            //    console.log(res,"created中的签到详情") 
-                if(!res.data.success){
-                    that.$toast({
-                        message:res.data.message
-                    })
-                    return
+        getMore(){
+            this.$toast("敬请期待")
+        },
+        //查询任务
+        getTask(){
+            axiosPost("/activity/getAmount")
+            .then(res=>{
+                if(!res.data.success) {
+                    this.$toast(res.data.message)
                 } else {
-                     that.signcount=res.data.data.signcount
-                     that.gold=res.data.data.gold
-                     that.days=res.data.data.list
-                     that.days.forEach(element => {
-                         if(element.signtime==that.currentTime){
-                             that.isPunch=true
-                         }
-                     })
+                    if(res.data.code=="0"){
+                        this.$router.push({
+                            path:"/home/totalPunch/wallet",
+                            query:{
+                                amount:res.data.data.amount
+                            }
+                        })
+
+                    } else {
+
+
+                    let type=res.data.data.type
+                    if(type=='1'){
+                        this.task="炫彩黄金任务"
+                    } else if(type=='2'){
+                        this.task="璀璨钻石任务"
+                    }
+                        this.$router.push({
+                            path:"/home/totalPunch/tasked",
+                            query:{
+                                task:res.data.message,
+                                amount:res.data.data.amount,
+                                info:this.task                                
+                            }
+                        })
+                    }
+
                 }
-                
-           })
-         },
-        fnDate(){
-                var date=new Date();
-                var year=date.getFullYear();//当前年份
-                var month=date.getMonth();//当前月份
-                var data=date.getDate();//天
-                this.currentTime=year+"-"+this.fnW((month+1))+"-"+this.fnW(data);
-          },
-            //补位 当某个字段不是两位数时补0
-            fnW(str){
-                var num;
-                str>10?num=str:num="0"+str;
-                return num;
-            } 
+            })
 
-        //  initData: function (cur) {
-        //             let that = this;
-        //             let leftcount = 0; //存放剩余数量
-        //             let date;
-        //             if (cur) {
-        //                 date = new Date(cur);
-        //             } else {
-        //                 let now = new Date();
-        //                 let d = new Date(that.formatDate(now.getFullYear(), now.getMonth(), 1));
-        //                 d.setDate(35);
-        //                 date = new Date(that.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
-        //             }
-        //             that.currentDay = date.getDate();
-        //             that.currentYear = date.getFullYear();
-        //             that.currentMonth = date.getMonth() + 1;
-        //             that.currentWeek = date.getDay(); // 1...6,0
-        //             if (that.currentWeek == 0) {
-        //                 that.currentWeek = 7;
-        //             }
-        //             let str = that.formatDate(that.currentYear, that.currentMonth, that.currentDay);
-        //             that.days.length = 0;
-        //             // 今天是周日，放在第一行第7个位置，前面6个
-        //             //初始化本周
-        //             for (let i = that.currentWeek - 1; i >= 0; i--) {
-        //                 let d = new Date(str);
-        //                 d.setDate(d.getDate() - i);
-        //                 let dayobject = {}; //用一个对象包装Date对象  以便为以后预定功能添加属性
-        //                 dayobject.day = d;
-        //                 that.days.push(dayobject); //将日期放入data 中的days数组 供页面渲染使用
-        //             }
-        //             //其他周
-        //             for (let i = 1; i <= 35 - that.currentWeek; i++) {
-        //                 let d = new Date(str);
-        //                 d.setDate(d.getDate() + i);
-        //                 let dayobject = {};
-        //                 dayobject.day = d;
-        //                 that.days.push(dayobject);
-        //             }
-
-        //         },
-        //         pickPre: function (year, month) {
-        //             let that = this;
-        //             // setDate(0); 上月最后一天
-        //             // setDate(-1); 上月倒数第二天
-        //             // setDate(dx) 参数dx为 上月最后一天的前后dx天
-        //             let d = new Date(that.formatDate(year, month, 1));
-        //             d.setDate(0);
-        //             that.initData(that.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
-        //         },
-        //         pickNext: function (year, month) {
-        //             let that = this;
-        //             let d = new Date(that.formatDate(year, month, 1));
-        //             d.setDate(35);
-        //             that.initData(that.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
-        //         },
-        //         pickYear: function (year, month) {
-        //             alert(year + "," + month);
-        //         },
-        //         // 返回 类似 2016-01-02 格式的字符串
-        //         formatDate: function (year, month, day) {
-        //             let y = year;
-        //             let m = month;
-        //             if (m < 10) m = "0" + m;
-        //             let d = day;
-        //             if (d < 10) d = "0" + d;
-        //             return y + "-" + m + "-" + d
-        //         },
-         },
-      
+        },
+        // 查询签到详情
+        handleSignDetail(){
+            CommonPost('/customer/getSignDetail').then(res =>{
+                let s = (res.data.data.list).find(i =>i.signtime == this.current);
+                (res.data.data.list).forEach((item,index) =>{
+                    (this.DateArray).forEach((element,key) =>{
+                        if(element.date == (item.signtime).substr(8,2)){
+                            element.signed = 'true';
+                        }
+                    })
+                    
+                })
+                if(typeof s == 'undefined'){
+                    this.Sign = '签到'
+                }else{
+                    this.Sign = '已签到'
+                }
+            }).catch(res =>{
+                // console.log('签到详情失败',res);
+            })
+        },
+        // 签到
+        handleSign(){
+            if(this.Sign == '签到'){
+                CommonPost('/customer/insertSign').then(res =>{
+                    this.Sign = '已签到';
+                    this.$toast('签到成功');
+                    this.handleSignDetail()
+                }).catch(res =>{
+                    // console.log('签到失败',res);
+                })
+            }else{
+                this.$toast('今日已签到');
+            }
+            
+        },
+        // 获取当前月份天数
+        handleCurrentTime(){
+            let date = new Date();
+            this.year = date.getFullYear();
+            date.getMonth() + 1 < 10 ? this.month = '0' + parseInt(date.getMonth() + 1) : this.month = parseInt(date.getMonth() + 1);
+            date.getDate() < 10 ? this.date = '0' + date.getDate() : this.date = date.getDate(); 
+            this.current =  this.year + '-' + this.month + '-' + this.date;
+            let days = new Date(this.year,this.month,0).getDate();
+            let arr = [];
+            let item = '';
+            for(var i = 1; i <= days; i++){
+                if(i < 10){
+                    item = '{"date":"' + '0' + i + '","signed":"false"}';
+                    arr.push(JSON.parse(item));
+                }else{
+                    item = '{"date":"' + i + '","signed":"false"}';
+                    arr.push(JSON.parse(item));
+                }
+            }
+            this.DateArray = arr;
+            // console.log(arr);
+        },
+        // 查询任务记录
+        handleTaskList(){
+            CommonPost('/activity/getActivityList').then(res =>{
+                this.taskList = res.data.data.activityList;
+                this.sum = res.data.data.sum;
+            }).catch(res =>{
+                // console.log('查询失败',res);
+            })
+        }
+        
+    },
     created () {
-        //  let that = this
-        //  that.initData(null)
-          this.searchPunch()
-          this.fnDate()
+        this.handleSignDetail();
+        this.handleCurrentTime();
+        this.handleTaskList();
+        this.headimg = this.$store.state.wechat.headimg;
     }
 }
 </script>
-
 <style lang="less">
-   #total-punch {
-       >header {
-           background-color: #4B66AF;
-           width:100%;
-           height: 86px;
-           line-height:86px;
-           padding-top:10px;
-           z-index:999;
-           font-size:28px;
-           color:#fff;
-           display: flex;
-           position: fixed;
-           justify-content: space-between;
-           >span {
-               &:nth-of-type(1) {
-                   margin-left: 10px;
-               }
-               &:nth-of-type(3) {
-                   margin-right: 10px;
-               }
-           }
-       }
-       >.container {
-           padding-top:96px;
-           padding-bottom: 50px;
-           >.task{
-               background-color: #4B66AF;
+#total-punch {
+    padding-top: 86px;
+    .header-top{
+        color: #fff;
+    }
+    .container {
+        background-color: #ccc;
+        .cover{
+            position: fixed;
+            top:0;
+            right:0;
+            bottom:0;
+            left:0;
+            background-color: rgba(0, 0, 0, .2);
+            .close{
+                font-size: 34px;
+                margin-top:20%;
+                text-align: center;
+            }
+            .rule{
+                width:80%;
+                height: 500px;
+                background-color: #fff;
+                margin-left:8%;
+                margin-top:10%;
+                padding:20px;
+                border-radius: 15px;
+                p{
+                    padding-bottom: 20px;
+                    text-align: center;
+                    font-size: 32px;
+                    color:royalblue;
+                }
+                div{
+                    font-size: 30px;
+                    line-height: 34px;
+                    margin-bottom: 40px;
+                    &:nth-of-type(3){
+                        font-weight: bold;
+                    }   
+                }
+            }
+        }
+        >.task{
+               background-color: #4b66af;
                color:#FFF1F6;
                padding:20px 30px;
                >.punch {
@@ -342,121 +398,284 @@ export default {
                        }
                    }
                }
-               
            }
-           >.rule{
-               background-color: #4B66AF;
-               color:#fff;
-               >ul{
-                   display: flex;
-                   padding:20px 0px;
-                   >li {
-                            width:33%;
-                            border-right: 1px solid #fff;
-                            text-align: center;
-                       &:nth-of-type(3){
-                           border:none;
-                       }
-                   }
-               }
-           }
-           >.calendar{
-               margin-top:30px;
-                width: 98%;
-                border: 2px solid #A4A7B0;
-                margin-left: 0.5%;
-                >.month {
-                    width: 92%;
-                    height: 48px;
-                    border: 2px solid #FFFFFF;
-                    margin-left: 3%;
-                    margin-top: 20px;
-                    >ul {
-                         margin: 0;
-                        padding: 0;
-                        display: flex;
-                        margin-top: 11px;
-                        justify-content: space-between;
-                        >li {
-                            color: #999;
-                            font-size: 20px;
-                            text-transform: uppercase;
-                            letter-spacing: 3px;
-                            list-style: none;
-                            &.arrow {
-                            width: 3%;
-                            height: 25px;
-                            }
-                            &.year-month {
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: space-around;
-                            > .choose-year {
-                                padding: 0 20px;
-                                font-size: 16px;
-                                font-weight: 200;
-                            }
-                            >.choose-month {
-                                text-align: center;
-                                font-size: 16px;
-                                font-weight: 200;
-                            }
-                           }
+        background: #4b66af;
+        .avator-signin{
+            width: 85%;
+            height: 150px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .avator{
+                width: 120px;
+                height: 120px;
+                img{
+                    width: 100%;
+                    border-radius: 50%;
+                }
+            }
+            .signin{
+                .normal{
+                    width: 120px;
+                    height: 60px;
+                    color: #fff; 
+                    background: url('http://pay.91dianji.com.cn/signIn.png');
+                    background-size: 100% 100%;
+                    font-size: 32px;
+                }
+                #sign {
+                     animation:  tosign .8s linear infinite;
+                     -webkit-animation:  tosign .8s linear infinite;
+                 }
+                 @keyframes tosign {
+                        0%{
+                           margin-top:0;
+                           transform: scale(0.8);
+                        }
+                        50%{
+                           margin-top:40px;
+                           transform: scale(1);
+                        }
+                        100%{
+                           margin-top:0;
+                           transform: scale(0.8);
                         }
                     }
-                  }
-                > .weekdays {
-                    margin: 0;
-                    color: #FFFFFF;
-                    background: #A4A7B0;
-                    width: 96.6%;
-                    margin-top: 26px;
-                    height: 34px;
-                    line-height: 34px;
-                    margin-left: 2.2%;
-                    >li {
-                         display: inline-block;
-                        text-align: center;
-                        color: #11616f;
-                        font-size: 14px;
-                        font-weight: 100;
-                        width: 13.3%;
+            }
+        }
+        .desc{
+            width: 85%;
+            height: auto;
+            margin: auto;
+            .desc-title{
+                padding: 30px 0px;
+                color: #fff;
+                font-size: 26px;
+            }
+            .desc-list{
+                width: 100%;
+                height: 120px;
+                display: flex;
+                justify-content: space-between;
+                .coin{
+                    width: 85px;
+                    height: 100%;
+                    background: #fff;
+                    border-radius: 40px;
+                    font-size: 26px;
+                    >div{
+                        width: 100%;
+                        height: 50%;
                     }
                 }
-                > .days {
-                    padding: 0;
-                    margin: 0;
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: space-around;
-                     margin-left: 2.2%;
-                      width: 96.6%;
-                    //   margin-right: 2.2%;
-                    >li {
-                         list-style-type: none;
-                        display: inline-block;
-                        width: 12.9%;
-                        text-align: center;
-                        padding-bottom:10px;
-                        padding-top: 15px;
+            }
+        }
+        .rule-prize-task{
+            width: 100%;
+            height: 60px;
+            margin: 20px auto auto auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 26px;
+            color: #fff;
+            >div{
+                width: calc(100% / 3);
+            }
+            >div:nth-child(1),div:nth-child(2){
+                border-right: solid 1px #fff;
+            }
+        }
+        .calendar{
+            width: 90%;
+            height: auto;
+            margin: 20px auto auto auto;
+            background: #fff;
+            box-shadow: 0px 0px 2px 2px #f2f2f2;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            .year-month{
+                width: 95%;
+                height: 80px;
+                margin: auto;
+                font-size: 30px;
+                font-weight: 700;
+            }
+            .days-content{
+                width: 95%;
+                margin: auto;
+                display: flex;
+                flex-wrap: wrap;
+                padding-bottom: 50px;
+                border-bottom: 10px solid rgba(235,232,232,1);
+                >div{
+                    width: calc(100% / 7);
+                    height: 60px;
+                    font-size: 28px;
+                    font-weight: 700;
+                     margin:3px;
+                    box-sizing: border-box;
+                }
+                .active{
+                    background: #ed8080;
+                    color: #fff;
+                    border-radius: 15px;
+                    margin:3px;
+                }
+            }
+            .task{
+                width: 100%;
+                height: auto;
+                background:rgba(254,254,254,1);
+                background: #DBE4FC;
+                margin-top: 50px;
+                padding-bottom: 50px;
+                position: relative;
+                .dollars {
+                    width:120px;
+                    height:120px;
+                    position: absolute;
+                    top:30%;
+                    left:45%;
+                     animation:  dollars .8s linear infinite;
+                    -webkit-animation:  dollars .8s linear infinite;
+                    >img {
+                        width:100%;
+                        animation:  self .8s linear infinite;
+                       -webkit-animation:  self .8s linear infinite;
+
+
+
+
+                      @keyframes self {
+                        0%{
+                             transform: scale(0.6);
+                        }
+                        50%{
+                            transform: scale(1.5);
+                        }
+                        100%{
+                             transform: scale(0.6);
+                        }
+                    }
+
+
+
+                    }
+                     @keyframes dollars {
+                        0%{
+                            top:45%;
+                        }
+                        50%{
+                            top:-5%;
+                        }
+                        100%{
+                             top:45%;
+                        }
+                    }
+                }
+                .task-title{
+                    margin-bottom:20px;
+                    width: 100%;
+                    height: 100px;
+                    color: #C63232;
+                    font-weight: 700;
+                    font-size: 48px;
+                    margin-bottom: 10px;
+                    animation:  renwu .8s linear infinite;
+                    -webkit-animation:  renwu .8s linear infinite;
+                }
+
+                 @keyframes renwu {
+                        0%{
+                            opacity: 1;
+                        }
+                        50%{
+                            opacity: 0;
+                        }
+                        100%{
+                             opacity: 1;
+                        }
+                    }
+
+
+                .task-share{
+                    width: 230px;
+                    height:230px;
+                    background:linear-gradient(180deg,rgba(237,128,128,1) 0%,rgba(173,21,51,1) 100%);
+                    box-shadow:0px 3px 4px 0px rgba(234,156,156,0.5);
+                    border-radius:8px;
+                    opacity:0.96;
+                    margin: auto;
+                    img {
+                        width:100%;
+                    }
+                }
+            }
+            .bottom{
+                width: 100%;
+                height: 46px;
+                background:rgba(216,216,216,1);
+                opacity:0.17;
+                border:1px solid rgba(151,151,151,1);
+                margin-top: 80px;
+            }
+        }
+    }
+    .task-list{
+        width: 100%;
+        background: #4b66af;  
+        height: 80px;
+        box-sizing: border-box;
+        padding: 0px 5%;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 30px;
+        >div{
+            span:last-child{
+                margin-left: 10px;
+            }
+        }
+    }
+    .record-list{
+        .task-record{
+            width: 100%;
+            height: 120px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 0px 5%;
+            border-bottom: 1px solid rgba(235,232,232,1);
+            >div:nth-child(1){
+                height: 100%;
+                >div{
+                    height: 50%;
+                    &:nth-of-type(1){
+                        font-weight: 700;
+                        font-size: 32px;
+                    }
+                    &:nth-of-type(2){
+                        color: #060606;
                         font-size: 26px;
-                        // color: rgb(14, 220, 235);
-                        color:#000;
-                        font-weight: 200;
-                        >span {
-                            >span {
-                                height: 29.5px;
-                                width: 27px;
-                                line-height: 29.5px;
-                                display: inline-block;
-                                &:active {
-                                    background-color: red;
-                                }
-                            }
-                        }
                     }
                 }
-           }
-       }
-   }
+            }
+            >div:nth-child(2){
+                color: #A71818;
+                font-size: 48px;
+            }
+        }
+        .none{
+            width: 100%;
+            height: 100px;
+        }
+    }
+    // .sign-rule{
+        
+    // }
+}
 </style>

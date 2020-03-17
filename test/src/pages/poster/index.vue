@@ -3,12 +3,12 @@
         <header class="header-top row">
             <div class="left-icon start-center" @click="goBack"><van-icon color="white" size="20px" name="arrow-left"/></div>
             <div class="top-title center">海报</div>
-            <div @click="showCover" class="right-icon center">
-                     <!-- <van-icon color="white" size="20px" name="weapp-nav"/> -->
-                </div>
+            <!-- <div @click="showCover" class="right-icon center">
+                     <van-icon color="white" size="20px" name="weapp-nav"/>
+            </div> -->
         </header>
         <div class="poster-canvas center"><canvas id="poster" width="375" height="667"></canvas>  </div>
-        <div class="btn row">
+        <div class="btn row center">
             <div @click="handlechangeRandom" class="change center">换一换</div>
             <div @click="handlePrivacySettings" class="rightnow center">隐私设置</div>
             <div @click="savePoster" class="rightnow center">立即合成</div>
@@ -20,7 +20,7 @@
                         <li id="wxF"  @click="wxfri">
                             <p><van-icon name="http://pay.91dianji.com.cn/wx.png" size="40px"/></p>
                             <p>分享给好友</p>
-                        </li>
+                        </li>      
                         <li @click="wxcir">
                             <p><van-icon color="white"  size="40px"  name="http://pay.91dianji.com.cn/pyq.png"/></p>
                             <p>分享到朋友圈</p>
@@ -67,10 +67,12 @@ export default {
             imgShow: false,
             url: 'http://pay.91dianji.com.cn',
             qrcode: '',
-            random: '01',
-             shares:null,
+            random: '2',
+            shares:null,
             sharewx:null,
-            Sharewxf:false
+            Sharewxf:false,
+            max: 1,
+            min: 0,
         }
     },
     methods:{
@@ -109,29 +111,24 @@ export default {
         },
         sharewxCirMessage(){
               let that=this
-          that.sharewx.send( 
-                // {
-                //      type:"image",
-                //       pictures: that.imgUrl,
-                //     content:"钱夹宝综合金融服务推广平台，点滴成就未来",
-                //     // href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode,
-                //     extra:{scene:"WXSceneTimeline"}
-                // }
-                { content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝",thumbs:"http://pay.91dianji.com.cn/wxc.png", href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode, extra: { scene: "WXSceneTimeline" } }
+          that.sharewx.send(
+                { content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝",
+                thumbs:["http://pay.91dianji.com.cn/wxc.jpg"],
+                //  thumbs:"../../assets/images/slt.jpg",
+                 href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode, extra: { scene: "WXSceneTimeline" } }
                 , function(){
-                alert("分享成功！");
+                // alert("分享成功！");
             }, function(e){
                 alert("分享失败："+e.message);
             });
         },
          shareWeixinMessage() {
              let that=this
-            //   console.log(JSON.stringify(that.sharewx),"55555555555555555")
-            //   console.log(that.imgUrl)
              that.sharewx.send(
                  { 
                      content: "钱夹宝综合金融服务推广平台，点滴成就未来",title:"钱夹宝", 
-                     thumbs:"http://pay.91dianji.com.cn/wxc.png",
+                     thumbs:["http://pay.91dianji.com.cn/wxc.jpg"],
+                    //  thumbs:["../../assets/images/slt.jpg"],
                      href: "http://pay.91dianji.com.cn/#/home?promotioncode="+that.$store.state.wechat.promotioncode,
                      extra: { scene: "WXSceneSession" } 
                  }, function () {
@@ -147,27 +144,14 @@ export default {
         showCover(){
            this.Sharewxf=!this.Sharewxf
         },
-        // save(){
-        //     plus.gallery.save( '/wx.png', (result) => {
-        //         console.log(result.file)
-        //         this.$toast("保存成功")
-        //         } ,(e) => {
-        //         console.log(JSON.stringify(e))
-        //          this.$toast("保存失败")
-        //         });
-        // },
-        // 随机数
+       
+        
+        // 区间随机数
         handlechangeRandom(){
             this.componentload = true;
-            var ran = Math.ceil((Math.random())*26);
-            var random = '';
-            if(ran < 10){
-                random = '0' + ran;
-                // console.log('随机数',random);
-                this.random = random;
-            }else{
-                this.random = ran;
-                // console.log('随机数',ran);
+            this.random = Math.floor(Math.random()*(this.max - this.min + 1) + this.min);
+            if(this.random===1 || this.random===0){
+                this.random=2
             }
             this.handlePoster();
         },
@@ -180,7 +164,9 @@ export default {
 
             var bigPoster = new Image();
             
-            bigPoster.src = 'http://pay.91dianji.com.cn/pop'+ this.random +'.jpg';
+            // bigPoster.src = 'http://pay.91dianji.com.cn/POP'+ this.random +'.jpg';
+            bigPoster.src = 'http://pay.91dianji.com.cn/pop'+ this.random +'.png';
+
             bigPoster.onload = function(){
                 ctx.drawImage(bigPoster,0,0,375,600);
                 setTimeout(()=>{
@@ -191,11 +177,14 @@ export default {
             var qrcode = new Image();
             qrcode.src = 'http://pay.91dianji.com.cn/' + this.qrcode;
             qrcode.onload = function(){
-                ctx.drawImage(qrcode,10,610,50,50);
+                // ctx.drawImage(qrcode,10,610,50,50);
+                 ctx.drawImage(qrcode,127.5,200,120,120);
             };
             ctx.fillStyle="#000";
             ctx.font="14px Arial";
-            ctx.fillText('长按识别二维码体验更多惊喜',80,640);
+            // ctx.fillText('长按识别二维码体验更多惊喜',80,640);
+            ctx.fillText('长按识别二维码体验更多惊喜',40,640);
+
             setTimeout(()=>{
                 this.componentload = false;
             },2500);
@@ -209,7 +198,7 @@ export default {
 
             var bigPoster = new Image();
             
-            bigPoster.src = 'http://pay.91dianji.com.cn/pop'+ this.random +'.jpg';
+            bigPoster.src = 'http://pay.91dianji.com.cn/pop'+ this.random +'.png';
             bigPoster.onload = function(){
                 ctx.drawImage(bigPoster,0,0,375,600);
                 setTimeout(()=>{
@@ -218,9 +207,13 @@ export default {
             };
             
             var qrcode = new Image();
+            // qrcode.src = 'http://pay.91dianji.com.cn/' + this.qrcode;
             qrcode.src = 'http://pay.91dianji.com.cn/' + this.qrcode;
+
             qrcode.onload = function(){
-                ctx.drawImage(qrcode,300,610,50,50);
+                // ctx.drawImage(qrcode,300,610,50,50);
+                ctx.drawImage(qrcode,127.5,200,120,120);
+
             };
             var headimg = new Image();
             var url = this.$store.state.wechat.headimg;
@@ -267,7 +260,7 @@ export default {
                                 },1000);
                                 this.handlePoster();
                             }else{
-                                this.$toast('二维码请求失败');
+                                this.$toast.fail('二维码请求失败');
                             }
                         })
                     }else{
@@ -304,10 +297,11 @@ export default {
                 introduce:""
             }
         }
-
     },
     created () {
-       
+        this.max = this.$route.query.max;
+        this.min = this.$route.query.min;
+        this.random = this.$route.query.min;
     },
     mounted(){
         this.handleJundgeQrCode();
@@ -337,20 +331,24 @@ export default {
            margin-right: auto;
            font-size: 28px;
            margin-top: -50px;
+           display: flex;
+           justify-content: center;
            .change{
-               width: 30%;
+            //    width: 30%;
                height: 100%;
                background: #4b66af;
                color: #ffffff;
                border-radius: 20px;
+               padding:0px 30px;
            }
            .rightnow{
-               width: 30%;
+            //    width: 30%;
                height: 100%;
                margin-left: 5%;
                 background: #4b66af;
                 color: #ffffff;
                 border-radius: 20px;
+                 padding:0px 30px;
             }
        }
        .share {

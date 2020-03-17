@@ -1,22 +1,25 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-09 16:57:17
+ * @LastEditTime: 2019-08-20 19:10:37
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
     <div id="personal-center-component">
-        <header class="header">
+        <header class="header" id="head">
             <div class="top row">
                 <div class="avator"><img :src="headimg" alt=""></div>
                 <div class="name-code">
                     <div class="name start-center">{{nickname}}</div>
-                    <div class="unset start-center">
+                    <!-- <div class="unset start-center">
                         <router-link tag="div" class="center" to="/register">设置</router-link>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <!-- <div v-show="showYYS" class="operator end-center" @click="handleExpect">
-                <van-icon name="medel" size="20px" color="#dab17b"/>
-                <span>运营商</span>
-            </div> -->
-            <div v-show="isUpgrade" class="operator end-center"  @click="Upgrade">
+            <div v-show="isUpgrade" class="operator end-center"  @click="Upgrade" >
                 <van-icon name="gem" size="20px" color="#dab17b"/>
-                <span>升级为钻石会员</span>
+                <span >升级为钻石会员</span>
             </div>
             <div class="position">
                 <div class="recomcode center">推荐码:{{promotioncode}}</div>
@@ -52,6 +55,7 @@
                     <router-link tag="div" :to="{path: '/personalCenter/income',query: {amountSum: amountSum}}" class="per-title center">总收益</router-link>
                 </div>
             </div>
+            <img class="backgroung" :src="background" alt="">
         </header>
         <div class="pop" v-show="showCover">
                 <van-popup v-model="show" :overlay="false" >
@@ -94,7 +98,7 @@
 
             <div class="per-menu-list line" @click="handleExpect">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/307.png" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">共享佣金池</div>
+                <div class="per-menu-title center">平台奖励</div>
             </div>
 
             <div class="per-menu-list" @click="handleExpect">
@@ -104,10 +108,10 @@
         </div>
         <div class="menu-title m-top server start-center">实时工具</div>
         <div class="per-list row">
-            <div class="per-menu-list line" @click="handleExpect">
-                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/309.png" size="30px" color="#dab17b"/></div>
-                <div class="per-menu-title center">VIP视频</div>
-            </div>
+            <router-link tag="div" to="/Extension" class="per-menu-list line">
+                <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/tuiguang_shipin.png" size="30px" color="#dab17b"/></div>
+                <div class="per-menu-title center">推广原则</div>
+            </router-link>
 
             <div class="per-menu-list line"  @click="handleExpect">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/310.png" size="30px" color="#dab17b"/></div>
@@ -130,7 +134,7 @@
                 <div class="per-menu-title center">联系我们</div>
             </router-link>
 
-            <div class="per-menu-list" @click="handleExpect">
+            <div class="per-menu-list">
                 <div class="menu-icon center"><van-icon name="http://pay.91dianji.com.cn/314.png" size="30px" color="#dab17b"/></div>
                 <div class="per-menu-title center">名片夹</div>
             </div>
@@ -195,26 +199,11 @@
                     <van-icon name="http://pay.91dianji.com.cn/Android.png"  size="90px" color="#dab17b"/>
                     <p> 安卓手机下载</p>
                 </li>
-                 <!-- <router-link @click="uploadIos"  tag="li"  :to="{path: '/loan/form/myOrder',query: {info: 'http://znd.hvv.dnf-w3.cn/KXxv61',title: '苹果下载'}}" >
-           
-                     <van-icon name="http://pay.91dianji.com.cn/Android.png"  size="40px" color="#dab17b"/>
-                    <p>苹果手机下载</p>
-                 </router-link> -->
                  <li  @click="uploadIos">
                      <van-icon name="http://pay.91dianji.com.cn/ios.png"  size="90px" color="#dab17b"/>
                     <p>苹果手机下载</p>
                  </li>
             </ul>
-            <!-- <div v-show="showand" class="cover">
-                    <dir class="dis">
-                         <van-icon name="http://pay.91dianji.com.cn/Aandroidem.png"  size="30px" color="#dab17b"/>
-                    </dir>
-            </div>
-            <div v-show="showios" class="cover">
-                    <dir class="dis">
-                        <img src="http://pay.91dianji.com.cn/iosem.png" alt="">
-                    </dir>
-            </div> -->
         </div>
         <footerMenu :active="active" @getChange="changeActive"></footerMenu>
         <loading :componentload="componentload"></loading>
@@ -245,7 +234,6 @@ export default {
             commission: '',
             showand:false,
             showios:false,
-            // showYYS:true,
             isUpgrade:false,
             show:false,
             showCover:false,
@@ -255,7 +243,10 @@ export default {
             recomname:"",
             recomcode:"",
             recomheadimg:"",
-            orderId:""
+            orderId:"",
+            pic:"",
+            ispartner:"",
+            background:""
         }
     },
     methods:{
@@ -265,16 +256,57 @@ export default {
         },
         Upgrade(){
             this.show=true
-            this.showCover=true
+            this.showCover=true;
+            let data = {
+                type: '9'
+            };
+            axiosPost("/behavior/insertBehavior",data).then(res =>{
+
+            }).catch(res =>{})
         },
         handleCancelOrder(){
             this.showCover=false
         },
+
         handlePayTypeWX(){
             this.paytype="wechat"
         },
         handlePayTypeZFB(){
              this.paytype="alipay"
+        },
+         handlePay(obj){
+            let params = obj;
+            let url = '/order/xhPay';
+            axiosPost(url,params).then(res =>{
+                if(res.data.success){
+                    // console.log('支付成功',res);
+                    let ua = navigator.userAgent.toLowerCase();
+                    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                        // 微信浏览器中打开
+                        window.location.href = res.data.data.url
+                        
+                    }else{
+                        // 非微信中打开
+                        if(this.paytype == 'wechat'){
+                            // 此时无法在非微信中调用微信支付
+                            this.$router.push({
+                                path: '/middle',
+                                query:{
+                                    qrcode: res.data.data.codeUrl
+                                }
+                            })
+                        }else{
+                           window.location.href = res.data.data.url 
+                        }
+                    }
+                }else{
+                    // console.log('支付失败',res);
+                    this.$toast('支付失败');
+                }
+            }).catch(res =>{
+                // console.log('支付失败',res);
+                this.$toast('支付失败');
+            })
         },
         handleBuyCancel(){
             this.pup2=false
@@ -308,70 +340,138 @@ export default {
                  }
             })
         },
+
+
+         plusReady(){
+            var channel=null;
+            let that=this
+            plus.payment.getChannels(function(channels){
+                for(var i in channels){
+                    var iap=channels[i];
+                    if(iap.id==='wxpay'){
+                        channel=iap;
+                    }
+                }
+                let param = {
+                    orderid: that.orderid,
+                }
+                axiosPost('/order/wxPayH5App',param).then(res =>{
+                         
+                        plus.payment.request(channel,res.data,function(result){
+                           
+                            plus.nativeUI.alert("支付成功！",function(){
+                                back();
+                            });
+                        },function(error){
+                            
+                            plus.nativeUI.alert("支付失败" );
+                        });
+                   
+                }).catch(res =>{
+                    alert("失败")
+                })
+               
+                
+                },function(e){
+                alert("获取支付通道失败："+e.message);
+            });
+            // document.addEventListener('plusready',plusReady,false);
+        },
+
+
         handleBuyNow(){
             // 首先判断选择哪一种支付方式
             if(this.paytype == 'alipay'){
-                // 支付宝支付
-                var ua = navigator.userAgent.toLowerCase();
-                if(ua.match(/MicroMessenger/i)=="micromessenger") {
-                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
-                         
-                } else {
-                    // 非微信浏览器
-                    window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
-                } 
-            }else{
-                var  params = {
+
+                 let params = {
                     orderid: this.orderid,
-                    trade_type: 'JSAPI',
-                    openid: storage.get('openid')
+                    channel: 'aliwap'
                 };
-                var url = '/order/wxPayH5';
-                axiosPost(url,params).then(res =>{
-                        var radom = Math.random().toString(36).substr(2);
-                        var tmp = Date.parse( new Date() ).toString();
-                        tmp = tmp.substr(0,10);
-                        wx.chooseWXPay({
-                            timestamp: res.data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                            nonceStr: res.data.nonceStr, // 支付签名随机串，不长于 32 位
-                            package: res.data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
-                            signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                            paySign: res.data.paySign, // 支付签名
-                            success: function (res) {
-                            }
-                        });
-                    }).catch(res =>{
-                    })
+                this.handlePay(params);
+
+
+
+                // 支付宝支付
+                // var ua = navigator.userAgent.toLowerCase();
+                // if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                //     window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid + '&openid='+ this.$store.state.wechat.openid
+                         
+                // } else {
+                //     // 非微信浏览器
+                //     window.location.href="http://pay.91dianji.com.cn/pay.htm?orderid="+ this.orderid
+                // } 
+            }else{
+
+                    // this.plusReady()    // app微信支付
+
+                      //h5支付 --->四方平台
+
+                let params = {           
+                    orderid: this.orderid,
+                    channel: 'wx'
+                };
+                this.handlePay(params);
+
+
+                //h5支付
+
+                // var  params = {
+                //     orderid: this.orderid,
+                //     trade_type: 'JSAPI',
+                //     openid: storage.get('openid')
+                // };
+                // var url = '/order/wxPayH5';
+                // axiosPost(url,params).then(res =>{
+                //         var radom = Math.random().toString(36).substr(2);
+                //         var tmp = Date.parse( new Date() ).toString();
+                //         tmp = tmp.substr(0,10);
+                //         wx.chooseWXPay({
+                //             timestamp: res.data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                //             nonceStr: res.data.nonceStr, // 支付签名随机串，不长于 32 位
+                //             package: res.data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                //             signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                //             paySign: res.data.paySign, // 支付签名
+                //             success: function (res) {
+                //             }
+                //         });
+                //     }).catch(res =>{
+                //     })
             }
         },
+        getUrl(data){
+            axiosPost("/content/getDownLoadUrl")
+            .then(res=>{
+                if(res.data.success){
+                    let links=res.data.data
+                    links=JSON.parse(links)
+                    links.forEach(item=>{
+                        if(item.title==data){
+                            // console.log(item.link)
+                            location.href=item.link 
+                        }
+                    })
+                } else {
+                    this.$toast(res.data.message)
+                }
+            })
+        },
         uploadAnd(){
-            location.href=" https://www.pgyer.com/vFbf"
-            // this.showand=!this.showand
-            // this.showios=false
-            // setTimeout(()=>{
-            //     this.showand=false
-            // },6000)
+           this.getUrl('android')
         },
         uploadIos(){
-            location.href="http://znd.hvv.dnf-w3.cn/KXxv61"
-            // this.showios=!this.showios
-            // this.showand=false
-            // setTimeout(()=>{
-            //     this.showios=false
-            // },6000)
+             this.getUrl('ios')
         },
         changeActive(obj){
-            // console.log('obj', obj);
+          
         },
         // 查询个人设置
         handleGetAmount(){
             let url = '/customer/getCustomer';
-            // let url = '/customer/getCustomer';
             let params = {
                 openid:this.$store.state.wechat.openid,
             };
             axiosPost(url,params).then(res =>{
-                // console.log('查询个人设置成功',res)
+               
                 if(res.data.success){
                     setTimeout(()=>{
                         this.componentload = false;
@@ -382,17 +482,40 @@ export default {
                     this.amount = res.data.data.amount;
                     this.amountSum = res.data.data.amountSum;
                     this.commission = res.data.data.commission;
+                    this.pic=res.data.data.level
+                    
+                    this.ispartner=res.data.data.ispartner
                     res.data.data.iscertification == '0' ? this.iscertification = '实名认证' : ( res.data.data.iscertification == '1' ? this.iscertification = '审核中' : (res.data.data.iscertification == '2' ? this.iscertification = '认证成功' : this.iscertification = '认证失败，请重试')); 
                     if(res.data.data.level == '0'){
                         this.vip ='';
                     }
                     else if(res.data.data.level == '1'){
-                        // this.showYYS=false
                         this.isUpgrade=true
                         this.vip ='http://pay.91dianji.com.cn/huangjinVIP.png';
                     }else{
                         this.vip = 'http://pay.91dianji.com.cn/zuanshivip.png';
                     }
+                    let head=document.getElementById("head")
+
+                    //  if(this.ispartner=='1'){
+                    //    this.background='http://pay.91dianji.com.cn/vip0003.png'
+                    // }else  if(this.pic=='1'){
+                    //    this.background='http://pay.91dianji.com.cn/vip004.png'
+                    // } else if(this.pic=='2'){
+                    //   this.background='http://pay.91dianji.com.cn/vip001.png'
+                    // } else {
+                    //    this.background=''
+                    // }
+                    if(this.ispartner=='1'){
+                       this.background='http://pay.91dianji.com.cn/vip003.png'
+                    }else  if(this.pic=='1'){
+                       this.background='http://pay.91dianji.com.cn/vip001.png'
+                    } else if(this.pic=='2'){
+                      this.background='http://pay.91dianji.com.cn/vip002.png'
+                    } else {
+                      this.background='http://pay.91dianji.com.cn/vip000.png'
+                    }
+
                 }else{
                     setTimeout(()=>{
                         this.componentload = false;
@@ -409,6 +532,9 @@ export default {
     },
     created(){
         this.handleGetAmount();
+    },
+    mounted () {
+      
     }
 }
 </script>
@@ -418,14 +544,21 @@ export default {
       width: 100%;
       height: 90vh;
       overflow: scroll;
-      padding-bottom: 5vh;
+      padding-bottom: 10vh;
       background: #F2F2F2;
       .header{
           width: 100vw;
-          height: 450px;
+          height: 391px;
           position: relative;
-          background: linear-gradient(#4B66AF,#6883C1);  
+          background-repeat: no-repeat;
+          background-size: contain;
           padding-top: 60px;  
+          .backgroung {
+              width:100%;
+              position: absolute;
+              top:0;
+              left:0;
+          }
           .top{
               width: 90%;
               height: 120px;
@@ -434,6 +567,8 @@ export default {
               .avator{
                   width: 18%;
                   height: 100%;
+                  z-index: 998;
+                  position: relative;
                   >img{
                       width: 120px;
                       height: 120px;
@@ -442,8 +577,10 @@ export default {
               }
               .name-code{
                   width: 72%;
+                   z-index: 99;
+                   position: relative;
                   margin-left: 15px;
-                  height: 100%;
+                //   height: 80%;
                   .name{
                       height: 50px;
                       margin-top: 10px;
@@ -457,22 +594,25 @@ export default {
                       margin-top: 5px;
                       font-size: 28px;
                       color:#ffffff; 
+                       z-index: 9999;
+                      position: relative;
                       >div{
                         width: auto;
                         border: solid 0.02rem #ccc;
                         border-radius: 20px; 
                         padding: 5px 20px;
                       }
-
                   }
               }
           }
           .operator{
               width: auto;
-              height: 100px;
+              height: 70px;
               position: absolute;
+              z-index: 999;
               right: 0px;
-              top: 70px;
+              top: 140px;
+              z-index: 99;
               background: #798bc5;
               padding-left: 20px;
               padding-right: 20px;
@@ -485,6 +625,7 @@ export default {
               height: 350px;
               position: relative;
               margin-top: 100px;
+              z-index: 99;
               margin-left: auto;
               margin-right: auto;
               background: #ffffff;
@@ -536,6 +677,7 @@ export default {
                           height: 50px;
                           padding-left: 10%;
                           font-size: 30px;
+                        //   color: #000000;
                       }
                       .bold{
                           font-weight: bold;
@@ -568,6 +710,7 @@ export default {
               height: 180px;
               background: white;
               margin-top: 30px;
+              z-index: 99;
               .per-menu{
                   width: 33%;
                   height: 160px;
@@ -588,35 +731,36 @@ export default {
             width: 100%;
             height: 100%;
             position: fixed;
-            z-index: 2;
+            z-index: 100;
             top: 0;
             left: 0;
             background: rgba(0, 0, 0, 0.4);
-
           .content {
               width:600px;
-              height:800px;
+              height:auto;
               margin:0 auto;
-              padding:15px;
+              padding: 30px;
               box-sizing:border-box;
               line-height: 38px;
               >h1 {
                   text-align: center;
                   margin-top:10px;
                   font-weight: bold;
+                  padding-bottom: 20px;
+                  font-size: 34px;
               }
               p{
-                  font-size: 30px;
+                  font-size: 26px;
               }
               .colum {
                   color:#DAB17D;
                   font-weight: bold;
-                  font-size: 30px;
+                  font-size: 26px;
               }
               .vip {
                   margin-top:20px;
                   margin-bottom:20px;
-                  font-size: 30px;
+                  font-size: 26px;
               }
                .button{
                  width: 80%;
@@ -650,7 +794,7 @@ export default {
             background: white;
             font-size: 30px;
             color: #000;
-            margin-top: 360px;
+            margin-top: 400px;
             &.server {
                 font-size: 36px;
                 font-weight: bold;
@@ -717,144 +861,144 @@ export default {
             }
         }
          .buy-detail{
-         width: 100%;
-         height: 100%;
-         position: fixed;
-         z-index: 10000;
-         top: 0;
-         left: 0;
-         background: #ffffff;
-         color: black;
-         .recom{
-             width: 100%;
-             height: 150px;
-            //  border-bottom: solid 1px #ccc;
-             .avator{
-                 width: 15%;
-                 height: 100%;
-                 >img{
-                     width: 80px;
-                     height: 80px;
-                     border-radius: 50%;
-                 }
-             }
-             .recom-detail{
-                 width: 33%;
-                 height: 100%;
-                 padding-left: 2%;
-                 .recom-title{
-                     width: 100%;
-                     height: 25%;
-                     margin-top: 8%;
-                     color: #333;
-                     font-size: 24px;
-                 }
-                 .recom-name{
-                     width: 100%;
-                     height: 25%;
-                     font-size: 20px;
-                 }
-                 .recom-code{
-                     width: 100%;
-                     height: 25%;
-                     color: #333;
-                     font-size: 24px;
-                 }
-             }
-             .recom-info{
-                 width: 50%;
-                 height: 100%;
-                 .mini-info{
-                     width: 80%;
-                     height: 70%;
-                     background: #CAF788;
-                     padding: 5%;
-                     text-align: justify; 
-                     font-size: 22px;
-
-                 }
-             }
-         }
-        .price{
             width: 100%;
-            height: 150px;
-            font-weight: bold;
-            font-size: 50px;
-        }
-        .per-title{
-            width: 100%;
-            height: 100px;
-            border-bottom: solid 1px #ddd;
-            .goods-title{
-                width: 25%;
-                height: 100%;
-                margin-left: 5%;
-                font-size: 32px;
-                color: #333;
-            }
-            .goods-detail{
-                width: 75%;
-                height: 100%;
-                font-size: 28px;
-                .alipay{
-                    border: solid 1.2px #0498E2;
-                }
-                .wechatpay{
-                    border: solid 1.2px #09BB07;
-                }
-                .paytype{
-                    width: 40%;
-                    height: 70%;
-                    padding-left: 15px;
-                    padding-right: 15px;
-                    margin-top: 15px;
-                    border-radius: 50px;
-                    .payicon{
-                        font-size: 40px;
-                        padding-right: 10px;
+            height: 100%;
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            background: #ffffff;
+            color: black;
+            .recom{
+                width: 100%;
+                height: 150px;
+                //  border-bottom: solid 1px #ccc;
+                .avator{
+                    width: 15%;
+                    height: 100%;
+                    >img{
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 50%;
                     }
                 }
-                .paytypes{
-                    width: 40%;
-                    height: 70%;
-                    margin-left: 5%;
-                    padding-left: 15px;
-                    padding-right: 15px;
-                    margin-top: 15px;
-                    border-radius: 50px;
-                    .payicon{
-                        font-size: 40px;
-                        padding-right: 10px;
+                .recom-detail{
+                    width: 33%;
+                    height: 100%;
+                    padding-left: 2%;
+                    .recom-title{
+                        width: 100%;
+                        height: 25%;
+                        margin-top: 8%;
+                        color: #333;
+                        font-size: 24px;
+                    }
+                    .recom-name{
+                        width: 100%;
+                        height: 25%;
+                        font-size: 20px;
+                        z-index: 9999;
+                    }
+                    .recom-code{
+                        width: 100%;
+                        height: 25%;
+                        color: #333;
+                        font-size: 24px;
+                    }
+                }
+                .recom-info{
+                    width: 50%;
+                    height: 100%;
+                    .mini-info{
+                        width: 80%;
+                        height: 70%;
+                        background: #CAF788;
+                        padding: 5%;
+                        text-align: justify; 
+                        font-size: 22px;
                     }
                 }
             }
-        }
-        .buybtn{
-            width: 80%;
-            height: 100px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 100px;
-            .cancel{
-                width: 40%;
-                height: 100%;
-                background: #ddd;
-                border: none;
-                font-size: 30px;
-            }
-            .submit{
-                width: 40%;
-                height: 100%;
-                background: #4b66af;
-                color:#ffffff;
-                font-size: 36px;
+            .price{
+                width: 100%;
+                height: 150px;
                 font-weight: bold;
-                margin-left: 20%;
-                border: none;
-                font-size: 30px;
+                font-size: 50px;
+            }
+            .per-title{
+                width: 100%;
+                height: 100px;
+                border-bottom: solid 1px #ddd;
+                .goods-title{
+                    width: 25%;
+                    height: 100%;
+                    margin-left: 5%;
+                    font-size: 32px;
+                    color: #333;
+                }
+                .goods-detail{
+                    width: 75%;
+                    height: 100%;
+                    font-size: 28px;
+                    .alipay{
+                        border: solid 1.2px #0498E2;
+                    }
+                    .wechatpay{
+                        border: solid 1.2px #09BB07;
+                    }
+                    .paytype{
+                        width: 40%;
+                        height: 70%;
+                        padding-left: 15px;
+                        padding-right: 15px;
+                        margin-top: 15px;
+                        border-radius: 50px;
+                        .payicon{
+                            font-size: 40px;
+                            padding-right: 10px;
+                        }
+                    }
+                    .paytypes{
+                        width: 40%;
+                        height: 70%;
+                        margin-left: 5%;
+                        padding-left: 15px;
+                        padding-right: 15px;
+                        margin-top: 15px;
+                        border-radius: 50px;
+                        .payicon{
+                            font-size: 40px;
+                            padding-right: 10px;
+                        }
+                    }
+                }
+            }
+            .buybtn{
+                width: 80%;
+                height: 100px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 100px;
+                .cancel{
+                    width: 40%;
+                    height: 100%;
+                    background: #ddd;
+                    border: none;
+                    font-size: 30px;
+                }
+                .submit{
+                    width: 40%;
+                    height: 100%;
+                    background: #4b66af;
+                    color:#ffffff;
+                    font-size: 36px;
+                    font-weight: bold;
+                    margin-left: 20%;
+                    border: none;
+                    font-size: 30px;
+                }
             }
         }
-     }
         
 }
 </style>

@@ -98,6 +98,7 @@
 
 
 <script>
+import storage from '@/lib/storage'
 export default {
     data() {
         return {
@@ -119,11 +120,15 @@ export default {
                 })
                 return
             }
+
+
+            storage.set('type',i)
+
             this.$router.push({
                 path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
                 query:{
                     info:this.item,
-                    type:i
+                    // type:i
                 }
             })
 
@@ -173,9 +178,9 @@ export default {
                       border-radius: 10px;
                       box-sizing: border-box;
                       margin-bottom: 15px;
-                      background-image:url("http://pay.91dianji.com.cn/big2.png");
+                      background-image:url("http://pay.91dianji.com.cn/bgc5.jpg");
                       background-repeat: no-repeat;
-                      height: 350px;
+                      height: 410px;
                       background-size:100%;
                       padding:10px;
                        >.top {
@@ -189,6 +194,7 @@ export default {
                        }
                       .bottom {
                          margin-bottom:35px;
+                         margin-top:50px;
                           >ul{
                               display: flex;
                               justify-content: space-around;
@@ -268,6 +274,7 @@ export default {
                   }
                   .van-checkbox__icon .van-icon{
                       border:1px solid #000;
+                      margin-bottom: 8px !important;
                   }
                   .red {
                       color:red;

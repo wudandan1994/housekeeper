@@ -93,7 +93,12 @@ export default {
     },
     methods:{
         goBack() {
-            this.$router.push('/home/creditHousekeeper/aisleHousekeeper')
+            this.$router.push({
+                path:"/home/creditHousekeeper/aisleHousekeeper/makePlan",
+                query:{
+                    info:this.item
+                }
+            })
         },
         changePage(){
            this.details= this.plans.splice((this.currentPage-1)*10,10)
@@ -114,6 +119,7 @@ export default {
                         this.componentload=true
                         setTimeout(()=>{
                             this.componentload=false
+                            this.$toast(res.data.message)
                                  this.$router.push({
                                     path:"/home/punch",
                                     query:{
@@ -124,7 +130,6 @@ export default {
                    }
             })
             .catch(err=>{
-                console.log(err)
             })
         },
         fnDate(){
@@ -140,7 +145,7 @@ export default {
             //补位 当某个字段不是两位数时补0
             fnW(str){
                 var num;
-                str>10?num=str:num="0"+str;
+                str>9?num=str:num="0"+str;
                 return num;
             } 
     },

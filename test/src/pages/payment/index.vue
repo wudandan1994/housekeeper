@@ -177,7 +177,7 @@ export default {
         //    })
     //    },
        pay(){
-           let partten=/0?(13|14|15|17|18|19)[0-9]{9}/ 
+           let partten=/0?(13|14|15|16|17|18|19)[0-9]{9}/ 
            if(this.orderAmount.trim().length===0 || this.realName.trim().length===0 || this.idCard.trim().length===0
            || this.accNo.trim().length===0 || this.mobile.trim().length===0){
                 this.$toast({
@@ -242,14 +242,28 @@ export default {
                 let url=res.data.data.url.replace("http://localhost:8080","http://test.man-opaydev.ncfgroup.com/fusionPosp")
                         setTimeout(() =>{
                             this.componentload = false;
+                               if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                                this.$router.push({
+                                    path:"/loan/form/myOrder",
+                                    query:{
+                                        info:url,
+                                        title:"支付"
+                                    }
+                                })
+                                } else {
+                                    this.componentload=false
+                                    location.href=url
+                                }
+
+                            //  this.$router.push({
+                            //   path:"/loan/form/myOrder",
+                            //     query:{
+                            //         info:url,
+                            //         title:"支付"
+                            //     }
+                            // })
+                            
                         },2000)
-                        this.$router.push({
-                            path:"/loan/form/myOrder",
-                            query:{
-                                info:url,
-                                title:"支付"
-                              }
-                        })
                    }
                })
             .catch(err=>{
@@ -266,15 +280,9 @@ export default {
                     return
                 }
                  this.chMerCode=res.data.data.chMerCode
-            })
-            .catch(err=>{
-                // console.log(err,"error");
-            })
-        },
-        sureSubmit(){
-            let data={
-                chMerCode:this.chMerCode
-            }
+                    let data={
+                        chMerCode:this.chMerCode
+                    }   
             axiosPost("/creditCard/getMemberRegLine",data)
             .then(res=>{
                 let type=res.data.data.uploadStatus
@@ -284,7 +292,7 @@ export default {
                     },500)
                      this.$router.push({
                          path:"/home/collect/open",
-                         info:this.chMerCode
+                        //  info:this.chMerCode
                      })
                   } else {
                       this.componentload=false
@@ -293,15 +301,44 @@ export default {
             .catch(err=>{
 
             })
-            
+
+            })
+            .catch(err=>{
+                // console.log(err,"error");
+            })
         },
+        // sureSubmit(){
+        //     let data={
+        //         chMerCode:this.chMerCode
+        //     }
+        //     axiosPost("/creditCard/getMemberRegLine",data)
+        //     .then(res=>{
+        //         let type=res.data.data.uploadStatus
+        //         if(res.data.data.uploadStatus!="0"){
+        //              setTimeout(()=>{
+        //                 this.componentload=false
+        //             },500)
+        //              this.$router.push({
+        //                  path:"/home/collect/open",
+        //                  info:this.chMerCode
+        //              })
+        //           } else {
+        //               this.componentload=false
+        //           }
+        //     })
+        //     .catch(err=>{
+
+        //     })
+            
+        // },
         
     },
     created () {
-         this.chMerCode=this.$route.query.info
-         console.log(this.chMerCode,"payment")
-        //  this.search()
-         this.sureSubmit()
+
+        //  this.chMerCode=this.$route.query.info
+       
+         this.search()
+        //  this.sureSubmit()
     },
    
     mounted () {

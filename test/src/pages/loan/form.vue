@@ -187,47 +187,63 @@ export default {
                this.$toast('请阅读并同意服务协议');
            }
            else{
-                 let url="https://wallet.xiaoying.com/fe/wallet-landing/blueRegPage/index.html?landId=1017&source=100024443"
-                setTimeout(()=>{
-                            this.$router.push({
-                            path:"/home/online",
-                            query:{
-                                info:url,
-                                title:"贷款中心"
-                              }
-                          })
+                //  let url="https://wallet.xiaoying.com/fe/wallet-landing/blueRegPage/index.html?landId=1017&source=100024443"
+                // setTimeout(()=>{
+                //             this.$router.push({
+                //             path:"/home/online",
+                //             query:{
+                //                 info:url,
+                //                 title:"贷款中心"
+                //               }
+                //           })
+                //         },1000)
+               let data={
+                   realName:this.form.name,
+                   mobile:this.form.mobile,
+                   certcode:this.form.idcardnumber
+               }
+               axiosPost("/creditCard/getLoanUrl",data)
+               .then(res=>{
+                   if(!res.data.success){
+                       this.$toast({
+                           message:res.data.message
+                       })
+                       return
+                   } else {
+                    //    window.location.href=res.data.data;
+                        let url=res.data.data;
+                        this.componentload=true
+
+                        setTimeout(()=>{
+                            
+                            // this.$router.push({
+                            //         path:"/home/online",
+                            //         query:{
+                            //             info:url,
+                            //             title:"贷款中心"
+                            //         }
+                            //     })
+
+
+                         if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                                this.$router.push({
+                                    path:"/loan/form/myOrder",
+                                    query:{
+                                        info:url,
+                                        title:"贷款中心"
+                                    }
+                                })
+                                } else {
+                                    this.componentload=false
+                                    location.href=url
+                                }
+
                         },1000)
-            //    let data={
-            //        realName:this.form.name,
-            //        mobile:this.form.mobile,
-            //        certcode:this.form.idcardnumber
-            //    }
-            //    axiosPost("/creditCard/getLoanUrl",data)
-            //    .then(res=>{
-            //        if(!res.data.success){
-            //            this.$toast({
-            //                message:res.data.message
-            //            })
-            //            return
-            //        } else {
-            //         //    window.location.href=res.data.data;
-            //             let url=res.data.data;
-            //             this.componentload=true
-            //             setTimeout(()=>{
-            //                 this.$router.push({
-            //                 path:"/home/online",
-            //                 query:{
-            //                     info:url,
-            //                     title:"贷款中心"
-            //                   }
-            //               })
-            //             },1000)
-            //        }
+                   }
+               })
+               .catch(err=>{
                    
-            //    })
-            //    .catch(err=>{
-                   
-            //    })
+               })
            }
         },
          // 获取实名认证信息
@@ -382,9 +398,9 @@ export default {
             padding-bottom: 50px;
             background: #F7F6FB;
             .van-checkbox__icon .van-icon{
-                      border:1px solid #000;
-                  }
-            
+                border:1px solid #000;
+                margin-bottom: 8px !important;
+            }
             span{
                 color: #4B66AF;
             }

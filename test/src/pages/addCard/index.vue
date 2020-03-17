@@ -9,19 +9,19 @@
             <div class="info">
                  <div class="user-input row">
                     <div class="title start-center">真实姓名</div>
-                    <div class="input start-center"><input type="text" required v-model="name" placeholder="请填写姓名"></div>
+                    <div class="input start-center"><input type="text" required v-model="name" placeholder="姓名"></div>
                 </div>
                 <div class="user-input row">
                     <div class="title start-center">身份证号码</div>
-                    <div class="input start-center"><input type="text" required v-model="idCard" placeholder="请填写所持身份证号码"></div>
+                    <div class="input start-center"><input type="text" required v-model="idCard" placeholder="身份证号码"></div>
                 </div>
                 <div class="user-input row">
                     <div class="title start-center">手机号码</div>
-                    <div class="input start-center"><input type="number" required v-model="phone" placeholder="请填写预留手机号码"></div>
+                    <div class="input start-center"><input type="number" required v-model="phone" placeholder="预留手机号码"></div>
                 </div>
             </div>
             <div class="submit">
-                <van-button @click="submit" round size="large" type="info">提交</van-button>
+                <van-button @click="submit" round size="large" type="default">提交</van-button>
             </div>
         </div>
     </div>
@@ -64,17 +64,30 @@ export default {
                     }  else {
                         // window.location.href=res.data.data
                         let url=res.data.data
-                        this.$router.push({
-                            path:"/home/cardCenter/progressQuery",
-                            query:{
-                                info:url,
-                                title:"信用卡办理"
-                              }
-                        })
+                        // this.$router.push({
+                        //     path:"/home/cardCenter/progressQuery",
+                        //     query:{
+                        //         info:url,
+                        //         title:"信用卡办理"
+                        //       }
+                        // })
+
+
+                    if (!navigator.userAgent.match(/iPad|iPhone/i)){
+                                this.$router.push({
+                                    path:"/loan/form/myOrder",
+                                    query:{
+                                        info:url,
+                                        title:"还款"
+                                    }
+                                })
+                                } else {
+                                    this.componentload=false
+                                    location.href=url
+                                }
                     }
                 })
                 .catch(err=>{
-                    // console.log(err,"error");
                 })
             }
         },
@@ -83,7 +96,6 @@ export default {
             let url = '/customer/getIdentification';
             let params = {};
             axiosPost(url,params).then(res =>{
-                // console.log('获取实名认证状态成功',res);
                 if(res.data.data.status != '0'){
                     this.name = res.data.data.name;
                     this.idCard = res.data.data.idcardnumber;
@@ -91,7 +103,6 @@ export default {
                    
                 }
             }).catch(res =>{
-                // console.log('获取实名认证状态失败',res);
             })
         }
     },

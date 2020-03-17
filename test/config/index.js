@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-09 16:57:17
+ * @LastEditTime: 2019-08-28 09:48:59
+ * @LastEditors: Please set LastEditors
+ */
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
@@ -6,13 +13,13 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath:'/',
     proxyTable: {
       '/api': {
-        target: 'http://pay.91dianji.com.cn', //http://106.14.141.40:8080 192.168.101.71
+        target: 'http://pay.91dianji.com.cn', //正式环境
+        // target: 'http://test.91dianji.com.cn', //测试环境
         changeOrigin: true,
         pathRewrite: { //需要rewrite重写的, 如果在服务器端做了处理则可以不要这段
           '^/api': '/api'

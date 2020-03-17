@@ -9,104 +9,78 @@
              <div class="phone">
                <ul>
                     <li>
-                        <span>真实姓名：</span>
+                        <span>真实姓名</span>
                        <input v-model="name" type="text" placeholder="姓名">
                    </li>
                     <li>
+<<<<<<< HEAD
                         <span>身份证号：</span>
+=======
+                        <span>身份证号</span>
+>>>>>>> 9d19d1de91fef0273ec26e424324a6fce1b99c47
                        <input v-model="idCard"  type="text" placeholder="所持身份证号码">
                    </li>
                     <li>
-                        <span>银行卡号：</span>
+                        <span>银行卡号</span>
                        <input v-model="bankcardno"  type="number" placeholder="所持银行卡号">
                    </li>
+                   <div class="shadow"></div>
                     <li>
-                        <span>有效期年份：</span>
+                        <span>有效期年份</span>
                        <input v-model="year"  type="number" placeholder="信用卡有效期年份如 22">
                    </li>
                    <li>
-                       <span>有效期月份：</span>
+                       <span>有效期月份</span>
                        <input type="number" v-model="month" placeholder="信用卡有效期月份 如 05">
                    </li> 
                     <li>
-                       <span>安全码：</span>
+                       <span>安全码</span>
                        <input type="number" v-model="safeCode" placeholder="信用卡后三位安全码">
                    </li> 
+                     <div class="shadow"></div>
                      <li>
-                       <span>手机号：</span>
+                       <span>手机号</span>
                        <input type="number" v-model="phone" placeholder="银行卡预留手机号">
                    </li> 
-                     <li>
-                       <span>账单日：</span>
+                    <li>
+                       <span>账单日</span>
                        <input type="number" v-model="billdate" placeholder="账单日 如 06">
                    </li> 
                     <li>
-                       <span>最后还款日：</span>
+                       <span>最后还款日</span>
                        <input type="number" v-model="duedate" placeholder="还款日 如 23">
                    </li> 
+                     <div class="shadow"></div>
                </ul>
               <div @click="bindingCard" class="btn">
                 <van-button round size="large" type="info">确认绑定</van-button>
              </div>
- 
            </div>
         </div>
-        <!-- <div class="user-input row">
-            <div class="title start-center"></div>
-            <div class="input start-center"><input type="text" required v-model="name" placeholder="姓名"></div>
-        </div> -->
-        <!-- <div class="user-input row">
-            <div class="title start-center">身份证号</div>
-            <div class="input start-center"><input type="text" required v-model="idCard" placeholder="所持身份证号码"></div>
-        </div> -->
-        <!-- <div class="user-input row">
-            <div class="title start-center">银行卡号</div>
-            <div class="input start-center"><input type="number" required v-model="bankcardno" placeholder="所持银行卡号"></div>
-        </div> -->
-         <!-- <div class="user-input top row">
-            <div class="title year start-center">有效期年份</div>
-            <div class="input start-center"><input type="number" v-model="year" placeholder="信用卡有效期年份如 22"></div>
-        </div> -->
-         <!-- <div class="user-input  row">
-            <div class="title year start-center">有效期月份</div>
-            <div class="input start-center"><input type="number" v-model="month" placeholder="信用卡有效期月份 如 05"></div>
-        </div> -->
-         <!-- <div class="user-input  row">
-            <div class="title year start-center">安全码</div>
-            <div class="input start-center"><input type="number"  v-model="safeCode" placeholder="信用卡后三位安全码"></div>
-        </div> -->
-
-        <!-- <div class="user-input top row">
-            <div class="title start-center">手机号</div>
-            <div class="input start-center"><input type="number" v-model="phone" required placeholder="银行卡预留手机号"></div>
-        </div> -->
-         <!-- <div class="user-input  row">
-            <div class="title start-center">账单日</div>
-            <div class="input start-center"><input type="number" v-model="billdate" required placeholder="账单日 如06"></div>
-        </div>
-        <div class="user-input  row">
-            <div class="title start-center">最后还款日</div>
-            <div class="input start-center"><input type="number" v-model="duedate" required placeholder="还款日 如23"></div>
-        </div>
-        <div @click="bindingCard" class="btn">
-            <van-button round size="large" type="info">确认绑定</van-button>
-        </div> -->
+         <loading :componentload="componentload"></loading>
     </div>
 </template>
 <script>
-import area from '@/config/area.js'
+// import area from '@/config/area.js'
+import loading from '@/components/loading'
 import {axiosPost,axiosGet} from '@/lib/http'
+// import { bankCardAttribution } from '../../lib/bankName'
+import Bank from '@/lib/bank'
 import storage from '@/lib/storage'
 export default {
+     components:{
+      loading
+    },
     data(){
         return{
-            area: '请选择支行地址',
+            // area: '请选择支行地址',
             show: false,
             title: '获取验证码',
             areaList:{},
             name:"",
             phone:"",
             bankcardno:"",
+             componentload:false,
             idCard:"",
             year:"",
             month:"",
@@ -114,7 +88,8 @@ export default {
             // autoCode:"",
             // orderId:"",
             billdate:"",
-            duedate:""
+            duedate:"",
+            bankcode:""
         }
     },
     created(){
@@ -124,109 +99,17 @@ export default {
         handleReturnHome(){
             this.$router.go(-1)
         },
-         // 获取验证码
-        // handleSafeCode(){
-        //     let that=this
-        //     if(this.title == '获取验证码'){
-        //         let num = 60;
-        //         let codetitle = '';
-        //         let timer = setInterval(() => {
-        //             num = num - 1;
-        //             codetitle = '已发送' + '(' + num + ' s)';
-        //             this.title = codetitle
-                   
-        //         }, 1000)
-
-        //     let partern=/^1\d{10}$/
-
-        //     if(that.name.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写姓名"
-        //         })
-        //         return
-        //     }
-        //     if(that.phone.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写手机号"
-        //         })
-        //         return
-        //     }
-        //     if(that.bankcardno.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写持有银行卡号码"
-        //         })
-        //         return
-        //     }
-        //     if(!partern.test(that.phone)){
-        //          that.$toast({
-        //             message:"请输入11位手机号码"
-        //         })
-        //         return
-        //     }
-        //     if(that.idCard.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写身份证号码"
-        //         })
-        //         return
-        //     }
-        //      if(that.year.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写信用卡有效年份"
-        //         })
-        //         return
-        //     }
-        //      if(that.month.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写信用卡有效月份"
-        //         })
-        //         return
-        //     }
-        //      if(that.safeCode.trim().length===0){
-        //         that.$toast({
-        //             message:"请填写信用卡安全码"
-        //         })
-        //         return
-        //     }
-
-        //      let data={
-        //         P10_payerName:that.name,
-        //         P7_phone:that.phone,
-        //         P6_cardNo:that.bankcardno,
-        //         P8_idCardNo:that.idCard,
-        //         P12_year:that.year,
-        //         P13_month:that.month,
-        //         P14_cvv2:that.safeCode
-        //      }
-        //         axiosPost("/creditCard/agreementBindCardValidateCode",data)
-        //         .then(res=>{
-        //             if(!res.data.success){
-        //                 that.$toast({
-        //                     message:res.data.message
-        //                 })
-        //             }
-        //             that.orderId=res.data.data.orderId
-        //         })
-        //         .catch(err=>{
-                    
-        //         })
-        //         setTimeout(() => {
-        //             clearInterval(timer);
-        //             this.title = '获取验证码';
-        //         }, 60000)
-        //     }else{
-        //         this.$toast('验证码已发送，请勿重复操作');
-        //     }
-        // }, :"",
-           
+          
         // 绑卡
         bindingCard(){
-             let partern=/0?(13|14|15|17|18|19)[0-9]{9}/
+             let partern=/0?(13|14|15|16|17|18|19)[0-9]{9}/
              if(!partern.test(this.phone)){
                  this.$toast({
                     message:"请输入11位手机号码"
                 })
                 return
              }
+<<<<<<< HEAD
              
             //   let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
             //    if(!parttenId.test(this.idCard)){
@@ -236,70 +119,64 @@ export default {
             //     return
             //  }
 
+=======
+>>>>>>> 9d19d1de91fef0273ec26e424324a6fce1b99c47
 
-            if(this.name.trim().length===0 || this.phone.trim().length===0 || this.bankcardno.trim().length===0 || this.idCard.trim().length===0 ||
-                this.year.trim().length!=2 || this.month.trim().length!=2 || this.safeCode.trim().length!=3 || this.billdate.trim().length ===0 || this.duedate.trim().length!=2
-            ){
+            if(this.name.trim().length===0 || this.phone.trim().length===0 || this.bankcardno.trim().length===0 || this.idCard.trim().length===0){
                  this.$toast({
                     message:"请将信息填写完整"
                 })
                 return
             }
-             let data={
-                 cardNo:this.bankcardno,
-                 phone:this.phone,
-                 idCardNo:this.idCard,
-                 idCardType:"身份证",
-                 payerName:this.name,
-                 year:this.year,
-                 month:this.month,
-                 cvv2:this.safeCode,
-                 billdate:this.billdate,
-                 duedate:this.duedate
+
+             if(this.month.length==1){
+                this.month='0'+this.month
+            }
+            if(this.duedate.length==1){
+                this.duedate='0'+this.duedate
+            }
+            if(this.billdate.length==1){
+                this.billdate=='0'+this.billdate
+            }
+
+            let data={
+                cardNo:this.bankcardno,
+                phone:this.phone,
+                idCardNo:this.idCard,
+                idCardType:"身份证",
+                payerName:this.name,
+                year:this.year,
+                month:this.month,
+                cvv2:this.safeCode,
+                billdate:this.billdate,
+                duedate:this.duedate,
+                // bankname:this.bankcode
+            }
+
+           this.componentload=true
+    
+            axiosPost("/creditCard/bindCreditCard",data)
+                .then(res=>{
+
+                    setTimeout(()=>{
+
+                    if(!res.data.success){
+                        this.$toast({
+                            message:res.data.message
+                        })
+                         this.componentload=false
+                    } else {
+                        this.$router.go(-1)
+                    }  
+                    this.componentload=false
+                  },1500)
+                })
+                .catch(err=>{
+                    
+                })
+
              }
-              axiosPost("/creditCard/bindCreditCard",data)
-              .then(res=>{
-                  if(!res.data.success){
-                      this.$toast({
-                          message:res.data.message
-                      })
-                  } else {
-                      this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
-                  }               
-              })
-              .catch(err=>{
-                  
-              })
 
-            //   let that =this
-            //   if(that.autoCode.trim().length===0){
-            //       that.$toast({
-            //           message:"请输入验证码"
-            //       })
-            //       return
-            //   }
-            //       let validateCode=that.autoCode
-            //         let datas={
-            //             orderId:that.orderId,
-            //             validateCode,
-            //         }
-            //         axiosPost("/creditCard/bindCard",datas)
-            //         .then(function(res){
-            //             if(!res.data.success){
-            //                 that.$toast({
-            //                 message:res.data.message
-            //               })
-            //             } else {
-            //             }
-            //         })
-            //         .catch(function(err){
-            //             that.$toast({
-            //                 message:err.message
-            //             })
-            //         })
-        }
-
-       
     }    
 }
 </script>
@@ -321,15 +198,21 @@ export default {
                         >button {
                             height:80px;
                             background-color: #4B66AF;
+                            border-color: #4B66AF;
                         }
                     }
                >ul{
-                   padding-left:30px;
+                  
                    background-color: #fff;
-                    
+                    .shadow {
+                        height:20px;
+                        width:100%;
+                        background-color: rgb(243, 239, 239);
+                        }
                    >li{
                        display: flex;
                        flex-wrap: nowrap;
+                        padding-left:30px;
                        border-bottom: 1px solid #ccc;
                        padding-top:40px;
                        padding-bottom: 40px;
@@ -357,6 +240,7 @@ export default {
                            height: 100px;
                             margin-top:-26px;
                             font-size: 30px;
+                            text-align: right;
                        }
                         ::-webkit-input-placeholder{
                             font-size:28px;
@@ -367,7 +251,7 @@ export default {
            }
         }
         .loan .van-nav-bar {
-          background-color: #4B66AF!important;
+          background-color: #4B66AF !important;
           height: 96px;
           line-height: 96px;
          }
@@ -435,12 +319,6 @@ export default {
             .safe-code{
                 width: 40vw;
                 height: 100%;
-                //  >input{
-                //     width: 100%;
-                //     height: 90%;
-                //     margin-top: 5px;
-                //     border: none;
-                // }
                 >input{
                     width: 100%;
                     height: 90%;
@@ -482,16 +360,6 @@ export default {
             margin-top: 50px;
             border-radius: 20px;
         }
-        // .btn {
-        //     margin-top:30px;
-        //     padding-left:20px;
-        //     padding-right: 20px;
-        //     font-size: 30px;
-        //     >button {
-        //         height:80px;
-        //         background-color: #4B66AF;
-        //     }
-        // }
         .position{
             width: 100vw;
             z-index: 2;

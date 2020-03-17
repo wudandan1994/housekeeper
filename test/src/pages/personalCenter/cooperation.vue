@@ -10,17 +10,29 @@
             如果您想对接我们的渠道资源，或是您有更好的渠道资源，请留下您的联系方式，我们会尽快和您联系，或者您也可以拨打我们的客服电话，钱夹宝欢迎您的来电。
             电话：<a href="tel:021-51695695">021-51695695</a>
         </div>
+        <loading :componentload="componentload"></loading>
     </div>
 </template>
 <script>
+import loading from '@/components/loading'
 export default {
+    components:{
+      loading
+    },
     data(){
-        return{}
+        return{
+            componentload: true
+        }
     },
     methods:{
         handleReturnHome() {
             this.$router.push({path:'/personalCenter'})
         },
+    },
+    created(){
+        setTimeout(() =>{
+            this.componentload = false;
+        },700)
     }
 }
 </script>
