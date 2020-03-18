@@ -336,7 +336,35 @@ export default {
 
         // 查询小额通道是否签约
         small(i){
-            this.$toast("通道维护中")
+            // this.$toast("通道维护中")
+            let data={
+                accountNumber:i.cardNo
+            }
+            axiosPost("/rbpay/getRBPayExist",data)
+            .then(res=>{
+                console.log(res,"是否签约")
+                if(res.data.success){
+                     storage.set('channel',"1");
+                        this.$router.push({
+                            path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",
+                            query:{
+                            info:i
+                        }
+                    })  
+                } else{
+                    this.$router.push({
+                        path:"/home/smallAmountRb",
+                        query:{
+                            info:i
+                        }
+                    })
+                }
+            })
+
+
+
+
+
             // axiosPost("/jftpay/getRegist")
             // .then(res=>{
             //     if(res.data.success){    // 查询商户 成功   查绑卡

@@ -472,6 +472,14 @@ const famousFoods = ()=>import('@/pages/mall/famousFoods')
 // 生活服务
 const lifeservice =()=>import('@/pages/mall/lifeservice')
 
+// 融宝小额
+const smallAmountRbcomponent = ()=>import('@/pages/smallAmountRb/index.vue')
+
+// 融宝小额验证码
+const rbbindingComponent = ()=>import('@/pages/smallAmountRb/rbbinding.vue')
+
+
+
 export default new Router({
   // mode:"hash",
   routes: [
@@ -485,6 +493,10 @@ export default new Router({
     {path:"/home/online",component:onlineComponent},
     {path:"/home/collect/open",component:openComponent},
     {path:"/home/collect/payment",component:paymentComponent},
+    {path:"/home/smallAmountRb",component:smallAmountRbcomponent},
+    {path:"/home/rbbinding",component:rbbindingComponent},
+
+
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
     {path:"/home/punch/planDetail",component:planDetailComponent},

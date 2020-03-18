@@ -1,7 +1,14 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-06-18 09:22:42
+ * @LastEditTime: 2019-08-21 15:53:06
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
-    <div id="binding-credit-card">
+    <div id="rbbiinding">
         <header class="manage loan">
-            <van-nav-bar title="添加信用卡" left-text="返回" left-arrow @click-left="handleReturnHome" >
+            <van-nav-bar title="短信验证" left-text="" left-arrow @click-left="handleReturnHome" >
                
             </van-nav-bar>
         </header>
@@ -9,60 +16,24 @@
              <div class="phone">
                <ul>
                     <li>
-                        <span>真实姓名</span>
-                       <input v-model="name" type="text" placeholder="姓名">
+                        <span>验证码：</span>
+                       <input v-model="messageCode" type="number" placeholder="短信验证码">
                    </li>
-                    <li>
-                       
-                        <span>身份证号</span>
-                       <input v-model="idCard"  type="text" placeholder="所持身份证号码">
-                   </li>
-                    <li>
-                        <span>银行卡号</span>
-                       <input v-model="bankcardno"  type="number" placeholder="所持银行卡号">
-                   </li>
-                   <div class="shadow"></div>
-                    <li>
-                        <span>有效期年份</span>
-                       <input v-model="year"  type="number" placeholder="信用卡有效期年份如 22">
-                   </li>
-                   <li>
-                       <span>有效期月份</span>
-                       <input type="number" v-model="month" placeholder="信用卡有效期月份 如 05">
-                   </li> 
-                    <li>
-                       <span>安全码</span>
-                       <input type="number" v-model="safeCode" placeholder="信用卡后三位安全码">
-                   </li> 
-                     <div class="shadow"></div>
-                     <li>
-                       <span>手机号</span>
-                       <input type="number" v-model="phone" placeholder="银行卡预留手机号">
-                   </li> 
-                    <li>
-                       <span>账单日</span>
-                       <input type="number" v-model="billdate" placeholder="账单日 如 06">
-                   </li> 
-                    <li>
-                       <span>最后还款日</span>
-                       <input type="number" v-model="duedate" placeholder="还款日 如 23">
-                   </li> 
-                     <div class="shadow"></div>
+                   
+                   
                </ul>
               <div @click="bindingCard" class="btn">
-                <van-button round size="large" type="info">确认绑定</van-button>
-             </div>
+                <van-button round size="large" type="info">提交</van-button>
+              </div>
            </div>
         </div>
-         <loading :componentload="componentload"></loading>
+        <loading :componentload="componentload"></loading>
     </div>
 </template>
 <script>
-// import area from '@/config/area.js'
+import area from '../../../static/area'
 import loading from '@/components/loading'
 import {axiosPost,axiosGet} from '@/lib/http'
-// import { bankCardAttribution } from '../../lib/bankName'
-import Bank from '@/lib/bank'
 import storage from '@/lib/storage'
 export default {
      components:{
@@ -70,112 +41,89 @@ export default {
     },
     data(){
         return{
-            // area: '请选择支行地址',
-            show: false,
-            title: '获取验证码',
-            areaList:{},
-            name:"",
-            phone:"",
-            bankcardno:"",
-             componentload:false,
-            idCard:"",
-            year:"",
-            month:"",
-            safeCode:"",
-            // autoCode:"",
-            // orderId:"",
-            billdate:"",
-            duedate:"",
-            bankcode:""
+            componentload: false,
+            bizOrderNumber:"",
+            messageCode:"",
+            holderName:"",
+            idcard:"",
+            accountNumber:"",
+            tel:"",
+            cvv2:"",
+            expired:"",
+            
         }
     },
     created(){
-        
+        this.bizOrderNumber=this.$route.query.bizOrderNumber
+        this.idcard=this.$route.query.idcard
+        this.accountNumber=this.$route.query.accountNumber
+        this.tel=this.$route.query.tel
+        this.cvv2=this.$route.query.cvv2
+        this.expired=this.$route.query.expired
     },
     methods:{
         handleReturnHome(){
             this.$router.go(-1)
         },
-          
+           
         // 绑卡
         bindingCard(){
-             let partern=/0?(13|14|15|16|17|18|19)[0-9]{9}/
-             if(!partern.test(this.phone)){
+            
+            if(this.messageCode.trim().length===0){
                  this.$toast({
-                    message:"请输入11位手机号码"
+                    message:"请填写验证码"
                 })
                 return
-             }
-             
-            //   let parttenId=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-            //    if(!parttenId.test(this.idCard)){
-            //      this.$toast({
-            //         message:"请填写正确的身份证号"
-            //     })
-            //     return
-            //  }
-
-
-            if(this.name.trim().length===0 || this.phone.trim().length===0 || this.bankcardno.trim().length===0 || this.idCard.trim().length===0){
-                 this.$toast({
-                    message:"请将信息填写完整"
-                })
-                return
-            }
-
-             if(this.month.length==1){
-                this.month='0'+this.month
-            }
-            if(this.duedate.length==1){
-                this.duedate='0'+this.duedate
-            }
-            if(this.billdate.length==1){
-                this.billdate=='0'+this.billdate
-            }
+            } 
 
             let data={
-                cardNo:this.bankcardno,
-                phone:this.phone,
-                idCardNo:this.idCard,
-                idCardType:"身份证",
-                payerName:this.name,
-                year:this.year,
-                month:this.month,
-                cvv2:this.safeCode,
-                billdate:this.billdate,
-                duedate:this.duedate,
-                // bankname:this.bankcode
+                 bizOrderNumber:this.bizOrderNumber,
+                 smsCode:this.messageCode,
+                 holderName:this.holderName,
+                 idcard:this.idcard,
+                 accountNumber:this.accountNumber,
+                 tel:this.tel,
+                 cvv2:this.cvv2,
+                 expired:this.expired,
             }
+            console.log(data,"data参数")
 
-           this.componentload=true
-    
-            axiosPost("/creditCard/bindCreditCard",data)
-                .then(res=>{
+             
+              axiosPost("/rbpay/checkSms",data)
+              .then(res=>{
+                  console.log(res,"确认绑卡")
 
-                    setTimeout(()=>{
+                this.componentload=true 
 
-                    if(!res.data.success){
-                        this.$toast({
-                            message:res.data.message
-                        })
-                         this.componentload=false
-                    } else {
-                        this.$router.go(-1)
-                    }  
-                    this.componentload=false
-                  },1500)
-                })
-                .catch(err=>{
-                    
-                })
+                setTimeout(()=>{
 
-             }
+                     this.componentload=false
 
+                      if(!res.data.success){
+
+                      this.$toast(res.data.message)
+
+                  } else {
+
+                     this.$toast(res.data.message)
+                       
+                      this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
+                  }  
+
+                },1000)
+                              
+              })
+              .catch(err=>{
+                   if(!err.data.success){
+                       this.$toast(err.data.message)
+                   }
+              })
+          }
     }    
 }
 </script>
 <style lang="less" >
-    #binding-credit-card{
+    #rbbiinding{
         background: #EEEFF1;
         width: 100vw;
         height: 120vh;
@@ -188,21 +136,18 @@ export default {
                         margin-top:30px;
                         padding-left:20px;
                         padding-right: 20px;
-                        font-size: 30px;
+                        font-size: 32px;
                         >button {
                             height:80px;
-                            background-color: #4B66AF;
-                            border-color: #4B66AF;
+                            line-height: 80px;
+                            background-color: #4965AE;
+                            border:1px solid #4965AE;
                         }
                     }
                >ul{
                   
                    background-color: #fff;
-                    .shadow {
-                        height:20px;
-                        width:100%;
-                        background-color: rgb(243, 239, 239);
-                        }
+                    
                    >li{
                        display: flex;
                        flex-wrap: nowrap;
@@ -234,7 +179,6 @@ export default {
                            height: 100px;
                             margin-top:-26px;
                             font-size: 30px;
-                            text-align: right;
                        }
                         ::-webkit-input-placeholder{
                             font-size:28px;
@@ -245,7 +189,7 @@ export default {
            }
         }
         .loan .van-nav-bar {
-          background-color: #4B66AF !important;
+          background-color: #4965AE!important;
           height: 96px;
           line-height: 96px;
          }
@@ -336,7 +280,7 @@ export default {
                 width: 30vw;
                 height: 100%;
                 >div{
-                    background: #4B66AF;
+                    background: #4965AE;
                     color: white;
                     padding: 15px;
                     border-radius: 10px;
@@ -349,7 +293,7 @@ export default {
             padding-bottom: 30px;
             margin-left: auto;
             margin-right: auto;
-            background-color: #4B66AF;
+            background-color: #4965AE;
             color: white;
             margin-top: 50px;
             border-radius: 20px;
