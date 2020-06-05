@@ -18,7 +18,7 @@
     "qs": "^6.9.1",
     "request": "^2.88.0",
     "smartour": "^2.0.0",
-    "vant": "^1.6.10",
+    "vant": "^2.1.8",
     "vue": "^2.5.2",
     "vue-calendar-component": "^2.8.2",
     "vue-html5plus": "^1.0.0",
