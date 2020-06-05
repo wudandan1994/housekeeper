@@ -6,9 +6,9 @@
  * @LastEditors: Please set LastEditors
  -->
 <template>
-    <div id="small-amount-wyf">
+    <div id="large-amount-zsdh">
         <header class="manage loan">
-            <van-nav-bar title="签约通道1" left-text="" left-arrow @click-left="handleReturnHome" >
+            <van-nav-bar title="签约通道2" left-text="" left-arrow @click-left="handleReturnHome" >
                
             </van-nav-bar>
         </header>
@@ -17,21 +17,28 @@
                <ul>
                     <li>
                         <span>真实姓名：</span>
-                       <input v-model="merchant_name" type="text" placeholder="姓名">
+                       <input v-model="accountName" type="text" placeholder="姓名">
                    </li>
                     <li>
                         <span>身份证号：</span>
-                       <input v-model="id_cardno"  type="text" placeholder="所持身份证号码">
+                       <input v-model="idNo"  type="text" placeholder="所持身份证号码">
                    </li>
                     <li>
                         <span>银行卡号：</span>
-                       <input v-model="bank_cardno"  type="number" placeholder="信用卡卡号">
+                       <input v-model="bankCard"  type="number" placeholder="所持银行卡号">
                    </li>
                     <li>
                        <span>手机号：</span>
-                       <input type="number" v-model="phone" placeholder="信用卡预留手机号">
+                       <input type="number" v-model="mobile" placeholder="银行卡预留手机号">
                    </li> 
-              
+                     <li>
+                       <span>安全码：</span>
+                       <input type="number" v-model="cvn2" placeholder="信用卡安全码">
+                   </li> 
+                     <li>
+                       <span>有效期：</span>
+                       <input type="number" v-model="expired" placeholder="信用卡有效期 如06/21 填写0621">
+                   </li> 
                    
                </ul>
               <div @click="bindingCard" class="btn">
@@ -53,23 +60,24 @@ export default {
     data(){
         return{
             componentload: false,
-            merchant_name:"",
-            id_cardno:"",
-            bank_cardno:"",
-            phone:"",
+            accountName:"",
+            idNo:"",
+            bankCard:"",
+            mobile:"",
+            cvn2:"",
+            expired:"",
             info:{},
-            type:""
+           
         }
     },
     created(){
-        if(this.info){
-            this.info=this.$route.query.info
-            this.merchant_name=this.info.payerName
-            this.id_cardno=this.info.idCardNo
-            this.bank_cardno=this.info.cardNo
-            this.phone=this.info.phone
-            this.type=this.$route.query.type
-        }
+        this.info=this.$route.query.info
+        this.accountName=this.info.payerName
+        this.idNo=this.info.idCardNo
+        this.bankCard=this.info.cardNo
+        this.mobile=this.info.phone
+        this.expired=this.info.year+this.info.month
+        this.cvn2=this.info.cvv2
     },
     methods:{
         handleReturnHome(){
@@ -79,49 +87,48 @@ export default {
         // 绑卡
         bindingCard(){
              let partern=/0?(13|14|15|16|17|18|19)[0-9]{9}/
-             if(!partern.test(this.phone)){
+             if(!partern.test(this.mobile)){
                   return   this.$toast("请输入11位手机号码")
              }
 
-            if(this.merchant_name.trim().length===0 || this.id_cardno.trim().length===0 ||  this.bank_cardno.trim().length===0||  this.phone.trim().length===0 ){
+            if(this.accountName.trim().length===0 || this.expired.trim().length===0 || this.idNo.trim().length===0 ||  this.bankCard.trim().length===0 ||  this.mobile.trim().length===0 || this.cvn2.trim().length===0){
                  this.$toast({
                     message:"请将信息填写完整"
                 })
-  
-             return
+                return
             } 
 
              let data={
-                 accountName:this.merchant_name,
-                 idNo:this.id_cardno,
-                 bankCard:this.bank_cardno,
-                 mobile:this.phone,
-                 channel:this.type
+                 name:this.accountName,
+                 id_card_no:this.idNo,
+                 bank_card_no:this.bankCard,
+                 phone_no:this.mobile,
+                 cvv:this.cvn2,
+                 valid_date:this.expired
              }
+                this.componentload=true 
 
-            console.log(data,"data")
-
-             this.componentload=true
-              axiosPost("/newscpay/bindCard",data)
+              axiosPost("/zsdhpay/dhbind",data)
               .then(res=>{
-                  console.log(res,"绑卡结果")
-                       if(res.data.success){
-                          let orderNum=res.data.data.orderNum
-                          this.$router.push({
-                              path:"/home/smallSCactive",
-                              query:{
-                                  orderNum:orderNum,
-                                  type:this.type
-                              }
-                          })
+                setTimeout(()=>{
+                     this.componentload=false
+                      if(!res.data.success){
+                          this.$toast(res.data.message)
+                  } else {
 
-                       } else {
-                          
-                           setTimeout(()=>{
-                               this.componentload=false
-                              this.$toast(res.data.message)
-                           },1500)
-                       }      
+                        let request_id=res.data.data
+            
+                        this.$router.push({
+                            path:"/home/sendmsgZSDH",
+                            query:{
+                                request_id:request_id,
+                                info:data
+                            }
+                        })
+                  }  
+
+                },1000)
+                              
               })
               .catch(err=>{
                    if(!err.data.success){
@@ -133,7 +140,7 @@ export default {
 }
 </script>
 <style lang="less" >
-    #small-amount-wyf{
+    #large-amount-zsdh{
         background: #EEEFF1;
         width: 100vw;
         height: 120vh;

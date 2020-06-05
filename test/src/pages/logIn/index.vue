@@ -26,6 +26,9 @@
                 <div @click="logInPass" class="log">
                     <p>登录</p>
                 </div>
+                 <!-- <div @click="Pass" class="log">
+                    <p>微信登录</p>
+                </div> -->
            </div>
             <div class="wx-login" @click="logIn">
                 <div class="center">———————其他登录方式———————</div>
@@ -55,6 +58,19 @@ export default {
         forgetPassword() {
             this.$router.push('/forgetPassword')
         },
+        // Pass(){
+            
+        //       let url = '/customer/loginByWechat';
+        //                 let params = {
+        //                     openid: 'oyG2A1bHolsKQou3oUobmpaMS_YU'
+        //                 };
+        //      axiosPost(url,params)
+        //      .then(res=>{
+        //          if(res.data.success){
+        //              this.$router.push("/home")
+        //          }
+        //      })
+        // },
         register(){
              this.$router.push('/logOut')
         },

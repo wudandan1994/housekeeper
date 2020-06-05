@@ -31,8 +31,6 @@ const loginComponent = () =>import('@/pages/login')
 // import newsComponent from '@/pages/news'
 const newsComponent = () =>import('@/pages/news')
 
-// import addCardComponent from '@/pages/addCard'
-const addCardComponent = () =>import('@/pages/addCard')
 
 // import logOutComponent from '@/pages/logOut'
 const logOutComponent = () =>import('@/pages/logOut')
@@ -81,14 +79,10 @@ const receivablesComponent = () =>import('@/pages/receivables')
 // import transactionQueryComponent from '@/pages/transactionQuery'
 const transactionQueryComponent = () =>import('@/pages/transactionQuery')
 
-// import storageComponent from '@/pages/storage'
-const storageComponent = () =>import('@/pages/storage')
 
 // import passagewayComponent from '@/pages/passageway'
 const passagewayComponent = () =>import('@/pages/passageway')
 
-// import reportExampleComponent from '@/pages/reportExample'
-const reportExampleComponent = () =>import('@/pages/reportExample')
 
 // import rateComponent from '@/pages/rate'
 const rateComponent = () =>import('@/pages/rate')
@@ -99,17 +93,11 @@ const verifiedComponent = () =>import('@/pages/verified/index')
 // import verifiedNameComponent from '@/pages/verifiedName/index.vue'
 const verifiedNameComponent = () =>import('@/pages/verifiedName/index')
 
-// import creditDataQueryComponent from '@/pages/creditDataQuery'
-const creditDataQueryComponent = () =>import('@/pages/creditDataQuery')
-
 // import violationInquiryComponent from '@/pages/violationInquiry'
 const violationInquiryComponent = () =>import('@/pages/violationInquiry')
 
 // import addCarComponent from '@/pages/addCar'
 const addCarComponent = () =>import('@/pages/addCar')
-
-// import addSaveComponent from '@/pages/addSave'
-const addSaveComponent = () =>import('@/pages/addSave')
 
 // import punchComponent from '@/pages/punch'
 const punchComponent = () =>import('@/pages/punch')
@@ -142,8 +130,6 @@ const financialCircleComponent = () =>import('@/pages/financialCircle')
 // import realNameComponent from '@/pages/realName'
 const realNameComponent = () =>import('@/pages/realName')
 
-// import creditEnquiryComponent from '@/pages/creditEnquiry'
-const creditEnquiryComponent = () =>import('@/pages/creditEnquiry')
 
 // import inviteShareComponent from '@/pages/inviteShare'
 const inviteShareComponent = () =>import('@/pages/inviteShare')
@@ -230,8 +216,6 @@ const recordComponent = () =>import('@/pages/userAccountManage/record')
 // import posterComponent from '@/pages/poster'
 const posterComponent = () =>import('@/pages/poster')
 
-// import principleComponent from '@/pages/principle'
-const principleComponent = () =>import('@/pages/principle')
 
 // import dataComponent from '@/pages/data'
 const dataComponent = () =>import('@/pages/data')
@@ -239,17 +223,6 @@ const dataComponent = () =>import('@/pages/data')
 // import businessCardComponent from '@/pages/businessCard'
 const businessCardComponent = () =>import('@/pages/businessCard')
 
-// import creditCardLinkComponent from '@/pages/creditCardLink'
-const creditCardLinkComponent = () =>import('@/pages/creditCardLink')
-
-// import shareLinkComponent from '@/pages/shareLink'
-const shareLinkComponent = () =>import('@/pages/shareLink')
-
-// import promotionMaterialComponent from '@/pages/promotionMaterial'
-const promotionMaterialComponent = () =>import('@/pages/promotionMaterial')
-
-// import corporateVideoComponent from '@/pages/corporateVideo'
-const corporateVideoComponent = () =>import('@/pages/corporateVideo')
 
 // import adsNewsComponent from '@/pages/adsNews'
 const adsNewsComponent = () =>import('@/pages/adsNews')
@@ -330,7 +303,6 @@ const radar = () =>import('@/pages/AIRadar/index')
 
 const vipRate = () =>import('@/pages/vip/vipRate')
 
-
 // import nextLevel from '@/pages/AIRadar/nextdetail'
 const nextLevel = () =>import('@/pages/AIRadar/nextdetail')
 
@@ -384,10 +356,7 @@ const nextOtherList = () =>import('@/pages/AIRadar/nextOtherList')
 const testpage = () =>import('@/pages/AIRadar/test')  
 // import cardsComponent from '@/pages/receivables/cards'  //收款信用卡列表  
 const  cardsComponent = () =>import('@/pages/receivables/cards')
-
-
-
-// import largeZYComponent from '@/pages/largeZY'  //哲杨大额  
+ 
 const  largeZYComponent = () =>import('@/pages/largeZY')
 const largeVerificateComponent = () =>import('@/pages/largeVerificate')  // 哲杨大额短信验证
 
@@ -443,8 +412,12 @@ const smallAmountSCComponent = () => import('@/pages/smallAmountSC')  // sc小�
 const smallSCactiveComponent = () => import('@/pages/smallAmountSC/smallSCactive.vue')  // sc小额
 
 const smallAmountRHComponent = () => import('@/pages/smallAmountRH')  // rh小额
-
 const rhbindingComponent = () => import('@/pages/smallAmountRH/rhbinding')  // rh小额
+
+const smallAmountXSComponent = () => import('@/pages/smallAmountXS')  // 新生小额
+const xsbindingComponent = () => import('@/pages/smallAmountXS/xsbinding')  // 新生小额绑卡
+
+
 
 const largeAmountRSRComponent = () => import('@/pages/largeAmountRSR')  // rsr大额注册商户
 
@@ -478,6 +451,12 @@ const smallAmountRbcomponent = ()=>import('@/pages/smallAmountRb/index.vue')
 // 融宝小额验证码
 const rbbindingComponent = ()=>import('@/pages/smallAmountRb/rbbinding.vue')
 
+const smallAmountYZcomponent = ()=>import('@/pages/smallAmountYZ')  // YZ小额注册
+const smallYZbindcomponent = ()=>import('@/pages/smallAmountYZ/smallYZbind.vue')  // YZ小额注册
+
+const largeAmountZSDHcomponent = ()=>import('@/pages/largeAmountZSDH')  // ZSDH大额注册
+const sendmsgZSDHcomponent = ()=>import('@/pages/largeAmountZSDH/sendmsgZSDH.vue')  // ZSDH大额注册
+
 
 
 export default new Router({
@@ -495,13 +474,23 @@ export default new Router({
     {path:"/home/collect/payment",component:paymentComponent},
     {path:"/home/smallAmountRb",component:smallAmountRbcomponent},
     {path:"/home/rbbinding",component:rbbindingComponent},
+    {path:"/home/smallAmountXS",component:smallAmountXSComponent},
+    {path:"/home/xsbinding",component:xsbindingComponent},
+
+    {path:"/home/largeAmountZSDH",component:largeAmountZSDHcomponent},
+    {path:"/home/sendmsgZSDH",component:sendmsgZSDHcomponent},
+
+
+
+    {path:"/home/smallAmountYZ",component:smallAmountYZcomponent},
+    {path:"/home/smallYZbind",component:smallYZbindcomponent},
+
 
 
     {path:"/forgetPassword",component:forgetPasswordComponent},
     {path:"/home/punch",component:punchComponent},
     {path:"/home/punch/planDetail",component:planDetailComponent},
     {path:"/home/news",component:newsComponent},
-    {path:"/home/addCard",component:addCardComponent},
     {path:"/vip/extension",component:extensionComponent},  // 推广升级
     {path:"/home/beautyBill",component:beautyBillComponent},  // 美化账单
     {path:"/home/beautyBill/exchangeRate",component:exchangeRateComponent},  // 实时汇率
@@ -569,15 +558,11 @@ export default new Router({
     {path:"/home/largeWFxe/verify",component:largeWFxeverifyComponent}, //WF小额通道绑卡
     {path:"/share/inviteFriends/inviteShare",component:inviteShareComponent},
     {path:"/share/poster",component:posterComponent},
-    {path:"/share/promotionMaterial",component:promotionMaterialComponent},
-    {path:"/share/principle",component:principleComponent},
+    // {path:"/share/principle",component:principleComponent},
     {path:"/share/data",component:dataComponent},
     {path:"/home/creditHousekeeper/aisleHousekeeper/repaymentChannel",component:repaymentChannelComponent},
     {path:"/share/adsNews",component:adsNewsComponent},
     {path:"/share/businessCard",component:businessCardComponent},
-    {path:"/share/creditCardLink",component:creditCardLinkComponent},
-    {path:"/share/shareLink",component:shareLinkComponent},
-    {path:"/share/corporateVideo",component:corporateVideoComponent},
     {path:"/home/incomeBreakdown",component:incomeBreakdownComponent},
     {path:"/home/clearCache",component:clearCacheComponent},
     {path:"/home/accountManagement", component:accountManagementComponent,},
@@ -589,9 +574,7 @@ export default new Router({
     {path:"/home/totalPunch/taskrecord",component:taskrecordComponent}, // 任务纪录
     {path:"/home/violationInquiry",component:violationInquiryComponent},
     {path:"/home/violationInquiry/addCar",component:addCarComponent},
-    {path:"/home/violationInquiry/addCar/addSave",component:addSaveComponent},
     {path:"/home/cardCenter",component:cardCenterComponent,},
-    {path:"/home/creditEnquiry",component:creditEnquiryComponent,},
     {path:"/home/systemNews",component:systemNewsComponent,},
     {path:"/home/verified",component:verifiedComponent,},
     {path:"/home/verified/verifiedName",component:verifiedNameComponent,},
@@ -599,8 +582,6 @@ export default new Router({
     {path:"/home/customerService",component:customerServiceComponent,},
     {path:"/home/aboutUs",component:aboutUsComponent,},
     {path:"/loan/form/myOrder",component:myOrderComponent,},
-    {path:"/home/creditEnquiry/creditDataQuery",component:creditDataQueryComponent,},
-    {path:"/home/creditEnquiry/reporyExample",component:reportExampleComponent,},
     {path:"/home/cardCenter/liftingAmount",component:liftingAmountComponent,},
     {path:"/home/cardCenter/progressQuery",component:progressQueryComponent,},
     {path:"/home/cardCenter/businessCooperation",component:businessCooperationComponent,},
@@ -609,7 +590,6 @@ export default new Router({
     {path:"/home/receivables/transactionQuery",component:transactionQueryComponent,},
     {path:"/home/receivables/rate",component:rateComponent,},
     {path:"/home/receivables/passageway",component:passagewayComponent,},
-    {path:"/home/receivables/storage",component:storageComponent,},
     {path:"/home/cardCenter/consultation",component:consultationComponent,},
     {path:"/personalCenter",component:personalCenterComponent},
     {path:"/share",component:shareComponent},

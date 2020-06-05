@@ -111,27 +111,27 @@ export default {
               axiosPost("/rbpay/sendSms",data)
               .then(res=>{   
                   if(res.data.success){
-                      console.log("chegn")
                       this.componentload=false
                       let responce=res.data.data
                       responce=JSON.parse(responce)
                       console.log(responce,"responce")
                       let bizOrderNumber=responce.data.bizOrderNumber
-                      console.log(bizOrderNumber,"bizOrderNumber")
-                      this.$router.push({
-                          path:"/home/rbbinding",
-                          query:{
-                              bizOrderNumber:bizOrderNumber,
-                              holderName:this.merchant_name,
-                              idcard:this.id_cardno,
-                              accountNumber:this.bank_cardno,
-                              tel:this.phone,
-                              cvv2:this.cvv,
-                              expired:this.bankAccountExpiry,
-                              
-                          }
-                      })
+                      location.href=responce.data.openUrl
 
+                    //   console.log(bizOrderNumber,"bizOrderNumber")
+                    //   this.$router.push({
+                    //       path:"/home/rbbinding",
+                    //       query:{
+                    //           bizOrderNumber:bizOrderNumber,
+                    //           holderName:this.merchant_name,
+                    //           idcard:this.id_cardno,
+                    //           accountNumber:this.bank_cardno,
+                    //           tel:this.phone,
+                    //           cvv2:this.cvv,
+                    //           expired:this.bankAccountExpiry,
+                              
+                    //       }
+                    //   })
                   } else{
                      setTimeout(()=>{
                          this.componentload=false

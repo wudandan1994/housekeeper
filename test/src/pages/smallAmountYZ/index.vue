@@ -8,7 +8,7 @@
 <template>
     <div id="small-amount-wyf">
         <header class="manage loan">
-            <van-nav-bar title="签约通道1" left-text="" left-arrow @click-left="handleReturnHome" >
+            <van-nav-bar title="注册商户" left-text="" left-arrow @click-left="handleReturnHome" >
                
             </van-nav-bar>
         </header>
@@ -44,7 +44,7 @@
 </template>
 <script>
 import loading from '@/components/loading'
-import {axiosPost,axiosGet} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
      components:{
@@ -62,8 +62,8 @@ export default {
         }
     },
     created(){
+         this.info=this.$route.query.info
         if(this.info){
-            this.info=this.$route.query.info
             this.merchant_name=this.info.payerName
             this.id_cardno=this.info.idCardNo
             this.bank_cardno=this.info.cardNo
@@ -92,26 +92,28 @@ export default {
             } 
 
              let data={
-                 accountName:this.merchant_name,
-                 idNo:this.id_cardno,
-                 bankCard:this.bank_cardno,
-                 mobile:this.phone,
-                 channel:this.type
+                 merchant_name:this.merchant_name,
+                 idcard_no:this.id_cardno,
+                 bankcard_no:this.bank_cardno,
+                 phone:this.phone,
              }
 
             console.log(data,"data")
 
-             this.componentload=true
-              axiosPost("/newscpay/bindCard",data)
+            //  this.componentload=true
+              axiosPost("/yzpay/insertRegister",data)
               .then(res=>{
                   console.log(res,"绑卡结果")
                        if(res.data.success){
-                          let orderNum=res.data.data.orderNum
+                        let responce=res.data.data
+                        responce=JSON.parse(responce)
+                        console.log(responce,'responce')
+                        let merchant_no=responce.merchant_no
                           this.$router.push({
-                              path:"/home/smallSCactive",
+                              path:"/home/smallYZbind",
                               query:{
-                                  orderNum:orderNum,
-                                  type:this.type
+                                  merchant_no:merchant_no,
+                                  info:this.info
                               }
                           })
 

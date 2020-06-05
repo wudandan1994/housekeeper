@@ -6,9 +6,9 @@
  * @LastEditors: Please set LastEditors
  -->
 <template>
-    <div id="small-amount-wyf">
+    <div id="sendmsg-hc">
         <header class="manage loan">
-            <van-nav-bar title="签约通道1" left-text="" left-arrow @click-left="handleReturnHome" >
+            <van-nav-bar title="短信验证" left-text="" left-arrow @click-left="handleReturnHome" >
                
             </van-nav-bar>
         </header>
@@ -16,26 +16,12 @@
              <div class="phone">
                <ul>
                     <li>
-                        <span>真实姓名：</span>
-                       <input v-model="merchant_name" type="text" placeholder="姓名">
+                        <span>验证码：</span>
+                       <input v-model="messageCode" type="number" placeholder="短信验证码">
                    </li>
-                    <li>
-                        <span>身份证号：</span>
-                       <input v-model="id_cardno"  type="text" placeholder="所持身份证号码">
-                   </li>
-                    <li>
-                        <span>银行卡号：</span>
-                       <input v-model="bank_cardno"  type="number" placeholder="信用卡卡号">
-                   </li>
-                    <li>
-                       <span>手机号：</span>
-                       <input type="number" v-model="phone" placeholder="信用卡预留手机号">
-                   </li> 
-              
-                   
                </ul>
               <div @click="bindingCard" class="btn">
-                <van-button round size="large" type="info">确认绑定</van-button>
+                <van-button round size="large" type="info">提交</van-button>
               </div>
            </div>
         </div>
@@ -53,23 +39,18 @@ export default {
     data(){
         return{
             componentload: false,
-            merchant_name:"",
-            id_cardno:"",
-            bank_cardno:"",
-            phone:"",
+            // openOrderNum:"",
+            // merchantno:"",
+            messageCode:"",
+            request_id:"",
             info:{},
-            type:""
+           
         }
     },
     created(){
-        if(this.info){
-            this.info=this.$route.query.info
-            this.merchant_name=this.info.payerName
-            this.id_cardno=this.info.idCardNo
-            this.bank_cardno=this.info.cardNo
-            this.phone=this.info.phone
-            this.type=this.$route.query.type
-        }
+        this.request_id=this.$route.query.request_id
+        console.log( this.request_id,' this.request_id')
+        this.info=this.$route.query.info
     },
     methods:{
         handleReturnHome(){
@@ -78,62 +59,54 @@ export default {
            
         // 绑卡
         bindingCard(){
-             let partern=/0?(13|14|15|16|17|18|19)[0-9]{9}/
-             if(!partern.test(this.phone)){
-                  return   this.$toast("请输入11位手机号码")
-             }
-
-            if(this.merchant_name.trim().length===0 || this.id_cardno.trim().length===0 ||  this.bank_cardno.trim().length===0||  this.phone.trim().length===0 ){
+            
+            if(this.messageCode.trim().length===0){
                  this.$toast({
-                    message:"请将信息填写完整"
+                    message:"请填写验证码"
                 })
-  
-             return
+                return
             } 
 
              let data={
-                 accountName:this.merchant_name,
-                 idNo:this.id_cardno,
-                 bankCard:this.bank_cardno,
-                 mobile:this.phone,
-                 channel:this.type
+                 verify_code:this.messageCode,
+                 request_id:this.request_id,
              }
+             console.log(Object.assign(data,this.info),'data')
+            this.componentload=true 
 
-            console.log(data,"data")
-
-             this.componentload=true
-              axiosPost("/newscpay/bindCard",data)
+              axiosPost("/zsdhpay/bindCardConfirm",Object.assign(data,this.info))
               .then(res=>{
-                  console.log(res,"绑卡结果")
-                       if(res.data.success){
-                          let orderNum=res.data.data.orderNum
-                          this.$router.push({
-                              path:"/home/smallSCactive",
-                              query:{
-                                  orderNum:orderNum,
-                                  type:this.type
-                              }
-                          })
+                  console.log(res)
 
-                       } else {
-                          
-                           setTimeout(()=>{
-                               this.componentload=false
-                              this.$toast(res.data.message)
-                           },1500)
-                       }      
+
+                setTimeout(()=>{
+
+                     this.componentload=false
+
+                      if(!res.data.success){
+
+                      this.$toast(message.message)
+                  } else {
+
+                     this.$toast(res.data.message)
+                       
+                      this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
+                  }  
+
+                },1000)
+                              
               })
-              .catch(err=>{
-                   if(!err.data.success){
-                       this.$toast(err.data.message)
-                   }
-              })
+            //   .catch(err=>{
+            //        if(!err.data.success){
+            //            this.$toast(err.data.message)
+            //        }
+            //   })
           }
     }    
 }
 </script>
 <style lang="less" >
-    #small-amount-wyf{
+    #sendmsg-hc{
         background: #EEEFF1;
         width: 100vw;
         height: 120vh;
@@ -146,7 +119,7 @@ export default {
                         margin-top:30px;
                         padding-left:20px;
                         padding-right: 20px;
-                        font-size: 30px;
+                        font-size: 32px;
                         >button {
                             height:80px;
                             line-height: 80px;
@@ -240,12 +213,6 @@ export default {
                 width: 70vw;
                 height: 100%;
                  box-sizing: border-box;
-                // >input{
-                //     width: 100%;
-                //     height: 90%;
-                //     margin-top: 5px;
-                //     border: none;
-                // }
                 >input{
                     width: 100%;
                     height: 90%;
@@ -267,12 +234,6 @@ export default {
             .safe-code{
                 width: 40vw;
                 height: 100%;
-                //  >input{
-                //     width: 100%;
-                //     height: 90%;
-                //     margin-top: 5px;
-                //     border: none;
-                // }
                 >input{
                     width: 100%;
                     height: 90%;

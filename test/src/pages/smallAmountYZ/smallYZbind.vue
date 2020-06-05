@@ -6,36 +6,45 @@
  * @LastEditors: Please set LastEditors
  -->
 <template>
-    <div id="small-amount-wyf">
+    <div id="rhbinding">
         <header class="manage loan">
-            <van-nav-bar title="签约通道1" left-text="" left-arrow @click-left="handleReturnHome" >
+            <van-nav-bar title="绑卡" left-text="" left-arrow @click-left="handleReturnHome" >
                
             </van-nav-bar>
         </header>
         <div class="container">
-             <div class="phone">
-               <ul>
+             <div class="phone" v-if="showFlag">
+               <ul>                 
                     <li>
-                        <span>真实姓名：</span>
-                       <input v-model="merchant_name" type="text" placeholder="姓名">
-                   </li>
-                    <li>
-                        <span>身份证号：</span>
-                       <input v-model="id_cardno"  type="text" placeholder="所持身份证号码">
-                   </li>
-                    <li>
-                        <span>银行卡号：</span>
+                        <span>信用卡卡号：</span>
                        <input v-model="bank_cardno"  type="number" placeholder="信用卡卡号">
                    </li>
                     <li>
                        <span>手机号：</span>
                        <input type="number" v-model="phone" placeholder="信用卡预留手机号">
                    </li> 
-              
-                   
+                    <li>
+                       <span>安全码：</span>
+                       <input type="number" v-model="cvv2" placeholder="信用卡安全码">
+                   </li> 
+                    <li>
+                       <span>有效期：</span>
+                       <input type="number" v-model="year" placeholder="信用卡有效期年份">
+                   </li>
                </ul>
               <div @click="bindingCard" class="btn">
                 <van-button round size="large" type="info">确认绑定</van-button>
+              </div>
+           </div>
+           <div class="phone" v-else>
+               <ul>
+                    <li>
+                        <span>验证码：</span>
+                       <input v-model="messageCode" type="number" placeholder="短信验证码">
+                   </li>
+               </ul>
+                <div @click="submit" class="btn">
+                <van-button round size="large" type="info">提交</van-button>
               </div>
            </div>
         </div>
@@ -44,7 +53,7 @@
 </template>
 <script>
 import loading from '@/components/loading'
-import {axiosPost,axiosGet} from '@/lib/http'
+import {axiosPost} from '@/lib/http'
 import storage from '@/lib/storage'
 export default {
      components:{
@@ -53,28 +62,59 @@ export default {
     data(){
         return{
             componentload: false,
-            merchant_name:"",
-            id_cardno:"",
             bank_cardno:"",
             phone:"",
             info:{},
-            type:""
+            aisleMerId:"",
+            cvv2:"",
+            validityDate:"",
+            outMerId:'',
+            aisleMerId:'',
+            year:'',
+            month:'',
+            merchant_no:'',
+            messageCode:'',
+            data:{},
+            showFlag:true
         }
     },
     created(){
+         this.info=this.$route.query.info
         if(this.info){
-            this.info=this.$route.query.info
-            this.merchant_name=this.info.payerName
-            this.id_cardno=this.info.idCardNo
             this.bank_cardno=this.info.cardNo
             this.phone=this.info.phone
-            this.type=this.$route.query.type
+            this.cvv2=this.info.cvv2
+            this.year=this.info.month+this.info.year
         }
+        this.merchant_no=this.$route.query.merchant_no
     },
     methods:{
         handleReturnHome(){
             this.$router.go(-1)
         },
+       
+      submit(){
+          if(this.messageCode===''){
+              this.$toast("请填写验证码")
+              return
+          }
+          let params={
+              sms_code:this.messageCode
+          }
+          this.componentload=true
+          axiosPost("/yzpay/bindCardConfirm",Object.assign(params,this.data))
+          .then(res=>{
+              console.log(res,'绑卡')
+             setTimeout(()=>{
+                if(res.data.success){
+                  this.$toast(res.data.message)
+                  this.$router.push("/home/creditHousekeeper/aisleHousekeeper")
+              } else {
+                   this.$toast(res.data.message)
+              }
+             },1000)
+          })
+      },
            
         // 绑卡
         bindingCard(){
@@ -83,7 +123,7 @@ export default {
                   return   this.$toast("请输入11位手机号码")
              }
 
-            if(this.merchant_name.trim().length===0 || this.id_cardno.trim().length===0 ||  this.bank_cardno.trim().length===0||  this.phone.trim().length===0 ){
+            if(   this.bank_cardno.trim().length===0||  this.phone.trim().length===0 ){
                  this.$toast({
                     message:"请将信息填写完整"
                 })
@@ -91,30 +131,25 @@ export default {
              return
             } 
 
-             let data={
-                 accountName:this.merchant_name,
-                 idNo:this.id_cardno,
-                 bankCard:this.bank_cardno,
+             this.data={
+                 merchantno:this.merchant_no,
+                 bankcard_no:this.bank_cardno,
                  mobile:this.phone,
-                 channel:this.type
+                 cvn2:this.cvv2,
+                 expiry:this.year,
              }
-
-            console.log(data,"data")
-
-             this.componentload=true
-              axiosPost("/newscpay/bindCard",data)
+                this.componentload=true
+              axiosPost("/yzpay/bindCardApply",this.data)
               .then(res=>{
-                  console.log(res,"绑卡结果")
+                        console.log(res,"绑卡结果")
                        if(res.data.success){
-                          let orderNum=res.data.data.orderNum
-                          this.$router.push({
-                              path:"/home/smallSCactive",
-                              query:{
-                                  orderNum:orderNum,
-                                  type:this.type
-                              }
-                          })
-
+                            setTimeout(()=>{
+                               this.componentload=false
+                               this.showFlag=false
+                           },1500)
+                          
+                           let responce=res.data.data
+                           responce=JSON.parse(responce)
                        } else {
                           
                            setTimeout(()=>{
@@ -124,16 +159,15 @@ export default {
                        }      
               })
               .catch(err=>{
-                   if(!err.data.success){
-                       this.$toast(err.data.message)
-                   }
+                  console.log(err)
+                   
               })
           }
     }    
 }
 </script>
 <style lang="less" >
-    #small-amount-wyf{
+    #rhbinding{
         background: #EEEFF1;
         width: 100vw;
         height: 120vh;
@@ -240,12 +274,6 @@ export default {
                 width: 70vw;
                 height: 100%;
                  box-sizing: border-box;
-                // >input{
-                //     width: 100%;
-                //     height: 90%;
-                //     margin-top: 5px;
-                //     border: none;
-                // }
                 >input{
                     width: 100%;
                     height: 90%;
@@ -267,12 +295,6 @@ export default {
             .safe-code{
                 width: 40vw;
                 height: 100%;
-                //  >input{
-                //     width: 100%;
-                //     height: 90%;
-                //     margin-top: 5px;
-                //     border: none;
-                // }
                 >input{
                     width: 100%;
                     height: 90%;

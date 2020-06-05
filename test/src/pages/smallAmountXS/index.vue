@@ -6,9 +6,9 @@
  * @LastEditors: Please set LastEditors
  -->
 <template>
-    <div id="small-amount-wyf">
+    <div id="small-amount-rh">
         <header class="manage loan">
-            <van-nav-bar title="签约通道1" left-text="" left-arrow @click-left="handleReturnHome" >
+            <van-nav-bar title="注册商户" left-text="" left-arrow @click-left="handleReturnHome" >
                
             </van-nav-bar>
         </header>
@@ -58,7 +58,6 @@ export default {
             bank_cardno:"",
             phone:"",
             info:{},
-            type:""
         }
     },
     created(){
@@ -66,9 +65,8 @@ export default {
             this.info=this.$route.query.info
             this.merchant_name=this.info.payerName
             this.id_cardno=this.info.idCardNo
-            this.bank_cardno=this.info.cardNo
             this.phone=this.info.phone
-            this.type=this.$route.query.type
+            this.bank_cardno=this.info.cardNo
         }
     },
     methods:{
@@ -92,33 +90,33 @@ export default {
             } 
 
              let data={
-                 accountName:this.merchant_name,
-                 idNo:this.id_cardno,
-                 bankCard:this.bank_cardno,
-                 mobile:this.phone,
-                 channel:this.type
+                 merNameCipher:this.merchant_name,
+                 idCardNoCipher:this.id_cardno,
+                 debitCardNo:this.bank_cardno,
+                 debitCardPhone:this.phone,
              }
+             console.log(data)
 
-            console.log(data,"data")
-
-             this.componentload=true
-              axiosPost("/newscpay/bindCard",data)
+                this.componentload=true
+              axiosPost("/cjpay/insertMerchant",data)
               .then(res=>{
-                  console.log(res,"绑卡结果")
-                       if(res.data.success){
-                          let orderNum=res.data.data.orderNum
-                          this.$router.push({
-                              path:"/home/smallSCactive",
+                        console.log(res,"注册商户，商户号在此生成")
+                       if(res.data.success){                         
+                           let responce=res.data.data
+                           responce=JSON.parse(responce)
+                           let aisleMerId=responce.data.chMerCode
+                           this.componentload=false
+                           this.$router.push({
+                              path:"/home/xsbinding",
                               query:{
-                                  orderNum:orderNum,
-                                  type:this.type
+                                  
+                                  info:this.info
                               }
                           })
 
                        } else {
-                          
                            setTimeout(()=>{
-                               this.componentload=false
+                              this.componentload=false
                               this.$toast(res.data.message)
                            },1500)
                        }      
@@ -133,7 +131,7 @@ export default {
 }
 </script>
 <style lang="less" >
-    #small-amount-wyf{
+    #small-amount-rh{
         background: #EEEFF1;
         width: 100vw;
         height: 120vh;
@@ -240,12 +238,6 @@ export default {
                 width: 70vw;
                 height: 100%;
                  box-sizing: border-box;
-                // >input{
-                //     width: 100%;
-                //     height: 90%;
-                //     margin-top: 5px;
-                //     border: none;
-                // }
                 >input{
                     width: 100%;
                     height: 90%;
@@ -267,12 +259,6 @@ export default {
             .safe-code{
                 width: 40vw;
                 height: 100%;
-                //  >input{
-                //     width: 100%;
-                //     height: 90%;
-                //     margin-top: 5px;
-                //     border: none;
-                // }
                 >input{
                     width: 100%;
                     height: 90%;
