@@ -15,7 +15,7 @@
     "cssnano": "^4.1.10",
     "lib-flexible": "^0.3.2",
     "px2rem-loader": "^0.1.9",
-    "qs": "^6.9.1",
+    "qs": "^6.9.7",
     "request": "^2.88.0",
     "smartour": "^2.0.0",
     "vant": "^1.6.10",
